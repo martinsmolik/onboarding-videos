@@ -1,0 +1,10 @@
+[00:00] Ahoj, v tomto videu si ukážeme, jak v Sloneeku požádat o dovolenou nebo jinou absenci.
+[00:07] Po přihlášení se ocitnete na úvodní přehledu. V levém menu klikněte na položku Absence.
+[00:15] Tady vidíte svůj kalendář absencí a vpravo nahoře zůstatek dovolené, tedy kolik dní vám ještě zbývá.
+[00:24] Teď klikněte na tlačítko Přidat nepřítomnost, které najdete vpravo nad kalendářem.
+[00:31] Otevře se formulář. Nejdřív si vyberte typ absence, například Dovolená nebo Nemoc.
+[00:40] Potom zadejte datum od a datum do. Systém si sám spočítá, kolik pracovních dní to je.
+[00:49] Pokud chcete, připište poznámku pro svého nadřízeného, třeba důvod nebo kontakt na zástup.
+[00:56] Nakonec klikněte na tlačítko Odeslat žádost. Žádost půjde ke schválení vašemu manažerovi.
+[01:04] Stav žádosti uvidíte v seznamu. Jakmile ji manažer schválí, dostanete upozornění.
+[01:11] To je vše. Takto jednoduše požádáte o absenci. Díky za pozornost a zase příště.

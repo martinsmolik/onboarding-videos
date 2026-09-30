@@ -52,6 +52,18 @@ state.json             (orchestrator)
 
 Each package: TypeScript, `tsx` runtime, exposes a CLI (`pnpm --filter @svp/<name> start -- <args>`) and a programmatic `run()` export. Shared code must NOT be introduced between packages – keep them independent; duplicate 20 lines rather than couple.
 
+## Settled contract rules (found during integration)
+
+- **Run order:** `tts` → `record` → `mux`. The recorder paces against `audio/durations.json`, which must hold *real* mp3 durations (ffprobe), never estimates. Silent steps are `0`, not omitted.
+- **Time base:** `timing.json` is in *video* time (t=0 = first frame of raw.webm). The recorder corrects wall-clock drift with a 6 px sync beacon in the bottom-left corner (`sync_source: "beacon"`). Steps are contiguous: `t_end(N) == t_start(N+1)`.
+- **Exit codes:** recorder exits 0 with failed steps (status lives in timing.json), 1 on crash. Orchestrator heals only when timing.json lists `failed` steps.
+- **Heal:** `explorer --heal out/<id>/timing.json` rewrites `out/<id>/recipe.json` in place and bumps `version`. `tts` is cached per step (narration + provider + voice), so re-running after heal is cheap.
+- **Knowledge** is four commands (`ingest` → `transcribe` → `changes` → `scenarize`); its result is `out/<id>/scenario.json` plus `scenario.review.md` for a 30-second human approval.
+- **Ids:** `out/<id>` is the pipeline id; `recipe.id` may differ (it goes into the YouTube description). Keep them equal in practice.
+- **Paths:** stages resolve relative paths against the directory pnpm was invoked from (`INIT_CWD`); the orchestrator always passes absolute paths.
+- **Login on the real tenant:** explorer saves `out/<id>/storage-state.json` (+ `login-actions.json` with `{{SLONEEK_DEMO_USER}}` placeholders); recorder uses `recipe.start.storage_state`. Credentials only ever come from env.
+- **YouTube:** the API cannot replace a video's media. `--replace <oldId>` uploads a new video, sets the old one private and writes `out/video-map.json` – the portal has to swap the link. Uploads from unverified API projects are forced to *private*; flip to unlisted in Studio or get the project audited.
+
 ## Local dev without Sloneek credentials
 
 `pnpm demo` serves `demo-app/index.html` on :4173 – a stand-in HR app with `data-testid`s. `samples/recipe.absence-request.json` runs against it. Voice provider `mock` generates a spoken-tempo silent/tone track with realistic duration (≈ 14 chars/s for Czech) so the whole pipeline runs offline.

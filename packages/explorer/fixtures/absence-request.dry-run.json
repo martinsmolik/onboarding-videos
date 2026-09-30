@@ -1,0 +1,254 @@
+{
+  "_comment": "Scripted fake model for --dry-run. One tool call per model turn. @ref:/@sel: are resolved against the latest snapshot the explorer produced. s02 and s05 contain deliberately bad done() calls to exercise the ambiguity and policy rejection paths. 'login' is used only when SLONEEK_DEMO_URL/USER/PASS are set (see fixtures/login.html).",
+  "steps": {
+    "login": [
+      {
+        "tool": "type",
+        "input": {
+          "ref": "@ref:testid=login-email",
+          "text": "{{SLONEEK_DEMO_USER}}"
+        }
+      },
+      {
+        "tool": "type",
+        "input": {
+          "ref": "@ref:testid=login-password",
+          "text": "{{SLONEEK_DEMO_PASS}}"
+        }
+      },
+      {
+        "tool": "click",
+        "input": {
+          "ref": "@ref:testid=login-submit"
+        }
+      },
+      {
+        "tool": "snapshot",
+        "input": {}
+      },
+      {
+        "tool": "done",
+        "input": {
+          "actions": [
+            {
+              "type": "type",
+              "selector": "[data-testid=login-email]",
+              "value": "{{SLONEEK_DEMO_USER}}"
+            },
+            {
+              "type": "type",
+              "selector": "[data-testid=login-password]",
+              "value": "{{SLONEEK_DEMO_PASS}}"
+            },
+            {
+              "type": "click",
+              "selector": "[data-testid=login-submit]"
+            }
+          ],
+          "expect": {
+            "visible": "@sel:testid=page-dashboard"
+          }
+        }
+      }
+    ],
+    "s01": [
+      {
+        "tool": "done",
+        "input": {
+          "actions": [],
+          "expect": {
+            "visible": "@sel:testid=page-dashboard"
+          }
+        }
+      }
+    ],
+    "s02": [
+      {
+        "tool": "click",
+        "input": {
+          "ref": "@ref:testid=nav-absences"
+        }
+      },
+      {
+        "tool": "snapshot",
+        "input": {}
+      },
+      {
+        "tool": "verify_visible",
+        "input": {
+          "selector": "@sel:testid=page-absences"
+        }
+      },
+      {
+        "tool": "done",
+        "input": {
+          "actions": [
+            {
+              "type": "click",
+              "selector": "text=\"Absence\""
+            }
+          ],
+          "expect": {
+            "visible": "@sel:testid=page-absences"
+          }
+        }
+      },
+      {
+        "tool": "done",
+        "input": {
+          "actions": [
+            {
+              "type": "click",
+              "selector": "@sel:testid=nav-absences"
+            }
+          ],
+          "expect": {
+            "visible": "@sel:testid=page-absences"
+          }
+        }
+      }
+    ],
+    "s03": [
+      {
+        "tool": "click",
+        "input": {
+          "ref": "@ref:testid=btn-new-absence"
+        }
+      },
+      {
+        "tool": "snapshot",
+        "input": {}
+      },
+      {
+        "tool": "verify_visible",
+        "input": {
+          "selector": "@sel:testid=absence-form"
+        }
+      },
+      {
+        "tool": "done",
+        "input": {
+          "actions": [
+            {
+              "type": "click",
+              "selector": "@sel:testid=btn-new-absence"
+            }
+          ],
+          "expect": {
+            "visible": "@sel:testid=absence-form"
+          }
+        }
+      }
+    ],
+    "s04": [
+      {
+        "tool": "select",
+        "input": {
+          "ref": "@ref:testid=absence-type",
+          "option": "Dovolená"
+        }
+      },
+      {
+        "tool": "type",
+        "input": {
+          "ref": "@ref:testid=absence-from",
+          "text": "1. 10. 2026"
+        }
+      },
+      {
+        "tool": "type",
+        "input": {
+          "ref": "@ref:testid=absence-to",
+          "text": "3. 10. 2026"
+        }
+      },
+      {
+        "tool": "done",
+        "input": {
+          "actions": [
+            {
+              "type": "select",
+              "selector": "@sel:testid=absence-type",
+              "value": "Dovolená"
+            },
+            {
+              "type": "type",
+              "selector": "@sel:testid=absence-from",
+              "value": "1. 10. 2026"
+            },
+            {
+              "type": "type",
+              "selector": "@sel:testid=absence-to",
+              "value": "3. 10. 2026"
+            }
+          ]
+        }
+      }
+    ],
+    "s05": [
+      {
+        "tool": "type",
+        "input": {
+          "ref": "@ref:testid=absence-note",
+          "text": "Rodinná dovolená"
+        }
+      },
+      {
+        "tool": "done",
+        "input": {
+          "actions": [
+            {
+              "type": "type",
+              "selector": "css=#absence-form > input:nth-of-type(3)",
+              "value": "Rodinná dovolená"
+            }
+          ]
+        }
+      },
+      {
+        "tool": "done",
+        "input": {
+          "actions": [
+            {
+              "type": "type",
+              "selector": "@sel:testid=absence-note",
+              "value": "Rodinná dovolená"
+            }
+          ]
+        }
+      }
+    ],
+    "s06": [
+      {
+        "tool": "click",
+        "input": {
+          "ref": "@ref:testid=absence-submit"
+        }
+      },
+      {
+        "tool": "snapshot",
+        "input": {}
+      },
+      {
+        "tool": "verify_visible",
+        "input": {
+          "selector": "@sel:testid=toast-success"
+        }
+      },
+      {
+        "tool": "done",
+        "input": {
+          "actions": [
+            {
+              "type": "click",
+              "selector": "@sel:testid=absence-submit"
+            }
+          ],
+          "expect": {
+            "visible": "@sel:testid=toast-success"
+          }
+        }
+      }
+    ]
+  }
+}

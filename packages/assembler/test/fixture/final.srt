@@ -1,0 +1,55 @@
+1
+00:00:00,000 --> 00:00:01,786
+V tomto videu si ukážeme,
+
+2
+00:00:01,857 --> 00:00:03,786
+jak zadat žádost o absenci.
+
+3
+00:00:03,857 --> 00:00:05,929
+Začínáme na hlavním přehledu.
+
+4
+00:00:06,500 --> 00:00:09,429
+V levém menu klikněte na položku Absence.
+
+5
+00:00:10,000 --> 00:00:11,429
+Vpravo nahoře zvolte
+
+6
+00:00:11,500 --> 00:00:13,071
+tlačítko Nová absence.
+
+7
+00:00:13,143 --> 00:00:15,000
+Otevře se krátký formulář.
+
+8
+00:00:15,500 --> 00:00:18,357
+Vyberte typ absence, například Dovolená,
+
+9
+00:00:18,429 --> 00:00:20,143
+a vyplňte datum od a do.
+
+10
+00:00:21,000 --> 00:00:23,286
+Do poznámky můžete napsat důvod,
+
+11
+00:00:23,357 --> 00:00:24,786
+ale není to povinné.
+
+12
+00:00:25,500 --> 00:00:28,429
+Nakonec klikněte na Odeslat ke schválení.
+
+13
+00:00:28,500 --> 00:00:30,786
+Váš nadřízený dostane notifikaci
+
+14
+00:00:30,857 --> 00:00:32,500
+a žádost může schválit.

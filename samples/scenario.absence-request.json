@@ -1,0 +1,45 @@
+{
+  "id": "absence-request",
+  "lang": "cs",
+  "title": "Jak zadat žádost o absenci",
+  "audience": "employee",
+  "source": {
+    "changes_detected": []
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "V tomto videu si ukážeme, jak zadat žádost o absenci. Začínáme na hlavním přehledu.",
+      "intent": "Stay on the main dashboard (Přehled); no interaction.",
+      "must_show": "the dashboard page"
+    },
+    {
+      "id": "s02",
+      "narration": "V levém menu klikněte na položku Absence.",
+      "intent": "Open Absence from the left menu.",
+      "must_show": "the Absence page"
+    },
+    {
+      "id": "s03",
+      "narration": "Vpravo nahoře zvolte tlačítko Nová absence. Otevře se krátký formulář.",
+      "intent": "Click the 'Nová absence' button to open the new absence form.",
+      "must_show": "the new absence form"
+    },
+    {
+      "id": "s04",
+      "narration": "Vyberte typ absence, například Dovolená, a vyplňte datum od a do.",
+      "intent": "In the form choose absence type 'Dovolená', type '1. 10. 2026' into 'Od' and '3. 10. 2026' into 'Do'."
+    },
+    {
+      "id": "s05",
+      "narration": "Do poznámky můžete napsat důvod, ale není to povinné.",
+      "intent": "Type 'Rodinná dovolená' into the 'Poznámka' field."
+    },
+    {
+      "id": "s06",
+      "narration": "Nakonec klikněte na Odeslat ke schválení. Váš nadřízený dostane notifikaci a žádost může schválit.",
+      "intent": "Submit the form with 'Odeslat ke schválení'.",
+      "must_show": "a success toast confirming the request was sent"
+    }
+  ]
+}

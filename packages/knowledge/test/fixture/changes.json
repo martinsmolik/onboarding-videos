@@ -1,0 +1,11 @@
+[
+  {
+    "identifier": "SLO-1234",
+    "title": "Rename button 'Přidat nepřítomnost' to 'Nová absence' on Absence page",
+    "description_excerpt": "On the Absence page (left menu > Absence) the primary button above the calendar was renamed from 'Přidat nepřítomnost' to 'Nová absence' for consistency with the rest of the product. Behaviour is unchanged: it opens the request dialog.",
+    "completedAt": "2026-08-12T09:30:00.000Z",
+    "project": "Absence & Attendance",
+    "labels": ["absence", "ux-copy"],
+    "url": "https://linear.app/sloneek/issue/SLO-1234"
+  }
+]

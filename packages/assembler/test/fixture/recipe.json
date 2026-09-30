@@ -1,0 +1,59 @@
+{
+  "id": "absence-request",
+  "version": 1,
+  "title": "Jak zadat žádost o absenci",
+  "lang": "cs",
+  "app_version": "demo-app",
+  "viewport": { "width": 1920, "height": 1080 },
+  "start": { "url": "http://localhost:4173/index.html" },
+  "voice": { "provider": "mock" },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "V tomto videu si ukážeme, jak zadat žádost o absenci. Začínáme na hlavním přehledu.",
+      "actions": [],
+      "hold_after_ms": 500
+    },
+    {
+      "id": "s02",
+      "narration": "V levém menu klikněte na položku Absence.",
+      "actions": [
+        { "type": "click", "selector": "[data-testid=nav-absences]" }
+      ],
+      "expect": { "visible": "[data-testid=page-absences]" }
+    },
+    {
+      "id": "s03",
+      "narration": "Vpravo nahoře zvolte tlačítko Nová absence. Otevře se krátký formulář.",
+      "actions": [
+        { "type": "click", "selector": "[data-testid=btn-new-absence]" }
+      ],
+      "expect": { "visible": "[data-testid=absence-form]" }
+    },
+    {
+      "id": "s04",
+      "narration": "Vyberte typ absence, například Dovolená, a vyplňte datum od a do.",
+      "actions": [
+        { "type": "select", "selector": "[data-testid=absence-type]", "value": "Dovolená" },
+        { "type": "type", "selector": "[data-testid=absence-from]", "value": "1. 10. 2026" },
+        { "type": "type", "selector": "[data-testid=absence-to]", "value": "3. 10. 2026" }
+      ]
+    },
+    {
+      "id": "s05",
+      "narration": "Do poznámky můžete napsat důvod, ale není to povinné.",
+      "actions": [
+        { "type": "type", "selector": "[data-testid=absence-note]", "value": "Rodinná dovolená" }
+      ]
+    },
+    {
+      "id": "s06",
+      "narration": "Nakonec klikněte na Odeslat ke schválení. Váš nadřízený dostane notifikaci a žádost může schválit.",
+      "actions": [
+        { "type": "click", "selector": "[data-testid=absence-submit]" }
+      ],
+      "expect": { "visible": "[data-testid=toast-success]" },
+      "hold_after_ms": 1500
+    }
+  ]
+}

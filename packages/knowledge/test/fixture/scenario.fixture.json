@@ -1,0 +1,21 @@
+{
+  "id": "absence-request",
+  "lang": "cs",
+  "title": "Jak požádat o absenci",
+  "audience": "employee",
+  "source": {
+    "changes_detected": [
+      "\"Přidat nepřítomnost\" -> \"Nová absence\" (tlačítko nad kalendářem na stránce Absence přejmenováno, chování stejné)"
+    ]
+  },
+  "steps": [
+    { "id": "s01", "narration": "V tomto videu si ukážeme, jak ve Sloneeku během pár kroků požádat o dovolenou nebo jinou absenci.", "intent": "No action - stay on the dashboard after login.", "must_show": "The Sloneek dashboard with the left navigation menu is visible." },
+    { "id": "s02", "narration": "V levém menu klikněte na položku Absence, kde najdete svůj kalendář a zůstatek dovolené.", "intent": "In the left sidebar click the menu item 'Absence'.", "must_show": "The Absence page with the absence calendar is visible." },
+    { "id": "s03", "narration": "Vpravo nahoře vidíte, kolik dní dovolené vám ještě zbývá, takže hned víte, na co máte nárok.", "intent": "No click - point at the vacation balance shown at the top right of the Absence page.", "must_show": "The remaining vacation days balance is visible at the top right." },
+    { "id": "s04", "narration": "Nad kalendářem klikněte na tlačítko Nová absence a otevře se formulář.", "intent": "On the Absence page click the button 'Nová absence' above the calendar.", "must_show": "The request dialog for a new absence is open." },
+    { "id": "s05", "narration": "Vyberte typ absence, například Dovolená, a zadejte datum od a datum do.", "intent": "In the dialog choose type 'Dovolená' from the type dropdown and fill the 'Od' and 'Do' date fields.", "must_show": "Type 'Dovolená' and both dates are filled in the dialog." },
+    { "id": "s06", "narration": "Systém sám spočítá počet pracovních dní, takže nemusíte nic přepočítávat.", "intent": "No click - point at the computed number of working days in the dialog.", "must_show": "The number of working days is displayed in the dialog." },
+    { "id": "s07", "narration": "Klikněte na Odeslat žádost, ta půjde ke schválení vašemu manažerovi.", "intent": "In the dialog click the button 'Odeslat žádost'.", "must_show": "The dialog is closed and the new request appears in the list with a pending status." },
+    { "id": "s08", "narration": "Hotovo. Stav žádosti uvidíte v seznamu a po schválení vám přijde upozornění.", "intent": "No action - stay on the Absence page.", "must_show": "The request is visible in the list with its current status." }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "recipe_id": "absence-request",
+  "video_path": "raw.webm",
+  "fps": 25,
+  "total_ms": 34000,
+  "recorded_at": "2026-09-30T10:00:00Z",
+  "steps": [
+    { "id": "s01", "t_start_ms": 0,     "t_actions_end_ms": 100,   "t_end_ms": 6456,  "audio_ms": 5956, "status": "ok" },
+    { "id": "s02", "t_start_ms": 6500,  "t_actions_end_ms": 7000,  "t_end_ms": 9978,  "audio_ms": 2978, "status": "ok" },
+    { "id": "s03", "t_start_ms": 10000, "t_actions_end_ms": 10500, "t_end_ms": 15542, "audio_ms": 5042, "status": "ok" },
+    { "id": "s04", "t_start_ms": 15500, "t_actions_end_ms": 18000, "t_end_ms": 20676, "audio_ms": 4676, "status": "ok" },
+    { "id": "s05", "t_start_ms": 21000, "t_actions_end_ms": 22000, "t_end_ms": 25314, "audio_ms": 3814, "status": "ok" },
+    { "id": "s06", "t_start_ms": 25500, "t_actions_end_ms": 26000, "t_end_ms": 34000, "audio_ms": 7027, "status": "ok" }
+  ]
+}

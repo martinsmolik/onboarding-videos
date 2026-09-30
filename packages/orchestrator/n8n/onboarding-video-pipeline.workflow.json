@@ -1,0 +1,278 @@
+{
+  "name": "Onboarding video pipeline",
+  "nodes": [
+    {
+      "id": "n0",
+      "name": "Setup notes",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -200,
+        -260
+      ],
+      "parameters": {
+        "width": 560,
+        "height": 300,
+        "content": "## Onboarding video pipeline\n**Needs:** self-hosted n8n on the machine that has the repo + pnpm + ffmpeg + Playwright browsers (Execute Command is NOT available on n8n Cloud and is disabled by default in n8n 2.x: set `NODES_EXCLUDE=[]` on the n8n process).\n\n1. Edit `REPO` in **Build command** (absolute path on the n8n host).\n2. Pick Slack credentials + channel id in the 3 Slack nodes.\n3. `curl -X POST <webhook-url> -H 'content-type: application/json' -d '{\"id\":\"absence-request\",\"youtube_url\":\"https://youtu.be/...\"}'`\n\nThe webhook answers immediately; the run takes minutes. Add header auth on the Webhook node before exposing it."
+      }
+    },
+    {
+      "id": "n1",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        200
+      ],
+      "webhookId": "onboarding-video-pipeline",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "onboarding-video",
+        "authentication": "none",
+        "responseMode": "onReceived",
+        "options": {}
+      }
+    },
+    {
+      "id": "n2",
+      "name": "Build command",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        200
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "// Validate the webhook payload and build ONE safe shell command.\n// Body: { id: \"absence-request\", youtube_url?: \"https://...\", recipe?: {...}, lang?, audience?, title?, upload?: true, dry_run?: true }\nconst REPO = '/opt/hackaton'; // <-- absolute path of the hackaton repo ON THE N8N HOST\nconst b = $input.first().json.body ?? $input.first().json;\nif (!/^[a-zA-Z0-9][a-zA-Z0-9._-]{0,80}$/.test(b.id ?? '')) throw new Error('invalid or missing id');\nconst q = (s) => \"'\" + String(s).replace(/'/g, \"'\\\\''\") + \"'\"; // POSIX single-quote escaping\nconst out = REPO + '/out/' + b.id;\nlet pre = '';\nconst args = ['run', '--id', q(b.id)];\nif (b.youtube_url) {\n  if (!/^https:\\/\\/(www\\.)?(youtube\\.com|youtu\\.be)\\//.test(b.youtube_url)) throw new Error('youtube_url must be a YouTube URL');\n  args.push('--youtube', q(b.youtube_url));\n}\nif (b.recipe) {\n  const b64 = Buffer.from(JSON.stringify(b.recipe)).toString('base64'); // base64 alphabet is shell-safe\n  const f = REPO + '/out/_incoming/' + b.id + '.recipe.json';\n  pre = 'mkdir -p ' + q(REPO + '/out/_incoming') + ' && echo ' + b64 + ' | base64 -d > ' + q(f) + ' && ';\n  args.push('--recipe', q(f));\n}\nfor (const k of ['lang', 'audience', 'title']) if (b[k]) args.push('--' + k, q(b[k]));\nif (b.upload) args.push('--upload');\nif (b.dry_run) args.push('--dry-run');\nconst cmd =\n  'cd ' + q(REPO) + ' && ' + pre +\n  'pnpm --silent pipeline ' + args.join(' ') + ' >/dev/null 2>&1; ' +   // run (exit code ignored; state.json is the truth)\n  'pnpm --silent pipeline status --id ' + q(b.id) + ' --json; ' +\n  \"echo; echo '---REVIEW---'; cat \" + q(out + '/scenario.review.md') + ' 2>/dev/null || true';\nreturn [{ json: { id: b.id, outDir: out, cmd } }];"
+      }
+    },
+    {
+      "id": "n3",
+      "name": "Run pipeline",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        440,
+        200
+      ],
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "command": "={{ $json.cmd }}"
+      },
+      "notesInFlow": true,
+      "notes": "Blocks until the pipeline finishes (minutes). Raise the workflow timeout in Settings if needed."
+    },
+    {
+      "id": "n4",
+      "name": "Parse result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        200
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "// stdout = <state.json>\\n---REVIEW---\\n<review.md?>\nconst r = $input.first().json;\nconst meta = $('Build command').first().json;\nconst [jsonPart, review = ''] = String(r.stdout ?? '').split('---REVIEW---');\nlet state = null;\ntry { state = JSON.parse(jsonPart); } catch (e) {}\nconst stages = state ? Object.entries(state.stages) : [];\nconst failed = stages.find(([, s]) => s.status === 'failed');\nconst summary = stages.map(([k, s]) => k + ':' + s.status).join('  ');\nreturn [{ json: {\n  id: meta.id,\n  outDir: meta.outDir,\n  ok: !!state && !failed && state.stages.mux.status === 'done',\n  videoUrl: state?.video_url ?? null,\n  failedStage: failed?.[0] ?? null,\n  failedSteps: state?.failed_steps ?? [],\n  error: failed?.[1]?.error ?? (state ? null : 'could not read pipeline state: ' + (r.stderr || r.stdout || '').slice(0, 500)),\n  summary,\n  review: review.trim().slice(0, 2500),\n} }];"
+      }
+    },
+    {
+      "id": "n5",
+      "name": "Succeeded?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        880,
+        200
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.ok }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "n6",
+      "name": "Read final.mp4",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        100
+      ],
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "operation": "read",
+        "fileSelector": "={{ $json.outDir }}/final.mp4",
+        "options": {
+          "dataPropertyName": "data"
+        }
+      }
+    },
+    {
+      "id": "n7",
+      "name": "Slack: video ready",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        1320,
+        100
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "REPLACE_ME",
+          "name": "Slack account"
+        }
+      },
+      "parameters": {
+        "resource": "file",
+        "operation": "upload",
+        "binaryData": true,
+        "binaryPropertyName": "data",
+        "options": {
+          "channelIds": "REPLACE_WITH_CHANNEL_ID",
+          "fileName": "={{ $('Parse result').item.json.id }}.mp4",
+          "initialComment": "=:movie_camera: *Onboarding video ready:* `{{ $('Parse result').item.json.id }}`\n{{ $('Parse result').item.json.videoUrl ? 'YouTube: ' + $('Parse result').item.json.videoUrl : 'Not uploaded (no YouTube credentials / --upload).' }}\nStages: {{ $('Parse result').item.json.summary }}\n{{ $('Parse result').item.json.review ? '*Review notes:*\\n' + $('Parse result').item.json.review : '' }}"
+        }
+      }
+    },
+    {
+      "id": "n8",
+      "name": "Slack: ALERT failed",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        1100,
+        320
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "REPLACE_ME",
+          "name": "Slack account"
+        }
+      },
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_CHANNEL_ID",
+          "mode": "id"
+        },
+        "messageType": "text",
+        "resource": "message",
+        "operation": "post",
+        "text": "=:rotating_light: *Onboarding video FAILED:* `{{ $json.id }}`\nStage: *{{ $json.failedStage ?? 'unknown' }}*\nFailed step ids: {{ $json.failedSteps.length ? $json.failedSteps.join(', ') : 'n/a' }}\nError: {{ $json.error }}\nStages: {{ $json.summary }}\nLogs: `{{ $json.outDir }}/logs/` — rerun: `pnpm pipeline run --id {{ $json.id }}` (done stages are skipped)",
+        "otherOptions": {}
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Build command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build command": {
+      "main": [
+        [
+          {
+            "node": "Run pipeline",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run pipeline": {
+      "main": [
+        [
+          {
+            "node": "Parse result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse result": {
+      "main": [
+        [
+          {
+            "node": "Succeeded?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Succeeded?": {
+      "main": [
+        [
+          {
+            "node": "Read final.mp4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Slack: ALERT failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read final.mp4": {
+      "main": [
+        [
+          {
+            "node": "Slack: video ready",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "executionTimeout": 3600,
+    "saveManualExecutions": true
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

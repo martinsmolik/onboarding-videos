@@ -1,0 +1,12 @@
+{
+  "name": "@svp/assembler",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Narration TTS (audio-first) + ffmpeg mux of raw.webm + audio + subtitles -> final.mp4",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "tsx src/cli.ts",
+    "typecheck": "tsc --noEmit"
+  }
+}

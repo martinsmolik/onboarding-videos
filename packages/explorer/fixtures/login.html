@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="cs"><head><meta charset="utf-8"><title>Login (explorer test fixture)</title></head>
+<body>
+<form data-testid="login-form" onsubmit="event.preventDefault();
+  if (email.value === 'demo@sloneek.test' && pass.value === 's3cret!') location.href = '../../../demo-app/index.html';
+  else err.hidden = false;">
+  <label for="email">E-mail</label><input id="email" data-testid="login-email" type="email">
+  <label for="pass">Heslo</label><input id="pass" data-testid="login-password" type="password">
+  <button type="submit" data-testid="login-submit">Přihlásit</button>
+  <p id="err" hidden data-testid="login-error">Špatné jméno nebo heslo</p>
+</form>
+</body></html>
