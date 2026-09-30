@@ -1,0 +1,109 @@
+{
+  "id": "org-chart",
+  "lang": "cs",
+  "title": "Vytvořte organizační schéma",
+  "audience": "admin",
+  "preconditions": [
+    "Log in as 'Administrátor' or 'Majitel účtu'.",
+    "At least one existing top-level team (parent) and one user who can be manager exist on the demo tenant.",
+    "User 'Petra Ukázková' exists (created by add-users). No team named 'Marketing' exists; if it does, use 'Marketing a komunikace'."
+  ],
+  "source": {
+    "old_video_url": "https://www.youtube.com/watch?v=NNtvzKEEN7U",
+    "release_notes_since": "2026-04-20",
+    "changes_detected": [
+      "Release 3.52 (27. 7. 2026): teams and locations now support multiple selection; no rename of 'Společnost / Týmy' found."
+    ],
+    "references": [
+      {
+        "title": "Týmy a organizační struktura",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/14888059312796",
+        "updated": "2024-08-31"
+      },
+      {
+        "title": "Mezinárodní složení týmu firmy",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/14888026718236",
+        "updated": "2024-07-28"
+      },
+      {
+        "title": "Uživatelské role (týmové role)",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/14888101294876",
+        "updated": "2025-02-10"
+      }
+    ]
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "V tomto videu vytvoříme organizační strukturu. Podle ní se pak řídí, kdo komu schvaluje absence a aktivity.",
+      "intent": "No action - stay on the dashboard 'Plocha' after login.",
+      "must_show": "The dashboard 'Plocha' is visible."
+    },
+    {
+      "id": "s02",
+      "narration": "V levém menu otevřete Společnost a zvolte Týmy. Uvidíte organizační schéma firmy.",
+      "intent": "In the left menu open 'Společnost', then click 'Týmy'.",
+      "must_show": "The teams page with the organizational chart tree is shown.",
+      "notes": "Cesta 'Společnost / Týmy' z článku 08/2024; pravděpodobně stále platí."
+    },
+    {
+      "id": "s03",
+      "narration": "Nový tým založíte tlačítkem Přidat nad organizačním schématem.",
+      "intent": "Click the add button on the teams page.",
+      "must_show": "The form for a new team is open.",
+      "notes": "Tlačítko je v článku jen jako obrázek (button_Pridat), popisek je pravděpodobně 'Přidat'."
+    },
+    {
+      "id": "s04",
+      "narration": "Tým pojmenujte, například Marketing, a připište krátký popisek, čím se zabývá.",
+      "intent": "Type 'Marketing' into the team name field and 'Kampaně, web a sociální sítě' into the description field.",
+      "must_show": "The form shows the name 'Marketing' and the description filled in.",
+      "notes": "Pole pro popis je v článku jako 'popisek'; přesný popisek pole pravděpodobně 'Popis'."
+    },
+    {
+      "id": "s05",
+      "narration": "Vyberte nadřazený tým. Tím určíte, kam nový tým v organizačním schématu patří.",
+      "intent": "In the parent team selector choose the top-level team of the company.",
+      "must_show": "The parent team field shows the selected top-level team."
+    },
+    {
+      "id": "s06",
+      "narration": "Přiřaďte manažera. Ten bude členům týmu schvalovat žádosti o absence.",
+      "intent": "In the manager field choose an existing user other than 'Petra Ukázková'.",
+      "must_show": "The manager field shows the selected user.",
+      "notes": "Popisek pole je pravděpodobně 'Manažer'; vedle něj existuje i role 'Supervisor' (jen dohled)."
+    },
+    {
+      "id": "s07",
+      "narration": "Přidejte do týmu jeho členy, například nového kolegu, a tým uložte.",
+      "intent": "Add 'Petra Ukázková' as a team member, then click the save button of the form.",
+      "must_show": "The form is closed and the team was saved without errors.",
+      "notes": "Název ukládacího tlačítka pravděpodobně 'Uložit'."
+    },
+    {
+      "id": "s08",
+      "narration": "Nový tým se hned objeví ve schématu. Přes Rozbalit vše uvidíte celou strukturu najednou.",
+      "intent": "Click 'Rozbalit vše' on the teams page.",
+      "must_show": "The fully expanded org chart shows 'Marketing' under its parent team."
+    },
+    {
+      "id": "s09",
+      "narration": "Kolegy mezi jednotlivými týmy můžete přesouvat také přetažením myší.",
+      "intent": "Drag the user 'Petra Ukázková' from the team 'Marketing' onto its parent team and drop her there.",
+      "must_show": "'Petra Ukázková' is now shown in the parent team.",
+      "notes": "Drag and drop je popsán v článku 08/2024 (tabulkový pohled); pravděpodobně funguje i ve schématu. Pokud přetažení v UI není, krok vypustit."
+    },
+    {
+      "id": "s10",
+      "narration": "Pozor, pokud tým nemá manažera, chodí žádosti ke schválení všem administrátorům.",
+      "intent": "No action - keep the expanded org chart in view.",
+      "must_show": "The expanded org chart is still visible."
+    },
+    {
+      "id": "s11",
+      "narration": "Struktura firmy je hotová a schvalování absencí se podle ní řídí automaticky.",
+      "intent": "No action - stay on the teams page.",
+      "must_show": "The teams page with the org chart is still visible."
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "id": "user-folders",
+  "lang": "cs",
+  "title": "Práce s uživatelskými složkami",
+  "audience": "admin",
+  "preconditions": [
+    "Log in as 'Administrátor' or 'Majitel účtu' (only these roles see the user card).",
+    "User 'Petra Ukázková' exists (created by add-users). Otherwise use the first active user in the list and keep the same user for all steps."
+  ],
+  "source": {
+    "old_video_url": "https://www.youtube.com/watch?v=pqELX50ERKc",
+    "release_notes_since": "2026-04-20",
+    "changes_detected": [
+      "Naming: the portal calls it 'uživatelská složka', the help center 'Karta uživatele'. Narration uses 'uživatelská složka' as the portal does; confirm the label in the UI."
+    ],
+    "references": [
+      { "title": "Karta uživatele (zaměstnanci, kontraktoři)", "url": "https://help.sloneek.com/hc/cs-cz/articles/14888150991516", "updated": "2024-08-29" },
+      { "title": "Přehled uživatelů", "url": "https://help.sloneek.com/hc/cs-cz/articles/14888167971356", "updated": "2024-07-28" },
+      { "title": "Uživatelské role", "url": "https://help.sloneek.com/hc/cs-cz/articles/14888101294876", "updated": "2025-02-10" },
+      { "title": "Vlastní pole uživatelů", "url": "https://help.sloneek.com/hc/cs-cz/articles/14888082631964", "updated": "2025-07-11" },
+      { "title": "Přiřazení a povolení událostí absence", "url": "https://help.sloneek.com/hc/cs-cz/articles/14888143255708", "updated": "2024-07-28" }
+    ]
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "V tomto videu si projdeme uživatelskou složku, tedy místo, kde najdete a upravíte všechny údaje o kolegovi.",
+      "intent": "No action - stay on the dashboard 'Plocha' after login.",
+      "must_show": "The dashboard 'Plocha' is visible."
+    },
+    {
+      "id": "s02",
+      "narration": "V levém menu otevřete Uživatelé, zvolte Přehled a správa a klikněte na jméno kolegy.",
+      "intent": "In the left menu open 'Uživatelé' → 'Přehled a správa', then click the name 'Petra Ukázková' in the list.",
+      "must_show": "The user folder of 'Petra Ukázková' is open with a row of tabs.",
+      "notes": "'Přehled a správa' dle článků 05/2026 (starší 'Seznam a správa')."
+    },
+    {
+      "id": "s03",
+      "narration": "Na záložce Základní a pracovní údaje vidíte tým, roli a poznámky. Štítky vám pomůžou kolegy později filtrovat.",
+      "intent": "Click the tab 'Základní a pracovní údaje'.",
+      "must_show": "The tab 'Základní a pracovní údaje' is active and shows team, role and tag information."
+    },
+    {
+      "id": "s04",
+      "narration": "Chcete-li něco změnit, klikněte na ikonu tužky, upravte údaj a změnu uložte.",
+      "intent": "On 'Základní a pracovní údaje' click the edit (pencil) icon of the work information section, type 'HR specialistka' into the position field and save.",
+      "must_show": "The position 'HR specialistka' is displayed in the work information section.",
+      "notes": "Ikona tužky pro editaci je v nápovědě u jiných sekcí; pole pro pozici je pravděpodobně 'Pozice' (filtr podle pozice přibyl v 3.52)."
+    },
+    {
+      "id": "s05",
+      "narration": "Na záložce Typ spolupráce a finanční podmínky nastavujete úvazek, pracovní dobu a mzdu.",
+      "intent": "Click the tab 'Typ spolupráce a finanční podmínky'.",
+      "must_show": "The tab 'Typ spolupráce a finanční podmínky' is active and shows the working hours and salary sections."
+    },
+    {
+      "id": "s06",
+      "narration": "Osobní údaje může kolega vyplnit i sám. Vy jeho změny potom jen schválíte.",
+      "intent": "Click the tab 'Osobní údaje'.",
+      "must_show": "The tab 'Osobní údaje' is active and shows the personal data fields."
+    },
+    {
+      "id": "s07",
+      "narration": "V přehledu absencí a aktivit vidíte kolegovy nároky na dovolenou a kolik z nich už vyčerpal.",
+      "intent": "Click the tab with the absence overview.",
+      "must_show": "The absence overview tab is active and shows absence types with entitlement and used amounts.",
+      "notes": "Záložka se v jednom článku jmenuje 'Přehled absencí a aktivit', v jiném 'Přehled nepřítomností'; pravděpodobně jedna z nich."
+    },
+    {
+      "id": "s08",
+      "narration": "Záložka Historie ukazuje na časové ose důležité události, třeba nástup, změnu mzdy nebo novou roli.",
+      "intent": "Click the tab 'Historie'.",
+      "must_show": "The tab 'Historie' is active and shows a timeline of events for the user."
+    },
+    {
+      "id": "s09",
+      "narration": "Když vám nějaký údaj chybí, vytvořte si vlastní pole v menu Uživatelé, Vlastní pole.",
+      "intent": "In the left menu open 'Uživatelé' → 'Vlastní pole'.",
+      "must_show": "The 'Vlastní pole' page lists custom fields and offers a way to add a new one."
+    },
+    {
+      "id": "s10",
+      "narration": "Uživatelská složka tak drží všechny informace o kolegovi pohromadě.",
+      "intent": "No action - stay on the 'Vlastní pole' page.",
+      "must_show": "The 'Vlastní pole' page is still visible."
+    }
+  ]
+}

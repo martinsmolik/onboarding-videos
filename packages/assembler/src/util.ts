@@ -45,6 +45,16 @@ export async function probeVideoSize(file: string): Promise<{ width: number; hei
   return { width: w, height: h };
 }
 
+/** First PATH entry containing an executable `name`, or null. */
+export function which(name: string): string | null {
+  for (const dir of (process.env.PATH || "").split(path.delimiter)) {
+    if (!dir) continue;
+    const f = path.join(dir, name);
+    try { fs.accessSync(f, fs.constants.X_OK); return f; } catch { /* next */ }
+  }
+  return null;
+}
+
 export function readJson<T = any>(f: string): T {
   return JSON.parse(fs.readFileSync(f, "utf8"));
 }

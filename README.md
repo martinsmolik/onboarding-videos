@@ -55,7 +55,7 @@ Each package: TypeScript, `tsx` runtime, exposes a CLI (`pnpm --filter @svp/<nam
 ## Settled contract rules (found during integration)
 
 - **Run order:** `tts` → `record` → `mux`. The recorder paces against `audio/durations.json`, which must hold *real* mp3 durations (ffprobe), never estimates. Silent steps are `0`, not omitted.
-- **Time base:** `timing.json` is in *video* time (t=0 = first frame of raw.webm). The recorder corrects wall-clock drift with a 6 px sync beacon in the bottom-left corner (`sync_source: "beacon"`). Steps are contiguous: `t_end(N) == t_start(N+1)`.
+- **Time base:** `timing.json` is in *video* time (t=0 = first frame of raw.webm). The recorder corrects wall-clock drift with a 6 px sync beacon in the bottom-left corner of an 8 px strip below the content (`sync_source: "beacon"`, `beacon_strip_px: 8`; mux crops the strip). Steps are contiguous: `t_end(N) == t_start(N+1)`. `final.mp4` time = recording time + intro card length (2.5 s by default).
 - **Exit codes:** recorder exits 0 with failed steps (status lives in timing.json), 1 on crash. Orchestrator heals only when timing.json lists `failed` steps.
 - **Heal:** `explorer --heal out/<id>/timing.json` rewrites `out/<id>/recipe.json` in place and bumps `version`. `tts` is cached per step (narration + provider + voice), so re-running after heal is cheap.
 - **Knowledge** is four commands (`ingest` → `transcribe` → `changes` → `scenarize`); its result is `out/<id>/scenario.json` plus `scenario.review.md` for a 30-second human approval.
@@ -64,9 +64,16 @@ Each package: TypeScript, `tsx` runtime, exposes a CLI (`pnpm --filter @svp/<nam
 - **Login on the real tenant:** explorer saves `out/<id>/storage-state.json` (+ `login-actions.json` with `{{SLONEEK_DEMO_USER}}` placeholders); recorder uses `recipe.start.storage_state`. Credentials only ever come from env.
 - **YouTube:** the API cannot replace a video's media. `--replace <oldId>` uploads a new video, sets the old one private and writes `out/video-map.json` – the portal has to swap the link. Uploads from unverified API projects are forced to *private*; flip to unlisted in Studio or get the project audited.
 
+## Video look (recorder + assembler)
+
+- **Intro / outro cards.** `assembler mux` wraps the recording in a 2.5 s title card (`recipe.title` + "Sloneek · onboarding") and a 2 s "sloneek.com" card, generated with ffmpeg `color` + `drawtext` (DejaVu Sans) and joined with `concat`. Default on when the recipe has a `title`; `--intro off` / `--outro off` to disable. Colours: env `BRAND_BG` (`#1f2a44`), `BRAND_FG` (`#ffffff`). All audio offsets and SRT cues are shifted by the intro length; `timing.json` stays in recording time.
+- **Offline speech.** Without `ELEVENLABS_API_KEY` the tts default is now `espeak` (espeak-ng, voice from `recipe.lang`, 150 wpm, linear alignment over the measured mp3) – intelligible narration instead of a tone. `--provider mock` still gives the silent tone; `--provider elevenlabs` needs the key.
+- **Beacon strip.** The recorder records 8 px taller than the recipe viewport (1920×1088 for 1920×1080) and keeps the sync beacon in that extra opaque strip; `timing.beacon_strip_px: 8` tells mux to `crop=W:H:0:0`. The beacon therefore never appears in `final.mp4`, and old timings without the field still work (no crop). The recipe viewport remains the content size.
+- **Cursor.** 28 px arrow with a subtle shadow, always re-stacked above modals/toasts; 420 ms click ripple (visible for ~10 frames).
+
 ## Local dev without Sloneek credentials
 
-`pnpm demo` serves `demo-app/index.html` on :4173 – a stand-in HR app with `data-testid`s. `samples/recipe.absence-request.json` runs against it. Voice provider `mock` generates a spoken-tempo silent/tone track with realistic duration (≈ 14 chars/s for Czech) so the whole pipeline runs offline.
+`pnpm demo` serves `demo-app/index.html` on :4173 – a stand-in HR app with `data-testid`s. `samples/recipe.absence-request.json` runs against it. Voice provider `espeak` (default without an ElevenLabs key) produces real offline speech via espeak-ng; `mock` generates a spoken-tempo silent/tone track with realistic duration (≈ 14 chars/s for Czech).
 
 ## Env
 

@@ -1,0 +1,52 @@
+{
+  "source": "https://www.sloneek.com/cs/onboarding-portal/ and /onboarding-portal/ (fetched 2026-09-30)",
+  "note": "Current portal catalog. `cs` / `en` are the YouTube IDs of the existing videos. Same ID in both = shared video. null = static image, no video.",
+  "sections": [
+    { "id": "core-hr", "cs": "Core HR", "en": "Core HR", "videos": [
+      { "id": "add-users",            "cs_title": "Přidejte uživatele do systému",         "en_title": "Add Users to the System",              "cs": "Bgq7l81i5_o", "en": "8kM2CdCHjm8" },
+      { "id": "user-folders",         "cs_title": "Práce s uživatelskými složkami",        "en_title": "Work With the User Folders",           "cs": "pqELX50ERKc", "en": "UlrBaes8O_Q" },
+      { "id": "org-chart",            "cs_title": "Vytvořte organizační schéma",           "en_title": "Create an Org Chart",                  "cs": "NNtvzKEEN7U", "en": "Ug8gJLC6yQ0" },
+      { "id": "collect-data",         "cs_title": "Sesbírejte data od nových kolegů",      "en_title": "Collect Data From New Colleagues",     "cs": "SJAnTZUJFik", "en": "eXWpo3T8qgY" },
+      { "id": "onboarding-checklists","cs_title": "Připravte si checklisty pro nástup",    "en_title": "Prepare Your Onboarding Checklists",   "cs": "6hmAQC_vn5A", "en": "rjNcqgykEwU" },
+      { "id": "documents",            "cs_title": "Nahrajte a posílejte dokumenty",        "en_title": "Upload and Send Documents",            "cs": "gynX5OLrssI", "en": "RLqstCWSLo8" },
+      { "id": "work-assets",          "cs_title": "Evidujte a předávejte pracovní pomůcky","en_title": "Store and Hand Over Work Assets",      "cs": "-Gi6C6gq9ys", "en": "aYMZptcgXjM" }
+    ]},
+    { "id": "time-management", "cs": "Time management", "en": "Time Management", "videos": [
+      { "id": "attendance-modes",     "cs_title": "Negativní vs. aktivní docházka",        "en_title": "Negative vs. Active Attendance",       "cs": "1pQ2jsmsAqw", "en": "1pQ2jsmsAqw" },
+      { "id": "working-hours",        "cs_title": "Vytvořte a přiřaďte pracovní doby",     "en_title": "Create & Assign Working Hours",        "cs": "6YtpAv_9j3o", "en": "TxnbRj6f_lA" },
+      { "id": "absences",             "cs_title": "Nastavte a spravujte absence",          "en_title": "Absence Management",                   "cs": "dEb04tZJdSU", "en": "seFGm7jNukk" },
+      { "id": "clockins-vs-tracking", "cs_title": "Příchody/odchody vs. timetracking a aktivity", "en_title": "Clock-ins/Clock-outs vs. Timetracking & Activities", "cs": "CLJYSWB0mgA", "en": "CLJYSWB0mgA" },
+      { "id": "clockins",             "cs_title": "Příchody a odchody (pípačky)",          "en_title": null,                                   "cs": "7PdBuipDGlA", "en": null },
+      { "id": "timetracking",         "cs_title": "Timetracking a aktivity (projekty)",    "en_title": "Activities & Timetracking",            "cs": "b5OGymENvi0", "en": "UOjneYdKmZI" }
+    ]},
+    { "id": "ats", "cs": "ATS", "en": "ATS", "videos": [
+      { "id": "ats-setup",            "cs_title": "Přizpůsobte si modul ATS",              "en_title": "Set Up the ATS Module",                "cs": "ElSvf6vHocw", "en": "EN1eyXG4gcI" },
+      { "id": "ats-new-position",     "cs_title": "Otevřete novou pozici",                 "en_title": "Open a New Position",                  "cs": "Hyh6rNFhgY0", "en": "zSzIps4hclw" },
+      { "id": "ats-candidates",       "cs_title": "Pracujte s kandidáty",                  "en_title": "Work with the Candidates",             "cs": "rxCrENM7_z8", "en": "Ho_XHiYOWho" }
+    ]},
+    { "id": "performance", "cs": "Hodnocení", "en": "Performance", "videos": [
+      { "id": "performance-review",   "cs_title": "Hodnocení výkonnosti",                  "en_title": null,                                   "cs": "4DMFEvwQe0M", "en": null },
+      { "id": "okr-kpi",              "cs_title": "OKR a KPI",                             "en_title": "OKRs & KPIs",                          "cs": "EIf7hLp4QFY", "en": "RqFu5x5m0T4" },
+      { "id": "feedback-360",         "cs_title": "(Nejen 360°) Zpětná vazba",             "en_title": null,                                   "cs": "WoW_oy7vIdQ", "en": null }
+    ]},
+    { "id": "surveys", "cs": "Průzkumy", "en": "Surveys", "videos": [
+      { "id": "surveys",              "cs_title": "Vytvářejte a rozesílejte průzkumy",     "en_title": "Create and Send Out Surveys",          "cs": "zL02jrbVAbU", "en": "ju96sf1IWiQ" }
+    ]},
+    { "id": "hr-workflows", "cs": "HR Workflows", "en": "HR Workflows", "videos": [
+      { "id": "workflows",            "cs_title": "Onboardingové a offboardingové workflows","en_title": "Onboarding & Offboarding workflows",  "cs": "aUU2IOD3LMk", "en": "JMiAzPam8HA" }
+    ]},
+    { "id": "payroll", "cs": "Mzdy", "en": "Payroll", "videos": [
+      { "id": "custom-reports",       "cs_title": "Seznamte se s našimi Custom reporty",   "en_title": null,                                   "cs": null, "en": null }
+    ]},
+    { "id": "intelligence", "cs": "Sloneek Intelligence", "en": "Sloneek Intelligence", "videos": [
+      { "id": "ai-agent",             "cs_title": "Využijte naplno svého osobního HR AI agenta","en_title": "Use Your Personal HR AI Agent",   "cs": "jgIadzX8gwY", "en": "JSN69pXBAdU" }
+    ]},
+    { "id": "other", "cs": "Ostatní", "en": "Other", "videos": [
+      { "id": "dashboard",            "cs_title": "Objevte možnosti hlavní plochy",        "en_title": "Discover Your Dashboard",              "cs": "G_mvggoF4Hc", "en": "xoXstYjH-Fk" },
+      { "id": "ai-features",          "cs_title": "Využijte AI naplno",                    "en_title": null,                                   "cs": "tSpu_4DE10w", "en": null },
+      { "id": "integrations",         "cs_title": "Integrujte Sloneek",                    "en_title": null,                                   "cs": null, "en": null },
+      { "id": "wiki",                 "cs_title": "Vytvářejte články na Wiki",             "en_title": "Create Wiki Articles",                 "cs": "fYyyWu2WatI", "en": "gCze8spWq4U" },
+      { "id": "trust-box",            "cs_title": "Otevřete schránku důvěry",              "en_title": "Open the Trust Box",                   "cs": "hIRjvKRRrMc", "en": "IgZJ3iyBu_Y" }
+    ]}
+  ]
+}

@@ -56,6 +56,8 @@ export interface Timing {
   recorded_at: string;
   /** 'beacon' = step times re-anchored to true video frames; 'wall' = raw Date.now() offsets (fallback) */
   sync_source: 'beacon' | 'wall';
+  /** Extra rows recorded BELOW the recipe viewport (raw.webm height = viewport.height + this). Holds the sync beacon; the assembler crops it away. Absent/0 in old timings = no crop. */
+  beacon_strip_px: number;
   steps: TimingStep[];
 }
 

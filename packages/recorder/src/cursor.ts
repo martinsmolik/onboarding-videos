@@ -6,7 +6,8 @@
 //
 // Exposes on window:
 //   __svpCursor.moveTo(x, y, ms)  -> Promise, rAF ease-in-out animation
-//   __svpCursor.click()           -> 300 ms expanding ring ripple at cursor pos
+//   __svpCursor.click()           -> ~420 ms expanding ring ripple at cursor pos
+//   __svpCursor.beacon(k)         -> flip the sync beacon colour for step k
 //   __svpCursor.pos()             -> { x, y }
 //
 // FRAME-RATE NOTE (important for A/V sync): Playwright's video writer emits
@@ -15,33 +16,51 @@
 // All overlay animation runs through one rAF loop that only paints on an
 // alternating 2/3-vsync cadence (≈ 41.7 ms ≈ 24 fps), which keeps video time
 // ≈ wall time. Do not "fix" this back to painting on every rAF tick.
+//
+// BEACON STRIP: the browser viewport is recorded BEACON_STRIP_PX taller than
+// the recipe viewport. The bottom strip is an opaque, fixed, max-z-index bar
+// that holds the sync beacon (BEACON_PX square, bottom-left). The assembler
+// crops the strip away (timing.beacon_strip_px), so nothing of it reaches
+// final.mp4. Page content may extend under the strip; that is by design.
 
 export const CURSOR_ID = '__svp-cursor';
 export const BEACON_ID = '__svp-beacon';
+export const STRIP_ID = '__svp-strip';
 export const BEACON_PX = 6;
+/** Extra rows recorded below the recipe viewport; cropped away by the assembler. */
+export const BEACON_STRIP_PX = 8;
+export const CURSOR_PX = 28;
 
 export const CURSOR_INIT_SCRIPT = `
 (() => {
   if (window.__svpCursor) return;
-  const HOT = { x: 4, y: 2 }; // arrow tip inside the 24px svg box
-  const SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">'
+  const SIZE = ${CURSOR_PX};
+  const HOT = { x: 4 * SIZE / 24, y: 2 * SIZE / 24 }; // arrow tip inside the svg box (path is in 24-unit space)
+  const SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="' + SIZE + '" height="' + SIZE + '" viewBox="0 0 24 24">'
     + '<path d="M4 2 L4 19.5 L8.6 15.4 L11.6 22 L14.4 20.7 L11.5 14.3 L17.5 14.3 Z"'
     + ' fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round"/></svg>';
   const state = { x: (window.innerWidth || 1920) / 2, y: (window.innerHeight || 1080) / 2, el: null };
+  const Z = '2147483647';
+
+  // Keep an overlay element as the LAST child of <body>: with equal (max) z-index the
+  // later sibling wins, so modals/toasts appended after us can never cover the cursor.
+  function toTop(el) {
+    if (document.body && document.body.lastElementChild !== el) document.body.appendChild(el);
+  }
 
   let ensure = function () {
-    if (state.el && state.el.isConnected) return state.el;
     if (!document.body) return null;
-    let el = document.getElementById('${CURSOR_ID}');
+    let el = state.el && state.el.isConnected ? state.el : document.getElementById('${CURSOR_ID}');
     if (!el) {
       el = document.createElement('div');
       el.id = '${CURSOR_ID}';
       el.setAttribute('aria-hidden', 'true');
-      el.style.cssText = 'position:fixed;left:0;top:0;width:24px;height:24px;pointer-events:none;'
-        + 'z-index:2147483647;filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.45));will-change:transform;';
+      el.style.cssText = 'position:fixed;left:0;top:0;width:' + SIZE + 'px;height:' + SIZE + 'px;pointer-events:none;'
+        + 'z-index:' + Z + ';filter:drop-shadow(0 1.5px 2px rgba(0,0,0,.35));will-change:transform;';
       el.innerHTML = SVG;
       document.body.appendChild(el);
     }
+    toTop(el);
     state.el = el;
     place();
     return el;
@@ -86,40 +105,54 @@ export const CURSOR_INIT_SCRIPT = `
     });
   }
 
+  // Click ripple: ~420 ms (≈ 10 frames at 25 fps, 5 painted at the 24 fps cadence), a 56 px ring
+  // plus a soft filled disc so it stays visible even when the ring lands on a busy background.
   function click() {
-    ensure();
     if (!document.body) return Promise.resolve();
-    const cx = state.x, cy = state.y;
+    const cx = state.x, cy = state.y, R = 28;
     const ring = document.createElement('div');
-    ring.style.cssText = 'position:fixed;left:0;top:0;width:44px;height:44px;border-radius:50%;'
-      + 'border:3px solid rgba(59,130,246,.9);box-sizing:border-box;pointer-events:none;'
-      + 'z-index:2147483646;transform:translate(' + (cx - 22) + 'px,' + (cy - 22) + 'px) scale(0.2);opacity:1;';
+    ring.style.cssText = 'position:fixed;left:0;top:0;width:' + (2 * R) + 'px;height:' + (2 * R) + 'px;border-radius:50%;'
+      + 'border:3px solid rgba(59,130,246,.95);background:rgba(59,130,246,.22);box-sizing:border-box;pointer-events:none;'
+      + 'z-index:' + Z + ';transform:translate(' + (cx - R) + 'px,' + (cy - R) + 'px) scale(0.25);opacity:1;';
     document.body.appendChild(ring);
-    return animate(300, p => {
-      ring.style.transform = 'translate(' + (cx - 22) + 'px,' + (cy - 22) + 'px) scale(' + (0.2 + 0.8 * p) + ')';
-      ring.style.opacity = String(1 - p);
+    ensure(); // cursor back on top of the ring
+    return animate(420, p => {
+      ring.style.transform = 'translate(' + (cx - R) + 'px,' + (cy - R) + 'px) scale(' + (0.25 + 0.75 * p) + ')';
+      ring.style.opacity = String(1 - p * p);
     }).then(() => ring.remove());
   }
 
-  // --- sync beacon: 6x6 px square in the bottom-left corner. Colour changes at every
-  // step start (0 = grey, odd = black, even = white); the recorder scans it in raw.webm
-  // afterwards to map wall-clock step starts onto true video time. ---
+  // --- sync beacon: BEACON_PX square in the bottom-left corner of an opaque strip that
+  // sits in the extra BEACON_STRIP_PX rows below the recipe viewport. Colour changes at
+  // every step start (0 = grey, odd = black, even = white); the recorder scans it in
+  // raw.webm afterwards to map wall-clock step starts onto true video time. ---
   let beaconK = 0;
   function beacon(k) {
     beaconK = k;
     if (!document.body) return;
+    let strip = document.getElementById('${STRIP_ID}');
+    if (!strip) {
+      strip = document.createElement('div');
+      strip.id = '${STRIP_ID}';
+      strip.setAttribute('aria-hidden', 'true');
+      strip.style.cssText = 'position:fixed;left:0;right:0;bottom:0;height:${BEACON_STRIP_PX}px;background:#808080;'
+        + 'pointer-events:none;z-index:' + Z + ';margin:0;padding:0;border:0;';
+      document.body.appendChild(strip);
+    }
     let b = document.getElementById('${BEACON_ID}');
     if (!b) {
       b = document.createElement('div');
       b.id = '${BEACON_ID}';
       b.setAttribute('aria-hidden', 'true');
-      b.style.cssText = 'position:fixed;left:0;bottom:0;width:${BEACON_PX}px;height:${BEACON_PX}px;pointer-events:none;z-index:2147483647;';
+      b.style.cssText = 'position:fixed;left:0;bottom:0;width:${BEACON_PX}px;height:${BEACON_PX}px;pointer-events:none;'
+        + 'z-index:' + Z + ';margin:0;padding:0;border:0;';
       document.body.appendChild(b);
     }
+    toTop(strip); toTop(b);
     b.style.background = k === 0 ? '#808080' : (k % 2 ? '#000' : '#fff');
   }
   const ensure0 = ensure;
-  ensure = function () { const r = ensure0(); if (r) beacon(beaconK); return r; };
+  ensure = function () { beacon(beaconK); return ensure0(); }; // strip+beacon first, cursor last => cursor on top
 
   window.__svpCursor = { moveTo, click, ensure, beacon, pos: () => ({ x: state.x, y: state.y }) };
   if (document.body) ensure();

@@ -3,12 +3,19 @@
   "private": true,
   "version": "0.1.0",
   "packageManager": "pnpm@10.28.0",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "demo": "node scripts/serve-demo.mjs",
     "record": "pnpm --filter @svp/recorder start",
     "assemble": "pnpm --filter @svp/assembler start",
-    "pipeline": "pnpm --filter @svp/orchestrator start"
+    "pipeline": "pnpm --filter @svp/orchestrator start",
+    "setup": "bash scripts/setup.sh",
+    "typecheck": "node scripts/typecheck.mjs",
+    "test": "node scripts/test-all.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "batch": "node packages/orchestrator/scripts/batch.mjs"
   },
   "devDependencies": {
     "typescript": "^5.6.0",

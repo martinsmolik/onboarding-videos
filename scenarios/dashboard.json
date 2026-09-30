@@ -1,0 +1,98 @@
+{
+  "id": "dashboard",
+  "lang": "cs",
+  "title": "Objevte možnosti hlavní plochy",
+  "audience": "admin",
+  "preconditions": [
+    "Log in as 'Administrátor'.",
+    "Demo data should make the widgets non-empty: at least one upcoming birthday or work anniversary in the next seven days, one absence today, one planned absence within fourteen days, one home office or business trip today.",
+    "User 'Petra Ukázková' exists (created by add-users) for the Kudos step."
+  ],
+  "source": {
+    "old_video_url": "https://www.youtube.com/watch?v=G_mvggoF4Hc",
+    "release_notes_since": "2026-04-20",
+    "changes_detected": [
+      "\"Plocha\" -> \"Plocha 2.0\" (release 3.51, 29. 6. 2026): users can personalise widgets, HR admins can set mandatory widgets, empty widgets are hidden, tasks and pending requests are centralised. The only dashboard help article is from 07/2024, so widget labels are unconfirmed.",
+      "Release 3.54 (29. 9. 2026): Wiki pages are directly accessible from the dashboard again; admins get same-day birthday notifications."
+    ],
+    "references": [
+      { "title": "Firemní nástěnka na Ploše", "url": "https://help.sloneek.com/hc/cs-cz/articles/14888114515996", "updated": "2024-07-28" },
+      { "title": "Release log 3.51 (Plocha 2.0)", "url": "https://help.sloneek.com/hc/cs-cz/articles/28523258354972", "updated": "2026-06-29" },
+      { "title": "Release log 3.54", "url": "https://help.sloneek.com/hc/cs-cz/articles/30575134117660", "updated": "2026-09-29" }
+    ]
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "V tomto videu si projdeme Plochu, tedy hlavní stránku, kterou po přihlášení vidí každý zaměstnanec.",
+      "intent": "No action - stay on the dashboard 'Plocha' after login.",
+      "must_show": "The dashboard 'Plocha' is visible."
+    },
+    {
+      "id": "s02",
+      "narration": "Nahoře máte na jednom místě úkoly a neschválené žádosti, které na vás čekají.",
+      "intent": "No click. Scroll to the top of 'Plocha' and keep the widget with pending tasks and approval requests in view.",
+      "must_show": "A widget listing pending tasks or requests waiting for approval is visible.",
+      "notes": "Název widgetu neznámý (Plocha 2.0); pravděpodobně obsahuje 'Úkoly' nebo 'Ke schválení'."
+    },
+    {
+      "id": "s03",
+      "narration": "V Oznámeních sdílíte důležité zprávy s celou firmou, s jedním týmem nebo jen s vybranými kolegy.",
+      "intent": "In the widget 'Oznámení' click the control for adding a new announcement.",
+      "must_show": "The form for a new announcement is open with a choice of recipients.",
+      "notes": "Popisek tlačítka pro nové oznámení článek neuvádí."
+    },
+    {
+      "id": "s04",
+      "narration": "Napište text a oznámení zveřejněte. Připínáčkem ho můžete nechat nahoře.",
+      "intent": "Type 'Ve čtvrtek máme společnou snídani v kuchyňce.' as the text, keep the whole company as recipients, publish it, then click the pin icon on the new announcement.",
+      "must_show": "The new announcement is shown pinned at the top of 'Oznámení'."
+    },
+    {
+      "id": "s05",
+      "narration": "V sekci Kudos pochválíte kolegu. Poděkování uvidí i ostatní.",
+      "intent": "In the widget 'Kudos' start a new praise, choose 'Petra Ukázková', type 'Díky za skvělou pomoc s onboardingem!' and publish it.",
+      "must_show": "The new praise for 'Petra Ukázková' is shown in the 'Kudos' widget.",
+      "notes": "Widget je v článku jako 'Kudos (pochvaly)'; přesný popisek a tlačítko pravděpodobně jiné po Plocha 2.0."
+    },
+    {
+      "id": "s06",
+      "narration": "Narozeniny a pracovní výročí kolegů na příštích sedm dní máte hned na očích.",
+      "intent": "No click. Scroll so the widgets 'Narozeniny' and 'Výročí' are in view.",
+      "must_show": "The widgets 'Narozeniny' and 'Výročí' are visible with at least one entry."
+    },
+    {
+      "id": "s07",
+      "narration": "Vidíte také, kdo dnes nepracuje a kdo je na home office nebo na služební cestě.",
+      "intent": "No click. Scroll so the widgets 'Kdo dnes nepracuje?' and the home office and business trip widget are in view.",
+      "must_show": "The widgets for today's absences and for home office or business trips are visible.",
+      "notes": "Názvy 'Kdo dnes nepracuje?' a 'Kdo je dnes na služební cestě a homeoffice?' jsou z článku 07/2024, pravděpodobně změněné."
+    },
+    {
+      "id": "s08",
+      "narration": "Plánované absence ukazují, kdo bude chybět v následujících dvou týdnech.",
+      "intent": "No click. Scroll so the widget 'Plánované absence' is in view.",
+      "must_show": "The widget 'Plánované absence' is visible with at least one upcoming absence."
+    },
+    {
+      "id": "s09",
+      "narration": "Plochu si každý může přizpůsobit a vybrat si widgety, které chce vidět.",
+      "intent": "Click the control for customising the dashboard layout.",
+      "must_show": "The dashboard customisation mode or panel with a list of widgets is open.",
+      "notes": "Ovládání personalizace (Plocha 2.0) není v nápovědě popsané; popisek je pravděpodobně 'Upravit plochu' nebo 'Přizpůsobit'. Nutné ověřit člověkem."
+    },
+    {
+      "id": "s10",
+      "narration": "Jako administrátor navíc určíte widgety, které musí mít na Ploše všichni zaměstnanci.",
+      "intent": "In the customisation panel show the option for marking a widget as mandatory for all users, without changing it.",
+      "must_show": "The option for mandatory widgets is visible.",
+      "notes": "Umístění nastavení povinných widgetů neznámé; pravděpodobně v personalizaci nebo v 'Nastavení / Nastavení aplikace'. Nutné ověřit člověkem."
+    },
+    {
+      "id": "s11",
+      "narration": "Plocha tak každému ukáže, co se ve firmě právě děje.",
+      "intent": "Close the customisation panel without saving changes and stay on 'Plocha'.",
+      "must_show": "The dashboard 'Plocha' is visible in its normal view."
+    }
+  ]
+}

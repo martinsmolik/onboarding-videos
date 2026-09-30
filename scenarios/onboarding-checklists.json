@@ -1,0 +1,107 @@
+{
+  "id": "onboarding-checklists",
+  "lang": "cs",
+  "title": "Připravte si checklisty pro nástup",
+  "audience": "admin",
+  "preconditions": [
+    "Log in as 'Administrátor' (or a user with the role 'Onboarding Specialist').",
+    "The demo tenant must already run release 3.54 (29. 9. 2026) with the new 'Checklisty' module. If the left menu still shows the old onboarding task lists, stop: this scenario does not apply.",
+    "User 'Petra Ukázková' exists (created by add-users). No template named 'Nástup nového kolegy' exists."
+  ],
+  "source": {
+    "old_video_url": "https://www.youtube.com/watch?v=6hmAQC_vn5A",
+    "release_notes_since": "2026-04-20",
+    "changes_detected": [
+      "\"Onboarding / seznam úkolů\" -> \"Checklisty\" (release 3.54, 29. 9. 2026: fully redesigned module with templates, mandatory tasks, 'Režim dokončení' Souběžně / Postupně, 'Moje úkoly', role 'Onboarding Specialist', AI task suggestions, link to HR Workflows). The old video is fully outdated.",
+      "Old help articles linked from the portal ('Vytvoření šablony pro onboarding (seznam úkolů)', 'Spuštění onboardingu (seznamu úkolů)', 'Kontrola plnění úkolů') describe the previous module; the new article 'Checklisty' is authoritative."
+    ],
+    "references": [
+      {
+        "title": "Checklisty – jak je vytvořit a používat",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/30575223342364",
+        "updated": "2026-09-29"
+      },
+      {
+        "title": "Moje úkoly",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/14888120847772",
+        "updated": "2026-09-29"
+      },
+      {
+        "title": "Release log 3.54",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/30575134117660",
+        "updated": "2026-09-29"
+      }
+    ]
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "V tomto videu připravíme šablonu checklistu pro nástup a spustíme ji pro nového kolegu.",
+      "intent": "No action - stay on the dashboard 'Plocha' after login.",
+      "must_show": "The dashboard 'Plocha' is visible."
+    },
+    {
+      "id": "s02",
+      "narration": "V levém menu otevřete Checklisty. Tady najdete šablony i probíhající checklisty.",
+      "intent": "In the left menu click 'Checklisty'.",
+      "must_show": "The 'Checklisty' module is open.",
+      "notes": "Umístění položky v menu článek neuvádí; pravděpodobně samostatná položka 'Checklisty' v levém menu."
+    },
+    {
+      "id": "s03",
+      "narration": "Novou šablonu založíte vpravo nahoře tlačítkem Vytvořit šablonu.",
+      "intent": "Click '+ Vytvořit šablonu' in the top right corner.",
+      "must_show": "The editor of a new checklist template is open."
+    },
+    {
+      "id": "s04",
+      "narration": "Šablonu pojmenujte, třeba Nástup nového kolegy, a uložte ji jako koncept.",
+      "intent": "Type 'Nástup nového kolegy' as the template name and save it as a draft ('koncept').",
+      "must_show": "The template 'Nástup nového kolegy' is saved as a draft.",
+      "notes": "Popisek tlačítka pro uložení konceptu článek neuvádí."
+    },
+    {
+      "id": "s05",
+      "narration": "Klikněte na Přidat nový úkol a zadejte jeho název, například Připravit notebook.",
+      "intent": "Click '+ Přidat nový úkol' and type 'Připravit notebook' into 'Název úkolu'.",
+      "must_show": "A task form with 'Název úkolu' = 'Připravit notebook' is shown."
+    },
+    {
+      "id": "s06",
+      "narration": "Určete řešitele a termín dokončení. Termín se dopočítá od data, kdy checklist spustíte.",
+      "intent": "In the task set 'Řešitele' to the logged-in admin and 'Termín dokončení' to one day, then save the task.",
+      "must_show": "The template lists the task 'Připravit notebook' with an assignee and a deadline.",
+      "notes": "Formát 'Termín dokončení' (počet dní od spuštění) je z popisu, přesné ovládání pravděpodobně číselné pole s jednotkou."
+    },
+    {
+      "id": "s07",
+      "narration": "Šablona je připravená. Klikněte na Spustit checklist a vyberte kolegu, který nastupuje.",
+      "intent": "Click 'Spustit checklist', then choose 'Petra Ukázková' in the field 'Uživatele'.",
+      "must_show": "The launch form shows 'Petra Ukázková' as the selected user."
+    },
+    {
+      "id": "s08",
+      "narration": "V režimu dokončení zvolte, jestli se úkoly plní souběžně, nebo postupně jeden po druhém.",
+      "intent": "In 'Režim dokončení' select 'Souběžně'.",
+      "must_show": "'Souběžně' is selected in 'Režim dokončení'."
+    },
+    {
+      "id": "s09",
+      "narration": "Zkontrolujte nastavení a klikněte na Uložit a spustit checklist.",
+      "intent": "Click 'Uložit a spustit checklist'.",
+      "must_show": "The checklist for 'Petra Ukázková' is running and appears in the list of active checklists."
+    },
+    {
+      "id": "s10",
+      "narration": "Průběh sledujete v záložce Checklisty, v seznamu nebo v Kanban zobrazení. Řešitelé své úkoly najdou v Mých úkolech.",
+      "intent": "Open the tab 'Checklisty', open the running checklist of 'Petra Ukázková' and switch to 'Kanban zobrazení'.",
+      "must_show": "The checklist detail is shown as a Kanban board with the task 'Připravit notebook'."
+    },
+    {
+      "id": "s11",
+      "narration": "Stejnou šablonu teď můžete spustit pro každého dalšího kolegu, který k vám nastoupí.",
+      "intent": "No action - keep the Kanban view in place.",
+      "must_show": "The Kanban view of the checklist is still visible."
+    }
+  ]
+}

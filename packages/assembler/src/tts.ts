@@ -1,13 +1,14 @@
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
-import { probeDurationMs, readJson, resolvePath, run } from "./util.js";
+import { probeDurationMs, readJson, resolvePath, run, which } from "./util.js";
 
 export interface Alignment {
   characters: string[];
   character_start_times_seconds: number[];
   character_end_times_seconds: number[];
 }
-export type Provider = "elevenlabs" | "mock";
+export type Provider = "elevenlabs" | "espeak" | "mock";
 export interface TtsOptions {
   recipe: string;            // path to recipe.json
   out: string;               // out/<id>
@@ -59,6 +60,39 @@ async function mock(text: string, mp3Path: string): Promise<Alignment> {
   return linearAlignment(text, ms / 1000);
 }
 
+/** espeak-ng voice for a recipe language (all three ship with espeak-ng-data). */
+export function espeakVoice(lang: string | undefined): string {
+  const l = (lang || "cs").toLowerCase();
+  if (l.startsWith("en")) return "en";
+  if (l.startsWith("sk")) return "sk";
+  return "cs";
+}
+export const ESPEAK_WPM = 150;
+
+/**
+ * Offline speech via espeak-ng (robotic but real, intelligible narration; no network, no billing).
+ * Text goes through a file (`-f`), never through a shell, so narration cannot inject arguments.
+ * espeak has no per-char timestamps, so the alignment is linear over the measured mp3 duration
+ * (good enough for the <= 42-char subtitle cues).
+ */
+async function espeak(text: string, voice: string, mp3Path: string): Promise<Alignment> {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "svp-espeak-"));
+  const txt = path.join(tmp, "text.txt");
+  const wav = path.join(tmp, "out.wav");
+  try {
+    fs.writeFileSync(txt, text + "\n", "utf8");
+    await run("espeak-ng", ["-v", voice, "-s", String(ESPEAK_WPM), "-f", txt, "-w", wav]);
+    // 22.05 kHz mono wav -> 44.1 kHz mp3 (same container/rate as the other providers); the mild
+    // high-shelf cut and normalisation take the edge off espeak's buzz without hiding the speech.
+    await run("ffmpeg", ["-y", "-v", "error", "-i", wav, "-af", "highshelf=f=4000:g=-4,dynaudnorm=f=250:g=7,volume=0.9",
+      "-ar", "44100", "-ac", "1", "-c:a", "libmp3lame", "-b:a", "128k", mp3Path]);
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+  const ms = await probeDurationMs(mp3Path);
+  return linearAlignment(text, ms / 1000);
+}
+
 export function linearAlignment(text: string, durSec: number): Alignment {
   const chars = [...text];
   const per = durSec / Math.max(1, chars.length);
@@ -75,12 +109,18 @@ export async function tts(opts: TtsOptions): Promise<TtsResult> {
   const out = resolvePath(opts.out);
   const recipe = readJson(recipePath);
   const apiKey = process.env.ELEVENLABS_API_KEY;
-  const provider: Provider = opts.provider ?? (apiKey ? "elevenlabs" : "mock");
+  let provider: Provider = opts.provider ?? (apiKey ? "elevenlabs" : "espeak");
   if (provider === "elevenlabs" && !apiKey) throw new Error("provider elevenlabs requires ELEVENLABS_API_KEY");
+  if (provider === "espeak" && !which("espeak-ng")) {
+    if (opts.provider) throw new Error("provider espeak requires espeak-ng on PATH");
+    log("[tts] espeak-ng not found on PATH - falling back to provider=mock (silent tone)");
+    provider = "mock";
+  }
+  const espeakVoiceId = espeakVoice(recipe.lang);
   const voiceId: string = recipe.voice?.voice_id || process.env.ELEVENLABS_VOICE_ID || "";
   if (provider === "elevenlabs" && !voiceId) throw new Error("no voice id: set recipe.voice.voice_id or ELEVENLABS_VOICE_ID");
   const modelId: string = recipe.voice?.model_id || process.env.ELEVENLABS_MODEL_ID || "eleven_multilingual_v2";
-  const meta = provider === "mock" ? { provider } : { provider, voiceId, modelId };
+  const meta = provider === "mock" ? { provider } : provider === "espeak" ? { provider, voice: espeakVoiceId, wpm: ESPEAK_WPM } : { provider, voiceId, modelId };
 
   const audioDir = path.join(out, "audio");
   const alignDir = path.join(audioDir, "alignment");
@@ -89,7 +129,7 @@ export async function tts(opts: TtsOptions): Promise<TtsResult> {
   const durations: Record<string, number> = {};
   const synthesized: string[] = [], cached: string[] = [];
   let chars = 0;
-  log(`[tts] provider=${provider}${provider === "elevenlabs" ? ` model=${modelId} voice=${voiceId}` : ""}`);
+  log(`[tts] provider=${provider}${provider === "elevenlabs" ? ` model=${modelId} voice=${voiceId}` : provider === "espeak" ? ` voice=${espeakVoiceId} wpm=${ESPEAK_WPM}` : ""}`);
 
   for (const step of recipe.steps as { id: string; narration: string }[]) {
     const id = step.id;
@@ -110,6 +150,7 @@ export async function tts(opts: TtsOptions): Promise<TtsResult> {
     } else {
       let alignment: Alignment;
       if (provider === "mock") alignment = await mock(text, mp3);
+      else if (provider === "espeak") alignment = await espeak(text, espeakVoiceId, mp3);
       else {
         const r = await elevenlabs(text, voiceId, modelId, apiKey!);
         fs.writeFileSync(mp3, r.mp3);

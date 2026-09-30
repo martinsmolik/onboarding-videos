@@ -1,0 +1,109 @@
+{
+  "id": "documents",
+  "lang": "cs",
+  "title": "Nahrajte a posílejte dokumenty",
+  "audience": "admin",
+  "preconditions": [
+    "Log in as 'Administrátor', 'Vlastník' or a user with the extra role 'Správce dokumentů'.",
+    "The Word file scenarios/fixtures/dohoda-o-provedeni-prace.docx is available to the browser for the file chooser in s04 (contains the placeholder text 'JMÉNO ZAMĚSTNANCE').",
+    "User 'Petra Ukázková' exists (created by add-users). No template named 'Dohoda o provedení práce' exists."
+  ],
+  "source": {
+    "old_video_url": "https://www.youtube.com/watch?v=gynX5OLrssI",
+    "release_notes_since": "2026-04-20",
+    "changes_detected": [
+      "Release 3.52 (27. 7. 2026): the document template editor opens full screen; recipients show e-mail addresses; tags are searchable.",
+      "Help 02/2026: templates can also be generated with AI; not shown in this video."
+    ],
+    "references": [
+      {
+        "title": "Práce s modulem Dokumenty",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/18502089103900",
+        "updated": "2026-02-23"
+      },
+      {
+        "title": "Jaké dokumenty ve Sloneekovi podepíšete a jak je doručovat",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/14888025000988"
+      },
+      {
+        "title": "Elektronický podpis a potvrzení dokumentu",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/14888131526172"
+      },
+      {
+        "title": "Release log 3.52",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/29187621291548",
+        "updated": "2026-07-27"
+      }
+    ]
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "V tomto videu nahrajeme šablonu dokumentu z Wordu a pošleme ji kolegovi k elektronickému podpisu.",
+      "intent": "No action - stay on the dashboard 'Plocha' after login.",
+      "must_show": "The dashboard 'Plocha' is visible."
+    },
+    {
+      "id": "s02",
+      "narration": "V levém menu otevřete modul Dokumenty, kde jsou všechny firemní dokumenty.",
+      "intent": "In the left menu click 'Dokumenty'.",
+      "must_show": "The 'Dokumenty' module with the list of documents is open."
+    },
+    {
+      "id": "s03",
+      "narration": "Vpravo nahoře klikněte na Šablony a zvolte Přidat novou šablonu.",
+      "intent": "Click 'Šablony' in the top right corner, then click '+ Přidat novou šablonu'.",
+      "must_show": "The template editor for a new template is open (full screen)."
+    },
+    {
+      "id": "s04",
+      "narration": "Šablonu pojmenujte a v editoru přes nabídku Soubor zvolte Importovat z Wordu.",
+      "intent": "Type 'Dohoda o provedení práce' as the template name, open the editor menu 'Soubor', choose 'Importovat z Wordu' and pick the file dohoda-o-provedeni-prace.docx.",
+      "must_show": "The editor contains the imported text starting with 'Dohoda o provedení práce'."
+    },
+    {
+      "id": "s05",
+      "narration": "V pravém panelu Proměnné vložte údaje, které se doplní samy, třeba jméno zaměstnance.",
+      "intent": "Select the placeholder text 'JMÉNO ZAMĚSTNANCE' in the editor, open the panel 'Proměnné' on the right and insert the employee full name variable.",
+      "must_show": "The placeholder is replaced by an employee name variable in the editor.",
+      "notes": "Přesný název proměnné pro jméno zaměstnance článek neuvádí; pravděpodobně 'Jméno a příjmení' nebo podobně."
+    },
+    {
+      "id": "s06",
+      "narration": "Klikněte na Uložit šablonu. Stejnou šablonu pak použijete pro kohokoli dalšího.",
+      "intent": "Click 'Uložit šablonu'.",
+      "must_show": "The template 'Dohoda o provedení práce' appears in the list of templates."
+    },
+    {
+      "id": "s07",
+      "narration": "Teď dokument odešleme. Klikněte na Přidat nový dokument a zvolte Vytvořit dokument ze šablony.",
+      "intent": "Go back to the 'Dokumenty' list, click '+ Přidat nový dokument' in the top right corner and choose 'Vytvořit dokument ze šablony'.",
+      "must_show": "The form for creating a document from a template is open."
+    },
+    {
+      "id": "s08",
+      "narration": "Vyberte šablonu, dokument pojmenujte a v poli Podepisující zvolte kolegu.",
+      "intent": "Choose the template 'Dohoda o provedení práce', type 'Dohoda o provedení práce, Petra Ukázková' into 'Název' and choose 'Petra Ukázková' in 'Podepisující'.",
+      "must_show": "The form shows the chosen template, the name and 'Petra Ukázková' as the signer."
+    },
+    {
+      "id": "s09",
+      "narration": "Jako typ potvrzení zvolte Žádost o podpis a nastavte termín, do kdy má kolega dokument podepsat.",
+      "intent": "Set 'Typ potvrzení' to 'Žádost o podpis' and set 'Termín deadline' to the date seven days from today.",
+      "must_show": "'Typ potvrzení' shows 'Žádost o podpis' and a deadline date is set."
+    },
+    {
+      "id": "s10",
+      "narration": "Dokument odešlete. V jeho detailu pak v sekci Potvrzení uvidíte, jestli už je podepsaný.",
+      "intent": "Click the send button of the form, then open the new document from the list and go to the section 'Potvrzení'.",
+      "must_show": "The document detail shows the section 'Potvrzení' with 'Petra Ukázková' and a not yet signed state.",
+      "notes": "Název odesílacího tlačítka není jistý; souhrn článku uvádí 'Nahrajte dokument', pravděpodobně jde o jiný popisek."
+    },
+    {
+      "id": "s11",
+      "narration": "Šablony, dokumenty i podpisy tak máte bezpečně uložené na jednom místě.",
+      "intent": "No action - stay on the document detail.",
+      "must_show": "The document detail is still visible."
+    }
+  ]
+}

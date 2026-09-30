@@ -33,7 +33,7 @@ import { run } from '@svp/recorder';   // packages/recorder/src/index.ts
 const { timing, videoPath } = await run({ recipe: 'out/x/recipe.json', out: 'out/x', durations: 'out/x/audio/durations.json' });
 ```
 
-Env: `PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers` (Chromium already installed, never run `playwright install`). `SLONEEK_DEMO_USER` / `SLONEEK_DEMO_PASS` trigger the login hook (see below).
+Env: `PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers` (Chromium already installed, on this cloud box browsers are preinstalled (PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1); on a Mac run `pnpm run setup` which installs Chromium). `SLONEEK_DEMO_USER` / `SLONEEK_DEMO_PASS` trigger the login hook (see below).
 
 ## How pacing works
 
@@ -69,28 +69,45 @@ Standalone mode: if no durations file is given/found, `audio_ms` is estimated fr
 * `t_actions_end_ms` is when the last action finished (before `expect` / pacing wait). Useful for placing
   callouts or for cutting a "just the action" clip.
 * `total_ms` comes from `ffprobe` on the actual webm, `fps` from its stream (25).
+* `beacon_strip_px` (extra field, currently `8`): `raw.webm` is `viewport.width × (viewport.height + 8)`. The bottom
+  8 rows are an opaque strip holding the sync beacon; the assembler crops them (`crop=W:H:0:0`). Missing/`0` in an
+  old timing.json = raw video is exactly the viewport, nothing to crop.
 * `audio_ms` is the value the recorder paced against (real duration or estimate).
 * `sync_source` (extra field): `"beacon"` = timestamps re-anchored to true video frames (normal case),
   `"wall"` = raw wall-clock offsets (fallback when beacon detection failed – expect up to ~1 s drift on long videos).
 
 **Why the beacon:** Playwright's video writer emits `max(1, round(25·Δt))` frames per screencast frame, so video
 time drifts from wall time whenever the page repaints faster than 25 fps (measured: +0.5 s over a 36 s recording).
-The cursor overlay draws a 6×6 px square in the bottom-left corner whose colour flips at every step start
-(grey → black → white → black …). After recording, the recorder scans that square in `raw.webm` with ffmpeg and
+The cursor overlay draws a 6×6 px square in the bottom-left corner of an opaque 8 px strip that lives *below* the
+recipe viewport (the browser context is `viewport.height + 8` tall, see "Beacon strip"); its colour flips at every step
+start (grey → black → white → black …). After recording, the recorder scans that square in `raw.webm` with ffmpeg and
 rewrites `t_start_ms` of each step to the exact frame where the flip appeared; the other timestamps of the step are
 shifted by the same delta. Measured residual error between `t_actions_end_ms` and the visible UI change: 40–150 ms.
 The same reason is why the overlay animates at ~24 fps (alternating 2/3 vsync ticks) and the default typing delay is
 80 ms (2 frames) instead of 60 ms – do not change those to "smoother" values without re-measuring drift.
 
+### Beacon strip (why raw.webm is 1920×1088)
+
+The recipe viewport is the *content* size. The recorder opens the browser context 8 px taller
+(`BEACON_STRIP_PX` in `cursor.ts`) and records at that size (e.g. 1920×1088). An opaque, `position:fixed`, max-z-index
+strip covers those bottom 8 rows and holds the 6×6 beacon at its bottom-left. Page content lays out in the full 1088 px
+and may extend under the strip; nothing of the strip reaches `final.mp4` because the assembler crops to
+`timing.beacon_strip_px`. Screenshots in `shots/` are clipped to the content viewport as well. Beacon detection is
+unchanged (still `crop=6:6:0:ih-6` on the raw video) and was verified on the demo recipe: 6/6 transitions found,
+wall→video corrections +59…+538 ms.
+
 ## Cursor overlay
 
 Headless Chromium videos never show the OS cursor, so a DOM overlay is injected on every page
-(`context.addInitScript`, re-positioned after each navigation): a 24 px SVG arrow with a drop shadow,
-`position:fixed; pointer-events:none; z-index:2147483647`.
+(`context.addInitScript`, re-positioned after each navigation): a 28 px SVG arrow with a subtle drop shadow,
+`position:fixed; pointer-events:none; z-index:2147483647`. Before every move/click the overlay (and the beacon strip)
+are re-appended as the last children of `<body>`, so a modal or toast appended later with the same max z-index can never
+cover the cursor.
 
 * `click` / `hover` / `type` / `select`: element is scrolled into view, its centre computed, the overlay glides
   there with ease-in-out over 600–900 ms (distance based) while the real mouse (`page.mouse.move`) follows the same
-  path in 12 steps (so `:hover` styles react); a 300 ms expanding ring marks the click.
+  path in 12 steps (so `:hover` styles react); a 420 ms expanding ring (56 px, blue outline + soft fill) marks the
+  click – ≈ 10 frames at 25 fps, verified visible in `final.mp4`.
 * `highlight`: 2 s outline pulse on the element.
 * `scroll`: `down` / `up` = 400 px wheel; a selector (in `value` or `selector`) = smooth `scrollIntoView`.
 * `type`: clicks the field first, optional `clear`, then per-char typing (`delay_ms`, default 80).
@@ -127,8 +144,8 @@ In both cases keep the beacon scan – it makes sync independent of the capture 
 ## Known limits
 
 * 25 fps VP8 with soft text (see above).
-* The 6×6 px beacon square is visible in `raw.webm` in the bottom-left corner. The assembler may crop 6 px or
-  overlay a bar there; at 1080p it is barely noticeable.
+* The beacon strip is visible in `raw.webm` (bottom 8 rows); only the assembler's crop removes it. Anything the app
+  renders in its bottom 8 px (e.g. a `bottom:0` sticky bar) sits under the strip and is cropped too.
 * `t = 0` is defined as the first video frame; the first ~50–100 ms of the video is the blank page before `start.url`
   loads (page is created before `goto` so the screencast starts immediately).
 * Only the first matching element of a selector is used (`locator(...).first()`), 10 s locator timeout.

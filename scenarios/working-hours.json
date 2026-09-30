@@ -1,0 +1,114 @@
+{
+  "id": "working-hours",
+  "lang": "cs",
+  "title": "Vytvořte a přiřaďte pracovní doby",
+  "audience": "admin",
+  "preconditions": [
+    "Log in as 'Administrátor' or 'Majitel účtu'.",
+    "User 'Petra Ukázková' exists (created by add-users) and has no active working hours yet (each user can have only one active).",
+    "No working hours named 'Plný úvazek, ukázka' exist. Once assigned, working hours are locked for editing, so rerunning requires a new name or unassigning first."
+  ],
+  "source": {
+    "old_video_url": "https://www.youtube.com/watch?v=6YtpAv_9j3o",
+    "release_notes_since": "2026-04-20",
+    "changes_detected": [
+      "Docházka 2.0 (help 01/2026): lunch break time in attendance is taken from the working hours; changing it requires new working hours and reassignment.",
+      "Release 3.54 (29. 9. 2026): working hours fund is recalculated when the cooperation type changes mid-month."
+    ],
+    "references": [
+      {
+        "title": "Typy spolupráce (úvazky), pracovní doba a jejich nastavení",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/14888114487964",
+        "updated": "2024-08-27"
+      },
+      {
+        "title": "Jak upravit nebo smazat pracovní dobu",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/14888057385244",
+        "updated": "2024-07-28"
+      },
+      {
+        "title": "Kde najdu nastavení účtu?",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/15774085849500",
+        "updated": "2024-09-06"
+      },
+      {
+        "title": "Docházka 2.0: vše, co potřebujete vědět",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/24879546533276",
+        "updated": "2026-01-19"
+      }
+    ]
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "V tomto videu vytvoříme pracovní dobu a přiřadíme ji kolegovi. Bez ní nemůže čerpat absence ani zapisovat docházku.",
+      "intent": "No action - stay on the dashboard 'Plocha' after login.",
+      "must_show": "The dashboard 'Plocha' is visible."
+    },
+    {
+      "id": "s02",
+      "narration": "V levém menu otevřete Nastavení a zvolte Úvazky a typy spolupráce.",
+      "intent": "In the left menu open 'Nastavení', then click 'Úvazky a typy spolupráce'.",
+      "must_show": "The list of working hours and cooperation types is shown.",
+      "notes": "'Nastavení' je dle článku 09/2024 dole v levém menu pod 'Reporty a nastavení'; pravděpodobně stále platí."
+    },
+    {
+      "id": "s03",
+      "narration": "Klikněte na Přidat a zvolte týdenní pracovní dobu, která se opakuje každý týden.",
+      "intent": "Click 'PŘIDAT' and choose the weekly type 'týdenní'.",
+      "must_show": "The editor for new weekly working hours is open.",
+      "notes": "Tlačítko je v článku psané verzálkami 'PŘIDAT'; ovládání pro volbu typu (týdenní / roční) je pravděpodobně přepínač nebo výběr."
+    },
+    {
+      "id": "s04",
+      "narration": "Pracovní dobu pojmenujte, třeba Plný úvazek, ukázka, ať ji později v seznamu najdete.",
+      "intent": "Type 'Plný úvazek, ukázka' into the name field.",
+      "must_show": "The name field contains 'Plný úvazek, ukázka'."
+    },
+    {
+      "id": "s05",
+      "narration": "Tlačítkem Běžná nastavíte standardní směnu od pondělí do pátku i s obědovou pauzou.",
+      "intent": "Click the button 'BĚŽNÁ'.",
+      "must_show": "Monday to Friday are working days with start, end and break times filled in; Saturday and Sunday are off."
+    },
+    {
+      "id": "s06",
+      "narration": "Jiné časy nastavíte přes tlačítko Vlastní. Tady třeba zkrátíme pátek do půl třetí.",
+      "intent": "Select Friday, click 'VLASTNÍ' in the top right, set the end time to 14:30 and click 'ULOŽIT'.",
+      "must_show": "Friday shows the end time 14:30 while Monday to Thursday keep the standard times.",
+      "notes": "Postup výběru dne a zadání času je z článku 08/2024; tabulku lze zvětšit přes 'Zvětšení na celou plochu'."
+    },
+    {
+      "id": "s07",
+      "narration": "Pracovní dobu uložte. Pozor, jakmile ji někomu přiřadíte, už ji nepůjde upravit.",
+      "intent": "Click the save button of the working hours editor.",
+      "must_show": "'Plný úvazek, ukázka' appears in the list of working hours.",
+      "notes": "Název tlačítka pravděpodobně 'Uložit'."
+    },
+    {
+      "id": "s08",
+      "narration": "Teď ji přiřadíme. V menu Uživatelé otevřete uživatelskou složku kolegy.",
+      "intent": "In the left menu open 'Uživatelé' → 'Přehled a správa' and click 'Petra Ukázková'.",
+      "must_show": "The user folder of 'Petra Ukázková' is open."
+    },
+    {
+      "id": "s09",
+      "narration": "Na záložce Typ spolupráce a finanční podmínky přidejte pracovní dobu, kterou jste právě vytvořili.",
+      "intent": "Click the tab 'Typ spolupráce a finanční podmínky', add a new working hours assignment and choose 'Plný úvazek, ukázka'.",
+      "must_show": "The assignment form shows 'Plný úvazek, ukázka' as the selected working hours.",
+      "notes": "Popisek tlačítka pro přidání přiřazení článek neuvádí."
+    },
+    {
+      "id": "s10",
+      "narration": "Nastavte platnost od dnešního dne na dobu neurčitou a přiřazení uložte.",
+      "intent": "Set the start date to today, choose the duration 'neurčitou' and save the assignment.",
+      "must_show": "'Plný úvazek, ukázka' is listed as the active working hours of 'Petra Ukázková' from today."
+    },
+    {
+      "id": "s11",
+      "narration": "Kolega teď může zadávat absence a jeho pracovní fond se počítá správně.",
+      "intent": "No action - stay on the user folder tab.",
+      "must_show": "The tab 'Typ spolupráce a finanční podmínky' with the active assignment is still visible."
+    }
+  ]
+}

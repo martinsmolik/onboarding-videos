@@ -1,0 +1,119 @@
+{
+  "id": "add-users",
+  "lang": "cs",
+  "title": "Přidejte uživatele do systému",
+  "audience": "admin",
+  "preconditions": [
+    "Log in as 'Administrátor' or 'Majitel účtu'.",
+    "No user 'Petra Ukázková' exists yet (this scenario creates her; user-folders, org-chart, working-hours and onboarding-checklists reuse her). If she exists, delete her or use a unique e-mail suffix.",
+    "Optional: a connected Google Workspace or Microsoft Entra ID integration so step s09 can show group selection. Never run the actual import on the demo tenant."
+  ],
+  "source": {
+    "old_video_url": "https://www.youtube.com/watch?v=Bgq7l81i5_o",
+    "release_notes_since": "2026-04-20",
+    "changes_detected": [
+      "\"Uživatelé / Seznam a správa\" -> \"Uživatelé / Přehled a správa\" (help 08/2024 vs. help 05/2026; the newer name is used, confirm in UI)",
+      "\"Import uživatelů\" is now a self-service entry under 'Přehled a správa' for Google Workspace and Microsoft Entra ID (help 05/2026); the 2024 article said Excel import needed the Sloneek team."
+    ],
+    "references": [
+      {
+        "title": "Vytvoření nového uživatele (zaměstnance)",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/14888164615324",
+        "updated": "2024-08-29"
+      },
+      {
+        "title": "Přehled uživatelů",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/14888167971356",
+        "updated": "2024-07-28"
+      },
+      {
+        "title": "Synchronizace uživatelů s Google Workspace",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/14888111626524",
+        "updated": "2026-05-27"
+      },
+      {
+        "title": "Integrace Microsoft Entra ID se Sloneekem",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/14888093550620",
+        "updated": "2026-05-27"
+      },
+      {
+        "title": "Pravidla pro import uživatelů",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/14888034785692",
+        "updated": "2025-07-14"
+      },
+      {
+        "title": "Jak na hromadný import uživatelů?",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/14888035279132",
+        "updated": "2024-07-27"
+      }
+    ]
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "V tomto videu si ukážeme tři způsoby, jak do Sloneeku přidat kolegy: ručně, pozvánkou a hromadným importem.",
+      "intent": "No action - stay on the dashboard 'Plocha' after login.",
+      "must_show": "The dashboard 'Plocha' is visible."
+    },
+    {
+      "id": "s02",
+      "narration": "V levém menu otevřete Uživatelé a zvolte Přehled a správa. Uvidíte seznam všech aktivních i neaktivních uživatelů.",
+      "intent": "In the left menu open 'Uživatelé', then click 'Přehled a správa'.",
+      "must_show": "The user list is shown with columns for name, status, role, teams and e-mail.",
+      "notes": "Článek 08/2024 uvádí 'Seznam a správa' / 'Seznam uživatelů', články 05/2026 'Přehled a správa'. Aktuální je pravděpodobně 'Přehled a správa'."
+    },
+    {
+      "id": "s03",
+      "narration": "Nového kolegu přidáte ručně. Nad seznamem klikněte na tlačítko Přidat.",
+      "intent": "Click the button 'Přidat' on the 'Přehled a správa' page.",
+      "must_show": "The form for creating a new user is open."
+    },
+    {
+      "id": "s04",
+      "narration": "Vyplňte jméno, příjmení a e-mail. Další údaje doplníte později v jeho uživatelské složce.",
+      "intent": "In the new user form type 'Petra' into the first name field, 'Ukázková' into the last name field and 'petra.ukazkova@example.com' into the e-mail field.",
+      "must_show": "The form shows first name 'Petra', last name 'Ukázková' and the e-mail filled in.",
+      "notes": "Popisky polí formuláře článek neuvádí, pravděpodobně 'Jméno', 'Příjmení', 'E-mail'. Pokud formulář vyžaduje další povinná pole (např. tým), vyplnit první nabízenou hodnotu."
+    },
+    {
+      "id": "s05",
+      "narration": "Formulář uložte. Nový uživatel se hned objeví v seznamu.",
+      "intent": "Click the save button of the new user form.",
+      "must_show": "'Petra Ukázková' appears as a row in the user list.",
+      "notes": "Název ukládacího tlačítka je pravděpodobně 'Uložit' nebo 'Vytvořit'. Zda je nový uživatel rovnou aktivní, nepotvrzeno."
+    },
+    {
+      "id": "s06",
+      "narration": "Druhou možností je pozvánka. Klikněte na Pozvat a zkopírujte odkaz, přes který se kolega zaregistruje sám.",
+      "intent": "On the 'Přehled a správa' page click the button 'Pozvat'.",
+      "must_show": "A dialog with a generated invitation link and a way to copy it is shown."
+    },
+    {
+      "id": "s07",
+      "narration": "Až se kolega přes odkaz zaregistruje, zkontrolujte jeho údaje a uživatele aktivujte v nabídce akcí.",
+      "intent": "Close the invitation dialog, then open the actions menu '...' on the row of any user in the list, without choosing an option.",
+      "must_show": "The row actions menu is open and offers editing, deletion and activation or deactivation.",
+      "notes": "Menu akcí '...' je z článku 07/2024; přesný popisek položky je pravděpodobně 'Aktivovat' / 'Deaktivovat'. Po ukázce menu zavřít klávesou Escape."
+    },
+    {
+      "id": "s08",
+      "narration": "Když přidáváte víc lidí najednou, použijte Import uživatelů.",
+      "intent": "Close the actions menu, then click 'Import uživatelů' on the 'Přehled a správa' page.",
+      "must_show": "The user import screen is open and offers Google Workspace and Microsoft Entra ID as sources.",
+      "notes": "Zda import nabízí i nahrání tabulky (importní šablony), nepotvrzeno; portál ji zmiňuje, článek 2024 říká, že Excel import dělá tým Sloneeku."
+    },
+    {
+      "id": "s09",
+      "narration": "Vyberte skupiny z Google Workspace nebo Microsoft Entra ID, zvolte uživatele a rozhodněte, jestli mají být rovnou aktivní.",
+      "intent": "If a connected source is offered, select it so the group and user selection is shown; do NOT start the import. If no source is connected, stay on the import screen.",
+      "must_show": "The import screen with source or group selection is visible and no import has been started.",
+      "notes": "Vyžaduje připojenou integraci na demo tenantu, jinak se ukáže jen úvodní obrazovka importu. Tento krok zkontrolovat člověkem."
+    },
+    {
+      "id": "s10",
+      "narration": "Teď už víte, jak kolegy přidat ručně, pozvánkou i hromadným importem.",
+      "intent": "No action - stay on the current screen.",
+      "must_show": "The import screen or user list is still visible."
+    }
+  ]
+}

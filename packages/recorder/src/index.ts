@@ -4,7 +4,7 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { chromium, type Browser, type BrowserContext, type Page, type Locator } from 'playwright';
 import type { Action, Recipe, RunOptions, RunResult, Step, Timing, TimingStep } from './types.js';
-import { BEACON_PX, CURSOR_INIT_SCRIPT, HIGHLIGHT_FN } from './cursor.js';
+import { BEACON_PX, BEACON_STRIP_PX, CURSOR_INIT_SCRIPT, HIGHLIGHT_FN } from './cursor.js';
 import { login, shouldLogin } from './login.js';
 
 export type { RunOptions, RunResult, Recipe, Timing, TimingStep } from './types.js';
@@ -275,6 +275,7 @@ export async function run(opts: RunOptions): Promise<RunResult> {
   };
 
   const { viewport } = recipe;
+  const recordSize = { width: viewport.width, height: viewport.height + BEACON_STRIP_PX };
   const browser: Browser = await chromium.launch({ headless: !opts.headed });
   let context: BrowserContext | null = null;
   let videoPathTmp: string | null = null;
@@ -286,12 +287,15 @@ export async function run(opts: RunOptions): Promise<RunResult> {
       recipe.start.storage_state && fs.existsSync(recipe.start.storage_state) ? recipe.start.storage_state : undefined;
     if (recipe.start.storage_state && !storageState) log(`storage_state ${recipe.start.storage_state} not found – ignoring`);
 
+    // The browser viewport is BEACON_STRIP_PX taller than the recipe viewport: the extra
+    // bottom rows hold an opaque strip with the sync beacon, which the assembler crops away
+    // (timing.beacon_strip_px). Page content therefore never has to share pixels with the beacon.
     context = await browser.newContext({
-      viewport,
+      viewport: recordSize,
       deviceScaleFactor: 1,
       locale: recipe.lang === 'en' ? 'en-US' : recipe.lang === 'sk' ? 'sk-SK' : 'cs-CZ',
       storageState,
-      recordVideo: { dir: videoTmp, size: viewport }
+      recordVideo: { dir: videoTmp, size: recordSize }
     });
     await context.addInitScript(CURSOR_INIT_SCRIPT);
 
@@ -335,7 +339,8 @@ export async function run(opts: RunOptions): Promise<RunResult> {
         if (opts.strict) aborted = true;
       }
 
-      await page.screenshot({ path: shot }).catch(err => log(`screenshot ${step.id} failed: ${(err as Error).message}`));
+      // screenshots are content-only (strip cropped) so QA / self-heal see what the viewer sees
+      await page.screenshot({ path: shot, clip: { x: 0, y: 0, width: viewport.width, height: viewport.height } }).catch(err => log(`screenshot ${step.id} failed: ${(err as Error).message}`));
 
       // Pacing: hold the step until narration AND actions are both done, then hold_after.
       const floor = Math.max(audioMs, step.min_duration_ms ?? 0);
@@ -376,6 +381,7 @@ export async function run(opts: RunOptions): Promise<RunResult> {
     total_ms: totalMs,
     recorded_at: new Date().toISOString(),
     sync_source: syncSource,
+    beacon_strip_px: BEACON_STRIP_PX,
     steps: timingSteps
   };
   const timingPath = path.join(outDir, 'timing.json');
@@ -384,7 +390,7 @@ export async function run(opts: RunOptions): Promise<RunResult> {
   log('');
   log(fmtHeader());
   for (const s of timingSteps) log(fmtRow(s));
-  log(`video: ${rawPath}  fps=${fps}  total=${totalMs} ms (last step end ${lastEnd} ms + ${TAIL_MS} ms tail => drift ${drift >= 0 ? '+' : ''}${drift} ms)`);
+  log(`video: ${rawPath}  ${recordSize.width}x${recordSize.height} (content ${viewport.width}x${viewport.height} + ${BEACON_STRIP_PX} px beacon strip)  fps=${fps}  total=${totalMs} ms (last step end ${lastEnd} ms + ${TAIL_MS} ms tail => drift ${drift >= 0 ? '+' : ''}${drift} ms)`);
   log(`timing: ${timingPath}`);
   const failed = timingSteps.filter(s => s.status !== 'ok');
   if (failed.length) log(`${failed.length} step(s) not ok: ${failed.map(s => `${s.id}=${s.status}`).join(', ')}`);
@@ -396,7 +402,8 @@ export async function run(opts: RunOptions): Promise<RunResult> {
  * Playwright's video writer emits max(1, round(fps*dt)) frames per screencast
  * frame, so video time drifts from wall time by a few hundred ms per minute
  * (more when the page repaints >25 fps). The overlay flips a 6x6 px square in
- * the bottom-left corner at each step start; scanning it in raw.webm gives the
+ * the bottom-left corner (inside the extra BEACON_STRIP_PX rows below the
+ * recipe viewport) at each step start; scanning it in raw.webm gives the
  * exact video frame where each step begins.
  */
 async function scanBeacon(file: string, fps: number): Promise<number[] | null> {

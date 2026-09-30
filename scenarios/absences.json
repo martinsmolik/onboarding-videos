@@ -1,0 +1,95 @@
+{
+  "id": "absences",
+  "lang": "cs",
+  "title": "Zadejte absenci a sledujte její schválení",
+  "audience": "employee",
+  "preconditions": [
+    "Log in as a user with the plain role 'Uživatel' (not admin) who has an active working hours assignment and the absence type 'Dovolená' assigned with a non-zero balance.",
+    "The user belongs to a team with a manager, and 'Dovolená' has 'Nutné schválení' enabled, so the request ends up pending approval.",
+    "Choose a date range in the future with no existing absence and no public holiday."
+  ],
+  "source": {
+    "old_video_url": "https://www.youtube.com/watch?v=dEb04tZJdSU",
+    "release_notes_since": "2026-04-20",
+    "changes_detected": [
+      "Scope change: the catalog video 'Nastavte a spravujte absence' teaches admin setup (types, entitlements); this batch targets employees, so it covers requesting an absence. Admin setup needs a separate scenario.",
+      "\"Plocha\" -> \"Plocha 2.0\" (release 3.51, 29. 6. 2026): absence widget layout on the dashboard may differ from the 2024 help article.",
+      "Docházka 2.1 / 2.2 (releases 3.49, 3.51): planned absences are synced into attendance; not shown in this video."
+    ],
+    "references": [
+      { "title": "Jak zadat absenci nebo si zažádat o dovolenou?", "url": "https://help.sloneek.com/hc/cs-cz/articles/14888080081436", "updated": "2024-08-21" },
+      { "title": "Zobrazení absencí uživatele (plocha, kalendáře)", "url": "https://help.sloneek.com/hc/cs-cz/articles/14888149308060", "updated": "2024-07-28" },
+      { "title": "Přiřazení a povolení událostí absence", "url": "https://help.sloneek.com/hc/cs-cz/articles/14888143255708", "updated": "2024-07-28" },
+      { "title": "Release log 3.51 (Plocha 2.0, Docházka 2.2)", "url": "https://help.sloneek.com/hc/cs-cz/articles/28523258354972", "updated": "2026-06-29" }
+    ]
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "V tomto videu si ukážeme, jak zadáte absenci, třeba dovolenou, a kde uvidíte, jestli ji nadřízený schválil.",
+      "intent": "No action - stay on the dashboard 'Plocha' right after login.",
+      "must_show": "The dashboard 'Plocha' of the logged-in employee is visible."
+    },
+    {
+      "id": "s02",
+      "narration": "Na Ploše máte přehled svých absencí a pracovní doby, včetně toho, kolik dovolené vám ještě zbývá.",
+      "intent": "No click. Scroll the dashboard 'Plocha' so the absence widget with the employee's balances is fully in view.",
+      "must_show": "A dashboard widget showing the employee's absence balance, including 'Dovolená', is visible.",
+      "notes": "Widget se v článku z 07/2024 jmenuje 'Absence a pracovní doba'; po Plocha 2.0 se pravděpodobně jmenuje jinak nebo je jinde."
+    },
+    {
+      "id": "s03",
+      "narration": "Klikněte na tlačítko Nová absence. Stejné tlačítko najdete i v kalendáři absencí.",
+      "intent": "Click the button 'Nová absence' on the dashboard 'Plocha'.",
+      "must_show": "The dialog for entering a new absence is open.",
+      "notes": "Titulek dialogu článek neuvádí. Pokud tlačítko na Ploše není, je pravděpodobně v kalendáři absencí (levé menu 'Kalendáře')."
+    },
+    {
+      "id": "s04",
+      "narration": "Nejdřív vyberte typ absence, v našem případě Dovolená.",
+      "intent": "In the new absence dialog, open the absence type selector and choose 'Dovolená'.",
+      "must_show": "'Dovolená' is selected as the absence type in the dialog.",
+      "notes": "Popisek pole pro typ absence je neznámý; typ 'Dovolená' na demo tenantu pravděpodobně existuje."
+    },
+    {
+      "id": "s05",
+      "narration": "Pak nastavte, od kdy do kdy budete chybět. Stačí vybrat první a poslední den.",
+      "intent": "In the dialog set the start date to next Monday and the end date to next Wednesday using the date fields.",
+      "must_show": "The dialog shows the chosen start and end dates of next Monday to next Wednesday.",
+      "notes": "Názvy datumových polí jsou pravděpodobně 'Od' a 'Do'. Výběr období tažením myši v kalendáři je alternativa, pro nahrávání ji nepoužívat."
+    },
+    {
+      "id": "s06",
+      "narration": "Do poznámky můžete připsat, co by měl nadřízený vědět. Vyplnit ji ale nemusíte.",
+      "intent": "Type 'Rodinná dovolená' into the note field 'Poznámka' of the dialog.",
+      "must_show": "The note field contains 'Rodinná dovolená'.",
+      "notes": "Pole 'Poznámka' je zmíněné v článku o zobrazení absencí; v dialogu je pravděpodobně, ale nepotvrzeno."
+    },
+    {
+      "id": "s07",
+      "narration": "Klikněte na Zkontrolovat. Aplikace ověří, že se absence s ničím nepřekrývá a že máte dost dovolené.",
+      "intent": "Click the button 'Zkontrolovat' in the dialog.",
+      "must_show": "The check passes: a summary of the absence is shown with no duplicate or insufficient-balance warning."
+    },
+    {
+      "id": "s08",
+      "narration": "Potvrďte odeslání. Pokud absence vyžaduje schválení, žádost automaticky odejde vašemu nadřízenému.",
+      "intent": "Click the confirm button that appears after 'Zkontrolovat' to create the absence request.",
+      "must_show": "The dialog closes and a confirmation that the absence was created or sent for approval is shown.",
+      "notes": "Název potvrzovacího tlačítka článek neuvádí, pravděpodobně 'Uložit' nebo 'Odeslat'."
+    },
+    {
+      "id": "s09",
+      "narration": "Novou dovolenou uvidíte v kalendáři absencí. Dokud ji nadřízený neschválí, zůstává ve stavu čeká na schválení.",
+      "intent": "In the left menu open 'Kalendáře' and the absence calendar, then navigate to next week.",
+      "must_show": "The new 'Dovolená' event is shown from next Monday to next Wednesday, visibly marked as pending approval.",
+      "notes": "Cesta 'Kalendáře' a kalendář absencí je z článku 07/2024; vyznačení stavu čeká na schválení je pravděpodobně barvou nebo ikonou, přesný text nepotvrzen."
+    },
+    {
+      "id": "s10",
+      "narration": "Jakmile nadřízený žádost schválí nebo zamítne, přijde vám o tom e-mail.",
+      "intent": "No action - keep the absence calendar with the new event in view.",
+      "must_show": "The absence calendar with the new pending 'Dovolená' event is still visible."
+    }
+  ]
+}
