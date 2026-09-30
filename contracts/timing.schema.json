@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sloneek-video/timing",
+  "title": "Timing log",
+  "description": "Written by recorder. All times are ms from the first video frame (t=0). Consumed by assembler to place audio and subtitles.",
+  "type": "object",
+  "required": ["recipe_id", "video_path", "fps", "total_ms", "steps"],
+  "properties": {
+    "recipe_id": { "type": "string" },
+    "video_path": { "type": "string", "description": "path to raw webm" },
+    "fps": { "type": "number" },
+    "total_ms": { "type": "integer" },
+    "recorded_at": { "type": "string", "format": "date-time" },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "t_start_ms", "t_end_ms", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "t_start_ms": { "type": "integer", "description": "when narration audio for this step must start" },
+          "t_actions_end_ms": { "type": "integer" },
+          "t_end_ms": { "type": "integer" },
+          "audio_ms": { "type": "integer", "description": "duration of narration audio the recorder paced against (0 if silent)" },
+          "status": { "type": "string", "enum": ["ok", "failed", "skipped"] },
+          "error": { "type": "string" },
+          "screenshot": { "type": "string", "description": "path to screenshot taken at step end (for QA / self-heal)" }
+        }
+      }
+    }
+  }
+}

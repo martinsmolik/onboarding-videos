@@ -1,0 +1,18 @@
+{
+  "name": "sloneek-video-pipeline",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.28.0",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "demo": "node scripts/serve-demo.mjs",
+    "record": "pnpm --filter @svp/recorder start",
+    "assemble": "pnpm --filter @svp/assembler start",
+    "pipeline": "pnpm --filter @svp/orchestrator start"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "tsx": "^4.19.0",
+    "@types/node": "^22.0.0"
+  }
+}

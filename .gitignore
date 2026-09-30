@@ -1,0 +1,9 @@
+node_modules/
+dist/
+out/
+.env
+*.webm
+*.mp4
+*.mp3
+*.wav
+storage-state*.json

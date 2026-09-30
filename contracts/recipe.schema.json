@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sloneek-video/recipe",
+  "title": "Recipe",
+  "description": "Deterministic, LLM-free replay script for one onboarding video. Produced by explorer, consumed by recorder + assembler.",
+  "type": "object",
+  "required": ["id", "version", "lang", "viewport", "start", "steps"],
+  "properties": {
+    "id": { "type": "string", "description": "slug, e.g. attendance-overview" },
+    "version": { "type": "integer" },
+    "title": { "type": "string" },
+    "lang": { "type": "string", "enum": ["cs", "en", "sk"] },
+    "app_version": { "type": "string", "description": "Sloneek FE version/date this recipe was verified against" },
+    "viewport": {
+      "type": "object",
+      "properties": { "width": { "type": "integer" }, "height": { "type": "integer" } },
+      "required": ["width", "height"]
+    },
+    "start": {
+      "type": "object",
+      "description": "How to get to the first screen. Auth is handled by recorder via env (SLONEEK_DEMO_URL/USER/PASS) or storageState file.",
+      "required": ["url"],
+      "properties": {
+        "url": { "type": "string" },
+        "storage_state": { "type": "string", "description": "path to Playwright storageState json (logged-in session)" }
+      }
+    },
+    "voice": {
+      "type": "object",
+      "properties": {
+        "provider": { "type": "string", "enum": ["elevenlabs", "mock"] },
+        "voice_id": { "type": "string" },
+        "model_id": { "type": "string" }
+      }
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/step" }
+    }
+  },
+  "$defs": {
+    "step": {
+      "type": "object",
+      "required": ["id", "narration", "actions"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^s[0-9]{2,3}$" },
+        "narration": { "type": "string", "description": "One idea per step. Spoken while actions run. Empty string = silent step." },
+        "actions": { "type": "array", "items": { "$ref": "#/$defs/action" } },
+        "hold_after_ms": { "type": "integer", "default": 800, "description": "Extra pause after audio AND actions both finished" },
+        "min_duration_ms": { "type": "integer", "description": "Optional floor for the step even if audio is shorter" },
+        "expect": {
+          "type": "object",
+          "description": "Post-condition checked by recorder; failure => step marked failed for self-heal.",
+          "properties": {
+            "visible": { "type": "string", "description": "selector that must be visible" },
+            "url_contains": { "type": "string" }
+          }
+        }
+      }
+    },
+    "action": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": { "type": "string", "enum": ["navigate", "click", "hover", "type", "press", "select", "scroll", "wait", "highlight"] },
+        "selector": { "type": "string", "description": "Playwright locator string. Prefer data-testid / role+text." },
+        "value": { "type": "string", "description": "navigate: url; type: text; press: key; select: option; wait: ms; scroll: 'down'|'up'|selector" },
+        "clear": { "type": "boolean", "description": "type: clear field first" },
+        "delay_ms": { "type": "integer", "description": "type: per-char delay (default 60)" },
+        "before_ms": { "type": "integer", "description": "pause before this action (default 300)" }
+      }
+    }
+  }
+}

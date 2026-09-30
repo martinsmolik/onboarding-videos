@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>Demo HR app (stand-in for Sloneek FE)</title>
+<style>
+  :root { --sidebar:#1f2a44; --accent:#3b82f6; --bg:#f6f7fb; --card:#fff; --text:#1c1c1e; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--text); display:flex; height:100vh; }
+  nav { width:240px; background:var(--sidebar); color:#fff; padding:24px 0; }
+  nav .logo { font-weight:700; padding:0 24px 24px; font-size:18px; }
+  nav a { display:block; padding:12px 24px; color:#cbd5e1; text-decoration:none; cursor:pointer; }
+  nav a:hover, nav a.active { background:rgba(255,255,255,.08); color:#fff; }
+  main { flex:1; padding:32px 40px; overflow:auto; }
+  h1 { margin:0 0 20px; font-size:24px; }
+  .card { background:var(--card); border-radius:12px; padding:20px 24px; box-shadow:0 1px 3px rgba(0,0,0,.08); margin-bottom:16px; }
+  button { background:var(--accent); color:#fff; border:0; border-radius:8px; padding:10px 16px; font-size:14px; cursor:pointer; }
+  input, select { padding:10px 12px; border:1px solid #d0d5dd; border-radius:8px; font-size:14px; width:280px; }
+  label { display:block; font-size:13px; color:#555; margin:12px 0 4px; }
+  table { width:100%; border-collapse:collapse; }
+  td, th { text-align:left; padding:10px 8px; border-bottom:1px solid #eee; font-size:14px; }
+  .hidden { display:none; }
+  .toast { position:fixed; right:24px; bottom:24px; background:#16a34a; color:#fff; padding:12px 18px; border-radius:8px; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Demo HR</div>
+  <a data-testid="nav-dashboard" data-page="dashboard" class="active">Přehled</a>
+  <a data-testid="nav-attendance" data-page="attendance">Docházka</a>
+  <a data-testid="nav-absences" data-page="absences">Absence</a>
+  <a data-testid="nav-people" data-page="people">Lidé</a>
+  <a data-testid="nav-settings" data-page="settings">Nastavení</a>
+</nav>
+<main>
+  <section id="dashboard" data-testid="page-dashboard">
+    <h1>Přehled</h1>
+    <div class="card">Vítejte v demo aplikaci. Tady se nahrává onboardingové video.</div>
+  </section>
+
+  <section id="attendance" class="hidden" data-testid="page-attendance">
+    <h1>Docházka</h1>
+    <div class="card">
+      <table>
+        <tr><th>Jméno</th><th>Příchod</th><th>Odchod</th><th>Hodiny</th></tr>
+        <tr><td>Jana Nováková</td><td>08:02</td><td>16:31</td><td>8,5</td></tr>
+        <tr><td>Petr Svoboda</td><td>07:55</td><td>16:10</td><td>8,25</td></tr>
+        <tr><td>Eva Dvořáková</td><td>09:00</td><td>17:30</td><td>8,5</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="absences" class="hidden" data-testid="page-absences">
+    <h1>Absence</h1>
+    <div class="card">
+      <button data-testid="btn-new-absence">+ Nová absence</button>
+      <div id="absence-form" class="hidden" data-testid="absence-form">
+        <label>Typ absence</label>
+        <select data-testid="absence-type"><option>Dovolená</option><option>Sick day</option><option>Home office</option></select>
+        <label>Od</label><input data-testid="absence-from" placeholder="1. 10. 2026">
+        <label>Do</label><input data-testid="absence-to" placeholder="3. 10. 2026">
+        <label>Poznámka</label><input data-testid="absence-note" placeholder="Volitelné">
+        <div style="margin-top:16px"><button data-testid="absence-submit">Odeslat ke schválení</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="people" class="hidden" data-testid="page-people">
+    <h1>Lidé</h1>
+    <div class="card">Seznam zaměstnanců (42)</div>
+  </section>
+
+  <section id="settings" class="hidden" data-testid="page-settings">
+    <h1>Nastavení</h1>
+    <div class="card">Konfigurace společnosti</div>
+  </section>
+</main>
+<script>
+  document.querySelectorAll('nav a').forEach(a => a.addEventListener('click', () => {
+    document.querySelectorAll('nav a').forEach(x => x.classList.remove('active'));
+    a.classList.add('active');
+    document.querySelectorAll('main section').forEach(s => s.classList.add('hidden'));
+    document.getElementById(a.dataset.page).classList.remove('hidden');
+    history.replaceState(null, '', '#' + a.dataset.page);
+  }));
+  document.querySelector('[data-testid=btn-new-absence]').addEventListener('click', () => {
+    document.getElementById('absence-form').classList.remove('hidden');
+  });
+  document.querySelector('[data-testid=absence-submit]').addEventListener('click', () => {
+    const t = document.createElement('div'); t.className = 'toast'; t.dataset.testid = 'toast-success';
+    t.textContent = 'Absence odeslána ke schválení'; document.body.appendChild(t);
+    setTimeout(() => t.remove(), 4000);
+  });
+</script>
+</body>
+</html>
