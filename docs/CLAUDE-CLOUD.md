@@ -9,7 +9,13 @@ Kolegové vyrábějí videa v prohlížeči na **claude.ai/code**: vyberou repo 
 3. Napiš `/onboarding-video` (nebo jen „chci video o tom, jak…“) a odpovídej na otázky.
 4. Schval scénář. Pak počkej na odkaz na hotové video (jednotky až desítky minut).
 
-Potřebuješ účet v Claude Team organizace Sloneek s přístupem ke Claude Code.
+Potřebuješ (jednou):
+
+- účet v Claude Team organizace Sloneek s přístupem ke Claude Code,
+- **ElevenLabs konektor**: claude.ai → Settings → Connectors → ElevenLabs, přihlas se svým ElevenLabs účtem,
+- v ElevenLabs přidaný hlas z `config/voices.json` (Voice Library → Add to my voices), jinak ti Claude nabídne jiný.
+
+**Co to stojí:** všechno jde z tvého plánu. Claude sám prokliká aplikaci a namluví video (kredity tvého ElevenLabs účtu). Delší video spotřebuje znatelnou část týdenního limitu, protože Claude čte stránku u každého kroku.
 
 ## Pro správce (jednou)
 
@@ -32,12 +38,12 @@ bash scripts/cloud-setup.sh || true
 | doména | proč |
 |---|---|
 | doména z `SLONEEK_DEMO_URL` (např. `app-pre-production.sloneek.com`) | demo aplikace, kterou agent prokliká a nahraje |
-| `api.anthropic.com` | explorer (agent v prohlížeči) a scenarist |
-| `api.elevenlabs.io` | hlas a titulky |
+| `storage.googleapis.com` | stažení namluvených mp3 z ElevenLabs konektoru |
 | `cdn.playwright.dev`, `playwright.download.prss.microsoft.com`, `playwright.azureedge.net` | stažení Chromia |
 | `archive.ubuntu.com`, `security.ubuntu.com` | ffmpeg přes apt |
 | `oauth2.googleapis.com`, `www.googleapis.com` | jen pro upload na YouTube |
 | `www.youtube.com`, `*.googlevideo.com` | jen pro scénář ze starého YouTube videa |
+| `api.anthropic.com`, `api.elevenlabs.io` | jen pro režim API (viz níže) |
 
 **Proměnné prostředí:**
 
@@ -45,11 +51,11 @@ bash scripts/cloud-setup.sh || true
 |---|---|---|
 | `SLONEEK_DEMO_URL` | ano | **demo / pre-prod**, nikdy produkce s daty klientů |
 | `SLONEEK_DEMO_USER`, `SLONEEK_DEMO_PASS` | ano | samostatný demo účet jen pro videa |
-| `ANTHROPIC_API_KEY` | ano | vlastní klíč s měsíčním limitem útraty |
-| `ELEVENLABS_API_KEY`, `ELEVENLABS_VOICE_ID` | ano | `ELEVENLABS_MODEL_ID` volitelně (default `eleven_multilingual_v2`) |
 | `YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN` | ne | bez nich jde video do git větve; `YT_PRIVACY` default `unlisted` |
 
-> ⚠️ **Proměnné ve sdíleném prostředí vidí každý, kdo prostředí používá** (Claude je umí vypsat). Proto: dedikovaný demo účet bez přístupu k reálným datům, API klíče s limity, žádné osobní přihlašovací údaje. Při odchodu člověka z týmu klíče rotuj.
+> ⚠️ **Proměnné ve sdíleném prostředí vidí každý, kdo prostředí používá** (Claude je umí vypsat). Proto dedikovaný demo účet bez přístupu k reálným datům a žádné osobní přihlašovací údaje. Při odchodu člověka z týmu heslo změň.
+
+**Režim plánu vs. režim API.** Výchozí je režim plánu: explorer řídí Claude v session a hlas jde přes ElevenLabs konektor, takže v prostředí **nejsou žádné API klíče**. Režim API (`ANTHROPIC_API_KEY` + `ELEVENLABS_API_KEY` v prostředí) je rychlejší, ale platí ho ty klíče a vidí je všichni uživatelé prostředí. Používej ho jen v samostatném prostředí pro pár lidí, ne ve sdíleném.
 
 ### 3. Ověření
 
@@ -57,6 +63,5 @@ Otevři novou session s tímto prostředím a napiš: *„spusť bash scripts/cl
 
 ## Náklady na jedno video (orientačně)
 
-- Explorer (Sonnet 5.5): desítky centů až jednotky dolarů podle počtu kroků a oprav. Cena se loguje u každého kroku.
-- ElevenLabs: podle počtu znaků narace (typicky 1–5 tisíc znaků).
-- Session v Claude Code jde z předplatného Team.
+- Režim plánu: session (včetně exploreru) jde z týmového plánu daného kolegy, hlas z jeho ElevenLabs kreditů (typicky 1–5 tisíc znaků na video).
+- Režim API: explorer (Sonnet 5.5) desítky centů až jednotky dolarů podle počtu kroků a oprav (loguje se u každého kroku), ElevenLabs podle znaků.

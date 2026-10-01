@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { chromium, type Browser } from 'playwright';
 import { AnthropicModel, ScriptedModel, type ModelClient } from './model.ts';
+import { SessionModel } from './session.ts';
 import { Explorer, PrefixFailed, StepFailed, type AcceptedStep } from './explore.ts';
 import { openFresh, type StartState } from './replay.ts';
 import type { Recipe, RecipeStep, Scenario, StepUsage, Timing } from './types.ts';
@@ -42,18 +43,20 @@ function recipeStepId(id: string, i: number): string {
   return /^s[0-9]{2,3}$/.test(id) ? id : `s${String(i + 1).padStart(2, '0')}`;
 }
 
-function pickModel(opts: RunOptions, scenarioId: string): ModelClient {
+function pickModel(opts: RunOptions, scenarioId: string, outDir: string): ModelClient {
   if (opts.model) return opts.model;
   if (opts.dryRun) {
     const f = typeof opts.dryRun === 'string' ? abs(opts.dryRun) : path.join(PKG_DIR, 'fixtures', `${scenarioId}.dry-run.json`);
     return new ScriptedModel(f);
   }
-  if (!process.env.ANTHROPIC_API_KEY) throw new Error('ANTHROPIC_API_KEY is not set – set it, or run with --dry-run');
+  if (process.env.EXPLORER_DRIVER === 'session') return new SessionModel(outDir);
+  if (!process.env.ANTHROPIC_API_KEY) throw new Error('ANTHROPIC_API_KEY is not set – set it, use EXPLORER_DRIVER=session (Claude Code drives), or run with --dry-run');
   return new AnthropicModel();
 }
 
 async function launch(headed?: boolean): Promise<Browser> {
-  process.env.PLAYWRIGHT_BROWSERS_PATH ||= '/opt/pw-browsers';
+  // preinstalled browsers on some cloud boxes; otherwise Playwright's default cache (pnpm setup / cloud-setup.sh)
+  if (!process.env.PLAYWRIGHT_BROWSERS_PATH && fs.existsSync('/opt/pw-browsers')) process.env.PLAYWRIGHT_BROWSERS_PATH = '/opt/pw-browsers';
   return chromium.launch({ headless: !headed });
 }
 
@@ -102,7 +105,7 @@ async function explore(opts: RunOptions, log: (s: string) => void): Promise<RunR
   const outDir = abs(opts.out ?? `out/${scenario.id}`);
   fs.mkdirSync(outDir, { recursive: true });
   if (!fs.existsSync(path.join(outDir, 'scenario.json'))) fs.copyFileSync(abs(opts.scenario), path.join(outDir, 'scenario.json'));
-  const model = pickModel(opts, scenario.id);
+  const model = pickModel(opts, scenario.id, outDir);
   log(`[explorer] ${scenario.id}: ${scenario.steps.length} steps, model=${model.name}, out=${rel(outDir)}`);
 
   const browser = await launch(opts.headed);
@@ -150,6 +153,7 @@ async function explore(opts: RunOptions, log: (s: string) => void): Promise<RunR
     writeJson(path.join(outDir, 'explorer-log.json'), { mode: 'explore', model: model.name, usage, total_usd: total(usage), error: (e as Error).message });
     throw e;
   } finally {
+    model.finish?.();
     await browser.close();
   }
 }
@@ -185,7 +189,7 @@ async function heal(opts: RunOptions, log: (s: string) => void): Promise<RunResu
     log('[explorer] heal: no failed steps in timing.json – nothing to do');
     return { recipePath, recipe, usage: [], healed: [] };
   }
-  const model = pickModel(opts, recipe.id);
+  const model = pickModel(opts, recipe.id, outDir);
   const browser = await launch(opts.headed);
   const usage: StepUsage[] = [];
   const healed: string[] = [];
@@ -247,6 +251,7 @@ async function heal(opts: RunOptions, log: (s: string) => void): Promise<RunResu
     log(`[explorer] healed ${healed.join(', ')} → ${rel(recipePath)} v${recipe.version} · $${total(usage)}`);
     return { recipePath, recipe, usage, healed };
   } finally {
+    model.finish?.();
     await browser.close();
   }
 }

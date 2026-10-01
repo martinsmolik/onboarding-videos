@@ -38,7 +38,9 @@ for each scenario step:
 ```
 
 * **An in-process tool loop over the Anthropic Messages API** (`@anthropic-ai/sdk`). No MCP is involved.
-  The model is `claude-sonnet-5-5` (override it with `EXPLORER_MODEL`). The system prompt and the tool
+  The model is `claude-sonnet-5-5` (override it with `EXPLORER_MODEL`). With `EXPLORER_DRIVER=session` there is no API call:
+  the Claude running the surrounding Claude Code session is the model, through request/reply files in
+  `out/<id>/explorer-session/` (`src/session.ts`, driven with `node scripts/explorer-turn.mjs <id>`). Replay validation is identical. The system prompt and the tool
   definitions are prompt-cached.
 * **Snapshot** (`src/snapshot.ts` + `src/browser-script.ts`): lists visible elements, interactive ones
   first, then elements in the viewport. The list is capped at 150 elements and about 14k characters.

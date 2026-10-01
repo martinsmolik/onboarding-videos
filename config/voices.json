@@ -1,0 +1,6 @@
+{
+  "_comment": "Default ElevenLabs voice per language for /onboarding-video (voice ids are not secrets). Each colleague's ElevenLabs account must have access to the voice (Voice Library -> Add to my voices, or a shared workspace).",
+  "model_id": "eleven_multilingual_v2",
+  "cs": { "voice_id": "bF7C2fCv7Zf30iT84wZ1", "name": "Warm Czech Female Voice – Jana" },
+  "en": { "voice_id": "7jQ3jNk3Fcw65sWUmzun", "name": "Abigail" }
+}

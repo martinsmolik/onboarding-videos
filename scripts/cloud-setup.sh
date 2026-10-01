@@ -27,9 +27,13 @@ else tail -15 /tmp/svp-playwright.log; echo "  ✗ chromium install failed (is t
 
 echo "== environment"
 missing=()
-for v in SLONEEK_DEMO_URL SLONEEK_DEMO_USER SLONEEK_DEMO_PASS ANTHROPIC_API_KEY ELEVENLABS_API_KEY ELEVENLABS_VOICE_ID; do
+for v in SLONEEK_DEMO_URL SLONEEK_DEMO_USER SLONEEK_DEMO_PASS; do
   [ -n "${!v:-}" ] && echo "  ✓ $v" || { echo "  ✗ $v missing"; missing+=("$v"); }
 done
+# Plan mode (default): Claude in this session drives the explorer and voices via the ElevenLabs connector.
+# API mode needs both keys below (billed to those accounts, not to the user's plan).
+if [ -n "${ANTHROPIC_API_KEY:-}" ] && [ -n "${ELEVENLABS_API_KEY:-}" ]; then echo "  ✓ API mode available (ANTHROPIC_API_KEY + ELEVENLABS_API_KEY)"
+else echo "  · plan mode (no API keys; ElevenLabs connector needed in claude.ai)"; fi
 for v in YT_CLIENT_ID YT_CLIENT_SECRET YT_REFRESH_TOKEN; do
   [ -n "${!v:-}" ] && echo "  ✓ $v" || echo "  ! $v missing (no YouTube upload; video goes to a git branch instead)"
 done

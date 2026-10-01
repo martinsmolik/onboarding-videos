@@ -24,6 +24,8 @@ export interface ModelReply { content: Block[]; stop_reason: string | null; usag
 export interface ModelClient {
   name: string;
   create(req: { system: string; tools: ToolDef[]; messages: Msg[]; stepId: string }): Promise<ModelReply>;
+  /** called once when the explorer run ends (success or failure) */
+  finish?(): void;
 }
 
 // Sonnet 5.5 list price, USD per million tokens (cache_write = 5-minute TTL).

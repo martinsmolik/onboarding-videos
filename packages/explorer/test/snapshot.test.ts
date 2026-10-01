@@ -12,7 +12,8 @@ import { policyViolations } from '../src/policy.ts';
 import { validateActions, ValidationError } from '../src/replay.ts';
 import { run } from '../src/index.ts';
 
-process.env.PLAYWRIGHT_BROWSERS_PATH ||= '/opt/pw-browsers';
+// preinstalled browsers on some cloud boxes; otherwise Playwright's default cache (pnpm setup / cloud-setup.sh)
+if (!process.env.PLAYWRIGHT_BROWSERS_PATH && fs.existsSync('/opt/pw-browsers')) process.env.PLAYWRIGHT_BROWSERS_PATH = '/opt/pw-browsers';
 const ROOT = path.resolve(new URL('../../..', import.meta.url).pathname);
 const DEMO = pathToFileURL(path.join(ROOT, 'demo-app/index.html')).href;
 let browser: Browser;

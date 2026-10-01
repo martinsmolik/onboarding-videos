@@ -17,6 +17,7 @@ bash scripts/cloud-setup.sh
 
 - `SETUP OK` → pokračuj.
 - Exit 3 (`SETUP INCOMPLETE`) → řekni uživateli, které proměnné chybí (jen názvy), a že je musí doplnit správce Claude organizace v nastavení cloud prostředí (návod: `docs/CLAUDE-CLOUD.md`). Dál nepokračuj.
+- Ověř, že máš nástroje ElevenLabs konektoru (např. `creative_generate_speech`). Když ne a není ani režim API, řekni uživateli, ať si konektor připojí (viz 3b), ještě před rozhovorem.
 - Jiná chyba → typicky síť (allowlist). Řekni, která doména asi chybí, a odkaž na `docs/CLAUDE-CLOUD.md`.
 
 Hodnoty tajných proměnných nikdy nevypisuj, necommituj `.env` ani `out/**/storage-state*.json`.
@@ -57,19 +58,71 @@ Ověř: `pnpm --filter @svp/knowledge start -- validate --scenario "$PWD/out/<id
 
 ## 3. Výroba videa
 
+Výchozí je **režim plánu**: prohlížeč řídíš ty (explorer se tě ptá na každý krok) a hlas generuješ přes **ElevenLabs konektor**. Všechno jde z plánu uživatele, žádné API klíče. Dlouhé příkazy pouštěj na pozadí a průběžně stručně hlas, kde jsi („Absence mám proklikané, teď namlouvám“).
+
+**Režim API** (rychlejší, platí ho firemní klíče) použij jen když `cloud-setup.sh` hlásí `API mode available` a uživatel o něj stojí: `pnpm pipeline run --id <id> --scenario "$PWD/out/<id>/scenario.json" --to mux` a pokračuj krokem 3d.
+
+### 3a. Explorer (proklikání aplikace)
+
+Do `scenario.json` přidej hlas z `config/voices.json` podle jazyka: `"voice": {"provider": "external", "voice_id": "<voice_id>", "model_id": "<model_id>"}`. Pro jazyk bez hlasu se zeptej uživatele, nebo vyber vhodný hlas přes konektor (`creative_list_voices`).
+
+Na pozadí:
+
 ```bash
-pnpm pipeline run --id <id> --scenario "$PWD/out/<id>/scenario.json" --to mux
+EXPLORER_DRIVER=session SVP_TIMEOUT_EXPLORE_MS=14400000 pnpm pipeline run --id <id> --scenario "$PWD/out/<id>/scenario.json" --to explore
 ```
 
-Trvá jednotky až desítky minut (explorer prochází aplikaci krok po kroku, pak hlas, nahrávání a střih). Pusť to na pozadí a průběžně stručně hlas, kde jsi („aplikaci mám prošlou, teď nahrávám“). Stav: `pnpm pipeline status --id <id>`. Běh je resumable. Po opravě pokračuj `--from <stage>`, ne od začátku.
+Pak opakuj, dokud neuvidíš `FINISHED`:
 
-Když stage selže, přečti `out/<id>/logs/<stage>.log` a `out/<id>/timing.json`:
+```bash
+node scripts/explorer-turn.mjs <id>                         # vypíše další požadavek explorera
+node scripts/explorer-turn.mjs <id> --reply /tmp/reply.json # tvoje odpověď + čekání na další
+```
 
-- **explore**: krok nejde v aplikaci provést. Zjisti proč (prvek neexistuje, jiný název). Uprav `intent` v `scenario.json`, ukaž uživateli změnu a pusť znovu `--from explore`. Když problém vypadá jako chybějící oprávnění nebo data demo účtu, řekni to uživateli lidsky.
-- **record** s `failed` kroky: pipeline se sama 2× pokusí opravit (heal). Když nestačí, postupuj jako u explore.
-- **tts**: klíč nebo hlas ElevenLabs (viz `docs/CLAUDE-CLOUD.md`).
+- Požadavek (`TURN n`) obsahuje snapshot stránky a výsledky nástrojů. První tah obsahuje i systémový prompt explorera a popis nástrojů. **Ten prompt dodržuj** (selektory, minimální akce, `verify_visible`, pak `done`).
+- Odpověď: soubor `{"calls":[{"name":"click","input":{"ref":5}},{"name":"snapshot","input":{}}]}`. Každý tah píšeš do nového souboru (Write tool) a předáš ho přes `--reply`.
+- `REJECTED n`: oprav odpověď podle důvodu. `WAITING`: explorer zrovna přehrává předchozí kroky v čistém prohlížeči, zavolej znovu bez `--reply`.
+- Po `done` explorer krok sám nezávisle ověří replayem. Odmítnutí (`REJECTED by independent replay`) přijde jako výsledek dalšího tahu: oprav jen to, co je špatně.
+- Limit je 12 volání nástrojů na krok. Šetři: snapshot jen po změně stránky, screenshot jen když se zasekneš (uloží se jako soubor, otevři ho Read toolem).
+- `FINISHED` → `pnpm pipeline status --id <id>`. Selhal-li explore, viz 3e.
 
-Hotovo, když `out/<id>/final.mp4` existuje a v `timing.json` nejsou `failed` kroky. Zkontroluj screenshoty `out/<id>/shots/sNN.png` (podívej se na ně) a uživateli řekni, jestli vše sedí.
+### 3b. Hlas přes ElevenLabs konektor
+
+```bash
+pnpm voice:manifest "$PWD/out/<id>/recipe.json" --id <id>
+```
+
+Pro každý krok v `out/<id>/audio/manifest.json` vygeneruj řeč nástrojem konektoru `creative_generate_speech`: **přesně `tts_text`** (nikdy `subtitle`), `voice_id` a `model_id` z receptu. Všechny kroky dej do jednoho flow, pak se dotazuj `creative_get_flow_run_status`, dokud nejsou hotové. Do `out/<id>/audio/urls.json` zapiš:
+
+```json
+{ "voice_id": "…", "model_id": "…", "elevenlabs_flow": "<url flow>", "clips": { "s01": "<url mp3>", … }, "texts": { "s01": "<tts_text>", … } }
+```
+
+Pak `node scripts/fetch-voice.mjs <id>` (stáhne mp3 a zkontroluje, že sedí text). Podepsané odkazy brzy vyprší, takže stahuj hned.
+
+Když konektor ElevenLabs v session není: řekni uživateli, ať si ho připojí v claude.ai → Settings → Connectors (přihlásí se svým ElevenLabs účtem) a session spustí znovu. Když hlas z `config/voices.json` v jeho účtu není dostupný: ať si ho přidá z Voice Library, nebo s ním vyber jiný.
+
+### 3c. Nahrání a střih
+
+Na pozadí (`EXPLORER_DRIVER=session`, protože při selhaných krocích se pipeline sama 2× pokusí opravit a zeptá se tě):
+
+```bash
+EXPLORER_DRIVER=session SVP_TIMEOUT_EXPLORE_MS=14400000 pnpm pipeline run --id <id> --from tts --to mux
+```
+
+Dokud běží, volej `node scripts/explorer-turn.mjs <id>` a obsluž případné tahy (oprava kroku). `WAITING` je v pořádku. Konec poznáš podle doběhnutí příkazu na pozadí.
+
+### 3d. Kontrola
+
+Hotovo, když `out/<id>/final.mp4` existuje a v `out/<id>/timing.json` nejsou `failed` kroky. Projdi screenshoty `out/<id>/shots/sNN.png` (otevři je) a řekni uživateli, jestli všechno sedí. Titulky mají v režimu plánu rovnoměrné časování v rámci kroku (konektor nevrací časy znaků).
+
+### 3e. Když něco selže
+
+Přečti `out/<id>/logs/<stage>.log` a `out/<id>/timing.json`. Běh je resumable: po opravě pokračuj `--from <stage>`, ne od začátku.
+
+- **explore**: krok nejde provést (prvek neexistuje, jiný název, chybí oprávnění či data demo účtu). Uprav `intent` ve `scenario.json`, ukaž uživateli změnu a pusť znovu `--from explore` (v režimu plánu s `EXPLORER_DRIVER=session …`).
+- **record** s `failed` kroky po 2 opravách: postupuj jako u explore.
+- **tts**: chybí mp3 (manifest říká které) → dogeneruj je podle 3b.
 
 ## 4. Předání videa
 

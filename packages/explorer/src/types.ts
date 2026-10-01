@@ -35,7 +35,7 @@ export interface Recipe {
   app_version?: string;
   viewport: { width: number; height: number };
   start: { url: string; storage_state?: string };
-  voice?: { provider?: 'elevenlabs' | 'mock'; voice_id?: string; model_id?: string };
+  voice?: { provider?: 'elevenlabs' | 'external' | 'mock'; voice_id?: string; model_id?: string };
   steps: RecipeStep[];
 }
 
