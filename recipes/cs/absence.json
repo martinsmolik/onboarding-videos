@@ -903,7 +903,7 @@
         }
       ],
       "expect": {
-        "visible": "h1:text-is(\"Vítejte\")",
+        "visible": "h3:text-is(\"Absence\")",
         "url_contains": "/app/dashboard"
       }
     },

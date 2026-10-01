@@ -130,6 +130,32 @@ export function zoomFit(wanted: number, box: { x: number; y: number; width: numb
   return { scale, ox: Math.round(axis(box.x, box.width, vp.width)), oy: Math.round(axis(box.y, box.height, vp.height)) };
 }
 
+// ---------------------------------------------------------------- selectors
+/**
+ * Recipe selectors are plain CSS or `CSS:text-is("Exact text")` (see scripts/explorer-kit/resolve.js).
+ * The explorer resolves `:text-is` against the element's WHOLE text (whitespace-normalised), but
+ * Playwright's own `:text-is()` only matches the deepest element that owns the text – so
+ * `button:text-is("X")` never matches `<button><span>X</span></button>`. We therefore translate the
+ * trailing `:text-is("…")` into `locator(css).filter({ hasText: /^\s*X\s*$/ })`, which matches the
+ * explorer's semantics exactly.
+ */
+const TEXT_IS = /^(.*):text-is\("((?:[^"\\]|\\.)*)"\)$/s;
+export function splitTextIs(selector: string): { css: string; text: string | null } {
+  const m = selector.match(TEXT_IS);
+  if (!m) return { css: selector, text: null };
+  return { css: m[1] || '*', text: m[2].replace(/\\"/g, '"') };
+}
+export function exactTextRegex(text: string): RegExp {
+  const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const words = text.trim().split(/\s+/).filter(Boolean).map(esc);
+  return new RegExp(`^\\s*${words.join('\\s+')}\\s*$`);
+}
+export function recipeLocator(page: Page, selector: string): Locator {
+  const { css, text } = splitTextIs(selector);
+  const base = page.locator(css);
+  return (text === null ? base : base.filter({ hasText: exactTextRegex(text) })).first();
+}
+
 class Recorder {
   private cursor = { x: 0, y: 0 };
   private beaconK = 0;
@@ -164,7 +190,7 @@ class Recorder {
   }
 
   private locator(selector: string): Locator {
-    return this.page.locator(selector).first();
+    return recipeLocator(this.page, selector);
   }
 
   private async elementCenter(selector: string): Promise<{ x: number; y: number; loc: Locator; box: { x: number; y: number; width: number; height: number } }> {
@@ -446,7 +472,12 @@ async function replaySteps(page: Page, recorder: Recorder, p: Prepared, strict: 
     if (beacon) await recorder.setBeacon(timingSteps.length + 1);
     rec.t_start_ms = recorder.now();
     try {
-      for (const a of step.actions) await recorder.runAction(a);
+      for (const [i, a] of step.actions.entries()) {
+        try { await recorder.runAction(a); } catch (e) {
+          const msg = (e as Error).message.split('\n')[0];
+          throw new Error(`action ${i + 1} ${a.type}${a.selector ? ` ${a.selector}` : ''}: ${msg}`);
+        }
+      }
       rec.t_actions_end_ms = recorder.now();
       await recorder.checkExpect(step);
     } catch (e) {

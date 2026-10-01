@@ -18,9 +18,48 @@ export function loadEnv(): void {
   }
 }
 
+/** Homebrew's ffmpeg-full is keg-only (not linked into PATH): used automatically when installed and FFMPEG_PATH is unset. */
+export const FFMPEG_FULL_KEGS = ["/opt/homebrew/opt/ffmpeg-full/bin", "/usr/local/opt/ffmpeg-full/bin", "/home/linuxbrew/.linuxbrew/opt/ffmpeg-full/bin"];
+const exe = (f: string) => { try { fs.accessSync(f, fs.constants.X_OK); return true; } catch { return false; } };
+/** ffmpeg binary: env FFMPEG_PATH > Homebrew ffmpeg-full keg > `ffmpeg` on PATH. */
+export function ffmpegBin(env: NodeJS.ProcessEnv = process.env): string {
+  if (env.FFMPEG_PATH) return env.FFMPEG_PATH;
+  for (const d of FFMPEG_FULL_KEGS) if (exe(path.join(d, "ffmpeg"))) return path.join(d, "ffmpeg");
+  return "ffmpeg";
+}
+/** ffprobe binary: env FFPROBE_PATH > ffprobe next to the chosen ffmpeg (FFMPEG_PATH / keg) > `ffprobe` on PATH. */
+export function ffprobeBin(env: NodeJS.ProcessEnv = process.env): string {
+  if (env.FFPROBE_PATH) return env.FFPROBE_PATH;
+  const ff = ffmpegBin(env);
+  if (ff !== "ffmpeg") { const p = path.join(path.dirname(ff), "ffprobe"); if (exe(p)) return p; }
+  return "ffprobe";
+}
+
+export interface FfmpegCaps { bin: string; drawtext: boolean; subtitles: boolean; forcedNoDrawtext: boolean }
+const capsCache = new Map<string, FfmpegCaps>();
+/**
+ * Which text filters this ffmpeg has (`ffmpeg -hide_banner -filters`): drawtext (libfreetype) and subtitles (libass).
+ * Homebrew's core `ffmpeg` formula (8.x/9.x) has neither; `ffmpeg-full` has both. Cached per binary.
+ * env SVP_FORCE_NO_DRAWTEXT=1 pretends drawtext is missing (tests / trying the PNG card fallback).
+ */
+export async function ffmpegCaps(env: NodeJS.ProcessEnv = process.env): Promise<FfmpegCaps> {
+  const bin = ffmpegBin(env);
+  const forced = /^(1|true|yes)$/i.test(env.SVP_FORCE_NO_DRAWTEXT || "");
+  const key = `${bin}|${forced}`;
+  const hit = capsCache.get(key);
+  if (hit) return hit;
+  let out = "";
+  try { out = (await run(bin, ["-hide_banner", "-filters"])).stdout; } catch { /* treat as none */ }
+  const caps = { bin, drawtext: !forced && / drawtext /.test(out), subtitles: / subtitles /.test(out), forcedNoDrawtext: forced };
+  capsCache.set(key, caps);
+  return caps;
+}
+
 export function run(cmd: string, args: string[], opts: { cwd?: string } = {}): Promise<{ stdout: string; stderr: string }> {
+  // every ffmpeg/ffprobe call in this package goes through here -> FFMPEG_PATH / FFPROBE_PATH apply everywhere
+  const bin = cmd === "ffmpeg" ? ffmpegBin() : cmd === "ffprobe" ? ffprobeBin() : cmd;
   return new Promise((resolve, reject) => {
-    const p = spawn(cmd, args, { cwd: opts.cwd, stdio: ["ignore", "pipe", "pipe"] });
+    const p = spawn(bin, args, { cwd: opts.cwd, stdio: ["ignore", "pipe", "pipe"] });
     let stdout = "", stderr = "";
     p.stdout.on("data", (d) => (stdout += d));
     p.stderr.on("data", (d) => (stderr += d));

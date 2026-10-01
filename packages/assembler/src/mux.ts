@@ -2,7 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { cuesForStep, toSrt, type Cue } from "./srt.js";
 import { chapterProblems, chaptersText, effectiveParts, partLabel, partStarts, subtitleText, type Chapter, type PartStart } from "./parts.js";
-import { probeDurationMs, probeVideoSize, readJson, resolvePath, run } from "./util.js";
+import { ffmpegCaps, probeDurationMs, probeVideoSize, readJson, resolvePath, run } from "./util.js";
+import { CARD_RENDERERS, cssColor, renderCardPngs, type CardRendererName, type CardSpec } from "./cards.js";
 
 export interface MuxOptions {
   out: string;
@@ -23,6 +24,17 @@ export interface MuxOptions {
   interstitials?: boolean;
   /** Write chapters.txt (YouTube). Default: recipe.chapters ?? true (only when the recipe has parts). */
   chapters?: boolean;
+  /**
+   * Only used when ffmpeg has no `drawtext` (Homebrew core ffmpeg): CDP endpoint of a running browser
+   * (BrowserOS neo, http://127.0.0.1:9110 / ws://… / port) or "auto", used to render the cards as PNGs in a
+   * temporary tab. Default: env SVP_CARD_CDP. Without it the PNG renderers are local Chromium / Chrome / Edge.
+   */
+  cdp?: string;
+  /**
+   * How text cards are made: "auto" (default; drawtext when available, else PNG renderers in order cdp, chromium,
+   * chrome, msedge, else cards off), "drawtext", one PNG renderer, or "none" (cards off). Default: env SVP_CARD_RENDERER.
+   */
+  cardRenderer?: "auto" | "drawtext" | "none" | CardRendererName;
   log?: (m: string) => void;
 }
 export interface MuxResult {
@@ -32,6 +44,10 @@ export interface MuxResult {
   /** ms of intro card in front of the recording; every audio offset and SRT cue is shifted by this. */
   introMs: number;
   outroMs: number;
+  /** how intro/outro/interstitial cards were made: drawtext | png:<renderer> | none (wanted, but no renderer worked) | off (no text cards wanted) */
+  cards: string;
+  /** step ids with status "failed" in timing.json (final.mp4 is still written) */
+  failedSteps: string[];
   /** interstitial cards inserted (each INTERSTITIAL_MS long) */
   interstitials: { stepId: string; part?: number; title: string; finalMs: number }[];
   /** final.mp4 time offset of every step's recording time (intro + cards before it), by step id */
@@ -138,14 +154,10 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
   const introImage = opts.introImage ? resolvePath(opts.introImage) : undefined;
   const outroImage = opts.outroImage ? resolvePath(opts.outroImage) : undefined;
   for (const f of [introImage, outroImage]) if (f && !fs.existsSync(f)) throw new Error(`image not found: ${f}`);
-  const introCard = !introImage && (opts.intro ?? !!title);
-  const outroCard = !outroImage && (opts.outro ?? (opts.intro ?? !!title));
-  const intro = introCard || !!introImage;
-  const outro = outroCard || !!outroImage;
+  let introCard = !introImage && (opts.intro ?? !!title);
+  let outroCard = !outroImage && (opts.outro ?? (opts.intro ?? !!title));
   if (introCard && !title) warnings.push("intro requested but recipe.json has no title - using recipe id");
   const imgMs = (s: number | undefined) => Math.round((Math.round((s !== undefined && s > 0 ? s : IMAGE_SEC) * OUT_FPS) * 1000) / OUT_FPS); // whole frames
-  const introMs = introImage ? imgMs(opts.introImageSec) : introCard ? INTRO_MS : 0;
-  const outroMs = outroImage ? imgMs(opts.outroImageSec) : outroCard ? OUTRO_MS : 0;
   const BG = ffColor(process.env.BRAND_BG, "#1f2a44");
   const FG = ffColor(process.env.BRAND_FG, "#ffffff");
 
@@ -158,7 +170,46 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
   const hasParts = tSteps.some((s) => s.part !== undefined);
   const starts: PartStart[] = hasParts ? partStarts(tSteps, OUT_FPS, totalMs, recipe.lang) : [];
   const useCards = (opts.interstitials ?? recipe.interstitials ?? true) !== false && starts.length > 0;
-  const cards = useCards ? starts : [];
+  let cards = useCards ? starts : [];
+
+  // --- text cards: drawtext when ffmpeg has it, else PNG stills (Chromium canvas), else off (stills via --intro/outro-image never need text) ---
+  const specs: CardSpec[] = [];
+  if (introCard) specs.push({ key: "intro", title: wrapTitle(title || String(recipe.id || timing.recipe_id || "Sloneek")), sub: "Sloneek · onboarding" });
+  cards.forEach((c, i) => specs.push({ key: `part-${i + 1}`, title: c.part !== undefined ? `${c.part} / ${c.title}` : c.title, sub: title || null }));
+  if (outroCard) specs.push({ key: "outro", title: "sloneek.com", sub: null });
+  const want = (opts.cardRenderer ?? (process.env.SVP_CARD_RENDERER as MuxOptions["cardRenderer"]) ?? "auto") || "auto";
+  if (!["auto", "drawtext", "none", ...CARD_RENDERERS].includes(want)) throw new Error(`cardRenderer must be auto|drawtext|none|${CARD_RENDERERS.join("|")} (got ${want})`);
+  const caps = await ffmpegCaps();
+  let cardMode = specs.length ? "drawtext" : "off";
+  const pngs: Record<string, string> = {};
+  if (specs.length && want === "none") cardMode = "none";
+  else if (specs.length && want === "drawtext" && !caps.drawtext) throw new Error(`cardRenderer=drawtext but ${caps.bin} has no drawtext filter${caps.forcedNoDrawtext ? " (SVP_FORCE_NO_DRAWTEXT is set)" : ""}`);
+  else if (specs.length && (want !== "auto" && want !== "drawtext" || !caps.drawtext)) {
+    if (!caps.drawtext) log(`[mux] ${caps.bin} has no drawtext filter${caps.forcedNoDrawtext ? " (forced by SVP_FORCE_NO_DRAWTEXT)" : " (Homebrew core ffmpeg is built without libfreetype)"} -> rendering ${specs.length} card(s) as PNG`);
+    const cdp = opts.cdp ?? process.env.SVP_CARD_CDP;
+    const r = await renderCardPngs(specs, {
+      width: W, height: H, bg: cssColor(BG), fg: cssColor(FG), boldFont: fontFile(true), regularFont: fontFile(false), dir: out, cdp,
+      renderers: want === "auto" ? undefined : [want as CardRendererName], log,
+    });
+    if (r.renderer) { cardMode = `png:${r.renderer}`; Object.assign(pngs, r.files); }
+    else {
+      cardMode = "none";
+      warnings.push(`CARDS DISABLED: ${caps.drawtext ? "" : "ffmpeg has no drawtext and "}no PNG card renderer worked -> intro/outro/interstitial cards are off, chapters use the shorter timeline. Tried: ${r.tried.join(" | ") || "-"}. ` +
+        `Fix: brew install ffmpeg-full (picked up automatically from /opt/homebrew/opt/ffmpeg-full/bin, or set FFMPEG_PATH), or keep BrowserOS neo running and pass --cdp auto`);
+    }
+  }
+  if (cardMode === "none") { introCard = false; outroCard = false; cards = []; }
+  const intro = introCard || !!introImage;
+  const outro = outroCard || !!outroImage;
+  const introMs = introImage ? imgMs(opts.introImageSec) : introCard ? INTRO_MS : 0;
+  const outroMs = outroImage ? imgMs(opts.outroImageSec) : outroCard ? OUTRO_MS : 0;
+  const pngMode = cardMode.startsWith("png:");
+  // burned subtitles need libass (`subtitles` filter) – also missing in Homebrew core ffmpeg
+  let subsMode = subs;
+  if (subs === "burn" && !caps.subtitles) {
+    subsMode = "sidecar";
+    warnings.push(`--subtitles burn needs the ffmpeg 'subtitles' filter (libass), ${caps.bin} has none -> sidecar final.srt only. Fix: brew install ffmpeg-full`);
+  }
   // final.mp4 time = recording time + intro + one card per part change at or before the step
   const shiftAt = (index: number) => introMs + INTERSTITIAL_MS * cards.filter((c) => c.index <= index).length;
   const stepOffsetMs: Record<string, number> = {};
@@ -188,7 +239,7 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
   // Text = step.subtitle ?? narration (what the viewer reads); timing = alignment of the spoken
   // narration_tts (audio/<id>.txt), mapped proportionally when the two texts differ.
   let srtPath: string | undefined;
-  if (subs !== "none") {
+  if (subsMode !== "none") {
     const cues: Cue[] = [];
     for (const it of items) {
       const txtF = path.join(out, "audio", `${it.id}.txt`);
@@ -215,6 +266,10 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
   const imageInput = (file: string, ms: number) => { args.push("-loop", "1", "-framerate", String(OUT_FPS), "-t", (ms / 1000).toFixed(3), "-i", file); return nextIdx++; };
   const introImgIdx = introImage ? imageInput(introImage, introMs) : -1;
   const outroImgIdx = outroImage ? imageInput(outroImage, outroMs) : -1;
+  // PNG cards (no drawtext): one looped still per card, same length/fps/pixfmt/fades as the drawtext card
+  const pngIdx: Record<string, number> = {};
+  const cardMs = (key: string) => (key === "intro" ? introMs : key === "outro" ? outroMs : INTERSTITIAL_MS);
+  if (pngMode) for (const sp of specs) if (pngs[sp.key] && (sp.key !== "intro" || introCard) && (sp.key !== "outro" || outroCard)) pngIdx[sp.key] = imageInput(pngs[sp.key], cardMs(sp.key));
 
   const f: string[] = [];
   const labels: string[] = [];
@@ -248,8 +303,16 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
   const imageChain = (idx: number, ms: number, label: string, fadeIn: boolean, fadeOut: boolean) =>
     f.push(`[${idx}:v]scale=${W}:${H}:force_original_aspect_ratio=decrease,pad=${W}:${H}:(ow-iw)/2:(oh-ih)/2:color=${BG},fps=${OUT_FPS},format=yuv420p,setsar=1,trim=duration=${(ms / 1000).toFixed(3)}` +
       (fadeIn ? `,fade=t=in:st=0:d=0.3` : "") + (fadeOut ? `,fade=t=out:st=${(ms / 1000 - 0.3).toFixed(3)}:d=0.3` : "") + `[${label}]`);
+  const pngCard = (key: string, label: string, fadeS: number) => {
+    const d = cardMs(key) / 1000;
+    f.push(`[${pngIdx[key]}:v]scale=${W}:${H},fps=${OUT_FPS},format=yuv420p,setsar=1,trim=duration=${d.toFixed(3)},` +
+      `fade=t=in:st=0:d=${fadeS},fade=t=out:st=${(d - fadeS).toFixed(3)}:d=${fadeS}[${label}]`);
+  };
   if (introImage) {
     imageChain(introImgIdx, introMs, "vintro", false, true); // first frame = the thumbnail itself, no fade from black
+    segs.push("[vintro]");
+  } else if (introCard && pngMode) {
+    pngCard("intro", "vintro", FADE_S);
     segs.push("[vintro]");
   } else if (introCard) {
     const tf = path.join(out, ".card-intro-title.txt"), sf = path.join(out, ".card-intro-sub.txt");
@@ -267,6 +330,7 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
       const from = i === 0 ? 0 : cards[i - 1].frame;
       f.push(`[m${i}]trim=start_frame=${from}:end_frame=${c.frame},setpts=PTS-STARTPTS[seg${i}]`);
       segs.push(`[seg${i}]`);
+      if (pngMode) { pngCard(`part-${i + 1}`, `vcard${i}`, CARD_FADE_S); segs.push(`[vcard${i}]`); return; }
       const tf = path.join(out, `.card-part-${i + 1}.txt`), sf = path.join(out, `.card-part-${i + 1}-sub.txt`);
       fs.writeFileSync(tf, c.part !== undefined ? `${c.part} / ${c.title}` : c.title);
       cardFiles.push(tf);
@@ -281,6 +345,9 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
   if (outroImage) {
     imageChain(outroImgIdx, outroMs, "voutro", true, false);
     segs.push("[voutro]");
+  } else if (outroCard && pngMode) {
+    pngCard("outro", "voutro", FADE_S);
+    segs.push("[voutro]");
   } else if (outroCard) {
     const tf = path.join(out, ".card-outro-title.txt");
     fs.writeFileSync(tf, "sloneek.com");
@@ -290,7 +357,7 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
   }
   let vlabel = segs[0];
   if (segs.length > 1) { f.push(`${segs.join("")}concat=n=${segs.length}:v=1:a=0[vcat]`); vlabel = "[vcat]"; }
-  if (subs === "burn" && srtPath) {
+  if (subsMode === "burn" && srtPath) {
     // libass scales style sizes from the SRT's implicit 384x288 PlayRes, so FontSize 22 / MarginV 40 are resolution independent (~8% / ~14% of height).
     const style = "FontName=DejaVu Sans,FontSize=22,Outline=1,Shadow=0,MarginV=40,PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,BorderStyle=1,Alignment=2";
     f.push(`${vlabel}subtitles=filename=final.srt:force_style='${style}'[vout]`);
@@ -300,10 +367,12 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
     "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-r", String(OUT_FPS),
     "-c:a", "aac", "-b:a", "160k", "-t", total, "-movflags", "+faststart", path.join(out, "final.mp4"));
 
+  cardFiles.push(...Object.values(pngs));
+  const failedSteps = (timing.steps as any[]).filter((s) => s.status === "failed").map((s) => String(s.id));
   warnings.forEach((w) => log(`[mux] WARNING: ${w}`));
   const kind = (img: string | undefined, card: boolean, ms: number) => (img ? `image ${path.basename(img)} ${ms}ms` : card ? `${ms}ms` : "off");
-  log(`[mux] video ${W}x${H}${strip ? ` (cropped ${strip}px beacon strip)` : ""}, intro=${kind(introImage, introCard, introMs)}, outro=${kind(outroImage, outroCard, outroMs)}, interstitials=${cards.length ? `${cards.length} x ${INTERSTITIAL_MS}ms (before ${cards.map((c) => c.stepId).join(", ")})` : starts.length ? "off" : "none (no part changes)"}`);
-  log(`[mux] ffmpeg: ${items.length} narration tracks${opts.bgm ? " + bgm" : ""} (offset +${introMs}ms${cards.length ? ` +${INTERSTITIAL_MS}ms per card` : ""}), subtitles=${subs}`);
+  log(`[mux] video ${W}x${H}${strip ? ` (cropped ${strip}px beacon strip)` : ""}, intro=${kind(introImage, introCard, introMs)}, outro=${kind(outroImage, outroCard, outroMs)}, interstitials=${cards.length ? `${cards.length} x ${INTERSTITIAL_MS}ms (before ${cards.map((c) => c.stepId).join(", ")})` : starts.length ? "off" : "none (no part changes)"}, cards=${cardMode}`);
+  log(`[mux] ffmpeg: ${items.length} narration tracks${opts.bgm ? " + bgm" : ""} (offset +${introMs}ms${cards.length ? ` +${INTERSTITIAL_MS}ms per card` : ""}), subtitles=${subsMode}`);
   // cwd=out so the subtitles/drawtext filters can use relative filenames (no path escaping issues)
   try {
     await run("ffmpeg", args, { cwd: out });
@@ -329,5 +398,10 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
   } else fs.rmSync(chaptersF, { force: true });
 
   log(`[mux] done: ${finalPath}\n[mux] total ${(finalMs / 1000).toFixed(2)}s (${introMs} + ${totalMs}${cardsMs ? ` + ${cardsMs}` : ""} + ${outroMs} ms planned), steps with audio: ${items.length}, warnings: ${warnings.length}`);
-  return { finalPath, srtPath, totalMs: finalMs, introMs, outroMs, interstitials, stepOffsetMs, chaptersPath, chapters, stepsWithAudio: items.length, warnings, ffmpegArgs: args };
+  if (failedSteps.length) {
+    const msg = `${failedSteps.length} step(s) FAILED in timing.json: ${failedSteps.join(", ")} - final.mp4 was written but is NOT publishable; fix the recipe and re-record`;
+    warnings.push(msg);
+    log(`[mux] ${"!".repeat(72)}\n[mux] !!! ${msg}\n[mux] ${"!".repeat(72)}`);
+  }
+  return { finalPath, srtPath, totalMs: finalMs, introMs, outroMs, cards: cardMode, failedSteps, interstitials, stepOffsetMs, chaptersPath, chapters, stepsWithAudio: items.length, warnings, ffmpegArgs: args };
 }

@@ -5,6 +5,9 @@ export { ttsText, subtitleText, effectiveParts, partStarts, chaptersText, chapte
 export type { Chapter, PartStart } from "./parts.js";
 export type { MuxOptions, MuxResult } from "./mux.js";
 export { splitNarration, cuesForStep, toSrt, mapTextIndices } from "./srt.js";
-export { probeDurationMs } from "./util.js";
+export { probeDurationMs, ffmpegBin, ffprobeBin, ffmpegCaps, FFMPEG_FULL_KEGS } from "./util.js";
+export type { FfmpegCaps } from "./util.js";
+export { renderCardPngs, loadPlaywright, resolveCdp, cssColor, CARD_RENDERERS } from "./cards.js";
+export type { CardSpec, CardRendererName, RenderResult } from "./cards.js";
 export { writeManifest, buildManifest, acceptExternal, classifyStep, parseAlignment, findExternalAudio } from "./external.js";
 export type { Manifest, ManifestStep } from "./external.js";

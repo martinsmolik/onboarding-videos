@@ -2,7 +2,11 @@ import { loadEnv, parseArgs } from "./util.js";
 import { tts } from "./tts.js";
 import { mux } from "./mux.js";
 import { writeManifest } from "./external.js";
-import { readJson, resolvePath } from "./util.js";
+import { ffmpegCaps, ffprobeBin, readJson, resolvePath } from "./util.js";
+import { renderCardPngs, cssColor, loadPlaywright, CARD_RENDERERS, type CardRendererName } from "./cards.js";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 
 loadEnv();
 const { cmd, flags } = parseArgs(process.argv.slice(2));
@@ -24,8 +28,28 @@ async function main() {
       console.log(`  ${s.status === "present" ? "ok     " : s.status.padEnd(7)} ${s.file.padEnd(9)} ${cut(s.tts_text)}`);
       if (s.subtitle !== s.tts_text) console.log(`  ${"".padEnd(7)} ${"".padEnd(9)} subtitle: ${cut(s.subtitle)}`);
     }
+  } else if (cmd === "cards-check") {
+    // pre-flight: does ffmpeg have drawtext / subtitles, and if not, which PNG card renderer works here (renders one tiny test card)
+    const caps = await ffmpegCaps();
+    const res: any = { ffmpeg: caps.bin, ffprobe: ffprobeBin(), drawtext: caps.drawtext, subtitles: caps.subtitles, forcedNoDrawtext: caps.forcedNoDrawtext, cards: caps.drawtext ? "drawtext" : null, tried: [] as string[] };
+    const want = str("card-renderer");
+    if (!caps.drawtext || (want && want !== "auto" && want !== "drawtext")) {
+      const pw = await loadPlaywright();
+      res.playwright = pw?.from ?? null;
+      const dir = fs.mkdtempSync(path.join(os.tmpdir(), "svp-cards-check-"));
+      try {
+        const r = await renderCardPngs([{ key: "check", title: "Nastavení · Ukázka využití · Závěr", sub: "Žluťoučký kůň" }], {
+          width: 640, height: 360, bg: cssColor("0x1f2a44"), fg: "#ffffff", boldFont: null, regularFont: null, dir,
+          cdp: flags.cdp === true ? "auto" : str("cdp") ?? process.env.SVP_CARD_CDP, renderers: want && CARD_RENDERERS.includes(want as any) ? [want as CardRendererName] : undefined,
+        });
+        res.cards = r.renderer ? `png:${r.renderer}` : "none";
+        res.tried = r.tried;
+      } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+    }
+    if (flags.json) console.log(JSON.stringify(res));
+    else console.log(`ffmpeg ${res.ffmpeg}: drawtext=${res.drawtext} subtitles=${res.subtitles} -> cards=${res.cards}${res.tried.length ? `\n  tried: ${res.tried.join("\n         ")}` : ""}`);
   } else if (cmd === "mux") {
-    if (!str("out")) throw new Error("usage: mux --out out/<id> [--subtitles burn|sidecar|none] [--bgm <file> --bgm-volume 0.08] [--intro on|off] [--outro on|off] [--intro-image <png> [--intro-sec 3]] [--outro-image <png> [--outro-sec 3]] [--no-interstitials] [--no-chapters]");
+    if (!str("out")) throw new Error("usage: mux --out out/<id> [--subtitles burn|sidecar|none] [--bgm <file> --bgm-volume 0.08] [--intro on|off] [--outro on|off] [--intro-image <png> [--intro-sec 3]] [--outro-image <png> [--outro-sec 3]] [--no-interstitials] [--no-chapters] [--cdp auto|<url>] [--card-renderer auto|drawtext|cdp|chromium|chrome|msedge|none]");
     const s = str("subtitles") ?? "sidecar";
     if (!["burn", "sidecar", "none"].includes(s)) throw new Error("--subtitles must be burn|sidecar|none");
     // --intro / --outro: bare flag or "on" = force on, "off" / --no-intro = force off, absent = default (on when recipe has a title)
@@ -42,10 +66,11 @@ async function main() {
       out: str("out")!, subtitles: s as any, bgm: str("bgm"), bgmVolume: str("bgm-volume") ? Number(str("bgm-volume")) : undefined,
       intro: tri("intro"), outro: tri("outro"), interstitials: tri("interstitials"), chapters: tri("chapters"),
       introImage: str("intro-image"), outroImage: str("outro-image"), introImageSec: num("intro-sec"), outroImageSec: num("outro-sec"),
+      cdp: flags.cdp === true ? "auto" : str("cdp"), cardRenderer: str("card-renderer") as any,
     });
     if (r.warnings.length) { console.log("\nWARNINGS:"); r.warnings.forEach((w) => console.log(" - " + w)); }
   } else {
-    console.error("usage: start -- <tts|manifest|mux> ...");
+    console.error("usage: start -- <tts|manifest|mux|cards-check> ...");
     process.exit(2);
   }
 }

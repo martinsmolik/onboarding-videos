@@ -7,7 +7,13 @@ pnpm --filter @svp/assembler start -- tts --recipe <recipe.json> --out out/<id> 
 pnpm --filter @svp/assembler start -- manifest --recipe <recipe.json> --out out/<id>      # voiceover to-do list only (external)
 pnpm --filter @svp/assembler start -- mux --out out/<id> [--subtitles burn|sidecar|none] [--bgm <file> --bgm-volume 0.08] [--intro on|off] [--outro on|off]
       [--intro-image thumb.png [--intro-sec 3]] [--outro-image end.png [--outro-sec 3]] [--no-interstitials] [--no-chapters]
+      [--cdp auto|<url>] [--card-renderer auto|drawtext|cdp|chromium|chrome|msedge|none]
+pnpm --filter @svp/assembler start -- cards-check [--cdp auto|<url>] [--json]   # drawtext? else which PNG card renderer works (renders a test card)
 ```
+
+ffmpeg / ffprobe: env `FFMPEG_PATH` / `FFPROBE_PATH` (ffprobe defaults to the one next to `FFMPEG_PATH`) > Homebrew
+`ffmpeg-full` keg (`/opt/homebrew/opt/ffmpeg-full/bin`, `/usr/local/opt/…`; keg-only, used automatically when installed) >
+PATH. Every ffmpeg/ffprobe call of this package goes through `run()` in `src/util.ts`, so this applies to tts, external and mux.
 
 ## Text roles (recipe step)
 
@@ -24,7 +30,7 @@ so a cue still ends where its words are spoken. A subtitle-only edit never inval
 
 Relative paths are resolved against the directory you typed the command in (`INIT_CWD`), not the package dir. `.env` is auto-loaded from the cwd / repo root.
 
-Programmatic: `import { tts, mux } from "@svp/assembler"` (`tts({recipe, out, provider?})` -> `{durations,...}`, `mux({out, subtitles?, bgm?, bgmVolume?, intro?, outro?, introImage?, outroImage?, introImageSec?, outroImageSec?, interstitials?, chapters?})` -> `{finalPath, srtPath, totalMs, introMs, outroMs, interstitials, stepOffsetMs, chaptersPath, chapters, warnings,...}`).
+Programmatic: `import { tts, mux } from "@svp/assembler"` (`tts({recipe, out, provider?})` -> `{durations,...}`, `mux({out, subtitles?, bgm?, bgmVolume?, intro?, outro?, introImage?, outroImage?, introImageSec?, outroImageSec?, interstitials?, chapters?, cdp?, cardRenderer?})` -> `{finalPath, srtPath, totalMs, introMs, outroMs, cards, failedSteps, interstitials, stepOffsetMs, chaptersPath, chapters, warnings,...}`).
 
 ## tts
 
@@ -115,6 +121,38 @@ video re-encoded libx264 crf20 yuv420p 30fps, aac 160k, -t (intro + total_ms + o
 `--outro-sec` seconds (default 3, whole frames). Scaled to fit and letterboxed in `BRAND_BG`. The intro image is the
 very first frame (no fade from black – good for YouTube previews), 0.3 s fade into the recording; the outro image fades
 in. An image wins over `--no-intro` / `--no-outro`; every shift uses the image length.
+
+### Cards without `drawtext` (Homebrew core ffmpeg)
+
+`ffmpeg -hide_banner -filters` is checked once per binary (`ffmpegCaps`, `src/util.ts`). With `drawtext` nothing changes.
+Without it (Homebrew's core `ffmpeg` formula 8.x/9.x is built without libfreetype, libass, fontconfig – `ffmpeg-full` has them):
+
+* every text card (intro, outro, each interstitial) is drawn on a Chromium `<canvas>` (`src/cards.ts`) with the same
+  geometry as `cardFilter` (title 6.6 % / 5.8 % of height, 25 % line spacing, block raised 4.5 % when there is a subtitle,
+  accent bar 4 % wide at 55 %, subtitle 2.8 % at 85 %), the same colours and the same font file (`fontFile()` embedded via
+  `FontFace`; system stack Inter → Helvetica Neue → Arial when none is found) → `out/<id>/.card-<key>.png` (removed after);
+* each PNG becomes a segment via `-loop 1 -framerate 30 -t <ms> -i card.png` → `scale,fps=30,format=yuv420p,setsar=1,trim,fade in/out`
+  – same length, fps, pixel format, SAR, fades and (silent) audio as the drawtext card, so `concat`, `adelay` offsets,
+  SRT and `chapters.txt` are identical (verified by test: same durations/chapters, frames close to the drawtext ones);
+* renderer order (`--card-renderer auto`): **cdp** – a temporary tab in an already running browser (`--cdp <url>|auto`,
+  env `SVP_CARD_CDP`; `pnpm local` passes the endpoint the recorder found, i.e. BrowserOS neo; the tab is closed and the
+  browser only disconnected) → **chromium** – Playwright's bundled build (`chromium.launch()`; headless uses
+  `chromium_headless_shell-<rev>`, which exists only after `playwright install chromium`) → **chrome** – channel `chrome`,
+  the user's installed Google Chrome, no download → **msedge**. Canvas output does not depend on tab visibility or the
+  display's pixel ratio. Playwright is not a dependency of this package; it is resolved from here, then the sibling
+  recorder package, then the repo root;
+* none works → cards are **skipped** with a `CARDS DISABLED` warning (intro/outro/interstitials off; `introMs`/offsets 0,
+  `chapters.txt` in the shorter timeline, so it still matches `final.mp4`). `--intro-image` / `--outro-image` stills need
+  no text and keep working;
+* `--subtitles burn` needs the `subtitles` filter (libass) – without it mux warns and writes the sidecar `final.srt` only.
+
+`MuxResult.cards` = `drawtext` | `png:<renderer>` | `none` | `off` (no text card wanted). `--card-renderer <name>` forces
+one path (`drawtext` errors when the filter is missing). `SVP_FORCE_NO_DRAWTEXT=1` pretends the filter is missing (tests).
+
+### Failed steps
+
+A step with `status: "failed"` in `timing.json` keeps its audio; mux still writes `final.mp4` and ends with a
+`!!! N step(s) FAILED in timing.json: <ids>` banner (also in `warnings`, `MuxResult.failedSteps`). Re-record before publishing.
 
 ### Intro / outro cards
 

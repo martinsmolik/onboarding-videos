@@ -5,6 +5,12 @@
 //   pnpm local <recipe> [--id <id>] [--cdp auto|url] [--session-file f] [--no-intro]
 //                       [--intro-image thumb.png] [--outro-image end.png] [--no-interstitials] [--no-chapters]
 //                       [--provider external|elevenlabs|say|espeak|mock] [--run-id X] [--subtitles burn|sidecar|none] [--no-open]
+//   pnpm local <recipe> --id <id> --mux-only [...]   re-mux an existing recording (no tts, no record):
+//                       needs out/<id>/raw.mp4 (timing.video_path) + timing.json + audio/durations.json
+//
+// ffmpeg: env FFMPEG_PATH / FFPROBE_PATH > Homebrew ffmpeg-full keg (/opt/homebrew/opt/ffmpeg-full/bin) > PATH.
+// Without the drawtext filter (Homebrew core ffmpeg) the assembler renders the brand cards as PNGs in a temporary
+// tab of the browser found over CDP (or a local Chromium/Chrome), else skips them – see the pre-flight line.
 //
 // No LLM here – recipes and voiceovers are produced interactively with Claude; this script only replays.
 import fs from 'node:fs';
@@ -18,7 +24,7 @@ const userCwd = process.env.INIT_CWD || process.cwd();
 const isMac = process.platform === 'darwin';
 
 // ---------------------------------------------------------------- args
-const BOOL = ['no-intro', 'no-open', 'check', 'help', 'no-interstitials', 'no-chapters'];
+const BOOL = ['no-intro', 'no-open', 'check', 'help', 'no-interstitials', 'no-chapters', 'mux-only'];
 function parseArgs(argv) {
   const o = { _: [] };
   for (let i = 0; i < argv.length; i++) {
@@ -34,12 +40,14 @@ function parseArgs(argv) {
 }
 const args = parseArgs(process.argv.slice(2));
 const checkOnly = !!args.check;
+const muxOnly = !!args['mux-only'];
 if (args.help) {
   console.log(`usage:
   pnpm local:check [recipe.json] [--id <id>] [--cdp auto|http://127.0.0.1:9110] [--session-file out/session.json]
   pnpm local <recipe.json> [--id <id>] [--cdp auto|<url>] [--session-file <file>] [--no-intro]
              [--intro-image <png> [--intro-sec 3]] [--outro-image <png> [--outro-sec 3]] [--no-interstitials] [--no-chapters]
              [--provider external|elevenlabs|say|espeak|mock] [--run-id <id>] [--subtitles burn|sidecar|none] [--no-open]
+  pnpm local <recipe.json> --id <id> --mux-only [same mux flags]   re-mux out/<id>/ (skips tts + record)
   pnpm voice:manifest <recipe.json> [--id <id>]     to-do list for the voiceover (provider external)`);
   process.exit(0);
 }
@@ -78,7 +86,15 @@ function recipeStrings(r) {
 console.log('== pre-flight');
 const major = Number(process.versions.node.split('.')[0]);
 major >= 22 ? ok(`node ${process.version}`) : bad(`node ${process.version} – need >= 22 (brew install node@22)`);
-has('ffmpeg') && has('ffprobe') ? ok('ffmpeg + ffprobe') : bad(`ffmpeg/ffprobe missing – ${isMac ? 'brew install ffmpeg' : 'apt install ffmpeg'}`);
+// same resolution as packages/assembler/src/util.ts ffmpegBin/ffprobeBin (duplicated on purpose)
+const isExe = (f) => { try { fs.accessSync(f, fs.constants.X_OK); return true; } catch { return false; } };
+const FULL_KEGS = ['/opt/homebrew/opt/ffmpeg-full/bin', '/usr/local/opt/ffmpeg-full/bin', '/home/linuxbrew/.linuxbrew/opt/ffmpeg-full/bin'];
+const kegFfmpeg = FULL_KEGS.map((d) => path.join(d, 'ffmpeg')).find(isExe);
+const ffmpegBin = process.env.FFMPEG_PATH || kegFfmpeg || 'ffmpeg';
+const ffprobeBin = process.env.FFPROBE_PATH || (ffmpegBin !== 'ffmpeg' && isExe(path.join(path.dirname(ffmpegBin), 'ffprobe')) ? path.join(path.dirname(ffmpegBin), 'ffprobe') : 'ffprobe');
+const ffSrc = process.env.FFMPEG_PATH ? 'env FFMPEG_PATH' : kegFfmpeg ? 'Homebrew ffmpeg-full keg' : 'PATH';
+has(ffmpegBin) && has(ffprobeBin) ? ok(`ffmpeg + ffprobe (${ffmpegBin === 'ffmpeg' ? 'from PATH' : `${ffmpegBin}, ${ffSrc}`})`) : bad(`ffmpeg/ffprobe missing (${ffmpegBin} / ${ffprobeBin}) – ${isMac ? 'brew install ffmpeg' : 'apt install ffmpeg'}`);
+if (ffmpegBin !== 'ffmpeg' && !has('ffmpeg')) (muxOnly ? warn : bad)('the recorder runs `ffmpeg` from PATH – keep Homebrew `ffmpeg` installed or `brew link --overwrite ffmpeg-full`');
 
 let playwright = null;
 try {
@@ -91,13 +107,16 @@ try {
 }
 
 // ---------------------------------------------------------------- browser: CDP or session file
+let cdpFound = null; // endpoint the recorder's discovery found – also handed to mux for PNG cards
+const cdpBad = muxOnly ? warn : bad; // --mux-only records nothing: a missing browser only matters for PNG cards
 if (cdpSpec) {
-  ok('CDP mode: Playwright\'s own Chromium is NOT needed (recording happens in a new tab of your running browser)');
+  if (!muxOnly) ok('CDP mode: Playwright\'s own Chromium is NOT needed (recording happens in a new tab of your running browser)');
   const r = spawnSync('pnpm', ['-s', '--filter', '@svp/recorder', 'start', '--', '--cdp-check', cdpSpec, '--json'], { cwd: root, encoding: 'utf8', env: process.env });
   let j = null;
   try { j = JSON.parse((r.stdout || '').trim().split('\n').filter(Boolean).pop() || 'null'); } catch { /* ignore */ }
+  if (j?.ok) cdpFound = j.endpoint;
   if (j?.endpoint && !j.ok) {
-    bad(`CDP endpoint ${j.endpoint} answers, but Playwright cannot attach: ${j.playwright?.error ?? '?'}`);
+    cdpBad(`CDP endpoint ${j.endpoint} answers, but Playwright cannot attach: ${j.playwright?.error ?? '?'}`);
   } else if (j?.ok) {
     ok(`CDP reachable: ${j.endpoint}  (found via ${j.source}); Playwright attach ok (${j.playwright.contexts} context(s))`);
     if (j.browser) info(`browser: ${j.browser}`);
@@ -106,7 +125,7 @@ if (cdpSpec) {
     for (const p of j.pages.slice(0, 15)) info(`  · ${String(p.title).slice(0, 50).padEnd(50)}  ${p.url}`);
     if (j.pages.length > 15) info(`  · … ${j.pages.length - 15} more`);
   } else {
-    bad(`CDP not reachable (${cdpSpec}).${j?.tried ? ' Tried: ' + j.tried.join(' | ') : ' ' + ((r.stderr || '').trim().split('\n').pop() || '')}`);
+    cdpBad(`CDP not reachable (${cdpSpec}).${j?.tried ? ' Tried: ' + j.tried.join(' | ') : ' ' + ((r.stderr || '').trim().split('\n').pop() || '')}`);
     info('BrowserOS neo serves CDP on 127.0.0.1:9110 while it runs (no flag needed). Is "BrowserOS neo" open?');
     info('Check: curl -s http://127.0.0.1:9110/json/version   ·   or pass --cdp http://127.0.0.1:<port>   ·   or use --session-file');
   }
@@ -128,6 +147,34 @@ if (sessionFile) {
     try { exe = (playwright?.chromium ?? playwright?.default?.chromium)?.executablePath(); } catch { /* ignore */ }
     exe && fs.existsSync(exe) ? ok('Playwright Chromium installed (needed for --session-file mode)') : bad('Playwright Chromium missing – pnpm --filter @svp/recorder exec playwright install chromium');
   }
+}
+
+// ---------------------------------------------------------------- ffmpeg text filters: drawtext (brand cards) / subtitles (burn)
+const cardCdp = cdpFound ?? cdpSpec ?? undefined;
+{
+  // asks the assembler (renders one tiny test card when drawtext is missing) – same code path as mux
+  const r = spawnSync('pnpm', ['-s', '--filter', '@svp/assembler', 'start', '--', 'cards-check', '--json', ...(cardCdp ? ['--cdp', cardCdp] : [])], { cwd: root, encoding: 'utf8', env: process.env });
+  let j = null;
+  try { j = JSON.parse((r.stdout || '').trim().split('\n').filter(Boolean).pop() || 'null'); } catch { /* ignore */ }
+  const fixHint = () => {
+    info('fix (real ffmpeg text rendering, also needed for --subtitles burn):');
+    info('  brew install ffmpeg-full        # keg-only; the assembler picks /opt/homebrew/opt/ffmpeg-full/bin automatically');
+    info('  or make it THE ffmpeg: brew uninstall ffmpeg && brew install ffmpeg-full && brew link --overwrite ffmpeg-full');
+    info('  or point at any ffmpeg with drawtext: FFMPEG_PATH=/path/to/ffmpeg FFPROBE_PATH=/path/to/ffprobe (e.g. in .env)');
+  };
+  const how = { 'png:cdp': `a temporary tab of your running browser over CDP (${cardCdp})`, 'png:chromium': "Playwright's Chromium (headless)", 'png:chrome': 'installed Google Chrome (headless)', 'png:msedge': 'installed Microsoft Edge (headless)' };
+  if (!j) warn(`could not check ffmpeg filters: ${((r.stderr || r.stdout || '').trim().split('\n').pop() || '?')}`);
+  else if (j.drawtext) ok(`ffmpeg has drawtext${j.subtitles ? ' + subtitles (libass)' : ''} – brand cards drawn by ffmpeg`);
+  else {
+    warn(`ffmpeg${j.ffmpeg === 'ffmpeg' ? '' : ` (${j.ffmpeg})`} has NO drawtext filter${j.forcedNoDrawtext ? ' (forced by SVP_FORCE_NO_DRAWTEXT)' : ' (Homebrew core ffmpeg is built without libfreetype)'}`);
+    if (j.cards && j.cards.startsWith('png:')) info(`fallback: intro/outro/part cards rendered as PNG stills via ${how[j.cards] ?? j.cards} – same look, nothing to do`);
+    else {
+      warn('no PNG card renderer works either -> intro/outro/part cards will be SKIPPED (chapters.txt still matches final.mp4; --intro-image/--outro-image still work)');
+      for (const t of j.tried || []) info(`tried ${t}`);
+    }
+    fixHint();
+  }
+  if (j && !j.subtitles && args.subtitles === 'burn') { warn(`ffmpeg${j.ffmpeg === 'ffmpeg' ? '' : ` (${j.ffmpeg})`} has no 'subtitles' filter (libass) – --subtitles burn falls back to sidecar final.srt`); if (j.drawtext) fixHint(); }
 }
 
 // ---------------------------------------------------------------- recipe: JSON + contracts/recipe.schema.json (ajv 2020) + placeholders
@@ -221,6 +268,23 @@ const outDir = id ? path.join(outRoot, id) : null;
   } else (pick === 'mock' ? warn : ok)(`voice: ${pick}${pick === 'say' ? ` (voice ${process.env.SAY_VOICE || ({ en: 'Samantha', cs: 'Zuzana', sk: 'Laura' }[(recipe?.lang || 'cs').slice(0, 2)] || 'Zuzana')})` : ''}${pick === 'mock' ? ' – silent tone only' : ''}`);
 }
 
+// ---------------------------------------------------------------- --mux-only: the recording must already be there
+if (muxOnly) {
+  if (!outDir) bad('--mux-only needs --id <id> (or a recipe with an id)');
+  else {
+    const tf = path.join(outDir, 'timing.json');
+    let t = null;
+    try { t = JSON.parse(fs.readFileSync(tf, 'utf8')); } catch (e) { bad(`--mux-only: ${path.relative(root, tf)} ${e.code === 'ENOENT' ? 'not found – record first (pnpm local <recipe> without --mux-only)' : 'is not valid JSON'}`); }
+    if (t) {
+      const raw = [t.video_path && path.join(outDir, path.basename(t.video_path)), path.join(outDir, 'raw.mp4'), path.join(outDir, 'raw.webm')].filter(Boolean).find((f) => fs.existsSync(f));
+      raw ? ok(`--mux-only: ${path.relative(root, raw)} + timing.json (${t.steps?.length ?? 0} steps, ${((t.total_ms ?? 0) / 1000).toFixed(1)} s, recorded ${t.recorded_at ?? '?'})`) : bad(`--mux-only: raw video not found in ${path.relative(root, outDir)}/ (timing.video_path = ${t.video_path ?? '-'})`);
+      const failedSteps = (t.steps || []).filter((s) => s.status === 'failed').map((s) => s.id);
+      if (failedSteps.length) warn(`timing.json has ${failedSteps.length} FAILED step(s): ${failedSteps.join(', ')} – final.mp4 will be made but is not publishable`);
+    }
+    fs.existsSync(path.join(outDir, 'audio', 'durations.json')) ? ok('--mux-only: audio/durations.json') : bad(`--mux-only: ${path.relative(root, path.join(outDir, 'audio', 'durations.json'))} not found – run tts first`);
+  }
+}
+
 const failed = results.filter((r) => r[0] === 'bad');
 if (failed.length) {
   console.log(`\nPRE-FLIGHT FAILED (${failed.length}). Fix the ✗ items above.`);
@@ -240,12 +304,16 @@ const stage = (name, pnpmArgs) => {
   if (r.status !== 0) { console.error(`\n${name} FAILED (exit ${r.status ?? r.signal}) – fix and re-run; finished stages are cheap to repeat (tts is cached).`); process.exit(1); }
 };
 
-stage('1/3 tts', ['--filter', '@svp/assembler', 'start', '--', 'tts', '--recipe', recipeOut, '--out', outDir, ...(forcedProvider ? ['--provider', forcedProvider] : [])]);
-stage('2/3 record', ['--filter', '@svp/recorder', 'start', '--', '--recipe', recipeOut, '--out', outDir,
-  ...(cdpSpec ? ['--cdp', cdpSpec] : []), ...(sessionFile && !cdpSpec ? ['--session-file', sessionFile, '--capture', 'screencast'] : []),
-  ...(typeof args['run-id'] === 'string' ? ['--run-id', args['run-id']] : [])]);
+if (muxOnly) console.log('\n== --mux-only: skipping tts + record, re-using the existing recording');
+else {
+  stage('1/3 tts', ['--filter', '@svp/assembler', 'start', '--', 'tts', '--recipe', recipeOut, '--out', outDir, ...(forcedProvider ? ['--provider', forcedProvider] : [])]);
+  stage('2/3 record', ['--filter', '@svp/recorder', 'start', '--', '--recipe', recipeOut, '--out', outDir,
+    ...(cdpSpec ? ['--cdp', cdpSpec] : []), ...(sessionFile && !cdpSpec ? ['--session-file', sessionFile, '--capture', 'screencast'] : []),
+    ...(typeof args['run-id'] === 'string' ? ['--run-id', args['run-id']] : [])]);
+}
 const passStr = (k) => (typeof args[k] === 'string' ? [`--${k}`, k.endsWith('-image') ? resolveUser(args[k]) : args[k]] : []);
-stage('3/3 mux', ['--filter', '@svp/assembler', 'start', '--', 'mux', '--out', outDir, ...(args['no-intro'] ? ['--no-intro'] : []),
+// --cdp for mux = where to render PNG brand cards when ffmpeg has no drawtext (ignored otherwise)
+stage(muxOnly ? 'mux' : '3/3 mux', ['--filter', '@svp/assembler', 'start', '--', 'mux', '--out', outDir, ...(cardCdp ? ['--cdp', cardCdp] : []), ...(args['no-intro'] ? ['--no-intro'] : []),
   ...(args['no-interstitials'] ? ['--no-interstitials'] : []), ...(args['no-chapters'] ? ['--no-chapters'] : []),
   ...passStr('intro-image'), ...passStr('outro-image'), ...passStr('intro-sec'), ...passStr('outro-sec'),
   ...(typeof args.subtitles === 'string' ? ['--subtitles', args.subtitles] : [])]);
