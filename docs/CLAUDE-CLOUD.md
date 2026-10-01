@@ -1,5 +1,7 @@
 # Videa bez terminálu: Claude Code na webu
 
+> Hlavní cesta pro kolegy s Macem je **[lokálně v Claude desktop app](MAC.md)** (bez nastavování u správce, video rovnou na disku). Cloud níže je záloha, např. když si někdo nemůže nic stáhnout.
+
 Kolegové vyrábějí videa v prohlížeči na **claude.ai/code**: vyberou repo `onboarding-videos`, napíšou `/onboarding-video` a Claude je provede. Pipeline běží v cloudovém kontejneru Anthropicu. Nic se nikam nenasazuje.
 
 ## Pro kolegy (každé video)

@@ -10,7 +10,8 @@ import { mux, ffmpegBin, ffprobeBin, ffmpegCaps, cssColor, renderCardPngs, INTER
 import { FIXTURE_DIR, ensureFixtureVideo } from "./fixture-video.js";
 
 const hasFfmpeg = spawnSync("ffmpeg", ["-version"], { stdio: "ignore" }).status === 0;
-const hasDrawtext = hasFfmpeg && / drawtext /.test(spawnSync("ffmpeg", ["-hide_banner", "-filters"], { encoding: "utf8" }).stdout);
+const hasDrawtext = hasFfmpeg && / drawtext /.test(spawnSync(ffmpegBin(), ["-hide_banner", "-filters"], { encoding: "utf8" }).stdout)
+  && /\btext_align\b/.test(spawnSync(ffmpegBin(), ["-hide_banner", "-h", "filter=drawtext"], { encoding: "utf8" }).stdout); // cards need ffmpeg >= 6.1
 const quiet = () => {};
 
 function withEnv<T>(vars: Record<string, string | undefined>, fn: () => Promise<T>): Promise<T> {

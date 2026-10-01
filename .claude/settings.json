@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bash scripts/local-setup.sh)",
+      "Bash(bash scripts/cloud-setup.sh)",
+      "Bash(source ~/.onboarding-videos/env.sh)",
+      "Bash(pnpm video *)",
+      "Bash(caffeinate -i pnpm video *)",
+      "Bash(pnpm pipeline status *)",
+      "Bash(pnpm pipeline upload *)",
+      "Bash(pnpm voice:manifest *)",
+      "Bash(pnpm --filter @svp/knowledge start -- validate *)",
+      "Bash(pnpm smoke)",
+      "Bash(node scripts/explorer-turn.mjs *)",
+      "Bash(node scripts/fetch-voice.mjs *)",
+      "Bash(open -R out/*)",
+      "Bash(open -e .env)",
+      "Bash(git pull --ff-only)",
+      "Edit(out/**)",
+      "mcp__claude_ai_ElevenLabs__creative_create_flow",
+      "mcp__claude_ai_ElevenLabs__creative_generate_speech",
+      "mcp__claude_ai_ElevenLabs__creative_get_flow_run_status",
+      "mcp__claude_ai_ElevenLabs__creative_list_voices"
+    ],
+    "deny": [
+      "Read(.env)",
+      "Edit(.env)"
+    ]
+  }
+}

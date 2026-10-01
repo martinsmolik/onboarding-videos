@@ -11,6 +11,7 @@
     "record": "pnpm --filter @svp/recorder start",
     "assemble": "pnpm --filter @svp/assembler start",
     "pipeline": "pnpm --filter @svp/orchestrator start",
+    "video": "EXPLORER_DRIVER=session SVP_TIMEOUT_EXPLORE_MS=${SVP_TIMEOUT_EXPLORE_MS:-14400000} pnpm --filter @svp/orchestrator start",
     "setup": "bash scripts/setup.sh",
     "typecheck": "node scripts/typecheck.mjs",
     "test": "node scripts/test-all.mjs",

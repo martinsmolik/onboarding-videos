@@ -50,7 +50,14 @@ export async function ffmpegCaps(env: NodeJS.ProcessEnv = process.env): Promise<
   if (hit) return hit;
   let out = "";
   try { out = (await run(bin, ["-hide_banner", "-filters"])).stdout; } catch { /* treat as none */ }
-  const caps = { bin, drawtext: !forced && / drawtext /.test(out), subtitles: / subtitles /.test(out), forcedNoDrawtext: forced };
+  // brand cards use drawtext text_align (ffmpeg >= 6.1); an older drawtext counts as none -> PNG cards
+  let drawtext = !forced && / drawtext /.test(out);
+  if (drawtext) {
+    let help = "";
+    try { const r = await run(bin, ["-hide_banner", "-h", "filter=drawtext"]); help = r.stdout + r.stderr; } catch { /* treat as unsupported */ }
+    drawtext = /\btext_align\b/.test(help);
+  }
+  const caps = { bin, drawtext, subtitles: / subtitles /.test(out), forcedNoDrawtext: forced };
   capsCache.set(key, caps);
   return caps;
 }

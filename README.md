@@ -2,7 +2,7 @@
 
 End-to-end generation of onboarding videos for the Sloneek portal (hosted on YouTube).
 
-**Without a terminal:** colleagues run it on claude.ai/code with the `/onboarding-video` skill, see [docs/CLAUDE-CLOUD.md](docs/CLAUDE-CLOUD.md).
+**Without a terminal:** colleagues run the `/onboarding-video` skill in the Claude desktop app on their Mac ([docs/MAC.md](docs/MAC.md), tools installed without admin rights by `scripts/local-setup.sh`) or on claude.ai/code ([docs/CLAUDE-CLOUD.md](docs/CLAUDE-CLOUD.md)).
 
 ## Core design decisions (do not violate)
 
