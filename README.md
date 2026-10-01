@@ -2,6 +2,8 @@
 
 End-to-end generation of onboarding videos for the Sloneek portal (hosted on YouTube).
 
+**Without a terminal:** colleagues run it on claude.ai/code with the `/onboarding-video` skill, see [docs/CLAUDE-CLOUD.md](docs/CLAUDE-CLOUD.md).
+
 ## Core design decisions (do not violate)
 
 1. **Never record with an LLM in the loop.** Discovery (slow, agentic) and recording (deterministic Playwright replay) are separate phases joined by `recipe.json`.

@@ -2,13 +2,15 @@ import { parseArgs } from "./util.js";
 import { ingest } from "./ingest.js";
 import { transcribe, Provider } from "./transcribe.js";
 import { changes } from "./changes.js";
-import { scenarize, Lang, Audience } from "./scenarize.js";
+import { readFileSync } from "node:fs";
+import { scenarize, validateScenario, lintScenario, Lang, Audience, Scenario } from "./scenarize.js";
 
 const USAGE = `usage:
   ingest      --youtube <url> --out out/<id>
   transcribe  --out out/<id> [--provider elevenlabs|openai|local] [--language cs] [--force]
   changes     --since YYYY-MM-DD --out out/<id> [--keywords "docházka,attendance,absence"]
-  scenarize   --out out/<id> --lang cs --audience employee [--title ...] [--product-notes file.md] [--since YYYY-MM-DD] [--fake-llm]`;
+  scenarize   --out out/<id> --lang cs --audience employee [--title ...] [--product-notes file.md] [--since YYYY-MM-DD] [--fake-llm]
+  validate    --scenario out/<id>/scenario.json      (schema + editorial rules; exit 1 on errors)`;
 
 const need = (f: Record<string, string | true>, k: string): string => {
   const v = f[k];
@@ -50,6 +52,14 @@ try {
       });
       console.log(`scenario.json: ${r.scenario.steps.length} steps, ${r.warnings.length} warnings`);
       break;
+    }
+    case "validate": {
+      const sc = JSON.parse(readFileSync(need(flags, "scenario"), "utf8"));
+      const errors = validateScenario(sc);
+      for (const e of errors) console.log(`error: ${e}`);
+      if (!errors.length) for (const w of lintScenario(sc as Scenario)) console.log(`warning: ${w}`);
+      console.log(errors.length ? `INVALID (${errors.length} errors)` : `OK: ${(sc as Scenario).steps.length} steps`);
+      process.exit(errors.length ? 1 : 0);
     }
     default:
       console.error(USAGE);
