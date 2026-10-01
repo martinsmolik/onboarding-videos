@@ -38,7 +38,7 @@ for each scenario step:
 ```
 
 * **An in-process tool loop over the Anthropic Messages API** (`@anthropic-ai/sdk`). No MCP is involved.
-  The model is `claude-sonnet-4-5` (override it with `EXPLORER_MODEL`). The system prompt and the tool
+  The model is `claude-sonnet-5-5` (override it with `EXPLORER_MODEL`). The system prompt and the tool
   definitions are prompt-cached.
 * **Snapshot** (`src/snapshot.ts` + `src/browser-script.ts`): lists visible elements, interactive ones
   first, then elements in the viewport. The list is capped at 150 elements and about 14k characters.
@@ -53,7 +53,7 @@ for each scenario step:
   can therefore never accumulate across steps.
 * **Cost control:**
   * The model is told not to take screenshots unless it is stuck.
-  * Older snapshots and screenshots are pruned from the history.
+  * The history is append-only (Sonnet 5.5 signs thinking blocks over earlier turns); the growing prefix is prompt-cached instead of pruned.
   * Each step is limited to 12 tool calls (`EXPLORER_MAX_TOOL_CALLS`).
   * Token usage and USD cost are logged per step to stderr and to `out/<id>/explorer-log.json`.
 

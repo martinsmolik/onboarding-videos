@@ -29,7 +29,7 @@ Programmatic: `import { ingest, transcribe, changes, scenarize, validateScenario
 - **ingest**: `yt-dlp` metadata (`meta.json`: title, upload_date, description, ...), subtitles (`--write-sub --write-auto-sub --sub-lang cs,en`, VTT with auto-caption rolling-duplicates removed) -> `transcript.json/txt` directly, and audio -> `audio.m4a`. If subtitles exist, `transcribe` is a no-op (unless `--force`).
 - **transcribe**: ElevenLabs Scribe (`POST /v1/speech-to-text`, multipart `model_id=scribe_v1`, `language_code`, `timestamps_granularity=word`, `file`; header `xi-api-key`), OpenAI `whisper-1` (`verbose_json`), or `local` (`faster-whisper` in python3; never installed automatically, model downloads on first use, `WHISPER_MODEL` default `small`). Output `[{start_ms,end_ms,text}]`.
 - **changes**: Linear GraphQL, `issues(filter:{completedAt:{gt:since}})`, paginated (max 1000 issues), keyword filter applied client-side, accent-insensitive, over title/description/project/labels. No key or API error => empty list + warning (never fails).
-- **scenarize**: model `claude-sonnet-4-5` (override `SCENARIST_MODEL` or `--model`-less env). Tool `submit_scenario` with `tool_choice` forced; its input schema is derived from the contract (+ 6–12 steps). Code then overwrites deterministic fields (`id`, `lang`, `audience`, `title` if given, step ids `s01..`, and `source.*` provenance) and validates with ajv (+ editorial rules). On failure the errors are sent back once; second failure throws. Soft lint (narration 8–25 words, missing `must_show`) goes to the review file. `--fake-llm` returns `test/fixture/scenario.fixture.json` through the same validation/review path (review file is marked FIXTURE).
+- **scenarize**: model `claude-sonnet-5-5` (override `SCENARIST_MODEL` or `--model`-less env). Tool `submit_scenario` with `tool_choice: auto` (Sonnet 5.5 rejects forced tool choice; a prose reply gets one nudge); its input schema is derived from the contract (+ 6–12 steps). Code then overwrites deterministic fields (`id`, `lang`, `audience`, `title` if given, step ids `s01..`, and `source.*` provenance) and validates with ajv (+ editorial rules). On failure the errors are sent back once; second failure throws. Soft lint (narration 8–25 words, missing `must_show`) goes to the review file. `--fake-llm` returns `test/fixture/scenario.fixture.json` through the same validation/review path (review file is marked FIXTURE).
 - **review**: `scenario.review.md` = steps table (narration / intent / must_show), "What changed vs old video" (`source.changes_detected` + Linear issues considered), warnings, approval checklist.
 
 ## Env
@@ -37,7 +37,7 @@ Programmatic: `import { ingest, transcribe, changes, scenarize, validateScenario
 | var | used by |
 |---|---|
 | `ANTHROPIC_API_KEY` (`ANTHROPIC_BASE_URL` optional) | scenarize |
-| `SCENARIST_MODEL` | scenarize (default `claude-sonnet-4-5`) |
+| `SCENARIST_MODEL` | scenarize (default `claude-sonnet-5-5`) |
 | `LINEAR_API_KEY` | changes (personal key, sent as raw `Authorization`) |
 | `ELEVENLABS_API_KEY` | transcribe elevenlabs |
 | `OPENAI_API_KEY` | transcribe openai |

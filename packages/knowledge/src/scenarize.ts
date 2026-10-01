@@ -131,12 +131,18 @@ async function callLlm(model: string, user: string, hint: { lang: Lang; audience
   const tool = { name: "submit_scenario", description: "Submit the finished scenario.json", input_schema: toolSchema() as Anthropic.Tool["input_schema"] };
   const system = SYSTEM_PROMPT.replace("{LANG}", LANG_NAME[hint.lang]);
   const messages: Anthropic.MessageParam[] = [{ role: "user", content: user }];
+  // Sonnet 5.5 rejects forced tool_choice and sampling params: use auto, nudge once if the
+  // model answers in prose, and keep the history append-only (thinking blocks are signed).
   const ask = async () => {
-    const r = await client.messages.create({ model, max_tokens: 4096, temperature: 0.3, system, tools: [tool], tool_choice: { type: "tool", name: "submit_scenario" }, messages });
-    const tu = r.content.find((b): b is Anthropic.ToolUseBlock => b.type === "tool_use");
-    if (!tu) throw new Error("model returned no tool_use");
-    log(`usage: in=${r.usage.input_tokens} out=${r.usage.output_tokens}`);
-    return { tu, content: r.content };
+    for (let attempt = 0; ; attempt++) {
+      const r = await client.messages.create({ model, max_tokens: 16000, system, tools: [tool], tool_choice: { type: "auto" }, messages });
+      log(`usage: in=${r.usage.input_tokens} out=${r.usage.output_tokens}`);
+      const tu = r.content.find((b): b is Anthropic.ToolUseBlock => b.type === "tool_use");
+      if (tu) return { tu, content: r.content };
+      if (attempt >= 1) throw new Error(`model returned no tool_use (stop_reason=${r.stop_reason})`);
+      messages.push({ role: "assistant", content: r.content });
+      messages.push({ role: "user", content: "Submit the scenario by calling submit_scenario now. Do not reply in prose." });
+    }
   };
   let { tu, content } = await ask();
   let errs = validateScenario(finalize(tu.input as Scenario, hint));
@@ -174,7 +180,7 @@ export async function scenarize(opts: ScenarizeOptions): Promise<{ scenario: Sce
     raw = JSON.parse(readFileSync(FIXTURE_SCENARIO, "utf8"));
   } else {
     if (!process.env.ANTHROPIC_API_KEY) throw new Error("ANTHROPIC_API_KEY missing (use --fake-llm to run offline)");
-    const model = opts.model ?? process.env.SCENARIST_MODEL ?? "claude-sonnet-4-5";
+    const model = opts.model ?? process.env.SCENARIST_MODEL ?? "claude-sonnet-5-5";
     raw = await callLlm(model, buildUserPrompt({ lang: opts.lang, audience: opts.audience, title: opts.title, transcript, changes, notes }), opts);
   }
 

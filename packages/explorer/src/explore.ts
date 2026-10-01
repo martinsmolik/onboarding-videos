@@ -189,30 +189,6 @@ export class Explorer {
     ].filter((l) => l !== '').join('\n');
   }
 
-  /** Remove all but the newest snapshot / screenshot from history (cost control). */
-  private prune(messages: Msg[]): void {
-    let seenSnap = false; let seenImg = false;
-    for (let i = messages.length - 1; i >= 0; i--) {
-      const m = messages[i];
-      m.content = m.content.map((b) => {
-        if (b.type === 'text' && b.text.includes('# snapshot g')) {
-          if (seenSnap) return { ...b, text: b.text.slice(0, b.text.indexOf('# snapshot g')) + '[older snapshot removed – its refs are stale]' };
-          seenSnap = true;
-        }
-        if (b.type === 'tool_result') {
-          if (typeof b.content === 'string' && b.content.includes('# snapshot g')) {
-            if (seenSnap) return { ...b, content: '[older snapshot removed – its refs are stale]' };
-            seenSnap = true;
-          } else if (Array.isArray(b.content) && b.content.some((c: any) => c.type === 'image')) {
-            if (seenImg) return { ...b, content: '[older screenshot removed]' };
-            seenImg = true;
-          }
-        }
-        return b;
-      });
-    }
-  }
-
   async exploreStep(task: StepTask): Promise<StepResult> {
     if (!this.current) await this.resetCurrent();
     const usage: Usage = { input_tokens: 0, output_tokens: 0, cache_read_input_tokens: 0, cache_creation_input_tokens: 0 };
@@ -226,7 +202,6 @@ export class Explorer {
 
     while (true) {
       if (stat.tool_calls >= this.maxToolCalls) throw new StepFailed(task.id, `tool budget of ${this.maxToolCalls} calls exhausted`, finish());
-      this.prune(messages);
       const reply = await this.model.create({ system: SYSTEM_PROMPT, tools: TOOLS, messages, stepId: task.scriptKey ?? task.id });
       stat.calls++;
       for (const k of Object.keys(usage) as (keyof Usage)[]) usage[k] += reply.usage[k] ?? 0;

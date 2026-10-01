@@ -26,8 +26,8 @@ export interface ModelClient {
   create(req: { system: string; tools: ToolDef[]; messages: Msg[]; stepId: string }): Promise<ModelReply>;
 }
 
-// Sonnet 4.5 list price, USD per million tokens.
-export const PRICE = { input: 3, output: 15, cache_read: 0.3, cache_write: 3.75 };
+// Sonnet 5.5 list price, USD per million tokens (cache_write = 5-minute TTL).
+export const PRICE = { input: 2, output: 10, cache_read: 0.2, cache_write: 2.5 };
 export function usd(u: Usage): number {
   return (u.input_tokens * PRICE.input + u.output_tokens * PRICE.output
     + u.cache_read_input_tokens * PRICE.cache_read + u.cache_creation_input_tokens * PRICE.cache_write) / 1e6;
@@ -35,17 +35,23 @@ export function usd(u: Usage): number {
 
 export class AnthropicModel implements ModelClient {
   private client = new Anthropic();
-  constructor(public name = process.env.EXPLORER_MODEL || 'claude-sonnet-4-5') {}
+  constructor(public name = process.env.EXPLORER_MODEL || 'claude-sonnet-5-5') {}
 
   async create(req: { system: string; tools: ToolDef[]; messages: Msg[] }): Promise<ModelReply> {
     const tools = req.tools.map((t, i) =>
       i === req.tools.length - 1 ? { ...t, cache_control: { type: 'ephemeral' as const } } : t);
+    // History is append-only (Sonnet 5.5 signs thinking blocks over the preceding turns),
+    // so cache the whole prefix up to the newest block instead of pruning old snapshots.
+    const messages = req.messages.map((m, i) => i < req.messages.length - 1 ? m : {
+      ...m, content: m.content.map((b, j) => j < m.content.length - 1 ? b : { ...b, cache_control: { type: 'ephemeral' as const } }),
+    });
     const res = await this.client.messages.create({
       model: this.name,
-      max_tokens: 2048,
+      // covers adaptive thinking + the tool call; thinking blocks are passed back unchanged
+      max_tokens: 16000,
       system: [{ type: 'text', text: req.system, cache_control: { type: 'ephemeral' } }],
       tools: tools as any,
-      messages: req.messages as any,
+      messages: messages as any,
     });
     return {
       content: res.content as Block[],
