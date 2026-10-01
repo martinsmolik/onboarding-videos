@@ -18,7 +18,9 @@
     "local": "node scripts/local-run.mjs",
     "local:check": "node scripts/local-run.mjs --check",
     "voice:manifest": "node scripts/voice-manifest.mjs",
-    "batch": "node packages/orchestrator/scripts/batch.mjs"
+    "batch": "node packages/orchestrator/scripts/batch.mjs",
+    "voice:fetch": "node scripts/fetch-voice.mjs",
+    "pilot": "node scripts/fetch-voice.mjs add-users && node scripts/local-run.mjs recipes/add-users.en.json --id add-users --cdp auto --provider external --no-intro"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
