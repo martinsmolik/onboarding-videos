@@ -52,11 +52,55 @@ export function splitNarration(text: string): [number, number][] {
   return out;
 }
 
+/**
+ * Map every code point of `shown` (subtitle) to an index into `spoken` (the text the alignment is for,
+ * e.g. narration_tts). Identical runs map 1:1 via an LCS alignment (case-insensitive); differing runs
+ * ("KPI" vs "kej pí áj") are interpolated linearly between their matched neighbours.
+ * Falls back to a proportional map for very long texts.
+ */
+export function mapTextIndices(shown: string[], spoken: string[]): number[] {
+  const n = shown.length, m = spoken.length;
+  if (!n) return [];
+  if (!m) return shown.map(() => 0);
+  const prop = () => shown.map((_, i) => Math.min(m - 1, Math.round((i / Math.max(1, n - 1)) * (m - 1))));
+  if (n * m > 4_000_000) return prop();
+  const a = shown.map((c) => c.toLowerCase()), b = spoken.map((c) => c.toLowerCase());
+  // LCS lengths of suffixes, row-major (n+1) x (m+1)
+  const W = m + 1;
+  const L = new Uint16Array((n + 1) * W);
+  for (let i = n - 1; i >= 0; i--)
+    for (let j = m - 1; j >= 0; j--)
+      L[i * W + j] = a[i] === b[j] ? L[(i + 1) * W + j + 1] + 1 : Math.max(L[(i + 1) * W + j], L[i * W + j + 1]);
+  const match: number[] = new Array(n).fill(-1);
+  for (let i = 0, j = 0; i < n && j < m;) {
+    if (a[i] === b[j]) { match[i] = j; i++; j++; }
+    else if (L[(i + 1) * W + j] >= L[i * W + j + 1]) i++;
+    else j++;
+  }
+  if (!match.some((x) => x >= 0)) return prop();
+  // interpolate unmatched runs between the surrounding matched anchors
+  const res = match.slice();
+  let i = 0;
+  while (i < n) {
+    if (res[i] >= 0) { i++; continue; }
+    let k = i;
+    while (k < n && match[k] < 0) k++;
+    const lo = i > 0 ? match[i - 1] + 1 : 0;   // first spoken index available to this run
+    const hi = k < n ? match[k] - 1 : m - 1;  // last spoken index available
+    const len = k - i;
+    for (let r = 0; r < len; r++) res[i + r] = hi < lo ? Math.max(0, Math.min(m - 1, lo)) : Math.round(lo + ((hi - lo) * r) / Math.max(1, len - 1));
+    i = k;
+  }
+  return res;
+}
+
 export function cuesForStep(tStartMs: number, text: string, al: Alignment): Cue[] {
   const n = al.characters.length;
   const tl = [...text].length;
-  // alignment normally matches input text 1:1; if not, map proportionally
-  const map = (i: number) => (n === tl ? i : Math.min(n - 1, Math.max(0, Math.round((i / Math.max(1, tl - 1)) * (n - 1)))));
+  // alignment normally matches the input text 1:1 (subtitle == narration_tts); otherwise map via LCS
+  const same = n === tl && al.characters.join("") === text;
+  const idx = same ? null : mapTextIndices([...text], al.characters);
+  const map = (i: number) => (idx ? idx[Math.min(tl - 1, Math.max(0, i))] : i);
   const chars = [...text]; // code-point indexing consistent with alignment characters
   const joined = chars.join("");
   const pieces = splitNarration(joined);

@@ -1,0 +1,698 @@
+Kostra videonávodů k modulům Sloneek
+
+
+
+
+Kostra videonávodů k modulům Sloneek
+  ​Oct 1, 2026     · ​@Alex
+
+
+Účel dokumentu
+Každé video k modulu Sloneek má stejnou kostru o 5 částech: úvod, nastavení, ukázka
+využití, pohled manažera/zaměstnance a závěr. Dokument slouží jako zadání (brief) pro AI
+agenta, který video připravuje, i jako kontrolní seznam pro tým, který ho schvaluje. Vychází
+ze stávajícího skriptu „Kompletní Onboarding Video Script“ (David a Marie) – jeho tón,
+persony a názvy z aplikace přebírá, ale dělí ho na samostatná videa po modulech.
+
+Jak ho používat:
+
+ 1. Vezmi Šablonu scénáře níže a vyplň ji pro konkrétní modul (název, persony, kroky v
+    aplikaci, odkazy na nápovědu).
+ 2. Vyplněnou šablonu předej AI agentovi spolu s Obecnými pravidly.
+ 3. Hotové video projdi podle Checklistu před publikací.
+
+Cílový divák: HR manažer nebo office manager firmy, která Sloneek právě zavádí nebo do
+něj přidává nový modul. Nemusí být technicky zdatný, ale zná HR agendu.
+
+
+Obecná pravidla pro AI agenta
+Tato pravidla platí pro každé video bez ohledu na modul.
+
+Formát a délka
+
+     Délka 4–8 minut. Velké moduly (Základní HR, Řízení času) rozděl na více kratších videí
+     podle podsekcí.
+     Nahrávka obrazovky v rozlišení 1920×1080, aplikace v češtině, prohlížeč bez záložek a
+     rozšíření.
+     Demo účet s realistickými, ale smyšlenými daty (fiktivní firma, jména, útvary). Nikdy
+     skutečná osobní data.
+     Titulky vždy zapnuté (část diváků sleduje bez zvuku).
+
+Tón a namlouvání
+
+     Tykání, nebo vykání? Vykání – stejně jako ve stávajícím skriptu, jednotně ve všech
+     videích.
+     Přátelský, věcný tón kolegy z HR, ne prodejce. Krátké věty, žádný žargon bez vysvětlení.
+     Tempo cca 130–150 slov za minutu. Po každém kliknutí krátká pauza, aby divák stihl
+     sledovat.
+
+
+                                                                                      Page 1 of 13
+Kostra videonávodů k modulům Sloneek
+
+
+
+
+     Vždy říkej tři věci: co dělám („Kliknu na Nastavení“), co to znamená („Tady určuji, kdo
+     schvaluje dovolenou“) a proč na tom záleží („Manažer pak dostane notifikaci a nic se
+     neztratí“).
+     Názvy tlačítek a položek menu čti přesně tak, jak jsou v aplikaci, a ve skriptu je označ
+     tučně (jako dosud).
+
+Persona, rod a humor
+
+     Jeden průvodce na video. Každým videem provází jedna virtuální osoba z týmu
+     Sloneek – Marie, David nebo nové alter ego (např. Petr z customer success pro Reporty,
+     Lucie z náboru pro ATS). Průvodce se v úvodu představí jménem a rolí, mluví v první
+     osobě a drží svůj rod po celé video („chtěla bych“ / „chtěl bych“). Uprostřed videa se
+     průvodce nestřídá a nepředává slovo. Seznam alter eg s rolí a hlasem veď v šabloně
+     scénáře, ať stejné jméno má vždy stejný AI hlas.
+     Divák bez rodu: oslovuj neutrálně („vidíte“, „mohli byste“), ne střídavě „mohly byste“ a
+     „mohli byste“.
+     Humor s mírou: 1–2 vtipy na video, ideálně v úvodu a závěru. Ne na účet zaměstnanců
+     (sledování pauz, propouštění) a ne uprostřed postupu, který divák musí sledovat.
+
+Psaní pro AI hlas
+
+     Čísla, časy a zkratky piš tak, jak se mají vyslovit: „osm dvacet“ místo 8:20, „nula celá
+     sedmdesát pět“ místo 0,75.
+     Zkratky piš foneticky tak, jak se v českém HR běžně vyslovují, a drž to ve všech
+     videech: KPI → „kej pí áj“, OKR → „ó kej ár“, eNPS → „í en pí es“, ATS → „éj tí es“, NDA →
+     „en dí ej“, CV → „sí ví“, HR → „há er“, GDPR → „gé dé pé er“, PNG → „pé en gé“, PIN →
+     „pin“, GPS → „gé pé es“, PDF → „pé dé ef“, eIDAS → „í ajdas“, AI → „éj áj“. V titulcích
+     zůstává běžný zápis (KPI), fonetika je jen pro namlouvání.
+     Nepiš citoslovce typu „Haha“ ani dlouhé závorky – AI hlas je přečte doslova. Poznámky
+     pro střih dávej do hranatých závorek, např. [ZOOM na tlačítko Uložit].
+
+Práce s obrazovkou
+
+     Kurzor se pohybuje plynule, bez hledání. Kliknutí zvýrazni (kroužek nebo zoom).
+     U důležitých míst použij zoom na detail nebo popisek na obrazovce.
+     Psaní textu do polí zrychli nebo vlož hotový text – divák nemusí sledovat každé
+     písmeno.
+     Načítání stránek a čekání vystřihni.
+
+Vizuální identita
+
+     Úvodní a závěrečná karta v barvách Sloneek, logo v rohu po celou dobu.
+     Na začátku každé části krátký mezititulek (např. „2 / Nastavení“), aby se v něm dalo
+     orientovat.
+
+
+
+                                                                                               Page 2 of 13
+Kostra videonávodů k modulům Sloneek
+
+
+
+
+     Kapitoly s časovými značkami do popisu na YouTube.
+
+
+Přehled struktury videa
+Video má vždy 5 částí ve stejném pořadí. Časy jsou orientační pro 6minutové video; část 2
+a 4 lze vynechat, pokud je modul nemá.
+
+
+ #          Část                       Orientační   Podíl   Cíl pro diváka                   Povinná?
+                                       čas
+
+ 1          Úvod                       0:00–0:45    ~10 %   Chápu, k čemu modul je a         Ano
+                                                            jaký problém mi vyřeší
+
+ 2          Nastavení                  0:45–2:15    ~25     Vím, co mám jednorázově          Jen pokud modul
+                                                    %       nastavit, než začnu              vyžaduje nastavení
+
+ 3          Ukázka využití             2:15–4:30    ~40     Umím modul použít v běžné        Ano
+                                                    %       situaci
+
+ 4          Pohled manažera /          4:30–5:30    ~15 %   Vím, co uvidí a udělají          Jen pokud se role liší
+            zaměstnance                                     ostatní role
+
+ 5          Závěr                      5:30–6:00    ~10 %   Vím, co udělat dál a kde najít   Ano
+                                                            pomoc
+
+
+Zlaté pravidlo: divák by měl do 30 sekund vědět, že je ve správném videu, a na konci mít
+jeden jasný další krok.
+
+
+Část 1: Úvod (cca 30–45 s)
+Cíl: divák pochopí, o jaký modul jde, jaký problém řeší a co se ve videu naučí.
+
+Co se děje na obrazovce
+
+     Úvodní karta: logo Sloneek, název modulu, podtitulek (např. „Docházka – jak na evidenci
+     pracovní doby“).
+     Přechod na přehled (dashboard) aplikace, kurzor ukáže, kde modul v menu najdu.
+
+Co namlouváme – 4 kroky
+
+ 1. Hook (1 věta): běžná bolest z HR praxe. Např. „Tabulky s dovolenými, e-maily se
+     žádostmi a na konci měsíce shon kvůli mzdám? To zná skoro každé HR.“
+ 2. Co modul je (1–2 věty): jednoduchá definice bez žargonu.
+ 3. HR kontext (2–3 věty): proč na tom v HR světě záleží – úspora času, menší chybovost,
+     zákonné povinnosti (např. evidence pracovní doby, GDPR), lepší zkušenost
+     zaměstnanců. Kde to dává smysl, jeden konkrétní fakt nebo číslo (ověřené!).
+
+
+
+
+                                                                                                             Page 3 of 13
+Kostra videonávodů k modulům Sloneek
+
+
+
+
+ 4. Co se naučíte (1 věta): „V tomhle videu si ukážeme nastavení, běžné použití a pohled
+     manažera.“
+
+Vzorový text
+
+    „Základem každého HR je přehled o lidech. Modul Základní HR v Sloneeku je místo,
+    kde máte všechny zaměstnance, jejich dokumenty i organizační strukturu
+    pohromadě. Už žádné hledání smluv po sdílených discích. Za šest minut si ukážeme,
+    jak modul nastavit, jak přidat nového kolegu a co pak uvidí on sám.“
+
+Čemu se vyhnout: dlouhému představování Sloneeku jako firmy, výčtu všech funkcí,
+marketingovým superlativům.
+
+
+Část 2: Nastavení (cca 1–1,5 min)
+Cíl: admin/HR ví, co musí jednorázově nastavit, než modul začne používat celá firma. Pokud
+modul nastavení nemá, tuto část vynech a v úvodu to zmínit („Modul funguje hned po
+zapnutí“).
+
+Struktura
+
+ 1. Kde nastavení najdu: ukaž cestu v menu (např. Nastavení → název modulu). Řekni, kdo
+     k němu má přístup (admin / HR).
+ 2. Povinné kroky: jen to, bez čeho modul nefunguje (typy nepřítomností, pracovní
+     rozvrhy, schvalovatelé, šablony dokumentů…). Každý krok: klik → co to znamená →
+     doporučená hodnota.
+ 3. Doporučená nastavení: 1–2 volby, které většina firem ocení (notifikace, automatické
+     schvalování, propojení s kalendářem).
+ 4. Přiřazení lidem: jak nastavení přiřadit zaměstnancům, týmům nebo celé firmě.
+ 5. Uložení a kontrola: ukaž výsledek, ať divák ví, že se to povedlo.
+
+Tipy pro namlouvání
+
+     U každé volby řekni, kdy zvolit kterou možnost („Když máte směnný provoz,
+     vyberte…“).
+     Upozorni na časté chyby („Nezapomeňte nastavit zástupce schvalovatele, jinak žádosti
+     uváznou, když je manažer na dovolené“).
+     Pokročilá nastavení jen zmínit a odkázat na článek v nápovědě (popisek s odkazem na
+     obrazovce).
+
+Vzorová věta: „Nejdřív si modul připravíme. Jdu do Nastavení a tady vytvořím typy
+nepřítomností – tedy dovolenou, sick day nebo home office. U každého určím, jestli ho
+musí někdo schválit.“
+
+
+
+                                                                                    Page 4 of 13
+Kostra videonávodů k modulům Sloneek
+
+
+
+
+Část 3: Ukázka využití (cca 2–2,5 min)
+Cíl: divák uvidí modul v akci na reálné situaci a po zhlédnutí to zvládne sám. Toto je jádro
+videa.
+
+Princip: příběh, ne prohlídka menu. Ukázku stavěj kolem 1–3 konkrétních situací z života
+HR, ne kolem výčtu tlačítek. Např. „Do firmy nastupuje Petra, pojďme ji přidat“ místo „Tady
+je tlačítko Přidat uživatele“.
+
+Struktura
+
+ 1. Uveď situaci (1 věta): „Petr z obchodu si chce vzít týden dovolené.“
+ 2. Projdi hlavní scénář krok za krokem: každý klik okomentuj (co dělám → co to znamená
+     → proč).
+ 3. Ukaž výsledek: kde se akce projeví (kalendář, profil zaměstnance, report, notifikace).
+ 4. Druhý scénář (volitelně): jiná častá situace nebo varianta (zrušení, úprava, hromadná
+     akce).
+ 5. Přehledy a reporty: kde HR vidí souhrn (filtry, export, podklady pro mzdy), pokud je
+     modul má.
+ 6. AI tip (volitelně): pokud lze akci udělat přes Sloneek Intelligence, krátce to ukaž („Na
+     tohle se můžete zeptat i AI asistentky Ellie“).
+
+Tipy
+
+     Volit nejčastější scénáře, ne okrajové případy.
+     Mezi scénáři krátké shrnutí („Takhle snadno… A teď se podíváme na…“).
+     Funkce, které se do videa nevejdou, zmínit jednou větou a odkázat na článek nebo další
+     video.
+
+
+Část 4: Pohled manažera a zaměstnance (cca 1 min)
+Cíl: HR ví, co uvidí a udělají ostatní role, a dokáže jim modul představit. Zařaď, když se
+pohled role liší od admina; jinak stačí jedna věta v závěru.
+
+Jak to natočit
+
+     Přepni se na demo účet dané role (nebo použij náhled uživatele, pokud ho aplikace má)
+     a ukaž to na obrazovce popiskem: „Pohled zaměstnance“ / „Pohled manažera“.
+     Naváž na scénář z části 3, ať je vidět celý tok: zaměstnanec požádá → manažer schválí
+     → HR vidí v přehledu.
+     Ukaž i mobilní aplikaci, pokud ji v modulu zaměstnanci běžně používají (např. píchnutí
+     docházky).
+
+
+
+
+                                                                                         Page 5 of 13
+Kostra videonávodů k modulům Sloneek
+
+
+
+
+  Role                      Co ukazujeme                             Příklad
+
+  Zaměstnanec               Co vidí, co může sám udělat, kde najde   Podá žádost o dovolenou, vidí
+                            své údaje                                zbývající dny
+
+  Manažer                   Jak dostane notifikaci, co schvaluje,    Schválí žádost, vidí týmový
+                            jaký má přehled o týmu                   kalendář
+
+  HR / admin                Souhrnný výsledek za firmu               Report nepřítomností pro mzdy
+
+
+Vzorová věta: „A jak to vypadá na druhé straně? Přepnu se na účet manažera. Tady nahoře
+vidím notifikaci, ž Petr žádá o dovolenou. Jedním kliknutím ji schválím a Petr hned dostane
+potvrzení.“
+
+
+
+Část 5: Závěr (cca 30 s)
+Cíl: divák si odnese hlavní přínos a ví, co udělat jako další krok.
+
+Struktura – pravidlo 3×1
+
+ 1. Jedna věta shrnutí: co divák teď umí.
+ 2. Jeden přínos: proč se to vyplatí (čas, přehled, spokojenost lidí).
+ 3. Jeden další krok: konkrétní výzva k akci + kde najde pomoc.
+
+Opakující se prvky každého závěru
+
+     „Tip na závěr“ – jeden méně známý trik k modulu (zkratka, AI příkaz, chytřé nastavení).
+     Dává divákům důvod dokoukat až do konce.
+     Most na další video – navázání na související modul (Docházka → Podklady pro mzdy,
+     Nábor → HR automatizace / onboarding).
+     Kde hledat pomoc – AI asistentka Ellie v pravém dolním rohu, Centrum nápovědy,
+     onboarding portál a živá podpora („mluvit s podporou“).
+     Závěrečná karta – logo, odkaz na onboarding portál, náhled dalšího videa.
+
+Vzorové závěry (vyber styl a drž ho ve všech videech)
+
+
+    A) Věcný: „A je to. Teď umíte nastavit absence, schvalovat žádosti a máte přehled o
+    celém týmu na jednom místě. Na závěr tip: propojte si Sloneek s Google nebo Outlook
+    kalendářem a schválené dovolené se vám propišou i tam. V dalším videu se podíváme
+    na docházku.“
+
+
+
+
+                                                                                                   Page 6 of 13
+Kostra videonávodů k modulům Sloneek
+
+
+
+
+    B) S nadhledem: „Gratuluji, právě jste si ušetřili hodiny přepisování tabulek. Kdyby
+    něco nefungovalo, zeptejte se Ellie, nebo nám napište. Já se zatím jdu podívat, kolik
+    dní dovolené mi zbývá.“
+
+
+    C) S výzvou: „Váš úkol na dnes: vytvořte první typ absence a pošlete odkaz na tohle
+    video svým manažerům. Za pět minut máte hotovo. Uvidíme se v dalším díle.“
+
+Podpis série (návrh): každé video končí stejnou větou, např. „Méně administrativy, víc
+času na lidi. To je Sloneek.“
+
+
+
+Šablona scénáře (k vyplnění pro každý modul)
+Zkopíruj, vyplň a předej AI agentovi. Políčka v hranatých závorkách nahraď.
+
+  # Videonávod: [Název modulu] – [podtitulek]
+
+
+  ## Základní info
+  - Modul / sekce v aplikaci: [např. Řízení času → Nepřítomnosti]
+  - Cílová délka: [např. 6 min]
+  - Průvodce: [jméno, role v týmu Sloneek, rod, AI hlas]
+  - Role ve videu: [admin / manažer / zaměstnanec]
+  - Demo účet a data: [firma, jména person]
+  - Odkazy na nápovědu: [URL článků]
+  - Související videa: [předchozí / následující]
+
+
+  ## 1. Úvod
+  - Hook (bolest z praxe): […]
+  - Co modul je: […]
+  - HR kontext / přínos: […]
+  - Co se divák naučí: […]
+
+
+  ## 2. Nastavení (vynech, pokud není potřeba)
+  - Cesta v menu: […]
+  - Povinné kroky: [krok → vysvětlení → doporučená hodnota]
+  - Doporučená nastavení: […]
+  - Častá chyba, na kterou upozornit: […]
+
+
+  ## 3. Ukázka využití
+  - Situace 1: [příběh] → kroky: […] → výsledek: […]
+  - Situace 2 (volitelně): […]
+  - Reporty / přehledy: […]
+  - AI tip (Sloneek Intelligence): […]
+
+
+
+
+                                                                                       Page 7 of 13
+Kostra videonávodů k modulům Sloneek
+
+
+
+
+  ## 4. Pohled manažera / zaměstnance                     (vynech, pokud se neliší)
+  - Zaměstnanec vidí / dělá: […]
+  - Manažer vidí / dělá: […]
+  - Mobilní aplikace: [ano / ne – co ukázat]
+
+
+  ## 5. Závěr
+  - Shrnutí (1 věta): […]
+  - Tip na závěr: […]
+  - Další krok / výzva: […]
+  - Most na další video: […]
+
+
+
+
+Ukázkový scénář: Absence (Řízení času)
+Vzorový scénář na cca 6 minut, postavený na částech skriptu „Absence“, „Hromadná
+správa absencí“ a „Kalendář absencí, zůstatky a úpravy“. Provází Marie, demo
+zaměstnankyně Eliška, manažer Tomáš. Tučně jsou názvy z aplikace.
+
+
+  Čas         Část                 Na obrazovce                        Namlouvá Marie
+
+  0:00        Úvod                 Úvodní karta „Absence –             „Dovolená v Excelu, nemocenská v
+                                   dovolená bez tabulek“               e-mailu a na konci měsíce
+                                                                       dohledávání pro mzdy? Pojďme to
+                                                                       zjednodušit.“
+
+  0:10        Úvod                 Plocha, kurzor na tlačítku Nová     „V Sloneeku máte dovolené,
+                                   absence                             nemocenské i návštěvy lékaře na
+                                                                       jednom místě. Zaměstnanci žádají
+                                                                       sami, manažer schvaluje a vy máte
+                                                                       data rovnou pro mzdy. Ukážu vám
+                                                                       nastavení, zadání absence a
+                                                                       pohled manažera.“
+
+  0:40        Nastavení            Mezititulek „Než začnete“, složka   „Jedna podmínka předem:
+                                   uživatele → Typ spolupráce a        zaměstnanec musí mít přiřazenou
+                                   finanční podmínky                   pracovní dobu. Bez ní systém
+                                                                       nezná jeho pracovní fond a
+                                                                       absenci zadat nejde.“ [odkaz na
+                                                                       video Pracovní doba]
+
+  0:55        Nastavení            Nastavení / Absence → Přidat,       „Vytvořím novou absenci,
+                                   název Dovolená, barva               pojmenuji ji Dovolená a vyberu
+                                                                       barvu, kterou uvidíte v kalendáři.“
+
+
+
+
+                                                                                                     Page 8 of 13
+Kostra videonávodů k modulům Sloneek
+
+
+
+
+  Čas         Část                 Na obrazovce                        Namlouvá Marie
+
+  1:15        Nastavení            Typ Volno vs. V práci [ZOOM]        „Volno snižuje pracovní fond – to je
+                                                                       právě dovolená. V práci fond
+                                                                       nemění, hodí se třeba pro
+                                                                       návštěvu lékaře.“
+
+  1:35        Nastavení            Jednotka čerpání, roční fond,       „Dovolená se čerpá po dnech a
+                                   Zdravotní důvody, časový limit      půldnech, roční fond máme dvě
+                                                                       stě hodin. A zaměstnanci ji musí
+                                                                       zadat nejpozději sedm dní
+                                                                       předem.“
+
+  2:05        Nastavení            Uložit a automaticky povolit pro    „Uložím a rovnou povolím pro
+                                   všechny uživatele                   všechny, ať ji nemusím přiřazovat
+                                                                       ručně.“
+
+  2:15        Nastavení            Hromadné nastavení absencí,         „Tady upím všem najednou nárok a
+                                   filtr, skrytí sloupců               určím, kdo potřebuje schválení.
+                                                                       Ideální při přechodu na Sloneek
+                                                                       během roku.“
+
+  2:50        Ukázka               Profil Elišky → Přehled absencí     „V profilu Elišky vidím plánované i
+                                                                       ukončené absence a zůstatek –
+                                                                       zbývá jí osmdesát hodin
+                                                                       dovolené.“
+
+  3:20        Ukázka               Nová absence, přepínač „za          „Eliška volala, že je nemocná. Jako
+                                   jiného uživatele“                   administrátorka jí absenci zadám
+                                                                       sama.“
+
+  3:50        Ukázka               Kalendář absencí, filtr týmu,       „V kalendáři hned vidíte, kdo je
+                                   státní svátky                       pryč. Žádné překvapení, že je v
+                                                                       srpnu polovina firmy u moře.“
+
+  4:20        Pohled               Popisek „Pohled zaměstnance“,       „Eliška si dovolenou zadá sama – z
+              rolí                 mobilní aplikace → Nová absence     plochy, z kalendáře nebo z mobilu.
+                                                                       Vybere typ, termín a odešle ke
+                                                                       schválení.“
+
+  4:50        Pohled               Popisek „Pohled manažera“, e-mail   „Tomáš dostane e-mail, otevře
+              rolí                 + sekce Schvalování                 Schvalování a jedním klikem
+                                                                       potvrdí. Eliška má hned odpověď.“
+
+  5:20        Závěr                Shrnutí v bodech na obrazovce       „Teď umíte vytvořit absenci,
+                                                                       nastavit nároky a schvalovat
+                                                                       žádosti.“
+
+
+
+
+                                                                                                      Page 9 of 13
+Kostra videonávodů k modulům Sloneek
+
+
+
+
+  Čas         Část                 Na obrazovce                       Namlouvá Marie
+
+  5:35        Závěr                Profil → propojení kalendáře       „Tip na závěr: propojte si Google
+                                                                      nebo Outlook kalendář a
+                                                                      schválené absence se tam
+                                                                      propišou jako Mimo kancelář.“
+
+  5:50        Závěr                Závěrečná karta + náhled dalšího   „Příště: docházka a příchody.
+                                   videa                              Méně administrativy, víc času na
+                                                                      lidi.“
+
+
+
+
+Mapa videí: ze stávajícího skriptu na samostatná videa
+Stávající skript je jeden souvislý průchod aplikací (cca 90 min). Obsahově pokrývá skoro
+vše, takže nová videa vznikají hlavně rozřezáním a doplněním chybějících částí kostry.
+Návrh: úvodní video + 19 modulových videí (3 z nich lze dál dělit).
+
+
+  #          Video                             Ze skriptu (sekce)           Co doplnit podle kostry
+
+  0          Vítejte v Sloneeku                Intro, Outro                 Zkrátit na 1–2 min,
+             (David + Marie)                                                nabídnout mapu videí místo
+                                                                            „hodiny a půl“
+
+  1          Plocha                            Dashboard – přehled          HR kontext (interní
+                                               aplikace                     komunikace, kudos), závěr
+
+  2          Přidání uživatelů                 Správa uživatelů             Závěr; ukázat aspoň 1
+                                                                            způsob importu klikáním
+
+  3          Složka zaměstnance                Detail uživatele, Osobní     Hook, pohled zaměstnance
+                                               údaje a smlouvy, Absence a   (samoobslužné údaje), závěr
+                                               aktivity, Hodnocení…,
+                                               Historie
+
+  4          Týmy a organizační                Týmy                         Hook, závěr, pohled
+             struktura                                                      manažera
+
+  5          Jaký typ docházky                 Negativní a aktivní          Bez klikání – krátké
+             zvolit                            docházka, Příchody a         vysvětlující video se
+                                               odchody vs. Aktivity         schématem (2 min)
+
+  6          Pracovní doba                     Pracovní doba                Úvod (proč je to krok č. 1),
+                                                                            závěr
+
+  7          Absence                           Absence, Hromadná            Hook a závěr (viz ukázkový
+                                               správa, Kalendář absencí     scénář)
+
+
+
+
+                                                                                                    Page 10 of 13
+Kostra videonávodů k modulům Sloneek
+
+
+
+
+  #          Video                     Ze skriptu (sekce)           Co doplnit podle kostry
+
+  8          Docházka – příchody a     Docházka, Kalendář           HR kontext (evidence
+             odchody                   docházky                     pracovní doby), pohled
+                                                                    manažera, závěr
+
+  9          Aktivity, klienti a       Aktivity, Kalendář aktivit   Hook, dopsat přechod
+             projekty                                               označený červeně, závěr
+
+  10         Nábor (ATS) –             ATS – Úvod, Nastavení        Závěr
+             nastavení a kariérní
+             portál
+
+  11         Nábor (ATS) – nabídky     Nová pracovní nabídka,       Pohled náborového
+             a kandidáti               Správa kandidátů, Shrnutí    manažera
+
+  12         Preboarding               Pre-boarding                 Dopsat část o dokumentech
+                                                                    od nováčka (červená
+                                                                    poznámka), závěr
+
+  13         Onboarding checklisty     Onboarding                   Hook
+
+  14         Pomůcky                   Pomůcky                      Hook
+
+  15         Dokumenty a e-podpis      Dokumenty                    Rozdělit na 2 (šablony /
+                                                                    odeslání a podpis), ověřit
+                                                                    právní tvrzení
+
+  16         Průzkumy a eNPS           Surveys                      Ověřit „ušetříte až 90 %“,
+                                                                    ukázat vyplnění
+                                                                    zaměstnancem
+
+  17         Hodnocení                 Evaluation, Evaluační        Rozdělit na 3 (kompetence /
+                                       dotazníky, Výkonnostní       dotazníky / OKR a KPI), HR
+                                       hodnocení                    kontext
+
+  18         Reporty a podklady        Reporty, Jak vytvořit nový   Pohled manažera, závěr
+             pro mzdy                  report, Úprava reportu
+
+  19         Trust box, wiki a pomoc   Trust box, Wiki…, AI         Hook, závěr celé série
+             (Ellie)                   asistent, help centrum…
+
+
+Moduly z onboarding portálu, které ve skriptu chybí: HR automatizace (workflow),
+Sloneek Intelligence jako AI HR agent (skript ukazuje jen Ellii pro nápovědu) a integrace
+(Google, Outlook, Jira, API – jen zmínka ve složce uživatele).
+
+
+
+
+                                                                                             Page 11 of 13
+Kostra videonávodů k modulům Sloneek
+
+
+
+
+Návrhy ke zlepšení stávajícího skriptu
+Skript je obsahově silný a má osobitou, vtipnou Marii. Nejvíc mu pomůže rozdělení na
+samostatná videa a sjednocení jazyka.
+
+Struktura
+
+ 1. Každé video musí dávat smysl samo. Vyřaď odkazy typu „k tomu se ještě dostaneme“,
+     „jak jsme si ukázali dříve“ a předávání slova mezi Davidem a Marií. Nahraď je odkazem
+     na konkrétní video.
+ 2. Doplnit úvod s hookem. Nejlépe to dělá ATS („Fragmentovaný nábor na různých
+     platformách…“) – stejný vzorec použít u Docházky, Pracovní doby, Týmů a Plochy.
+ 3. Doplnit závěr s jedním dalším krokem. Většina sekcí končí přechodem na další část, ne
+     shrnutím.
+ 4. Ukázat druhou stranu, ne jen ji zmínit. Např. podpis dokumentu zaměstnancem,
+     schválení absence manažerem, vyplnění průzkumu.
+ 5. Vysvětlující části bez klikání (oranžové: negativní vs. aktivní docházka) dát do
+     samostatného krátkého videa se schématem místo obrazovky aplikace.
+ 6. Dlouhé moduly rozdělit: Dokumenty, Hodnocení a ATS mají každý materiál na 10+
+     minut.
+
+Jazyk a hlas
+
+ 1. Jeden průvodce, jeden rod. Marie o sobě jednou říká „chtěla“, jindy „chtěl“ (Reporty).
+     Diváky oslovuje někdy v ženském rodu („byste měly vědět“, „nedávaly pozor“, „jste si
+     všimly“ v Dokumentech), jinde v mužském.
+ 2. Upravit text pro AI hlas: „Haha.“, „Hmmm, dovolená!“, časy (8:20, 15:37) a zkratky
+     přepsat tak, jak se mají vyslovit.
+ 3. Proměnit humor na účet zaměstnanců. Cigaretová pauza a odhlášení z autobusu
+     působí jako šmirování, tedy přesně to, čeho se firmy u docházky bojí. Podobně „až
+     zaměstnance propustíte“ v intru.
+ 4. Méně superlativů: „To je bomba“, „kouzlo v přímém přenosu“, „nesmírně užitečná“ –
+     jeden na video stačí, jinak znějí jako reklama.
+
+Fakta k ověření před natáčením
+
+     „Elektronický podpis je plně v souladu s legislativou EU a eIDAS ready“ – nechat
+     potvrdit, jaký typ podpisu podle eIDAS to je.
+     „Můžete ušetřit až 90 % času“ (Průzkumy) – doložit, nebo změkcit.
+     Absence typu V práci s příkladem „nemocenská“ – zkontrolovat, zda příklad sedí
+     (nemocenská obvykle fond snižuje).
+     Rozdíl „Plý úvazek 0,75“ vs. „75% úvazek“ – sjednotit název.
+
+
+
+
+                                                                                        Page 12 of 13
+Kostra videonávodů k modulům Sloneek
+
+
+
+
+Otevřené poznámky ve skriptu (červeně)
+
+     Dopsat přechod „Pokračujme nyní k nastavení klientů a projektů“
+     Pre-boarding: vložit část o žádosti o dokumenty a přílohy od nováčka
+     Hodnocení: ověřit počet kompetenčních modelů („tři“) v demo účtu
+     Reporty: opravit „chtěl“ na „chtěla“
+
+
+Checklist před publikací
+Obsah
+
+     Divák do 30 s ví, o jaký modul jde a k čemu je
+     Každý klik je okomentovaný (co dělám → co to znamená → proč)
+     Názvy tlačítek a menu odpovídají aktuální verzi aplikace
+     Ukázka stojí na reálné situaci, ne na prohlídce menu
+     Všechna fakta a čísla (vč. právních tvrzení jako eIDAS) jsou ověřená
+     Závěr má jeden jasný další krok a odkaz na další video
+
+Technika
+
+     V záběrech nejsou skutečná osobní data
+     Rozlišení 1080p, čistý prohlížeč, kurzor zvýrazněný
+     Vystřižené načítání a pauzy, délka v rámci 4–8 min
+     Titulky zkontrolované (názvy funkcí, česká diakritika); čísla a zkratky přepsané pro AI
+     hlas; jeden průvodce na video v jednotném rodu, divák oslovený neutrálně
+     Úvodní a závěrečná karta v brandu Sloneek
+
+Publikace
+
+     Kapitoly s časovými značkami v popisu na YouTube
+     Odkazy na nápovědu a onboarding portál v popisu
+     Video vložené do správné sekce onboarding portálu
+     Schváleno vlastníkem modulu (produkt / customer success)
+
+
+
+
+                                                                                      Page 13 of 13
+

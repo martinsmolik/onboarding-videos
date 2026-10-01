@@ -37,6 +37,7 @@ raw.webm               (recorder)
 timing.json            (recorder)
 shots/s01.png ...      (recorder)
 final.mp4, final.srt   (assembler mux)
+chapters.txt           (assembler mux, only when the recipe has parts)
 state.json             (orchestrator)
 ```
 
@@ -57,7 +58,7 @@ Each package: TypeScript, `tsx` runtime, exposes a CLI (`pnpm --filter @svp/<nam
 - **Run order:** `tts` → `record` → `mux`. The recorder paces against `audio/durations.json`, which must hold *real* mp3 durations (ffprobe), never estimates. Silent steps are `0`, not omitted.
 - **Time base:** `timing.json` is in *video* time (t=0 = first frame of raw.webm). The recorder corrects wall-clock drift with a 6 px sync beacon in the bottom-left corner of an 8 px strip below the content (`sync_source: "beacon"`, `beacon_strip_px: 8`; mux crops the strip). Steps are contiguous: `t_end(N) == t_start(N+1)`. `final.mp4` time = recording time + intro card length (2.5 s by default).
 - **CDP screencast mode** (`recorder --cdp`, `pnpm local`): recording attaches to a running, logged-in browser (BrowserOS neo on Martin's Mac), writes `raw.mp4` built from `Page.screencastFrame` timestamps (`sync_source: "screencast"`, `beacon_strip_px: 0`) – video time equals the screencast clock by construction, no beacon. The launch + recordVideo + beacon path above is unchanged. Details: `packages/recorder/README.md`.
-- **External voice:** `recipe.voice.provider: "external"` = mp3s are produced outside the pipeline (Claude via the ElevenLabs connector) into `out/<id>/audio/<stepId>.mp3`; `tts` only measures them and writes the to-do list `audio/manifest.json` (`pnpm voice:manifest`). Missing files fail `tts` with the list.
+- **External voice:** `recipe.voice.provider: "external"` = mp3s are produced outside the pipeline (Claude via the ElevenLabs connector) into `out/<id>/audio/<stepId>.mp3`; `tts` only measures them and writes the to-do list `audio/manifest.json` (`pnpm voice:manifest`); voice its `tts_text` (= `narration_tts ?? narration`), never `subtitle`. Missing files fail `tts` with the list.
 - **Placeholders:** `{{RUN_ID}}`, `{{ENV:NAME}}`, `{{DAY:+Nd}}`, `{{DAY:+Nd+M}}`, `{{DATE:+Nd[+M]:FMT}}` are substituted by the recorder right before replay (never in narration).
 - **Exit codes:** recorder exits 0 with failed steps (status lives in timing.json), 1 on crash. Orchestrator heals only when timing.json lists `failed` steps.
 - **Heal:** `explorer --heal out/<id>/timing.json` rewrites `out/<id>/recipe.json` in place and bumps `version`. `tts` is cached per step (narration + provider + voice), so re-running after heal is cheap.
@@ -65,10 +66,21 @@ Each package: TypeScript, `tsx` runtime, exposes a CLI (`pnpm --filter @svp/<nam
 - **Ids:** `out/<id>` is the pipeline id; `recipe.id` may differ (it goes into the YouTube description). Keep them equal in practice.
 - **Paths:** stages resolve relative paths against the directory pnpm was invoked from (`INIT_CWD`); the orchestrator always passes absolute paths.
 - **Login on the real tenant:** explorer saves `out/<id>/storage-state.json` (+ `login-actions.json` with `{{SLONEEK_DEMO_USER}}` placeholders); recorder uses `recipe.start.storage_state`. Credentials only ever come from env.
+- **Recipe v2 fields (brief „Kostra videonávodů“, all optional, old recipes unchanged):** step `part` (int, inherited by
+  later steps) + `part_title` → 1.5 s interstitial card "`2 / Nastavení`" at every part change and `out/<id>/chapters.txt`
+  (YouTube chapters in `final.mp4` time); top-level `interstitials` / `chapters` (default `true`). Step `narration_tts`
+  (spoken; TTS, external manifest `tts_text`, cache + stale detection) and `subtitle` (shown in `final.srt`), both
+  default `narration`. Actions `zoom` (`selector`, `value` scale default `"1.6"`, `hold_ms` default 2500) and `fill`
+  (whole value at once); `type` defaults to 35 ms/char, `speed: "fast"` = 15 ms (CDP screencast; the recordVideo + beacon path keeps 80 / 40 ms). `timing.json` steps carry `part` /
+  `part_title` and `zooms[]` (video time). Final time = recording time + intro + 1.5 s per card before the step.
+  mux: `--no-interstitials`, `--no-chapters`, `--intro-image <png> [--intro-sec 3]`, `--outro-image <png> [--outro-sec 3]`
+  (also via `pnpm local`). Sample: `samples/recipe.parts-demo.json` (demo app, 3 parts).
 - **YouTube:** the API cannot replace a video's media. `--replace <oldId>` uploads a new video, sets the old one private and writes `out/video-map.json` – the portal has to swap the link. Uploads from unverified API projects are forced to *private*; flip to unlisted in Studio or get the project audited.
 
 ## Video look (recorder + assembler)
 
+- **Parts.** Interstitial card per part change (1.5 s, brand colours, "`<part> / <part_title>`" + video title), `chapters.txt` for the YouTube description, thumbnails as intro/outro stills (`--intro-image` / `--outro-image`). Fonts: `BRAND_FONT[_BOLD]` > Inter (if installed) > DejaVu Sans.
+- **Zoom.** `zoom` action = CSS scale on `<html>` (400 ms in, hold, 400 ms out), cursor stays normal size on the zoomed element, beacon unaffected. Origin = element centre, shifted only to keep the zoomed element on screen; scale clamped to fit. Details: `packages/recorder/README.md` → Zoom.
 - **Intro / outro cards.** `assembler mux` wraps the recording in a 2.5 s title card (`recipe.title` + "Sloneek · onboarding") and a 2 s "sloneek.com" card, generated with ffmpeg `color` + `drawtext` (DejaVu Sans) and joined with `concat`. Default on when the recipe has a `title`; `--intro off` / `--outro off` to disable. Colours: env `BRAND_BG` (`#1f2a44`), `BRAND_FG` (`#ffffff`). All audio offsets and SRT cues are shifted by the intro length; `timing.json` stays in recording time.
 - **Offline speech.** Without `ELEVENLABS_API_KEY` the tts default is now `espeak` (espeak-ng, voice from `recipe.lang`, 150 wpm, linear alignment over the measured mp3) – intelligible narration instead of a tone. `--provider mock` still gives the silent tone; `--provider elevenlabs` needs the key.
 - **Beacon strip.** The recorder records 8 px taller than the recipe viewport (1920×1088 for 1920×1080) and keeps the sync beacon in that extra opaque strip; `timing.beacon_strip_px: 8` tells mux to `crop=W:H:0:0`. The beacon therefore never appears in `final.mp4`, and old timings without the field still work (no crop). The recipe viewport remains the content size.

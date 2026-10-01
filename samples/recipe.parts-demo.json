@@ -1,0 +1,77 @@
+{
+  "id": "parts-demo",
+  "version": 1,
+  "title": "Ukázka: části, zoom a rychlé vyplnění",
+  "lang": "cs",
+  "app_version": "demo-app",
+  "viewport": { "width": 1920, "height": 1080 },
+  "start": { "url": "http://localhost:4173/index.html" },
+  "voice": { "provider": "external" },
+  "chapters": true,
+  "interstitials": true,
+  "steps": [
+    {
+      "id": "s01",
+      "part": 1,
+      "part_title": "Úvod",
+      "narration": "Dobrý den, jsem Marie ze Sloneeku. V tomhle krátkém videu vám ukážu, jak se video skládá ze tří částí.",
+      "actions": [],
+      "hold_after_ms": 500
+    },
+    {
+      "id": "s02",
+      "narration": "Všechny moduly najdete v levém menu. Přiblížím si položku Docházka, tu budeme potřebovat hned.",
+      "actions": [
+        { "type": "hover", "selector": "[data-testid=nav-attendance]" },
+        { "type": "zoom", "selector": "[data-testid=nav-attendance]", "value": "1.8", "hold_ms": 2000 }
+      ]
+    },
+    {
+      "id": "s03",
+      "part": 2,
+      "part_title": "Přehled docházky",
+      "narration": "Kliknu na Docházka. Tady vidím příchody a odchody všech kolegů za dnešní den.",
+      "actions": [
+        { "type": "click", "selector": "[data-testid=nav-attendance]" }
+      ],
+      "expect": { "visible": "[data-testid=page-attendance]" }
+    },
+    {
+      "id": "s04",
+      "narration": "Přiblížím si odpracované hodiny. To je hlavní KPI docházky a hned vidím, kdo má přesčas.",
+      "narration_tts": "Přiblížím si odpracované hodiny. To je hlavní kej pí áj docházky a hned vidím, kdo má přesčas.",
+      "actions": [
+        { "type": "zoom", "selector": "[data-testid=page-attendance] td:has-text(\"8,25\")", "value": "1.6", "hold_ms": 2500 }
+      ]
+    },
+    {
+      "id": "s05",
+      "part": 3,
+      "part_title": "Žádost o absenci",
+      "narration": "Teď zadám absenci. Kliknu na Absence a potom na tlačítko Nová absence.",
+      "actions": [
+        { "type": "click", "selector": "[data-testid=nav-absences]" },
+        { "type": "click", "selector": "[data-testid=btn-new-absence]" }
+      ],
+      "expect": { "visible": "[data-testid=absence-form]" }
+    },
+    {
+      "id": "s06",
+      "narration": "Datum napíšu rychle a delší poznámku vložím najednou, abyste nemuseli sledovat každé písmeno.",
+      "actions": [
+        { "type": "type", "selector": "[data-testid=absence-from]", "value": "1. 10. 2026", "speed": "fast" },
+        { "type": "fill", "selector": "[data-testid=absence-note]", "value": "Rodinná dovolená na horách – zástup drží Petr Svoboda, naléhavé věci řešte s ním." }
+      ]
+    },
+    {
+      "id": "s07",
+      "narration": "Odešlu žádost ke schválení. Nadřízený dostane upozornění do dvaceti čtyř hodin.",
+      "subtitle": "Odešlu žádost ke schválení. Nadřízený dostane upozornění do 24 hodin.",
+      "actions": [
+        { "type": "click", "selector": "[data-testid=absence-submit]" }
+      ],
+      "expect": { "visible": "[data-testid=toast-success]" },
+      "hold_after_ms": 1500
+    }
+  ]
+}

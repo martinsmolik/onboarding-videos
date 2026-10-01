@@ -1,0 +1,978 @@
+{
+  "id": "absence-cs",
+  "version": 1,
+  "title": "Absence – dovolená bez tabulek",
+  "lang": "cs",
+  "app_version": "preprod-2026-10-01",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2"
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "bF7C2fCv7Zf30iT84wZ1",
+    "model_id": "eleven_multilingual_v2"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "steps": [
+    {
+      "id": "s01",
+      "part": 1,
+      "part_title": "Úvod",
+      "narration": "Dovolená v Excelu, nemocenská v e-mailu a na konci měsíce dohledávání pro mzdy? Pojďme to zjednodušit. Jsem Marie z týmu Sloneek a dnes vás provedu modulem Absence.",
+      "narration_tts": "Dovolená v excelu, nemocenská v e-mailu a na konci měsíce dohledávání pro mzdy? Pojďme to zjednodušit. Jsem Marie z týmu Sloník a dnes vás provedu modulem Absence.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/absence-overview\"]",
+        "url_contains": "/app/dashboard"
+      },
+      "hold_after_ms": 500
+    },
+    {
+      "id": "s02",
+      "narration": "V Sloneeku máte dovolené, nemocenské i sick days na jednom místě. Zaměstnanci o volno žádají sami, manažer žádost schválí a vy máte data rovnou připravená pro mzdy.",
+      "narration_tts": "V Sloníku máte dovolené, nemocenské i sik dejs na jednom místě. Zaměstnanci o volno žádají sami, manažer žádost schválí a vy máte data rovnou připravená pro mzdy.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/absence-overview\"]",
+          "before_ms": 1500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/absence-overview\"]"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "narration": "Zákoník práce dává zaměstnancům nárok nejméně na čtyři týdny dovolené v roce. Když zůstatky počítá systém, odpadá přepisování i chyby. Za pár minut si ukážeme nastavení, zadání absence a přehledy pro mzdy.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "h3:text-is(\"Přehled - Následujících 14 dní\")",
+          "before_ms": 1500
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "part": 2,
+      "part_title": "Nastavení",
+      "narration": "Nejdřív si modul připravíme. Jedna podmínka předem: zaměstnanec musí mít přiřazenou pracovní dobu. Bez ní systém nezná jeho pracovní fond a absenci mu nespočítá. Návod najdete ve videu Pracovní doba.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/settings/dashboard\"]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "highlight",
+          "selector": "a[href=\"/app/settings/working-hours\"]:text-is(\"Zobrazit\")",
+          "before_ms": 1200
+        }
+      ],
+      "expect": {
+        "visible": "a[href=\"/app/settings/absence/events\"]:text-is(\"Zobrazit\")",
+        "url_contains": "/app/settings/dashboard"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "V Nastavení otevřu Absence. Tady jsou všechny typy absencí, které firma používá. Přístup sem má administrátor nebo HR. Pozor, seznam ukazuje jen aktivní typy, vypnuté najdete přes filtr nahoře.",
+      "narration_tts": "V Nastavení otevřu Absence. Tady jsou všechny typy absencí, které firma používá. Přístup sem má administrátor nebo há er. Pozor, seznam ukazuje jen aktivní typy, vypnuté najdete přes filtr nahoře.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "a[href=\"/app/settings/absence/events\"]:text-is(\"Zobrazit\")"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "highlight",
+          "selector": "h5:text-is(\"Události absence\")"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-row-column-filter .ag-header-cell[aria-colindex=\"4\"] select.common_select"
+        }
+      ],
+      "expect": {
+        "visible": ".ag-row a.redirect_column:text-is(\"Dovolená\")",
+        "url_contains": "/app/settings/absence/events"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "Kliknu na Přidat a založím nový typ. Interní název bude Dovolená – ukázka. Vyplním i název, který uvidí zaměstnanci, česky, slovensky a anglicky.",
+      "narration_tts": "Kliknu na Přidat a založím nový typ. Interní název bude Dovolená, ukázka. Vyplním i název, který uvidí zaměstnanci, česky, slovensky a anglicky.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "a[data-cy=addAbsenceButton]:text-is(\"Přidat\")"
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "type",
+          "selector": "input[data-cy=nameInput]",
+          "value": "Dovolená – ukázka",
+          "speed": "fast"
+        },
+        {
+          "type": "type",
+          "selector": "input[data-cy=translatedNameInput]",
+          "value": "Dovolená – ukázka",
+          "speed": "fast"
+        },
+        {
+          "type": "click",
+          "selector": "p.cursor_pointer:text-is(\"Zobraz překlad\")"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "type",
+          "selector": "slnk-common-translates-form-group-inputs div.ng-trigger > div.form-group:nth-child(7) > input",
+          "value": "Dovolenka – ukážka",
+          "speed": "fast"
+        },
+        {
+          "type": "type",
+          "selector": "slnk-common-translates-form-group-inputs div.ng-trigger > div.form-group:nth-child(2) > input",
+          "value": "Vacation – demo",
+          "speed": "fast"
+        }
+      ],
+      "expect": {
+        "visible": "h5:text-is(\"Nová absence\")",
+        "url_contains": "/app/settings/absence/event/new/general"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "Teď přijde volba, která ovlivní mzdy: typ. Volno zkracuje odpracovanou dobu, to je dovolená nebo nemocenská. V práci odpracovanou dobu nemění, hodí se třeba pro sick day, který firma platí jako běžnou práci. Pro dovolenou vyberu Volno.",
+      "narration_tts": "Teď přijde volba, která ovlivní mzdy: typ. Volno zkracuje odpracovanou dobu, to je dovolená nebo nemocenská. V práci odpracovanou dobu nemění, hodí se třeba pro sik dej, který firma platí jako běžnou práci. Pro dovolenou vyberu Volno.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=typeSelect] button"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-pane nb-option[data-cy=type_vacation]"
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-pane nb-option[data-cy=type_in_work]"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane nb-option[data-cy=type_vacation]"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "zoom",
+          "selector": "nb-select[data-cy=typeSelect]",
+          "value": "1.6",
+          "hold_ms": 2000
+        }
+      ],
+      "expect": {
+        "visible": "nb-select[data-cy=typeSelect] button:text-is(\"Volno (krátí odpracovanou dobu)\")"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "U Časové jednotky čerpání vyberu Dny a půl dny, aby si lidé mohli vzít i půlden. Zapnu Roční fond, nastavím dvacet dní a nevyčerpané dny se převedou do dalšího roku.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=unitTypeSelect] button"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane nb-option[data-cy=unitType_days_and_half_days]"
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-checkbox[data-cy=annualFundCheckbox] .custom-checkbox"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "type",
+          "selector": "input[data-cy=yearlyEntitlementInput]",
+          "value": "20",
+          "speed": "fast"
+        },
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=fundUnitSelect] button"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane nb-option[data-cy=fundUnit_day]"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-checkbox[data-cy=unusedUnitsTransferCheckbox] .custom-checkbox"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "zoom",
+          "selector": "input[data-cy=yearlyEntitlementInput]",
+          "value": "1.6",
+          "hold_ms": 1800
+        }
+      ],
+      "expect": {
+        "visible": "nb-checkbox[data-cy=healthReasonsCheckbox]"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "Zdravotní důvody nechám vypnuté. Ty zaškrtnete u nemocenské nebo ošetřování člena rodiny, které se počítají v kalendářních dnech. V Časovém omezení nastavím sedm, takže dovolenou je potřeba zadat aspoň týden předem.",
+      "actions": [
+        {
+          "type": "zoom",
+          "selector": "nb-checkbox[data-cy=healthReasonsCheckbox]",
+          "value": "1.8",
+          "hold_ms": 2500
+        },
+        {
+          "type": "click",
+          "selector": "nb-checkbox[data-cy=eventTimeoutCheckbox] .custom-checkbox",
+          "before_ms": 1500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "fill",
+          "selector": "input[data-cy=eventTimeoutInput]",
+          "value": "7"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-checkbox[data-cy=eventTimeoutCheckbox]"
+        }
+      ],
+      "expect": {
+        "visible": "input[data-cy=eventTimeoutInput]"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Pozor na častou chybu. Časovou jednotku a roční fond po vytvoření typu už nezměníte. Když se spletete, typ nemažte, ale deaktivujte ho, aby zůstala historie, a založte nový.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "nb-select[data-cy=unitTypeSelect]",
+          "before_ms": 800
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-checkbox[data-cy=annualFundCheckbox]"
+        }
+      ],
+      "expect": {
+        "visible": "button[data-cy=submitButton]:not([disabled])"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "Při ukládání máte dvě tlačítka. Uložit pro všechny uživatele typ povolí celé firmě. Jinak se třeba slovenským kolegům objeví česká dovolená. Proto stačí kliknout jen na Uložit. Já už mám typ uložený, takže formulář zavřu a tady v seznamu ho vidíte.",
+      "actions": [
+        {
+          "type": "zoom",
+          "selector": "button[data-cy=allCompanyButton]:text-is(\"Uložit pro všechny uživatele\")",
+          "value": "1.6",
+          "hold_ms": 2500
+        },
+        {
+          "type": "highlight",
+          "selector": "button[data-cy=submitButton]:text-is(\"Uložit\")",
+          "before_ms": 1200
+        },
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Zpět\")",
+          "before_ms": 1500
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-row a.redirect_column:text-is(\"Dovolená – ukázka\")"
+        }
+      ],
+      "expect": {
+        "visible": "h5:text-is(\"Události absence\")",
+        "url_contains": "/app/settings/absence/events"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Komu typ patří a s jakým nárokem, určíte v Hromadném nastavení absencí. Každý člověk tu má řádek pro každý typ absence. Ve sloupci Povolená mu absenci zpřístupníte a ve sloupci Nutné schválení určíte, jestli ji musí schvalovat nadřízený.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/settings/absence/collective-claims\"]"
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        },
+        {
+          "type": "type",
+          "selector": "input[aria-label=\"Jméno Filter Input\"]",
+          "value": "Claver",
+          "speed": "fast"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=allowed]"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=approval_needed]"
+        }
+      ],
+      "expect": {
+        "visible": ".ag-cell[col-id=\"user.full_name\"]:text-is(\"Claver Thomas\")",
+        "url_contains": "/app/settings/absence/collective-claims"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "Přecházíte na Sloneek během roku? Pak vyplňte hlavně Fond pro tento rok, tedy kolik dní člověku letos náleží. Individuální fond nechte jen pro skutečné výjimky, třeba delší dovolenou pro vedení.",
+      "narration_tts": "Přecházíte na Sloník během roku? Pak vyplňte hlavně Fond pro tento rok, tedy kolik dní člověku letos náleží. Individuální fond nechte jen pro skutečné výjimky, třeba delší dovolenou pro vedení.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".ag-row[row-index=\"0\"] .ag-cell[col-id=\"user.full_name\"]"
+        },
+        {
+          "type": "press",
+          "value": "End"
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=transformed_first_yearly_claim]"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=transformed_yearly_claim]"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=transformed_claimed]"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=transformed_transferred_from_previous_year]"
+        }
+      ],
+      "expect": {
+        "visible": ".ag-header-cell[col-id=transformed_first_yearly_claim]"
+      }
+    },
+    {
+      "id": "s14",
+      "part": 3,
+      "part_title": "Ukázka využití",
+      "narration": "A teď do praxe. Eliška z obchodu si chce vzít tři dny dovolené. Zaměstnanec si absenci zadá sám a já vám to ukážu na svém účtu, Eliška uvidí totéž. V levém menu otevřu Moje absence.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/absence-overview\"]",
+          "before_ms": 4500
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ],
+      "expect": {
+        "visible": "button[data-cy=addAbsenceButton]:text-is(\"Nová absence\")",
+        "url_contains": "/app/my-profile/absence-overview"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Nahoře vidíte zůstatky podle typů, tedy kolik dovolené ještě zbývá. Pod nimi jsou nadcházející a už ukončené absence.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".col-12.d-flex > .row"
+        },
+        {
+          "type": "zoom",
+          "selector": ".remaining-absence-title:text-is(\"🏖️ Dovolená (denní fond)\")",
+          "value": "1.8",
+          "hold_ms": 2200
+        },
+        {
+          "type": "highlight",
+          "selector": "h6:text-is(\"Nadcházející absence\")"
+        },
+        {
+          "type": "highlight",
+          "selector": "h6:text-is(\"Již ukončené absence\")"
+        }
+      ]
+    },
+    {
+      "id": "s16",
+      "narration": "Kliknu na Nová absence a v poli Absence vyberu dovolenou. V nabídce jsou jen typy, které má daný člověk povolené.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "button[data-cy=addAbsenceButton]:text-is(\"Nová absence\")"
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=absenceEventsAutocomplete] input"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-pane [data-cy=autocompleteSearchInput]",
+          "value": "Dovolená (denní fond)",
+          "speed": "fast"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane slnk-common-autocomplete-option"
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container [data-cy=dateFromInput]"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "V kalendáři vyberu první a poslední den. Kdyby šlo jen o dopoledne, přepnu nahoře na Půlden.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=dateFromInput]"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-view-mode button"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-year-cell:text-is(\"2026\")"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-picker-row:nth-child(3) nb-calendar-month-cell:nth-child(3)"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-day-cell:not(.bounding-month):text-is(\"23\")"
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=dateToInput]"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-day-cell:not(.bounding-month):text-is(\"25\")"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container nb-toggle[formcontrolname=fullDay]"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container nb-icon[icon=\"check\"]"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Sloneek hned zkontroluje, jestli se absence s ničím nepřekrývá, a ukáže, kolik dní se odečte z fondu. Kdyby něco nesedělo, tlačítko Vytvořit zůstane neaktivní.",
+      "narration_tts": "Sloník hned zkontroluje, jestli se absence s ničím nepřekrývá, a ukáže, kolik dní se odečte z fondu. Kdyby něco nesedělo, tlačítko Vytvořit zůstane neaktivní.",
+      "actions": [
+        {
+          "type": "zoom",
+          "selector": "nb-dialog-container .info:has(nb-icon[icon=\"check\"])",
+          "value": "1.8",
+          "hold_ms": 2500
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container [data-cy=submitButton]:not([disabled])"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container [data-cy=submitButton]:not([disabled])"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "Do poznámky napíšu, kdo mě zastoupí, ať to kolegové vědí. Kliknu na Vytvořit.",
+      "actions": [
+        {
+          "type": "fill",
+          "selector": "nb-dialog-container [data-cy=noteTextarea]",
+          "value": "Zastupuje mě Petr."
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=submitButton]:text-is(\"Vytvořit\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ],
+      "expect": {
+        "visible": ".upcoming-container span:text-is(\"23.11.2026 - 25.11.2026\")"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Absence je mezi nadcházejícími. Jako administrátorka mám schválení automaticky. Elišce by žádost odešla nadřízenému a do schválení by svítila oranžově. Po schválení zezelená a teprve pak se odečte ze zůstatku.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".upcoming-container span:text-is(\"23.11.2026 - 25.11.2026\")"
+        },
+        {
+          "type": "highlight",
+          "selector": "h6:text-is(\"Nadcházející absence\")"
+        }
+      ]
+    },
+    {
+      "id": "s21",
+      "narration": "Druhá častá situace: Eliška ráno volá, že je nemocná. Jako administrátorka jí nemocenskou zadám sama. Kliknu na Nová absence a posunu přepínač na Jiný uživatel.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "button[data-cy=addAbsenceButton]:text-is(\"Nová absence\")",
+          "before_ms": 1500
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container nb-toggle[data-cy=differentUserToggle]",
+          "before_ms": 1500
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container [data-cy=usersAutocomplete] input"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "V poli Uživatel vyberu kolegyni, typ Nemocenská a dnešní den. Tlačítkem Vytvořit nemocenskou uložíte a hned je v kalendáři i v podkladech pro mzdy.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=usersAutocomplete] input"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-pane [data-cy=autocompleteSearchInput]",
+          "value": "Kristýna",
+          "speed": "fast"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane slnk-common-autocomplete-option:text-is(\"Nová Kristýna\")"
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=absenceEventsAutocomplete] input"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-pane [data-cy=autocompleteSearchInput]",
+          "value": "Nemocenská",
+          "speed": "fast"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane slnk-common-autocomplete-option"
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=dateFromInput]"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-day-cell.today"
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container [data-cy=submitButton]:text-is(\"Vytvořit\")"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=closeButton]",
+          "before_ms": 800
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "h6:text-is(\"Nadcházející absence\")"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "Kdo je zrovna pryč? V menu Kalendáře otevřu kalendář Absence. Můžu filtrovat podle týmu nebo lidí a hned vidím, jestli se dovolené v týmu nepřekrývají.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a.navigation_item:text-is(\"Kalendáře\")"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/events/absence\"]"
+        },
+        {
+          "type": "navigate",
+          "value": "https://app-pre-production.sloneek.com/app/events/absence?view=resourceTimelineMonth&from=01.11.2026"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "highlight",
+          "selector": "input[placeholder=\"Rychlý pohled\"]"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=filterUsersAutocomplete] input"
+        },
+        {
+          "type": "highlight",
+          "selector": "full-calendar .fc-datagrid-cell.fc-resource:text-is(\"Claver Thomas\")"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=fullCalendar]",
+        "url_contains": "from=01.11.2026"
+      }
+    },
+    {
+      "id": "s24",
+      "narration": "Zbývají podklady pro mzdy. Ve Vlastních reportech otevřu Komplexní mzdový report. Vidíte hrubý pracovní fond, délku absencí a čistý pracovní fond, tedy co zbude po odečtení volna. Proto tolik záleží na volbě Volno nebo V práci.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/custom-reports\"]"
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "highlight",
+          "selector": "a[href=\"/app/custom-reports/579\"]"
+        },
+        {
+          "type": "navigate",
+          "value": "https://app-pre-production.sloneek.com/app/custom-reports/579"
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        },
+        {
+          "type": "highlight",
+          "selector": "th[data-cy=\"crDetail.grid.header.salary_summary_working_fund_gross_hour\"]"
+        },
+        {
+          "type": "highlight",
+          "selector": "th[data-cy=\"crDetail.grid.header.salary_summary_absence_vacation_duration_hour\"]"
+        },
+        {
+          "type": "highlight",
+          "selector": "th[data-cy=\"crDetail.grid.header.salary_summary_working_fund_net_hour\"]"
+        }
+      ],
+      "expect": {
+        "visible": "h1:text-is(\"Komplexní mzdový report\")",
+        "url_contains": "/app/custom-reports/579"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "Pro mzdovou účetní si report omezte na aktivní zaměstnance. Pozor, zaškrtnutí sloupce Aktivní vlevo ještě nefiltruje, hodnotu Ano zvolte přes ikonu filtru u sloupce Aktivní v tabulce. Pak report vyexportujete do Excelu.",
+      "narration_tts": "Pro mzdovou účetní si report omezte na aktivní zaměstnance. Pozor, zaškrtnutí sloupce Aktivní vlevo ještě nefiltruje, hodnotu Ano zvolte přes ikonu filtru u sloupce Aktivní v tabulce. Pak report vyexportujete do excelu.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-report-columns-selection-section-item label:text-is(\"Aktivní\")"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=\"crDetail.grid.filterIcon.employee_active\"]"
+        },
+        {
+          "type": "highlight",
+          "selector": "button:text-is(\"Export\")",
+          "before_ms": 1000
+        }
+      ],
+      "expect": {
+        "visible": "th[data-cy=\"crDetail.grid.header.employee_active\"]"
+      }
+    },
+    {
+      "id": "s26",
+      "part": 5,
+      "part_title": "Závěr",
+      "narration": "A je to. Teď umíte nastavit typ absence, přidělit nároky a zadat dovolenou i nemocenskou. Ušetříte přepisování tabulek a mzdová účetní dostane data, na která se může spolehnout.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/dashboard\"]"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "highlight",
+          "selector": "h3:text-is(\"Absence\")",
+          "before_ms": 800
+        }
+      ],
+      "expect": {
+        "visible": "h1:text-is(\"Vítejte\")",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "Jak žádost schválí manažer v sekci Schvalování, ukážeme v samostatném videu. Váš úkol na dnes: projděte typy absencí se mzdovou účetní a lidem doplňte Fond pro tento rok.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/events/approvals\"]"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/events/approvals\"]"
+        }
+      ]
+    },
+    {
+      "id": "s28",
+      "narration": "Tip na závěr: v Nastavení rozhraní si v části Propojené účty připojte Google nebo Microsoft. Schválené absence se vám pak propíšou do kalendáře Google nebo Outlook a nemusíte je zadávat dvakrát.",
+      "narration_tts": "Tip na závěr: v Nastavení rozhraní si v části Propojené účty připojte gůgl nebo majkrosoft. Schválené absence se vám pak propíšou do kalendáře gůgl nebo autluk a nemusíte je zadávat dvakrát.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/interface-settings\"]"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "highlight",
+          "selector": "h6:text-is(\"Propojené účty\")"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-common-user-detail-my-integrations button:text-is(\"Sign in with Microsoft\")"
+        }
+      ],
+      "expect": {
+        "visible": "h6:text-is(\"Propojené účty\")",
+        "url_contains": "/app/my-profile/interface-settings"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "Kdyby něco nešlo, zeptejte se Ellie vpravo dole nebo mrkněte do Centra nápovědy. Příště se podíváme na docházku a příchody. Já se zatím jdu podívat, kolik dní dovolené mi zbývá. Méně administrativy, víc času na lidi. To je Sloneek.",
+      "narration_tts": "Kdyby něco nešlo, zeptejte se Elí vpravo dole nebo mrkněte do Centra nápovědy. Příště se podíváme na docházku a příchody. Já se zatím jdu podívat, kolik dní dovolené mi zbývá. Méně administrativy, víc času na lidi. To je Sloník.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/absence-overview\"]",
+          "before_ms": 2500
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".remaining-absence-title:text-is(\"🏖️ Dovolená (denní fond)\")",
+          "before_ms": 1500
+        }
+      ],
+      "expect": {
+        "visible": ".remaining-absence-title:text-is(\"🏖️ Dovolená (denní fond)\")",
+        "url_contains": "/app/my-profile/absence-overview"
+      },
+      "hold_after_ms": 1500
+    }
+  ]
+}

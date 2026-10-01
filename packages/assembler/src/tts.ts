@@ -3,6 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { probeDurationMs, readJson, resolvePath, run, which } from "./util.js";
 import { acceptExternal } from "./external.js";
+import { ttsText } from "./parts.js";
 
 export interface Alignment {
   characters: string[];
@@ -234,9 +235,9 @@ export async function tts(opts: TtsOptions): Promise<TtsResult> {
   let chars = 0;
   log(`[tts] provider=${provider}${provider === "elevenlabs" ? ` model=${modelId} voice=${voiceId}` : provider === "espeak" ? ` voice=${espeakVoiceId} wpm=${ESPEAK_WPM}` : provider === "say" ? ` voice=${say!.voice} rate=${say!.rate}` : ""}`);
 
-  for (const step of recipe.steps as { id: string; narration: string }[]) {
+  for (const step of recipe.steps as { id: string; narration: string; narration_tts?: string }[]) {
     const id = step.id;
-    const text = (step.narration ?? "").trim();
+    const text = ttsText(step); // narration_tts ?? narration – what is spoken (and the cache key in <id>.txt)
     const mp3 = path.join(audioDir, `${id}.mp3`);
     const txt = path.join(audioDir, `${id}.txt`);
     const metaF = path.join(audioDir, `${id}.meta.json`);

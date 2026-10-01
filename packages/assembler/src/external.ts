@@ -6,7 +6,10 @@
 //   4. keeps a supplied audio/alignment/<stepId>.json (ElevenLabs with-timestamps format) or writes a
 //      linear one over the measured duration (for SRT cues).
 //
-// Bookkeeping per accepted step: audio/<id>.txt (narration the file was accepted for) and
+// The text to voice is step.narration_tts ?? step.narration ("tts text"); step.subtitle ?? narration is
+// only listed for orientation (it goes to the SRT, never to the voice).
+//
+// Bookkeeping per accepted step: audio/<id>.txt (tts text the file was accepted for) and
 // audio/<id>.meta.json ({provider:"external", source, alignment:"external"|"linear"}).
 // A file is STALE (= treated as missing) when the narration changed and the audio file is not newer
 // than the .txt written when it was accepted. An mp3 that another provider synthesized
@@ -15,12 +18,18 @@ import fs from "node:fs";
 import path from "node:path";
 import type { Alignment } from "./tts.js";
 import { probeDurationMs, readJson, run } from "./util.js";
+import { subtitleText, ttsText } from "./parts.js";
 
 export const EXTERNAL_EXTS = [".mp3", ".wav", ".m4a"] as const;
 
 export type ManifestStatus = "present" | "missing" | "stale" | "foreign";
 export interface ManifestStep {
   id: string;
+  /** EXACT text to synthesize (step.narration_tts ?? step.narration) */
+  tts_text: string;
+  /** text the viewer reads in final.srt (step.subtitle ?? step.narration) – never sent to the voice */
+  subtitle: string;
+  /** deprecated alias of tts_text (older prompts say "generate speech for narration") */
   narration: string;
   /** file name Claude must write, relative to audio/ (always .mp3; .wav/.m4a are accepted too) */
   file: string;
@@ -71,7 +80,7 @@ export function classifyStep(audioDir: string, id: string, text: string): { stat
     return { status: "foreign", file, reason: `${path.basename(file)} was synthesized by provider "${meta.provider}", not supplied externally - delete it or overwrite it with the real voiceover` };
   }
   if (fs.existsSync(txtF) && fs.readFileSync(txtF, "utf8") !== text && mtime(file) <= mtime(txtF) + 1) {
-    return { status: "stale", file, reason: `narration changed since ${path.basename(file)} was accepted - regenerate it` };
+    return { status: "stale", file, reason: `tts text (narration_tts ?? narration) changed since ${path.basename(file)} was accepted - regenerate it` };
   }
   return { status: "present", file };
 }
@@ -86,7 +95,8 @@ export function parseAlignment(j: any): Alignment | null {
 }
 
 const INSTRUCTIONS =
-  "For every entry in steps[] with status != present: generate speech for `narration` (exact text) with the ElevenLabs connector " +
+  "For every entry in steps[] with status != present: generate speech for `tts_text` (exact text - numbers/acronyms are already spelled out; " +
+  "`subtitle` is only what the viewer reads, never voice it) with the ElevenLabs connector " +
   "(voice/model below if set, mp3_44100_128) and save it as audio/<file>. Optionally save the with-timestamps alignment " +
   "({characters, character_start_times_seconds, character_end_times_seconds}) as audio/<alignment_file> for exact subtitles. " +
   "Then re-run `assembler tts` (or `pnpm local`); it only measures the files.";
@@ -95,12 +105,12 @@ export function buildManifest(recipe: any, out: string): Manifest {
   const audioDir = path.join(out, "audio");
   const steps: ManifestStep[] = [];
   const silent: string[] = [];
-  for (const s of recipe.steps as { id: string; narration: string }[]) {
-    const text = (s.narration ?? "").trim();
+  for (const s of recipe.steps as { id: string; narration: string; narration_tts?: string; subtitle?: string }[]) {
+    const text = ttsText(s);
     if (!text) { silent.push(s.id); continue; }
     const c = classifyStep(audioDir, s.id, text);
     steps.push({
-      id: s.id, narration: text, file: `${s.id}.mp3`, path: path.join(audioDir, `${s.id}.mp3`), alignment_file: `alignment/${s.id}.json`,
+      id: s.id, tts_text: text, subtitle: subtitleText(s), narration: text, file: `${s.id}.mp3`, path: path.join(audioDir, `${s.id}.mp3`), alignment_file: `alignment/${s.id}.json`,
       chars: [...text].length, status: c.status, ...(c.reason ? { reason: c.reason } : {}),
     });
   }
@@ -127,7 +137,7 @@ export function missingReport(m: Manifest): string {
   const bad = m.steps.filter((s) => s.status !== "present");
   return [
     `provider=external: ${bad.length} of ${m.steps.length} narrated step(s) have no usable audio in ${m.audio_dir}:`,
-    ...bad.map((s) => `  - ${s.file}  [${s.status}]${s.reason ? ` ${s.reason}` : ""}\n      "${s.narration.length > 90 ? s.narration.slice(0, 87) + "..." : s.narration}"`),
+    ...bad.map((s) => `  - ${s.file}  [${s.status}]${s.reason ? ` ${s.reason}` : ""}\n      "${s.tts_text.length > 90 ? s.tts_text.slice(0, 87) + "..." : s.tts_text}"`),
     `to-do list: ${path.join(m.audio_dir, "manifest.json")} (generate the voiceover, save as above, re-run)`,
   ].join("\n");
 }
@@ -155,9 +165,9 @@ export async function acceptExternal(recipe: any, out: string, linear: (text: st
   const durations: Record<string, number> = {};
   const accepted: string[] = [], transcoded: string[] = [], alignedExternal: string[] = [];
   const byId = new Map(manifest.steps.map((s) => [s.id, s]));
-  for (const step of recipe.steps as { id: string; narration: string }[]) {
+  for (const step of recipe.steps as { id: string; narration: string; narration_tts?: string }[]) {
     const id = step.id;
-    const text = (step.narration ?? "").trim();
+    const text = ttsText(step);
     const mp3 = path.join(audioDir, `${id}.mp3`);
     const txtF = path.join(audioDir, `${id}.txt`);
     const metaF = path.join(audioDir, `${id}.meta.json`);
@@ -189,7 +199,7 @@ export async function acceptExternal(recipe: any, out: string, linear: (text: st
         alignedExternal.push(id);
         const end = parsed.character_end_times_seconds[parsed.character_end_times_seconds.length - 1] * 1000;
         if (Math.abs(end - ms) > 1500) log(`[tts] ${id}: alignment ends at ${Math.round(end)} ms but audio is ${ms} ms - is it the alignment of this file?`);
-        if (parsed.characters.join("") !== text) log(`[tts] ${id}: alignment characters differ from the narration - SRT maps them proportionally`);
+        if (parsed.characters.join("") !== text) log(`[tts] ${id}: alignment characters differ from the tts text - SRT maps them proportionally`);
       } else if (supplied && !parsed) log(`[tts] ${id}: ${alF} is not an ElevenLabs alignment - using linear alignment`);
     }
     if (alignKind === "linear") fs.writeFileSync(alF, JSON.stringify(linear(text, ms / 1000)));

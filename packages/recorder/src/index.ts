@@ -3,14 +3,14 @@ import path from 'node:path';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { chromium, type Browser, type BrowserContext, type CDPSession, type Page, type Locator } from 'playwright';
-import type { Action, Recipe, RunOptions, RunResult, Step, Timing, TimingStep } from './types.js';
+import type { Action, Recipe, RunOptions, RunResult, Step, Timing, TimingStep, ZoomWindow } from './types.js';
 import { BEACON_PX, BEACON_STRIP_PX, CURSOR_INIT_SCRIPT, HIGHLIGHT_FN, cursorInitScript } from './cursor.js';
 import { login, shouldLogin } from './login.js';
 import { discoverCdp, safeUrl } from './cdp.js';
 import { ScreencastCapture } from './screencast.js';
 import { envPlaceholders, makeRunId, sanitizeRunId, substituteRecipe } from './placeholders.js';
 
-export type { RunOptions, RunResult, Recipe, Timing, TimingStep } from './types.js';
+export type { RunOptions, RunResult, Recipe, Timing, TimingStep, ZoomWindow } from './types.js';
 export { discoverCdp, listTargets, safeUrl, parseDevToolsActivePort, parseLocalStateCdpPort, macProfileDirs } from './cdp.js';
 export { substituteRecipe, envPlaceholders, unknownPlaceholders, makeRunId, sanitizeRunId, startDate, offsetDate, formatDate } from './placeholders.js';
 export { concatScript } from './screencast.js';
@@ -21,8 +21,20 @@ const sleep = (ms: number) => new Promise<void>(r => setTimeout(r, Math.max(0, m
 // ---------------------------------------------------------------- defaults
 const DEFAULT_BEFORE_MS = 300;
 const DEFAULT_HOLD_MS = 800;
-// 80 ms (= 2 video frames at 25 fps) keeps typing frame-exact; 60 ms would stretch the video by ~33 % while typing.
-const DEFAULT_TYPE_DELAY_MS = 80;
+// Brief: typing must be quick (or pasted – use `fill`). CDP screencast: 35 ms/char default, `speed: "fast"` = 15 ms.
+const DEFAULT_TYPE_DELAY_MS = 35;
+const FAST_TYPE_DELAY_MS = 15;
+// recordVideo + beacon keeps its old defaults: Playwright's writer emits >= 1 video frame (40 ms) per repaint, so
+// faster typing stretches the video against the narration inside the step (measured on the smoke recipe: 40 ms/char
+// adds ~120-150 ms drift per typing step vs 80 ms). An explicit delay_ms is always honoured.
+const BEACON_TYPE_DELAY_MS = 80;
+const BEACON_FAST_TYPE_DELAY_MS = 40;
+const DEFAULT_ZOOM_SCALE = 1.6;
+const DEFAULT_ZOOM_HOLD_MS = 2500;
+const ZOOM_IN_MS = 400;
+const ZOOM_OUT_MS = 400;
+/** the zoomed element must stay inside this fraction of the viewport (scale is clamped otherwise) */
+const ZOOM_FIT = 0.96;
 const LOCATOR_TIMEOUT_MS = 10_000;
 const EXPECT_TIMEOUT_MS = 5_000;
 const SCROLL_PX = 400;
@@ -52,10 +64,33 @@ export function validateRecipe(r: Recipe): void {
       else if (seen.has(s.id)) errs.push(`duplicate step id ${s.id}`);
       seen.add(s.id);
       if (typeof s.narration !== 'string') errs.push(`${s.id}: narration must be a string`);
+      if (s.part !== undefined && !(Number.isInteger(s.part) && s.part >= 1)) errs.push(`${s.id}: part must be an integer >= 1`);
       if (!Array.isArray(s.actions)) errs.push(`${s.id}: actions must be an array`);
+      else for (const a of s.actions) {
+        if (a.type === 'zoom') {
+          if (!a.selector) errs.push(`${s.id}: zoom needs a selector`);
+          if (a.value !== undefined && !(Number(a.value) > 1)) errs.push(`${s.id}: zoom value must be a scale > 1, e.g. "1.6" (got ${JSON.stringify(a.value)})`);
+        }
+        if (a.type === 'fill' && !a.selector) errs.push(`${s.id}: fill needs a selector`);
+      }
     }
   }
   if (errs.length) throw new Error('recipe invalid: ' + errs.join('; '));
+}
+
+/** Text that is actually spoken (narration_tts, default narration). */
+export function ttsText(s: Pick<Step, 'narration' | 'narration_tts'>): string {
+  return (s.narration_tts ?? s.narration ?? '').trim();
+}
+
+/** Effective part per step: step.part, else inherited from the previous step; part_title from the step that opened the part. */
+export function effectiveParts(steps: Pick<Step, 'part' | 'part_title'>[]): { part?: number; part_title?: string }[] {
+  let part: number | undefined, title: string | undefined;
+  return steps.map(s => {
+    if (s.part !== undefined && s.part !== part) { part = s.part; title = undefined; }
+    if (s.part_title !== undefined && part !== undefined) title = s.part_title;
+    return part === undefined ? {} : { part, ...(title ? { part_title: title } : {}) };
+  });
 }
 
 /** Standalone fallback when audio/durations.json is missing: Czech ≈ 14 chars/s. */
@@ -77,12 +112,32 @@ function loadDurations(file: string | undefined, log: (l: string) => void): Reco
 }
 
 // ---------------------------------------------------------------- recorder
+/**
+ * Zoom geometry. scale = min(wanted, what still fits ZOOM_FIT of the viewport). Origin = element centre,
+ * moved only as far as needed to keep the zoomed element fully on screen (an element at the left edge
+ * zooms "to the right" instead of being cut off).
+ */
+export function zoomFit(wanted: number, box: { x: number; y: number; width: number; height: number }, vp: { width: number; height: number }): { scale: number; ox: number; oy: number } {
+  const scale = Math.max(1, Math.min(wanted, box.width > 0 ? (ZOOM_FIT * vp.width) / box.width : Infinity, box.height > 0 ? (ZOOM_FIT * vp.height) / box.height : Infinity));
+  const axis = (x0: number, w: number, size: number) => {
+    const c = x0 + w / 2;
+    if (scale <= 1.0001) return c;
+    const m = (size * (1 - ZOOM_FIT)) / 2;
+    // zoomed edge o + s(x - o) must stay within [m, size - m]
+    const hi = (scale * x0 - m) / (scale - 1), lo = (scale * (x0 + w) - size + m) / (scale - 1);
+    return lo <= hi ? Math.min(hi, Math.max(lo, c)) : c;
+  };
+  return { scale, ox: Math.round(axis(box.x, box.width, vp.width)), oy: Math.round(axis(box.y, box.height, vp.height)) };
+}
+
 class Recorder {
   private cursor = { x: 0, y: 0 };
   private beaconK = 0;
   private t0 = 0;
+  /** zoom windows of the current step (Recorder.now() time); replaySteps collects them */
+  zooms: ZoomWindow[] = [];
 
-  constructor(private page: Page, private viewport: { width: number; height: number }, private log: (l: string) => void) {
+  constructor(private page: Page, private viewport: { width: number; height: number }, private log: (l: string) => void, private beaconMode = false) {
     this.cursor = { x: Math.round(viewport.width / 2), y: Math.round(viewport.height / 2) };
     // Re-place the overlay after every full navigation (init script re-creates it fresh at 50/50).
     page.on('load', () => { void this.reinjectCursor(); });
@@ -112,14 +167,15 @@ class Recorder {
     return this.page.locator(selector).first();
   }
 
-  private async elementCenter(selector: string): Promise<{ x: number; y: number; loc: Locator }> {
+  private async elementCenter(selector: string): Promise<{ x: number; y: number; loc: Locator; box: { x: number; y: number; width: number; height: number } }> {
     const loc = this.locator(selector);
     await loc.waitFor({ state: 'visible', timeout: LOCATOR_TIMEOUT_MS });
     await loc.scrollIntoViewIfNeeded({ timeout: LOCATOR_TIMEOUT_MS });
     const box = await loc.boundingBox();
     if (!box) throw new Error(`no bounding box for ${selector}`);
-    return { x: Math.round(box.x + box.width / 2), y: Math.round(box.y + box.height / 2), loc };
+    return { x: Math.round(box.x + box.width / 2), y: Math.round(box.y + box.height / 2), loc, box };
   }
+
 
   /** Animate overlay cursor AND the real mouse along the same eased path. */
   private async glideTo(x: number, y: number): Promise<void> {
@@ -178,7 +234,50 @@ class Recorder {
         await this.ripple();
         await this.page.mouse.click(x, y);
         if (a.clear) await loc.fill('');
-        await loc.pressSequentially(a.value ?? '', { delay: a.delay_ms ?? DEFAULT_TYPE_DELAY_MS });
+        const fast = a.speed === 'fast';
+        const delay = a.delay_ms ?? (this.beaconMode ? (fast ? BEACON_FAST_TYPE_DELAY_MS : BEACON_TYPE_DELAY_MS) : (fast ? FAST_TYPE_DELAY_MS : DEFAULT_TYPE_DELAY_MS));
+        await loc.pressSequentially(a.value ?? '', { delay });
+        return;
+      }
+      case 'fill': {
+        // long texts: cursor goes to the field and clicks, then the whole value appears at once
+        if (!a.selector) throw new Error('fill: missing selector');
+        const { x, y, loc } = await this.elementCenter(a.selector);
+        await this.glideTo(x, y);
+        await this.ripple();
+        await this.page.mouse.click(x, y);
+        await loc.fill(a.value ?? ''); // sets the value + 'input' event (works for React/Angular controlled inputs)
+        await loc.dispatchEvent('change').catch(() => {});
+        await sleep(150);
+        return;
+      }
+      case 'zoom': {
+        if (!a.selector) throw new Error('zoom: missing selector');
+        const wanted = a.value !== undefined ? Number(a.value) : DEFAULT_ZOOM_SCALE;
+        if (!(wanted > 1)) throw new Error(`zoom: value must be a scale > 1 (got ${a.value})`);
+        const hold = a.hold_ms ?? DEFAULT_ZOOM_HOLD_MS;
+        const { x, y, box } = await this.elementCenter(a.selector);
+        // the cursor must point at the zoomed element: keep it if it already is inside, else glide to the centre
+        const c = this.cursor;
+        if (!(c.x >= box.x && c.x <= box.x + box.width && c.y >= box.y && c.y <= box.y + box.height)) await this.glideTo(x, y);
+        const fit = zoomFit(wanted, box, this.viewport);
+        const scale = +fit.scale.toFixed(3);
+        if (scale < wanted - 0.01) this.log(`zoom ${a.selector}: scale ${wanted} -> ${scale} (element ${Math.round(box.width)}x${Math.round(box.height)} must fit the viewport – zoom a smaller element)`);
+        const zoomTo = (s: number, ms: number) => this.page.evaluate(([cx, cy, ss, mm]) => (window as any).__svpCursor?.zoom(cx, cy, ss, mm), [fit.ox, fit.oy, s, ms]);
+        const w: ZoomWindow = { selector: a.selector, scale, origin: [fit.ox, fit.oy], t_start_ms: this.now(), t_full_ms: 0, t_release_ms: 0, t_end_ms: 0 };
+        try {
+          const r = await zoomTo(scale, ZOOM_IN_MS) as { scrolled?: boolean } | undefined;
+          if (r?.scrolled) this.log(`zoom ${a.selector}: the document is scrolled – the app's own position:fixed elements shift during the zoom`);
+          w.t_full_ms = this.now();
+          await sleep(hold);
+          w.t_release_ms = this.now();
+          await zoomTo(1, ZOOM_OUT_MS);
+          w.t_end_ms = this.now();
+        } catch (e) {
+          await this.page.evaluate(() => (window as any).__svpCursor?.zoomReset()).catch(() => {});
+          throw e;
+        }
+        this.zooms.push(w);
         return;
       }
       case 'press': {
@@ -292,7 +391,7 @@ function prepare(opts: RunOptions): Prepared {
   const durations = loadDurations(opts.durations ?? path.join(outDir, 'audio', 'durations.json'), log);
   const audioFor = (s: Step): number => {
     if (durations && Number.isFinite(durations[s.id])) return Math.round(durations[s.id]);
-    const est = estimateAudioMs(s.narration);
+    const est = estimateAudioMs(ttsText(s));
     if (durations) log(`durations: no entry for ${s.id} – estimated ${est} ms`);
     return est;
   };
@@ -328,11 +427,13 @@ async function replaySteps(page: Page, recorder: Recorder, p: Prepared, strict: 
   const { viewport } = recipe;
   const timingSteps: TimingStep[] = [];
   let aborted = false;
-  for (const step of recipe.steps) {
+  const parts = effectiveParts(recipe.steps);
+  for (const [si, step] of recipe.steps.entries()) {
     const audioMs = audioFor(step);
     const hold = step.hold_after_ms ?? DEFAULT_HOLD_MS;
     const shot = path.join(shotsDir, `${step.id}.png`);
-    const rec: TimingStep = { id: step.id, t_start_ms: 0, t_actions_end_ms: 0, t_end_ms: 0, audio_ms: audioMs, status: 'ok', screenshot: shot };
+    const rec: TimingStep = { id: step.id, ...parts[si], t_start_ms: 0, t_actions_end_ms: 0, t_end_ms: 0, audio_ms: audioMs, status: 'ok', screenshot: shot };
+    recorder.zooms = [];
 
     if (aborted) {
       rec.status = 'skipped';
@@ -355,6 +456,7 @@ async function replaySteps(page: Page, recorder: Recorder, p: Prepared, strict: 
       log(`step ${step.id} FAILED: ${rec.error}`);
       if (strict) aborted = true;
     }
+    if (recorder.zooms.length) rec.zooms = recorder.zooms;
 
     // screenshots are content-only (strip cropped) so QA / self-heal see what the viewer sees
     await page.screenshot({ path: shot, clip: { x: 0, y: 0, width: viewport.width, height: viewport.height } }).catch(err => log(`screenshot ${step.id} failed: ${(err as Error).message}`));
@@ -410,7 +512,7 @@ async function runVideo(opts: RunOptions, p: Prepared): Promise<RunResult> {
     await context.addInitScript(CURSOR_INIT_SCRIPT);
 
     const page = await context.newPage();
-    recorder = new Recorder(page, viewport, log);
+    recorder = new Recorder(page, viewport, log, true);
     recorder.start(); // t=0 ≈ first video frame (video starts with page creation)
     const video = page.video();
 
@@ -565,7 +667,10 @@ async function runScreencast(opts: RunOptions, p: Prepared, mode: 'cdp' | 'launc
   await cap!.encode(rawPath, endTs);
   // Move step times from the Date.now() clock into video time: t_video = map(wall) - t0.
   const delta = cap!.wallToVideoMs(wallT0);
-  for (const s of timingSteps) { s.t_start_ms += delta; s.t_actions_end_ms += delta; s.t_end_ms += delta; }
+  for (const s of timingSteps) {
+    s.t_start_ms += delta; s.t_actions_end_ms += delta; s.t_end_ms += delta;
+    for (const z of s.zooms ?? []) { z.t_start_ms += delta; z.t_full_ms += delta; z.t_release_ms += delta; z.t_end_ms += delta; }
+  }
   if (!opts.keepFrames) fs.rmSync(framesDir, { recursive: true, force: true });
 
   const { fps, durationMs } = await probe(rawPath);
@@ -647,6 +752,8 @@ function applyBeaconSync(all: TimingStep[], beacons: number[] | null, totalMs: n
     s.t_start_ms = start;
     s.t_end_ms = Math.max(start, end);
     s.t_actions_end_ms = Math.min(s.t_end_ms, Math.max(start, s.t_actions_end_ms + d));
+    const clamp = (v: number) => Math.min(s.t_end_ms, Math.max(start, v + d));
+    for (const z of s.zooms ?? []) { z.t_start_ms = clamp(z.t_start_ms); z.t_full_ms = clamp(z.t_full_ms); z.t_release_ms = clamp(z.t_release_ms); z.t_end_ms = clamp(z.t_end_ms); }
   }
   const lastEnd = steps.length ? steps[steps.length - 1].t_end_ms : 0;
   for (const s of all) if (s.status === 'skipped') s.t_start_ms = s.t_actions_end_ms = s.t_end_ms = lastEnd;
@@ -661,5 +768,6 @@ function fmtHeader(): string {
   return `${'step'.padEnd(6)}${pad('start', 8)}${pad('act_end', 9)}${pad('end', 8)}${pad('audio', 8)}${pad('dur', 8)}  status`;
 }
 function fmtRow(s: TimingStep): string {
-  return `${s.id.padEnd(6)}${pad(s.t_start_ms, 8)}${pad(s.t_actions_end_ms, 9)}${pad(s.t_end_ms, 8)}${pad(s.audio_ms, 8)}${pad(s.t_end_ms - s.t_start_ms, 8)}  ${s.status}${s.error ? '  ' + s.error : ''}`;
+  const extra = [s.part !== undefined ? `part ${s.part}` : '', ...(s.zooms ?? []).map(z => `zoom x${z.scale} ${z.t_start_ms}-${z.t_end_ms}`)].filter(Boolean).join(', ');
+  return `${s.id.padEnd(6)}${pad(s.t_start_ms, 8)}${pad(s.t_actions_end_ms, 9)}${pad(s.t_end_ms, 8)}${pad(s.audio_ms, 8)}${pad(s.t_end_ms - s.t_start_ms, 8)}  ${s.status}${extra ? '  [' + extra + ']' : ''}${s.error ? '  ' + s.error : ''}`;
 }

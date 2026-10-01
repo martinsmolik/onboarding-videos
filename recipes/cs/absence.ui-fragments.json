@@ -1,0 +1,778 @@
+{
+  "_meta": {
+    "id": "absence.ui-fragments",
+    "lang": "cs",
+    "app_version": "preprod-2026-10-01",
+    "base_url": "https://app-pre-production.sloneek.com",
+    "explored_as": "Thomas Claver (admin, his own approver – his requests are auto-approved)",
+    "explored_viewport": "1456x868 CSS px (BrowserOS window, DPR 2; could not be resized to 1920x1080)",
+    "selector_rules": "Plain CSS or CSS:text-is(\"…\"). Every action selector resolved to count 1 / visible 1 with scripts/explorer-kit/resolve.js at the moment it is used (unless a note says otherwise). The recorder uses locator(sel).first() plus scrollIntoViewIfNeeded, so elements below the fold are fine.",
+    "format": "Each fragment: pre (state the fragment expects), actions (recipe action format), expect (suggested step post-condition), creates_data (true = writes to pre-prod), notes. Stitch fragments into recipe steps; split long fragments into several steps as narration needs.",
+    "docs": "docs/brief/absence-ui-map.md",
+    "replay_check": "2026-10-01: every fragment except the two creates_data fragments was replayed in order in a fresh tab with real mouse clicks at the resolved element centre: every action selector resolved count 1 / visible 1 and every expect matched in < 120 ms. new_type_save and new_absence_note_and_submit ran once during exploration (that is the data listed in the UI map) and were not replayed. new_absence_dates_nov_9_11 replays to the expected collision because the Nov 9–11 absence now exists."
+  },
+  "fragments": {
+    "ui_language_to_czech": {
+      "pre": "Any app page, UI in another language. Only needed if the recording profile is not Czech yet. Preferred: set localStorage key local-translate=cs in the storage state instead of clicking.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-select.language_select"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane nb-option:has(.fi-cz)"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/absence-overview\"]:text-is(\"Moje absence\")"
+      },
+      "creates_data": false,
+      "notes": "Flag dropdown top right (header, slnk-common-translate-bar). Options are flag-only nb-options (no text); English = .fi-gb, Czech = .fi-cz. The choice is stored in localStorage 'local-translate' (value 'cs' / 'en'), so it survives reloads and is shared by every tab of this browser profile."
+    },
+    "nav_expand_calendars": {
+      "pre": "Kalendáře section collapsed. It is collapsed after every full page load (verified also after a direct load of /app/events/absence); clicking it when it is already expanded COLLAPSES it.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a.navigation_item:text-is(\"Kalendáře\")"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a[href=\"/app/events/absence\"]"
+      },
+      "creates_data": false,
+      "notes": "Submenu: Celkový přehled, Absence, Příchody / Odchody, Time-tracking a aktivity, Připomínky. The expanded state survives in-app (SPA) navigation but not a reload / navigate action."
+    },
+    "open_absence_calendar_from_menu": {
+      "pre": "Kalendáře expanded (nav_expand_calendars).",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/events/absence\"]"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=fullCalendar]",
+        "url_contains": "/app/events/absence"
+      },
+      "creates_data": false,
+      "notes": "Lands on ?view=resourceTimelineMonth&from=01.<current month>. Calendar data loads in ~1.5–2.5 s."
+    },
+    "open_absence_calendar_november": {
+      "pre": "Any page. Deterministic month regardless of recording date.",
+      "actions": [
+        {
+          "type": "navigate",
+          "value": "https://app-pre-production.sloneek.com/app/events/absence?view=resourceTimelineMonth&from=01.11.2026"
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ],
+      "expect": {
+        "visible": "full-calendar .holiday_cell:text-is(\"CZ: Den boje za svobodu a demokracii SK: Deň boja za slobodu a demokraciu\")"
+      },
+      "creates_data": false
+    },
+    "absence_calendar_tour": {
+      "pre": "Absence calendar open (Timeline, Všichni).",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=activeViewSelect]"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-checkbox:text-is(\"Zobrazit státní svátky země firmy (PT-11)\")"
+        },
+        {
+          "type": "highlight",
+          "selector": "input[placeholder=\"Vyhledej události...\"]"
+        },
+        {
+          "type": "highlight",
+          "selector": "input[placeholder=\"Rychlý pohled\"]"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=filterUsersAutocomplete] input"
+        },
+        {
+          "type": "highlight",
+          "selector": ".caption:text-is(\"Čekají na schválení\")"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=fullCalendar]"
+      },
+      "creates_data": false,
+      "notes": "Filter inputs show their current value: '(30) Vybraných událostí', 'Všichni', '(45) Vybrané uživatele' (counts are tenant data). Legend at the bottom: Automaticky schválené / Schválené / Čekají na schválení / Absence / Částečná absence (bottom of a long page – the recorder scrolls)."
+    },
+    "absence_calendar_quick_view_team": {
+      "pre": "Absence calendar open. Rychlý pohled = Všichni.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "input[placeholder=\"Rychlý pohled\"]"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane slnk-common-autocomplete-option:text-is(\"Tým\")"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ],
+      "expect": {
+        "visible": "full-calendar .fc-datagrid-cell.fc-resource:text-is(\"Claver Thomas\")"
+      },
+      "creates_data": false,
+      "notes": "Options: Moje, Tým, Podřízení, Všichni. Thomas Claver has NO team ('Bez týmu'), so 'Tým' shows only himself – weak demo; pick a recording user who is in a team, or use the user filter. Revert with the same clicks and option 'Všichni'. The choice is not in the URL."
+    },
+    "absence_calendar_next_month": {
+      "pre": "Absence calendar open.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] button:has(nb-icon[icon=\"angle-right\"])"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ],
+      "expect": {
+        "url_contains": "from=01.11.2026"
+      },
+      "creates_data": false,
+      "notes": "Prev = button:has(nb-icon[icon=\"angle-left\"]); 'Dnes' = [data-cy=mainContentCenterDiv] button:text-is(\"Dnes\"). The expect value assumes the start month is October 2026."
+    },
+    "absence_calendar_show_created_absence": {
+      "pre": "Absence calendar on November 2026, Všichni; the Nov 9–11 absence of Thomas Claver exists.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "full-calendar .fc-timeline-event:text-is(\"10:00 - 18:30 Claver Thomas - 🏖️ Dovolená (denní fond)\")"
+        },
+        {
+          "type": "highlight",
+          "selector": "full-calendar .holiday_cell:text-is(\"CZ: Den boje za svobodu a demokracii SK: Deň boja za slobodu a demokraciu\")"
+        }
+      ],
+      "expect": {
+        "visible": "full-calendar .fc-timeline-event:text-is(\"10:00 - 18:30 Claver Thomas - 🏖️ Dovolená (denní fond)\")"
+      },
+      "creates_data": false,
+      "notes": "Event text depends on data (time 10:00 - 18:30 comes from Thomas's working hours). The holiday column is a full-height background cell (2166 px tall) – highlight works, zoom would be clamped."
+    },
+    "open_settings_dashboard": {
+      "pre": "Any page with the left menu.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/settings/dashboard\"]"
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ],
+      "expect": {
+        "visible": "a[href=\"/app/settings/absence/events\"]:text-is(\"Zobrazit\")",
+        "url_contains": "/app/settings/dashboard"
+      },
+      "creates_data": false,
+      "notes": "Menu item 'Nastavení' (section REPORTY A NASTAVENÍ, far down the menu – the recorder scrolls the menu). The click also expands the settings submenu."
+    },
+    "open_absence_settings": {
+      "pre": "Settings dashboard (/app/settings/dashboard).",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "a[href=\"/app/settings/absence/events\"]:text-is(\"Zobrazit\")"
+        },
+        {
+          "type": "click",
+          "selector": "a[href=\"/app/settings/absence/events\"]:text-is(\"Zobrazit\")"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ],
+      "expect": {
+        "visible": "h5:text-is(\"Události absence\")",
+        "url_contains": "/app/settings/absence/events"
+      },
+      "creates_data": false,
+      "notes": "Card 'Nastavení absencí' in section 'Absence' (below the fold at 868 px). Alternative after the submenu is expanded: [data-cy=mainNavigationDiv] a[href=\"/app/settings/absence/events\"] (label 'Absence')."
+    },
+    "absence_types_list_tour": {
+      "pre": "Události absence list.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=name]"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=type]"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=yearly_fond_units]"
+        },
+        {
+          "type": "highlight",
+          "selector": "a[data-cy=addAbsenceButton]:text-is(\"Přidat\")"
+        }
+      ],
+      "expect": {
+        "visible": ".ag-row a.redirect_column:text-is(\"Dovolená\")"
+      },
+      "creates_data": false,
+      "notes": "AG Grid, 23 types before exploration, 24 after ('1 do 24 z 24'). Columns: Akce, Název absence pro adminy, Překlad názvu pro uživatele, Aktivní, Typ, Objem ročního fondu, Jednotka fondu. Row action buttons [data-cy=editButton], [data-cy=deleteButton], [data-cy=customAction-toCollectiveClaims-button] exist once per row (not unique)."
+    },
+    "new_type_open": {
+      "pre": "Události absence list.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "a[data-cy=addAbsenceButton]:text-is(\"Přidat\")"
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ],
+      "expect": {
+        "visible": "h5:text-is(\"Nová absence\")",
+        "url_contains": "/app/settings/absence/event/new/general"
+      },
+      "creates_data": false,
+      "notes": "data-cy=addAbsenceButton is ALSO used by 'Nová absence' on the absence overview and the calendar – always qualify (a[...] here, button[...] there)."
+    },
+    "new_type_form_fill": {
+      "pre": "Empty 'Nová absence' (new type) form.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "input[data-cy=nameInput]",
+          "value": "Dovolená – ukázka"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=colorPicker] input"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": ".p-popover button.slnk-color-picker__swatch[aria-label=\"#10B981\"]"
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "type",
+          "selector": "input[data-cy=translatedNameInput]",
+          "value": "Dovolená – ukázka"
+        },
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=typeSelect] button"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane nb-option[data-cy=type_vacation]"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=unitTypeSelect] button"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane nb-option[data-cy=unitType_days]"
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": "nb-checkbox[data-cy=annualFundCheckbox] .custom-checkbox"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "type",
+          "selector": "input[data-cy=yearlyEntitlementInput]",
+          "value": "20"
+        },
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=fundUnitSelect] button"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane nb-option[data-cy=fundUnit_day]"
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "button[data-cy=submitButton]:not([disabled])"
+      },
+      "creates_data": false,
+      "notes": "Split into several narrated steps (name+colour, type+unit, fund). The wait after the unit select matters: 'Zdravotní důvody' is inserted under 'Roční fond' at that moment and the layout shifts; clicking the fund checkbox too early missed it. Other options: typ = type_in_work 'V práci (nemá vliv na odpracovanou dobu)'; jednotka = unitType_days_and_half_days 'Dny a půl dny' / unitType_hours 'Hodiny'; jednotka fondu = fundUnit_hour 'Hodiny'. Swatches (aria-label): #338B85 #FFC94D #10B981 #5A00FF #8F9BB3 #6E003B #FA0 #9E547C #32008C #222B45."
+    },
+    "new_type_optional_fields": {
+      "pre": "New type form after new_type_form_fill. Map only – each click toggles.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "nb-checkbox[data-cy=disableAccrueCheckbox]"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-checkbox[data-cy=unusedUnitsTransferCheckbox]"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-checkbox[data-cy=eventTimeoutCheckbox]"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-checkbox[data-cy=hideAbsenceNameCheckbox]"
+        }
+      ],
+      "expect": {
+        "visible": "nb-checkbox[data-cy=eventTimeoutCheckbox]"
+      },
+      "creates_data": false,
+      "notes": "Ticking 'Časové omezení pro zápis události' (.custom-checkbox inside it) shows a range slider input[data-cy=eventTimeoutInput] (-31…31, label 'v den začátku'). 'Zdravotní důvody' = nb-checkbox[data-cy=healthReasonsCheckbox]; on the NEW form it is visible only while 'Roční fond' is unticked (it disappears when the fund is ticked); on the edit form of a saved type it is shown together with the fund fields."
+    },
+    "new_type_save": {
+      "pre": "Filled new type form. WRITES a new absence type to the tenant (not assigned to anyone).",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "button[data-cy=submitButton]:text-is(\"Uložit\")"
+        },
+        {
+          "type": "click",
+          "selector": "button[data-cy=submitButton]:text-is(\"Uložit\")"
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ],
+      "expect": {
+        "visible": ".ag-row a.redirect_column:text-is(\"Dovolená – ukázka\")",
+        "url_contains": "/app/settings/absence/events"
+      },
+      "creates_data": true,
+      "notes": "Toast 'Vytvořeno' (shows < 3 s – do not expect on it), then redirect back to the list. A second recording with the same name creates a duplicate – use a {{RUN_ID}} suffix or delete the type first."
+    },
+    "new_type_save_for_all__DO_NOT_CLICK": {
+      "pre": "Recorded for reference only. Saves the type AND enables it for every user.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "button[data-cy=allCompanyButton]:text-is(\"Uložit pro všechny uživatele\")"
+        }
+      ],
+      "expect": {
+        "visible": "button[data-cy=allCompanyButton]"
+      },
+      "creates_data": false,
+      "notes": "Never clicked during exploration. Highlight-only is safe."
+    },
+    "open_bulk_absence_settings": {
+      "pre": "Settings dashboard (/app/settings/dashboard).",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "a[href=\"/app/settings/absence/collective-claims\"]:text-is(\"Zobrazit\")"
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        }
+      ],
+      "expect": {
+        "visible": ".ag-header-cell[col-id=allowed]",
+        "url_contains": "/app/settings/absence/collective-claims"
+      },
+      "creates_data": false,
+      "notes": "Card 'Hromadné nastavení absencí'. Alternative: menu [data-cy=mainNavigationDiv] a[href=\"/app/settings/absence/collective-claims\"] (submenu expanded). Grid loads server-side, 100 rows per page, 2,130 rows total on this tenant."
+    },
+    "bulk_settings_filter_by_type": {
+      "pre": "Hromadné nastavení událostí absence grid, no filter.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "input[aria-label=\"Název absence Filter Input\"]",
+          "value": "ukázka"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ],
+      "expect": {
+        "visible": ".ag-cell[col-id=\"user.full_name\"]:text-is(\"Claver Thomas\")"
+      },
+      "creates_data": false,
+      "notes": "Filtering with the full name 'Dovolená – ukázka' (en dash) returned 0 rows; the plain word 'ukázka' returns 45 rows (all active users), every one with Povolená unticked. Other filters: input[aria-label=\"Jméno Filter Input\"], input[aria-label=\"Tým Filter Input\"], input[aria-label=\"Štítky Filter Input\"]; Ano/Ne selects .ag-header-row-column-filter .ag-header-cell[aria-colindex=\"2\"] select.common_select (Povolená) and [aria-colindex=\"4\"] (Aktivní, default 'Ano'), [aria-colindex=\"7\"] (Nutné schválení)."
+    },
+    "bulk_settings_tour": {
+      "pre": "Bulk settings grid (filtered or not).",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=\"absence_event.name\"]"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=allowed]"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=\"user.full_name\"]"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=approval_needed]"
+        }
+      ],
+      "expect": {
+        "visible": ".ag-header-cell[col-id=approval_needed]"
+      },
+      "creates_data": false,
+      "notes": "Columns: Název absence, Povolená, Jméno, Aktivní, Tým, Štítky, Nutné schválení, Má roční fond, Jednotka fondu, Jednotka čerpání fondu, Roční fond, Individuální fond, Fond pro tento rok, Vyčerpáno letos, Převedeno z loňska (scroll right). The Povolená / Nutné schválení cells are per-row nb-checkboxes; there is no Save button on the page, so assume a click saves immediately (NOT verified – not clicked). The 'Kalkulačka nároku na dovolenou' button top right is a Userflow launcher, not app UI."
+    },
+    "open_my_absences": {
+      "pre": "Any page; section JÁ expanded (default).",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/absence-overview\"]"
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ],
+      "expect": {
+        "visible": "button[data-cy=addAbsenceButton]:text-is(\"Nová absence\")",
+        "url_contains": "/app/my-profile/absence-overview"
+      },
+      "creates_data": false
+    },
+    "absence_overview_tour": {
+      "pre": "Přehled absencí (own or another user's profile).",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".remaining-absence-container:text-is(\"🏖️ Dovolená (denní fond) Zůstatek : 12.05 Dny\")"
+        },
+        {
+          "type": "highlight",
+          "selector": "h6:text-is(\"Nadcházející absence\")"
+        },
+        {
+          "type": "highlight",
+          "selector": "h6:text-is(\"Již ukončené absence\")"
+        }
+      ],
+      "expect": {
+        "visible": "h6:text-is(\"Nadcházející absence\")"
+      },
+      "creates_data": false,
+      "notes": "Balance card text is data: 15.05 Dny before, 12.05 Dny after the Nov 9–11 absence; it drops by 3 with each recording – prefer a highlight on .remaining-absence-container (11 cards, .first() = 'Compensatory leave') or re-read the number before recording. Year selector '2026' and a 12-month mini calendar sit below the lists."
+    },
+    "absence_overview_settings_table": {
+      "pre": "Přehled absencí.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "button[data-cy=absenceSettingsButton]:text-is(\"Zobrazit nastavení pro absence a roční fondy\")"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "highlight",
+          "selector": "th:text-is(\"Nutné schválení\")"
+        },
+        {
+          "type": "click",
+          "selector": "button[data-cy=absenceSettingsButton]:text-is(\"Skrýt nastavení pro absence a roční fondy\")"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "button[data-cy=absenceSettingsButton]:text-is(\"Zobrazit nastavení pro absence a roční fondy\")"
+      },
+      "creates_data": false,
+      "notes": "Inline per-user table (no dialog): Název absence, Povolená, Nutné schválení, Má roční fond, Jednotka fondu, Jednotka čerpání fondu, Roční fond, Individuální fond, Fond pro tento rok, Vyčerpáno letos, Převedeno z loňska. Checkboxes/inputs are editable for an admin – do not click them in a recording."
+    },
+    "new_absence_open": {
+      "pre": "Přehled absencí (or absence calendar – same dialog).",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "button[data-cy=addAbsenceButton]:text-is(\"Nová absence\")"
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container [data-cy=absenceEventsAutocomplete] input"
+      },
+      "creates_data": false,
+      "notes": "Nebular dialog titled 'Absence', right half = month calendar with existing absences and PT-11 holidays."
+    },
+    "new_absence_other_user_toggle": {
+      "pre": "New absence dialog open, toggle on 'Pro mě'.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container nb-toggle[data-cy=differentUserToggle]"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container [data-cy=usersAutocomplete] input"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container nb-toggle[data-cy=differentUserToggle]"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container [data-cy=absenceEventsAutocomplete] input"
+      },
+      "creates_data": false,
+      "notes": "Labels 'Pro mě' / 'Jiný uživatel'. ON adds field 'Uživatel' (+ link button 'Správa uživatelů') with 45 users; search box .cdk-overlay-pane [data-cy=autocompleteSearchInput]. Do not press Escape to close an overlay inside the dialog – it may close the dialog; click an empty part of the dialog instead."
+    },
+    "new_absence_pick_type": {
+      "pre": "New absence dialog open, no type chosen.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=absenceEventsAutocomplete] input"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-pane [data-cy=autocompleteSearchInput]",
+          "value": "Dovolená (denní fond)"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane slnk-common-autocomplete-option"
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container [data-cy=dateFromInput]"
+      },
+      "creates_data": false,
+      "notes": "Placeholder 'Vyberte absenci'. 11 types for Thomas (EN 'Vacation (days)' = CZ '🏖️ Dovolená (denní fond)'); the search leaves exactly 1 option. 'Dovolená – ukázka' is NOT offered (not enabled for him). After picking: toggle Půlden / Celé dny (nb-toggle[formcontrolname=fullDay], default Celé dny), Od / Do, summary Typ Absence · Jednotka Dny a půl dny · Fond Roční."
+    },
+    "new_absence_dates_nov_9_11": {
+      "pre": "Type chosen. Recording runs in OCTOBER 2026 (the datepicker opens on the current month; in November drop the two next-month clicks).",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=dateFromInput]"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container button.next-month"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-day-cell:not(.bounding-month):text-is(\"9\")"
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=dateToInput]"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-day-cell:not(.bounding-month):text-is(\"11\")"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container nb-icon[icon=\"check\"]"
+      },
+      "creates_data": false,
+      "notes": "Od/Do are readonly (format '9. 11. 2026'). Picking Od also sets Do to the same day. The Do picker opens on the month of Od (no second next-month click); the Od picker disables days after Do. 'Kontrola události' then shows Počet dní 3 / Čerpání fondu 3 Dny (+ check icon). Collision → nb-dialog-container .p-message-text 'V těchto dnech je kolize s jinou událostí: 09.11.2026, 10.11.2026, 11.11.2026', no check icon, Vytvořit disabled. Nov 9–11 2026 are now TAKEN by the exploration absence (replay hit exactly that collision). Nov 23–25 2026 (Mon–Wed) were checked free (green check, 3 Dny) and NOT created – use day numbers 23 and 25 and the expect '23.11.2026 - 25.11.2026, 3 Dny' for the real recording. Re-picking Od in an already filled dialog failed once (click landed while the picker was opening) – always run this fragment on a fresh dialog."
+    },
+    "new_absence_note_and_submit": {
+      "pre": "Dates set, event check green. WRITES an absence (auto-approved for Thomas Claver).",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container .info:has(nb-icon[icon=\"check\"])"
+        },
+        {
+          "type": "type",
+          "selector": "nb-dialog-container [data-cy=noteTextarea]",
+          "value": "Rodinná dovolená, ve čtvrtek jsem zpět."
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=submitButton]:text-is(\"Vytvořit\")"
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ],
+      "expect": {
+        "visible": ".upcoming-container div:text-is(\"09.11.2026 - 11.11.2026, 3 Dny\")"
+      },
+      "creates_data": true,
+      "notes": "Note label: 'Poznámka k absenci (veřejně viditelná, např. V mé nepřítomnosti prosím kontaktujte Petra Nováka)'. After Vytvořit the dialog closes immediately; the list refreshes within ~2 s. Entry shows '🏖️ Dovolená (denní fond) / 09.11.2026 - 11.11.2026, 3 Dny / Schváleno nadřízeným'. Update the dates in the expect if you change the days."
+    },
+    "open_approvals": {
+      "pre": "Any page.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/events/approvals\"]"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ],
+      "expect": {
+        "visible": "h5:text-is(\"Schvalování\")",
+        "url_contains": "/app/events/approvals/absence"
+      },
+      "creates_data": false,
+      "notes": "Menu 'Schvalování' with a count badge (98 = all pending items). Redirects to the 'Absence' tab."
+    },
+    "approvals_tour": {
+      "pre": "Schvalování → Absence tab with pending requests.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "a[href=\"/app/events/approvals/absence\"]"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-select:text-is(\"Všechny stavy\")"
+        },
+        {
+          "type": "highlight",
+          "selector": "table.mat-mdc-table"
+        },
+        {
+          "type": "highlight",
+          "selector": "button[data-cy=multipleApproveButton]"
+        }
+      ],
+      "expect": {
+        "visible": "table.mat-mdc-table"
+      },
+      "creates_data": false,
+      "notes": "MAP ONLY – never click Schválit/Odmítnout. Tabs: Absence 32, Aktivity 49, Docházka 7, Změna osobních údajů 5, Dokumenty 5 (counts are data; the tab text-is includes the count). Filters (nb-select): Všichni uživatelé, Všechny stavy (Čeká na schválení, Čeká na zrušení), Všechny absence, Seřadit podle data sestupně. Bulk: [data-cy=masterCheckbox], [data-cy=multipleApproveButton] 'Schválit všechny vybrané', [data-cy=multipleRejectButton] 'Odmítnout všechny vybrané'. Per row: [data-cy=singleApproveButton] 'Schválit', [data-cy=singleRejectButton] 'Odmítnout' (25 rows loaded, not unique). Columns: Jméno, Název absence, Datum, Doba trvání, Zažádáno dne, Akce. 'Načíst více výsledků' loads more."
+    }
+  }
+}

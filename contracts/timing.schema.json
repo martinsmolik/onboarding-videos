@@ -4,27 +4,127 @@
   "title": "Timing log",
   "description": "Written by recorder. All times are ms from the first video frame (t=0). Consumed by assembler to place audio and subtitles.",
   "type": "object",
-  "required": ["recipe_id", "video_path", "fps", "total_ms", "steps"],
+  "required": [
+    "recipe_id",
+    "video_path",
+    "fps",
+    "total_ms",
+    "steps"
+  ],
   "properties": {
-    "recipe_id": { "type": "string" },
-    "video_path": { "type": "string", "description": "path to raw webm" },
-    "fps": { "type": "number" },
-    "total_ms": { "type": "integer" },
-    "recorded_at": { "type": "string", "format": "date-time" },
+    "recipe_id": {
+      "type": "string"
+    },
+    "video_path": {
+      "type": "string",
+      "description": "path to raw webm"
+    },
+    "fps": {
+      "type": "number"
+    },
+    "total_ms": {
+      "type": "integer"
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time"
+    },
     "steps": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "t_start_ms", "t_end_ms", "status"],
+        "required": [
+          "id",
+          "t_start_ms",
+          "t_end_ms",
+          "status"
+        ],
         "properties": {
-          "id": { "type": "string" },
-          "t_start_ms": { "type": "integer", "description": "when narration audio for this step must start" },
-          "t_actions_end_ms": { "type": "integer" },
-          "t_end_ms": { "type": "integer" },
-          "audio_ms": { "type": "integer", "description": "duration of narration audio the recorder paced against (0 if silent)" },
-          "status": { "type": "string", "enum": ["ok", "failed", "skipped"] },
-          "error": { "type": "string" },
-          "screenshot": { "type": "string", "description": "path to screenshot taken at step end (for QA / self-heal)" }
+          "id": {
+            "type": "string"
+          },
+          "t_start_ms": {
+            "type": "integer",
+            "description": "when narration audio for this step must start"
+          },
+          "t_actions_end_ms": {
+            "type": "integer"
+          },
+          "t_end_ms": {
+            "type": "integer"
+          },
+          "audio_ms": {
+            "type": "integer",
+            "description": "duration of narration audio the recorder paced against (0 if silent)"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "failed",
+              "skipped"
+            ]
+          },
+          "error": {
+            "type": "string"
+          },
+          "screenshot": {
+            "type": "string",
+            "description": "path to screenshot taken at step end (for QA / self-heal)"
+          },
+          "part": {
+            "type": "integer",
+            "description": "effective part of the step (recipe step.part, inherited from earlier steps); absent when the recipe has no parts"
+          },
+          "part_title": {
+            "type": "string"
+          },
+          "zooms": {
+            "type": "array",
+            "description": "zoom actions of this step, in video time",
+            "items": {
+              "type": "object",
+              "required": [
+                "t_start_ms",
+                "t_end_ms",
+                "scale"
+              ],
+              "properties": {
+                "selector": {
+                  "type": "string"
+                },
+                "scale": {
+                  "type": "number",
+                  "description": "scale actually used (may be clamped so the element stays in the viewport)"
+                },
+                "t_start_ms": {
+                  "type": "integer",
+                  "description": "zoom-in starts"
+                },
+                "t_full_ms": {
+                  "type": "integer",
+                  "description": "fully zoomed in"
+                },
+                "t_release_ms": {
+                  "type": "integer",
+                  "description": "zoom-out starts"
+                },
+                "t_end_ms": {
+                  "type": "integer",
+                  "description": "back at scale 1"
+                },
+                "origin": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "description": "transform origin [x, y] in viewport px: element centre, shifted only as needed to keep the zoomed element on screen"
+                }
+              }
+            }
+          }
         }
       }
     }

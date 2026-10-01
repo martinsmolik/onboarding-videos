@@ -1,0 +1,466 @@
+{
+  "id": "absence",
+  "lang": "cs",
+  "title": "Absence – dovolená bez tabulek",
+  "audience": "admin",
+  "module": "Řízení času → Absence",
+  "guide": {
+    "name": "Marie",
+    "role": "tým Sloneek",
+    "gender": "female",
+    "voice": "Marie (stejný AI hlas jako v ostatních videích série)",
+    "address": "vykání, divák neutrálně"
+  },
+  "target_length": {
+    "min_minutes": 4,
+    "max_minutes": 6,
+    "wpm": 140,
+    "narration_words": 795,
+    "estimated_minutes": 5.7
+  },
+  "personas": {
+    "Eliška": "zaměstnankyně z obchodu (jen v příběhu, žádost se zadává z účtu admina)",
+    "Marie": "průvodkyně, mluví za přihlášeného admina"
+  },
+  "preconditions": [
+    "Logged in on pre-production as the admin 'Thomas Claver' (his own approver; his requests are auto-approved).",
+    "Thomas Claver has the vacation type 'Dovolená (dny)' (EN 'Vacation (days)') enabled with at least three days left, and the dates 23.–25. 11. 2026 (Mon–Wed) free.",
+    "The absence type 'Dovolená – ukázka' already exists (created during exploration 2026-10-01); the recording only fills the new-type form and never saves it.",
+    "At least one fictional demo employee exists for the 'Jiný uživatel' step (s21–s22); nothing is created for that user.",
+    "UI language Czech, 1920x1080, left menu section 'Já' expanded."
+  ],
+  "safety": [
+    "Never click 'Uložit pro všechny uživatele'.",
+    "Do not edit, deactivate or delete existing absence types; no type is created during recording (the new-type form is closed with Zpět).",
+    "Do not change anything in 'Hromadné nastavení absencí'.",
+    "Do not create absences for other users; only Thomas Claver's own vacation in s19."
+  ],
+  "source": {
+    "old_video_url": "https://www.youtube.com/watch?v=dEb04tZJdSU",
+    "changes_detected": [
+      "Built on the sample scenario 'Absence (Řízení času)' in docs/brief/kostra-videonavodu.txt, without part 4 (role views).",
+      "Brief fact corrected: sick leave (nemocenská) is type 'Volno' with 'Zdravotní důvody', not 'V práci'; the 'V práci' example is now a company-paid sick day.",
+      "Employee flow follows the 2026 UI explored on pre-prod (recipes/absence-request.en.notes.md): automatic event check instead of a 'Zkontrolovat' button, button 'Vytvořit'.",
+      "Payroll report step added (Komplexní mzdový report) from Modjo training calls; calendar sync tip kept without the unverified 'Mimo kancelář' wording."
+    ],
+    "knowledge_brief": "docs/brief/absence-knowledge.md",
+    "references": [
+      {
+        "title": "Vytvoření a nastavení nové události absence",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/14888168374556",
+        "updated": "2024-07-28"
+      },
+      {
+        "title": "Nastavení absencí uživatelům (hromadné nastavení)",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/14888167593372",
+        "updated": "2024-07-28"
+      },
+      {
+        "title": "Přiřazení a povolení událostí absence",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/14888143255708",
+        "updated": "2024-07-28"
+      },
+      {
+        "title": "Jak zadat absenci nebo si zažádat o dovolenou?",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/14888080081436",
+        "updated": "2024-08-21"
+      },
+      {
+        "title": "Zobrazení absencí uživatele (plocha, kalendáře)",
+        "url": "https://help.sloneek.com/hc/cs-cz/articles/14888149308060",
+        "updated": "2024-07-28"
+      }
+    ],
+    "modjo_calls": [
+      {
+        "name": "Sloneek/U lékaře: sync",
+        "date": "2026-05-14",
+        "call_id": 7826,
+        "used_for": "absence type setup (Volno, Dny a půl dny, Roční fond, převod, CZ/SK split, nemocenská, sick day) 00:37:17–00:43:27"
+      },
+      {
+        "name": "Form Factory: Q&A",
+        "date": "2026-09-18",
+        "call_id": 26698,
+        "used_for": "Volno vs V práci and payroll impact (čistý/hrubý fond) 00:07:20–00:09:59; Zdravotní důvody 00:13:26–00:16:01"
+      },
+      {
+        "name": "Sloneek/BDO Latvia: absence check",
+        "date": "2026-09-03",
+        "call_id": 23365,
+        "used_for": "Save vs Save for all users 00:03:00–00:04:52; fund fields 00:05:57–00:08:15, 00:23:23–00:25:39"
+      },
+      {
+        "name": "Investika & Sloneek | Onboarding",
+        "date": "2026-04-08",
+        "call_id": 2608,
+        "used_for": "active filter, deactivate instead of edit/delete 00:00:52–00:07:24"
+      },
+      {
+        "name": "Reporty mzdy - Sloneek",
+        "date": "2026-09-14",
+        "call_id": 25477,
+        "used_for": "Komplexní mzdový report, filter mistake, export 00:04:16–00:12:40; Uložit pro všechny mistake 00:19:10"
+      },
+      {
+        "name": "Sloneek - školení pro TL a manažment",
+        "date": "2026-06-23",
+        "call_id": 13829,
+        "used_for": "request/approval flow, admin self-approval 00:04:57–00:24:59"
+      },
+      {
+        "name": "Úvodní školení HRIS systém Sloneek",
+        "date": "2026-09-25",
+        "call_id": 28117,
+        "used_for": "orange/green status, balance after approval, Outlook sync 00:08:17–00:13:25"
+      }
+    ]
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "part": 1,
+      "part_title": "Úvod",
+      "narration": "Dovolená v Excelu, nemocenská v e-mailu a na konci měsíce dohledávání pro mzdy? Pojďme to zjednodušit. Jsem Marie z týmu Sloneek a dnes vás provedu modulem Absence.",
+      "narration_tts": "Dovolená v excelu, nemocenská v e-mailu a na konci měsíce dohledávání pro mzdy? Pojďme to zjednodušit. Jsem Marie z týmu Sloník a dnes vás provedu modulem Absence.",
+      "subtitle": "Dovolená v Excelu, nemocenská v e-mailu a na konci měsíce dohledávání pro mzdy? Pojďme to zjednodušit. Jsem Marie z týmu Sloneek a dnes vás provedu modulem Absence.",
+      "intent": "No action - show the intro card 'Absence – dovolená bez tabulek', then the dashboard 'Plocha' right after login.",
+      "must_show": "The dashboard 'Plocha' of the admin account with the left menu is visible.",
+      "zoom": "[ÚVODNÍ KARTA: Absence – dovolená bez tabulek]",
+      "notes": "Hook podle vzorového scénáře z briefu. Na ploše se zobrazuje coach-mark 'Make it yours!' (viz recipes/absence-request.en.notes.md); pokud jde zavřít, zavřít před natáčením."
+    },
+    {
+      "id": "s02",
+      "part": 1,
+      "part_title": "Úvod",
+      "narration": "V Sloneeku máte dovolené, nemocenské i sick days na jednom místě. Zaměstnanci o volno žádají sami, manažer žádost schválí a vy máte data rovnou připravená pro mzdy.",
+      "narration_tts": "V Sloníku máte dovolené, nemocenské i sik dejs na jednom místě. Zaměstnanci o volno žádají sami, manažer žádost schválí a vy máte data rovnou připravená pro mzdy.",
+      "subtitle": "V Sloneeku máte dovolené, nemocenské i sick days na jednom místě. Zaměstnanci o volno žádají sami, manažer žádost schválí a vy máte data rovnou připravená pro mzdy.",
+      "intent": "No click - move the cursor over the left menu section 'Já' to the item 'Moje absence' (EN 'Me' > 'My absences') and keep it there.",
+      "must_show": "The item 'Moje absence' is visible and pointed at in the left menu.",
+      "zoom": "[KROUŽEK na Moje absence v levém menu]",
+      "notes": "Český popisek sekce 'Já' a položky 'Moje absence' je odvozen z EN UI ('ME' > 'My absences'), v CZ UI ověřit."
+    },
+    {
+      "id": "s03",
+      "part": 1,
+      "part_title": "Úvod",
+      "narration": "Zákoník práce dává zaměstnancům nárok nejméně na čtyři týdny dovolené v roce. Když zůstatky počítá systém, odpadá přepisování i chyby. Za pár minut si ukážeme nastavení, zadání absence a přehledy pro mzdy.",
+      "narration_tts": "Zákoník práce dává zaměstnancům nárok nejméně na čtyři týdny dovolené v roce. Když zůstatky počítá systém, odpadá přepisování i chyby. Za pár minut si ukážeme nastavení, zadání absence a přehledy pro mzdy.",
+      "subtitle": "Zákoník práce dává zaměstnancům nárok nejméně na čtyři týdny dovolené v roce. Když zůstatky počítá systém, odpadá přepisování i chyby. Za pár minut si ukážeme nastavení, zadání absence a přehledy pro mzdy.",
+      "intent": "No action - stay on the dashboard 'Plocha'.",
+      "must_show": "The dashboard 'Plocha' is still visible.",
+      "notes": "Fakt: § 213 odst. 1 zákoníku práce – výměra dovolené činí nejméně čtyři týdny v kalendářním roce (platí pro pracovní poměr, ne pro DPP/DPČ – proto 'zaměstnancům' bez dalšího zpřesnění; právník/produkt může chtít doplnit 'v pracovním poměru')."
+    },
+    {
+      "id": "s04",
+      "part": 2,
+      "part_title": "Nastavení",
+      "narration": "Nejdřív si modul připravíme. Jedna podmínka předem: zaměstnanec musí mít přiřazenou pracovní dobu. Bez ní systém nezná jeho pracovní fond a absenci mu nespočítá. Návod najdete ve videu Pracovní doba.",
+      "narration_tts": "Nejdřív si modul připravíme. Jedna podmínka předem: zaměstnanec musí mít přiřazenou pracovní dobu. Bez ní systém nezná jeho pracovní fond a absenci mu nespočítá. Návod najdete ve videu Pracovní doba.",
+      "subtitle": "Nejdřív si modul připravíme. Jedna podmínka předem: zaměstnanec musí mít přiřazenou pracovní dobu. Bez ní systém nezná jeho pracovní fond a absenci mu nespočítá. Návod najdete ve videu Pracovní doba.",
+      "intent": "Show the interstitial card '2 / Nastavení', then open 'Nastavení' (EN 'Settings') from the left menu.",
+      "must_show": "The settings overview with the item 'Absence' is visible.",
+      "zoom": "[MEZITITULEK 2 / Nastavení] [POPISEK: Podmínka – přiřazená pracovní doba → video Pracovní doba]",
+      "notes": "Podmínka pracovní doby je ze vzorového scénáře briefu a z help článku o typech spolupráce; že absenci bez pracovní doby nejde zadat vůbec, ověřit na uživateli bez pracovní doby (např. Petra Example z add-users). Umístění položky Nastavení v levém menu 2026 neověřeno."
+    },
+    {
+      "id": "s05",
+      "part": 2,
+      "part_title": "Nastavení",
+      "narration": "V Nastavení otevřu Absence. Tady jsou všechny typy absencí, které firma používá. Přístup sem má administrátor nebo HR. Pozor, seznam ukazuje jen aktivní typy, vypnuté najdete přes filtr nahoře.",
+      "narration_tts": "V Nastavení otevřu Absence. Tady jsou všechny typy absencí, které firma používá. Přístup sem má administrátor nebo há er. Pozor, seznam ukazuje jen aktivní typy, vypnuté najdete přes filtr nahoře.",
+      "subtitle": "V Nastavení otevřu Absence. Tady jsou všechny typy absencí, které firma používá. Přístup sem má administrátor nebo HR. Pozor, seznam ukazuje jen aktivní typy, vypnuté najdete přes filtr nahoře.",
+      "intent": "Click 'Absence' in 'Nastavení' (EN 'Settings' > 'Absence'), then highlight the active/inactive filter above the list without changing it.",
+      "must_show": "The list of absence types is visible with the active filter highlighted.",
+      "zoom": "[ZOOM na filtr Aktivní nad seznamem]",
+      "notes": "Cesta 'Nastavení / Absence' z help článku 14888168374556 (2024). Filtr 'Aktivní' popsán v callu Investika & Sloneek | Onboarding (~00:04:43). Kdo má přístup (admin/HR) – role HR ověřit v uživatelských rolích."
+    },
+    {
+      "id": "s06",
+      "part": 2,
+      "part_title": "Nastavení",
+      "narration": "Kliknu na Přidat a založím nový typ. Interní název bude Dovolená – ukázka. Vyplním i název, který uvidí zaměstnanci, česky, slovensky a anglicky.",
+      "narration_tts": "Kliknu na Přidat a založím nový typ. Interní název bude Dovolená, ukázka. Vyplním i název, který uvidí zaměstnanci, česky, slovensky a anglicky.",
+      "subtitle": "Kliknu na Přidat a založím nový typ. Interní název bude Dovolená – ukázka. Vyplním i název, který uvidí zaměstnanci, česky, slovensky a anglicky.",
+      "intent": "Click 'Přidat', type 'Dovolená – ukázka' into Název and 'Přeložit název - cs', open 'Zobraz překlad' and type the Slovak ('Dovolenka – ukážka') and English ('Vacation – demo') names. The form is NEVER saved (see s11).",
+      "must_show": "The new absence type form shows 'Dovolená – ukázka' in all name fields.",
+      "zoom": "[Psaní zrychlit]",
+      "notes": "PRE-PROD: typ 'Dovolená – ukázka' už na pre-prod existuje (z průzkumu 2026-10-01), proto se formulář jen vyplní a v s11 zavře tlačítkem Zpět bez uložení – žádný duplikát při opakovaném natáčení. Barva se nevybírá."
+    },
+    {
+      "id": "s07",
+      "part": 2,
+      "part_title": "Nastavení",
+      "narration": "Teď přijde volba, která ovlivní mzdy: typ. Volno zkracuje odpracovanou dobu, to je dovolená nebo nemocenská. V práci odpracovanou dobu nemění, hodí se třeba pro sick day, který firma platí jako běžnou práci. Pro dovolenou vyberu Volno.",
+      "narration_tts": "Teď přijde volba, která ovlivní mzdy: typ. Volno zkracuje odpracovanou dobu, to je dovolená nebo nemocenská. V práci odpracovanou dobu nemění, hodí se třeba pro sik dej, který firma platí jako běžnou práci. Pro dovolenou vyberu Volno.",
+      "subtitle": "Teď přijde volba, která ovlivní mzdy: typ. Volno zkracuje odpracovanou dobu, to je dovolená nebo nemocenská. V práci odpracovanou dobu nemění, hodí se třeba pro sick day, který firma platí jako běžnou práci. Pro dovolenou vyberu Volno.",
+      "intent": "Highlight both options of the absence type selector ('Volno' and 'V práci'), then select 'Volno'.",
+      "must_show": "'Volno' is selected as the type.",
+      "zoom": "[ZOOM na přepínač Volno / V práci]",
+      "notes": "Opraveno proti briefu: nemocenská je typ Volno se zaškrtnutými Zdravotními důvody, ne V práci (help 14888168374556; call Sloneek/U lékaře: sync ~00:39:02 'Nemocenská. Volno krátí odpracovanou dobu'). Sick day jako V práci: tentýž call ~00:43:10. Návštěvu lékaře help uvádí jako V práci, ale firmy ji nastavují různě (Form Factory: Q&A ~00:21:18 jako Volno) – proto jako příklad sick day, ne lékař."
+    },
+    {
+      "id": "s08",
+      "part": 2,
+      "part_title": "Nastavení",
+      "narration": "U Časové jednotky čerpání vyberu Dny a půl dny, aby si lidé mohli vzít i půlden. Zapnu Roční fond, nastavím dvacet dní a nevyčerpané dny se převedou do dalšího roku.",
+      "narration_tts": "U Časové jednotky čerpání vyberu Dny a půl dny, aby si lidé mohli vzít i půlden. Zapnu Roční fond, nastavím dvacet dní a nevyčerpané dny se převedou do dalšího roku.",
+      "subtitle": "U Časové jednotky čerpání vyberu Dny a půl dny, aby si lidé mohli vzít i půlden. Zapnu Roční fond, nastavím dvacet dní a nevyčerpané dny se převedou do dalšího roku.",
+      "intent": "Set 'Časová jednotka čerpání' to 'Dny a půl dny', switch 'Roční fond' on, type 20 into the number of fund units, and switch on 'Nevyčerpané jednotky se převádí do dalšího roku'.",
+      "must_show": "'Dny a půl dny', 'Roční fond' 20 and the carry-over option are set in the form.",
+      "zoom": "[ZOOM na Časová jednotka čerpání a Roční fond]",
+      "notes": "Ověřeno v CZ UI 2026-10-01: Roční nárok je ve dnech ('Roční nárok (Dny)', Jednotka fondu Dny). Na novém formuláři 'Zdravotní důvody' po zaškrtnutí Ročního fondu zmizí a po zaškrtnutí převodu nevyčerpaných jednotek se znovu zobrazí – proto pořadí akcí fond → 20 → Dny → převod."
+    },
+    {
+      "id": "s09",
+      "part": 2,
+      "part_title": "Nastavení",
+      "narration": "Zdravotní důvody nechám vypnuté. Ty zaškrtnete u nemocenské nebo ošetřování člena rodiny, které se počítají v kalendářních dnech. V Časovém omezení nastavím sedm, takže dovolenou je potřeba zadat aspoň týden předem.",
+      "narration_tts": "Zdravotní důvody nechám vypnuté. Ty zaškrtnete u nemocenské nebo ošetřování člena rodiny, které se počítají v kalendářních dnech. V Časovém omezení nastavím sedm, takže dovolenou je potřeba zadat aspoň týden předem.",
+      "subtitle": "Zdravotní důvody nechám vypnuté. Ty zaškrtnete u nemocenské nebo ošetřování člena rodiny, které se počítají v kalendářních dnech. V Časovém omezení nastavím sedm, takže dovolenou je potřeba zadat aspoň týden předem.",
+      "intent": "Highlight the checkbox 'Zdravotní důvody' and leave it unchecked; type 7 into 'Časové omezení'.",
+      "must_show": "'Zdravotní důvody' is unchecked and 'Časové omezení' shows 7.",
+      "zoom": "[ZOOM na Zdravotní důvody] [ZOOM na Časové omezení]",
+      "notes": "Ověřeno: Časové omezení = posuvník −31…31, hodnota 7 ukáže '7 dny před začátkem'. Zdravotní důvody jen zoom, nezaškrtávat."
+    },
+    {
+      "id": "s10",
+      "part": 2,
+      "part_title": "Nastavení",
+      "narration": "Pozor na častou chybu. Časovou jednotku a roční fond po vytvoření typu už nezměníte. Když se spletete, typ nemažte, ale deaktivujte ho, aby zůstala historie, a založte nový.",
+      "narration_tts": "Pozor na častou chybu. Časovou jednotku a roční fond po vytvoření typu už nezměníte. Když se spletete, typ nemažte, ale deaktivujte ho, aby zůstala historie, a založte nový.",
+      "subtitle": "Pozor na častou chybu. Časovou jednotku a roční fond po vytvoření typu už nezměníte. Když se spletete, typ nemažte, ale deaktivujte ho, aby zůstala historie, a založte nový.",
+      "intent": "No click - highlight the fields 'Časová jednotka čerpání' and 'Roční fond' together.",
+      "must_show": "Both fields are highlighted in the form.",
+      "zoom": "[POPISEK: Častá chyba – jednotku a fond později nezměníte]",
+      "notes": "Help 14888168374556 ('Časovou jednotku a roční fond nelze změnit po vytvoření absence'); call Investika & Sloneek | Onboarding ~00:03:05 (přiřazený typ nejde upravit → deaktivovat, duplikovat, znovu přiřadit; nemazat kvůli historii)."
+    },
+    {
+      "id": "s11",
+      "part": 2,
+      "part_title": "Nastavení",
+      "narration": "Při ukládání máte dvě tlačítka. Uložit pro všechny uživatele typ povolí celé firmě. Jinak se třeba slovenským kolegům objeví česká dovolená. Proto stačí kliknout jen na Uložit. Já už mám typ uložený, takže formulář zavřu a tady v seznamu ho vidíte.",
+      "narration_tts": "Při ukládání máte dvě tlačítka. Uložit pro všechny uživatele typ povolí celé firmě. Jinak se třeba slovenským kolegům objeví česká dovolená. Proto stačí kliknout jen na Uložit. Já už mám typ uložený, takže formulář zavřu a tady v seznamu ho vidíte.",
+      "subtitle": "Při ukládání máte dvě tlačítka. Uložit pro všechny uživatele typ povolí celé firmě. Jinak se třeba slovenským kolegům objeví česká dovolená. Proto stačí kliknout jen na Uložit. Já už mám typ uložený, takže formulář zavřu a tady v seznamu ho vidíte.",
+      "intent": "Zoom 'Uložit pro všechny uživatele' (never click), highlight 'Uložit' (never click), click 'Zpět' (discards the form without a prompt), then zoom the existing row 'Dovolená – ukázka' in the list.",
+      "must_show": "The list of absence types shows the existing 'Dovolená – ukázka'.",
+      "zoom": "[ZOOM na Uložit pro všechny uživatele] [KROUŽEK na Uložit]",
+      "notes": "PRE-PROD: neklikat ani 'Uložit pro všechny uživatele', ani 'Uložit'. Narrace upravena, aby byla pravdivá: typ se neukládá, v seznamu je už připravený typ z průzkumu (Volno, roční fond 20 Dny). Chování tlačítek: call Sloneek/BDO Latvia ~00:03:51–00:04:52."
+    },
+    {
+      "id": "s12",
+      "part": 2,
+      "part_title": "Nastavení",
+      "narration": "Komu typ patří a s jakým nárokem, určíte v Hromadném nastavení absencí. Každý člověk tu má řádek pro každý typ absence. Ve sloupci Povolená mu absenci zpřístupníte a ve sloupci Nutné schválení určíte, jestli ji musí schvalovat nadřízený.",
+      "narration_tts": "Komu typ patří a s jakým nárokem, určíte v Hromadném nastavení absencí. Každý člověk tu má řádek pro každý typ absence. Ve sloupci Povolená mu absenci zpřístupníte a ve sloupci Nutné schválení určíte, jestli ji musí schvalovat nadřízený.",
+      "subtitle": "Komu typ patří a s jakým nárokem, určíte v Hromadném nastavení absencí. Každý člověk tu má řádek pro každý typ absence. Ve sloupci Povolená mu absenci zpřístupníte a ve sloupci Nutné schválení určíte, jestli ji musí schvalovat nadřízený.",
+      "intent": "Open 'Hromadné nastavení absencí' from the settings submenu, type 'Claver' into the Jméno column filter, highlight the column 'Povolená' and zoom 'Nutné schválení' without touching any checkbox.",
+      "must_show": "The bulk absence settings show the row of Thomas Claver with the enable and approval controls highlighted.",
+      "zoom": "[ZOOM na Povolit a Nutné schválení]",
+      "notes": "PRE-PROD: nic neměnit, buňky se nejspíš ukládají hned. Ověřeno: řádek = uživatel × typ absence, sloupce 'Povolená' a 'Nutné schválení' v hromadném gridu existují."
+    },
+    {
+      "id": "s13",
+      "part": 2,
+      "part_title": "Nastavení",
+      "narration": "Přecházíte na Sloneek během roku? Pak vyplňte hlavně Fond pro tento rok, tedy kolik dní člověku letos náleží. Individuální fond nechte jen pro skutečné výjimky, třeba delší dovolenou pro vedení.",
+      "narration_tts": "Přecházíte na Sloník během roku? Pak vyplňte hlavně Fond pro tento rok, tedy kolik dní člověku letos náleží. Individuální fond nechte jen pro skutečné výjimky, třeba delší dovolenou pro vedení.",
+      "subtitle": "Přecházíte na Sloneek během roku? Pak vyplňte hlavně Fond pro tento rok, tedy kolik dní člověku letos náleží. Individuální fond nechte jen pro skutečné výjimky, třeba delší dovolenou pro vedení.",
+      "intent": "Click the Jméno cell of the first row (plain text, no checkbox), press End to scroll the grid to the last column, then zoom 'Fond pro tento rok' and highlight 'Individuální fond', 'Vyčerpáno letos', 'Převedeno z loňska'.",
+      "must_show": "The fund columns of the bulk absence settings are highlighted.",
+      "zoom": "[ZOOM postupně na sloupce]",
+      "notes": "Sloupce z help 14888167593372. Doporučení 'při migraci vyplnit jen Fond pro tento rok' a 'Individuální fond jen pro výjimky': call Sloneek/BDO Latvia: absence check ~00:08:15, ~00:24:45, ~00:34:29."
+    },
+    {
+      "id": "s14",
+      "part": 3,
+      "part_title": "Ukázka využití",
+      "narration": "A teď do praxe. Eliška z obchodu si chce vzít tři dny dovolené. Zaměstnanec si absenci zadá sám a já vám to ukážu na svém účtu, Eliška uvidí totéž. V levém menu otevřu Moje absence.",
+      "narration_tts": "A teď do praxe. Eliška z obchodu si chce vzít tři dny dovolené. Zaměstnanec si absenci zadá sám a já vám to ukážu na svém účtu, Eliška uvidí totéž. V levém menu otevřu Moje absence.",
+      "subtitle": "A teď do praxe. Eliška z obchodu si chce vzít tři dny dovolené. Zaměstnanec si absenci zadá sám a já vám to ukážu na svém účtu, Eliška uvidí totéž. V levém menu otevřu Moje absence.",
+      "intent": "Show the interstitial card '3 / Ukázka využití', then click 'Moje absence' in the section 'Já' of the left menu (EN 'Me' > 'My absences').",
+      "must_show": "The profile tab 'Přehled absencí' with balance cards and the button 'Nová absence' is visible.",
+      "zoom": "[MEZITITULEK 3 / Ukázka využití]",
+      "notes": "Žádost se zadává za přihlášeného admina Thomase Clavera (jediný účet). Eliška je jen příběh; jméno Thomas Claver v hlavičce nekomentovat. Sekce Já musí být rozbalená (EN notes, riziko 4)."
+    },
+    {
+      "id": "s15",
+      "part": 3,
+      "part_title": "Ukázka využití",
+      "narration": "Nahoře vidíte zůstatky podle typů, tedy kolik dovolené ještě zbývá. Pod nimi jsou nadcházející a už ukončené absence.",
+      "narration_tts": "Nahoře vidíte zůstatky podle typů, tedy kolik dovolené ještě zbývá. Pod nimi jsou nadcházející a už ukončené absence.",
+      "subtitle": "Nahoře vidíte zůstatky podle typů, tedy kolik dovolené ještě zbývá. Pod nimi jsou nadcházející a už ukončené absence.",
+      "intent": "No click - highlight the balance cards, then the list 'Nadcházející absence' (EN 'Upcoming absences').",
+      "must_show": "Balance cards and the upcoming absences list are highlighted.",
+      "zoom": "[ZOOM na karty zůstatků]",
+      "notes": "Ověřeno v CZ UI: 'Nadcházející absence' / 'Již ukončené absence'. Zoom na kartu '🏖️ Dovolená (denní fond)' (zůstatek se mění s každým natáčením, selektor je podle názvu typu)."
+    },
+    {
+      "id": "s16",
+      "part": 3,
+      "part_title": "Ukázka využití",
+      "narration": "Kliknu na Nová absence a v poli Absence vyberu dovolenou. V nabídce jsou jen typy, které má daný člověk povolené.",
+      "narration_tts": "Kliknu na Nová absence a v poli Absence vyberu dovolenou. V nabídce jsou jen typy, které má daný člověk povolené.",
+      "subtitle": "Kliknu na Nová absence a v poli Absence vyberu dovolenou. V nabídce jsou jen typy, které má daný člověk povolené.",
+      "intent": "Click 'Nová absence' (EN 'New absence'), open the field 'Absence', type 'Dovolená (dny)' into its search box and click the single remaining option.",
+      "must_show": "The vacation type is selected and the date fields 'Od' and 'Do' appear.",
+      "notes": "CZ název typu na pre-prod odvozen z EN 'Vacation (days)'; možnosti začínají emoji, proto vyhledávání. Typ 'Dovolená – ukázka' z kroku s06 Thomas povolený nemá (nic se nepřiřazovalo), proto se používá existující typ."
+    },
+    {
+      "id": "s17",
+      "part": 3,
+      "part_title": "Ukázka využití",
+      "narration": "V kalendáři vyberu první a poslední den. Kdyby šlo jen o dopoledne, přepnu nahoře na Půlden.",
+      "narration_tts": "V kalendáři vyberu první a poslední den. Kdyby šlo jen o dopoledne, přepnu nahoře na Půlden.",
+      "subtitle": "V kalendáři vyberu první a poslední den. Kdyby šlo jen o dopoledne, přepnu nahoře na Půlden.",
+      "intent": "Click 'Od', switch the datepicker to the year view, pick 2026, then November, then the 23rd; click 'Do' and pick the 25th (Mon–Wed 23.–25. 11. 2026); highlight the toggle 'Půlden / Celé dny'.",
+      "must_show": "'Od' and 'Do' show a Monday to Wednesday range.",
+      "zoom": "[KROUŽEK na Půlden]",
+      "notes": "Datepicker přes rok → měsíc → den, takže nezáleží na měsíci natáčení. 23.–25. 11. 2026 ověřeno volné 2026-10-01 (zelená kontrola, 3 Dny). Každé úspěšné natočení termín spotřebuje."
+    },
+    {
+      "id": "s18",
+      "part": 3,
+      "part_title": "Ukázka využití",
+      "narration": "Sloneek hned zkontroluje, jestli se absence s ničím nepřekrývá, a ukáže, kolik dní se odečte z fondu. Kdyby něco nesedělo, tlačítko Vytvořit zůstane neaktivní.",
+      "narration_tts": "Sloník hned zkontroluje, jestli se absence s ničím nepřekrývá, a ukáže, kolik dní se odečte z fondu. Kdyby něco nesedělo, tlačítko Vytvořit zůstane neaktivní.",
+      "subtitle": "Sloneek hned zkontroluje, jestli se absence s ničím nepřekrývá, a ukáže, kolik dní se odečte z fondu. Kdyby něco nesedělo, tlačítko Vytvořit zůstane neaktivní.",
+      "intent": "No click - highlight the 'Kontrola události' block (EN 'Event check') with 'Počet dní' and 'Čerpání fondu'.",
+      "must_show": "The event check shows a green check, three days, and the enabled button 'Vytvořit'.",
+      "zoom": "[ZOOM na Kontrola události]",
+      "notes": "Kontrola běží automaticky (starý help zmiňuje tlačítko 'Zkontrolovat', nové UI ho nemá). CZ popisky bloku přeloženy z EN, ověřit."
+    },
+    {
+      "id": "s19",
+      "part": 3,
+      "part_title": "Ukázka využití",
+      "narration": "Do poznámky napíšu, kdo mě zastoupí, ať to kolegové vědí. Kliknu na Vytvořit.",
+      "narration_tts": "Do poznámky napíšu, kdo mě zastoupí, ať to kolegové vědí. Kliknu na Vytvořit.",
+      "subtitle": "Do poznámky napíšu, kdo mě zastoupí, ať to kolegové vědí. Kliknu na Vytvořit.",
+      "intent": "Fill 'Zastupuje mě Petr.' into 'Poznámka k absenci', then click 'Vytvořit' (the only write of the recording).",
+      "must_show": "The dialog closes and a confirmation toast appears.",
+      "zoom": "[Psaní zrychlit]"
+    },
+    {
+      "id": "s20",
+      "part": 3,
+      "part_title": "Ukázka využití",
+      "narration": "Absence je mezi nadcházejícími. Jako administrátorka mám schválení automaticky. Elišce by žádost odešla nadřízenému a do schválení by svítila oranžově. Po schválení zezelená a teprve pak se odečte ze zůstatku.",
+      "narration_tts": "Absence je mezi nadcházejícími. Jako administrátorka mám schválení automaticky. Elišce by žádost odešla nadřízenému a do schválení by svítila oranžově. Po schválení zezelená a teprve pak se odečte ze zůstatku.",
+      "subtitle": "Absence je mezi nadcházejícími. Jako administrátorka mám schválení automaticky. Elišce by žádost odešla nadřízenému a do schválení by svítila oranžově. Po schválení zezelená a teprve pak se odečte ze zůstatku.",
+      "intent": "No click - highlight the new entry under 'Nadcházející absence' with its status label.",
+      "must_show": "The new vacation entry with its status label is highlighted under 'Nadcházející absence'.",
+      "zoom": "[ZOOM na stav žádosti]",
+      "notes": "Thomasovy žádosti se schvalují automaticky ('Schváleno nadřízeným'); v dialogu není volba Automaticky schválit / Poslat ke schválení. Narrace to říká pravdivě."
+    },
+    {
+      "id": "s21",
+      "part": 3,
+      "part_title": "Ukázka využití",
+      "narration": "Druhá častá situace: Eliška ráno volá, že je nemocná. Jako administrátorka jí nemocenskou zadám sama. Kliknu na Nová absence a posunu přepínač na Jiný uživatel.",
+      "narration_tts": "Druhá častá situace: Eliška ráno volá, že je nemocná. Jako administrátorka jí nemocenskou zadám sama. Kliknu na Nová absence a posunu přepínač na Jiný uživatel.",
+      "subtitle": "Druhá častá situace: Eliška ráno volá, že je nemocná. Jako administrátorka jí nemocenskou zadám sama. Kliknu na Nová absence a posunu přepínač na Jiný uživatel.",
+      "intent": "Click 'Nová absence' and switch the toggle to 'Jiný uživatel' (EN 'Other user').",
+      "must_show": "The absence dialog shows a user picker.",
+      "zoom": "[KROUŽEK na přepínač Jiný uživatel]",
+      "notes": "Přepínač 'Jiný uživatel' je z help 14888167593372 (2024), v EN průzkumu nezmapován – ověřit EN/CZ popisek."
+    },
+    {
+      "id": "s22",
+      "part": 3,
+      "part_title": "Ukázka využití",
+      "narration": "V poli Uživatel vyberu kolegyni, typ Nemocenská a dnešní den. Tlačítkem Vytvořit nemocenskou uložíte a hned je v kalendáři i v podkladech pro mzdy.",
+      "narration_tts": "V poli Uživatel vyberu kolegyni, typ Nemocenská a dnešní den. Tlačítkem Vytvořit nemocenskou uložíte a hned je v kalendáři i v podkladech pro mzdy.",
+      "subtitle": "V poli Uživatel vyberu kolegyni, typ Nemocenská a dnešní den. Tlačítkem Vytvořit nemocenskou uložíte a hned je v kalendáři i v podkladech pro mzdy.",
+      "intent": "Pick the demo user 'Nová Kristýna' (search 'Kristýna'), type 'Nemocenská', pick today in 'Od', zoom 'Vytvořit' without clicking it, then close the dialog with X.",
+      "must_show": "The filled sick-leave form with the highlighted button 'Vytvořit' is visible before the dialog is closed.",
+      "zoom": "[ZOOM na Vytvořit]",
+      "notes": "PRE-PROD: nic se nevytváří. Uživatelka se jménem Eliška na pre-prod není, proto narrace říká 'vyberu kolegyni'. 'Nová Kristýna' má typ Sick leave (🏥 Nemocenská) povolený; Kočí Jana ho nemá."
+    },
+    {
+      "id": "s23",
+      "part": 3,
+      "part_title": "Ukázka využití",
+      "narration": "Kdo je zrovna pryč? V menu Kalendáře otevřu kalendář Absence. Můžu filtrovat podle týmu nebo lidí a hned vidím, jestli se dovolené v týmu nepřekrývají.",
+      "narration_tts": "Kdo je zrovna pryč? V menu Kalendáře otevřu kalendář Absence. Můžu filtrovat podle týmu nebo lidí a hned vidím, jestli se dovolené v týmu nepřekrývají.",
+      "subtitle": "Kdo je zrovna pryč? V menu Kalendáře otevřu kalendář Absence. Můžu filtrovat podle týmu nebo lidí a hned vidím, jestli se dovolené v týmu nepřekrývají.",
+      "intent": "Expand 'Kalendáře', point at 'Absence', open the absence calendar for November 2026 via URL, zoom 'Rychlý pohled' and highlight the user filter and the row 'Claver Thomas'.",
+      "must_show": "The absence calendar shows the new vacation event and the filter is highlighted.",
+      "zoom": "[ZOOM na filtr]",
+      "notes": "Help 14888149308060: Kalendáře → Absence, filtr událostí a uživatelů. Filtr podle týmu (brief) ověřit. Manažer vidí v kalendáři své podřízené (call Sloneek - školení pro TL a manažment ~00:18:24)."
+    },
+    {
+      "id": "s24",
+      "part": 3,
+      "part_title": "Ukázka využití",
+      "narration": "Zbývají podklady pro mzdy. Ve Vlastních reportech otevřu Komplexní mzdový report. Vidíte hrubý pracovní fond, délku absencí a čistý pracovní fond, tedy co zbude po odečtení volna. Proto tolik záleží na volbě Volno nebo V práci.",
+      "narration_tts": "Zbývají podklady pro mzdy. Ve Vlastních reportech otevřu Komplexní mzdový report. Vidíte hrubý pracovní fond, délku absencí a čistý pracovní fond, tedy co zbude po odečtení volna. Proto tolik záleží na volbě Volno nebo V práci.",
+      "subtitle": "Zbývají podklady pro mzdy. Ve Vlastních reportech otevřu Komplexní mzdový report. Vidíte hrubý pracovní fond, délku absencí a čistý pracovní fond, tedy co zbude po odečtení volna. Proto tolik záleží na volbě Volno nebo V práci.",
+      "intent": "Open 'Vlastní reporty' from the menu, point at 'Komplexní mzdový report' and open it (via its URL – the wrapped link cannot be clicked at its centre), highlight 'Hrubý pracovní fond (hodiny)', 'Délka absencí typu volno (hodiny)' and 'Čistý pracovní fond (hodiny)'.",
+      "must_show": "The payroll report with the three fund columns highlighted is visible.",
+      "zoom": "[ZOOM na tři sloupce]",
+      "notes": "Cesta a sloupce: call Reporty mzdy - Sloneek ~00:04:16, ~00:11:34; vzorec čistý = hrubý − délka absencí typu Volno: call Form Factory: Q&A ~00:08:01–00:09:36. Report může na pre-prod generovat déle – čekání vystřihnout."
+    },
+    {
+      "id": "s25",
+      "part": 3,
+      "part_title": "Ukázka využití",
+      "narration": "Pro mzdovou účetní si report omezte na aktivní zaměstnance. Pozor, zaškrtnutí sloupce Aktivní vlevo ještě nefiltruje, hodnotu Ano zvolte přes ikonu filtru u sloupce Aktivní v tabulce. Pak report vyexportujete do Excelu.",
+      "narration_tts": "Pro mzdovou účetní si report omezte na aktivní zaměstnance. Pozor, zaškrtnutí sloupce Aktivní vlevo ještě nefiltruje, hodnotu Ano zvolte přes ikonu filtru u sloupce Aktivní v tabulce. Pak report vyexportujete do excelu.",
+      "subtitle": "Pro mzdovou účetní si report omezte na aktivní zaměstnance. Pozor, zaškrtnutí sloupce Aktivní vlevo ještě nefiltruje, hodnotu Ano zvolte přes ikonu filtru u sloupce Aktivní v tabulce. Pak report vyexportujete do Excelu.",
+      "intent": "No change – highlight 'Aktivní' in the column list on the left, zoom the filter icon in the 'Aktivní' column header, highlight 'Export' without clicking it.",
+      "must_show": "The 'Aktivní' filter cell and the 'Export' button are highlighted.",
+      "zoom": "[ZOOM na řádek filtrů] [KROUŽEK na Export]",
+      "notes": "Ověřeno v UI 2026-10-01: report je PrimeNG tabulka bez řádku filtrů; filtr je ikona trychtýře v záhlaví sloupce – narrace upravena. Častá chyba: call Reporty mzdy - Sloneek ~00:04:52–00:05:20."
+    },
+    {
+      "id": "s26",
+      "part": 5,
+      "part_title": "Závěr",
+      "narration": "A je to. Teď umíte nastavit typ absence, přidělit nároky a zadat dovolenou i nemocenskou. Ušetříte přepisování tabulek a mzdová účetní dostane data, na která se může spolehnout.",
+      "narration_tts": "A je to. Teď umíte nastavit typ absence, přidělit nároky a zadat dovolenou i nemocenskou. Ušetříte přepisování tabulek a mzdová účetní dostane data, na která se může spolehnout.",
+      "subtitle": "A je to. Teď umíte nastavit typ absence, přidělit nároky a zadat dovolenou i nemocenskou. Ušetříte přepisování tabulek a mzdová účetní dostane data, na která se může spolehnout.",
+      "intent": "No action - show the interstitial card 'Závěr' with the three-point summary on screen.",
+      "must_show": "The summary card is visible.",
+      "zoom": "[MEZITITULEK 4 / Závěr – část 4 Pohled rolí je vynechaná, číslovat karty 1–2–3–4] [SHRNUTÍ V BODECH]",
+      "notes": "Pravidlo 3×1: shrnutí (tato věta), přínos (druhá věta), další krok (s27)."
+    },
+    {
+      "id": "s27",
+      "part": 5,
+      "part_title": "Závěr",
+      "narration": "Jak žádost schválí manažer v sekci Schvalování, ukážeme v samostatném videu. Váš úkol na dnes: projděte typy absencí se mzdovou účetní a lidem doplňte Fond pro tento rok.",
+      "narration_tts": "Jak žádost schválí manažer v sekci Schvalování, ukážeme v samostatném videu. Váš úkol na dnes: projděte typy absencí se mzdovou účetní a lidem doplňte Fond pro tento rok.",
+      "subtitle": "Jak žádost schválí manažer v sekci Schvalování, ukážeme v samostatném videu. Váš úkol na dnes: projděte typy absencí se mzdovou účetní a lidem doplňte Fond pro tento rok.",
+      "intent": "No action - keep the summary card and add the on-screen call to action 'Úkol: typy absencí + Fond pro tento rok'.",
+      "must_show": "The call to action is visible on the summary card.",
+      "zoom": "[POPISEK s výzvou]",
+      "notes": "Jedna věta za vynechanou část 4 (brief povoluje). Sekce 'Schvalování' a mobilní zadání: call Sloneek - školení pro TL a manažment ~00:17:20, Úvodní školení HRIS systém Sloneek (mobilní aplikace)."
+    },
+    {
+      "id": "s28",
+      "part": 5,
+      "part_title": "Závěr",
+      "narration": "Tip na závěr: v Nastavení rozhraní si v části Propojené účty připojte Google nebo Microsoft. Schválené absence se vám pak propíšou do kalendáře Google nebo Outlook a nemusíte je zadávat dvakrát.",
+      "narration_tts": "Tip na závěr: v Nastavení rozhraní si v části Propojené účty připojte gůgl nebo majkrosoft. Schválené absence se vám pak propíšou do kalendáře gůgl nebo autluk a nemusíte je zadávat dvakrát.",
+      "subtitle": "Tip na závěr: v Nastavení rozhraní si v části Propojené účty připojte Google nebo Microsoft. Schválené absence se vám pak propíšou do kalendáře Google nebo Outlook a nemusíte je zadávat dvakrát.",
+      "intent": "Open 'Nastavení rozhraní' (menu Já), highlight 'Propojené účty' and zoom 'Sign in with Microsoft' without connecting anything.",
+      "must_show": "The calendar connection control in the profile is highlighted.",
+      "zoom": "[ZOOM na propojení kalendáře]",
+      "notes": "Ověřeno: v Nastavení rozhraní je sekce 'Propojené účty' s Google a Microsoft (Sign in with Google / Microsoft). NEOVĚŘENO, že právě toto propojení propisuje schválené absence do kalendáře – potvrdit s produktem (kalendář absencí má ještě ikony Microsoft/Google vpravo nahoře, funkce neověřena)."
+    },
+    {
+      "id": "s29",
+      "part": 5,
+      "part_title": "Závěr",
+      "narration": "Kdyby něco nešlo, zeptejte se Ellie vpravo dole nebo mrkněte do Centra nápovědy. Příště se podíváme na docházku a příchody. Já se zatím jdu podívat, kolik dní dovolené mi zbývá. Méně administrativy, víc času na lidi. To je Sloneek.",
+      "narration_tts": "Kdyby něco nešlo, zeptejte se Elí vpravo dole nebo mrkněte do Centra nápovědy. Příště se podíváme na docházku a příchody. Já se zatím jdu podívat, kolik dní dovolené mi zbývá. Méně administrativy, víc času na lidi. To je Sloník.",
+      "subtitle": "Kdyby něco nešlo, zeptejte se Ellie vpravo dole nebo mrkněte do Centra nápovědy. Příště se podíváme na docházku a příchody. Já se zatím jdu podívat, kolik dní dovolené mi zbývá. Méně administrativy, víc času na lidi. To je Sloneek.",
+      "intent": "Open 'Moje absence' and zoom the vacation balance card (the joke 'kolik dní dovolené mi zbývá').",
+      "must_show": "The closing card with the Sloneek logo and the next video preview is visible.",
+      "zoom": "[KROUŽEK na Ellie] [ZÁVĚREČNÁ KARTA + náhled videa Docházka – příchody a odchody]",
+      "notes": "Bublina vpravo dole je HubSpot chat (#hubspot-messages-iframe-container); při kontrole byla jednou vidět a pak opakovaně skrytá (visibility:hidden), proto ji recept nezvýrazňuje. Jméno 'Ellie' v UI neověřeno."
+    }
+  ]
+}

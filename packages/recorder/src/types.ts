@@ -2,8 +2,8 @@
 // Kept local on purpose – packages must not share code.
 
 export type ActionType =
-  | 'navigate' | 'click' | 'hover' | 'type' | 'press'
-  | 'select' | 'scroll' | 'wait' | 'highlight';
+  | 'navigate' | 'click' | 'hover' | 'type' | 'fill' | 'press'
+  | 'select' | 'scroll' | 'wait' | 'highlight' | 'zoom';
 
 export interface Action {
   type: ActionType;
@@ -11,12 +11,23 @@ export interface Action {
   value?: string;
   clear?: boolean;
   delay_ms?: number;
+  /** type: 'fast' = 15 ms per char (default 35) */
+  speed?: 'normal' | 'fast';
+  /** zoom: time fully zoomed in (default 2500) */
+  hold_ms?: number;
   before_ms?: number;
 }
 
 export interface Step {
   id: string;
   narration: string;
+  /** text for the SRT (default narration) – assembler only */
+  subtitle?: string;
+  /** text sent to TTS (default narration) – the recorder estimates audio length from it */
+  narration_tts?: string;
+  /** video part; inherited by later steps without one */
+  part?: number;
+  part_title?: string;
   actions: Action[];
   hold_after_ms?: number;
   min_duration_ms?: number;
@@ -32,13 +43,30 @@ export interface Recipe {
   viewport: { width: number; height: number };
   start: { url: string; storage_state?: string };
   voice?: { provider?: string; voice_id?: string; model_id?: string };
+  chapters?: boolean;
+  interstitials?: boolean;
   steps: Step[];
 }
 
 export type StepStatus = 'ok' | 'failed' | 'skipped';
 
+export interface ZoomWindow {
+  selector?: string;
+  /** scale actually used (clamped so the element stays inside the viewport) */
+  scale: number;
+  /** transform origin in viewport px (element centre, shifted so the zoomed element stays on screen) */
+  origin?: [number, number];
+  t_start_ms: number;   // zoom-in starts
+  t_full_ms: number;    // fully zoomed in
+  t_release_ms: number; // zoom-out starts
+  t_end_ms: number;     // back at scale 1
+}
+
 export interface TimingStep {
   id: string;
+  /** effective part (step.part or inherited); absent when the recipe has no parts */
+  part?: number;
+  part_title?: string;
   t_start_ms: number;
   t_actions_end_ms: number;
   t_end_ms: number;
@@ -46,6 +74,7 @@ export interface TimingStep {
   status: StepStatus;
   error?: string;
   screenshot?: string;
+  zooms?: ZoomWindow[];
 }
 
 export interface Timing {

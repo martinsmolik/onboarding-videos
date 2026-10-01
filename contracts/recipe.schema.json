@@ -93,6 +93,16 @@
       "items": {
         "$ref": "#/$defs/step"
       }
+    },
+    "chapters": {
+      "type": "boolean",
+      "default": true,
+      "description": "Write out/<id>/chapters.txt (YouTube chapter list, times in final.mp4) from the steps' `part` / `part_title`. Only written when at least one step has a part."
+    },
+    "interstitials": {
+      "type": "boolean",
+      "default": true,
+      "description": "Insert a 1.5 s card \"<part> / <part_title>\" (brand colours) before every step whose part differs from the previous step's (never before the very first step – the intro covers it). mux --no-interstitials overrides."
     }
   },
   "$defs": {
@@ -110,7 +120,24 @@
         },
         "narration": {
           "type": "string",
-          "description": "One idea per step. Spoken while actions run. Empty string = silent step."
+          "description": "One idea per step. Spoken while actions run. Empty string = silent step. Default for both `subtitle` and `narration_tts`."
+        },
+        "subtitle": {
+          "type": "string",
+          "description": "Text for final.srt (what the viewer reads). Default = narration. Timing still comes from the audio alignment of narration_tts (mapped proportionally when the texts differ). Empty string = no subtitle for this step."
+        },
+        "narration_tts": {
+          "type": "string",
+          "description": "Text sent to TTS / the external voiceover (numbers and acronyms spelled out for the AI voice, e.g. \"kej pí áj\" for KPI). Default = narration. Also the text used for the audio cache and stale-clip detection."
+        },
+        "part": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Video part (brief: 1 Úvod, 2 Nastavení, 3 Ukázka využití, 4 Pohled manažera/zaměstnance, 5 Závěr). Set it on the first step of a part; later steps without `part` inherit it. A change of part => interstitial card + chapter."
+        },
+        "part_title": {
+          "type": "string",
+          "description": "Title of the part (card text \"<part> / <part_title>\", chapter title). Needed only on the first step of the part."
         },
         "actions": {
           "type": "array",
@@ -155,12 +182,15 @@
             "click",
             "hover",
             "type",
+            "fill",
             "press",
             "select",
             "scroll",
             "wait",
-            "highlight"
-          ]
+            "highlight",
+            "zoom"
+          ],
+          "description": "zoom = smooth page zoom on `selector` (400 ms in, hold_ms, 400 ms out; origin = element centre, moved only as far as needed to keep the zoomed element on screen; scale clamped to fit; cursor glides onto the element if it is not on it). fill = cursor clicks the field, then the whole `value` is set at once (+ input/change events) – for long texts."
         },
         "selector": {
           "type": "string",
@@ -168,19 +198,32 @@
         },
         "value": {
           "type": "string",
-          "description": "navigate: url; type: text; press: key; select: option; wait: ms; scroll: 'down'|'up'|selector"
+          "description": "navigate: url; type/fill: text; press: key; select: option; wait: ms; scroll: 'down'|'up'|selector; zoom: scale, e.g. \"1.6\" (default 1.6)"
         },
         "clear": {
           "type": "boolean",
-          "description": "type: clear field first"
+          "description": "type: clear field first (fill always replaces the value)"
         },
         "delay_ms": {
           "type": "integer",
-          "description": "type: per-char delay (default 60)"
+          "description": "type: per-char delay in ms (default 35; speed \"fast\" = 15; recordVideo+beacon recorder mode keeps 80 / 40). Wins over `speed`."
         },
         "before_ms": {
           "type": "integer",
           "description": "pause before this action (default 300)"
+        },
+        "speed": {
+          "type": "string",
+          "enum": [
+            "normal",
+            "fast"
+          ],
+          "description": "type: \"fast\" = 15 ms per char instead of 35. For long texts prefer `fill` (instant)."
+        },
+        "hold_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "zoom: how long to stay zoomed in (default 2500). Total action time = 400 ms in + hold_ms + 400 ms out."
         }
       }
     }

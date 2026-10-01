@@ -3,6 +3,7 @@
 //
 //   pnpm local:check [recipe] [--id <id>] [--cdp auto|url] [--session-file f]     pre-flight only
 //   pnpm local <recipe> [--id <id>] [--cdp auto|url] [--session-file f] [--no-intro]
+//                       [--intro-image thumb.png] [--outro-image end.png] [--no-interstitials] [--no-chapters]
 //                       [--provider external|elevenlabs|say|espeak|mock] [--run-id X] [--subtitles burn|sidecar|none] [--no-open]
 //
 // No LLM here – recipes and voiceovers are produced interactively with Claude; this script only replays.
@@ -17,7 +18,7 @@ const userCwd = process.env.INIT_CWD || process.cwd();
 const isMac = process.platform === 'darwin';
 
 // ---------------------------------------------------------------- args
-const BOOL = ['no-intro', 'no-open', 'check', 'help'];
+const BOOL = ['no-intro', 'no-open', 'check', 'help', 'no-interstitials', 'no-chapters'];
 function parseArgs(argv) {
   const o = { _: [] };
   for (let i = 0; i < argv.length; i++) {
@@ -37,6 +38,7 @@ if (args.help) {
   console.log(`usage:
   pnpm local:check [recipe.json] [--id <id>] [--cdp auto|http://127.0.0.1:9110] [--session-file out/session.json]
   pnpm local <recipe.json> [--id <id>] [--cdp auto|<url>] [--session-file <file>] [--no-intro]
+             [--intro-image <png> [--intro-sec 3]] [--outro-image <png> [--outro-sec 3]] [--no-interstitials] [--no-chapters]
              [--provider external|elevenlabs|say|espeak|mock] [--run-id <id>] [--subtitles burn|sidecar|none] [--no-open]
   pnpm voice:manifest <recipe.json> [--id <id>]     to-do list for the voiceover (provider external)`);
   process.exit(0);
@@ -180,6 +182,12 @@ if (recipeArg) {
   bad('no recipe given: pnpm local <recipe.json>');
 }
 
+// ---------------------------------------------------------------- intro / outro stills (thumbnails)
+for (const k of ['intro-image', 'outro-image']) {
+  if (typeof args[k] !== 'string') continue;
+  fs.existsSync(resolveUser(args[k])) ? ok(`--${k}: ${args[k]} (${args[k.replace('-image', '-sec')] ?? 3} s)`) : bad(`--${k}: ${args[k]} not found`);
+}
+
 // ---------------------------------------------------------------- voice (mirrors assembler chooseProvider)
 const id = typeof args.id === 'string' ? args.id : recipe?.id;
 const outDir = id ? path.join(outRoot, id) : null;
@@ -236,7 +244,10 @@ stage('1/3 tts', ['--filter', '@svp/assembler', 'start', '--', 'tts', '--recipe'
 stage('2/3 record', ['--filter', '@svp/recorder', 'start', '--', '--recipe', recipeOut, '--out', outDir,
   ...(cdpSpec ? ['--cdp', cdpSpec] : []), ...(sessionFile && !cdpSpec ? ['--session-file', sessionFile, '--capture', 'screencast'] : []),
   ...(typeof args['run-id'] === 'string' ? ['--run-id', args['run-id']] : [])]);
+const passStr = (k) => (typeof args[k] === 'string' ? [`--${k}`, k.endsWith('-image') ? resolveUser(args[k]) : args[k]] : []);
 stage('3/3 mux', ['--filter', '@svp/assembler', 'start', '--', 'mux', '--out', outDir, ...(args['no-intro'] ? ['--no-intro'] : []),
+  ...(args['no-interstitials'] ? ['--no-interstitials'] : []), ...(args['no-chapters'] ? ['--no-chapters'] : []),
+  ...passStr('intro-image'), ...passStr('outro-image'), ...passStr('intro-sec'), ...passStr('outro-sec'),
   ...(typeof args.subtitles === 'string' ? ['--subtitles', args.subtitles] : [])]);
 
 const timing = JSON.parse(fs.readFileSync(path.join(outDir, 'timing.json'), 'utf8'));
@@ -249,6 +260,7 @@ if (notOk.length) {
 }
 console.log(`final:     ${final}`);
 console.log(`subtitles: ${path.join(outDir, 'final.srt')}`);
+if (fs.existsSync(path.join(outDir, 'chapters.txt'))) console.log(`chapters:  ${path.join(outDir, 'chapters.txt')}  (paste into the YouTube description)`);
 console.log(`shots:     ${path.join(outDir, 'shots')}/`);
 if (isMac && !args['no-open']) spawnSync('open', [final], { stdio: 'ignore' });
 process.exit(notOk.length ? 2 : 0);

@@ -20,7 +20,9 @@
     "voice:manifest": "node scripts/voice-manifest.mjs",
     "batch": "node packages/orchestrator/scripts/batch.mjs",
     "voice:fetch": "node scripts/fetch-voice.mjs",
-    "pilot": "node scripts/fetch-voice.mjs add-users && node scripts/local-run.mjs recipes/add-users.en.json --id add-users --cdp auto --provider external --no-intro"
+    "pilot": "node scripts/fetch-voice.mjs add-users && node scripts/local-run.mjs recipes/add-users.en.json --id add-users --cdp auto --provider external --no-intro",
+    "absence": "node scripts/fetch-voice.mjs absence-cs && node scripts/local-run.mjs recipes/cs/absence.json --id absence-cs --cdp auto --provider external --no-intro",
+    "absence:record": "node scripts/local-run.mjs recipes/cs/absence.json --id absence-cs --cdp auto --provider external --no-intro"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

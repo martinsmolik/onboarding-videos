@@ -124,6 +124,35 @@ cd hackaton && pnpm i                # Playwright Chromium v CDP režimu není p
    ```
    Recorder pak spustí vlastní Chromium s tvými tokeny. Hodnoty tokenů se nikde nevypisují a `out/session.json` je v `.gitignore`.
 
+## 7b. Videa podle briefu (4–6 min, čeština, 5 částí)
+
+Brief (`docs/brief/kostra-videonavodu.txt`) chce mezititulek na začátku každé části, kapitoly do popisu na YouTube, zoom na důležitá místa a rychlé psaní. V recipe na to slouží tato pole (všechna jsou volitelná, staré recipe fungují beze změny):
+
+| pole | kde | co dělá | výchozí |
+|---|---|---|---|
+| `part`, `part_title` | krok | Číslo a název části. Stačí je dát na **první krok části**, další kroky ji zdědí. Při změně části se vloží karta „2 / Nastavení“ (1,5 s) a vznikne kapitola. | – |
+| `narration_tts` | krok | Text, který se **namluví** (čísla a zkratky rozepsané pro AI hlas, např. „kej pí áj“). Claude hlasuje pole `tts_text` z manifestu. | `narration` |
+| `subtitle` | krok | Text, který divák **čte** v titulcích (např. „KPI“, „24 hodin“). `""` = krok bez titulku. | `narration` |
+| `interstitials`, `chapters` | recipe | Vypne mezititulky / `chapters.txt`. | `true` |
+| `zoom` | akce | Plynulý zoom na `selector`: `value` = měřítko (`"1.6"`), `hold_ms` = jak dlouho zůstane přiblížený. Kurzor zůstane normálně velký a ukazuje na přiblížený prvek. Celý prvek se musí vejít na obrazovku, jinak se měřítko sníží (v logu `zoom …: scale 1.6 -> …`) – zoomuj spíš menší prvek. | `1.6`, 2500 ms |
+| `fill` | akce | Kurzor klikne do pole a celý text se vloží najednou. Na delší texty. | – |
+| `type` + `speed: "fast"` | akce | Psaní po znacích: normálně 35 ms/znak, `fast` 15 ms (nahrávání v Neo přes CDP; cloudový smoke zůstává na 80 / 40 ms kvůli synchronizaci). `delay_ms` má přednost. | 35 ms |
+
+Příklad kroku:
+
+```json
+{ "id": "s04", "part": 2, "part_title": "Nastavení",
+  "narration": "Tady vidíte hlavní KPI docházky.",
+  "narration_tts": "Tady vidíte hlavní kej pí áj docházky.",
+  "actions": [ { "type": "zoom", "selector": "[data-testid=kpi-hours]", "value": "1.6", "hold_ms": 2500 } ] }
+```
+
+Výstupy navíc: `out/<id>/chapters.txt` (např. `0:00 Úvod`, `0:45 Nastavení`, … – vlož do popisu videa; YouTube kapitoly ukáže jen při ≥ 3 kapitolách po ≥ 10 s, mux jinak varuje). Časy sedí na hotové `final.mp4` včetně úvodní karty a mezititulků.
+
+Náhledovky místo generované úvodní / závěrečné karty: `pnpm local <recipe> --intro-image thumb.png --outro-image konec.png` (`--intro-sec` / `--outro-sec`, výchozí 3 s). Vypnutí mezititulků nebo kapitol: `--no-interstitials`, `--no-chapters`. Písmo karet: Inter, pokud najde statické soubory `Inter-Bold.ttf` / `Inter-Regular.ttf` (např. v `~/Library/Fonts`), jinak DejaVu Sans; jiné písmo nastavíš cestou k souboru v `BRAND_FONT` / `BRAND_FONT_BOLD` v `.env`. Barvy: `BRAND_BG` / `BRAND_FG`.
+
+Vyzkoušení bez ElevenLabs: `pnpm demo &` a `pnpm local samples/recipe.parts-demo.json --provider say` (na Macu; v Linuxu `--provider espeak`). Ukázka má 3 části, 2 zoomy, `fill` a rozdílné titulky a hlas.
+
 ## 8. Co ještě není ověřeno naživo
 
 Ověřeno offline (demo app + mock hlas + stuby): recorder, mux, orchestrátor, testy. **Nezkoušeno s reálnými službami:**

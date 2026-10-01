@@ -218,8 +218,10 @@ recipe viewport (the browser context is `viewport.height + 8` tall, see "Beacon 
 start (grey → black → white → black …). After recording, the recorder scans that square in `raw.webm` with ffmpeg and
 rewrites `t_start_ms` of each step to the exact frame where the flip appeared; the other timestamps of the step are
 shifted by the same delta. Measured residual error between `t_actions_end_ms` and the visible UI change: 40–150 ms.
-The same reason is why the overlay animates at ~24 fps (alternating 2/3 vsync ticks) and the default typing delay is
-80 ms (2 frames) instead of 60 ms – do not change those to "smoother" values without re-measuring drift.
+The same reason is why the overlay animates at ~24 fps (alternating 2/3 vsync ticks) and why this mode keeps the old
+typing defaults (80 ms/char, `speed: "fast"` 40 ms; the screencast defaults are 35/15 ms) – measured on the smoke recipe,
+40 ms/char adds ~120–150 ms of in-step drift per typing step vs 80 ms. Do not change those to "smoother" values without
+re-measuring drift. An explicit `delay_ms` is always honoured. CDP screencast mode has no such limit.
 
 ### Beacon strip (why raw.webm is 1920×1088)
 
@@ -245,7 +247,12 @@ cover the cursor.
   click – ≈ 10 frames at 25 fps, verified visible in `final.mp4`.
 * `highlight`: 2 s outline pulse on the element.
 * `scroll`: `down` / `up` = 400 px wheel; a selector (in `value` or `selector`) = smooth `scrollIntoView`.
-* `type`: clicks the field first, optional `clear`, then per-char typing (`delay_ms`, default 80).
+* `type`: clicks the field first, optional `clear`, then per-char typing: `delay_ms`, else `speed: "fast"` = 15 ms,
+  else 35 ms (the brief: typing must be quick). recordVideo + beacon mode keeps 80 / 40 ms (see "Why the beacon").
+* `fill`: cursor glides to the field and clicks, then the whole `value` appears at once (`locator.fill` = native value
+  setter + `input` event, then a `change` event; works with React/Angular inputs). Use it for anything longer than a few words.
+* `zoom`: smooth zoom on `selector` – `value` = scale (default `"1.6"`), `hold_ms` = time fully zoomed (default 2500);
+  total = 400 ms in + hold + 400 ms out (cubic ease-in-out). Details in "Zoom" below.
 * `select`: native `<select>` popups are not rendered in the video, so the option is set directly
   (`selectOption` by label, falling back to value) after the cursor arrives.
 * `navigate`, `press`, `wait` as expected. Every action honors `before_ms` (default 300).
@@ -253,6 +260,34 @@ cover the cursor.
 Failed actions or `expect` (5 s) mark the step `failed` (with `error`), take the screenshot anyway and continue with
 the next step; `--strict` aborts instead. A failed step is the self-heal signal for the explorer, not a crash, so the
 process exits 0 (exit 1 only on a real error, e.g. invalid recipe).
+
+## Zoom
+
+Implemented in the overlay (`__svpCursor.zoom`, `src/cursor.ts`) as a CSS `transform: scale(s)` on
+`document.documentElement`, animated from JS: every animation frame in CDP screencast mode (smooth), on the shared
+~24 fps cadence in recordVideo + beacon mode (keeps video time = wall time). Geometry (`zoomFit` in `src/index.ts`):
+
+* scale = `min(value, 0.96·viewport / element size)` – a full-width card cannot be zoomed 1.6× (log line
+  `zoom …: scale 1.6 -> 1.12 …`); zoom a smaller element instead.
+* origin = element centre, moved only as far as needed to keep the zoomed element inside the viewport (2 % margin), so
+  a left-menu item zooms "to the right" instead of being cut off.
+* cursor: if it is not already on the element it glides to the element centre first. During the zoom it stays at
+  normal size (counter-scaled by 1/s around its hot spot) and sits on the zoomed content point it pointed at.
+* a transform on `<html>` makes `<html>` the containing block of `position:fixed` elements; the overlay compensates
+  for its own cursor and the beacon strip (the beacon never moves, sync detection is unaffected – verified 7/7).
+  The **app's own fixed elements shift during the zoom only when the document itself is scrolled** (`window.scrollY > 0`;
+  logged). SPAs that scroll inside a container (Sloneek, demo app) are unaffected.
+* viewport scrollbars that would appear because of the scaled page are suppressed for the zoom; existing ones stay.
+* `<html>` inline styles are restored afterwards; a failed zoom resets instantly.
+
+`timing.json` gets per step `zooms: [{selector, scale, origin:[x,y], t_start_ms, t_full_ms, t_release_ms, t_end_ms}]`
+in video time (shifted with the step in both sync modes).
+
+## Parts (`step.part`, `part_title`)
+
+The recorder only logs them: every timing step gets the **effective** `part` / `part_title` (a step without `part`
+inherits the previous one). Interstitial cards and chapters are made by the assembler. `narration_tts` (default
+narration) is the text whose length the standalone estimate uses; `subtitle` is ignored here.
 
 ## Login hook
 

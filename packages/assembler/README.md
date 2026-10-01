@@ -6,15 +6,29 @@ Audio-first narration + final assembly. Two stages, both plain file-in/file-out 
 pnpm --filter @svp/assembler start -- tts --recipe <recipe.json> --out out/<id> [--provider external|elevenlabs|say|espeak|mock]
 pnpm --filter @svp/assembler start -- manifest --recipe <recipe.json> --out out/<id>      # voiceover to-do list only (external)
 pnpm --filter @svp/assembler start -- mux --out out/<id> [--subtitles burn|sidecar|none] [--bgm <file> --bgm-volume 0.08] [--intro on|off] [--outro on|off]
+      [--intro-image thumb.png [--intro-sec 3]] [--outro-image end.png [--outro-sec 3]] [--no-interstitials] [--no-chapters]
 ```
+
+## Text roles (recipe step)
+
+| field | used for | default |
+|---|---|---|
+| `narration` | base text | – |
+| `narration_tts` | what is **spoken**: sent to TTS / listed as `tts_text` in the external manifest, cache key (`audio/<id>.txt`), stale-clip detection | `narration` |
+| `subtitle` | what the viewer **reads** in `final.srt` (`""` = no cue for the step) | `narration` |
+
+Example: `"narration": "Hlavní KPI docházky."`, `"narration_tts": "Hlavní kej pí áj docházky."` → the voice says
+"kej pí áj", the subtitle shows "KPI". Cue timing always comes from the alignment of the spoken text; when the two texts
+differ, subtitle characters are mapped onto it with an LCS alignment (identical words 1:1, differing spans interpolated),
+so a cue still ends where its words are spoken. A subtitle-only edit never invalidates audio.
 
 Relative paths are resolved against the directory you typed the command in (`INIT_CWD`), not the package dir. `.env` is auto-loaded from the cwd / repo root.
 
-Programmatic: `import { tts, mux } from "@svp/assembler"` (`tts({recipe, out, provider?})` -> `{durations,...}`, `mux({out, subtitles?, bgm?, bgmVolume?, intro?, outro?})` -> `{finalPath, srtPath, totalMs, introMs, outroMs, warnings,...}`).
+Programmatic: `import { tts, mux } from "@svp/assembler"` (`tts({recipe, out, provider?})` -> `{durations,...}`, `mux({out, subtitles?, bgm?, bgmVolume?, intro?, outro?, introImage?, outroImage?, introImageSec?, outroImageSec?, interstitials?, chapters?})` -> `{finalPath, srtPath, totalMs, introMs, outroMs, interstitials, stepOffsetMs, chaptersPath, chapters, warnings,...}`).
 
 ## tts
 
-Per step with non-empty narration -> `audio/<id>.mp3`, `audio/alignment/<id>.json`, sidecars `<id>.txt` (narration) and `<id>.meta.json` (provider/voice/model). A step is skipped (cache hit) only when mp3 + alignment exist, the `.txt` equals the current narration AND the meta matches, so switching mock <-> elevenlabs or voice re-synthesizes. Silent steps get `0` in `durations.json` and any stale audio is removed.
+Per step with a non-empty spoken text (`narration_tts ?? narration`) -> `audio/<id>.mp3`, `audio/alignment/<id>.json`, sidecars `<id>.txt` (the spoken text) and `<id>.meta.json` (provider/voice/model). A step is skipped (cache hit) only when mp3 + alignment exist, the `.txt` equals the current spoken text AND the meta matches, so switching mock <-> elevenlabs or voice re-synthesizes. Silent steps get `0` in `durations.json` and any stale audio is removed.
 
 Provider choice (`chooseProvider` in `src/tts.ts`):
 
@@ -31,12 +45,13 @@ The assembler never synthesizes. `tts` (and `manifest`) first writes **`audio/ma
 { "recipe_id": "absence-request", "provider": "external", "audio_dir": "/…/out/absence-request/audio",
   "format": "mp3, 44.1 kHz (ElevenLabs output_format mp3_44100_128); .wav/.m4a accepted and transcoded",
   "voice": { "voice_id": null, "model_id": "eleven_multilingual_v2" }, "instructions": "…",
-  "steps": [ { "id": "s01", "narration": "In this video, …", "file": "s01.mp3", "path": "/…/audio/s01.mp3",
-               "alignment_file": "alignment/s01.json", "chars": 87, "status": "missing" } ],
+  "steps": [ { "id": "s01", "tts_text": "In this video, …", "subtitle": "In this video, …", "narration": "(= tts_text, deprecated alias)",
+               "file": "s01.mp3", "path": "/…/audio/s01.mp3", "alignment_file": "alignment/s01.json", "chars": 87, "status": "missing" } ],
   "silent_steps": [], "missing": ["s01", "…"], "total_chars": 789 }
 ```
 
-`status`: `present` | `missing` | `stale` (narration changed since the file was accepted and the file is not newer) |
+Voice **`tts_text`** only (`narration_tts ?? narration`); `subtitle` is listed for orientation. `chars` counts `tts_text`.
+`status`: `present` | `missing` | `stale` (`tts_text` changed since the file was accepted and the file is not newer) |
 `foreign` (the mp3 was synthesized by another provider of this pipeline and not replaced since – never accepted as
 external audio). `pnpm voice:manifest <recipe> --id <id>` (root script) writes just this file + the empty
 `audio/` and `audio/alignment/` dirs.
@@ -52,7 +67,7 @@ Then, for every narrated step:
   `alignment` key – normalised to the bare form) is kept; otherwise a linear alignment over the measured duration is
   written. A supplied file is recognised by being newer than the step's bookkeeping, so a re-generated alignment is
   picked up and our own linear one is re-derived each run. Warns if it ends > 1.5 s away from the audio length.
-* Bookkeeping per step: `<id>.txt` (narration it was accepted for), `<id>.meta.json` (`{provider:"external", source, alignment}`).
+* Bookkeeping per step: `<id>.txt` (`tts_text` it was accepted for), `<id>.meta.json` (`{provider:"external", source, alignment}`).
 
 - `espeak` (offline, real speech): `espeak-ng -v <cs|en|sk> -s 150 -f <textfile> -w tmp.wav` -> ffmpeg -> 44.1 kHz mono mp3 (`highshelf -4 dB @ 4 kHz` + `dynaudnorm` to tame the buzz). Voice comes from `recipe.lang`. Narration is passed through a temp file, never through a shell. No per-char timestamps, so the alignment is linear over the *measured* mp3 duration (SRT cues still land inside the spoken window). Measured: Czech ≈ 11 chars/s at 150 wpm (mock assumes 14), mean level ≈ -22 dBFS.
 - `mock` (silent-ish tone): quiet 220 Hz sine, `max(1500, chars/14*1000)` ms, linear char alignment.
@@ -77,9 +92,35 @@ all -> amix=inputs=N:normalize=0:duration=longest   (plain sum: no 1/N attenuati
 video re-encoded libx264 crf20 yuv420p 30fps, aac 160k, -t (intro + total_ms + outro), faststart
 ```
 
+### Parts: interstitial cards and chapters
+
+`step.part` (int) + `part_title` – set on the first step of each part (brief: 1 Úvod, 2 Nastavení, 3 Ukázka využití,
+4 Pohled manažera/zaměstnance, 5 Závěr); later steps inherit the part. Wherever the effective part changes between two
+(non-skipped) steps:
+
+* **Interstitial** (`recipe.interstitials`, default `true`; `--no-interstitials` wins): the recording is split at the
+  step's `t_start_ms` (snapped to the 30 fps grid, `trim=start_frame/end_frame`, exact) and a 1.5 s card
+  (`INTERSTITIAL_MS`) "`<part> / <part_title>`" + accent bar + `recipe.title` is concatenated in between (brand colours,
+  same font as the intro, 0.25 s fades, silent). No card before the very first step (the intro covers it).
+  Shift: final time = recording time + intro + 1.5 s × (cards at or before the step) – applied to `adelay`, SRT cues and
+  burned subtitles; `MuxResult.stepOffsetMs` lists it per step. `timing.json` is never rewritten.
+* **Chapters** (`recipe.chapters`, default `true`; `--no-chapters`): `out/<id>/chapters.txt`, YouTube format –
+  `0:00 <first part title>` then `M:SS <part_title>` at each card start in `final.mp4` time (floored to the second, so a
+  click lands just before the card). Missing `part_title` → "Část N". Written only when the recipe has parts. Warns when
+  YouTube would ignore the list (< 3 chapters, or one shorter than 10 s). Paste it into the video description.
+
+### Intro / outro images (thumbnails)
+
+`--intro-image <png|jpg>` / `--outro-image <png|jpg>` show a still instead of the generated card for `--intro-sec` /
+`--outro-sec` seconds (default 3, whole frames). Scaled to fit and letterboxed in `BRAND_BG`. The intro image is the
+very first frame (no fade from black – good for YouTube previews), 0.3 s fade into the recording; the outro image fades
+in. An image wins over `--no-intro` / `--no-outro`; every shift uses the image length.
+
 ### Intro / outro cards
 
-On by default when `recipe.json` (in `out/<id>/`) has a `title`; force with `--intro on|off`, `--outro on|off` (also `--no-intro`, `--no-outro`; outro defaults to the intro setting). Intro = 2.5 s (`INTRO_MS`), outro = 2.0 s (`OUTRO_MS`). Colours via env `BRAND_BG` (default `#1f2a44`) and `BRAND_FG` (default `#ffffff`). Title is word-wrapped to <= 34 chars/line (max 3 lines). Text is passed to `drawtext` through temp files in `out/` (`.card-*.txt`, removed afterwards), so titles with `:`/`'`/`%` need no escaping. Font: `/usr/share/fonts/truetype/dejavu/DejaVuSans(-Bold).ttf`, falling back to fontconfig `font=DejaVu Sans`.
+On by default when `recipe.json` (in `out/<id>/`) has a `title`; force with `--intro on|off`, `--outro on|off` (also `--no-intro`, `--no-outro`; outro defaults to the intro setting). Intro = 2.5 s (`INTRO_MS`), outro = 2.0 s (`OUTRO_MS`). Colours via env `BRAND_BG` (default `#1f2a44`) and `BRAND_FG` (default `#ffffff`). Title is word-wrapped to <= 34 chars/line (max 3 lines). Text is passed to `drawtext` through temp files in `out/` (`.card-*.txt`, removed afterwards), so titles with `:`/`'`/`%` need no escaping. Font: env `BRAND_FONT` / `BRAND_FONT_BOLD` (ttf/otf path) > Inter (`Inter-Bold.ttf` / `Inter-Regular.ttf` in
+`/usr/share/fonts/truetype/inter`, `/usr/local/share/fonts`, `/Library/Fonts`, `~/Library/Fonts`) >
+`/usr/share/fonts/truetype/dejavu/DejaVuSans(-Bold).ttf` > fontconfig `font=DejaVu Sans`. All of them cover Czech diacritics.
 
 **Everything downstream of the recording shifts by `intro_ms`:** audio `adelay` offsets, SRT cue times, burned subtitles (applied after `concat`). `timing.json` stays in recording time – it is never rewritten. `MuxResult.introMs` reports the shift. With both cards off the output is byte-for-byte the old pipeline (plus the strip crop).
 
@@ -89,7 +130,7 @@ CDP screencast recordings (`raw.mp4`, `sync_source: "screencast"`, `beacon_strip
 
 Subtitles: `final.srt` is always written unless `none`; `burn` adds the libass `subtitles=` filter (DejaVu Sans, FontSize 22, Outline 1, MarginV 40; libass scales these from its 384x288 default PlayRes, so they're resolution independent).
 
-Cues: built from the alignment of each step, <= 42 chars, split on sentence end, then commas, then balanced word wrap; start = `intro_ms + t_start_ms + char_start(first)`, end = `intro_ms + t_start_ms + char_end(last)`; overlaps trimmed.
+Cues: built from the step's **subtitle text** (`subtitle ?? narration`, read from `out/<id>/recipe.json`; without a recipe the spoken text in `audio/<id>.txt`) and the alignment of the spoken text, <= 42 chars, split on sentence end, then commas, then balanced word wrap; start = `offset + t_start_ms + char_start(first)`, end = `offset + t_start_ms + char_end(last)` with `offset` = intro + cards before the step; overlaps trimmed.
 
 Warnings (printed + returned in `warnings`): `DRIFT` (t_start+audio > total+200), `OVERLAP` between narrations, step `failed`/`skipped`, stale `durations.json` vs mp3, recorder `audio_ms` mismatch.
 
