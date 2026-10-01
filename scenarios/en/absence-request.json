@@ -1,0 +1,48 @@
+{
+  "id": "absence-request",
+  "lang": "en",
+  "title": "How to request an absence",
+  "audience": "employee",
+  "source": {
+    "changes_detected": [
+      "Explored live on Sloneek pre-production 2026-10-01 (FE Angular 21.2.10). Request starts from Me > My absences > 'New absence'; the 'Absence' dialog has a searchable type field, From/To datepickers, an automatic 'Event check' and a 'Create' button.",
+      "On the explored account the request is auto-approved ('Approved by superior'); narration therefore says 'approval status' instead of 'pending'."
+    ],
+    "references": [
+      { "title": "My absences (Absence overview)", "path": "/app/my-profile/absence-overview" },
+      { "title": "Dashboard 2.0 (start screen)", "path": "/app/dashboard-v2" }
+    ]
+  },
+  "steps": [
+    { "id": "s01", "narration": "In this video, you will learn how to request an absence, such as a vacation, in Sloneek.",
+      "intent": "No action - stay on the dashboard right after login.",
+      "must_show": "The dashboard with the left menu, including 'My absences' under 'Me', is visible." },
+    { "id": "s02", "narration": "In the left menu, under Me, click My absences.",
+      "intent": "Click 'My absences' in the 'Me' section of the left menu.",
+      "must_show": "The 'Absence overview' tab of the profile with the 'New absence' button and the balance cards." },
+    { "id": "s03", "narration": "Here you can see your balances. Click New absence to open the request form.",
+      "intent": "Highlight, then click the 'New absence' button in the top right of the absence overview.",
+      "must_show": "The 'Absence' dialog is open with the 'Absence' type field." },
+    { "id": "s04", "narration": "Click the Absence field, search for Vacation (days), and pick it from the list.",
+      "intent": "Open the 'Absence' field, type 'Vacation (days)' into its search box and click the single remaining option.",
+      "must_show": "'Vacation (days)' is selected and the 'From' and 'To' date fields appear." },
+    { "id": "s05", "narration": "Now click the From field and pick the first day of your absence in the calendar.",
+      "intent": "Click 'From' and pick Monday 26 in the datepicker of the current month (October 2026).",
+      "must_show": "'From' shows 10/26/2026." },
+    { "id": "s06", "narration": "Then click the To field and pick the last day you will be away.",
+      "intent": "Click 'To' and pick Wednesday 28 in the datepicker.",
+      "must_show": "'To' shows 10/28/2026 and the 'Event check' shows a green check." },
+    { "id": "s07", "narration": "The Event check confirms there is no collision and shows how many days you will draw from your fund.",
+      "intent": "No click - highlight the 'Event check' block with 'Number of days' and 'Drawing the fund'.",
+      "must_show": "The 'Event check' block with a green check and the enabled 'Create' button." },
+    { "id": "s08", "narration": "Optionally, add an absence note, for example who your colleagues should contact while you are away.",
+      "intent": "Type 'Family trip, back on Thursday.' into the 'Absence note' field.",
+      "must_show": "The note text is in the 'Absence note' field." },
+    { "id": "s09", "narration": "When everything looks right, click Create to submit your absence.",
+      "intent": "Click 'Create' in the dialog.",
+      "must_show": "The dialog closes and the new absence 10/26/2026 - 10/28/2026 is listed under 'Upcoming absences'." },
+    { "id": "s10", "narration": "All done. Your absence now appears under Upcoming absences, together with its approval status.",
+      "intent": "No click - highlight the new entry under 'Upcoming absences'.",
+      "must_show": "The new 'Vacation (days)' entry with its status label under 'Upcoming absences'." }
+  ]
+}

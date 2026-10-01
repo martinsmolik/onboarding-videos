@@ -1,6 +1,6 @@
 # @svp/recorder
 
-Deterministic, LLM-free Playwright replay of `recipe.json` → `raw.webm` + `timing.json` + `shots/*.png`.
+Deterministic, LLM-free Playwright replay of `recipe.json` → `raw.webm` (launch + recordVideo) or `raw.mp4` (CDP screencast) + `timing.json` + `shots/*.png`.
 
 ```
 in : recipe.json, audio/durations.json (optional)
@@ -25,6 +25,141 @@ pnpm --filter @svp/recorder start -- --recipe out/absence-request/recipe.json \
 ```
 
 Relative paths are resolved against the directory `pnpm` was invoked from (repo root), not the package dir.
+
+More flags (all optional):
+
+```
+--cdp auto|<http://127.0.0.1:9110>|<ws://…>   attach to a RUNNING, logged-in browser (BrowserOS neo) – CDP screencast capture
+--session-file out/session.json              Playwright storageState for a Playwright-launched Chromium (fallback auth)
+--capture video|screencast                   launch-mode capture (default video = the original recordVideo + beacon path)
+--run-id <id>                                value for {{RUN_ID}} (default local YYYYMMDDHHmmss; lowercased, [a-z0-9] only)
+--keep-frames                                keep the screencast JPEGs + frames.ffconcat in <out>/.frames
+--cdp-check [auto|<endpoint>] [--json]       discovery only: endpoint, browser version, page targets, Playwright attach test
+```
+
+## CDP mode (`--cdp`) – record inside Martin's BrowserOS neo
+
+The PoC runs on a Mac where BrowserOS neo is already logged in to pre-prod (Sloneek keeps auth in `localStorage`
+`sloneek-access-token` / `sloneek-refresh-token`, no cookies). Instead of copying tokens, the recorder attaches to
+that browser:
+
+1. `chromium.connectOverCDP(endpoint)` and take the existing **default context** (= the logged-in profile).
+2. `context.newPage()` – a **new tab**; existing tabs are never touched (not even listed through Playwright pages).
+3. The cursor overlay is added with `page.addInitScript` to **this page only**, without the beacon strip.
+4. `Emulation.setDeviceMetricsOverride({width, height, deviceScaleFactor: 1, mobile: false})` sizes the tab to the
+   recipe viewport regardless of the real window size or Retina scale (verified: a 1280×800 window yields
+   1920×1080 frames).
+5. Same step/pacing engine as before (`replaySteps`), then `Emulation.clearDeviceMetricsOverride`, close the tab,
+   disconnect (`browser.close()` on a CDP connection only disconnects – the browser keeps running). SIGINT/SIGTERM
+   also close the tab.
+
+Output: `raw.mp4` (H.264, CFR 30 fps, exactly viewport size), `timing.json` with `sync_source: "screencast"`,
+`beacon_strip_px: 0`, `capture: "screencast"`, `browser_mode: "cdp"`.
+
+### Screencast capture and the time base
+
+* `Page.startScreencast({format: 'jpeg', quality: 90, maxWidth: W, maxHeight: H, everyNthFrame: 1})`; every
+  `Page.screencastFrame` is acked immediately, the JPEG is written to `.frames/fNNNNNN.jpg` together with
+  `metadata.timestamp` (seconds, browser clock = frame swap time).
+* Frames arrive **only on repaint**. Idle gaps are therefore not missing video: the video is built with the ffmpeg
+  **concat demuxer** where each frame lasts `next.ts − ts` (`option framerate 1000` gives a 1 ms time base instead of
+  image2's 40 ms) and the last frame is held until the recording end (it is listed twice because the concat demuxer
+  drops the final entry's duration). `-fps_mode cfr -r 30` resamples that VFR timeline to CFR 30 fps,
+  `-t` = exact length. Result: **video t = frame.ts − t0**, t0 = first frame timestamp.
+* Step times are taken with `Date.now()`. They are mapped into the screencast clock with
+  `offset = min over frames (receipt wall time − frame.ts)` – the smallest observed delivery latency, so any constant
+  difference between the Node clock and the browser clock cancels out – and then `t_video = (wall/1000 − offset − t0)·1000`.
+  The recorder waits for the first frame before `t = 0` (if none arrives in 4 s it nudges a repaint, then fails with
+  "is the browser window visible?").
+* Sanity numbers in the log: delivery latency min/spread, and video length vs wall timeline (cloud test: +4 ms over 38.8 s).
+
+**Measured (cloud, headful Chromium 141 on Xvfb, demo app, CDP attach, 1280×800 window → 1920×1080):**
+first changed frame vs `t_actions_end_ms`: s02 page switch +92 ms, s03 form +47 ms, s06 toast −79 ms (frame quantum
+33 ms; the toast has no animation, so the −79 ms is the click's CDP round-trip returning after the browser already
+painted). Narration onset in `final.mp4` vs `intro + t_start_ms`: +5 ms on all 6 steps. mux keeps the frame exactly
+(75 frames = 2.5 s intro offset, ±1 frame). For comparison the beacon path corrected up to 732 ms of drift in the
+same smoke run.
+
+### Endpoint discovery (`--cdp auto`)
+
+In order (`src/cdp.ts`):
+
+1. env `CDP_URL` (`http://host:port`, `ws://…` or a bare port).
+2. `DevToolsActivePort` (line 1 port, line 2 ws path) in `~/Library/Application Support/{BrowserClaw, BrowserOS,
+   BrowserOS neo, …}` – written by Chromium when started with `--remote-debugging-port`.
+3. `Local State` pref `browseros.server.cdp_port` in the same dirs – the port BrowserOS's managed CDP server actually
+   bound to (it moves to the next free port when the default is busy and persists the choice).
+4. Port probe `http://127.0.0.1:{9110, 9100, 9222, 9229, 9000…9003}/json/version` (Node inspectors are rejected).
+
+`pnpm --filter @svp/recorder start -- --cdp-check auto` prints the result and the open page titles (URLs without
+query strings, so tokens never reach the terminal).
+
+### BrowserOS neo and CDP – findings (verified in source, 2026-10-01)
+
+* **neo always runs its own CDP server on `127.0.0.1:9110`** – no flag needed. BrowserOS (classic) uses 9100.
+  `kDefaultCDPPort = 9110` under `BUILDFLAG(BROWSEROS_PRODUCT_BROWSERCLAW)`, else 9100
+  ([browseros_server_prefs.h](https://github.com/browseros-ai/BrowserOS/blob/main/packages/browseros/chromium_patches/chrome/browser/browseros/server/browseros_server_prefs.h)).
+  It is started with `content::DevToolsAgentHost::StartRemoteDebuggingServer(…)` bound to 127.0.0.1 / ::1, i.e. the
+  standard DevTools HTTP + WebSocket endpoint (`/json/version`, `/json/list`) that Playwright's `connectOverCDP` speaks;
+  it passes an empty output dir, so **no `DevToolsActivePort` file** is written
+  ([browseros_server_manager.cc](https://github.com/browseros-ai/BrowserOS/blob/main/packages/browseros/chromium_patches/chrome/browser/browseros/server/browseros_server_manager.cc)).
+* If 9110 is taken, `FindAvailablePort` picks another one and saves it in Local State as `browseros.server.cdp_port`
+  (same file) – discovery step 3 reads it. A fixed port can be forced with `--browseros-cdp-port=<n>`
+  ([browseros_switches.h](https://github.com/browseros-ai/BrowserOS/blob/main/packages/browseros/chromium_patches/chrome/browser/browseros/core/browseros_switches.h)).
+* `--remote-debugging-port` also works, but then neo **skips its managed CDP server** ("--remote-debugging-port takes
+  precedence"), which its own MCP sidecar expects – prefer `--browseros-cdp-port`.
+* neo's product id is "browserclaw": the macOS profile root is **`~/Library/Application Support/BrowserClaw`**
+  (`browseros_product_dir_name = "BrowserClaw"` → `CrProductDirName`,
+  [buildflags.gni](https://github.com/browseros-ai/BrowserOS/blob/main/packages/browseros/chromium_patches/chrome/browser/browseros/buildflags.gni));
+  the app bundle is **`BrowserOS neo.app`** (Homebrew cask `browseros-neo`: `app "BrowserOS neo.app"`, zap
+  `~/Library/Application Support/BrowserClaw`,
+  [Casks/browseros-neo.rb](https://github.com/browseros-ai/homebrew-tap/blob/main/Casks/browseros-neo.rb)). neo's own
+  session data lives in `~/.browserclaw/` ([README](https://github.com/browseros-ai/BrowserOS#readme)). The public docs
+  (docs.browseros.com) describe only the MCP endpoint, not CDP.
+* Relaunch with a fixed port (only if `--cdp auto` finds nothing): `open --args` is ignored while the app runs, so quit first:
+
+  ```bash
+  osascript -e 'quit app "BrowserOS neo"'; sleep 2
+  open -a "BrowserOS neo" --args --browseros-cdp-port=9110
+  curl -s http://127.0.0.1:9110/json/version
+  ```
+
+Not verified on a real Mac (the cloud has no BrowserOS): whether neo's tab-grouping / agent cockpit reacts to a tab
+opened over raw CDP, and screencast behaviour when the neo window is on another Space (frames may stop – keep the
+window visible during recording).
+
+## Fallback auth (`--session-file`)
+
+If CDP is not available: Martin copies the two localStorage keys from the logged-in tab into a Playwright
+storageState (`scripts/grab-session.md`: DevTools snippet → clipboard → `pbpaste > out/session.json`), and the
+recorder launches its own Chromium with `storageState` = that file. Only counts are logged (origins, number of keys,
+cookies) – never values. In `pnpm local` this mode records with the screencast capture too
+(`--capture screencast`); plain `--session-file` on the recorder CLI keeps the original recordVideo + beacon capture.
+`out/session.json` is git-ignored.
+
+## Placeholders
+
+Substituted right before replay in every action `value` / `selector`, `expect.visible` / `expect.url_contains` and
+`start.url` (narration is never touched; `recipe.json` is never rewritten):
+
+| placeholder | value | example (today Thu 2026-10-01) |
+|---|---|---|
+| `{{RUN_ID}}` | unique per recording, lowercase `[a-z0-9]` (local `YYYYMMDDHHmmss`, or `--run-id` / env `RUN_ID`, sanitized) | `video.demo+{{RUN_ID}}@example.com` → `video.demo+20261001143005@example.com` |
+| `{{ENV:NAME}}` | `process.env.NAME` (also from `.env`); unset = hard error naming the variable, values never logged | |
+| `{{DAY:+Nd}}` | day-of-month of today + N days; Saturday/Sunday move forward to the next Monday | `{{DAY:+2d}}` (Sat 3) → `5` |
+| `{{DAY:+Nd+M}}` | that start day + M **calendar** days (end of a range) | `{{DAY:+2d+2}}` → `7` (Wed) |
+| `{{DATE:+Nd:FMT}}`, `{{DATE:+Nd+M:FMT}}` | same dates, formatted; tokens `YYYY MM M DD D` | `{{DATE:+2d+2:MM/DD/YYYY}}` → `10/07/2026` |
+
+"today" is read once per run, so all placeholders of one recording agree. Unknown `{{…}}` tokens are an error
+(they would otherwise be typed literally). `timing.json` gets `run_id` and `placeholder_dates` (DAY/DATE only).
+The log prints every resolved date with its weekday and warns when it is not in the current month (date pickers
+that open on the current month would pick the wrong cell). Holidays are not skipped, and only the start day skips
+weekends – `pnpm local:check` warns when any resolved date is a Saturday/Sunday.
+
+For `recipes/absence-request.en.json` (picks days 26/28 by number and expects `10/26/2026 - 10/28/2026, 3 Days`)
+the selectors become `…:text-is("{{DAY:+Nd}}")` / `…:text-is("{{DAY:+Nd+2}}")` and the expect
+`…:text-is("{{DATE:+Nd:MM/DD/YYYY}} - {{DATE:+Nd+2:MM/DD/YYYY}}, 3 Days")`; choose N so the start is a Monday in
+the current month (the recipe itself is left to the explorer/Claude).
 
 Programmatic:
 
@@ -126,7 +261,7 @@ localhost, and only when no `start.storage_state` file is used. It contains a ge
 (`input[type=email]`, `input[type=password]`, `button[type=submit]`) marked `TODO(sloneek)` – replace with the real
 selectors, or better, record a storageState once and point `recipe.start.storage_state` at it.
 
-## Video quality and upgrade path (not implemented)
+## Video quality and upgrade path
 
 Playwright's built-in recorder is JPEG screencast → VP8 (`-crf 8 -b:v 1M -deadline realtime`) at 25 fps: soft text,
 no control over bitrate, and the frame-timing quirk described above. For the hackathon 1920×1080 from the recipe
@@ -135,11 +270,7 @@ viewport is acceptable. To upgrade later without touching the recipe contract:
 1. **Xvfb + ffmpeg x11grab** – run headed Chromium on a virtual display and capture with
    `ffmpeg -f x11grab -framerate 30 -video_size 1920x1080 -i :99 -c:v libx264 -crf 18 -preset veryfast`.
    Real wall-clock timing (no drift), sharp text, any bitrate. The OS cursor becomes visible as well.
-2. **CDP screencast** – `Page.startScreencast` via `context.newCDPSession(page)`, pipe frames with their
-   `metadata.timestamp` into ffmpeg using `-use_wallclock_as_timestamps` / `-vsync vfr`, encode to H.264. Keeps the
-   headless setup; gives correct timestamps and PNG-quality frames.
-
-In both cases keep the beacon scan – it makes sync independent of the capture method.
+2. **CDP screencast** – implemented: `--cdp` always, `--capture screencast` in launch mode (see "CDP mode").
 
 ## Known limits
 

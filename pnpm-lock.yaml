@@ -11,6 +11,9 @@ importers:
       '@types/node':
         specifier: ^22.0.0
         version: 22.20.4
+      ajv:
+        specifier: 8.20.0
+        version: 8.20.0
       tsx:
         specifier: ^4.19.0
         version: 4.23.15
@@ -40,6 +43,8 @@ importers:
       ajv-formats:
         specifier: ^3.0.1
         version: 3.0.1(ajv@8.20.0)
+
+  packages/orchestrator: {}
 
   packages/recorder:
     dependencies:

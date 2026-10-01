@@ -2,12 +2,18 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
-import { chromium, type Browser, type BrowserContext, type Page, type Locator } from 'playwright';
+import { chromium, type Browser, type BrowserContext, type CDPSession, type Page, type Locator } from 'playwright';
 import type { Action, Recipe, RunOptions, RunResult, Step, Timing, TimingStep } from './types.js';
-import { BEACON_PX, BEACON_STRIP_PX, CURSOR_INIT_SCRIPT, HIGHLIGHT_FN } from './cursor.js';
+import { BEACON_PX, BEACON_STRIP_PX, CURSOR_INIT_SCRIPT, HIGHLIGHT_FN, cursorInitScript } from './cursor.js';
 import { login, shouldLogin } from './login.js';
+import { discoverCdp, safeUrl } from './cdp.js';
+import { ScreencastCapture } from './screencast.js';
+import { envPlaceholders, makeRunId, sanitizeRunId, substituteRecipe } from './placeholders.js';
 
 export type { RunOptions, RunResult, Recipe, Timing, TimingStep } from './types.js';
+export { discoverCdp, listTargets, safeUrl, parseDevToolsActivePort, parseLocalStateCdpPort, macProfileDirs } from './cdp.js';
+export { substituteRecipe, envPlaceholders, unknownPlaceholders, makeRunId, sanitizeRunId, startDate, offsetDate, formatDate } from './placeholders.js';
+export { concatScript } from './screencast.js';
 
 const execFileP = promisify(execFile);
 const sleep = (ms: number) => new Promise<void>(r => setTimeout(r, Math.max(0, ms)));
@@ -84,6 +90,8 @@ class Recorder {
 
   start(): void { this.t0 = Date.now(); }
   now(): number { return Date.now() - this.t0; }
+  /** Date.now() at start() – screencast mode maps it onto the frame clock afterwards. */
+  get wallT0(): number { return this.t0; }
 
   async reinjectCursor(): Promise<void> {
     try {
@@ -257,14 +265,29 @@ async function probe(file: string): Promise<{ fps: number; durationMs: number | 
 }
 
 // ---------------------------------------------------------------- run
-export async function run(opts: RunOptions): Promise<RunResult> {
+interface Prepared {
+  recipe: Recipe;
+  runId: string;
+  /** resolved {{DAY:...}} / {{DATE:...}} tokens -> value (never ENV values) */
+  dates: Record<string, string>;
+  outDir: string;
+  shotsDir: string;
+  audioFor: (s: Step) => number;
+  log: (l: string) => void;
+}
+
+function prepare(opts: RunOptions): Prepared {
   const log = opts.log ?? ((l: string) => console.log(l));
-  const recipe = loadRecipe(opts.recipe);
+  const runId = sanitizeRunId(opts.runId || process.env.RUN_ID || makeRunId());
+  const envNames = envPlaceholders(loadRecipe(opts.recipe));
+  const { recipe, replaced, dates } = substituteRecipe(loadRecipe(opts.recipe), { runId, today: opts.today });
+  if (replaced) log(`placeholders: ${replaced} substituted (RUN_ID=${runId}${envNames.length ? `; env: ${envNames.join(', ')}` : ''})`);
+  for (const d of dates) {
+    log(`placeholders: ${d.token} -> "${d.value}" (${d.date})${d.otherMonth ? '  WARNING: not in the current month – a date picker that opens on the current month will pick the wrong day' : ''}`);
+  }
   const outDir = path.resolve(opts.out);
   const shotsDir = path.join(outDir, 'shots');
-  const videoTmp = path.join(outDir, '.video-tmp');
   fs.mkdirSync(shotsDir, { recursive: true });
-  fs.mkdirSync(videoTmp, { recursive: true });
 
   const durations = loadDurations(opts.durations ?? path.join(outDir, 'audio', 'durations.json'), log);
   const audioFor = (s: Step): number => {
@@ -273,19 +296,106 @@ export async function run(opts: RunOptions): Promise<RunResult> {
     if (durations) log(`durations: no entry for ${s.id} – estimated ${est} ms`);
     return est;
   };
+  return { recipe, runId, dates: Object.fromEntries(dates.map(d => [d.token, d.value])), outDir, shotsDir, audioFor, log };
+}
+
+/**
+ * Playwright storageState JSON ({cookies?, origins:[{origin, localStorage:[{name,value}]}]}).
+ * Only counts are logged – never names of cookies or any values (they are auth tokens).
+ */
+export function loadSessionFile(file: string, log: (l: string) => void): { cookies: any[]; origins: { origin: string; localStorage: { name: string; value: string }[] }[] } {
+  if (!fs.existsSync(file)) throw new Error(`session file ${file} not found (see scripts/grab-session.md)`);
+  let j: any;
+  try { j = JSON.parse(fs.readFileSync(file, 'utf8')); } catch { throw new Error(`session file ${file} is not valid JSON (see scripts/grab-session.md)`); }
+  const origins = Array.isArray(j?.origins) ? j.origins : null;
+  if (!origins || !origins.every((o: any) => typeof o?.origin === 'string' && Array.isArray(o.localStorage ?? [])))
+    throw new Error(`session file ${file}: expected {"origins":[{"origin":"https://…","localStorage":[{"name":…,"value":…}]}]}`);
+  const state = {
+    cookies: Array.isArray(j.cookies) ? j.cookies : [],
+    origins: origins.map((o: any) => ({ origin: o.origin.replace(/\/$/, ''), localStorage: (o.localStorage ?? []).filter((e: any) => typeof e?.name === 'string' && typeof e?.value === 'string') }))
+  };
+  const keys = state.origins.reduce((n: number, o: { localStorage: unknown[] }) => n + o.localStorage.length, 0);
+  log(`session: ${path.basename(file)} – ${state.origins.length} origin(s) [${state.origins.map((o: { origin: string }) => o.origin).join(', ')}], ${keys} localStorage key(s), ${state.cookies.length} cookie(s)`);
+  if (!keys && !state.cookies.length) log('session: WARNING – file holds no localStorage keys and no cookies');
+  return state;
+}
+
+const localeFor = (lang: string) => (lang === 'en' ? 'en-US' : lang === 'sk' ? 'sk-SK' : 'cs-CZ');
+
+/** The step/pacing engine shared by every capture mode. Times are Recorder.now() (ms since recorder.start()). */
+async function replaySteps(page: Page, recorder: Recorder, p: Prepared, strict: boolean, beacon: boolean): Promise<TimingStep[]> {
+  const { recipe, shotsDir, audioFor, log } = p;
+  const { viewport } = recipe;
+  const timingSteps: TimingStep[] = [];
+  let aborted = false;
+  for (const step of recipe.steps) {
+    const audioMs = audioFor(step);
+    const hold = step.hold_after_ms ?? DEFAULT_HOLD_MS;
+    const shot = path.join(shotsDir, `${step.id}.png`);
+    const rec: TimingStep = { id: step.id, t_start_ms: 0, t_actions_end_ms: 0, t_end_ms: 0, audio_ms: audioMs, status: 'ok', screenshot: shot };
+
+    if (aborted) {
+      rec.status = 'skipped';
+      rec.t_start_ms = rec.t_actions_end_ms = rec.t_end_ms = recorder.now();
+      delete rec.screenshot;
+      timingSteps.push(rec);
+      continue;
+    }
+
+    if (beacon) await recorder.setBeacon(timingSteps.length + 1);
+    rec.t_start_ms = recorder.now();
+    try {
+      for (const a of step.actions) await recorder.runAction(a);
+      rec.t_actions_end_ms = recorder.now();
+      await recorder.checkExpect(step);
+    } catch (e) {
+      if (!rec.t_actions_end_ms) rec.t_actions_end_ms = recorder.now();
+      rec.status = 'failed';
+      rec.error = (e as Error).message.split('\n')[0].slice(0, 500);
+      log(`step ${step.id} FAILED: ${rec.error}`);
+      if (strict) aborted = true;
+    }
+
+    // screenshots are content-only (strip cropped) so QA / self-heal see what the viewer sees
+    await page.screenshot({ path: shot, clip: { x: 0, y: 0, width: viewport.width, height: viewport.height } }).catch(err => log(`screenshot ${step.id} failed: ${(err as Error).message}`));
+
+    // Pacing: hold the step until narration AND actions are both done, then hold_after.
+    const floor = Math.max(audioMs, step.min_duration_ms ?? 0);
+    await sleep(rec.t_start_ms + floor - recorder.now());
+    await sleep(hold);
+    rec.t_end_ms = recorder.now();
+    timingSteps.push(rec);
+    log(fmtRow(rec));
+  }
+  return timingSteps;
+}
+
+export async function run(opts: RunOptions): Promise<RunResult> {
+  const p = prepare(opts);
+  if (opts.cdp) return runScreencast(opts, p, 'cdp');
+  if ((opts.capture ?? 'video') === 'screencast') return runScreencast(opts, p, 'launch');
+  return runVideo(opts, p);
+}
+
+// ---------------------------------------------------------------- mode 1: launch + recordVideo + beacon (original path)
+async function runVideo(opts: RunOptions, p: Prepared): Promise<RunResult> {
+  const { recipe, outDir, log } = p;
+  const videoTmp = path.join(outDir, '.video-tmp');
+  fs.mkdirSync(videoTmp, { recursive: true });
 
   const { viewport } = recipe;
   const recordSize = { width: viewport.width, height: viewport.height + BEACON_STRIP_PX };
   const browser: Browser = await chromium.launch({ headless: !opts.headed });
   let context: BrowserContext | null = null;
   let videoPathTmp: string | null = null;
-  const timingSteps: TimingStep[] = [];
+  let timingSteps: TimingStep[] = [];
   let recorder: Recorder | null = null;
 
   try {
+    const session = opts.sessionFile ? loadSessionFile(opts.sessionFile, log) : undefined;
     const storageState =
-      recipe.start.storage_state && fs.existsSync(recipe.start.storage_state) ? recipe.start.storage_state : undefined;
-    if (recipe.start.storage_state && !storageState) log(`storage_state ${recipe.start.storage_state} not found – ignoring`);
+      session ?? (recipe.start.storage_state && fs.existsSync(recipe.start.storage_state) ? recipe.start.storage_state : undefined);
+    if (!session && recipe.start.storage_state && !storageState) log(`storage_state ${recipe.start.storage_state} not found – ignoring`);
 
     // The browser viewport is BEACON_STRIP_PX taller than the recipe viewport: the extra
     // bottom rows hold an opaque strip with the sync beacon, which the assembler crops away
@@ -293,7 +403,7 @@ export async function run(opts: RunOptions): Promise<RunResult> {
     context = await browser.newContext({
       viewport: recordSize,
       deviceScaleFactor: 1,
-      locale: recipe.lang === 'en' ? 'en-US' : recipe.lang === 'sk' ? 'sk-SK' : 'cs-CZ',
+      locale: localeFor(recipe.lang),
       storageState,
       recordVideo: { dir: videoTmp, size: recordSize }
     });
@@ -309,47 +419,12 @@ export async function run(opts: RunOptions): Promise<RunResult> {
     }
     await page.goto(recipe.start.url, { waitUntil: 'load', timeout: 30_000 });
     await recorder.reinjectCursor();
-
-    let aborted = false;
-    for (const step of recipe.steps) {
-      const audioMs = audioFor(step);
-      const hold = step.hold_after_ms ?? DEFAULT_HOLD_MS;
-      const shot = path.join(shotsDir, `${step.id}.png`);
-      const rec: TimingStep = { id: step.id, t_start_ms: 0, t_actions_end_ms: 0, t_end_ms: 0, audio_ms: audioMs, status: 'ok', screenshot: shot };
-
-      if (aborted) {
-        rec.status = 'skipped';
-        rec.t_start_ms = rec.t_actions_end_ms = rec.t_end_ms = recorder.now();
-        delete rec.screenshot;
-        timingSteps.push(rec);
-        continue;
-      }
-
-      await recorder.setBeacon(timingSteps.length + 1);
-      rec.t_start_ms = recorder.now();
-      try {
-        for (const a of step.actions) await recorder.runAction(a);
-        rec.t_actions_end_ms = recorder.now();
-        await recorder.checkExpect(step);
-      } catch (e) {
-        if (!rec.t_actions_end_ms) rec.t_actions_end_ms = recorder.now();
-        rec.status = 'failed';
-        rec.error = (e as Error).message.split('\n')[0].slice(0, 500);
-        log(`step ${step.id} FAILED: ${rec.error}`);
-        if (opts.strict) aborted = true;
-      }
-
-      // screenshots are content-only (strip cropped) so QA / self-heal see what the viewer sees
-      await page.screenshot({ path: shot, clip: { x: 0, y: 0, width: viewport.width, height: viewport.height } }).catch(err => log(`screenshot ${step.id} failed: ${(err as Error).message}`));
-
-      // Pacing: hold the step until narration AND actions are both done, then hold_after.
-      const floor = Math.max(audioMs, step.min_duration_ms ?? 0);
-      await sleep(rec.t_start_ms + floor - recorder.now());
-      await sleep(hold);
-      rec.t_end_ms = recorder.now();
-      timingSteps.push(rec);
-      log(fmtRow(rec));
+    if (session) {
+      const n = await page.evaluate(() => { try { return localStorage.length; } catch { return -1; } }).catch(() => -1);
+      log(`page: ${safeUrl(page.url())}  localStorage keys: ${n}`);
     }
+
+    timingSteps = await replaySteps(page, recorder, p, !!opts.strict, true);
 
     await sleep(TAIL_MS);
     await context.close(); // finalizes the webm
@@ -382,18 +457,140 @@ export async function run(opts: RunOptions): Promise<RunResult> {
     recorded_at: new Date().toISOString(),
     sync_source: syncSource,
     beacon_strip_px: BEACON_STRIP_PX,
+    run_id: p.runId,
+    ...(Object.keys(p.dates).length ? { placeholder_dates: p.dates } : {}),
+    capture: 'video',
+    browser_mode: 'launch',
     steps: timingSteps
   };
-  const timingPath = path.join(outDir, 'timing.json');
-  fs.writeFileSync(timingPath, JSON.stringify(timing, null, 2));
-
-  log('');
-  log(fmtHeader());
-  for (const s of timingSteps) log(fmtRow(s));
+  const timingPath = writeTiming(outDir, timing, log);
   log(`video: ${rawPath}  ${recordSize.width}x${recordSize.height} (content ${viewport.width}x${viewport.height} + ${BEACON_STRIP_PX} px beacon strip)  fps=${fps}  total=${totalMs} ms (last step end ${lastEnd} ms + ${TAIL_MS} ms tail => drift ${drift >= 0 ? '+' : ''}${drift} ms)`);
   log(`timing: ${timingPath}`);
-  const failed = timingSteps.filter(s => s.status !== 'ok');
+  return { timing, timingPath, videoPath: rawPath };
+}
+
+function writeTiming(outDir: string, timing: Timing, log: (l: string) => void): string {
+  const timingPath = path.join(outDir, 'timing.json');
+  fs.writeFileSync(timingPath, JSON.stringify(timing, null, 2));
+  log('');
+  log(fmtHeader());
+  for (const s of timing.steps) log(fmtRow(s));
+  const failed = timing.steps.filter(s => s.status !== 'ok');
   if (failed.length) log(`${failed.length} step(s) not ok: ${failed.map(s => `${s.id}=${s.status}`).join(', ')}`);
+  return timingPath;
+}
+
+// ---------------------------------------------------------------- mode 2: CDP screencast (attach to BrowserOS neo, or launch)
+async function runScreencast(opts: RunOptions, p: Prepared, mode: 'cdp' | 'launch'): Promise<RunResult> {
+  const { recipe, outDir, log } = p;
+  const { viewport } = recipe;
+  const framesDir = path.join(outDir, '.frames');
+  let browser: Browser | null = null;
+  let context: BrowserContext | null = null;
+  let page: Page | null = null;
+  let cdp: CDPSession | null = null;
+  let cap: ScreencastCapture | null = null;
+  let timingSteps: TimingStep[] = [];
+  let wallT0 = 0, endWall = 0;
+  const onSignal = () => {
+    // never leave our recording tab behind in the user's browser
+    void (async () => { await page?.close().catch(() => {}); process.exit(130); })();
+  };
+
+  try {
+    if (mode === 'cdp') {
+      const { found, tried } = await discoverCdp(opts.cdp!, { log });
+      if (!found) throw new Error(`no CDP endpoint answered (${opts.cdp}). Tried:\n  - ${tried.join('\n  - ')}\nIs the browser running? BrowserOS neo serves CDP on 127.0.0.1:9110 by default; run \`pnpm local:check\`.`);
+      log(`cdp: ${found.endpoint}  via ${found.source}${found.browser ? `  (${found.browser})` : ''}`);
+      browser = await chromium.connectOverCDP(found.endpoint, { timeout: 15_000 });
+      context = browser.contexts()[0] ?? null;
+      if (!context) throw new Error('cdp: browser has no default context');
+      if (opts.sessionFile) log('cdp: --session-file ignored (the attached browser already has its own logins)');
+      page = await context.newPage(); // a NEW tab – existing tabs are never touched
+      process.once('SIGINT', onSignal);
+      process.once('SIGTERM', onSignal);
+    } else {
+      browser = await chromium.launch({ headless: !opts.headed });
+      const session = opts.sessionFile ? loadSessionFile(opts.sessionFile, log) : undefined;
+      const storageState = session ?? (recipe.start.storage_state && fs.existsSync(recipe.start.storage_state) ? recipe.start.storage_state : undefined);
+      context = await browser.newContext({ viewport, deviceScaleFactor: 1, locale: localeFor(recipe.lang), storageState });
+      page = await context.newPage();
+      if (!storageState && shouldLogin(recipe.start.url))
+        await login(page, { url: recipe.start.url, user: process.env.SLONEEK_DEMO_USER!, pass: process.env.SLONEEK_DEMO_PASS!, log });
+    }
+    await page.addInitScript(cursorInitScript({ beacon: false })); // this page only
+    cdp = await context.newCDPSession(page);
+    if (mode === 'cdp') {
+      // size the new tab to the recipe viewport independent of the real window size; 1x pixels
+      await cdp.send('Emulation.setDeviceMetricsOverride', {
+        width: viewport.width, height: viewport.height, deviceScaleFactor: 1, mobile: false,
+        screenWidth: viewport.width, screenHeight: viewport.height
+      });
+    }
+    await page.bringToFront().catch(() => {});
+
+    const recorder = new Recorder(page, viewport, log);
+    await page.goto(recipe.start.url, { waitUntil: 'load', timeout: 30_000 });
+    await page.waitForLoadState('networkidle', { timeout: 5_000 }).catch(() => {}); // SPA settle (capped)
+    await sleep(300);
+    await recorder.reinjectCursor();
+    const lsKeys = await page.evaluate(() => { try { return localStorage.length; } catch { return -1; } }).catch(() => -1);
+    log(`page: ${safeUrl(page.url())}  localStorage keys: ${lsKeys}`);
+
+    cap = new ScreencastCapture(cdp, framesDir, viewport, log);
+    await cap.start();
+    const got = await cap.waitFirstFrame(4000, () => recorder.reinjectCursor());
+    if (!got) throw new Error('screencast: no frames within 4 s – is the browser window visible (not minimized / on another Space)?');
+
+    recorder.start();
+    wallT0 = recorder.wallT0;
+    timingSteps = await replaySteps(page, recorder, p, !!opts.strict, false);
+    await sleep(TAIL_MS);
+    endWall = Date.now();
+    await cap.stop();
+  } finally {
+    process.off('SIGINT', onSignal);
+    process.off('SIGTERM', onSignal);
+    if (cap) await cap.stop().catch(() => {});
+    if (cdp && mode === 'cdp') await cdp.send('Emulation.clearDeviceMetricsOverride').catch(() => {});
+    if (cdp) await cdp.detach().catch(() => {});
+    if (mode === 'cdp') await page?.close().catch(() => {});
+    else await context?.close().catch(() => {});
+    // for connectOverCDP this only disconnects – the user's browser keeps running
+    await browser?.close().catch(() => {});
+  }
+
+  const rawPath = path.join(outDir, 'raw.mp4');
+  const endTs = cap!.wallToTs(endWall);
+  await cap!.encode(rawPath, endTs);
+  // Move step times from the Date.now() clock into video time: t_video = map(wall) - t0.
+  const delta = cap!.wallToVideoMs(wallT0);
+  for (const s of timingSteps) { s.t_start_ms += delta; s.t_actions_end_ms += delta; s.t_end_ms += delta; }
+  if (!opts.keepFrames) fs.rmSync(framesDir, { recursive: true, force: true });
+
+  const { fps, durationMs } = await probe(rawPath);
+  const plannedMs = cap!.wallToVideoMs(endWall);
+  const totalMs = durationMs ?? plannedMs;
+  const lastEnd = timingSteps.length ? timingSteps[timingSteps.length - 1].t_end_ms : 0;
+  log(`screencast sync: wall->video offset +${delta} ms (t0 = first frame); video ${totalMs} ms vs wall timeline ${plannedMs} ms (diff ${totalMs - plannedMs >= 0 ? '+' : ''}${totalMs - plannedMs} ms)`);
+
+  const timing: Timing = {
+    recipe_id: recipe.id,
+    video_path: rawPath,
+    fps,
+    total_ms: totalMs,
+    recorded_at: new Date().toISOString(),
+    sync_source: 'screencast',
+    beacon_strip_px: 0,
+    run_id: p.runId,
+    ...(Object.keys(p.dates).length ? { placeholder_dates: p.dates } : {}),
+    capture: 'screencast',
+    browser_mode: mode,
+    steps: timingSteps
+  };
+  const timingPath = writeTiming(outDir, timing, log);
+  log(`video: ${rawPath}  ${viewport.width}x${viewport.height}  fps=${fps}  total=${totalMs} ms (last step end ${lastEnd} ms + ${TAIL_MS} ms tail)`);
+  log(`timing: ${timingPath}`);
   return { timing, timingPath, videoPath: rawPath };
 }
 

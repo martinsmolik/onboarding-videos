@@ -1,0 +1,190 @@
+{
+  "id": "add-users",
+  "version": 1,
+  "title": "How to add a new user",
+  "lang": "en",
+  "app_version": "preprod-2026-10-01",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2"
+  },
+  "voice": {
+    "provider": "external",
+    "model_id": "eleven_multilingual_v2"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "In this video, you'll learn how to add a new user to Sloneek and fill in their basic details.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1200"
+        }
+      ],
+      "expect": {
+        "visible": "#navigation_company_staff",
+        "url_contains": "/app/dashboard"
+      },
+      "hold_after_ms": 500
+    },
+    {
+      "id": "s02",
+      "narration": "In the left menu, under Company, click Users to expand the user section.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#navigation_company_staff"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        }
+      ],
+      "expect": {
+        "visible": "#navigation_settings_users"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "Then choose Management to open the list of all users in your company.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#navigation_settings_users"
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        }
+      ],
+      "expect": {
+        "visible": ".slnk-h1:text-is(\"Management of users\")",
+        "url_contains": "/app/settings/users"
+      }
+    },
+    {
+      "id": "s04",
+      "narration": "Click the Add button at the top of the page to start creating a new user.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=\"addUserButton\"] button"
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=\"usersCreateForm\"]",
+        "url_contains": "/app/company-details/member/new"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "First, set the status. Select The user is not active, so Petra can't log in before her first day.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=\"userInactiveRadio\"]"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=\"hirePacketSelect\"]"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "Under Basic information, fill in the required Name and Surname fields.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=\"firstNameInput\"]",
+          "value": "Petra",
+          "clear": true
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=\"surnameInput\"]",
+          "value": "Example",
+          "clear": true
+        }
+      ]
+    },
+    {
+      "id": "s07",
+      "narration": "Next, enter the new colleague's work email address. The Email field is required too.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=\"emailInput\"]",
+          "value": "video.demo+{{RUN_ID}}@example.com",
+          "clear": true,
+          "delay_ms": 40
+        }
+      ]
+    },
+    {
+      "id": "s08",
+      "narration": "Optionally, assign a team. Open the Team dropdown and pick Marketing.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=\"teamsSelect\"] button"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": "nb-option[data-cy=\"team-Marketing\"]"
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=\"teamsSelect\"] button:text-is(\"Marketing\")"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "When everything looks right, click Create user in the top right corner to save.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=\"submitButton\"]"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-common-header-autocomplete .user_name:text-is(\"Example Petra (Inactive)\")",
+        "url_contains": "/work-data"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "That's it. Petra now has her own user profile, where you can add more details anytime.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-common-header-autocomplete .user_name:text-is(\"Example Petra (Inactive)\")"
+        }
+      ],
+      "hold_after_ms": 1500
+    }
+  ]
+}

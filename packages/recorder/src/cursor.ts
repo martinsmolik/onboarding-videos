@@ -31,9 +31,18 @@ export const BEACON_PX = 6;
 export const BEACON_STRIP_PX = 8;
 export const CURSOR_PX = 28;
 
-export const CURSOR_INIT_SCRIPT = `
+/**
+ * Overlay init script. `beacon: false` (CDP screencast mode) never creates the beacon strip –
+ * screencast timestamps make the beacon unnecessary and the page keeps its full viewport.
+ */
+export function cursorInitScript(opts: { beacon: boolean }): string {
+  return CURSOR_INIT_TEMPLATE.replace('__SVP_BEACON_ON__', opts.beacon ? 'true' : 'false');
+}
+
+const CURSOR_INIT_TEMPLATE = `
 (() => {
   if (window.__svpCursor) return;
+  const BEACON_ON = __SVP_BEACON_ON__;
   const SIZE = ${CURSOR_PX};
   const HOT = { x: 4 * SIZE / 24, y: 2 * SIZE / 24 }; // arrow tip inside the svg box (path is in 24-unit space)
   const SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="' + SIZE + '" height="' + SIZE + '" viewBox="0 0 24 24">'
@@ -129,7 +138,7 @@ export const CURSOR_INIT_SCRIPT = `
   let beaconK = 0;
   function beacon(k) {
     beaconK = k;
-    if (!document.body) return;
+    if (!BEACON_ON || !document.body) return;
     let strip = document.getElementById('${STRIP_ID}');
     if (!strip) {
       strip = document.createElement('div');
@@ -159,6 +168,9 @@ export const CURSOR_INIT_SCRIPT = `
   else document.addEventListener('DOMContentLoaded', ensure, { once: true });
 })();
 `;
+
+/** Original (launch + recordVideo) mode: overlay with the sync beacon strip. */
+export const CURSOR_INIT_SCRIPT = cursorInitScript({ beacon: true });
 
 // Highlight helper – 2 s outline pulse on an element (2 x 1 s, ~24 fps via the shared loop).
 export const HIGHLIGHT_FN = `(el) => {

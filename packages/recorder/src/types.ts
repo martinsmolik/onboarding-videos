@@ -54,10 +54,19 @@ export interface Timing {
   fps: number;
   total_ms: number;
   recorded_at: string;
-  /** 'beacon' = step times re-anchored to true video frames; 'wall' = raw Date.now() offsets (fallback) */
-  sync_source: 'beacon' | 'wall';
+  /** 'beacon' = step times re-anchored to true video frames; 'wall' = raw Date.now() offsets (fallback);
+   *  'screencast' = CDP screencast capture, video built from frame timestamps so video time == wall time by construction */
+  sync_source: 'beacon' | 'wall' | 'screencast';
   /** Extra rows recorded BELOW the recipe viewport (raw.webm height = viewport.height + this). Holds the sync beacon; the assembler crops it away. Absent/0 in old timings = no crop. */
   beacon_strip_px: number;
+  /** Value substituted for {{RUN_ID}} in the recipe (YYYYMMDDHHmmss unless overridden). */
+  run_id?: string;
+  /** Resolved {{DAY:...}} / {{DATE:...}} placeholders of this recording, e.g. {"{{DAY:+14d}}": "15"}. */
+  placeholder_dates?: Record<string, string>;
+  /** How the video was captured: 'video' = Playwright recordVideo (webm + beacon), 'screencast' = CDP Page.startScreencast (mp4). */
+  capture?: 'video' | 'screencast';
+  /** 'launch' = Playwright-launched Chromium, 'cdp' = attached to an already running browser (e.g. BrowserOS neo). */
+  browser_mode?: 'launch' | 'cdp';
   steps: TimingStep[];
 }
 
@@ -67,6 +76,18 @@ export interface RunOptions {
   durations?: string;        // path to audio/durations.json (optional)
   headed?: boolean;
   strict?: boolean;          // abort on first failed step
+  /** Attach to a running browser over CDP: 'auto' (discovery) or an http(s)/ws(s) endpoint. Implies capture 'screencast'. */
+  cdp?: string;
+  /** Playwright storageState JSON used instead of recipe.start.storage_state (launch mode only). */
+  sessionFile?: string;
+  /** Capture method in launch mode. Default 'video' (recordVideo + beacon, the original path). CDP mode always uses 'screencast'. */
+  capture?: 'video' | 'screencast';
+  /** Override the {{RUN_ID}} value (default: local time YYYYMMDDHHmmss). Lowercased, only [a-z0-9] kept. */
+  runId?: string;
+  /** "today" for {{DAY:+Nd}} / {{DATE:...}} placeholders (tests; default now). */
+  today?: Date;
+  /** Keep the raw screencast JPEG frames in <out>/.frames (debugging). */
+  keepFrames?: boolean;
   log?: (line: string) => void;
 }
 

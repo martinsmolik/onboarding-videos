@@ -3,7 +3,8 @@
 Audio-first narration + final assembly. Two stages, both plain file-in/file-out (see root README for the folder layout).
 
 ```
-pnpm --filter @svp/assembler start -- tts --recipe <recipe.json> --out out/<id> [--provider elevenlabs|espeak|mock]
+pnpm --filter @svp/assembler start -- tts --recipe <recipe.json> --out out/<id> [--provider external|elevenlabs|say|espeak|mock]
+pnpm --filter @svp/assembler start -- manifest --recipe <recipe.json> --out out/<id>      # voiceover to-do list only (external)
 pnpm --filter @svp/assembler start -- mux --out out/<id> [--subtitles burn|sidecar|none] [--bgm <file> --bgm-volume 0.08] [--intro on|off] [--outro on|off]
 ```
 
@@ -15,7 +16,43 @@ Programmatic: `import { tts, mux } from "@svp/assembler"` (`tts({recipe, out, pr
 
 Per step with non-empty narration -> `audio/<id>.mp3`, `audio/alignment/<id>.json`, sidecars `<id>.txt` (narration) and `<id>.meta.json` (provider/voice/model). A step is skipped (cache hit) only when mp3 + alignment exist, the `.txt` equals the current narration AND the meta matches, so switching mock <-> elevenlabs or voice re-synthesizes. Silent steps get `0` in `durations.json` and any stale audio is removed.
 
-Provider default: `elevenlabs` if `ELEVENLABS_API_KEY` is set, else `espeak` (falls back to `mock` with a log line if `espeak-ng` is not on PATH). `recipe.voice.provider` is *not* consulted; use `--provider` to force one.
+Provider choice (`chooseProvider` in `src/tts.ts`):
+
+1. `--provider` wins (and must be usable here, otherwise an error).
+2. `recipe.voice.provider: "external"` is always honoured – no fallback, missing files are an error, never a robot voice.
+3. `recipe.voice.provider` `elevenlabs` / `say` / `espeak` when usable here, else auto with a log note. (`mock` in a recipe is not a request.)
+4. Auto: `elevenlabs` (`ELEVENLABS_API_KEY` set) → `say` (macOS) → `espeak` (espeak-ng on PATH) → `mock` (silent tone, log line).
+
+### provider `external` (voiceover made outside the pipeline – Claude + ElevenLabs connector)
+
+The assembler never synthesizes. `tts` (and `manifest`) first writes **`audio/manifest.json`** – the to-do list:
+
+```json
+{ "recipe_id": "absence-request", "provider": "external", "audio_dir": "/…/out/absence-request/audio",
+  "format": "mp3, 44.1 kHz (ElevenLabs output_format mp3_44100_128); .wav/.m4a accepted and transcoded",
+  "voice": { "voice_id": null, "model_id": "eleven_multilingual_v2" }, "instructions": "…",
+  "steps": [ { "id": "s01", "narration": "In this video, …", "file": "s01.mp3", "path": "/…/audio/s01.mp3",
+               "alignment_file": "alignment/s01.json", "chars": 87, "status": "missing" } ],
+  "silent_steps": [], "missing": ["s01", "…"], "total_chars": 789 }
+```
+
+`status`: `present` | `missing` | `stale` (narration changed since the file was accepted and the file is not newer) |
+`foreign` (the mp3 was synthesized by another provider of this pipeline and not replaced since – never accepted as
+external audio). `pnpm voice:manifest <recipe> --id <id>` (root script) writes just this file + the empty
+`audio/` and `audio/alignment/` dirs.
+
+Then, for every narrated step:
+
+* `audio/<id>.mp3` is required; `.wav` / `.m4a` are accepted too (the newest of the three wins) and transcoded to
+  44.1 kHz mp3 (`libmp3lame 192k`). If any step has no usable file, `tts` fails with the list of missing files
+  (+ narration) and the manifest path – nothing is half-written.
+* Durations are measured with ffprobe → `audio/durations.json` (silent steps `0`, their stale files removed).
+* Alignment for SRT: a supplied `audio/alignment/<id>.json` in ElevenLabs with-timestamps format (the bare
+  `{characters, character_start_times_seconds, character_end_times_seconds}` or the whole response with an
+  `alignment` key – normalised to the bare form) is kept; otherwise a linear alignment over the measured duration is
+  written. A supplied file is recognised by being newer than the step's bookkeeping, so a re-generated alignment is
+  picked up and our own linear one is re-derived each run. Warns if it ends > 1.5 s away from the audio length.
+* Bookkeeping per step: `<id>.txt` (narration it was accepted for), `<id>.meta.json` (`{provider:"external", source, alignment}`).
 
 - `espeak` (offline, real speech): `espeak-ng -v <cs|en|sk> -s 150 -f <textfile> -w tmp.wav` -> ffmpeg -> 44.1 kHz mono mp3 (`highshelf -4 dB @ 4 kHz` + `dynaudnorm` to tame the buzz). Voice comes from `recipe.lang`. Narration is passed through a temp file, never through a shell. No per-char timestamps, so the alignment is linear over the *measured* mp3 duration (SRT cues still land inside the spoken window). Measured: Czech ≈ 11 chars/s at 150 wpm (mock assumes 14), mean level ≈ -22 dBFS.
 - `mock` (silent-ish tone): quiet 220 Hz sine, `max(1500, chars/14*1000)` ms, linear char alignment.
@@ -48,7 +85,7 @@ On by default when `recipe.json` (in `out/<id>/`) has a `title`; force with `--i
 
 ### Beacon strip crop
 
-The recorder records `viewport.height + timing.beacon_strip_px` rows (currently 8) and puts the sync beacon in the extra strip. mux crops it (`crop=W:H:0:0`) before anything else. `beacon_strip_px` absent or `0` (old timings) = no crop. A warning is printed if the cropped size differs from `recipe.viewport`.
+CDP screencast recordings (`raw.mp4`, `sync_source: "screencast"`, `beacon_strip_px: 0`) need no crop; the raw file is always taken from `timing.video_path`. The recorder (launch + recordVideo) records `viewport.height + timing.beacon_strip_px` rows (currently 8) and puts the sync beacon in the extra strip. mux crops it (`crop=W:H:0:0`) before anything else. `beacon_strip_px` absent or `0` (old timings) = no crop. A warning is printed if the cropped size differs from `recipe.viewport`.
 
 Subtitles: `final.srt` is always written unless `none`; `burn` adds the libass `subtitles=` filter (DejaVu Sans, FontSize 22, Outline 1, MarginV 40; libass scales these from its 384x288 default PlayRes, so they're resolution independent).
 

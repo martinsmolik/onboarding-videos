@@ -20,6 +20,8 @@ export interface RunOptions {
   replace?: string;
   dryRun?: boolean;
   quiet?: boolean;
+  /** before the first recording, heal the steps that the existing timing.json lists as failed (runner POST /heal) */
+  healFirst?: boolean;
   meta?: { lang?: string; audience?: string; title?: string; since?: string };
 }
 
@@ -178,6 +180,17 @@ async function runLocked(o: RunOptions, out: string): Promise<State> {
   // ---- record + self-heal loop ----
   async function recordWithHeal(max: number): Promise<{ ok: true; heals: number } | { ok: false; error: string }> {
     let heals = 0;
+    if (o.healFirst && fs.existsSync(ctx.timing)) {
+      const pre = readFailedSteps(ctx.timing);
+      if (pre.length) {
+        say(`~~ heal-first: explorer --heal for ${pre.join(", ")} from the previous timing.json, then tts (cached)`);
+        const h = await runCmd("heal", "explore");
+        if (h.code !== 0) return { ok: false, error: `explorer --heal exit ${h.code} (failed steps: ${pre.join(", ")})` };
+        const t = await runCmd("tts", "tts");
+        st.stages.tts.attempts++; saveState(st);
+        if (t.code !== 0) return { ok: false, error: `tts after heal exit ${t.code}` };
+      } else say("-- heal-first: previous timing.json has no failed steps, re-recording as is");
+    }
     for (;;) {
       // stale timing from an earlier attempt must not be mistaken for this attempt's result
       if (fs.existsSync(ctx.timing)) fs.renameSync(ctx.timing, path.join(out, "logs", `timing.prev.json`));

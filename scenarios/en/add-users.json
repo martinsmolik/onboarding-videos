@@ -1,0 +1,27 @@
+{
+  "id": "add-users",
+  "lang": "en",
+  "title": "How to add a new user",
+  "audience": "admin",
+  "source": {
+    "old_video_url": "https://www.youtube.com/watch?v=Bgq7l81i5_o",
+    "changes_detected": [
+      "Users > Management page is titled 'Management of users' (help center 2024 says 'Seznam a správa' / 2026 'Přehled a správa').",
+      "Add opens a full page 'Create a new user' (not a dialog); required: activation status, Name, Surname, Email.",
+      "Choosing 'The user is not active' reveals the new hire packet template and language selects.",
+      "After 'Create user' the app opens the new user's profile on the 'Basic and work data' tab."
+    ]
+  },
+  "steps": [
+    { "id": "s01", "narration": "In this video, you'll learn how to add a new user to Sloneek and fill in their basic details.", "intent": "No action - stay on the dashboard.", "must_show": "The dashboard with the left menu is visible." },
+    { "id": "s02", "narration": "In the left menu, under Company, click Users to expand the user section.", "intent": "In the left menu click 'Users' in the COMPANY section.", "must_show": "The 'Users' submenu with 'Management' is expanded." },
+    { "id": "s03", "narration": "Then choose Management to open the list of all users in your company.", "intent": "Click 'Management' in the 'Users' submenu.", "must_show": "The page 'Management of users' with the user table is shown." },
+    { "id": "s04", "narration": "Click the Add button at the top of the page to start creating a new user.", "intent": "Click the 'Add' button on the 'Management of users' page.", "must_show": "The page 'Create a new user' is open." },
+    { "id": "s05", "narration": "First, set the status. Select The user is not active, so Petra can't log in before her first day.", "intent": "Select the radio 'The user is not active'. Leave the new hire packet template empty.", "must_show": "'The user is not active' is selected and the new hire packet template select appears." },
+    { "id": "s06", "narration": "Under Basic information, fill in the required Name and Surname fields.", "intent": "Type 'Petra' into 'Name' and 'Example' into 'Surname'.", "must_show": "Name 'Petra' and Surname 'Example' are filled in." },
+    { "id": "s07", "narration": "Next, enter the new colleague's work email address. The Email field is required too.", "intent": "Type a unique example.com address into 'Email' (video.demo+RUN_ID@example.com).", "must_show": "The Email field is filled in without a validation error." },
+    { "id": "s08", "narration": "Optionally, assign a team. Open the Team dropdown and pick Marketing.", "intent": "Open the 'Team' dropdown in 'Additional work data' and choose 'Marketing'.", "must_show": "The 'Team' field shows 'Marketing'." },
+    { "id": "s09", "narration": "When everything looks right, click Create user in the top right corner to save.", "intent": "Click 'Create user'.", "must_show": "The new user's profile 'Example Petra (Inactive)' opens on the 'Basic and work data' tab." },
+    { "id": "s10", "narration": "That's it. Petra now has her own user profile, where you can add more details anytime.", "intent": "No action - highlight the user's name in the profile header.", "must_show": "The profile of 'Example Petra' is still visible." }
+  ]
+}

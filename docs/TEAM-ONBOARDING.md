@@ -43,6 +43,8 @@ Pořadí stagí: `knowledge > explore > tts > record > mux > upload`.
 | `pnpm --filter @svp/explorer start -- --scenario ... --out out/X` | jen explorer |
 | `pnpm --filter @svp/recorder start -- --recipe ... --out out/X [--headed]` | jen nahrávání (`--headed` ukáže prohlížeč) |
 | `pnpm --filter @svp/assembler start -- tts\|mux --out out/X` | jen hlas / jen sestříhání |
+| `pnpm local:check <recipe>` / `pnpm local <recipe>` | lokální PoC na Macu: pre-flight / tts → record v Neo → mux (sekce 7) |
+| `pnpm voice:manifest <recipe> [--id X]` | seznam mp3, které má Claude namluvit (hlas `external`) |
 
 Make: `make run ID=x RECIPE=samples/recipe.absence-request.json ARGS="--to mux"`.
 
@@ -69,7 +71,60 @@ Na reálném Sloneek tenantu jsou potřeba `SLONEEK_DEMO_URL/USER/PASS` v `.env`
 - `final.mp4` + `final.srt`: finální pohled; zkontroluj sync hlasu s kliky.
 - `pnpm pipeline status --id X`: tabulka stagí a počet pokusů.
 
-## 7. Co ještě není ověřeno naživo
+## 7. Lokální PoC na Macu s Neo
+
+Celá AI práce (průzkum UI, narace, hlas přes ElevenLabs konektor) běží interaktivně v Claudovi. Mac pouští jen deterministické skripty. Nahrává se **přímo v BrowserOS neo** („Neo“), kde už jsi přihlášený do pre-prod: recorder se připojí přes CDP (Chrome DevTools Protocol, tedy „dálkové ovládání“ Chromia), otevře si **vlastní novou záložku** (tvých záložek se nedotkne), nahraje ji a zase ji zavře. Žádné tokeny se nekopírují.
+
+**Jednou na začátku**
+
+```bash
+brew install node@22 ffmpeg          # pokud ještě nemáš
+cd hackaton && pnpm i                # Playwright Chromium v CDP režimu není potřeba
+```
+
+**Každé video (pořadí dodrž)**
+
+1. Otevři **BrowserOS neo** a zkontroluj, že jsi přihlášený na `https://app-pre-production.sloneek.com`. Okno nech **viditelné** (neminimalizuj ho, nepřesouvej na jinou plochu). Bez viditelného okna Chromium nekreslí snímky.
+2. Pre-flight kontrola:
+   ```bash
+   pnpm local:check recipes/absence-request.en.json
+   ```
+   Mělo by být ✓ `CDP reachable: http://127.0.0.1:9110` a pod tím seznam tvých otevřených záložek (tak poznáš, že je to Neo). Recipe se kontroluje proti `contracts/recipe.schema.json`. Hlas bude zatím ✗ (chybí mp3) a to je v pořádku.
+3. Seznam úkolů pro hlas:
+   ```bash
+   pnpm voice:manifest recipes/absence-request.en.json
+   ```
+   → `out/absence-request/audio/manifest.json`. Řekni Claudovi: *„vygeneruj voiceover podle tohoto manifestu“*. Claude přes ElevenLabs konektor vyrobí `s01.mp3 … s10.mp3` (případně i `alignment/sNN.json` pro přesné titulky) a uloží je do `out/absence-request/audio/`. Přijme se i `.wav` / `.m4a`, převede se samo.
+4. Znovu `pnpm local:check recipes/absence-request.en.json` → všechno ✓.
+5. Nahrání a sestříhání jedním příkazem:
+   ```bash
+   pnpm local recipes/absence-request.en.json
+   ```
+   Běží `tts` (jen změří délky mp3) → `record` (Neo, nová záložka 1920×1080) → `mux`. Na konci se `out/absence-request/final.mp4` sám otevře. Volby: `--id <jiné-id>`, `--no-intro`, `--cdp http://127.0.0.1:<port>`, `--no-open`.
+6. Kontrola: konec výpisu ukazuje kroky, které nejsou `ok`, spolu s cestou ke screenshotu. Exit kód 2 znamená, že video **není** publikovatelné.
+
+**Na co myslet**
+
+- **Každé nahrání mění data v pre-prod.** `absence-request` vytvoří absenci, takže druhé nahrání se stejnými dny skončí kolizí. Recipe proto má používat `{{DAY:+Nd}}` / `{{DAY:+Nd+2}}` a `{{DATE:+Nd:MM/DD/YYYY}}` (dny počítané od dneška; víkend se posune na pondělí). Start volíme tak, aby padl na pondělí v **aktuálním** měsíci. `pnpm local:check` vypíše konkrétní data a varuje, když vyjdou na víkend nebo do dalšího měsíce. `add-users` vytváří při každém běhu nového uživatele, unikátní e-mail zajistí `{{RUN_ID}}`.
+- Při nahrávání na Neo nesahej a nepouštěj Claudovy Neo nástroje (explorer) souběžně se záznamem.
+- Přerušení (Ctrl+C) nahrávací záložku zavře.
+
+**Když CDP nejde (✗ u CDP)**
+
+1. `curl -s http://127.0.0.1:9110/json/version`. Neo spouští CDP server na portu 9110 automaticky. Pokud byl port obsazený, Neo si vybralo jiný a zapsalo ho do `~/Library/Application Support/BrowserClaw/Local State`; `--cdp auto` ho tam najde.
+2. Restart Nea s pevným portem:
+   ```bash
+   osascript -e 'quit app "BrowserOS neo"'; sleep 2
+   open -a "BrowserOS neo" --args --browseros-cdp-port=9110
+   ```
+3. Záložní cesta bez CDP: zkopíruj přihlášení do souboru podle `scripts/grab-session.md` (snippet do DevTools konzole → `pbpaste > out/session.json`) a pusť
+   ```bash
+   pnpm --filter @svp/recorder exec playwright install chromium   # jen poprvé
+   pnpm local recipes/absence-request.en.json --session-file out/session.json
+   ```
+   Recorder pak spustí vlastní Chromium s tvými tokeny. Hodnoty tokenů se nikde nevypisují a `out/session.json` je v `.gitignore`.
+
+## 8. Co ještě není ověřeno naživo
 
 Ověřeno offline (demo app + mock hlas + stuby): recorder, mux, orchestrátor, testy. **Nezkoušeno s reálnými službami:**
 
@@ -82,7 +137,7 @@ Ověřeno offline (demo app + mock hlas + stuby): recorder, mux, orchestrátor, 
 
 Doporučení: ještě dnes otestuj své klíče na jednom krátkém videu, ne až na pódiu.
 
-## 8. Troubleshooting
+## 9. Troubleshooting
 
 | problém | řešení |
 |---|---|

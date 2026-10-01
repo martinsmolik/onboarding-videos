@@ -1,0 +1,208 @@
+{
+  "id": "absence-request",
+  "version": 1,
+  "title": "How to request an absence",
+  "lang": "en",
+  "app_version": "preprod-2026-10-01",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2"
+  },
+  "voice": {
+    "provider": "external",
+    "model_id": "eleven_multilingual_v2"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "In this video, you will learn how to request an absence, such as a vacation, in Sloneek.",
+      "actions": [],
+      "hold_after_ms": 500,
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/absence-overview\"]"
+      }
+    },
+    {
+      "id": "s02",
+      "narration": "In the left menu, under Me, click My absences.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/absence-overview\"]"
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=addAbsenceButton]",
+        "url_contains": "/app/my-profile/absence-overview"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "Here you can see your balances. Click New absence to open the request form.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=addAbsenceButton]"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=addAbsenceButton]"
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container [data-cy=absenceEventsAutocomplete] input"
+      }
+    },
+    {
+      "id": "s04",
+      "narration": "Click the Absence field, search for Vacation (days), and pick it from the list.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=absenceEventsAutocomplete] input"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-pane [data-cy=autocompleteSearchInput]",
+          "value": "Vacation (days)"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane slnk-common-autocomplete-option"
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container [data-cy=dateFromInput]"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "Now click the From field and pick the first day of your absence in the calendar.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=dateFromInput]"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-day-cell:not(.bounding-month):text-is(\"26\")"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container [data-cy=dateToInput]"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "Then click the To field and pick the last day you will be away.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=dateToInput]"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-day-cell:not(.bounding-month):text-is(\"28\")"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container nb-icon[icon=\"check\"]"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "The Event check confirms there is no collision and shows how many days you will draw from your fund.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container .info:has(nb-icon[icon=\"check\"])"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container [data-cy=submitButton]:not([disabled])"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "Optionally, add an absence note, for example who your colleagues should contact while you are away.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "nb-dialog-container [data-cy=noteTextarea]",
+          "value": "Family trip, back on Thursday.",
+          "delay_ms": 60
+        }
+      ]
+    },
+    {
+      "id": "s09",
+      "narration": "When everything looks right, click Create to submit your absence.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=submitButton]:text-is(\"Create\")"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ],
+      "expect": {
+        "visible": ".upcoming-container div:text-is(\"10/26/2026 - 10/28/2026, 3 Days\")"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "All done. Your absence now appears under Upcoming absences, together with its approval status.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".upcoming-container div:text-is(\"10/26/2026 - 10/28/2026, 3 Days\")"
+        }
+      ],
+      "hold_after_ms": 1500,
+      "expect": {
+        "visible": ".upcoming-container div:text-is(\"10/26/2026 - 10/28/2026, 3 Days\")"
+      }
+    }
+  ]
+}

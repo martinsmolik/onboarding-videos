@@ -1,6 +1,8 @@
 import { loadEnv, parseArgs } from "./util.js";
 import { tts } from "./tts.js";
 import { mux } from "./mux.js";
+import { writeManifest } from "./external.js";
+import { readJson, resolvePath } from "./util.js";
 
 loadEnv();
 const { cmd, flags } = parseArgs(process.argv.slice(2));
@@ -8,10 +10,16 @@ const str = (k: string) => (typeof flags[k] === "string" ? (flags[k] as string) 
 
 async function main() {
   if (cmd === "tts") {
-    if (!str("recipe") || !str("out")) throw new Error("usage: tts --recipe <path> --out out/<id> [--provider elevenlabs|espeak|mock]");
+    if (!str("recipe") || !str("out")) throw new Error("usage: tts --recipe <path> --out out/<id> [--provider elevenlabs|external|say|espeak|mock]");
     const p = str("provider");
-    if (p && p !== "elevenlabs" && p !== "espeak" && p !== "mock") throw new Error("--provider must be elevenlabs|espeak|mock");
+    if (p && !["elevenlabs", "external", "say", "espeak", "mock"].includes(p)) throw new Error("--provider must be elevenlabs|external|say|espeak|mock");
     await tts({ recipe: str("recipe")!, out: str("out")!, provider: p as any });
+  } else if (cmd === "manifest") {
+    if (!str("recipe") || !str("out")) throw new Error("usage: manifest --recipe <path> --out out/<id>");
+    const { manifest, file } = writeManifest(readJson(resolvePath(str("recipe")!)), resolvePath(str("out")!));
+    console.log(`[manifest] ${file}`);
+    console.log(`[manifest] ${manifest.steps.length} narrated step(s), ${manifest.total_chars} chars, ${manifest.silent_steps.length} silent; ${manifest.missing.length} without usable audio`);
+    for (const s of manifest.steps) console.log(`  ${s.status === "present" ? "ok     " : s.status.padEnd(7)} ${s.file.padEnd(9)} ${s.narration.length > 80 ? s.narration.slice(0, 77) + "..." : s.narration}`);
   } else if (cmd === "mux") {
     if (!str("out")) throw new Error("usage: mux --out out/<id> [--subtitles burn|sidecar|none] [--bgm <file> --bgm-volume 0.08] [--intro on|off] [--outro on|off]");
     const s = str("subtitles") ?? "sidecar";
@@ -28,7 +36,7 @@ async function main() {
     const r = await mux({ out: str("out")!, subtitles: s as any, bgm: str("bgm"), bgmVolume: str("bgm-volume") ? Number(str("bgm-volume")) : undefined, intro: tri("intro"), outro: tri("outro") });
     if (r.warnings.length) { console.log("\nWARNINGS:"); r.warnings.forEach((w) => console.log(" - " + w)); }
   } else {
-    console.error("usage: start -- <tts|mux> ...");
+    console.error("usage: start -- <tts|manifest|mux> ...");
     process.exit(2);
   }
 }

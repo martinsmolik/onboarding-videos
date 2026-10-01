@@ -15,11 +15,15 @@
     "typecheck": "node scripts/typecheck.mjs",
     "test": "node scripts/test-all.mjs",
     "smoke": "node scripts/smoke.mjs",
+    "local": "node scripts/local-run.mjs",
+    "local:check": "node scripts/local-run.mjs --check",
+    "voice:manifest": "node scripts/voice-manifest.mjs",
     "batch": "node packages/orchestrator/scripts/batch.mjs"
   },
   "devDependencies": {
-    "typescript": "^5.6.0",
+    "@types/node": "^22.0.0",
+    "ajv": "8.20.0",
     "tsx": "^4.19.0",
-    "@types/node": "^22.0.0"
+    "typescript": "^5.6.0"
   }
 }
