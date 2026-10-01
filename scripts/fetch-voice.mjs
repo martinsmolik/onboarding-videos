@@ -14,7 +14,6 @@ const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'urls.json'), 'utf8')
 let ok = 0, fail = 0;
 for (const [step, url] of Object.entries(manifest.clips)) {
   const dest = path.join(dir, `${step}.mp3`);
-  if (fs.existsSync(dest) && fs.statSync(dest).size > 1000) { console.log(`✓ ${step} (cached)`); ok++; continue; }
   try {
     const res = await fetch(url);
     if (!res.ok) throw new Error(`HTTP ${res.status}${res.status === 400 || res.status === 403 ? ' – signed URL expired? ask Claude to refresh urls.json' : ''}`);
