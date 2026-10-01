@@ -8,6 +8,7 @@ import {
   mux, tts, writeManifest, cuesForStep, mapTextIndices, linearAlignment,
   ttsText, subtitleText, effectiveParts, partStarts, chaptersText, chapterProblems, ytTime, INTERSTITIAL_MS,
 } from "../src/index.js";
+import { FIXTURE_DIR, ensureFixtureVideo } from "./fixture-video.js";
 
 const hasFfmpeg = spawnSync("ffmpeg", ["-version"], { stdio: "ignore" }).status === 0;
 const quiet = () => {};
@@ -78,10 +79,11 @@ test("manifest: tts_text + subtitle; a subtitle-only edit never makes the clip s
 
 // mux end-to-end on the committed fixture (6 steps, 34 s raw.webm, mock audio): 3 parts -> 2 cards
 function fixtureCopy(): string {
-  const src = path.join(path.dirname(new URL(import.meta.url).pathname), "fixture");
+  const src = FIXTURE_DIR;
+  ensureFixtureVideo(src);
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "svp-mux-parts-"));
   fs.cpSync(src, dir, { recursive: true });
-  for (const f of ["final.mp4", "final.srt", "frame_burn.png", "frame_burn2.png"]) fs.rmSync(path.join(dir, f), { force: true });
+  for (const f of ["final.mp4", "final.srt"]) fs.rmSync(path.join(dir, f), { force: true });
   const r = JSON.parse(fs.readFileSync(path.join(dir, "recipe.json"), "utf8"));
   Object.assign(r.steps[0], { part: 1, part_title: "Úvod" });
   Object.assign(r.steps[1], { subtitle: "V menu zvolte Absence." });

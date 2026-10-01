@@ -7,6 +7,7 @@ import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { mux, ffmpegBin, ffprobeBin, ffmpegCaps, cssColor, renderCardPngs, INTERSTITIAL_MS } from "../src/index.js";
+import { FIXTURE_DIR, ensureFixtureVideo } from "./fixture-video.js";
 
 const hasFfmpeg = spawnSync("ffmpeg", ["-version"], { stdio: "ignore" }).status === 0;
 const hasDrawtext = hasFfmpeg && / drawtext /.test(spawnSync("ffmpeg", ["-hide_banner", "-filters"], { encoding: "utf8" }).stdout);
@@ -45,10 +46,11 @@ test("ffmpegCaps: SVP_FORCE_NO_DRAWTEXT hides drawtext", { skip: !hasFfmpeg }, a
 
 // --- e2e on the committed fixture (34 s raw.webm, 6 steps) with 3 parts -> 2 interstitials
 function fixtureCopy(mutTiming?: (t: any) => void): string {
-  const src = path.join(path.dirname(new URL(import.meta.url).pathname), "fixture");
+  const src = FIXTURE_DIR;
+  ensureFixtureVideo(src);
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "svp-cards-"));
   fs.cpSync(src, dir, { recursive: true });
-  for (const f of ["final.mp4", "final.srt", "frame_burn.png", "frame_burn2.png"]) fs.rmSync(path.join(dir, f), { force: true });
+  for (const f of ["final.mp4", "final.srt"]) fs.rmSync(path.join(dir, f), { force: true });
   const r = JSON.parse(fs.readFileSync(path.join(dir, "recipe.json"), "utf8"));
   Object.assign(r.steps[0], { part: 1, part_title: "Úvod" });
   Object.assign(r.steps[2], { part: 2, part_title: "Nastavení" });

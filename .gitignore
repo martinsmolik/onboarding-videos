@@ -8,3 +8,4 @@ out/
 *.wav
 storage-state*.json
 out/session.json
+.DS_Store
