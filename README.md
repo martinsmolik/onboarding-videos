@@ -71,6 +71,21 @@ Each package: TypeScript, `tsx` runtime, exposes a CLI (`pnpm --filter @svp/<nam
 - **Ids:** `out/<id>` is the pipeline id; `recipe.id` may differ (it goes into the YouTube description). Keep them equal in practice.
 - **Paths:** stages resolve relative paths against the directory pnpm was invoked from (`INIT_CWD`); the orchestrator always passes absolute paths.
 - **Login on the real tenant:** explorer saves `out/<id>/storage-state.json` (+ `login-actions.json` with `{{SLONEEK_DEMO_USER}}` placeholders); recorder uses `recipe.start.storage_state`. Credentials only ever come from env.
+- **Brand cards (default `cardStyle: "brand"`, `SVP_CARD_STYLE=classic` = old dark cards):** intro / part interstitial /
+  outro are HTML from `packages/assembler/src/brand.ts` (sloneek.com tokens: Geometria Bold + Inter, `#5245FF`,
+  lavender `#F4F2FF`, the logo loop as the only decoration) rendered to PNG by a Chromium renderer (CDP tab, Playwright
+  Chromium, Chrome, Edge); fades dip to the brand background, not black. Fonts are not in git (licensed): `scripts/brand-fetch.mjs`
+  (run by the setup scripts) puts them in `~/.onboarding-videos/brand/fonts` (`BRAND_FONT_DIR`); missing = Inter/Helvetica + warning.
+  No renderer → classic drawtext cards. mux also writes `out/<id>/thumbnail.png` (1280x720; `recipe.thumbnail: {shot, title}`
+  or `false`; default shot = first step of the 2nd part), uploaded by `pipeline upload` via `thumbnails.set` (non-fatal).
+- **Loudness:** mux measures every narration clip (EBU R128, cached in `audio/loudness.json`) and applies a static gain to
+  -16 LUFS (`--lufs`, `SVP_LOUDNESS_LUFS`, `0` = off) + a -1 dBFS peak limiter per boosted clip. ElevenLabs clips differ by
+  up to 13 dB otherwise.
+- **Pronunciation:** `config/pronunciation.json` (per language) + `recipe.pronunciation` rewrite the SPOKEN text only
+  (`tts_text` = lexicon(`narration_tts ?? narration`)); subtitles keep the spelling. Whole words, `stem: true` keeps Czech
+  endings (absence/absencí → apsence/apsencí). It is part of the audio cache key, so a rule change re-voices exactly the
+  affected steps. The manifest carries `voice.language_code` (= `recipe.lang`); the skill sets it on the connector's TTS
+  node, the API path sends it to models that accept it (flash/turbo v2.5, v3).
 - **Recipe v2 fields (brief „Kostra videonávodů“, all optional, old recipes unchanged):** step `part` (int, inherited by
   later steps) + `part_title` → 1.5 s interstitial card "`2 / Nastavení`" at every part change and `out/<id>/chapters.txt`
   (YouTube chapters in `final.mp4` time); top-level `interstitials` / `chapters` (default `true`). Step `narration_tts`

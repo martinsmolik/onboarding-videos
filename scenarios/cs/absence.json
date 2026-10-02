@@ -169,7 +169,7 @@
       "part": 2,
       "part_title": "Nastavení",
       "narration": "V Nastavení otevřu Absence. Tady jsou všechny typy absencí, které firma používá. Přístup sem má administrátor nebo HR. Pozor, seznam ukazuje jen aktivní typy, vypnuté najdete přes filtr nahoře.",
-      "narration_tts": "V Nastavení otevřu Absence. Tady jsou všechny typy absencí, které firma používá. Přístup sem má administrátor nebo há er. Pozor, seznam ukazuje jen aktivní typy, vypnuté najdete přes filtr nahoře.",
+      "narration_tts": "V Nastavení otevřu Absence. Tady jsou všechny typy absencí, které firma používá. Přístup sem má administrátor nebo HR. Pozor, seznam ukazuje jen aktivní typy, vypnuté najdete přes filtr nahoře.",
       "subtitle": "V Nastavení otevřu Absence. Tady jsou všechny typy absencí, které firma používá. Přístup sem má administrátor nebo HR. Pozor, seznam ukazuje jen aktivní typy, vypnuté najdete přes filtr nahoře.",
       "intent": "Click 'Absence' in 'Nastavení' (EN 'Settings' > 'Absence'), then highlight the active/inactive filter above the list without changing it.",
       "must_show": "The list of absence types is visible with the active filter highlighted.",

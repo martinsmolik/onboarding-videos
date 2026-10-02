@@ -84,6 +84,10 @@
         },
         "model_id": {
           "type": "string"
+        },
+        "language_code": {
+          "type": "string",
+          "description": "BCP-47 language enforced on the TTS model (default recipe.lang). Sent to the API only for models that accept it (flash/turbo v2.5, v3); the /onboarding-video skill sets it on the connector's TTS node."
         }
       }
     },
@@ -103,6 +107,97 @@
       "type": "boolean",
       "default": true,
       "description": "Insert a 1.5 s card \"<part> / <part_title>\" (brand colours) before every step whose part differs from the previous step's (never before the very first step – the intro covers it). mux --no-interstitials overrides."
+    },
+    "thumbnail": {
+      "description": "YouTube thumbnail (out/<id>/thumbnail.png, brand card style). false = none.",
+      "oneOf": [
+        {
+          "type": "boolean",
+          "const": false
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "shot": {
+              "type": "string",
+              "description": "step id whose screenshot (shots/<id>.png) is shown; default first step of the 2nd part. Pick a screen without an open modal."
+            },
+            "title": {
+              "type": "string",
+              "description": "shorter title for the thumbnail (default recipe.title); 2-4 words read best"
+            }
+          }
+        }
+      ]
+    },
+    "pronunciation": {
+      "description": "Per-video pronunciation rules on top of config/pronunciation.json (spoken text only, subtitles unchanged). Array of rules, or { <lang>: [rules] }.",
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "match",
+              "say"
+            ],
+            "properties": {
+              "match": {
+                "type": "string"
+              },
+              "say": {
+                "type": "string"
+              },
+              "stem": {
+                "type": "boolean"
+              },
+              "case": {
+                "enum": [
+                  "sensitive",
+                  "insensitive"
+                ]
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "match",
+                "say"
+              ],
+              "properties": {
+                "match": {
+                  "type": "string"
+                },
+                "say": {
+                  "type": "string"
+                },
+                "stem": {
+                  "type": "boolean"
+                },
+                "case": {
+                  "enum": [
+                    "sensitive",
+                    "insensitive"
+                  ]
+                },
+                "note": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      ]
     }
   },
   "$defs": {

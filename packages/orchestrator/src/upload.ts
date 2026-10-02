@@ -4,7 +4,7 @@ import { outRoot, readJson, writeJsonAtomic, now, sleep } from "./util.ts";
 
 export const hasYtCreds = () => !!(process.env.YT_CLIENT_ID && process.env.YT_CLIENT_SECRET && process.env.YT_REFRESH_TOKEN);
 
-export interface UploadResult { videoId: string; url: string; captionsUploaded: boolean; replaced?: string }
+export interface UploadResult { videoId: string; url: string; captionsUploaded: boolean; thumbnailUploaded?: boolean; replaced?: string }
 type Log = (m: string) => void;
 
 export async function accessToken(): Promise<string> {
@@ -37,6 +37,8 @@ export function buildMetadata(out: string, recipeId: string) {
     "",
     "Automaticky generované onboardingové video Sloneek.",
     "",
+    // YouTube chapters: "0:00 Úvod" lines in the description (mux writes chapters.txt)
+    ...(fs.existsSync(path.join(out, "chapters.txt")) ? [fs.readFileSync(path.join(out, "chapters.txt"), "utf8").trim(), ""] : []),
     `recipe: ${recipe.id ?? recipeId}`,
     `version: ${recipe.version ?? "?"}`,
     `app_version: ${recipe.app_version ?? "?"}`,
@@ -125,6 +127,22 @@ async function uploadCaptions(token: string, videoId: string, srt: string, lang:
   }
 }
 
+/** thumbnails.set (needs a verified channel for custom thumbnails; failure is non-fatal). */
+async function uploadThumbnail(token: string, videoId: string, png: string, log: Log): Promise<boolean> {
+  try {
+    await api(token, `https://www.googleapis.com/upload/youtube/v3/thumbnails/set?videoId=${videoId}`, {
+      method: "POST",
+      headers: { "content-type": "image/png" },
+      body: fs.readFileSync(png),
+    });
+    log("thumbnail uploaded");
+    return true;
+  } catch (e: any) {
+    log(`thumbnail upload skipped: ${e.message}`);
+    return false;
+  }
+}
+
 /**
  * YouTube cannot replace the media of an existing video (videos.update is metadata-only).
  * So "replace" = upload new + make old private + record the mapping so the portal can swap the link.
@@ -165,11 +183,13 @@ export async function uploadVideoStage(id: string, out: string, opts: { replace?
   log(`uploaded: https://youtu.be/${videoId} (${meta.status.privacyStatus})`);
   const srt = path.join(out, "final.srt");
   const captionsUploaded = fs.existsSync(srt) ? await uploadCaptions(token, videoId, srt, (meta.snippet.defaultLanguage as string) || "cs", log) : false;
+  const thumb = path.join(out, "thumbnail.png");
+  const thumbnailUploaded = fs.existsSync(thumb) ? await uploadThumbnail(token, videoId, thumb, log) : false;
   if (opts.replace && opts.replace !== videoId) {
     try { await retireOld(token, opts.replace, videoId, log); } catch (e: any) { log(`could not retire old video: ${e.message}`); }
   }
   updateMap(id, videoId, opts.replace);
-  const res: UploadResult = { videoId, url: `https://youtu.be/${videoId}`, captionsUploaded, replaced: opts.replace };
+  const res: UploadResult = { videoId, url: `https://youtu.be/${videoId}`, captionsUploaded, thumbnailUploaded, replaced: opts.replace };
   writeJsonAtomic(path.join(out, "upload.json"), { ...res, privacy: meta.status.privacyStatus, uploaded_at: now() });
   return res;
 }

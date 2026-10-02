@@ -1,9 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { cuesForStep, toSrt, type Cue } from "./srt.js";
 import { chapterProblems, chaptersText, effectiveParts, partLabel, partStarts, subtitleText, type Chapter, type PartStart } from "./parts.js";
 import { ffmpegCaps, probeDurationMs, probeVideoSize, readJson, resolvePath, run } from "./util.js";
 import { CARD_RENDERERS, cssColor, renderCardPngs, type CardRendererName, type CardSpec } from "./cards.js";
+import { BRAND, brandStrings, loadBrandFonts, brandFontDir } from "./brand.js";
+import { normalizeClips, gainFilter, DEFAULT_LUFS, type ClipGain } from "./loudness.js";
 
 export interface MuxOptions {
   out: string;
@@ -35,6 +38,25 @@ export interface MuxOptions {
    * chrome, msedge, else cards off), "drawtext", one PNG renderer, or "none" (cards off). Default: env SVP_CARD_RENDERER.
    */
   cardRenderer?: "auto" | "drawtext" | "none" | CardRendererName;
+  /**
+   * "brand" (default): Sloneek brand cards from brand.ts (HTML template -> PNG via a Chromium renderer), fades dip
+   * to the brand background, plus out/<id>/thumbnail.png. "classic": the old dark drawtext/canvas cards.
+   * Default: env SVP_CARD_STYLE.
+   */
+  cardStyle?: "brand" | "classic";
+  /**
+   * Copy the finished video for people to pick up: <dir>/<id>/<id>.mp4, <id>.srt, <id>-nahled.png (thumbnail),
+   * youtube.txt (title + description with chapters). Default: env SVP_DELIVER_DIR, else <repo>/videa – but only
+   * when `out` is <repo>/out/<id> (test fixtures and other dirs are never copied). false = off.
+   */
+  deliver?: string | false;
+  /** Write thumbnail.png (1280x720, brand style only). Default: recipe.thumbnail !== false. */
+  thumbnail?: boolean;
+  /**
+   * Target loudness of every narration clip (integrated LUFS, EBU R128). Each clip gets its own gain so all
+   * scenes sound equally loud. Default -16 (env SVP_LOUDNESS_LUFS); 0 = off (clips mixed as they are).
+   */
+  loudnessLufs?: number;
   log?: (m: string) => void;
 }
 export interface MuxResult {
@@ -46,6 +68,12 @@ export interface MuxResult {
   outroMs: number;
   /** how intro/outro/interstitial cards were made: drawtext | png:<renderer> | none (wanted, but no renderer worked) | off (no text cards wanted) */
   cards: string;
+  /** per-clip loudness correction (empty when loudness normalisation is off) */
+  loudness: ClipGain[];
+  /** out/<id>/thumbnail.png when written */
+  thumbnailPath?: string;
+  /** folder with the copied deliverables (videa/<id>) */
+  deliveredTo?: string;
   /** step ids with status "failed" in timing.json (final.mp4 is still written) */
   failedSteps: string[];
   /** interstitial cards inserted (each INTERSTITIAL_MS long) */
@@ -128,6 +156,30 @@ function cardFilter(w: number, h: number, durMs: number, bg: string, fg: string,
   return parts.join(",") + `[${label}]`;
 }
 
+/** Title + description for YouTube (chapters must be in the description to show up). */
+export function youtubeText(title: string, chapters: string, lang?: string): string {
+  const intro = lang === "en" ? "Sloneek video guide." : lang === "sk" ? "Videonávod Sloneek." : "Videonávod Sloneek.";
+  return [`Název: ${title}`, "", "Popis:", title, "", intro, ...(chapters.trim() ? ["", chapters.trim()] : []), "", "https://www.sloneek.com"].join("\n") + "\n";
+}
+
+/** "1 část" / "4 části" / "5 částí" (cs), "časť/časti/častí" (sk), "part/parts" (en). */
+export function partsLabel(n: number, lang?: string): string {
+  if (lang === "en") return `${n} ${n === 1 ? "part" : "parts"}`;
+  const [one, few, many] = lang === "sk" ? ["časť", "časti", "častí"] : ["část", "části", "částí"];
+  return `${n} ${n === 1 ? one : n >= 2 && n <= 4 ? few : many}`;
+}
+
+/** Screenshot for the thumbnail: recipe.thumbnail.shot, else the first step of the 2nd part, else the middle step. */
+export function thumbnailShot(out: string, steps: { id: string; part?: number; status?: string }[], wanted?: string): string | null {
+  const f = (id: string) => { const p = path.join(out, "shots", `${id}.png`); return fs.existsSync(p) ? p : null; };
+  if (wanted) return f(String(wanted));
+  const ok = steps.filter((s) => s.status !== "failed" && s.status !== "skipped");
+  const first = ok[0]?.part;
+  const second = ok.find((s) => s.part !== undefined && s.part !== first);
+  for (const s of [second, ok[Math.floor(ok.length / 2)], ...ok]) if (s && f(s.id)) return f(s.id);
+  return null;
+}
+
 export async function mux(opts: MuxOptions): Promise<MuxResult> {
   const log = opts.log ?? ((m) => console.log(m));
   const out = resolvePath(opts.out);
@@ -158,8 +210,11 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
   let outroCard = !outroImage && (opts.outro ?? (opts.intro ?? !!title));
   if (introCard && !title) warnings.push("intro requested but recipe.json has no title - using recipe id");
   const imgMs = (s: number | undefined) => Math.round((Math.round((s !== undefined && s > 0 ? s : IMAGE_SEC) * OUT_FPS) * 1000) / OUT_FPS); // whole frames
-  const BG = ffColor(process.env.BRAND_BG, "#1f2a44");
-  const FG = ffColor(process.env.BRAND_FG, "#ffffff");
+  const styleWant = opts.cardStyle ?? (process.env.SVP_CARD_STYLE as MuxOptions["cardStyle"]) ?? "brand";
+  if (styleWant !== "brand" && styleWant !== "classic") throw new Error(`cardStyle must be brand|classic (got ${styleWant})`);
+  let brand = styleWant === "brand";
+  const BG = ffColor(process.env.BRAND_BG, brand ? BRAND.bg : "#1f2a44");
+  const FG = ffColor(process.env.BRAND_FG, brand ? BRAND.ink : "#ffffff");
 
   // --- parts: effective part per timing step (from recipe.json, else what the recorder logged) ---
   const recipeSteps: any[] = Array.isArray(recipe.steps) ? recipe.steps : [];
@@ -174,9 +229,32 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
 
   // --- text cards: drawtext when ffmpeg has it, else PNG stills (Chromium canvas), else off (stills via --intro/outro-image never need text) ---
   const specs: CardSpec[] = [];
-  if (introCard) specs.push({ key: "intro", title: wrapTitle(title || String(recipe.id || timing.recipe_id || "Sloneek")), sub: "Sloneek · onboarding" });
-  cards.forEach((c, i) => specs.push({ key: `part-${i + 1}`, title: c.part !== undefined ? `${c.part} / ${c.title}` : c.title, sub: title || null }));
-  if (outroCard) specs.push({ key: "outro", title: "sloneek.com", sub: null });
+  const shownTitle = title || String(recipe.id || timing.recipe_id || "Sloneek");
+  // brand content: parts are numbered by their order (recipes may skip numbers), meta line = parts + rough length
+  const S = brandStrings(recipe.lang);
+  const partOrder = [...new Set(tSteps.filter((s) => s.status !== "skipped" && s.part !== undefined).map((s) => s.part as number))];
+  const estMin = Math.max(1, Math.round((totalMs + cards.length * INTERSTITIAL_MS + INTRO_MS + OUTRO_MS) / 60000));
+  const meta = [partOrder.length > 1 ? partsLabel(partOrder.length, recipe.lang) : null, S.min(estMin)].filter(Boolean).join(" · ");
+  const thumbCfg: any = recipe.thumbnail && typeof recipe.thumbnail === "object" ? recipe.thumbnail : {};
+  const wantThumb = brand && (opts.thumbnail ?? recipe.thumbnail !== false);
+  const pushSpecs = () => {
+    specs.length = 0;
+    if (introCard) specs.push(brand ? { key: "intro", title: "", sub: null, brand: { kind: "intro", title: shownTitle, eyebrow: S.eyebrow, meta } }
+      : { key: "intro", title: wrapTitle(shownTitle), sub: "Sloneek · onboarding" });
+    cards.forEach((c, i) => {
+      const idx = c.part !== undefined ? partOrder.indexOf(c.part) + 1 : i + 2;
+      specs.push(brand ? { key: `part-${i + 1}`, title: "", sub: null, brand: { kind: "part", index: idx, count: Math.max(partOrder.length, idx), label: S.part(idx, Math.max(partOrder.length, idx)), title: c.title, videoTitle: title || undefined } }
+        : { key: `part-${i + 1}`, title: c.part !== undefined ? `${c.part} / ${c.title}` : c.title, sub: title || null });
+    });
+    if (outroCard) specs.push(brand ? { key: "outro", title: "", sub: null, brand: { kind: "outro", line: S.outro, url: "sloneek.com" } } : { key: "outro", title: "sloneek.com", sub: null });
+    if (wantThumb && brand) {
+      const shot = thumbnailShot(out, tSteps, thumbCfg.shot);
+      if (thumbCfg.shot && !shot) warnings.push(`thumbnail.shot ${thumbCfg.shot}: shots/${thumbCfg.shot}.png not found - thumbnail uses the first step of part 2`);
+      const shotUrl = shot ? `data:image/png;base64,${fs.readFileSync(shot).toString("base64")}` : undefined;
+      specs.push({ key: "thumb", title: "", sub: null, width: 1280, height: 720, brand: { kind: "thumb", title: String(thumbCfg.title || shownTitle), eyebrow: S.eyebrow, shot: shotUrl } });
+    }
+  };
+  pushSpecs();
   const want = (opts.cardRenderer ?? (process.env.SVP_CARD_RENDERER as MuxOptions["cardRenderer"]) ?? "auto") || "auto";
   if (!["auto", "drawtext", "none", ...CARD_RENDERERS].includes(want)) throw new Error(`cardRenderer must be auto|drawtext|none|${CARD_RENDERERS.join("|")} (got ${want})`);
   const caps = await ffmpegCaps();
@@ -184,15 +262,28 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
   const pngs: Record<string, string> = {};
   if (specs.length && want === "none") cardMode = "none";
   else if (specs.length && want === "drawtext" && !caps.drawtext) throw new Error(`cardRenderer=drawtext but ${caps.bin} has no drawtext filter${caps.forcedNoDrawtext ? " (SVP_FORCE_NO_DRAWTEXT is set)" : ""}`);
-  else if (specs.length && (want !== "auto" && want !== "drawtext" || !caps.drawtext)) {
-    if (!caps.drawtext) log(`[mux] ${caps.bin} has no drawtext filter${caps.forcedNoDrawtext ? " (forced by SVP_FORCE_NO_DRAWTEXT)" : " (Homebrew core ffmpeg is built without libfreetype)"} -> rendering ${specs.length} card(s) as PNG`);
+  else if (specs.length && brand && want === "drawtext") { brand = false; pushSpecs(); }
+  if (specs.length && cardMode === "drawtext" && (brand || want !== "auto" && want !== "drawtext" || !caps.drawtext)) {
+    if (!caps.drawtext && !brand) log(`[mux] ${caps.bin} has no drawtext filter${caps.forcedNoDrawtext ? " (forced by SVP_FORCE_NO_DRAWTEXT)" : " (Homebrew core ffmpeg is built without libfreetype)"} -> rendering ${specs.length} card(s) as PNG`);
     const cdp = opts.cdp ?? process.env.SVP_CARD_CDP;
+    let fonts = {};
+    if (brand) {
+      const lf = loadBrandFonts();
+      fonts = lf.fonts;
+      if (lf.missing.length) warnings.push(`brand fonts missing in ${brandFontDir()} (${lf.missing.join(", ")}) -> cards use Inter/Helvetica instead. Fix: node scripts/brand-fetch.mjs`);
+      log(`[mux] rendering ${specs.length} brand card(s) as PNG`);
+    }
     const r = await renderCardPngs(specs, {
-      width: W, height: H, bg: cssColor(BG), fg: cssColor(FG), boldFont: fontFile(true), regularFont: fontFile(false), dir: out, cdp,
+      width: W, height: H, bg: cssColor(BG), fg: cssColor(FG), boldFont: fontFile(true), regularFont: fontFile(false), dir: out, cdp, fonts,
       renderers: want === "auto" ? undefined : [want as CardRendererName], log,
     });
     if (r.renderer) { cardMode = `png:${r.renderer}`; Object.assign(pngs, r.files); }
-    else {
+    else if (brand && caps.drawtext && want === "auto") {
+      // no Chromium renderer here: fall back to the classic drawtext cards rather than none
+      warnings.push(`BRAND CARDS UNAVAILABLE: no PNG card renderer worked (${r.tried.join(" | ") || "-"}) -> classic drawtext cards, no thumbnail. Fix: keep BrowserOS neo running and pass --cdp auto, or install Chrome`);
+      brand = false;
+      pushSpecs();
+    } else {
       cardMode = "none";
       warnings.push(`CARDS DISABLED: ${caps.drawtext ? "" : "ffmpeg has no drawtext and "}no PNG card renderer worked -> intro/outro/interstitial cards are off, chapters use the shorter timeline. Tried: ${r.tried.join(" | ") || "-"}. ` +
         `Fix: brew install ffmpeg-full (picked up automatically from /opt/homebrew/opt/ffmpeg-full/bin, or set FFMPEG_PATH), or keep BrowserOS neo running and pass --cdp auto`);
@@ -228,6 +319,15 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
     if (s.audio_ms && Math.abs(s.audio_ms - real) > 100) warnings.push(`step ${s.id}: recorder paced against ${s.audio_ms}ms but mp3 is ${real}ms (stale durations.json at record time?)`);
     if (s.t_start_ms + real > totalMs + 200) warnings.push(`DRIFT step ${s.id}: t_start ${s.t_start_ms} + audio ${real} = ${s.t_start_ms + real}ms > video total ${totalMs}ms (+200 tolerance) - audio will be cut`);
     items.push({ id: s.id, file, t: s.t_start_ms, shift: shiftAt(index), audioMs: real, status: s.status });
+  }
+  // per-clip loudness: every scene at the same integrated loudness (EBU R128)
+  const lufsTarget = opts.loudnessLufs ?? (process.env.SVP_LOUDNESS_LUFS !== undefined ? Number(process.env.SVP_LOUDNESS_LUFS) : DEFAULT_LUFS);
+  if (!Number.isFinite(lufsTarget) || lufsTarget > 0 || lufsTarget < -40) throw new Error(`loudnessLufs must be between -40 and 0 (0 = off), got ${lufsTarget}`);
+  const loudness: ClipGain[] = lufsTarget ? await normalizeClips(path.join(out, "audio"), items, lufsTarget, (m) => warnings.push(m)) : [];
+  const gainOf = new Map(loudness.map((g) => [g.id, g.gainDb]));
+  if (loudness.length) {
+    const l = loudness.map((g) => g.lufs).filter(Number.isFinite);
+    log(`[mux] loudness: ${loudness.length} clip(s) ${Math.min(...l).toFixed(1)}..${Math.max(...l).toFixed(1)} LUFS -> ${lufsTarget} LUFS (gain ${loudness.map((g) => `${g.id} ${g.gainDb > 0 ? "+" : ""}${g.gainDb}`).join(", ")} dB)`);
   }
   // overlap between consecutive narrations
   const sorted = [...items].sort((a, b) => a.t - b.t);
@@ -269,14 +369,20 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
   // PNG cards (no drawtext): one looped still per card, same length/fps/pixfmt/fades as the drawtext card
   const pngIdx: Record<string, number> = {};
   const cardMs = (key: string) => (key === "intro" ? introMs : key === "outro" ? outroMs : INTERSTITIAL_MS);
-  if (pngMode) for (const sp of specs) if (pngs[sp.key] && (sp.key !== "intro" || introCard) && (sp.key !== "outro" || outroCard)) pngIdx[sp.key] = imageInput(pngs[sp.key], cardMs(sp.key));
+  if (pngMode) for (const sp of specs) if (sp.key !== "thumb" && pngs[sp.key] && (sp.key !== "intro" || introCard) && (sp.key !== "outro" || outroCard)) pngIdx[sp.key] = imageInput(pngs[sp.key], cardMs(sp.key));
+  let thumbnailPath: string | undefined;
+  const thumbF = path.join(out, "thumbnail.png");
+  if (pngs.thumb) { fs.copyFileSync(pngs.thumb, thumbF); thumbnailPath = thumbF; log(`[mux] thumbnail: ${thumbF}`); }
+  else fs.rmSync(thumbF, { force: true });
+  // brand style: every fade dips to the brand background instead of black
+  const fc = brand && pngMode ? `:color=${BG}` : "";
 
   const f: string[] = [];
   const labels: string[] = [];
   items.forEach((it, i) => {
     // adelay with both channels; mono mp3 -> upmix to stereo first so "t|t" is valid for any layout
     const t = it.t + it.shift;
-    f.push(`[${i + 1}:a]aformat=sample_rates=44100:channel_layouts=stereo,adelay=${t}|${t}[a${i}]`);
+    f.push(`[${i + 1}:a]aformat=sample_rates=44100:channel_layouts=stereo${gainFilter(gainOf.get(it.id) ?? 0)},adelay=${t}|${t}[a${i}]`);
     labels.push(`[a${i}]`);
   });
   if (bgmIdx >= 0) {
@@ -289,24 +395,24 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
     audioOut = "[aout]";
   } else {
     // normalize=0: plain sum (no 1/N attenuation). Narration clips never overlap, so no clipping; alimiter is a safety net.
-    f.push(`${labels.join("")}amix=inputs=${labels.length}:normalize=0:duration=longest:dropout_transition=0,apad=whole_dur=${total},atrim=0:${total},alimiter=limit=0.95[aout]`);
+    f.push(`${labels.join("")}amix=inputs=${labels.length}:normalize=0:duration=longest:dropout_transition=0,apad=whole_dur=${total},atrim=0:${total},alimiter=limit=0.95:level=0[aout]`);
     audioOut = "[aout]";
   }
 
   // video: crop the beacon strip, normalise fps/pixfmt, then (optionally) wrap in intro/outro cards
   const mainChain = [cards.length ? "setpts=PTS-STARTPTS" : null, strip > 0 ? `crop=${W}:${H}:0:0` : null, `fps=${OUT_FPS}`, `format=yuv420p`, `setsar=1`,
-    intro ? `fade=t=in:st=0:d=0.3` : null, outro ? `fade=t=out:st=${Math.max(0, totalMs / 1000 - 0.3).toFixed(3)}:d=0.3` : null].filter(Boolean).join(",");
+    intro ? `fade=t=in:st=0:d=0.3${fc}` : null, outro ? `fade=t=out:st=${Math.max(0, totalMs / 1000 - 0.3).toFixed(3)}:d=0.3${fc}` : null].filter(Boolean).join(",");
   f.push(`[0:v]${mainChain}[vmain]`);
   const cardFiles: string[] = [];
   const segs: string[] = [];
   // still image (thumbnail) as intro/outro: letterboxed in brand bg, held N s, short fade towards the recording
   const imageChain = (idx: number, ms: number, label: string, fadeIn: boolean, fadeOut: boolean) =>
     f.push(`[${idx}:v]scale=${W}:${H}:force_original_aspect_ratio=decrease,pad=${W}:${H}:(ow-iw)/2:(oh-ih)/2:color=${BG},fps=${OUT_FPS},format=yuv420p,setsar=1,trim=duration=${(ms / 1000).toFixed(3)}` +
-      (fadeIn ? `,fade=t=in:st=0:d=0.3` : "") + (fadeOut ? `,fade=t=out:st=${(ms / 1000 - 0.3).toFixed(3)}:d=0.3` : "") + `[${label}]`);
+      (fadeIn ? `,fade=t=in:st=0:d=0.3${fc}` : "") + (fadeOut ? `,fade=t=out:st=${(ms / 1000 - 0.3).toFixed(3)}:d=0.3${fc}` : "") + `[${label}]`);
   const pngCard = (key: string, label: string, fadeS: number) => {
     const d = cardMs(key) / 1000;
     f.push(`[${pngIdx[key]}:v]scale=${W}:${H},fps=${OUT_FPS},format=yuv420p,setsar=1,trim=duration=${d.toFixed(3)},` +
-      `fade=t=in:st=0:d=${fadeS},fade=t=out:st=${(d - fadeS).toFixed(3)}:d=${fadeS}[${label}]`);
+      `fade=t=in:st=0:d=${fadeS}${fc},fade=t=out:st=${(d - fadeS).toFixed(3)}:d=${fadeS}${fc}[${label}]`);
   };
   if (introImage) {
     imageChain(introImgIdx, introMs, "vintro", false, true); // first frame = the thumbnail itself, no fade from black
@@ -328,7 +434,9 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
     f.push(`[vmain]split=${n}${Array.from({ length: n }, (_, i) => `[m${i}]`).join("")}`);
     cards.forEach((c, i) => {
       const from = i === 0 ? 0 : cards[i - 1].frame;
-      f.push(`[m${i}]trim=start_frame=${from}:end_frame=${c.frame},setpts=PTS-STARTPTS[seg${i}]`);
+      const segDur = (c.frame - from) / OUT_FPS;
+      const dip = fc && segDur > 1 ? `,fade=t=out:st=${(segDur - CARD_FADE_S).toFixed(3)}:d=${CARD_FADE_S}${fc}` + (i > 0 ? `,fade=t=in:st=0:d=${CARD_FADE_S}${fc}` : "") : "";
+      f.push(`[m${i}]trim=start_frame=${from}:end_frame=${c.frame},setpts=PTS-STARTPTS${dip}[seg${i}]`);
       segs.push(`[seg${i}]`);
       if (pngMode) { pngCard(`part-${i + 1}`, `vcard${i}`, CARD_FADE_S); segs.push(`[vcard${i}]`); return; }
       const tf = path.join(out, `.card-part-${i + 1}.txt`), sf = path.join(out, `.card-part-${i + 1}-sub.txt`);
@@ -339,7 +447,7 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
       f.push(cardFilter(W, H, INTERSTITIAL_MS, BG, FG, tf, sub, `vcard${i}`, CARD_FADE_S));
       segs.push(`[vcard${i}]`);
     });
-    f.push(`[m${cards.length}]trim=start_frame=${cards[cards.length - 1].frame},setpts=PTS-STARTPTS[seg${cards.length}]`);
+    f.push(`[m${cards.length}]trim=start_frame=${cards[cards.length - 1].frame},setpts=PTS-STARTPTS${fc ? `,fade=t=in:st=0:d=${CARD_FADE_S}${fc}` : ""}[seg${cards.length}]`);
     segs.push(`[seg${cards.length}]`);
   } else segs.push("[vmain]");
   if (outroImage) {
@@ -397,11 +505,27 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
     log(`[mux] chapters: ${chaptersPath}\n${chaptersText(chapters).trimEnd().split("\n").map((l) => "        " + l).join("\n")}`);
   } else fs.rmSync(chaptersF, { force: true });
 
+  // --- deliverables: videa/<id>/ (what colleagues open in Finder) ---
+  let deliveredTo: string | undefined;
+  const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
+  const deliverRoot = opts.deliver === false ? null : opts.deliver ?? process.env.SVP_DELIVER_DIR ?? (path.dirname(out) === path.join(repoRoot, "out") ? path.join(repoRoot, "videa") : null);
+  if (deliverRoot) {
+    const id = path.basename(out);
+    deliveredTo = path.join(resolvePath(deliverRoot), id);
+    fs.mkdirSync(deliveredTo, { recursive: true });
+    fs.copyFileSync(finalPath, path.join(deliveredTo, `${id}.mp4`));
+    if (srtPath) fs.copyFileSync(srtPath, path.join(deliveredTo, `${id}.srt`));
+    if (thumbnailPath) fs.copyFileSync(thumbnailPath, path.join(deliveredTo, `${id}-nahled.png`));
+    else fs.rmSync(path.join(deliveredTo, `${id}-nahled.png`), { force: true });
+    fs.writeFileSync(path.join(deliveredTo, "youtube.txt"), youtubeText(shownTitle, chaptersPath ? fs.readFileSync(chaptersPath, "utf8") : "", recipe.lang));
+    log(`[mux] delivered: ${deliveredTo}`);
+  }
+
   log(`[mux] done: ${finalPath}\n[mux] total ${(finalMs / 1000).toFixed(2)}s (${introMs} + ${totalMs}${cardsMs ? ` + ${cardsMs}` : ""} + ${outroMs} ms planned), steps with audio: ${items.length}, warnings: ${warnings.length}`);
   if (failedSteps.length) {
     const msg = `${failedSteps.length} step(s) FAILED in timing.json: ${failedSteps.join(", ")} - final.mp4 was written but is NOT publishable; fix the recipe and re-record`;
     warnings.push(msg);
     log(`[mux] ${"!".repeat(72)}\n[mux] !!! ${msg}\n[mux] ${"!".repeat(72)}`);
   }
-  return { finalPath, srtPath, totalMs: finalMs, introMs, outroMs, cards: cardMode, failedSteps, interstitials, stepOffsetMs, chaptersPath, chapters, stepsWithAudio: items.length, warnings, ffmpegArgs: args };
+  return { finalPath, srtPath, totalMs: finalMs, introMs, outroMs, cards: brand && pngMode ? `brand ${cardMode}` : cardMode, loudness, thumbnailPath, deliveredTo, failedSteps, interstitials, stepOffsetMs, chaptersPath, chapters, stepsWithAudio: items.length, warnings, ffmpegArgs: args };
 }

@@ -5,12 +5,14 @@
 //   pnpm local <recipe> [--id <id>] [--cdp auto|url] [--session-file f] [--no-intro]
 //                       [--intro-image thumb.png] [--outro-image end.png] [--no-interstitials] [--no-chapters]
 //                       [--provider external|elevenlabs|say|espeak|mock] [--run-id X] [--subtitles burn|sidecar|none] [--no-open]
+//                       [--card-style brand|classic] [--no-thumbnail] [--lufs -16|0]
 //   pnpm local <recipe> --id <id> --mux-only [...]   re-mux an existing recording (no tts, no record):
 //                       needs out/<id>/raw.mp4 (timing.video_path) + timing.json + audio/durations.json
 //
 // ffmpeg: env FFMPEG_PATH / FFPROBE_PATH > Homebrew ffmpeg-full keg (/opt/homebrew/opt/ffmpeg-full/bin) > PATH.
-// Without the drawtext filter (Homebrew core ffmpeg) the assembler renders the brand cards as PNGs in a temporary
-// tab of the browser found over CDP (or a local Chromium/Chrome), else skips them – see the pre-flight line.
+// Brand cards (default style) are HTML rendered to PNG in a temporary tab of the browser found over CDP (or a local
+// Chromium/Chrome); fonts come from ~/.onboarding-videos/brand/fonts (scripts/brand-fetch.mjs). Without any browser
+// the classic drawtext cards are used when ffmpeg has drawtext, else cards are skipped – see the pre-flight line.
 //
 // No LLM here – recipes and voiceovers are produced interactively with Claude; this script only replays.
 import fs from 'node:fs';
@@ -24,7 +26,7 @@ const userCwd = process.env.INIT_CWD || process.cwd();
 const isMac = process.platform === 'darwin';
 
 // ---------------------------------------------------------------- args
-const BOOL = ['no-intro', 'no-open', 'check', 'help', 'no-interstitials', 'no-chapters', 'mux-only'];
+const BOOL = ['no-intro', 'no-open', 'check', 'help', 'no-interstitials', 'no-chapters', 'mux-only', 'no-thumbnail'];
 function parseArgs(argv) {
   const o = { _: [] };
   for (let i = 0; i < argv.length; i++) {
@@ -164,7 +166,11 @@ const cardCdp = cdpFound ?? cdpSpec ?? undefined;
   };
   const how = { 'png:cdp': `a temporary tab of your running browser over CDP (${cardCdp})`, 'png:chromium': "Playwright's Chromium (headless)", 'png:chrome': 'installed Google Chrome (headless)', 'png:msedge': 'installed Microsoft Edge (headless)' };
   if (!j) warn(`could not check ffmpeg filters: ${((r.stderr || r.stdout || '').trim().split('\n').pop() || '?')}`);
-  else if (j.drawtext) ok(`ffmpeg has drawtext${j.subtitles ? ' + subtitles (libass)' : ''} – brand cards drawn by ffmpeg`);
+  else if (j.style === 'brand' && j.cards && j.cards.startsWith('png:')) {
+    ok(`brand cards (intro, parts, outro, thumbnail) rendered via ${how[j.cards] ?? j.cards}`);
+    if (j.brandFontsMissing?.length) warn(`brand fonts missing (${j.brandFontsMissing.join(', ')}) -> cards fall back to Inter/Helvetica. Fix: node scripts/brand-fetch.mjs`);
+  }
+  else if (j.drawtext) ok(`ffmpeg has drawtext${j.subtitles ? ' + subtitles (libass)' : ''} – ${j.style === 'brand' ? 'no browser for brand cards, classic cards drawn by ffmpeg' : 'cards drawn by ffmpeg'}`);
   else {
     warn(`ffmpeg${j.ffmpeg === 'ffmpeg' ? '' : ` (${j.ffmpeg})`} has NO drawtext filter${j.forcedNoDrawtext ? ' (forced by SVP_FORCE_NO_DRAWTEXT)' : ' (Homebrew core ffmpeg is built without libfreetype)'}`);
     if (j.cards && j.cards.startsWith('png:')) info(`fallback: intro/outro/part cards rendered as PNG stills via ${how[j.cards] ?? j.cards} – same look, nothing to do`);
@@ -316,6 +322,7 @@ const passStr = (k) => (typeof args[k] === 'string' ? [`--${k}`, k.endsWith('-im
 stage(muxOnly ? 'mux' : '3/3 mux', ['--filter', '@svp/assembler', 'start', '--', 'mux', '--out', outDir, ...(cardCdp ? ['--cdp', cardCdp] : []), ...(args['no-intro'] ? ['--no-intro'] : []),
   ...(args['no-interstitials'] ? ['--no-interstitials'] : []), ...(args['no-chapters'] ? ['--no-chapters'] : []),
   ...passStr('intro-image'), ...passStr('outro-image'), ...passStr('intro-sec'), ...passStr('outro-sec'),
+  ...(args['no-thumbnail'] ? ['--no-thumbnail'] : []), ...passStr('card-style'), ...passStr('lufs'),
   ...(typeof args.subtitles === 'string' ? ['--subtitles', args.subtitles] : [])]);
 
 const timing = JSON.parse(fs.readFileSync(path.join(outDir, 'timing.json'), 'utf8'));

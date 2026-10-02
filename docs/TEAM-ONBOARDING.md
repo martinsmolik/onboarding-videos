@@ -22,7 +22,8 @@ Smoke test sám: `pnpm smoke` (~1 min). Hotovo = `SMOKE PASS` a soubor `out/smok
 3. **explorer**: LLM v prohlížeči projde scénář a vyrobí `recipe.json` s ověřenými selektory.
 4. **tts**: namluví každý krok *dřív* než se nahrává → `audio/sNN.mp3` + `durations.json`.
 5. **record**: deterministický Playwright replay bez LLM → `raw.webm`, `timing.json`, `shots/`.
-6. **mux**: ffmpeg složí video + audio + titulky → `final.mp4`, `final.srt`.
+6. **mux**: ffmpeg složí video + audio + titulky → `final.mp4`, `final.srt`, `thumbnail.png`; brandové karty (intro, předěly, outro) podle sloneek.com, hlasitost všech scén srovnaná na −16 LUFS. Hotové video se zkopíruje do `videa/<id>/` (`<id>.mp4`, `<id>-nahled.png`, `<id>.srt`, `youtube.txt`).
+   Výslovnost (HR, absence, Sloneek…) řeší `config/pronunciation.json`, jen v tom, co hlas čte; titulky zůstávají beze změny.
 7. Selhané kroky (`failed` v `timing.json`) → explorer je sám opraví (heal) → znovu tts + record (max 2×).
 8. **upload**: volitelně na YouTube (unlisted/private). Vše komunikuje přes soubory v `out/<id>/`.
 

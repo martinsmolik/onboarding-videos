@@ -18,6 +18,7 @@
   },
   "chapters": true,
   "interstitials": true,
+  "thumbnail": { "shot": "s15", "title": "Absence bez tabulek" },
   "steps": [
     {
       "id": "s01",
@@ -93,7 +94,7 @@
     {
       "id": "s05",
       "narration": "V Nastavení otevřu Absence. Tady jsou všechny typy absencí, které firma používá. Přístup sem má administrátor nebo HR. Pozor, seznam ukazuje jen aktivní typy, vypnuté najdete přes filtr nahoře.",
-      "narration_tts": "V Nastavení otevřu Absence. Tady jsou všechny typy absencí, které firma používá. Přístup sem má administrátor nebo há er. Pozor, seznam ukazuje jen aktivní typy, vypnuté najdete přes filtr nahoře.",
+      "narration_tts": "V Nastavení otevřu Absence. Tady jsou všechny typy absencí, které firma používá. Přístup sem má administrátor nebo HR. Pozor, seznam ukazuje jen aktivní typy, vypnuté najdete přes filtr nahoře.",
       "actions": [
         {
           "type": "click",

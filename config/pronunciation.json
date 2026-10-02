@@ -1,0 +1,33 @@
+{
+  "_comment": "Pronunciation lexicon for the voiceover. Applied to the SPOKEN text only (tts_text); subtitles keep the original spelling. Whole words; 'stem': true also matches inflected forms (absence, absenci, absencí...) and keeps the ending; 'case': 'insensitive' keeps a leading capital. Per-video overrides: recipe.pronunciation = [rules] or { cs: [rules] }. Changing a rule makes the affected clips stale, so they are regenerated on the next run.",
+  "cs": [
+    { "match": "HR", "say": "ejč ár", "note": "anglická výslovnost zkratky, ne há er" },
+    { "match": "absenc", "say": "apsenc", "stem": true, "case": "insensitive", "note": "jinak to hlas čte anglicky absens" },
+    { "match": "Sloneek", "say": "Sloník", "stem": true },
+    { "match": "sick days", "say": "sik dejs", "case": "insensitive" },
+    { "match": "sick day", "say": "sik dej", "case": "insensitive" },
+    { "match": "home office", "say": "houm ofis", "case": "insensitive" },
+    { "match": "onboarding", "say": "onbórding", "stem": true, "case": "insensitive" },
+    { "match": "offboarding", "say": "ofbórding", "stem": true, "case": "insensitive" },
+    { "match": "Excel", "say": "excel", "stem": true },
+    { "match": "Google", "say": "gůgl" },
+    { "match": "Microsoft", "say": "majkrosoft" },
+    { "match": "Outlook", "say": "autluk" },
+    { "match": "Teams", "say": "tíms" },
+    { "match": "Slack", "say": "slek", "stem": true },
+    { "match": "Ellie", "say": "Elí" },
+    { "match": "KPI", "say": "kej pí áj" },
+    { "match": "PDF", "say": "pé dé ef" },
+    { "match": "CSV", "say": "cé es vé" }
+  ],
+  "sk": [
+    { "match": "HR", "say": "ejč ár" },
+    { "match": "absenc", "say": "apsenc", "stem": true, "case": "insensitive" },
+    { "match": "Sloneek", "say": "Sloník", "stem": true },
+    { "match": "sick days", "say": "sik dejs", "case": "insensitive" },
+    { "match": "sick day", "say": "sik dej", "case": "insensitive" },
+    { "match": "home office", "say": "houm ofis", "case": "insensitive" },
+    { "match": "Ellie", "say": "Elí" }
+  ],
+  "en": []
+}

@@ -18,7 +18,8 @@ import fs from "node:fs";
 import path from "node:path";
 import type { Alignment } from "./tts.js";
 import { probeDurationMs, readJson, run } from "./util.js";
-import { subtitleText, ttsText } from "./parts.js";
+import { subtitleText } from "./parts.js";
+import { spokenTextFor } from "./pronunciation.js";
 
 export const EXTERNAL_EXTS = [".mp3", ".wav", ".m4a"] as const;
 
@@ -50,7 +51,7 @@ export interface Manifest {
   provider: "external";
   audio_dir: string;
   format: string;
-  voice: { voice_id?: string; model_id?: string };
+  voice: { voice_id?: string; model_id?: string; language_code?: string };
   generated_at: string;
   instructions: string;
   steps: ManifestStep[];
@@ -105,6 +106,7 @@ export function buildManifest(recipe: any, out: string): Manifest {
   const audioDir = path.join(out, "audio");
   const steps: ManifestStep[] = [];
   const silent: string[] = [];
+  const ttsText = spokenTextFor(recipe); // narration_tts ?? narration + config/pronunciation.json
   for (const s of recipe.steps as { id: string; narration: string; narration_tts?: string; subtitle?: string }[]) {
     const text = ttsText(s);
     if (!text) { silent.push(s.id); continue; }
@@ -117,7 +119,7 @@ export function buildManifest(recipe: any, out: string): Manifest {
   return {
     recipe_id: recipe.id, title: recipe.title, lang: recipe.lang, provider: "external", audio_dir: audioDir,
     format: "mp3, 44.1 kHz (ElevenLabs output_format mp3_44100_128); .wav/.m4a accepted and transcoded",
-    voice: { voice_id: recipe.voice?.voice_id, model_id: recipe.voice?.model_id },
+    voice: { voice_id: recipe.voice?.voice_id, model_id: recipe.voice?.model_id, language_code: recipe.voice?.language_code ?? recipe.lang },
     generated_at: new Date().toISOString(), instructions: INSTRUCTIONS,
     steps, silent_steps: silent, missing: steps.filter((s) => s.status !== "present").map((s) => s.id),
     total_chars: steps.reduce((n, s) => n + s.chars, 0),
@@ -165,6 +167,7 @@ export async function acceptExternal(recipe: any, out: string, linear: (text: st
   const durations: Record<string, number> = {};
   const accepted: string[] = [], transcoded: string[] = [], alignedExternal: string[] = [];
   const byId = new Map(manifest.steps.map((s) => [s.id, s]));
+  const ttsText = spokenTextFor(recipe);
   for (const step of recipe.steps as { id: string; narration: string; narration_tts?: string }[]) {
     const id = step.id;
     const text = ttsText(step);

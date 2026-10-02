@@ -21,7 +21,7 @@ Zjisti, kde běžíš: `uname -s` = `Darwin` → **Mac kolegy** (Claude desktop 
 | `‹P›` | `source ~/.onboarding-videos/env.sh && ` | (nic) |
 | dlouhý běh | `‹P›caffeinate -i pnpm video …` | `pnpm video …` |
 
-Na Macu nejdřív `git pull --ff-only` (aktuální verze), pak příprava. První běh stahuje nástroje (pár minut), řekni to uživateli dopředu.
+**Aktualizace (vždy jako první, i v cloudu):** `git pull --ff-only`, pak si potichu zapamatuj verzi `git log -1 --format='%h %cs'` (patří do každého hlášení, viz 5). Když pull selže (lokální změny, rozjetá historie, síť): nic nemaž, nepoužívej `reset`, `stash` ani `--force`, pokračuj se stávající verzí, řekni uživateli, že má starší verzi, a nahlas to Martinovi (viz 5). Pak příprava (spouští se pokaždé, stáhne i nové nástroje a brand fonty). První běh stahuje nástroje (pár minut), řekni to uživateli dopředu.
 
 - `SETUP OK` → pokračuj.
 - **Mac, exit 3 (`SETUP NEEDS LOGIN`)**: otevři `open -e .env` a požádej uživatele, ať v TextEditu doplní `SLONEEK_DEMO_USER` a `SLONEEK_DEMO_PASS` (svůj účet na pre-prod), uloží a dá vědět. Heslo ať nikdy nepíše do chatu. `.env` nečti. Pak přípravu pusť znovu.
@@ -58,6 +58,7 @@ Upozorni: **nahrávání probíhá na demo účtu a mění v něm data** (vytvo�
 - `intent`: co se má v aplikaci stát, prostými slovy („v levém menu otevři Absence“). Názvy prvků UI nevymýšlej; když si nejsi jistý, popiš záměr („otevři formulář pro novou absenci“) a explorer si prvek najde.
 - `must_show`: co musí být na konci kroku vidět („formulář nové absence je otevřený“).
 - První krok uvádí téma, poslední shrnuje výsledek.
+- **Výslovnost**: v `narration` piš normálně (HR, absence, Sloneek, sick days). Co hlas čte špatně, opravuje automaticky slovník `config/pronunciation.json` (jen v namluveném textu, titulky zůstanou správně). `narration_tts` použij jen pro výjimku v jednom kroku. Narazíš-li na nový problematický výraz, dej pravidlo do `recipe.pronunciation` (jen toto video) a navrhni ho Martinovi do společného slovníku (krok 5).
 
 Ověř: `‹P›pnpm --filter @svp/knowledge start -- validate --scenario "$PWD/out/<id>/scenario.json"`. Chyby oprav sám, varování zvaž.
 
@@ -101,7 +102,7 @@ Pak opakuj, dokud neuvidíš `FINISHED`:
 ‹P›pnpm voice:manifest "$PWD/out/<id>/recipe.json" --id <id>
 ```
 
-Pro každý krok v `out/<id>/audio/manifest.json` vygeneruj řeč nástrojem konektoru `creative_generate_speech`: **přesně `tts_text`** (nikdy `subtitle`), `voice_id` a `model_id` z receptu. Všechny kroky dej do jednoho flow, pak se dotazuj `creative_get_flow_run_status`, dokud nejsou hotové. Do `out/<id>/audio/urls.json` zapiš:
+Pro každý krok v `out/<id>/audio/manifest.json` vygeneruj řeč nástrojem konektoru `creative_generate_speech`: **přesně `tts_text`** (nikdy `subtitle`), `voice_id` a `model_id` z receptu, `generations_count: 1`. `tts_text` už má použitý výslovnostní slovník (HR → „ejč ár“, absence → „apsence“…), nic v něm neupravuj a jazyk hlasu nevynucuj. Všechny kroky dej do jednoho flow (`creative_create_flow` nejdřív), pak se dotazuj `creative_get_flow_run_status`, dokud nejsou hotové. Generování neopakuj kvůli retry, každé volání stojí kredity. Do `out/<id>/audio/urls.json` zapiš:
 
 ```json
 { "voice_id": "…", "model_id": "…", "elevenlabs_flow": "<url flow>", "clips": { "s01": "<url mp3>", … }, "texts": { "s01": "<tts_text>", … } }
@@ -123,7 +124,7 @@ Dokud běží, volej `‹P›node scripts/explorer-turn.mjs <id>` a obsluž př�
 
 ### 3d. Kontrola
 
-Hotovo, když `out/<id>/final.mp4` existuje a v `out/<id>/timing.json` nejsou `failed` kroky. Projdi screenshoty `out/<id>/shots/sNN.png` (otevři je) a řekni uživateli, jestli všechno sedí. Titulky mají v režimu plánu rovnoměrné časování v rámci kroku (konektor nevrací časy znaků).
+Hotovo, když `out/<id>/final.mp4` existuje a v `out/<id>/timing.json` nejsou `failed` kroky. Otevři i `out/<id>/thumbnail.png` (YouTube náhled): screenshot v něm nesmí mít otevřený dialog se ztmaveným pozadím a titulek má mít nejvýš 2–3 řádky. Jinak nastav v receptu `"thumbnail": {"shot": "sNN", "title": "kratší název"}` a pusť jen střih (`--mux-only`). Hlasitost scén srovnává střih sám (log `[mux] loudness`). Projdi screenshoty `out/<id>/shots/sNN.png` (otevři je) a řekni uživateli, jestli všechno sedí. Titulky mají v režimu plánu rovnoměrné časování v rámci kroku (konektor nevrací časy znaků).
 
 ### 3e. Když něco selže
 
@@ -135,14 +136,34 @@ Přečti `out/<id>/logs/<stage>.log` a `out/<id>/timing.json`. Běh je resumable
 
 ## 4. Předání videa
 
-- **Mac**: video je na disku. `open -R out/<id>/final.mp4` ho ukáže ve Finderu (vedle jsou `final.srt` s titulky a `chapters.txt` s kapitolami). Řekni uživateli, kde je.
-- **YouTube** (když jsou nastavené `YT_*`, Mac i cloud), jen když o to uživatel stojí: `‹P›pnpm pipeline upload --id <id>`. Video je neveřejné (`unlisted`), dej uživateli odkaz.
+- **Mac**: hotové video je v repu ve složce `videa/<id>/`: `<id>.mp4` (video), `<id>-nahled.png` (náhled pro YouTube), `<id>.srt` (titulky) a `youtube.txt` (název a popis s kapitolami ke zkopírování). `open videa/<id>` ji otevře ve Finderu. Řekni uživateli, kde je, a ukaž mu náhled.
+- **YouTube** (když jsou nastavené `YT_*`, Mac i cloud), jen když o to uživatel stojí: `‹P›pnpm pipeline upload --id <id>`. Video je neveřejné (`unlisted`). Nahraje se i náhled, titulky a kapitoly v popisu (vlastní náhled YouTube přijme jen u ověřeného kanálu; když ne, log to řekne a video je v pořádku). Dej uživateli odkaz.
 - **Cloud bez YouTube**: git větev. `git checkout -b video/<id>`, `git add -f out/<id>/final.mp4 out/<id>/final.srt out/<id>/scenario.json out/<id>/recipe.json`, commit, push. Dej uživateli odkaz `https://github.com/<repo>/blob/video/<id>/out/<id>/final.mp4` (tlačítko Download). **Repo je veřejné**, upozorni, že video tím uvidí kdokoli s odkazem.
 
 Na konci shrň: název, délka, počet kroků, odkaz, a co případně doporučuješ zkontrolovat.
 
+## 5. Hlášení Martinovi (změny, chyby, nápady)
+
+Martin Smolík (martin.smolik@sloneek.com) spravuje pipeline. Změny repa dělá jen on, kolegové si je stáhnou při dalším spuštění (krok 0). Nahlas mu:
+
+- chybu v kódu pipeline nebo krok, který nejde opravit úpravou scénáře či receptu,
+- slovo, které hlas čte špatně (navrhni rovnou pravidlo do `config/pronunciation.json`, např. `{ "match": "ATS", "say": "á té es" }`; pro aktuální video ho mezitím dej do `recipe.pronunciation`),
+- nepovedený `git pull` (krok 0),
+- přání nebo nápad kolegy (nové video, jiný vzhled, chybějící funkce).
+
+Jak: napiš krátkou zprávu česky, nejdřív ji ukaž uživateli a pošli až s jeho souhlasem. Když je v session Slack konektor, pošli ji Martinovi do DM, jinak ji dej uživateli ke zkopírování (Slack nebo e-mail). Obsah:
+
+```
+[onboarding-videos] <video id> · <jméno kolegy> · verze <hash datum>
+Co se stalo: <1–2 věty>
+Kde: <stage / krok sNN>, chyba: <1 řádek z logu bez tajných údajů>
+Návrh: <oprava / pravidlo / nápad>
+```
+
+Do zprávy nikdy nedávej hesla, obsah `.env` ani `storage-state*.json`.
+
 ## Hranice
 
-- Kód pipeline během výroby videa neměň. Když narazíš na chybu v kódu, popiš ji a navrhni, ať ji opraví správce repa.
+- Kód pipeline během výroby videa neměň a do gitu nic necommituj ani nepushuj (výjimka: větev `video/<id>` v cloudu, krok 4). Chyby a návrhy hlas Martinovi (krok 5).
 - Na produkční Sloneek (`app.sloneek.com`) s reálnými daty klientů nenahrávej, jen na demo/pre-prod účet z `SLONEEK_DEMO_URL`.
 - Když si nejsi jistý, jak se něco v aplikaci jmenuje nebo kam má video vést, zeptej se uživatele, nehádej.

@@ -14,6 +14,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { cardHtml, type BrandCard, type BrandFonts } from "./brand.js";
 
 export type CardRendererName = "cdp" | "chromium" | "chrome" | "msedge";
 export const CARD_RENDERERS: CardRendererName[] = ["cdp", "chromium", "chrome", "msedge"];
@@ -25,6 +26,11 @@ export interface CardSpec {
   title: string;
   /** smaller line under an accent bar (null = title only, vertically centred) */
   sub: string | null;
+  /** brand card (brand.ts HTML template) – when set, title/sub are ignored and the card is a Chromium screenshot */
+  brand?: BrandCard;
+  /** output size for this card (default RenderOptions width/height), e.g. 1280x720 for the thumbnail */
+  width?: number;
+  height?: number;
 }
 
 export interface RenderOptions {
@@ -36,6 +42,8 @@ export interface RenderOptions {
   /** ttf/otf files embedded via FontFace (null = system font stack: Inter, Helvetica Neue, Arial, DejaVu Sans) */
   boldFont: string | null;
   regularFont: string | null;
+  /** brand fonts (brand.ts loadBrandFonts) for brand cards; missing faces fall back to system fonts */
+  fonts?: BrandFonts;
   /** directory the PNGs are written to */
   dir: string;
   /** CDP endpoint (http://127.0.0.1:9110, ws://…, a port) or "auto"; undefined = skip the cdp renderer */
@@ -155,16 +163,33 @@ const fontDataUrl = (f: string | null): string | null => {
 };
 
 async function drawWith(page: any, specs: CardSpec[], o: RenderOptions): Promise<Record<string, string>> {
-  const args: PageArgs = { cards: specs, W: o.width, H: o.height, bg: o.bg, fg: o.fg, bold: fontDataUrl(o.boldFont), regular: fontDataUrl(o.regularFont) };
-  const urls: string[] = await page.evaluate(`(${PAGE_DRAW_JS})(${JSON.stringify(args)})`);
   const files: Record<string, string> = {};
-  specs.forEach((s, i) => {
-    const b64 = urls[i]?.replace(/^data:image\/png;base64,/, "");
-    if (!b64) throw new Error(`card ${s.key}: empty canvas output`);
-    const f = path.join(o.dir, `.card-${s.key}.png`);
-    fs.writeFileSync(f, Buffer.from(b64, "base64"));
-    files[s.key] = f;
-  });
+  const write = (key: string, buf: Buffer) => {
+    const f = path.join(o.dir, `.card-${key}.png`);
+    fs.writeFileSync(f, buf);
+    files[key] = f;
+  };
+  // brand cards: the HTML template, screenshotted at the card's own size
+  for (const s of specs.filter((x) => x.brand)) {
+    const w = s.width ?? o.width, h = s.height ?? o.height;
+    await page.setViewportSize({ width: w, height: h });
+    await page.setContent(cardHtml(s.brand!, w, h, o.fonts ?? {}), { waitUntil: "load" });
+    await page.evaluate("document.fonts.ready.then(() => new Promise((r) => requestAnimationFrame(() => r(1))))");
+    const buf: Buffer = await page.screenshot({ type: "png", clip: { x: 0, y: 0, width: w, height: h }, scale: "css", animations: "disabled" });
+    if (!buf?.length) throw new Error(`card ${s.key}: empty screenshot`);
+    write(s.key, buf);
+  }
+  // classic cards: canvas (title + sub)
+  const classic = specs.filter((x) => !x.brand);
+  if (classic.length) {
+    const args: PageArgs = { cards: classic, W: o.width, H: o.height, bg: o.bg, fg: o.fg, bold: fontDataUrl(o.boldFont), regular: fontDataUrl(o.regularFont) };
+    const urls: string[] = await page.evaluate(`(${PAGE_DRAW_JS})(${JSON.stringify(args)})`);
+    classic.forEach((s, i) => {
+      const b64 = urls[i]?.replace(/^data:image\/png;base64,/, "");
+      if (!b64) throw new Error(`card ${s.key}: empty canvas output`);
+      write(s.key, Buffer.from(b64, "base64"));
+    });
+  }
   return files;
 }
 

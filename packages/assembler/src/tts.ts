@@ -3,7 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { probeDurationMs, readJson, resolvePath, run, which } from "./util.js";
 import { acceptExternal } from "./external.js";
-import { ttsText } from "./parts.js";
+import { spokenTextFor } from "./pronunciation.js";
 
 export interface Alignment {
   characters: string[];
@@ -27,7 +27,10 @@ export interface TtsResult {
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-async function elevenlabs(text: string, voiceId: string, modelId: string, apiKey: string): Promise<{ mp3: Buffer; alignment: Alignment }> {
+/** ElevenLabs API only accepts language_code (language enforcement) on these models; others reject it. */
+export const LANGUAGE_CODE_MODELS = /^eleven_(flash|turbo)_v2_5$|^eleven_v3$/;
+
+async function elevenlabs(text: string, voiceId: string, modelId: string, apiKey: string, lang?: string): Promise<{ mp3: Buffer; alignment: Alignment }> {
   // output_format is a QUERY parameter in the ElevenLabs API (not a body field).
   const url = `${process.env.ELEVENLABS_BASE_URL || "https://api.elevenlabs.io"}/v1/text-to-speech/${encodeURIComponent(voiceId)}/with-timestamps?output_format=mp3_44100_128`;
   let lastErr: unknown;
@@ -37,7 +40,7 @@ async function elevenlabs(text: string, voiceId: string, modelId: string, apiKey
       const res = await fetch(url, {
         method: "POST",
         headers: { "xi-api-key": apiKey, "content-type": "application/json", accept: "application/json" },
-        body: JSON.stringify({ text, model_id: modelId }),
+        body: JSON.stringify({ text, model_id: modelId, ...(lang && LANGUAGE_CODE_MODELS.test(modelId) ? { language_code: lang } : {}) }),
       });
       if (res.status === 429 || res.status >= 500) { lastErr = new Error(`ElevenLabs HTTP ${res.status}: ${await res.text()}`); continue; }
       if (!res.ok) throw Object.assign(new Error(`ElevenLabs HTTP ${res.status}: ${await res.text()}`), { fatal: true });
@@ -235,9 +238,10 @@ export async function tts(opts: TtsOptions): Promise<TtsResult> {
   let chars = 0;
   log(`[tts] provider=${provider}${provider === "elevenlabs" ? ` model=${modelId} voice=${voiceId}` : provider === "espeak" ? ` voice=${espeakVoiceId} wpm=${ESPEAK_WPM}` : provider === "say" ? ` voice=${say!.voice} rate=${say!.rate}` : ""}`);
 
+  const ttsText = spokenTextFor(recipe);
   for (const step of recipe.steps as { id: string; narration: string; narration_tts?: string }[]) {
     const id = step.id;
-    const text = ttsText(step); // narration_tts ?? narration – what is spoken (and the cache key in <id>.txt)
+    const text = ttsText(step); // narration_tts ?? narration + pronunciation lexicon – what is spoken (and the cache key in <id>.txt)
     const mp3 = path.join(audioDir, `${id}.mp3`);
     const txt = path.join(audioDir, `${id}.txt`);
     const metaF = path.join(audioDir, `${id}.meta.json`);
@@ -257,7 +261,7 @@ export async function tts(opts: TtsOptions): Promise<TtsResult> {
       else if (provider === "espeak") alignment = await espeak(text, espeakVoiceId, mp3);
       else if (provider === "say") alignment = await sayTts(text, say!.voice, say!.rate, mp3);
       else {
-        const r = await elevenlabs(text, voiceId, modelId, apiKey!);
+        const r = await elevenlabs(text, voiceId, modelId, apiKey!, recipe.voice?.language_code ?? recipe.lang);
         fs.writeFileSync(mp3, r.mp3);
         alignment = r.alignment;
         chars += text.length;

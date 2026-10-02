@@ -50,6 +50,9 @@ echo "== Playwright Chromium"
 if pnpm --filter @svp/recorder exec playwright install chromium >/tmp/svp-playwright.log 2>&1; then echo "  ✓ chromium"
 else tail -15 /tmp/svp-playwright.log; echo "  ✗ chromium download failed"; exit 1; fi
 
+echo "== brand fonts (video cards)"
+node scripts/brand-fetch.mjs || true
+
 echo "== login (.env)"
 if [ ! -f "$REPO/.env" ]; then
   sed 's#^SLONEEK_DEMO_URL=.*#SLONEEK_DEMO_URL=https://app-pre-production.sloneek.com#' "$REPO/.env.example" > "$REPO/.env"

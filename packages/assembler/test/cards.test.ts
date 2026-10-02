@@ -81,7 +81,7 @@ test("no drawtext -> PNG cards: same timeline, chapters and look as drawtext", {
   const renderer = await probeRenderer();
   if (!renderer) { t.skip("no Chromium renderer available (playwright install chromium / Google Chrome)"); return; }
   const dir = fixtureCopy();
-  const r = await withEnv({ SVP_FORCE_NO_DRAWTEXT: "1", SVP_CARD_RENDERER: undefined }, () => mux({ out: dir, log: quiet }));
+  const r = await withEnv({ SVP_FORCE_NO_DRAWTEXT: "1", SVP_CARD_RENDERER: undefined }, () => mux({ out: dir, cardStyle: "classic", log: quiet }));
   assert.match(r.cards, /^png:/);
   assert.equal(r.introMs, 2500);
   assert.equal(r.outroMs, 2000);
@@ -94,7 +94,7 @@ test("no drawtext -> PNG cards: same timeline, chapters and look as drawtext", {
   if (!hasDrawtext) return;
   // compare with the real drawtext rendering: closer to it than a blank brand-colour card is
   const ref = fixtureCopy();
-  await withEnv({ SVP_FORCE_NO_DRAWTEXT: undefined, SVP_CARD_RENDERER: undefined }, () => mux({ out: ref, cardRenderer: "drawtext", log: quiet }));
+  await withEnv({ SVP_FORCE_NO_DRAWTEXT: undefined, SVP_CARD_RENDERER: undefined }, () => mux({ out: ref, cardRenderer: "drawtext", cardStyle: "classic", log: quiet }));
   const blank = path.join(dir, "blank.png");
   spawnSync("ffmpeg", ["-y", "-v", "error", "-f", "lavfi", "-i", "color=c=0x1f2a44:s=1920x1080", "-frames:v", "1", blank]);
   for (const [name, sec] of [["intro", 1.2], ["card", 13.2], ["outro", 40.0]] as const) {
@@ -103,6 +103,28 @@ test("no drawtext -> PNG cards: same timeline, chapters and look as drawtext", {
     const same = psnr(a, b), vsBlank = psnr(blank, b);
     assert.ok(same > vsBlank + 3, `${name}: png vs drawtext ${same.toFixed(1)} dB should beat blank vs drawtext ${vsBlank.toFixed(1)} dB`);
   }
+});
+
+test("brand cards: PNG via Chromium, lavender fades, thumbnail.png, per-clip loudness", { skip: !hasFfmpeg, timeout: 240_000 }, async (t) => {
+  const renderer = await probeRenderer();
+  if (!renderer) { t.skip("no Chromium renderer available"); return; }
+  const dir = fixtureCopy();
+  const deliver = fs.mkdtempSync(path.join(os.tmpdir(), "svp-deliver-"));
+  const r = await withEnv({ SVP_CARD_RENDERER: undefined, SVP_CARD_STYLE: undefined }, () => mux({ out: dir, deliver, log: quiet }));
+  assert.match(r.cards, /^brand png:/);
+  const id = path.basename(dir);
+  assert.equal(r.deliveredTo, path.join(deliver, id));
+  assert.deepEqual(fs.readdirSync(r.deliveredTo!).sort(), [`${id}-nahled.png`, `${id}.mp4`, `${id}.srt`, "youtube.txt"].sort());
+  assert.match(fs.readFileSync(path.join(r.deliveredTo!, "youtube.txt"), "utf8"), /0:00 Úvod\n0:12 Nastavení/);
+  assert.deepEqual(r.interstitials.map((c) => [c.stepId, c.finalMs]), [["s03", 12_500], ["s05", 25_000]]);
+  assert.ok(r.thumbnailPath && fs.existsSync(r.thumbnailPath));
+  const th = spawnSync("ffprobe", ["-v", "error", "-show_entries", "stream=width,height", "-of", "csv=p=0", r.thumbnailPath!], { encoding: "utf8" }).stdout.trim();
+  assert.equal(th, "1280,720");
+  assert.equal(r.loudness.length, r.stepsWithAudio);
+  // intro background = brand lavender (#F4F2FF), sampled left of the title
+  const px = spawnSync("ffmpeg", ["-v", "error", "-ss", "1.2", "-i", r.finalPath, "-frames:v", "1", "-vf", "crop=4:4:40:540,scale=1:1", "-f", "rawvideo", "-pix_fmt", "rgb24", "-"]).stdout;
+  assert.ok(px.length === 3 && px[0] > 235 && px[1] > 232 && px[2] > 245, `intro bg rgb(${[...px].join(",")})`);
+  assert.deepEqual(fs.readdirSync(dir).filter((f) => f.startsWith(".card-")), [], "temp card files removed");
 });
 
 test("no drawtext and no renderer -> cards off with a warning, chapters on the shorter timeline, failed steps listed", { skip: !hasFfmpeg, timeout: 120_000 }, async () => {

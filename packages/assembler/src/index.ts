@@ -11,3 +11,10 @@ export { renderCardPngs, loadPlaywright, resolveCdp, cssColor, CARD_RENDERERS } 
 export type { CardSpec, CardRendererName, RenderResult } from "./cards.js";
 export { writeManifest, buildManifest, acceptExternal, classifyStep, parseAlignment, findExternalAudio } from "./external.js";
 export type { Manifest, ManifestStep } from "./external.js";
+export { cardHtml, loadBrandFonts, brandFontDir, brandStrings, BRAND, LOGO_SVG } from "./brand.js";
+export type { BrandCard, BrandFonts } from "./brand.js";
+export { normalizeClips, measureLoudness, gainFor, DEFAULT_LUFS } from "./loudness.js";
+export type { ClipGain } from "./loudness.js";
+export { applyLexicon, loadLexicon, spokenTextFor } from "./pronunciation.js";
+export type { PronRule, Lexicon } from "./pronunciation.js";
+export { partsLabel, thumbnailShot, youtubeText } from "./mux.js";

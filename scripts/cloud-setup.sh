@@ -38,4 +38,5 @@ for v in YT_CLIENT_ID YT_CLIENT_SECRET YT_REFRESH_TOKEN; do
   [ -n "${!v:-}" ] && echo "  ✓ $v" || echo "  ! $v missing (no YouTube upload; video goes to a git branch instead)"
 done
 if [ ${#missing[@]} -gt 0 ]; then echo "SETUP INCOMPLETE: ask an org Owner to add ${missing[*]} to the cloud environment"; exit 3; fi
+node scripts/brand-fetch.mjs || true  # sloneek.com may be outside the cloud allowlist: cards then use Inter
 echo "SETUP OK"
