@@ -1,33 +1,727 @@
 {
-  "_comment": "Pronunciation lexicon for the voiceover. Applied to the SPOKEN text only (tts_text); subtitles keep the original spelling. Whole words; 'stem': true also matches inflected forms (absence, absenci, absencí...) and keeps the ending; 'case': 'insensitive' keeps a leading capital. Per-video overrides: recipe.pronunciation = [rules] or { cs: [rules] }. Changing a rule makes the affected clips stale, so they are regenerated on the next run.",
+  "_comment": "Pronunciation lexicon for the voiceover. Applied to the SPOKEN text only (tts_text); subtitles keep the original spelling. Whole words; 'stem': true also matches inflected forms (absence, absenci, absencí...) and keeps the ending; 'case': 'insensitive' keeps a leading capital. Longest match wins, nothing is rewritten twice. Per-video overrides: recipe.pronunciation = [rules] or { cs: [rules] }. Changing a rule makes the affected clips stale, so they are regenerated on the next run. New words: tell Martin (skill step 5).",
   "cs": [
-    { "match": "HR", "say": "ejč ár", "note": "anglická výslovnost zkratky, ne há er" },
-    { "match": "absenc", "say": "apsenc", "stem": true, "case": "insensitive", "note": "jinak to hlas čte anglicky absens" },
-    { "match": "Sloneek", "say": "Sloník", "stem": true },
-    { "match": "sick days", "say": "sik dejs", "case": "insensitive" },
-    { "match": "sick day", "say": "sik dej", "case": "insensitive" },
-    { "match": "home office", "say": "houm ofis", "case": "insensitive" },
-    { "match": "onboarding", "say": "onbórding", "stem": true, "case": "insensitive" },
-    { "match": "offboarding", "say": "ofbórding", "stem": true, "case": "insensitive" },
-    { "match": "Excel", "say": "excel", "stem": true },
-    { "match": "Google", "say": "gůgl" },
-    { "match": "Microsoft", "say": "majkrosoft" },
-    { "match": "Outlook", "say": "autluk" },
-    { "match": "Teams", "say": "tíms" },
-    { "match": "Slack", "say": "slek", "stem": true },
-    { "match": "Ellie", "say": "Elí" },
-    { "match": "KPI", "say": "kej pí áj" },
-    { "match": "PDF", "say": "pé dé ef" },
-    { "match": "CSV", "say": "cé es vé" }
+    {
+      "match": "HR",
+      "say": "ejč ár",
+      "note": "anglicky, ne há er"
+    },
+    {
+      "match": "ATS",
+      "say": "ej tý es",
+      "note": "Applicant Tracking System"
+    },
+    {
+      "match": "API",
+      "say": "ej pí áj"
+    },
+    {
+      "match": "SSO",
+      "say": "es es ou"
+    },
+    {
+      "match": "MCP",
+      "say": "em sí pí"
+    },
+    {
+      "match": "CEO",
+      "say": "sí í ou"
+    },
+    {
+      "match": "IT",
+      "say": "aj tý"
+    },
+    {
+      "match": "ID",
+      "say": "ajdý"
+    },
+    {
+      "match": "KPI",
+      "say": "kej pí áj"
+    },
+    {
+      "match": "OKR",
+      "say": "ou kej ár"
+    },
+    {
+      "match": "AI",
+      "say": "ej áj"
+    },
+    {
+      "match": "CRM",
+      "say": "sí ár em"
+    },
+    {
+      "match": "URL",
+      "say": "jú ár el"
+    },
+    {
+      "match": "Wi-Fi",
+      "say": "vaj faj",
+      "case": "insensitive"
+    },
+    {
+      "match": "PDF",
+      "say": "pé dé ef"
+    },
+    {
+      "match": "CSV",
+      "say": "cé es vé"
+    },
+    {
+      "match": "XLSX",
+      "say": "iks el es iks"
+    },
+    {
+      "match": "SMS",
+      "say": "es em es"
+    },
+    {
+      "match": "QR",
+      "say": "kvé er"
+    },
+    {
+      "match": "GDPR",
+      "say": "gé dé pé er"
+    },
+    {
+      "match": "HPP",
+      "say": "há pé pé"
+    },
+    {
+      "match": "DPP",
+      "say": "dé pé pé"
+    },
+    {
+      "match": "DPČ",
+      "say": "dé pé čé"
+    },
+    {
+      "match": "OSVČ",
+      "say": "ó es vé čé"
+    },
+    {
+      "match": "IČO",
+      "say": "ičo"
+    },
+    {
+      "match": "DIČ",
+      "say": "dič"
+    },
+    {
+      "match": "absenc",
+      "say": "apsenc",
+      "stem": true,
+      "case": "insensitive",
+      "note": "absence, absenci, absencí… jinak absens"
+    },
+    {
+      "match": "Sloneek",
+      "say": "Sloník",
+      "stem": true
+    },
+    {
+      "match": "Sloneek Intelligence",
+      "say": "Sloník intelidžens"
+    },
+    {
+      "match": "Ellie",
+      "say": "Elí"
+    },
+    {
+      "match": "Google Workspace",
+      "say": "gůgl vorkspejs"
+    },
+    {
+      "match": "Google",
+      "say": "gůgl"
+    },
+    {
+      "match": "Googl",
+      "say": "gůgl",
+      "stem": true,
+      "note": "Googlu, Googlem"
+    },
+    {
+      "match": "Microsoft 365",
+      "say": "majkrosoft tři šest pět"
+    },
+    {
+      "match": "Microsoft",
+      "say": "majkrosoft",
+      "stem": true
+    },
+    {
+      "match": "Outlook",
+      "say": "autluk",
+      "stem": true
+    },
+    {
+      "match": "Teams",
+      "say": "tíms"
+    },
+    {
+      "match": "Slack",
+      "say": "slek",
+      "stem": true
+    },
+    {
+      "match": "Excel",
+      "say": "excel",
+      "stem": true
+    },
+    {
+      "match": "Word",
+      "say": "vord",
+      "stem": true
+    },
+    {
+      "match": "Workspace",
+      "say": "vorkspejs",
+      "stem": true
+    },
+    {
+      "match": "Fidoo",
+      "say": "fidů"
+    },
+    {
+      "match": "LinkedIn",
+      "say": "linkedin"
+    },
+    {
+      "match": "YouTube",
+      "say": "jůtůb",
+      "stem": true
+    },
+    {
+      "match": "iPhone",
+      "say": "ajfoun",
+      "stem": true
+    },
+    {
+      "match": "Android",
+      "say": "android",
+      "stem": true
+    },
+    {
+      "match": "sick days",
+      "say": "sik dejs",
+      "case": "insensitive"
+    },
+    {
+      "match": "sick day",
+      "say": "sik dej",
+      "case": "insensitive"
+    },
+    {
+      "match": "home office",
+      "say": "houm ofis",
+      "case": "insensitive"
+    },
+    {
+      "match": "home officu",
+      "say": "houm ofisu",
+      "case": "insensitive"
+    },
+    {
+      "match": "onboarding",
+      "say": "onbórding",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "offboarding",
+      "say": "ofbórding",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "preboarding",
+      "say": "pribórding",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "HR Workflows",
+      "say": "ejč ár vorkflous"
+    },
+    {
+      "match": "workflow",
+      "say": "vorkflou",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "Checklists",
+      "say": "čeklists"
+    },
+    {
+      "match": "checklist",
+      "say": "čeklist",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "feedback",
+      "say": "fídbek",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "dashboard",
+      "say": "dešbórd",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "widget",
+      "say": "vidžet",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "timesheet",
+      "say": "tajmšít",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "check-in",
+      "say": "ček in",
+      "case": "insensitive"
+    },
+    {
+      "match": "check-out",
+      "say": "ček aut",
+      "case": "insensitive"
+    },
+    {
+      "match": "one-to-one",
+      "say": "van tu van",
+      "case": "insensitive"
+    },
+    {
+      "match": "performance review",
+      "say": "perfórmens revjů",
+      "case": "insensitive"
+    },
+    {
+      "match": "review",
+      "say": "revjů",
+      "case": "insensitive"
+    },
+    {
+      "match": "notebook",
+      "say": "noutbuk",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "e-shop",
+      "say": "í šop",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "upload",
+      "say": "aploud",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "download",
+      "say": "daunloud",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "update",
+      "say": "apdejt",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "drag and drop",
+      "say": "dreg end drop",
+      "case": "insensitive"
+    },
+    {
+      "match": "tooltip",
+      "say": "tůltip",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "wiki",
+      "say": "viki",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "freelancer",
+      "say": "frílenser",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "cafeterie",
+      "say": "kafetérie",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "Audit logy",
+      "say": "audit logy"
+    }
   ],
   "sk": [
-    { "match": "HR", "say": "ejč ár" },
-    { "match": "absenc", "say": "apsenc", "stem": true, "case": "insensitive" },
-    { "match": "Sloneek", "say": "Sloník", "stem": true },
-    { "match": "sick days", "say": "sik dejs", "case": "insensitive" },
-    { "match": "sick day", "say": "sik dej", "case": "insensitive" },
-    { "match": "home office", "say": "houm ofis", "case": "insensitive" },
-    { "match": "Ellie", "say": "Elí" }
+    {
+      "match": "HR",
+      "say": "ejč ár",
+      "note": "anglicky, ne há er"
+    },
+    {
+      "match": "ATS",
+      "say": "ej tý es",
+      "note": "Applicant Tracking System"
+    },
+    {
+      "match": "API",
+      "say": "ej pí áj"
+    },
+    {
+      "match": "SSO",
+      "say": "es es ou"
+    },
+    {
+      "match": "MCP",
+      "say": "em sí pí"
+    },
+    {
+      "match": "CEO",
+      "say": "sí í ou"
+    },
+    {
+      "match": "IT",
+      "say": "aj tý"
+    },
+    {
+      "match": "ID",
+      "say": "ajdý"
+    },
+    {
+      "match": "KPI",
+      "say": "kej pí áj"
+    },
+    {
+      "match": "OKR",
+      "say": "ou kej ár"
+    },
+    {
+      "match": "AI",
+      "say": "ej áj"
+    },
+    {
+      "match": "CRM",
+      "say": "sí ár em"
+    },
+    {
+      "match": "URL",
+      "say": "jú ár el"
+    },
+    {
+      "match": "Wi-Fi",
+      "say": "vaj faj",
+      "case": "insensitive"
+    },
+    {
+      "match": "PDF",
+      "say": "pé dé ef"
+    },
+    {
+      "match": "CSV",
+      "say": "cé es vé"
+    },
+    {
+      "match": "XLSX",
+      "say": "iks el es iks"
+    },
+    {
+      "match": "SMS",
+      "say": "es em es"
+    },
+    {
+      "match": "QR",
+      "say": "kvé er"
+    },
+    {
+      "match": "GDPR",
+      "say": "gé dé pé er"
+    },
+    {
+      "match": "absenc",
+      "say": "apsenc",
+      "stem": true,
+      "case": "insensitive",
+      "note": "absence, absenci, absencí… jinak absens"
+    },
+    {
+      "match": "Sloneek",
+      "say": "Sloník",
+      "stem": true
+    },
+    {
+      "match": "Sloneek Intelligence",
+      "say": "Sloník intelidžens"
+    },
+    {
+      "match": "Ellie",
+      "say": "Elí"
+    },
+    {
+      "match": "Google Workspace",
+      "say": "gůgl vorkspejs"
+    },
+    {
+      "match": "Google",
+      "say": "gůgl"
+    },
+    {
+      "match": "Googl",
+      "say": "gůgl",
+      "stem": true,
+      "note": "Googlu, Googlem"
+    },
+    {
+      "match": "Microsoft 365",
+      "say": "majkrosoft tři šest pět"
+    },
+    {
+      "match": "Microsoft",
+      "say": "majkrosoft",
+      "stem": true
+    },
+    {
+      "match": "Outlook",
+      "say": "autluk",
+      "stem": true
+    },
+    {
+      "match": "Teams",
+      "say": "tíms"
+    },
+    {
+      "match": "Slack",
+      "say": "slek",
+      "stem": true
+    },
+    {
+      "match": "Excel",
+      "say": "excel",
+      "stem": true
+    },
+    {
+      "match": "Word",
+      "say": "vord",
+      "stem": true
+    },
+    {
+      "match": "Workspace",
+      "say": "vorkspejs",
+      "stem": true
+    },
+    {
+      "match": "Fidoo",
+      "say": "fidů"
+    },
+    {
+      "match": "LinkedIn",
+      "say": "linkedin"
+    },
+    {
+      "match": "YouTube",
+      "say": "jůtůb",
+      "stem": true
+    },
+    {
+      "match": "iPhone",
+      "say": "ajfoun",
+      "stem": true
+    },
+    {
+      "match": "Android",
+      "say": "android",
+      "stem": true
+    },
+    {
+      "match": "sick days",
+      "say": "sik dejs",
+      "case": "insensitive"
+    },
+    {
+      "match": "sick day",
+      "say": "sik dej",
+      "case": "insensitive"
+    },
+    {
+      "match": "home office",
+      "say": "houm ofis",
+      "case": "insensitive"
+    },
+    {
+      "match": "onboarding",
+      "say": "onbórding",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "offboarding",
+      "say": "ofbórding",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "preboarding",
+      "say": "pribórding",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "HR Workflows",
+      "say": "ejč ár vorkflous"
+    },
+    {
+      "match": "workflow",
+      "say": "vorkflou",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "Checklists",
+      "say": "čeklists"
+    },
+    {
+      "match": "checklist",
+      "say": "čeklist",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "feedback",
+      "say": "fídbek",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "dashboard",
+      "say": "dešbórd",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "widget",
+      "say": "vidžet",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "timesheet",
+      "say": "tajmšít",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "check-in",
+      "say": "ček in",
+      "case": "insensitive"
+    },
+    {
+      "match": "check-out",
+      "say": "ček aut",
+      "case": "insensitive"
+    },
+    {
+      "match": "one-to-one",
+      "say": "van tu van",
+      "case": "insensitive"
+    },
+    {
+      "match": "performance review",
+      "say": "perfórmens revjů",
+      "case": "insensitive"
+    },
+    {
+      "match": "review",
+      "say": "revjů",
+      "case": "insensitive"
+    },
+    {
+      "match": "notebook",
+      "say": "noutbuk",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "e-shop",
+      "say": "í šop",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "upload",
+      "say": "aploud",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "download",
+      "say": "daunloud",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "update",
+      "say": "apdejt",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "drag and drop",
+      "say": "dreg end drop",
+      "case": "insensitive"
+    },
+    {
+      "match": "tooltip",
+      "say": "tůltip",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "wiki",
+      "say": "viki",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "freelancer",
+      "say": "frílenser",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "cafeterie",
+      "say": "kafetérie",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "Audit logy",
+      "say": "audit logy"
+    },
+    {
+      "match": "IČO",
+      "say": "ičo"
+    }
   ],
   "en": []
 }

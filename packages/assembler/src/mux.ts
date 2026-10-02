@@ -90,6 +90,8 @@ export interface MuxResult {
 export const INTRO_MS = 2500;
 export const OUTRO_MS = 2000;
 export const INTERSTITIAL_MS = 1500;
+/** Max speed-up applied to a narration clip that is longer than its recorded slot (6 % is inaudible). */
+export const MAX_FIT_TEMPO = 1.06;
 export const IMAGE_SEC = 3;
 const FADE_S = 0.4;
 const CARD_FADE_S = 0.25;
@@ -307,7 +309,9 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
   tSteps.forEach((s, i) => (stepOffsetMs[s.id] = shiftAt(i)));
   const cardsMs = cards.length * INTERSTITIAL_MS;
 
-  const items: { id: string; file: string; t: number; shift: number; audioMs: number; status: string }[] = [];
+  // re-voiced clip slightly longer than its recorded slot (e.g. after a pronunciation fix, without re-recording):
+  // speed it up by at most MAX_FIT_TEMPO instead of overlapping the next step; beyond that, warn and re-record.
+  const items: { id: string; file: string; t: number; shift: number; audioMs: number; status: string; tempo: number }[] = [];
   for (const [index, s] of (timing.steps as any[]).entries()) {
     const audioMs = durations[s.id] ?? 0;
     const file = path.join(out, "audio", `${s.id}.mp3`);
@@ -318,7 +322,13 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
     if (Math.abs(real - audioMs) > 100) warnings.push(`step ${s.id}: durations.json says ${audioMs}ms but mp3 is ${real}ms - rerun tts`);
     if (s.audio_ms && Math.abs(s.audio_ms - real) > 100) warnings.push(`step ${s.id}: recorder paced against ${s.audio_ms}ms but mp3 is ${real}ms (stale durations.json at record time?)`);
     if (s.t_start_ms + real > totalMs + 200) warnings.push(`DRIFT step ${s.id}: t_start ${s.t_start_ms} + audio ${real} = ${s.t_start_ms + real}ms > video total ${totalMs}ms (+200 tolerance) - audio will be cut`);
-    items.push({ id: s.id, file, t: s.t_start_ms, shift: shiftAt(index), audioMs: real, status: s.status });
+    const slot = typeof s.t_end_ms === "number" ? s.t_end_ms - s.t_start_ms - 40 : Infinity;
+    let tempo = 1;
+    if (real > slot && slot > 0) {
+      const need = real / slot;
+      if (need <= MAX_FIT_TEMPO) { tempo = Math.round(need * 1000) / 1000; warnings.push(`step ${s.id}: audio ${real}ms > recorded slot ${slot + 40}ms -> sped up ${((tempo - 1) * 100).toFixed(1)}% to fit`); }
+    }
+    items.push({ id: s.id, file, t: s.t_start_ms, shift: shiftAt(index), audioMs: Math.round(real / tempo), status: s.status, tempo });
   }
   // per-clip loudness: every scene at the same integrated loudness (EBU R128)
   const lufsTarget = opts.loudnessLufs ?? (process.env.SVP_LOUDNESS_LUFS !== undefined ? Number(process.env.SVP_LOUDNESS_LUFS) : DEFAULT_LUFS);
@@ -348,7 +358,9 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
       if (st && !text) continue; // subtitle: "" = deliberately no subtitle
       const alF = path.join(out, "audio", "alignment", `${it.id}.json`);
       if (!text || !fs.existsSync(alF)) { warnings.push(`no text/alignment for ${it.id}, no subtitle`); continue; }
-      cues.push(...cuesForStep(it.t + it.shift, text, readJson(alF)));
+      const al = readJson(alF);
+      if (it.tempo !== 1) for (const k of ["character_start_times_seconds", "character_end_times_seconds"]) al[k] = al[k].map((x: number) => x / it.tempo);
+      cues.push(...cuesForStep(it.t + it.shift, text, al));
     }
     cues.sort((a, b) => a.startMs - b.startMs);
     srtPath = path.join(out, "final.srt");
@@ -382,7 +394,7 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
   items.forEach((it, i) => {
     // adelay with both channels; mono mp3 -> upmix to stereo first so "t|t" is valid for any layout
     const t = it.t + it.shift;
-    f.push(`[${i + 1}:a]aformat=sample_rates=44100:channel_layouts=stereo${gainFilter(gainOf.get(it.id) ?? 0)},adelay=${t}|${t}[a${i}]`);
+    f.push(`[${i + 1}:a]aformat=sample_rates=44100:channel_layouts=stereo${gainFilter(gainOf.get(it.id) ?? 0)}${it.tempo !== 1 ? `,atempo=${it.tempo}` : ""},adelay=${t}|${t}[a${i}]`);
     labels.push(`[a${i}]`);
   });
   if (bgmIdx >= 0) {
