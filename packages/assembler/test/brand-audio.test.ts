@@ -33,10 +33,10 @@ test("lexicon: shared config/pronunciation.json + recipe overrides; spoken text 
   const cs = loadLexicon("cs");
   assert.ok(cs.some((r) => r.match === "HR"), "config/pronunciation.json has cs rules");
   const recipe = { id: "x", lang: "cs", pronunciation: [{ match: "HR", say: "há er" }], steps: [{ id: "s01", narration: "HR a absence." }] };
-  assert.equal(spokenTextFor(recipe)(recipe.steps[0]), "há er a apsence.");
+  assert.equal(spokenTextFor(recipe)(recipe.steps[0]), "há er a apsentse.");
   const out = fs.mkdtempSync(path.join(os.tmpdir(), "svp-lex-"));
   const m = buildManifest({ ...recipe, pronunciation: undefined }, out);
-  assert.equal(m.steps[0].tts_text, "ejč ár a apsence.");
+  assert.equal(m.steps[0].tts_text, "ejč ár a apsentse.");
   assert.equal(m.steps[0].subtitle, "HR a absence.");
   assert.equal(m.voice.language_code, "cs");
 });

@@ -109,13 +109,6 @@
       "say": "dič"
     },
     {
-      "match": "absenc",
-      "say": "apsenc",
-      "stem": true,
-      "case": "insensitive",
-      "note": "absence, absenci, absencí… jinak absens"
-    },
-    {
       "match": "Sloneek",
       "say": "Sloník",
       "stem": true
@@ -372,6 +365,821 @@
     {
       "match": "Audit logy",
       "say": "audit logy"
+    },
+    {
+      "match": "absenc",
+      "say": "apsents",
+      "stem": true,
+      "case": "insensitive",
+      "note": "absence -> apsentse; s 'c' to hlas občas četl anglicky absens"
+    },
+    {
+      "match": "licenc",
+      "say": "litsents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "evidenc",
+      "say": "evidents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "preferenc",
+      "say": "preferents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "referenc",
+      "say": "referents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "konferenc",
+      "say": "konferents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "kompetenc",
+      "say": "kompetents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "prezenc",
+      "say": "prezents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "existenc",
+      "say": "existents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "frekvenc",
+      "say": "frekvents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "sekvenc",
+      "say": "sekvents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "instanc",
+      "say": "instants",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "bilanc",
+      "say": "bilants",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "financ",
+      "say": "finants",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "distanc",
+      "say": "distants",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "inteligenc",
+      "say": "inteligents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "agenc",
+      "say": "agents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "aplikac",
+      "say": "aplikats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "notifikac",
+      "say": "notifikats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "integrac",
+      "say": "integrats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "organizac",
+      "say": "organizats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "konfigurac",
+      "say": "konfigurats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "komunikac",
+      "say": "komunikats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "prezentac",
+      "say": "prezentats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "informac",
+      "say": "informats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "registrac",
+      "say": "registrats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "verifikac",
+      "say": "verifikats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "autorizac",
+      "say": "autorizats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "autentizac",
+      "say": "autentizats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "synchronizac",
+      "say": "syntshronizats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "fakturac",
+      "say": "fakturats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "administrac",
+      "say": "administrats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "lokac",
+      "say": "lokats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "geolokac",
+      "say": "geolokats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "automatizac",
+      "say": "automatizats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "digitalizac",
+      "say": "digitalizats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "personalizac",
+      "say": "personalizats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "delegac",
+      "say": "delegats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "kalkulac",
+      "say": "kalkulats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "evaluac",
+      "say": "evaluats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "motivac",
+      "say": "motivats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "kvalifikac",
+      "say": "kvalifikats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "certifikac",
+      "say": "tsertifikats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "specifikac",
+      "say": "spetsifikats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "implementac",
+      "say": "implementats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "migrac",
+      "say": "migrats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "validac",
+      "say": "validats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "duplikac",
+      "say": "duplikats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "navigac",
+      "say": "navigats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "operac",
+      "say": "operats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "situac",
+      "say": "situats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "dokumentac",
+      "say": "dokumentats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "prioritizac",
+      "say": "prioritizats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "kategorizac",
+      "say": "kategorizats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "optimalizac",
+      "say": "optimalizats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "aktualizac",
+      "say": "aktualizats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "instalac",
+      "say": "instalats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "proces",
+      "say": "protses",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "princip",
+      "say": "printsip",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "certifik",
+      "say": "tsertifik",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "cyklus",
+      "say": "tsyklus",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "cykl",
+      "say": "tsykl",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "centr",
+      "say": "tsentr",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "procent",
+      "say": "protsent",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "pozic",
+      "say": "pozits",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "definic",
+      "say": "definits",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "akc",
+      "say": "akts",
+      "stem": true,
+      "case": "insensitive",
+      "note": "c -> ts (anglicky by četl s)"
+    },
+    {
+      "match": "sekc",
+      "say": "sekts",
+      "stem": true,
+      "case": "insensitive",
+      "note": "c -> ts (anglicky by četl s)"
+    },
+    {
+      "match": "funkc",
+      "say": "funkts",
+      "stem": true,
+      "case": "insensitive",
+      "note": "c -> ts (anglicky by četl s)"
+    },
+    {
+      "match": "konkurenc",
+      "say": "konkurents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "provinc",
+      "say": "provints",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "toleranc",
+      "say": "tolerants",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "manager",
+      "say": "menedžer",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "management",
+      "say": "menedžment",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "team leader",
+      "say": "tím lídr",
+      "case": "insensitive"
+    },
+    {
+      "match": "teamleader",
+      "say": "tímlídr",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "leader",
+      "say": "lídr",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "meeting",
+      "say": "míting",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "deadline",
+      "say": "dedlajn",
+      "case": "insensitive"
+    },
+    {
+      "match": "deadlin",
+      "say": "dedlajn",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "online",
+      "say": "onlajn",
+      "case": "insensitive"
+    },
+    {
+      "match": "offline",
+      "say": "oflajn",
+      "case": "insensitive"
+    },
+    {
+      "match": "e-learning",
+      "say": "í lérnink",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "coaching",
+      "say": "koučink",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "mentoring",
+      "say": "mentoring",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "soft skills",
+      "say": "soft skils",
+      "case": "insensitive"
+    },
+    {
+      "match": "hard skills",
+      "say": "hard skils",
+      "case": "insensitive"
+    },
+    {
+      "match": "skill",
+      "say": "skil",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "rating",
+      "say": "rejting",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "self-assessment",
+      "say": "self esesment",
+      "case": "insensitive"
+    },
+    {
+      "match": "assessment",
+      "say": "esesment",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "engagement",
+      "say": "ingejdžment",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "wellbeing",
+      "say": "velbíink",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "work-life balance",
+      "say": "vork lajf belens",
+      "case": "insensitive"
+    },
+    {
+      "match": "burnout",
+      "say": "bernaut",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "buddy",
+      "say": "badý",
+      "case": "insensitive"
+    },
+    {
+      "match": "welcome pack",
+      "say": "velkam pek",
+      "case": "insensitive"
+    },
+    {
+      "match": "kick-off",
+      "say": "kik of",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "recruitment",
+      "say": "rekrútment",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "recruiter",
+      "say": "rekrútr",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "headhunter",
+      "say": "hedhantr",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "employer branding",
+      "say": "emplojer brending",
+      "case": "insensitive"
+    },
+    {
+      "match": "talent pool",
+      "say": "talent půl",
+      "case": "insensitive"
+    },
+    {
+      "match": "pipeline",
+      "say": "pajplajn",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "screening",
+      "say": "skríning",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "interview",
+      "say": "intervjů",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "job offer",
+      "say": "džob ofr",
+      "case": "insensitive"
+    },
+    {
+      "match": "full-time",
+      "say": "ful tajm",
+      "case": "insensitive"
+    },
+    {
+      "match": "part-time",
+      "say": "pár tajm",
+      "case": "insensitive"
+    },
+    {
+      "match": "remote",
+      "say": "rimout",
+      "case": "insensitive"
+    },
+    {
+      "match": "shift",
+      "say": "šift",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "overtime",
+      "say": "ovrtajm",
+      "case": "insensitive"
+    },
+    {
+      "match": "payroll",
+      "say": "pejrol",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "whistleblowing",
+      "say": "vislblouink",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "freelance",
+      "say": "frílens",
+      "case": "insensitive"
+    },
+    {
+      "match": "startup",
+      "say": "startap",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "webhook",
+      "say": "vebhuk",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "push notifikac",
+      "say": "puš notifikats",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "NPS",
+      "say": "en pé es"
+    },
+    {
+      "match": "eNPS",
+      "say": "í en pé es"
+    },
+    {
+      "match": "LMS",
+      "say": "el em es"
+    },
+    {
+      "match": "GPS",
+      "say": "gé pé es"
+    },
+    {
+      "match": "NFC",
+      "say": "en ef cé"
+    },
+    {
+      "match": "RFID",
+      "say": "er ef í dé"
+    },
+    {
+      "match": "BOZP",
+      "say": "bé ó zet pé"
+    },
+    {
+      "match": "App Store",
+      "say": "ep stór"
+    },
+    {
+      "match": "Google Play",
+      "say": "gůgl plej"
+    },
+    {
+      "match": "Apple",
+      "say": "epl"
+    },
+    {
+      "match": "Zoom",
+      "say": "zům",
+      "stem": true
+    },
+    {
+      "match": "Notion",
+      "say": "noušn",
+      "stem": true
+    },
+    {
+      "match": "Jira",
+      "say": "džira",
+      "stem": true
+    },
+    {
+      "match": "Jobs.cz",
+      "say": "džobs tečka cé zet"
+    },
+    {
+      "match": "Teamio",
+      "say": "tímio"
+    },
+    {
+      "match": "StartupJobs",
+      "say": "startap džobs"
+    },
+    {
+      "match": "Money S3",
+      "say": "mony es tři"
+    },
+    {
+      "match": "SAP",
+      "say": "sap"
+    },
+    {
+      "match": "iDoklad",
+      "say": "í doklad"
+    },
+    {
+      "match": "Raynet",
+      "say": "rejnet"
+    },
+    {
+      "match": "Pipedrive",
+      "say": "pajpdrajv"
+    },
+    {
+      "match": "HubSpot",
+      "say": "habspot",
+      "stem": true
+    },
+    {
+      "match": "Salesforce",
+      "say": "sejlsfórs",
+      "stem": true
+    },
+    {
+      "match": "Power BI",
+      "say": "pauer bí áj"
+    },
+    {
+      "match": "Zapier",
+      "say": "zejpír"
+    },
+    {
+      "match": "n8n",
+      "say": "en ejt en"
+    },
+    {
+      "match": "DocuSign",
+      "say": "dokjusajn"
+    },
+    {
+      "match": "Pluxee",
+      "say": "pluksí"
+    },
+    {
+      "match": "Edenred",
+      "say": "edenred"
     }
   ],
   "sk": [
@@ -457,13 +1265,6 @@
     {
       "match": "GDPR",
       "say": "gé dé pé er"
-    },
-    {
-      "match": "absenc",
-      "say": "apsenc",
-      "stem": true,
-      "case": "insensitive",
-      "note": "absence, absenci, absencí… jinak absens"
     },
     {
       "match": "Sloneek",
@@ -721,6 +1522,597 @@
     {
       "match": "IČO",
       "say": "ičo"
+    },
+    {
+      "match": "absenc",
+      "say": "absents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "licenc",
+      "say": "litsents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "evidenc",
+      "say": "evidents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "preferenc",
+      "say": "preferents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "referenc",
+      "say": "referents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "konferenc",
+      "say": "konferents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "kompetenc",
+      "say": "kompetents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "prezenc",
+      "say": "prezents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "existenc",
+      "say": "existents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "financ",
+      "say": "finants",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "inteligenc",
+      "say": "inteligents",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "aplikác",
+      "say": "aplikáts",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "notifikác",
+      "say": "notifikáts",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "integrác",
+      "say": "integráts",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "organizác",
+      "say": "organizáts",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "konfigurác",
+      "say": "konfiguráts",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "komunikác",
+      "say": "komunikáts",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "prezentác",
+      "say": "prezentáts",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "informác",
+      "say": "informáts",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "registrác",
+      "say": "registráts",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "verifikác",
+      "say": "verifikáts",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "autorizác",
+      "say": "autorizáts",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "synchronizác",
+      "say": "syntshronizáts",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "fakturác",
+      "say": "fakturáts",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "administrác",
+      "say": "administráts",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "lokác",
+      "say": "lokáts",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "automatizác",
+      "say": "automatizáts",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "dokumentác",
+      "say": "dokumentáts",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "aktualizác",
+      "say": "aktualizáts",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "proces",
+      "say": "protses",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "princip",
+      "say": "printsip",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "certifik",
+      "say": "tsertifik",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "centr",
+      "say": "tsentr",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "percent",
+      "say": "pertsent",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "pozíc",
+      "say": "pozíts",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "definíc",
+      "say": "definíts",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "akci",
+      "say": "aktsi",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "sekci",
+      "say": "sektsi",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "funkci",
+      "say": "funktsi",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "manager",
+      "say": "menedžer",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "management",
+      "say": "menedžment",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "team leader",
+      "say": "tím lídr",
+      "case": "insensitive"
+    },
+    {
+      "match": "teamleader",
+      "say": "tímlídr",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "leader",
+      "say": "lídr",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "meeting",
+      "say": "míting",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "deadline",
+      "say": "dedlajn",
+      "case": "insensitive"
+    },
+    {
+      "match": "deadlin",
+      "say": "dedlajn",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "online",
+      "say": "onlajn",
+      "case": "insensitive"
+    },
+    {
+      "match": "offline",
+      "say": "oflajn",
+      "case": "insensitive"
+    },
+    {
+      "match": "e-learning",
+      "say": "í lérnink",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "coaching",
+      "say": "koučink",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "mentoring",
+      "say": "mentoring",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "soft skills",
+      "say": "soft skils",
+      "case": "insensitive"
+    },
+    {
+      "match": "hard skills",
+      "say": "hard skils",
+      "case": "insensitive"
+    },
+    {
+      "match": "skill",
+      "say": "skil",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "rating",
+      "say": "rejting",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "self-assessment",
+      "say": "self esesment",
+      "case": "insensitive"
+    },
+    {
+      "match": "assessment",
+      "say": "esesment",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "engagement",
+      "say": "ingejdžment",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "wellbeing",
+      "say": "velbíink",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "work-life balance",
+      "say": "vork lajf belens",
+      "case": "insensitive"
+    },
+    {
+      "match": "burnout",
+      "say": "bernaut",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "buddy",
+      "say": "badý",
+      "case": "insensitive"
+    },
+    {
+      "match": "welcome pack",
+      "say": "velkam pek",
+      "case": "insensitive"
+    },
+    {
+      "match": "kick-off",
+      "say": "kik of",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "recruitment",
+      "say": "rekrútment",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "recruiter",
+      "say": "rekrútr",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "headhunter",
+      "say": "hedhantr",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "employer branding",
+      "say": "emplojer brending",
+      "case": "insensitive"
+    },
+    {
+      "match": "talent pool",
+      "say": "talent půl",
+      "case": "insensitive"
+    },
+    {
+      "match": "pipeline",
+      "say": "pajplajn",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "screening",
+      "say": "skríning",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "interview",
+      "say": "intervjů",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "job offer",
+      "say": "džob ofr",
+      "case": "insensitive"
+    },
+    {
+      "match": "full-time",
+      "say": "ful tajm",
+      "case": "insensitive"
+    },
+    {
+      "match": "part-time",
+      "say": "pár tajm",
+      "case": "insensitive"
+    },
+    {
+      "match": "remote",
+      "say": "rimout",
+      "case": "insensitive"
+    },
+    {
+      "match": "shift",
+      "say": "šift",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "overtime",
+      "say": "ovrtajm",
+      "case": "insensitive"
+    },
+    {
+      "match": "payroll",
+      "say": "pejrol",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "whistleblowing",
+      "say": "vislblouink",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "freelance",
+      "say": "frílens",
+      "case": "insensitive"
+    },
+    {
+      "match": "startup",
+      "say": "startap",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "webhook",
+      "say": "vebhuk",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "NPS",
+      "say": "en pé es"
+    },
+    {
+      "match": "eNPS",
+      "say": "í en pé es"
+    },
+    {
+      "match": "LMS",
+      "say": "el em es"
+    },
+    {
+      "match": "GPS",
+      "say": "gé pé es"
+    },
+    {
+      "match": "NFC",
+      "say": "en ef cé"
+    },
+    {
+      "match": "RFID",
+      "say": "er ef í dé"
+    },
+    {
+      "match": "App Store",
+      "say": "ep stór"
+    },
+    {
+      "match": "Google Play",
+      "say": "gůgl plej"
+    },
+    {
+      "match": "Apple",
+      "say": "epl"
+    },
+    {
+      "match": "Zoom",
+      "say": "zům",
+      "stem": true
+    },
+    {
+      "match": "Notion",
+      "say": "noušn",
+      "stem": true
+    },
+    {
+      "match": "Jira",
+      "say": "džira",
+      "stem": true
+    },
+    {
+      "match": "Teamio",
+      "say": "tímio"
+    },
+    {
+      "match": "StartupJobs",
+      "say": "startap džobs"
+    },
+    {
+      "match": "SAP",
+      "say": "sap"
+    },
+    {
+      "match": "Raynet",
+      "say": "rejnet"
+    },
+    {
+      "match": "Pipedrive",
+      "say": "pajpdrajv"
+    },
+    {
+      "match": "HubSpot",
+      "say": "habspot",
+      "stem": true
+    },
+    {
+      "match": "Salesforce",
+      "say": "sejlsfórs",
+      "stem": true
+    },
+    {
+      "match": "Power BI",
+      "say": "pauer bí áj"
+    },
+    {
+      "match": "Zapier",
+      "say": "zejpír"
+    },
+    {
+      "match": "n8n",
+      "say": "en ejt en"
+    },
+    {
+      "match": "DocuSign",
+      "say": "dokjusajn"
+    },
+    {
+      "match": "Pluxee",
+      "say": "pluksí"
+    },
+    {
+      "match": "Edenred",
+      "say": "edenred"
     }
   ],
   "en": []
