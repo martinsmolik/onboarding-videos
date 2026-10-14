@@ -1,0 +1,325 @@
+{
+  "_comment": "Polská verze videa Evidujte a předávejte pracovní pomůcky (work-assets). Struktura, kroky, kliky a tempo 1:1 podle CZ masteru (schváleno Martinem – „raketa“). UI texty z translate_fe/pl (fetch uvnitř stránky) + ověřeno naživo 12. 10. 2026 (local-translate=pl). PL demo data: držitelka 'Zofia Wiśniewska' <zofia.wisniewska@example.com> (4f5629ff-4526-45b9-b97f-1d47edc42f2f, NEAKTIVNÍ, trvalá z org-chart PL); NE 'Anna Kowalska' (add-users PL). Recept vytváří pomůcku 'Lenovo ThinkPad T14 – przykład' (inv. PRZYKLAD-NB-014, 5490 PLN, kategorie Notebook – kategorie tenantu má stejný název ve všech jazycích UI); master cleanup ji maže. cleanup_prepend maže stejnou pojistkou pozůstatky CZ ('… – ukázka', držitelka Lucie) a EN ('… – demo', držitelka Olivia). Read-only data tenantu jako v CZ: 'Kia Sportage 2020' (s32), čekající pomůcky admina (s30), kategorie Notebook, vlastní pole Producer. PL UI nekonzistentní terminologie (menu 'Narzędzia', nadpis 'Zarządzanie majątkiem', role 'Menedżer aktywów', tlačítko 'Przypisz gadżet') – narace říká, co je na obrazovce. Pole Název má v PL UI chybný popisek 'Imię' – narace ho nejmenuje. Narace bez asistentky Ellie (Centrum pomocy). Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM. Generátor: out/work-assets/_work/build_i18n.py (+ i18n_src.json)",
+  "verified": {
+    "date": "2026-10-12",
+    "by": "Claude (BrowserOS, preprod, local-translate=pl, in-page runner out/work-assets-pl/_work/dryrun-runner.js = runner org-chart-pl + press; recept přes file input z out/work-assets-pl/_work/dryrun-R.json)",
+    "selectors": "Dry-run 40/40 (s331: runner neumí :has-text uprostřed selektoru – řádek „Wiśniewska Zofia / Nieaktywny“ ověřen ručně, klik + zbytek kroku ok). Cleanup před: CZ blok smazal pozůstatek CZ nahrávání 041 (dialog „Usuń narzędzia pracy“ s Králová Lucie); po: vlastní blok smazal PL pomůcku. Zkouška skutečným recorderem (job 060, mock hlas) 40/40 ok, cleanup FAILED (ignored) jen tam, kde nic nebylo.",
+    "notes": "Živé PL popisky: menu Firma → Narzędzia (Przegląd, Protokoły przekazania, Kategoria, Pola niestandardowe); Ja → Moje narzędzia pracy → Przegląd; Użytkownicy → Zarządzanie; nadpis Zarządzanie majątkiem; Status przyjęcia, Kategoria, Eksport do Excela, Import, Przypomnienie o wszystkich niewykorzystanych narzędziach; Kategorie narzędzi + Dodaj; Pola niestandardowe; formulář: pole Název = „Imię“ (chyba překladu, narace ho nejmenuje), Data nabycia, Numer inwentarzowy, Oznaczenie (numer seryjny), Cena nabycia (bez VAT), Waluta (výchozí EUR → PLN), Kategoria, Zdjęcie/Wybierz, Przypisz gadżet, Informacje dotyczące właściciela, Posiadacz, Stan użyteczności = 1 - Nowy, Data przekazania, Uwaga (widoczna w logu), Zapisz; detail Informacja / Rozszerzony / Historia, Typ protokołu, Poproś o zwrot narzędzia, Zwróć narzędzie bez protokołu przekazania; Przegląd moich narzędzi pracy + Zaakceptuj; Protokoły przyjęcia i zwrotu narzędzi; Szukaj..., Nieaktywny; karta Dane podstawowe i robocze, Narzędzia, Specjalne uprawnienia użytkownika → Menedżer aktywów."
+  },
+  "title": "Ewidencjonuj i przekazuj narzędzia pracy",
+  "thumbnail_title": "Narzędzia pracy",
+  "parts": {
+    "Úvod": "Wprowadzenie",
+    "Přehled pomůcek": "Przegląd narzędzi",
+    "Kategorie a vlastní pole": "Kategorie i pola niestandardowe",
+    "Nová pomůcka": "Nowe narzędzie",
+    "Předání zaměstnanci": "Przekazanie pracownikowi",
+    "Převzetí a vrácení": "Przyjęcie i zwrot",
+    "Karta uživatele a oprávnění": "Karta użytkownika i uprawnienia"
+  },
+  "text": {
+    "Pomůcky": "Narzędzia",
+    "Moje pomůcky": "Moje narzędzia pracy",
+    "Správa pomůcek": "Zarządzanie majątkiem",
+    "Stav přijetí": "Status przyjęcia",
+    "Kategorie": "Kategoria",
+    "Export do Excelu": "Eksport do Excela",
+    "Import": "Import",
+    "Připomenout všechny nepřevzaté pomůcky": "Przypomnienie o wszystkich niewykorzystanych narzędziach",
+    "Protokoly o převzetí a vrácení pomůcek": "Protokoły przyjęcia i zwrotu narzędzi",
+    "Typ protokolu": "Typ protokołu",
+    "Vyhledávání...": "Szukaj...",
+    "Neaktivní": "Nieaktywny",
+    "Odstranění pracovní pomůcky": "Usuń narzędzia pracy",
+    "Lenovo ThinkPad T14 – ukázka": "Lenovo ThinkPad T14 – przykład",
+    "Králová Lucie": "Wiśniewska Zofia",
+    "CZK": "PLN",
+    "UKAZKA-NB-014": "PRZYKLAD-NB-014",
+    "PF-4K7Q2X": "PF-5M8R3W",
+    "32000": "5490",
+    "Předáno s nabíječkou a brašnou.": "Przekazano z ładowarką i torbą.",
+    "Lucie": "Zofia",
+    "Králová": "Wiśniewska"
+  },
+  "selectors": {
+    "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Pomůcky\")": "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Narzędzia\")",
+    "[data-cy=mainContentCenterDiv] [data-cy=assetsManagementPage] h5:text-is(\"Správa pomůcek\")": "[data-cy=mainContentCenterDiv] [data-cy=assetsManagementPage] h5:text-is(\"Zarządzanie majątkiem\")",
+    "[data-cy=mainContentCenterDiv] nb-select button:has-text(\"Stav přijetí\")": "[data-cy=mainContentCenterDiv] nb-select button:has-text(\"Status przyjęcia\")",
+    "[data-cy=mainContentCenterDiv] nb-select button:has-text(\"Kategorie\")": "[data-cy=mainContentCenterDiv] nb-select button:has-text(\"Kategoria\")",
+    "[data-cy=mainContentCenterDiv] button:has-text(\"Export do Excelu\")": "[data-cy=mainContentCenterDiv] button:has-text(\"Eksport do Excela\")",
+    "[data-cy=mainContentCenterDiv] button:has-text(\"Připomenout všechny nepřevzaté pomůcky\")": "[data-cy=mainContentCenterDiv] button:has-text(\"Przypomnienie o wszystkich niewykorzystanych narzędziach\")",
+    "nb-option:text-is(\"CZK\")": "nb-option:text-is(\"PLN\")",
+    "[data-cy=assetsForm] [data-cy=assetCurrencySelect] button:text-is(\"CZK\")": "[data-cy=assetsForm] [data-cy=assetCurrencySelect] button:text-is(\"PLN\")",
+    "slnk-common-autocomplete-option:has-text(\"Králová Lucie\")": "slnk-common-autocomplete-option:has-text(\"Wiśniewska Zofia\")",
+    "[data-cy=mainContentCenterDiv] table:has-text(\"Typ protokolu\")": "[data-cy=mainContentCenterDiv] table:has-text(\"Typ protokołu\")",
+    "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Moje pomůcky\")": "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Moje narzędzia pracy\")",
+    "[data-cy=mainContentCenterDiv] h5:text-is(\"Protokoly o převzetí a vrácení pomůcek\")": "[data-cy=mainContentCenterDiv] h5:text-is(\"Protokoły przyjęcia i zwrotu narzędzi\")",
+    "[data-cy=mainContentCenterDiv] input[placeholder=\"Vyhledávání...\"]": "[data-cy=mainContentCenterDiv] input[placeholder=\"Szukaj...\"]",
+    "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Neaktivní\") td:first-child span:text-is(\"Králová Lucie\")": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Nieaktywny\") td:first-child span:text-is(\"Wiśniewska Zofia\")",
+    "[data-cy=mainContentCenterDiv] a[href=\"/app/company-details/member/0c9409f2-fc6e-475b-b2b1-2e791b4a7a83/assets\"]": "[data-cy=mainContentCenterDiv] a[href=\"/app/company-details/member/4f5629ff-4526-45b9-b97f-1d47edc42f2f/assets\"]",
+    "[data-cy=mainContentCenterDiv] [data-cy=companyMemberAssets] span.text-dark:text-is(\"Lenovo ThinkPad T14 – ukázka\")": "[data-cy=mainContentCenterDiv] [data-cy=companyMemberAssets] span.text-dark:text-is(\"Lenovo ThinkPad T14 – przykład\")",
+    "[data-cy=mainContentCenterDiv] [data-cy=companyMemberAssets] nb-card:has-text(\"Lenovo ThinkPad T14 – ukázka\")": "[data-cy=mainContentCenterDiv] [data-cy=companyMemberAssets] nb-card:has-text(\"Lenovo ThinkPad T14 – przykład\")",
+    "[data-cy=mainContentCenterDiv] a[href=\"/app/company-details/member/0c9409f2-fc6e-475b-b2b1-2e791b4a7a83/work-data\"]": "[data-cy=mainContentCenterDiv] a[href=\"/app/company-details/member/4f5629ff-4526-45b9-b97f-1d47edc42f2f/work-data\"]",
+    "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – ukázka\")": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – przykład\")",
+    "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – ukázka\")": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – przykład\")",
+    "[data-cy=assetsDetailPage]:has-text(\"Lenovo ThinkPad T14 – ukázka\") >> [data-cy=assetDeleteButton]": "[data-cy=assetsDetailPage]:has-text(\"Lenovo ThinkPad T14 – przykład\") >> [data-cy=assetDeleteButton]",
+    "[data-cy=confirmationDialog]:has-text(\"Odstranění pracovní pomůcky\"):has-text(\"Králová Lucie\")": "[data-cy=confirmationDialog]:has-text(\"Usuń narzędzia pracy\"):has-text(\"Wiśniewska Zofia\")",
+    "[data-cy=confirmationDialog]:has-text(\"Odstranění pracovní pomůcky\"):has-text(\"Králová Lucie\") >> [data-cy=submitButton]": "[data-cy=confirmationDialog]:has-text(\"Usuń narzędzia pracy\"):has-text(\"Wiśniewska Zofia\") >> [data-cy=submitButton]"
+  },
+  "keep": [
+    "Kia Sportage 2020",
+    "Notebook",
+    "Producer",
+    "Note",
+    "Import"
+  ],
+  "ids": {
+    "0c9409f2-fc6e-475b-b2b1-2e791b4a7a83": "4f5629ff-4526-45b9-b97f-1d47edc42f2f"
+  },
+  "cleanup_prepend": [
+    {
+      "name": "smazat CS pomůcku 'Lenovo ThinkPad T14 – ukázka' – jen při právě 1 řádku s přesným názvem po hledání, detail s tímtéž názvem v hlavičce, dialog 'Usuń narzędzia pracy' (jazyk UI) s držitelkou 'Králová Lucie'; když pomůcka neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/assets/all",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+          "value": "Lenovo ThinkPad T14 – ukázka",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – ukázka\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – ukázka\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetsDetailPage]:has-text(\"Lenovo ThinkPad T14 – ukázka\") >> [data-cy=assetDeleteButton]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=assetDeleteButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usuń narzędzia pracy\"):has-text(\"Králová Lucie\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usuń narzędzia pracy\"):has-text(\"Králová Lucie\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "smazat EN pomůcku 'Lenovo ThinkPad T14 – demo' – jen při právě 1 řádku s přesným názvem po hledání, detail s tímtéž názvem v hlavičce, dialog 'Usuń narzędzia pracy' (jazyk UI) s držitelkou 'Brown Olivia'; když pomůcka neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/assets/all",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+          "value": "Lenovo ThinkPad T14 – demo",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – demo\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – demo\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – demo\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetsDetailPage]:has-text(\"Lenovo ThinkPad T14 – demo\") >> [data-cy=assetDeleteButton]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=assetDeleteButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usuń narzędzia pracy\"):has-text(\"Brown Olivia\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usuń narzędzia pracy\"):has-text(\"Brown Olivia\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    }
+  ],
+  "steps": {
+    "s01": {
+      "narration": "Chcecie wiedzieć, kto w firmie ma który laptop albo telefon? Dzień dobry, jestem Maria z zespołu Sloneek i pokażę Wam, jak ewidencjonować i przekazywać narzędzia pracy."
+    },
+    "s02": {
+      "narration": "Narzędzia znajdziecie w lewym menu w sekcji Firma, gdzie rozwijam pozycję Narzędzia."
+    },
+    "s03": {
+      "narration": "Klikam Przegląd i otwiera się strona Zarządzanie majątkiem ze wszystkimi narzędziami w firmie."
+    },
+    "s04": {
+      "narration": "Przy każdym narzędziu widzicie posiadacza, a pod jego nazwiskiem status przyjęcia, obok zaś numer inwentarzowy i kategorię."
+    },
+    "s05": {
+      "narration": "Listę zawęzicie wyszukiwarką, filtrem Status przyjęcia, na przykład tylko do narzędzi czekających na potwierdzenie, albo według kategorii."
+    },
+    "s06": {
+      "narration": "Przełącznikiem w prawym górnym rogu włączycie szczegółową tabelę, którą pobierzecie przyciskiem Eksport do Excela."
+    },
+    "s07": {
+      "narration": "Przełącznik z powrotem wyłączam, a przyciskiem Import wgracie wiele narzędzi naraz z szablonu Excela."
+    },
+    "s08": {
+      "narration": "Pomarańczowym przyciskiem przypomnicie o przyjęciu wszystkim, którzy jeszcze nie potwierdzili swojego narzędzia."
+    },
+    "s09": {
+      "narration": "Klikam w menu Kategoria, gdzie przygotujecie grupy narzędzi, na przykład laptopy albo telefony, według których potem filtrujecie."
+    },
+    "s10": {
+      "narration": "Nową kategorię założycie przyciskiem Dodaj, wystarczy nadać jej nazwę i kolor."
+    },
+    "s11": {
+      "narration": "Klikam Pola niestandardowe, gdzie dodacie dodatkowe dane, na przykład producenta, rozmiar albo datę wygaśnięcia licencji."
+    },
+    "s12": {
+      "narration": "Każde pole ma swój rodzaj, na przykład tekst, liczbę, datę, wybór z listy albo przypomnienie."
+    },
+    "s13": {
+      "narration": "W menu klikam z powrotem Przegląd, potem Dodaj, i otwiera się karta nowego narzędzia."
+    },
+    "s14": {
+      "narration": "Najpierw wpisuję nazwę, czyli jakie to narzędzie, tutaj laptop Lenovo ThinkPad."
+    },
+    "s15": {
+      "narration": "Data nabycia wypełnia się dzisiejszą datą, a przy starszym narzędziu po prostu ją zmienicie."
+    },
+    "s16": {
+      "narration": "Numer inwentarzowy jest obowiązkowy i musi być unikalny w całej firmie."
+    },
+    "s17": {
+      "narration": "W polu Oznaczenie wpisuję numer seryjny, a gdy narzędzie go nie ma, przycisk z błyskawicą wygeneruje losowy kod."
+    },
+    "s18": {
+      "narration": "Wpisuję cenę nabycia bez VAT, a walutę zmieniam na złotówki."
+    },
+    "s19": {
+      "narration": "W polu Kategoria zaznaczam Notebook, a przyciskiem plus obok moglibyście od razu założyć nową kategorię."
+    },
+    "s20": {
+      "narration": "Przyciskiem Wybierz możecie dodać zdjęcie narzędzia, żeby każdy od razu wiedział, o co chodzi."
+    },
+    "s21": {
+      "narration": "Narzędzie od razu przekażę, więc klikam Przypisz gadżet i poniżej pojawiają się Informacje dotyczące właściciela."
+    },
+    "s22": {
+      "narration": "Jako posiadaczkę wybieram koleżankę Zofię Wiśniewską."
+    },
+    "s23": {
+      "narration": "Stan użyteczności zostawiam na wartości Nowy, a datę przekazania na dzisiaj."
+    },
+    "s24": {
+      "narration": "W uwadze wpisuję, co Zofia dostaje razem z laptopem, bo uwaga trafi do protokołu przekazania."
+    },
+    "s25": {
+      "narration": "Klikam Zapisz i narzędzie jest założone razem z posiadaczką."
+    },
+    "s26": {
+      "narration": "Posiadacz potem przyjmuje narzędzie w aplikacji podpisem elektronicznym albo je odrzuca, a do tego czasu czeka ono na potwierdzenie."
+    },
+    "s27": {
+      "narration": "Gdy zwleka z przyjęciem, przyciskiem ze strzałką wyślecie mu prośbę o przyjęcie jeszcze raz."
+    },
+    "s28": {
+      "narration": "Klikam zakładkę Rozszerzony, gdzie uzupełnicie pola niestandardowe, które wcześniej przygotowaliście."
+    },
+    "s29": {
+      "narration": "Klikam zakładkę Historia, gdzie znajdziecie protokoły przekazania i audit log, który zapisuje każdą zmianę narzędzia."
+    },
+    "s30": {
+      "narration": "Widok pracownika znajdziecie w menu w sekcji Ja, gdzie rozwijam Moje narzędzia pracy i klikam Przegląd."
+    },
+    "s301": {
+      "narration": "Tutaj pracownik widzi swoje narzędzia, a oczekujące przyjęcie potwierdza przyciskiem Zaakceptuj."
+    },
+    "s31": {
+      "narration": "W sekcji Narzędzia klikam Protokoły przekazania, gdzie macie podpisane protokoły przyjęcia i zwrotu z całej firmy."
+    },
+    "s32": {
+      "narration": "Klikam z powrotem Przegląd i otwieram narzędzie, które posiadacz już przyjął, na przykład samochód służbowy."
+    },
+    "s321": {
+      "narration": "W jego szczegółach poprosicie o zwrot, który posiadacz podpisze, albo bez protokołu zwrócicie je od razu do magazynu."
+    },
+    "s33": {
+      "narration": "Narzędzia jednej osoby znajdziecie też w jej karcie, więc w menu rozwijam pozycję Użytkownicy i klikam Zarządzanie."
+    },
+    "s331": {
+      "narration": "W wyszukiwarce wpisuję Wiśniewska i kliknięciem w nazwisko otwieram kartę Zofii."
+    },
+    "s332": {
+      "narration": "Klikam zakładkę Narzędzia i widzę laptop, który właśnie przekazaliśmy Zofii."
+    },
+    "s34": {
+      "narration": "Kto może zarządzać narzędziami, ustawicie po kliknięciu Dane podstawowe i robocze, w polu Specjalne uprawnienia użytkownika, wybierając Menedżer aktywów."
+    },
+    "s35": {
+      "narration": "Teraz umiecie ewidencjonować narzędzia, przekazywać je pracownikom i sprawdzać ich historię, a gdyby coś nie działało, zajrzyjcie do Centrum pomocy."
+    },
+    "s36": {
+      "narration": "Mniej administracji, więcej czasu dla ludzi. To jest Sloneek."
+    }
+  }
+}

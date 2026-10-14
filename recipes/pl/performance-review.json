@@ -1,0 +1,1175 @@
+{
+  "id": "performance-review",
+  "version": 1,
+  "title": "Ocena wydajności: stanowiska, kompetencje i cykle oceny",
+  "lang": "pl",
+  "app_version": "preprod-2026-10-09",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "pl"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "F9eb9uZYeJuHuO7Uvs1R",
+    "model_id": "eleven_v4"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s25",
+    "title": "Ocena wydajności"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Oceny w arkuszach kalkulacyjnych i notatki rozsiane po e-mailach? Dzień dobry, jestem Maria z zespołu Sloneek i dziś pokażę Wam ocenę wydajności.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Wprowadzenie",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Ocena opiera się na stanowiskach i ich kompetencjach. Menedżer ocenia swoich podwładnych, a pracownicy mogą ocenić także samych siebie.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "before_ms": 1500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "W lewym menu klikam Ocena wydajności. Tutaj widzicie wszystkie cykle oceny, ich status i stopień ukończenia.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-positions-evaluation-list [data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-list table thead",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-list [data-cy=tableRow]",
+        "url_contains": "/app/performance-evaluation/positions-evaluation/all"
+      }
+    },
+    {
+      "id": "s04",
+      "narration": "Filtry nad tabelą szybko oddzielą wersje robocze, cykle w toku, cykle gotowe do startu i zakończone.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-status-filter",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-status-filter button:text-is(\"Zakończony\")",
+        "url_contains": "/app/performance-evaluation/positions-evaluation/all"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "Zaczniemy od stanowisk. Przyciskiem Zarządzaj pozycjami otworzycie przegląd stanowisk i ich kompetencji.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "button:has-text(\"Zarządzaj pozycjami\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "button:has-text(\"Zarządzaj pozycjami\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "tr:has-text(\"Specjalista ds. obsługi klienta\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "h5:text-is(\"Stanowiska i kompetencje\")",
+        "url_contains": "/app/performance-evaluation/positions"
+      },
+      "part": 2,
+      "part_title": "Stanowiska i kompetencje"
+    },
+    {
+      "id": "s06",
+      "narration": "Przy każdym stanowisku widzicie, ilu osobom jest przypisane i ile kompetencji zawiera jego model kompetencji.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "table thead",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "tr:has-text(\"Specjalista ds. obsługi klienta\")",
+        "url_contains": "/app/performance-evaluation/positions"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "Otwieram stanowisko Specjalista ds. obsługi klienta. Na górze jest nazwa i opis stanowiska, który zobaczy też pracownik.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "tr:has-text(\"Specjalista ds. obsługi klienta\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "tr:has-text(\"Specjalista ds. obsługi klienta\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "input#name",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-common-card:has(slnk-common-editor)",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "slnk-common-card:has(slnk-common-editor)",
+        "url_contains": "/app/performance-evaluation/positions/edit/"
+      },
+      "voice_after_actions": true
+    },
+    {
+      "id": "s08",
+      "narration": "Niżej jest model kompetencji. Każda kompetencja ma swoją skalę, tutaj od zera do pięciu, a poszczególne stopnie możecie opisać słownie.",
+      "actions": [
+        {
+          "type": "scroll",
+          "value": "slnk-common-card:has(slnk-common-open-ai-search-bar-v2)",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "span.text-primary:text-is(\"Ustalenie opisu słownego skali\") >> nth=0",
+          "before_ms": 600
+        },
+        {
+          "type": "click",
+          "selector": "span.text-primary:text-is(\"Ustalenie opisu słownego skali\") >> nth=0",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "highlight",
+          "selector": "div.px-4.pb-4.pt-4:has(input[placeholder=\"Opis skali\"]) >> nth=0",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "div.px-4.pb-4.pt-4:has(input[placeholder=\"Opis skali\"]) >> nth=0",
+        "url_contains": "/app/performance-evaluation/positions/edit/"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "Kompetencji nie musicie wymyślać sami: w polu Zainspiruj się sztuczną inteligencją wpiszecie stanowisko, a AI je zaproponuje. Stanowisko przypiszecie potem pracownikom w profilu.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "textarea[data-cy=aiTextarea]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-common-card-page-header button:has-text(\"Wróć\")",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-card-page-header button:has-text(\"Wróć\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container [data-cy=submitButton]",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "nb-dialog-container [data-cy=submitButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "tr:has-text(\"Specjalista ds. obsługi klienta\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "h5:text-is(\"Stanowiska i kompetencje\")",
+        "url_contains": "/app/performance-evaluation/positions"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Teraz założymy nowy cykl. Klikam Dodać i wpisuję nazwę, na przykład Ocena wyników za czwarty kwartał.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-common-card-page-header button:has-text(\"Wróć\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-positions-evaluation-list [data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "button:has-text(\"Dodać\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "button:has-text(\"Dodać\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "input#name",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "input#name",
+          "value": "Ocena wyników za czwarty kwartał",
+          "before_ms": 400,
+          "delay_ms": 40
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-setup-survey-basic-settings",
+        "url_contains": "/setup/survey"
+      },
+      "part": 3,
+      "part_title": "Nowy cykl oceny",
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s11",
+      "narration": "Pierwsza opcja przeniesie do kwestionariusza kompetencje ze stanowisk. Menedżer ocenia zawsze, a ja zaznaczam też samoocenę.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "nb-checkbox[formcontrolname=is_copy_competencies_from_position]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "hover",
+          "selector": "nb-checkbox[formcontrolname=is_self_review_requested] label",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-checkbox[formcontrolname=is_self_review_requested] label",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "nb-checkbox[formcontrolname=is_self_review_requested] span.custom-checkbox.checked",
+        "url_contains": "/setup/survey"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "W części Celowanie wybieracie, kogo oceniacie: całą firmę, zespoły, lokalizacje, tagi, stanowiska albo konkretne osoby. Wybieram wybranych użytkowników.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-setup-survey-targeting nb-radio-group",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-radio:has(input[value=\"users\"]) label",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "slnk-positions-evaluation-setup-survey-targeting slnk-common-autocomplete input",
+          "before_ms": 600
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "Claver",
+          "before_ms": 400,
+          "delay_ms": 60
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:text-is(\"Claver Thomas\")",
+          "before_ms": 600
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-setup-survey-targeting slnk-common-autocomplete",
+        "url_contains": "/setup/survey"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "Na osi czasu ustawiam datę rozpoczęcia i zakończenia. Cykl może się zacząć nawet dzisiaj.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "input[formcontrolname=start_date]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-calendar-day-cell.day-cell.today",
+          "before_ms": 700
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "input[formcontrolname=end_date]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "nb-calendar-day-cell.day-cell:not(.bounding-month):not(.disabled) >> nth=-1",
+          "before_ms": 900
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-setup-survey-timeline",
+        "url_contains": "/setup/survey"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "Klikam Następny. Ocena zapisze się jako wersja robocza i przechodzimy do kwestionariusza.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "slnk-common-card-page-header button:has-text(\"Następny\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-card-page-header button:has-text(\"Następny\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ":text-is(\"Wybierz opcję utworzenia kwestionariusza\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": ":text-is(\"Wybierz opcję utworzenia kwestionariusza\")",
+        "url_contains": "/questionnaire"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Kwestionariusz może zaproponować sztuczna inteligencja albo możecie zacząć od zera. Ja wybieram Zaczynać od początku.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-setup li:has-text(\"Twórz za pomocą sztucznej inteligencji\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "hover",
+          "selector": "li:has-text(\"Zaczynać od początku\") >> nth=-1",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "li:has-text(\"Zaczynać od początku\") >> nth=-1",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ":text-is(\"Instrukcja dla osób dokonujących samooceny\")",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": ":text-is(\"Instrukcje dla menedżera\")",
+        "url_contains": "sectionId=instructions"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "W Instrukcjach przygotujecie wskazówki osobno dla samooceny i dla menedżera. Wszystkie zmiany zapisują się automatycznie.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-common-card:has-text(\"Instrukcja dla osób dokonujących samooceny\") >> nth=-1",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": ":text-is(\"Instrukcje dla menedżera\")",
+        "url_contains": "sectionId=instructions"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "W części Wszystkie pozycje dodacie pytania dla każdego ocenianego. Klikam Dodaj pytanie i wpisuję jego treść.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-common-dynamic-menu-item a:text-is(\"Wszystkie pozycje\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "button:has-text(\"Dodaj pytanie\")",
+          "value": "10000"
+        },
+        {
+          "type": "hover",
+          "selector": "button:has-text(\"Dodaj pytanie\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "button:has-text(\"Dodaj pytanie\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "type",
+          "selector": "input[formcontrolname=text]",
+          "value": "Jak udaje Ci się realizować cele w minionym okresie?",
+          "before_ms": 400,
+          "delay_ms": 30
+        }
+      ],
+      "expect": {
+        "visible": "input[formcontrolname=text]",
+        "url_contains": "/questionnaire"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Jako typ odpowiedzi wybieram skalę od jednego do pięciu. Pytanie możecie przeznaczyć tylko dla menedżera albo dla menedżera i pracownika.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-select#type button",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-option:text-is(\"Skala\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-select#target_type",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "nb-select#type button:has-text(\"Skala\")",
+        "url_contains": "/questionnaire"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "Przy konkretnym stanowisku są pytania z jego modelu kompetencji. Tutaj też możecie dodać własne pytania.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-common-dynamic-menu-item a:text-is(\"Specjalista ds. obsługi klienta\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-accordion-item-header h6:text-is(\"Komunikacja z klientem\")",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-setup-questionnaire-question:has-text(\"Komunikacja z klientem\") >> nth=0",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "nb-accordion-item-header h6:text-is(\"Komunikacja z klientem\")",
+        "url_contains": "/questionnaire"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Klikam Następny. Streszczenie pokaże nazwę, grupę docelową, terminy i liczbę pytań w kwestionariuszu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "slnk-common-card-page-header button:has-text(\"Następny\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-card-page-header button:has-text(\"Następny\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ":text-is(\"Streszczenie\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": ":text-is(\"Streszczenie\")",
+        "url_contains": "/launch"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "Przyciskiem Początek uruchomicie cykl, a oceniający dostaną zadanie. Na potrzeby pokazu zostawiam go jako wersję roboczą.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "slnk-common-card-page-header button:has-text(\"Początek\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ],
+      "expect": {
+        "visible": ":text-is(\"Streszczenie\")",
+        "url_contains": "/launch"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "Teraz wyniki. W przeglądzie otwieram przykładową ocenę wyników za trzeci kwartał.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=tableRow]:has-text(\"Ocena wyników – przykład (Q3 2026)\")",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=tableRow]:has-text(\"Ocena wyników – przykład (Q3 2026)\")",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=tableRow]:has-text(\"Ocena wyników – przykład (Q3 2026)\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-detail-results",
+        "url_contains": "/detail/"
+      },
+      "part": 4,
+      "part_title": "Wyniki",
+      "voice_after_actions": 3
+    },
+    {
+      "id": "s23",
+      "narration": "Na górze widzicie liczbę uczestników i współczynnik ukończenia. Tabela Wyniki pokaże, komu brakuje jeszcze któregoś typu opinii.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=positionsEvaluationResultUserListTable] tbody tr",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-common-card:has-text(\"Współczynnik ukończenia\") >> nth=-1",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=positionsEvaluationResultUserListTable] thead",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=positionsEvaluationResultUserListTable]",
+        "url_contains": "/detail/"
+      },
+      "voice_after_actions": 1
+    },
+    {
+      "id": "s24",
+      "narration": "W zakładce Oceniający sprawdzicie, kto kogo ocenia. W tabeli Wyniki klikam nazwisko ocenianej osoby.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "a[href$=\"/raters\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=positionsEvaluationResultUserListTable] tbody tr:has-text(\"Claver Thomas\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=positionsEvaluationResultUserListTable] tbody tr:has-text(\"Claver Thomas\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "slnk-position-evaluation-report-summary",
+        "url_contains": "/user-report/"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "Raport pokazuje mocne strony i obszary do poprawy, tutaj prowadzi komunikacja z klientem, a najsłabsza jest samodzielność. Sekcja z kluczowymi informacjami od AI podsumuje to słowami.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "slnk-position-evaluation-report-performance-by-category",
+          "value": "20000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-position-evaluation-report-summary",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-common-card:has-text(\"Kluczowe informacje na temat sztucznej inteligencji\") >> nth=-1",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-position-evaluation-report-performance-by-category",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "slnk-position-evaluation-report-performance-by-category",
+        "url_contains": "/user-report/"
+      },
+      "voice_after_actions": 1
+    },
+    {
+      "id": "s26",
+      "narration": "W Szczegółowej informacji zwrotnej widzicie ocenę menedżera i samoocenę. Wynik końcowy po wspólnych ustaleniach ustawicie ołówkiem.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-competencies-feedback table",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-positions-evaluation-competencies-feedback .fa-pencil >> nth=0",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-competencies-feedback th:text-is(\"Wynik końcowy\")",
+        "url_contains": "/user-report/"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "Ze słabszego obszaru od razu stworzycie osobisty cel. We wspólnych notatkach jest uzgodniony plan działania, który widzi też pracownik.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "button:has-text(\"Stwórz osobisty cel\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-common-card:has-text(\"Wspólne notatki z recenzji\") >> nth=-1",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "button:has-text(\"Stwórz osobisty cel\")",
+        "url_contains": "/user-report/"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "A jak to widzi pracownik? W sekcji Ja otwiera Moja ocena wyników. Gdy cykl trwa, znajdzie kwestionariusz w Moich zadaniach.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_performance_evaluation",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_performance_evaluation",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-positions-evaluation-my-cycles",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-my-tasks",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-my-cycles",
+        "url_contains": "/positions-evaluation/my/my-evaluation"
+      },
+      "part": 5,
+      "part_title": "Widok pracownika"
+    },
+    {
+      "id": "s29",
+      "narration": "W Moich cyklach ma swoje wyniki, a w zakładce Kompetencje widzi opis stanowiska i to, według czego będzie oceniany.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-my-cycles",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "hover",
+          "selector": "a[href$=\"/my/my-competences\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "a[href$=\"/my/my-competences\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ":has-text(\"Model kompetencji : Specjalista ds. obsługi klienta\") >> nth=-1",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": ":has-text(\"Model kompetencji : Specjalista ds. obsługi klienta\") >> nth=-1",
+        "url_contains": "/my/my-competences"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "Wskazówka na koniec: gotowy cykl w przeglądzie po prostu zduplikujecie i kolejną rundę oceny macie gotową w chwilę.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-positions-evaluation-list [data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=tableRow] [data-cy=actionsButton] >> nth=0",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-context-menu a:has-text(\"Duplikat\")",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=positionsEvaluationSearch]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-list [data-cy=tableRow]",
+        "url_contains": "/app/performance-evaluation/positions-evaluation/all"
+      },
+      "part": 6,
+      "part_title": "Podsumowanie"
+    },
+    {
+      "id": "s31",
+      "narration": "Teraz umiecie ustawić stanowiska, przygotować cykl oceny i czytać wyniki. Jeśli coś nie zadziała, zajrzyjcie do Centrum pomocy.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-list",
+        "url_contains": "/app/performance-evaluation/positions-evaluation/all"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "Mniej administracji, więcej czasu dla ludzi. To jest Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-list",
+        "url_contains": "/app/performance-evaluation/positions-evaluation/all"
+      },
+      "hold_after_ms": 1500
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat CZ koncept 'Hodnocení výkonu za čtvrté čtvrtletí' po CZ běhu (1)",
+      "url": "https://app-pre-production.sloneek.com/app/performance-evaluation/positions-evaluation/all",
+      "if_visible": "[data-cy=tableRow]:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\")",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=tableRow]:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\") >> [data-cy=actionsButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a:has-text(\"Usuwać\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\") [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat CZ koncept 'Hodnocení výkonu za čtvrté čtvrtletí' po CZ běhu (2)",
+      "url": "https://app-pre-production.sloneek.com/app/performance-evaluation/positions-evaluation/all",
+      "if_visible": "[data-cy=tableRow]:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\")",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=tableRow]:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\") >> [data-cy=actionsButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a:has-text(\"Usuwać\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\") [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "Thomas Claver: nastavit demo pozici videa (karta uživatele 244ccfdd, mění jen pole Pozice; přeskočí, když už ji má)",
+      "url": "https://app-pre-production.sloneek.com/app/company-details/member/244ccfdd-cc2a-4a75-bd8f-93e79bdd3b5f/work-data",
+      "if_visible": "nb-select[data-cy=positionSelect] button:not(:has-text(\"Specjalista ds. obsługi klienta\"))",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=positionSelect] button",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "nb-option:text-is(\"Specjalista ds. obsługi klienta\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=companyMemberWorkDataSaveButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "navigate",
+          "value": "https://app-pre-production.sloneek.com/app/company-details/member/244ccfdd-cc2a-4a75-bd8f-93e79bdd3b5f/work-data"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-select[data-cy=positionSelect] button:has-text(\"Specjalista ds. obsługi klienta\")",
+          "value": "15000"
+        }
+      ]
+    },
+    {
+      "name": "smazat koncept 'Hodnocení výkonu za čtvrté čtvrtletí' z minulého běhu (1)",
+      "url": "https://app-pre-production.sloneek.com/app/performance-evaluation/positions-evaluation/all",
+      "if_visible": "[data-cy=tableRow]:has-text(\"Ocena wyników za czwarty kwartał\")",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=tableRow]:has-text(\"Ocena wyników za czwarty kwartał\") >> [data-cy=actionsButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a:has-text(\"Usuwać\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has-text(\"Ocena wyników za czwarty kwartał\") [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat koncept 'Hodnocení výkonu za čtvrté čtvrtletí' z minulého běhu (2)",
+      "url": "https://app-pre-production.sloneek.com/app/performance-evaluation/positions-evaluation/all",
+      "if_visible": "[data-cy=tableRow]:has-text(\"Ocena wyników za czwarty kwartał\")",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=tableRow]:has-text(\"Ocena wyników za czwarty kwartał\") >> [data-cy=actionsButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a:has-text(\"Usuwać\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has-text(\"Ocena wyników za czwarty kwartał\") [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-09",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "position": "babef7ec-634e-484e-b1bc-4eedf54a28af",
+      "cycle": "dc32420e-4b25-4a07-b9d9-b40fb19b0467",
+      "user_report": "5cef2f44-3982-4e99-a83e-d4d5cb00f40a"
+    },
+    "notes": "DRY-RUN 9. 10. 2026 ~20:20-20:45 UTC in-page runnerem (Playwright-like: první shoda musí být viditelná, :text-is/:has-text/>>/nth, wait_ready = selektor + bez spinneru): cleanup před (smazán zbylý koncept) -> s01-s32 32/32 OK (~89 s bez narace) -> cleanup po (koncept smazán, ověřeno API). Zjištění: (1) detail pozice vždy při odchodu ukáže dialog 'Neuložené změny' (i bez úprav) -> s09 klikne Ano = odejít bez uložení; (2) menu Akce v seznamu cyklů je nbContextMenu s trigger=hover, otevírá se najetím a zavírá až odjetím myši (Escape nefunguje) -> s30 najede na Akce a pak na pole Hledat; (3) cleanup potvrzuje jen dialog, který obsahuje název konceptu (nb-dialog-container:has-text(...)), protože otevřené menu jiného řádku by jinak smazalo cizí cyklus - při dry-runu se to stalo (smazán cizí dokončený cyklus '360 evaluation'); (4) demo cyklus je stále 'Probíhá', s22 ho proto otevírá bez filtru Dokončeno; (5) nadpis sekce pozice v dotazníku je 'Specialista Zákaznické Podpory' (Title Case)."
+  },
+  "_localized": {
+    "from": "recipes/cs/performance-review.json",
+    "i18n": "i18n/performance-review.pl.json",
+    "at": "2026-10-11T06:59:14.992Z",
+    "verified": {
+      "date": "2026-10-11",
+      "by": "Claude (BrowserOS, preprod, local-translate=pl)",
+      "selectors": "DRY-RUN 11. 10. 2026 v PL UI in-page runnerem s polskými demo daty: cleanup před (po reloadu; žádný koncept k smazání; blok pozice Thomase otestován v obou směrech CZ→PL, po reloadu ověřeno) → 32/32 kroků OK → cleanup po (po reloadu; guarded dialog smazal koncept 'Ocena wyników za czwarty kwartał' 464d4d43…, API GET 404). Počet cyklů 25 před → 26 během → 25 po (24 před založením PL demo cyklu). Předchozí běh 10. 10. 2026 (CZ demo data) také 32/32.",
+      "notes": "PL demo cyklus 'Ocena wyników – przykład (Q3 2026)' je 11. 10. 2026 'W toku' (konec dnes, stav se přepne po skončení – CZ demo cyklus se takhle přepnul na Zakończony). s22 ho otevírá bez filtru, funguje v obou stavech. Moje zadania je prázdné (oba dotazníky vyplněny). Menu Akce po s30 zůstává v runneru otevřené – cleanup vždy po reloadu."
+    }
+  }
+}

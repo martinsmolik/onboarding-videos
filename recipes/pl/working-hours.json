@@ -1,0 +1,1393 @@
+{
+  "id": "working-hours",
+  "version": 1,
+  "title": "Utwórz i przypisz czas pracy",
+  "lang": "pl",
+  "app_version": "preprod-2026-10-11",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "pl"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "F9eb9uZYeJuHuO7Uvs1R",
+    "model_id": "eleven_v4"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s16",
+    "title": "Czas pracy"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Ile godzin tygodniowo ma przepracować każda osoba? Dzień dobry, jestem Maria z zespołu Sloneek i pokażę Wam, jak utworzyć i przypisać czas pracy.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Wprowadzenie",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Czas pracy, w aplikacji etat albo rodzaj współpracy, określa, kiedy dana osoba ma pracować. Bez niego nie może korzystać z nieobecności ani rejestrować czasu pracy.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+          "before_ms": 1500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "W lewym menu otwieram Ustawienia. Czas pracy znajdziecie w wierszu Obowiązki i rodzaje współpracy.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-settings-dashboard-row:has-text(\"Obowiązki i rodzaje współpracy\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-settings-dashboard-row:has-text(\"Obowiązki i rodzaje współpracy\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-settings-dashboard-row:has-text(\"Obowiązki i rodzaje współpracy\")",
+        "url_contains": "/app/settings/dashboard"
+      },
+      "part": 2,
+      "part_title": "Gdzie go znajdziecie",
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s04",
+      "narration": "Po kliknięciu Pokaż widzicie listę szablonów: czy są aktywne, czy są tygodniowe, czy roczne, i ich notatkę.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-settings-dashboard-row:has-text(\"Obowiązki i rodzaje współpracy\") >> a[href=\"/app/settings/working-hours\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-header",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] #settings_working_hours_add_working_hours_button",
+        "url_contains": "/app/settings/working-hours"
+      },
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s05",
+      "narration": "Nowy szablon zakładam przyciskiem Dodaj. Otwiera się formularz Nowy rodzaj współpracy.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] #settings_working_hours_add_working_hours_button",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] #settings_working_hours_add_working_hours_button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] input[formcontrolname=name]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] #settings_working_hours_form_save_new_button",
+        "url_contains": "/working-hours/setup"
+      },
+      "part": 3,
+      "part_title": "Nowy szablon"
+    },
+    {
+      "id": "s06",
+      "narration": "Możecie zacząć od gotowego szablonu, na przykład Full Time albo Half Time. Ja jednak zacznę od zera.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] input[placeholder=\"Wybierz predefiniowany szablon\"]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-autocomplete-option-list",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-common-autocomplete-option-list",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] input[formcontrolname=name]",
+        "url_contains": "/working-hours/setup"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "W pierwszym polu wpisuję nazwę Niepełny etat 30 h. Ten sam tekst wpisuję też w tłumaczeniu na polski.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[formcontrolname=name]",
+          "value": "Niepełny etat 30 h",
+          "clear": true,
+          "before_ms": 600
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=translatedNameInput]",
+          "value": "Niepełny etat 30 h",
+          "clear": true,
+          "before_ms": 500,
+          "speed": "fast"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=translatedNameInput]",
+        "url_contains": "/working-hours/setup"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "W notatce krótko piszę, dla kogo jest szablon. Przełącznik Aktywny zostawiam włączony, żeby można było z niego korzystać.",
+      "actions": [
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] textarea[formcontrolname=note]",
+          "value": "Od poniedziałku do piątku, 6 godzin dziennie.",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-toggle[formcontrolname=is_enabled]",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-toggle[formcontrolname=is_enabled]",
+        "url_contains": "/working-hours/setup"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "Rodzaj współpracy może być tygodniowy albo roczny. Tygodniowy rozkład powtarza się co tydzień i pasuje do zwykłej pracy.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] nb-select[formcontrolname=type] button",
+          "before_ms": 800
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option:text-is(\"Tygodniowy\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "nb-option:text-is(\"Tygodniowy\")",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "nb-option:text-is(\"Roczny\")",
+        "url_contains": "/working-hours/setup"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Roczny rozkład ustawiacie osobno dla każdego dnia w roku, na przykład dla pracy zmianowej. Ja zostawiam Tygodniowy.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "nb-option:text-is(\"Roczny\")",
+          "before_ms": 800
+        },
+        {
+          "type": "wait",
+          "value": "1800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-option:text-is(\"Tygodniowy\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-select[formcontrolname=type] button:has-text(\"Tygodniowy\")",
+        "url_contains": "/working-hours/setup"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "Szablon jest zapisany. Pod formularzem pojawiła się tabela Ustawienie tygodniowych godzin pracy.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] #settings_working_hours_form_save_new_button",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] #settings_working_hours_form_save_new_button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"6\"]",
+          "value": "15000"
+        },
+        {
+          "type": "scroll",
+          "value": "[data-cy=mainContentCenterDiv] span:has-text(\"Tygodniowy fundusz czasu pracy\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-card:has-text(\"Ustawienie tygodniowych godzin pracy\") >> nb-card-header",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] span:has-text(\"Tygodniowy fundusz czasu pracy\")",
+        "url_contains": "/working-hours/setup/"
+      },
+      "voice_after_actions": 3
+    },
+    {
+      "id": "s12",
+      "narration": "Sloneek wypełnił zwykły tydzień: od poniedziałku do piątku od dziewiątej do wpół do szóstej z półgodzinną przerwą. Tygodniowy fundusz to czterdzieści godzin.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-body-viewport",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] span:has-text(\"Tygodniowy fundusz czasu pracy\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] span:has-text(\"Tygodniowy fundusz czasu pracy\"):has-text(\"40:00\")",
+        "url_contains": "/working-hours/setup/"
+      },
+      "part": 4,
+      "part_title": "Rozkład tygodnia"
+    },
+    {
+      "id": "s13",
+      "narration": "Przycisk Resetuj czyści tabelę, a Normalna przywraca właśnie ten zwykły tydzień.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button:text-is(\"Resetuj\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button:text-is(\"Normalna\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] button:text-is(\"Skopiuj pierwszą linię\")",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "Dla niepełnego etatu zmieniam w wierszu poniedziałku Koniec godzin pracy na wpół do czwartej.",
+      "actions": [
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"] .ag-cell[col-id=shift_end] input",
+          "value": "15:30",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] span:has-text(\"Tygodniowy fundusz czasu pracy\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] span:has-text(\"Tygodniowy fundusz czasu pracy\"):has-text(\"38:00\")",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Przyciskiem Skopiuj pierwszą linię przenoszę godziny z poniedziałku na cały tydzień.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] button:text-is(\"Skopiuj pierwszą linię\")",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] button:text-is(\"Skopiuj pierwszą linię\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] span:has-text(\"Tygodniowy fundusz czasu pracy\"):has-text(\"42:00\")",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "Kopia trafiła też na weekend, więc w sobotę i niedzielę odznaczam Dzień roboczy. Fundusz pokazuje teraz trzydzieści godzin.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"5\"] .ag-cell[col-id=is_working_day] nb-checkbox span.custom-checkbox",
+          "before_ms": 800
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"6\"] .ag-cell[col-id=is_working_day] nb-checkbox span.custom-checkbox",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] span:has-text(\"Tygodniowy fundusz czasu pracy\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] span:has-text(\"Tygodniowy fundusz czasu pracy\"):has-text(\"30:00\")",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "Po prawej są przerwy. Przerwa obiadowa od dwunastej do wpół do pierwszej nie wlicza się do czasu pracy.",
+      "actions": [
+        {
+          "type": "scroll",
+          "value": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"] .ag-cell[col-id=lengthOfHalfShift]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "scroll",
+          "value": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"] .ag-cell[col-id=shift_first_pause_end]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-header-cell[col-id=shift_first_pause_start]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-header-cell[col-id=shift_first_pause_end]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-header-cell[col-id=shift_first_pause_start]",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Długość pół zmiany Sloneek wylicza sam. Na jej podstawie liczy się nieobecność na pół dnia.",
+      "actions": [
+        {
+          "type": "scroll",
+          "value": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"] .ag-cell[col-id=lengthOfHalfShift]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-header-cell[col-id=lengthOfHalfShift]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-header-cell[col-id=lengthOfHalfShift]",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "Na koniec zapisuję rozkład przyciskiem Zapisz nad tabelą. Bez tego zmiany by się nie zapisały.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] #settings_working_hours_form_weekly_yearly_settings_save_button",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] #settings_working_hours_form_weekly_yearly_settings_save_button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "value": "5000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] span:has-text(\"Tygodniowy fundusz czasu pracy\"):has-text(\"30:00\")",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Szablon przypisuję w karcie użytkownika. W sekcji Użytkownicy otwieram Zarządzanie, wyszukuję Piotra i otwieram jego kartę.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_staff",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "input[placeholder=\"Szukaj...\"]",
+          "value": "Piotr",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=tableRow]:has-text(\"Nowak Piotr\")",
+          "value": "8000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=tableRow]:has-text(\"Nowak Piotr\") >> span:text-is(\"Nowak Piotr\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] a[href$=\"/contracts-and-terms\"]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-common-header-autocomplete:has-text(\"Nowak Piotr\")",
+        "url_contains": "/work-data"
+      },
+      "part": 5,
+      "part_title": "Przypisanie użytkownikowi"
+    },
+    {
+      "id": "s21",
+      "narration": "Tutaj, w zakładce Rodzaj współpracy i warunki finansowe, widzicie wszystkie etaty Piotra.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href$=\"/contracts-and-terms\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Pełny etat 40 h\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=companyMemberContractsAndTerms] table >> nth=0",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Pełny etat 40 h\")",
+        "url_contains": "/contracts-and-terms"
+      },
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s22",
+      "narration": "Piotr ma Pełny etat 40 h na czas nieokreślony. Zielony wiersz oznacza rodzaj współpracy, który obowiązuje właśnie dziś.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Pełny etat 40 h\")",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Pełny etat 40 h\"):has-text(\"Czas nieokreślony\")",
+        "url_contains": "/contracts-and-terms"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "Wkrótce przejdzie na niepełny etat. Rodzaje współpracy nie mogą się nakładać, dlatego obecny najpierw kończę przez Edytuj.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Pełny etat 40 h\") >> [data-cy=actionsButton]",
+          "before_ms": 1500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Edytuj\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Redakcja umowy o pracę\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Redakcja umowy o pracę\") >> [data-cy=submitButton]",
+          "before_ms": 900
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container:has-text(\"Edytuj typ współpracy\")",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container input[formcontrolname=valid_from]",
+        "url_contains": "/contracts-and-terms"
+      }
+    },
+    {
+      "id": "s24",
+      "narration": "Odznaczam Czas nieokreślony, w polu Ważne do wpisuję ostatni dzień pełnego etatu i klikam Edytuj.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container nb-checkbox[formcontrolname=is_indefinite_period] label",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container input[formcontrolname=valid_to]",
+          "before_ms": 500
+        },
+        {
+          "type": "type",
+          "selector": "nb-dialog-container input[formcontrolname=valid_to]",
+          "value": "{{DATE:+14d+6:DD.MM.YYYY}}",
+          "clear": true,
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": "nb-calendar nb-calendar-day-cell.selected",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container button:text-is(\"Edytuj\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Pełny etat 40 h\"):has-text(\"{{DATE:+14d+6:DD.MM.YYYY}}\")",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Pełny etat 40 h\"):has-text(\"{{DATE:+14d+6:DD.MM.YYYY}}\")",
+        "url_contains": "/contracts-and-terms"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "Teraz klikam Dodaj nowy typ współpracy i wyszukuję Niepełny etat 30 h.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=companyMemberContractsAndTerms] button:has-text(\"Dodaj nowy typ współpracy\")",
+          "before_ms": 800
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container slnk-common-autocomplete",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container slnk-common-autocomplete",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "Niepełny",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Niepełny etat 30 h\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container input[formcontrolname=valid_from]",
+        "url_contains": "/contracts-and-terms"
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "Zaznaczam Czas nieokreślony, a Obowiązuje od ustawiam na dzień po końcu pełnego etatu. Potem zapisuję.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container nb-checkbox[formcontrolname=is_indefinite_period] label",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container input[formcontrolname=valid_from]",
+          "before_ms": 500
+        },
+        {
+          "type": "type",
+          "selector": "nb-dialog-container input[formcontrolname=valid_from]",
+          "value": "{{DATE:+14d+7:DD.MM.YYYY}}",
+          "clear": true,
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": "nb-calendar nb-calendar-day-cell.selected",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container button:text-is(\"Zapisz\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Niepełny etat 30 h\")",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Niepełny etat 30 h\"):has-text(\"{{DATE:+14d+7:DD.MM.YYYY}}\")",
+        "url_contains": "/contracts-and-terms"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "Nowy etat nawiązuje do starego, a historia zostaje. Nie zmieniajcie etatów w przeszłości, bo przeliczyłyby się salda wykorzystanych już nieobecności.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Niepełny etat 30 h\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Pełny etat 40 h\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Niepełny etat 30 h\")",
+        "url_contains": "/contracts-and-terms"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "Święta państwowe Sloneek w szablonie tygodniowym odlicza sam, według kraju pracy użytkownika, czyli pola Kraj działalności w Danych podstawowych i roboczych.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href$=\"/work-data\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=countrySelect]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=countrySelect]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=countrySelect] button:has-text(\"Poland\")",
+        "url_contains": "/work-data"
+      },
+      "part": 6,
+      "part_title": "Wpływ na nieobecności i czas pracy",
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s29",
+      "narration": "W ewidencji czasu pracy etat wyznacza fundusz i saldo, a czas wolny fundusz zmniejsza. Przerwy z etatu mogą się wpisywać automatycznie.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_attendance_v2_settings",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] form > p-card:has-text(\"Automatyczne pauzy\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] form > p-card:has-text(\"Automatyczne pauzy\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] form > p-card:has-text(\"Przerwy można zarządzać w Ustawienia umów\")",
+        "url_contains": "/attendance-v2-overview-settings"
+      },
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s30",
+      "narration": "Kto nie ma rodzaju współpracy albo komu wkrótce się on skończy, zobaczycie w Ustawieniach pod pozycją Kontrola ustawień.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_control_screen",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] div.row.pl-3:has-text(\"Czas pracy użytkowników\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] div.row.pl-3:has-text(\"Czas pracy użytkowników\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] div.row.pl-3:has-text(\"Koniec godzin pracy\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] div.row.pl-3:has-text(\"Koniec godzin pracy\")",
+        "url_contains": "/app/settings/checking"
+      },
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s31",
+      "narration": "Przypisanego szablonu już nie zmienicie, przy rozkładzie świeci kłódka. Gdy potrzebujecie innych godzin, użyjcie Duplikuj i zmieńcie kopię.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] div.row.pl-3:has-text(\"Konfiguracja umów o pracę\") >> a[href=\"/app/settings/working-hours\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular a.redirect_column:text-is(\"Niepełny etat 30 h\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] nb-icon[icon=lock-alt]",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] nb-icon[icon=lock-alt]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1800"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] #settings_working_hours_form_duplicate_button",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-icon[icon=lock-alt]",
+        "url_contains": "/working-hours/setup/"
+      },
+      "part": 7,
+      "part_title": "Zmiany i usuwanie",
+      "voice_after_actions": 4
+    },
+    {
+      "id": "s32",
+      "narration": "Usunąć można tylko szablon, którego nikt nie ma. Jeśli nie chcecie go już używać, wystarczy go dezaktywować.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] #settings_working_hours_form_delete_button",
+          "before_ms": 800
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container:has-text(\"Usuwanie wskaźnika czasu pracy\")",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container:has-text(\"Usuwanie wskaźnika czasu pracy\")",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "Klikam Tak, a Sloneek zatrzymuje usuwanie, bo szablon ma już przypisany Piotr.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has-text(\"Usuwanie wskaźnika czasu pracy\") >> button:text-is(\"Tak\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "p-toastitem:has-text(\"Rodzaj współpracy jest już przypisany\")",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": "p-toastitem:has-text(\"Rodzaj współpracy jest już przypisany\")",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-icon[icon=lock-alt]",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s34",
+      "narration": "Wskazówka na koniec: nowym osobom rodzaj współpracy ustawicie od razu przy zakładaniu konta albo przypisze go za Was HR Workflows.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows",
+          "before_ms": 600
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows",
+        "url_contains": "/working-hours/setup/"
+      },
+      "part": 8,
+      "part_title": "Podsumowanie"
+    },
+    {
+      "id": "s35",
+      "narration": "Teraz umiecie utworzyć czas pracy, przypisać go i bezpiecznie zmienić. Jeśli coś nie zadziała, zajrzyjcie do Centrum pomocy.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-icon[icon=lock-alt]",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "Mniej administracji, więcej czasu dla ludzi. To jest Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-icon[icon=lock-alt]",
+        "url_contains": "/working-hours/setup/"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat CZ šablonu 'Zkrácený úvazek 30 h' – jen při právě 1 řádku s přesným názvem po filtru (server ji odmítne smazat, dokud je někomu přiřazená)",
+      "url": "https://app-pre-production.sloneek.com/app/settings/working-hours",
+      "if_visible": "[data-cy=mainContentCenterDiv] #settings_working_hours_add_working_hours_button",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[aria-label=\"Imię Filter Input\"]",
+          "value": "Zkrácený úvazek 30 h",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container:not(:has(.ag-row ~ .ag-row)) a.redirect_column:text-is(\"Zkrácený úvazek 30 h\")",
+          "value": "6000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-paging-row-summary-panel:has-text(\"1 do 1 od 1\")",
+          "value": "3000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row:has-text(\"Zkrácený úvazek 30 h\") >> [data-cy=deleteButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usunięcie godzin pracy\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usunięcie godzin pracy\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat EN šablonu 'Part-time 30 h' – jen při právě 1 řádku s přesným názvem po filtru (server ji odmítne smazat, dokud je někomu přiřazená)",
+      "url": "https://app-pre-production.sloneek.com/app/settings/working-hours",
+      "if_visible": "[data-cy=mainContentCenterDiv] #settings_working_hours_add_working_hours_button",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[aria-label=\"Imię Filter Input\"]",
+          "value": "Part-time 30 h",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container:not(:has(.ag-row ~ .ag-row)) a.redirect_column:text-is(\"Part-time 30 h\")",
+          "value": "6000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-paging-row-summary-panel:has-text(\"1 do 1 od 1\")",
+          "value": "3000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row:has-text(\"Part-time 30 h\") >> [data-cy=deleteButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usunięcie godzin pracy\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usunięcie godzin pracy\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "odebrat Tomášovi 'Zkrácený úvazek 30 h' – jen v kartě Novák Tomáš (a8c8fa35-ed76-4867-8f26-0b3d41b768ac) a jen řádek s tímto názvem",
+      "url": "https://app-pre-production.sloneek.com/app/company-details/member/d0fd578b-556d-4e8d-add8-9793c69f31e5/contracts-and-terms",
+      "if_visible": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Niepełny etat 30 h\")",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-header-autocomplete:has-text(\"Nowak Piotr\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Niepełny etat 30 h\")",
+          "value": "10000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Niepełny etat 30 h\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Usuń\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usuwanie typu współpracy użytkownika\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usuwanie typu współpracy użytkownika\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "vrátit Tomášovi 'Plný úvazek 40 h' na dobu neurčitou – jen když řádek nemá 'Doba neurčitá'",
+      "url": "https://app-pre-production.sloneek.com/app/company-details/member/d0fd578b-556d-4e8d-add8-9793c69f31e5/contracts-and-terms",
+      "if_visible": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Pełny etat 40 h\"):not(:has-text(\"Czas nieokreślony\"))",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-header-autocomplete:has-text(\"Nowak Piotr\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Pełny etat 40 h\")",
+          "value": "10000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Pełny etat 40 h\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Edytuj\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Redakcja umowy o pracę\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Redakcja umowy o pracę\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container:has-text(\"Edytuj typ współpracy\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container nb-checkbox[formcontrolname=is_indefinite_period]:not(:has(.custom-checkbox.checked)) label",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container button:text-is(\"Edytuj\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Pełny etat 40 h\"):has-text(\"Czas nieokreślony\")",
+          "value": "10000"
+        }
+      ]
+    },
+    {
+      "name": "smazat šablonu 'Zkrácený úvazek 30 h' – jen při právě 1 řádku s přesným názvem po filtru Název (dialog název neobsahuje)",
+      "url": "https://app-pre-production.sloneek.com/app/settings/working-hours",
+      "if_visible": "[data-cy=mainContentCenterDiv] #settings_working_hours_add_working_hours_button",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[aria-label=\"Imię Filter Input\"]",
+          "value": "Niepełny etat 30 h",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container:not(:has(.ag-row ~ .ag-row)) a.redirect_column:text-is(\"Niepełny etat 30 h\")",
+          "value": "6000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-paging-row-summary-panel:has-text(\"1 do 1 od 1\")",
+          "value": "3000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row:has-text(\"Niepełny etat 30 h\") >> [data-cy=deleteButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usunięcie godzin pracy\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usunięcie godzin pracy\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-11",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "user": "Tomáš Novák <tomas.novak@example.com> (a8c8fa35-ed76-4867-8f26-0b3d41b768ac), NEAKTIVNÍ, Zaměstnanec, Specialista zákaznické podpory, tým Zákaznická podpora, Praha, Země působení Czechia – trvalý",
+      "user_working_hours": "Plný úvazek 40 h (80ef47d9-a4fe-43b0-b8ae-9c7bf59f3bce) od 1. 9. 2026, Doba neurčitá – trvalé (cleanup ho vrací na Doba neurčitá)",
+      "created_by_recipe": "šablona 'Zkrácený úvazek 30 h' (Týdenní, Po–Pá 9:00–15:30, pauza 12:00–12:30, 30:00) + její přiřazení Tomášovi; konec 40 h úvazku – vše vrací cleanup"
+    },
+    "notes": "viz atlas/working-hours.md (sekce 5 a 8)"
+  },
+  "_localized": {
+    "from": "recipes/cs/working-hours.json",
+    "i18n": "i18n/working-hours.pl.json",
+    "at": "2026-10-11T21:05:51.369Z",
+    "verified": {
+      "date": "2026-10-11",
+      "by": "Claude (BrowserOS, preprod, local-translate=pl)",
+      "selectors": "DRY-RUN 11. 10. 2026 ~20:55–21:40 UTC v PL UI in-page runnerem (out/working-hours/_work/dryrun-runner.js – runner z add-users + řetězené :has-text/:not(:has-text), focusout při kliku mimo input, klik na SVG) s polskými demo daty (Piotr Nowak d0fd578b-…), datumy {{DATE:+14d+6}} = 01.11.2026 a {{DATE:+14d+7}} = 02.11.2026 (psané DD.MM.YYYY přepnou nb-calendar, tabulka ukazuje DD.MM.YYYY). Průchod 1: 36/36 s opravami (s29 text karty, s31 jiný název řádku v Kontrole ustawień, s33 toast) → cleanup po (přiřazení odebráno, 40 h zpět na Czas nieokreślony, šablona 6f206b5f-… smazána, toast 'Usunięto'). Cleanup před (po reloadech): blok CZ 'Zkrácený úvazek 30 h' (0c5dd8e6-…, přiřazený Tomášovi z CZ nahrávání) → server odmítl ('Rodzaj współpracy jest już przypisany do użytkownika'), blok EN 'Part-time 30 h' selhal na pojistce (neexistuje), Piotr bloky přeskočeny (if_visible), blok PL šablony selhal na pojistce. Průchod 2: 36/36 v jednom kuse bez reloadu (~108 s bez narace; s31 otevřel šablonu z s11 3d6864d1-…, s33 kliknul Tak jen na ni, přiřazenou Piotrovi – server odmítl). Cleanup po (po reloadech): Piotrovi odebrán 'Niepełny etat 30 h', 'Pełny etat 40 h' zpět na Czas nieokreślony, šablona smazána ('1 do 1 od 1' → 'Usunięto'). Šablon 25 (vč. CZ pozůstatku) → 26 → 25; uživatelů 75 (46/29) před založením Piotra → 76 (46/30) trvale, během běhu beze změny. Piotr celou dobu neaktivní.",
+      "notes": "Názvosloví v PL UI je nejednotné: menu a řádek Ustawienia aplikacji 'Obowiązki i rodzaje współpracy', nadpis seznamu 'Warunki zatrudnienia', řádek Kontroli ustawień 'Konfiguracja umów o pracę' (s31 má vlastní selektor), karta docházky 'Ustawienia umów'. Sloupec/filtr názvu šablony je 'Imię' (aria-label 'Imię Filter Input'), stránkování 'X do Y od Z'. Předdefinované šablony jsou anglicky (Empty, Full Time, Half Time). Tlačítko v detailu 'Duplikuj' (translate_fe má i 'Duplikat'). Menu řádku úvazku 'Edytuj' / 'Usuń', potvrzení 'Redakcja umowy o pracę', dialog 'Edytuj typ współpracy' s tlačítkem 'Edytuj'. Toast odmítnutí smazání 'Rodzaj współpracy jest już przypisany do użytkownika' (backend, v translate_fe není). Kraj działalności Piotra = Poland (svátky PL)."
+    }
+  }
+}

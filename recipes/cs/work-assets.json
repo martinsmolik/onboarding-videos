@@ -1,0 +1,1113 @@
+{
+  "id": "work-assets",
+  "version": 1,
+  "title": "Evidujte a předávejte pracovní pomůcky",
+  "lang": "cs",
+  "app_version": "preprod-2026-10-12",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "cs",
+      "assetGridsWrapper": "false"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "bF7C2fCv7Zf30iT84wZ1",
+    "model_id": "eleven_v4"
+  },
+  "pronunciation": [
+    {
+      "match": "DPH",
+      "say": "dé pé há",
+      "note": "daň z přidané hodnoty"
+    },
+    {
+      "match": "ThinkPad",
+      "say": "tynkped",
+      "note": "značka notebooku"
+    }
+  ],
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s25",
+    "title": "Pracovní pomůcky"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Chcete mít přehled, kdo ve firmě drží který notebook nebo telefon? Dobrý den, jsem Marie z týmu Sloneek a ukážu vám, jak evidovat a předávat pracovní pomůcky.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Pomůcky\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Pomůcky\")",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Úvod",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Pomůcky najdete v levém menu v sekci Společnost, kde položku Pomůcky rozbalím.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Pomůcky\")",
+          "before_ms": 1200
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Pomůcky\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_management",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_management",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_assets_custom_fields",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "Kliknu na Přehled a správa a otevře se Správa pomůcek se všemi pomůckami ve firmě.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_management",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=assetsManagementPage] h5:text-is(\"Správa pomůcek\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=assets-management-add-button]",
+        "url_contains": "/app/assets/all"
+      },
+      "part": 2,
+      "part_title": "Přehled pomůcek"
+    },
+    {
+      "id": "s04",
+      "narration": "U každé pomůcky vidíte držitele a pod jeho jménem stav převzetí, vedle pak inventární číslo a kategorii.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] th.cdk-column-holderNameStatusFormatted",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] th.cdk-column-inventory_number",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] th.cdk-column-categories",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] th.cdk-column-holderNameStatusFormatted",
+        "url_contains": "/app/assets/all"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "Seznam zúžíte vyhledáváním, filtrem Stav přijetí, třeba jen na pomůcky čekající na potvrzení, nebo podle kategorie.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-select button:has-text(\"Stav přijetí\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-select button:has-text(\"Kategorie\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-select button:has-text(\"Stav přijetí\")",
+        "url_contains": "/app/assets/all"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "Přepínačem vpravo nahoře zapnete podrobnou tabulku, kterou si stáhnete tlačítkem Export do Excelu.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] #users_management_toggle label",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button:has-text(\"Export do Excelu\")",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] button:has-text(\"Export do Excelu\")",
+        "url_contains": "gridTypeExtended=true"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "Přepínač zase vypnu, a tlačítkem Import nahrajete víc pomůcek najednou z excelové šablony.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] #users_management_toggle label",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button:has-text(\"Import\")",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+        "url_contains": "gridTypeExtended=false"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "Oranžovým tlačítkem pak připomenete převzetí všem, kdo svou pomůcku ještě nepotvrdili.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button:has-text(\"Připomenout všechny nepřevzaté pomůcky\")",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] button:has-text(\"Připomenout všechny nepřevzaté pomůcky\")",
+        "url_contains": "/app/assets/all"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "Kliknu v menu na Kategorie, kde si připravíte skupiny pomůcek, třeba notebooky nebo telefony, podle kterých pak filtrujete.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_categories",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Notebook\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=assetsCategoriesPage] table",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] #assets_categories_add",
+        "url_contains": "/app/assets/categories"
+      },
+      "part": 3,
+      "part_title": "Kategorie a vlastní pole"
+    },
+    {
+      "id": "s10",
+      "narration": "Novou kategorii založíte tlačítkem Přidat, stačí jí dát název a barvu.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] #assets_categories_add",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] #assets_categories_add",
+        "url_contains": "/app/assets/categories"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "Kliknu na Vlastní pole, kde si přidáte údaje navíc, třeba výrobce, velikost nebo datum konce licence.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_custom_fields",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Producer\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] table",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] #assets_custom_fields_add",
+        "url_contains": "/app/assets/custom-fields"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Každé pole má svůj typ, například text, číslo, datum, výběr z možností nebo připomínku.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] th.cdk-column-dataTypeFormatted",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] #assets_custom_fields_add",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] th.cdk-column-dataTypeFormatted",
+        "url_contains": "/app/assets/custom-fields"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "V menu kliknu zpátky na Přehled a správa, pak na Přidat, a otevře se karta nové pomůcky.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_management",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=assets-management-add-button]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetsForm] [data-cy=assetNameInput]",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetAssignHolderButton]",
+        "url_contains": "/app/assets/new/info"
+      },
+      "part": 4,
+      "part_title": "Nová pomůcka"
+    },
+    {
+      "id": "s14",
+      "narration": "Do pole Název napíšu, o jakou pomůcku jde, tady notebook Lenovo ThinkPad.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=assetsForm] [data-cy=assetNameInput]",
+          "value": "Lenovo ThinkPad T14 – ukázka",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetAcquisitionDateInput]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Datum pořízení se předvyplní na dnešek a u starší pomůcky ho jednoduše přepíšete.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] [data-cy=assetAcquisitionDateInput]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetAcquisitionDateInput]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "Inventární číslo je povinné a v rámci firmy musí být jedinečné.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=assetsForm] [data-cy=assetInventoryNumberInput]",
+          "value": "UKAZKA-NB-014",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetSerialNumberInput]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "Do Označení zapíšu sériové číslo, a když ho pomůcka nemá, tlačítko s bleskem vygeneruje náhodný kód.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=assetsForm] [data-cy=assetSerialNumberInput]",
+          "value": "PF-4K7Q2X",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] #assets_management_detail_asset_part_generate_code_button",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] #assets_management_detail_asset_part_generate_code_button",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Vyplním pořizovací cenu bez DPH a měnu přepnu na české koruny.",
+      "actions": [
+        {
+          "type": "fill",
+          "selector": "[data-cy=assetsForm] [data-cy=assetPriceInput]",
+          "value": "32000",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=assetsForm] [data-cy=assetCurrencySelect] button",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option:text-is(\"CZK\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-option:text-is(\"CZK\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetCurrencySelect] button:text-is(\"CZK\")",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "V poli Kategorie zaškrtnu Notebook, a tlačítkem plus vedle byste rovnou založili novou kategorii.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=assetsForm] [data-cy=assetCategoriesSelect] input",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "Note",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Notebook\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] #assets_management_detail_asset_part_create_new_category_button",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] #assets_management_detail_asset_part_create_new_category_button",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Tlačítkem Vybrat můžete nahrát fotku pomůcky, aby každý hned poznal, o co jde.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] [data-cy=assetsPhotoUpload]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetsPhotoUpload]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "Pomůcku rovnou předám, takže kliknu na Přiřadit pomůcku a níž se objeví Informace o držiteli.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=assetsForm] [data-cy=assetAssignHolderButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetsForm] [data-cy=holderAutocomplete]",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] [data-cy=holderAutocomplete]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetNoteInput]",
+        "url_contains": "/app/assets/new/info"
+      },
+      "part": 5,
+      "part_title": "Předání zaměstnanci"
+    },
+    {
+      "id": "s22",
+      "narration": "Jako držitele vyberu kolegyni Lucii Královou.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=assetsForm] [data-cy=holderAutocomplete] input",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "Lucie",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Králová Lucie\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=holderAutocomplete] [data-cy=autocompleteClearButton]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "Stav pomůcky nechám na hodnotě Nový a datum předání na dnešku.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] nb-select[formcontrolname=condition]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] [data-cy=assetHandoverDateInput]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetHandoverDateInput]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s24",
+      "narration": "Do poznámky napíšu, co Lucie dostává s notebookem, protože poznámka se propíše do předávacího protokolu.",
+      "actions": [
+        {
+          "type": "fill",
+          "selector": "[data-cy=assetsForm] [data-cy=assetNoteInput]",
+          "value": "Předáno s nabíječkou a brašnou.",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=saveFormButton]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "Kliknu na Uložit a pomůcka je založená i s držitelem.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=saveFormButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetEditHolderButton]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] [data-cy=holderAutocomplete]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=holderAutocomplete] input[disabled]",
+        "url_contains": "/info"
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "Držitel pak pomůcku v aplikaci převezme elektronickým podpisem, nebo ji odmítne, a do té doby čeká na potvrzení.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] [data-cy=holderAutocomplete]",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "#assets_management_detail_holder_part_reset_acceptance_button",
+        "url_contains": "/info"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "Když s převzetím otálí, tlačítkem se šipkou mu výzvu k převzetí pošlete znovu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "#assets_management_detail_holder_part_reset_acceptance_button",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": "#assets_management_detail_holder_part_reset_acceptance_button",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "#assets_management_detail_holder_part_reset_acceptance_button",
+        "url_contains": "/info"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "Kliknu na záložku Rozšířené, kde vyplníte vlastní pole, která jste si předtím připravili.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=assetDetailTabExtendedInfo] a",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=\"customFieldInput-Producer\"]",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] form:has([data-cy=\"customFieldInput-Producer\"])",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=\"customFieldInput-Producer\"]",
+        "url_contains": "/extended-info"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "Kliknu na záložku Historie, kde najdete předávací protokoly a audit log, který zaznamená každou změnu pomůcky.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=assetDetailTabHistory] a",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] table:has-text(\"Typ protokolu\")",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] table:has-text(\"Typ protokolu\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] table:has-text(\"Typ protokolu\")",
+        "url_contains": "/history"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "Pohled zaměstnance najdete v menu v sekci Já, kde rozbalím Moje pomůcky a kliknu na Přehled.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Moje pomůcky\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_assets",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_assets",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=myAssetsPage] tr[data-cy=tableRow]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=myAssetsPage] [data-cy=assetAcceptButton]",
+        "url_contains": "/app/assets/my/assets"
+      },
+      "part": 6,
+      "part_title": "Převzetí a vrácení"
+    },
+    {
+      "id": "s301",
+      "narration": "Tady vidí své pomůcky a čekající převzetí potvrdí tlačítkem Přijmout.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=myAssetsPage] [data-cy=assetAcceptButton]",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=myAssetsPage] [data-cy=assetAcceptButton]",
+        "url_contains": "/app/assets/my/assets"
+      }
+    },
+    {
+      "id": "s31",
+      "narration": "V sekci Pomůcky kliknu na Předávací protokoly, kde máte podepsané protokoly o převzetí a vrácení z celé firmy.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_protocols",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] h5:text-is(\"Protokoly o převzetí a vrácení pomůcek\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] h5:text-is(\"Protokoly o převzetí a vrácení pomůcek\")",
+        "url_contains": "/app/assets/protocols"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "Kliknu zpátky na Přehled a správa a otevřu pomůcku, kterou už držitel převzal, třeba služební auto.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_management",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Kia Sportage 2020\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetRequestReturnButton]",
+          "value": "20000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetRequestReturnButton]",
+        "url_contains": "/app/assets/418f4ea2-7148-460f-be02-b696ea6a286d/info"
+      }
+    },
+    {
+      "id": "s321",
+      "narration": "V detailu u ní vyžádáte vrácení, které držitel podepíše, nebo ji bez protokolu vrátíte rovnou na sklad.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetRequestReturnButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetReturnWithoutFlowButton]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetReturnWithoutFlowButton]",
+        "url_contains": "/app/assets/418f4ea2-7148-460f-be02-b696ea6a286d/info"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "Pomůcky jednoho člověka najdete i v jeho kartě, a tak v menu rozbalím položku Uživatelé a kliknu na Přehled a správa.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_staff",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] input[placeholder=\"Vyhledávání...\"]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] input[placeholder=\"Vyhledávání...\"]",
+        "url_contains": "/app/settings/users"
+      },
+      "part": 7,
+      "part_title": "Karta uživatele a oprávnění"
+    },
+    {
+      "id": "s331",
+      "narration": "Do vyhledávání napíšu Králová a kliknutím na jméno otevřu kartu Lucie.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[placeholder=\"Vyhledávání...\"]",
+          "value": "Králová",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Neaktivní\") td:first-child span:text-is(\"Králová Lucie\")",
+          "value": "10000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Neaktivní\") td:first-child span:text-is(\"Králová Lucie\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/company-details/member/0c9409f2-fc6e-475b-b2b1-2e791b4a7a83/assets\"]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+        "url_contains": "/member/0c9409f2-fc6e-475b-b2b1-2e791b4a7a83/work-data"
+      }
+    },
+    {
+      "id": "s332",
+      "narration": "Kliknu na záložku Pomůcky a vidím notebook, který jsme Lucii právě předali.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/company-details/member/0c9409f2-fc6e-475b-b2b1-2e791b4a7a83/assets\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=companyMemberAssets] span.text-dark:text-is(\"Lenovo ThinkPad T14 – ukázka\")",
+          "value": "20000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=companyMemberAssets] nb-card:has-text(\"Lenovo ThinkPad T14 – ukázka\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=companyMemberAssets] span.text-dark:text-is(\"Lenovo ThinkPad T14 – ukázka\")",
+        "url_contains": "/member/0c9409f2-fc6e-475b-b2b1-2e791b4a7a83/assets"
+      }
+    },
+    {
+      "id": "s34",
+      "narration": "Kdo smí pomůcky spravovat, určíte po kliknutí na Základní a pracovní údaje v poli Zvláštní uživatelská práva volbou Správce pomůcek.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/company-details/member/0c9409f2-fc6e-475b-b2b1-2e791b4a7a83/work-data\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+        "url_contains": "/work-data"
+      }
+    },
+    {
+      "id": "s35",
+      "narration": "Teď umíte pomůcky evidovat, předat je zaměstnancům a dohledat jejich historii, a kdyby něco nešlo, mrkněte do Centra nápovědy.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+        "url_contains": "/work-data"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "Méně administrativy, víc času na lidi. To je Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+        "url_contains": "/work-data"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat pomůcku 'Lenovo ThinkPad T14 – ukázka' – jen při právě 1 řádku s přesným názvem po hledání, detail s tímtéž názvem v hlavičce, dialog 'Odstranění pracovní pomůcky' s držitelkou 'Králová Lucie' (název pomůcky dialog neobsahuje); když pomůcka neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/assets/all",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+          "value": "Lenovo ThinkPad T14 – ukázka",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – ukázka\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – ukázka\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetsDetailPage]:has-text(\"Lenovo ThinkPad T14 – ukázka\") >> [data-cy=assetDeleteButton]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=assetDeleteButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Odstranění pracovní pomůcky\"):has-text(\"Králová Lucie\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Odstranění pracovní pomůcky\"):has-text(\"Králová Lucie\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-12",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "holder": "Lucie Králová <lucie.kralova@example.com> (0c9409f2-fc6e-475b-b2b1-2e791b4a7a83), NEAKTIVNÍ – trvalá (z org-chart)",
+      "created_by_recipe": "pomůcka 'Lenovo ThinkPad T14 – ukázka' (inv. č. UKAZKA-NB-014, sériové č. PF-4K7Q2X, 32000 CZK, kategorie Notebook, držitelka Lucie, stav Nový, poznámka 'Předáno s nabíječkou a brašnou.') – maže cleanup",
+      "read_only": "pomůcka 'Kia Sportage 2020' (418f4ea2-7148-460f-be02-b696ea6a286d, držitel admin Claver Thomas, Přijata) – v s32 jen zvýraznění tlačítek vrácení; Moje pomůcky admina musí mít aspoň 1 čekající pomůcku (tlačítko Přijmout, s30)"
+    },
+    "notes": "viz atlas/work-assets.md (sekce 5 a 8)"
+  }
+}

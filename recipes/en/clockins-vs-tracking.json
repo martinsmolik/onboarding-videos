@@ -1,0 +1,975 @@
+{
+  "id": "clockins-vs-tracking",
+  "version": 1,
+  "title": "Clock-ins vs. time tracking and activities",
+  "lang": "en",
+  "app_version": "preprod-2026-10-13",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "en"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "7jQ3jNk3Fcw65sWUmzun",
+    "model_id": "eleven_v4"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s07",
+    "title": "Attendance vs. time tracking"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Want to know when people are at work, or rather what they're working on? Hi, I'm Marie from the Sloneek team, and I'll show you the difference between attendance and time tracking.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "slnk-dashboard-v2-attendance p-card:has(a.widget-headline-link)",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "#new_timetracking_show_detail .time_tracking_info",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-attendance p-card:has(a.widget-headline-link)",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Introduction",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Clock-ins and clock-outs, in other words attendance, tell you when and for how long you're at work, and you can record them with this button on the Dashboard.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "slnk-dashboard-v2-attendance slnk-attendance-v2-clock-in-out-button button",
+          "before_ms": 1000
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-attendance p-card:has(a.widget-headline-link)",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-attendance slnk-attendance-v2-clock-in-out-button button",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-attendance slnk-attendance-v2-clock-in-out-button button",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "Time tracking and activities tell you what you worked on, for which client and on which project, and you can measure the time with the stopwatch right here in the header.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "#new_timetracking_show_detail .time_tracking_info",
+          "before_ms": 600
+        },
+        {
+          "type": "highlight",
+          "selector": "#new_timetracking_show_detail",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "#new_timetracking_show_detail .time_tracking_info",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s04",
+      "narration": "So attendance serves mainly payroll and overtime, while activities serve client invoicing and project costs, and you can use both at the same time.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-attendance p-card:has(a.widget-headline-link) .p-card-content",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "#new_timetracking_show_detail",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "#new_timetracking_show_detail .time_tracking_info",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "I'll start with attendance, so in the left menu I click Attendance.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-daily-summary-card p-card",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .timeline-row.selected",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .timeline-row.selected",
+        "url_contains": "view=me"
+      },
+      "part": 2,
+      "part_title": "Clock-ins and clock-outs"
+    },
+    {
+      "id": "s06",
+      "narration": "In the My view, every day has its own timeline showing clock-ins, clock-outs, breaks and absences.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .timeline-row.selected",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .timeline-row.selected",
+        "url_contains": "view=me"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "On the right, Sloneek compares the time worked with your target based on your contract, and shows the balance, meaning overtime or missing hours.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-daily-summary-card p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-monthly-summary-card p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-monthly-summary-card p-card",
+        "url_contains": "view=me"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "You clock in with the Clock in button, and the Clock-ins and clock-outs video covers it in detail, but I won't press it now.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-clock-in-out-button button",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-clock-in-out-button button",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-clock-in-out-button button",
+        "url_contains": "view=me"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "And whether people record their clock-ins at all, or Sloneek calculates their time from their contract, is explained in the video about negative versus active attendance.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-monthly-summary-card p-card",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-monthly-summary-card p-card",
+        "url_contains": "view=me"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Now time tracking, so in the left menu I click My activities.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_activities",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_activities",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "#planning_add_button",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] table.activity-table thead",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] table.activity-table thead",
+        "url_contains": "/app/my-profile/activity-overview"
+      },
+      "part": 3,
+      "part_title": "Time tracking and activities"
+    },
+    {
+      "id": "s11",
+      "narration": "With the left arrow I go to last month, where my recorded activities are.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=decreaseMonthDiv]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=decreaseMonthDiv]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] table.activity-table tbody tr:has-text(\"Number of hours\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] table.activity-table tbody tr:has-text(\"Number of hours\")",
+        "url_contains": "/app/my-profile/activity-overview"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Each record has a date, client, project, activity and the number of approved hours, not the time of clock-in and clock-out.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] table.activity-table thead",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] table.activity-table tbody",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] table.activity-table tbody tr:has-text(\"Number of hours\")",
+        "url_contains": "/app/my-profile/activity-overview"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "You record time with the button for a new activity, even retroactively, and the video about time tracking and activities covers it in detail.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "#planning_add_button",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "#planning_add_button",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "#planning_add_button",
+        "url_contains": "/app/my-profile/activity-overview"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "The stopwatch is in the header, so I click the time and the Timetracking activities window opens.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "#new_timetracking_show_detail .time_tracking_info",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "#new_timetracking_show_detail .time_tracking_info",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "p-dynamicdialog button:has-text(\"Start\")",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "p-dynamicdialog button:has-text(\"Start\")",
+        "url_contains": "/app/my-profile/activity-overview"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "You choose an activity and a client and click Start, but I won't measure anything, so I'll close the window with the cross.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "p-dynamicdialog slnk-sloneek-planning-time-tracking-form",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "p-dynamicdialog button:has-text(\"Start\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "p-dynamicdialog button:has-text(\"Start\")",
+          "before_ms": 200
+        },
+        {
+          "type": "hover",
+          "selector": "p-dynamicdialog .p-dialog-header button",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "p-dynamicdialog .p-dialog-header button",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "body:not(:has(p-dynamicdialog .p-dialog))",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "#planning_add_button",
+        "url_contains": "/app/my-profile/activity-overview"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "How the two records relate, I'll show in the attendance settings, so in the left menu I click Attendance and then the cogwheel.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] button:has(.fa-gear-complex)",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] button:has(.fa-gear-complex)",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] button:has(.fa-gear-complex)",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-settings-general-attendance-connections p-card",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-settings-general-attendance-connections p-card",
+        "url_contains": "/app/attendance-v2-overview-settings/general"
+      },
+      "part": 4,
+      "part_title": "How they relate"
+    },
+    {
+      "id": "s17",
+      "narration": "At the bottom, in the connection section, is the list of absences and activities that relate to attendance, such as Home office or a business trip.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-settings-general-attendance-connections p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-settings-general-attendance-connections p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-settings-general-attendance-connections p-card",
+        "url_contains": "/attendance-v2-overview-settings"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Time spent on such a linked activity counts toward attendance as time worked.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-settings-general-attendance-connections ul",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-settings-general-attendance-connections p-card",
+        "url_contains": "/attendance-v2-overview-settings"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "The link is set up on the activities, so I click the link to the activity settings.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-settings-general-attendance-connections a[href=\"/app/planning/events\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-settings-general-attendance-connections a[href=\"/app/planning/events\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=is_connected_to_attendance]",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=is_connected_to_attendance]",
+        "url_contains": "/app/planning/events"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "In the column showing whether an activity is linked to attendance, an activity like Home office has a green dot.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=is_connected_to_attendance]",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row:has-text(\"Homeoffice\") >> [col-id=is_connected_to_attendance]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=is_connected_to_attendance]",
+        "url_contains": "/app/planning/events"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "In the next column, the time tracking mode, you decide whether people may not, may, or must use the stopwatch for the activity.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=time_tracking_type]",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=time_tracking_type]",
+        "url_contains": "/app/planning/events"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "And in the columns for the hourly billing rate and the hourly cost rate are the rates Sloneek uses to calculate the price of work.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=company_price]",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=worker_price]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=worker_price]",
+        "url_contains": "/app/planning/events"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "The two records are switched on separately, so in the left menu I click Settings, then Visibility of modules, and I expand the panel for the whole company.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users_modules",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users_modules",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users_modules",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Name Filter Input\"]",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion.toggle-modules-section nb-accordion-item-header",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion.toggle-modules-section nb-accordion-item-header",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion-item-body div.col-6:has-text(\"Time tracking and activities\")",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion.toggle-modules-section nb-accordion-item-body form",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-accordion-item-body div.col-6:has-text(\"Attendance (new module)\")",
+        "url_contains": "/app/settings/users-modules"
+      },
+      "part": 5,
+      "part_title": "Where to switch them on"
+    },
+    {
+      "id": "s24",
+      "narration": "Attendance is switched on by the Attendance (new module) toggle, and time tracking by the toggles Time tracking and activities and Projects and clients.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion-item-body div.col-6:has-text(\"Attendance (new module)\")",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion-item-body div.col-6:has-text(\"Time tracking and activities\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion-item-body div.col-6:has-text(\"Projects and clients\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-accordion-item-body div.col-6:has-text(\"Projects and clients\")",
+        "url_contains": "/app/settings/users-modules"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "In the table below the panel you can then switch them on just for selected people, but I won't change anything here now.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion.toggle-modules-section nb-accordion-item-body form",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-accordion.toggle-modules-section nb-accordion-item-body form",
+        "url_contains": "/app/settings/users-modules"
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "You'll find the data for payroll and for projects in the left menu, where I click Reports.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_reports_v2",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_reports_v2",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/attendance\"]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/attendance\"]",
+        "url_contains": "/app/reports-v-2/dashboard"
+      },
+      "part": 6,
+      "part_title": "Reports"
+    },
+    {
+      "id": "s27",
+      "narration": "I click the tab for clock-ins and clock-outs, where, for example, the summary of time worked with the balance is, the basis for payroll.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/attendance\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/attendance\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-arrivals-departures-summary)",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-arrivals-departures-summary)",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-arrivals-departures-summary)",
+        "url_contains": "/dashboard/attendance"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "I click the Activities tab, where the activities summary adds up the hours and calculates the price of work by rates, for invoicing and project costs.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/planning\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/planning\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-activities-summary)",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-activities-summary)",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-activities-summary)",
+        "url_contains": "/dashboard/planning"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "I click the Other tab, and at the Daily payroll report I click Go to report.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/other\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/other\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/other/payroll\"]",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-payroll)",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/other/payroll\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/other/payroll\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+        "url_contains": "/app/reports-v-2/other/payroll"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "I click Generate a one-time report and the form for a new report opens.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container slnk-sloneek-reports-new-dialog nb-select[formcontrolname=working_type] button",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container slnk-sloneek-reports-new-dialog nb-select[formcontrolname=working_type] button",
+        "url_contains": "/other/payroll"
+      }
+    },
+    {
+      "id": "s31",
+      "narration": "I click the field asking on what basis you pay wages, where you choose between working hours only, clock-in and clock-out, or activities and time tracking.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container slnk-sloneek-reports-new-dialog nb-select[formcontrolname=working_type] button",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option:has-text(\"Activities & time tracking\")",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-option-list",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "nb-option:has-text(\"Activities & time tracking\")",
+        "url_contains": "/other/payroll"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "So you can calculate payroll from attendance or from activities, and since I won't generate the report now, I'll close the form with the Escape key.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "nb-option:has-text(\"Activities & time tracking\")",
+          "before_ms": 600
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "body:not(:has(nb-dialog-container))",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+        "url_contains": "/other/payroll"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "Switch on attendance when you need to record working hours, overtime and data for payroll.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+        "url_contains": "/other/payroll"
+      },
+      "part": 7,
+      "part_title": "What to switch on"
+    },
+    {
+      "id": "s34",
+      "narration": "Switch on time tracking and activities when you invoice clients, or want to know how much individual projects cost you.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_activities",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_activities",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_my_activities",
+        "url_contains": "/other/payroll"
+      }
+    },
+    {
+      "id": "s35",
+      "narration": "And when you need both, switch on active attendance for payroll and activities for projects.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "#new_timetracking_show_detail",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "#new_timetracking_show_detail .time_tracking_info",
+        "url_contains": "/other/payroll"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "Now you know how attendance and time tracking differ and how they relate, and if anything doesn't work, check the Help Center.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+        "url_contains": "/other/payroll"
+      }
+    },
+    {
+      "id": "s37",
+      "narration": "Less admin, more time for people. That's Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+        "url_contains": "/other/payroll"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "zpět na start (video nic nevytváří)",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-13",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "created_by_recipe": "nic – video jen čte a zvýrazňuje",
+      "read_only": "Plocha (widget Docházka, stopky), Docházka Moje, Moje aktivity (minulý měsíc – záznamy admina ze září 2026), okno stopek (otevřeno a zavřeno), Nastavení docházky → Propojení, Nastavení → Aktivity (sloupce), Viditelnost modulů (panel jen rozbalen), Reporty, dialog Denního mzdového reportu (otevřen a zavřen)",
+      "never_clicked": "Zaznamenat příchod (Plocha i Docházka), play / Spustit (stopky), Nová aktivita, Přidat segment, Uložit / přepínače na Viditelnosti modulů, Vygenerovat report"
+    },
+    "notes": "viz atlas/clockins-vs-tracking.md"
+  },
+  "_localized": {
+    "from": "recipes/cs/clockins-vs-tracking.json",
+    "i18n": "i18n/clockins-vs-tracking.en.json",
+    "at": "2026-10-14T13:47:45.751Z",
+    "verified": null
+  }
+}

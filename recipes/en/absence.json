@@ -1,0 +1,1057 @@
+{
+  "id": "absence-en",
+  "version": 1,
+  "title": "Absence – vacation without spreadsheets",
+  "lang": "en",
+  "app_version": "preprod-2026-10-01",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "en"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "7jQ3jNk3Fcw65sWUmzun",
+    "model_id": "eleven_v4"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s15",
+    "title": "Absence without spreadsheets"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "part": 1,
+      "part_title": "Introduction",
+      "narration": "Vacation in Excel, sick leave in an email, and at the end of the month, chasing the details for payroll? Let's make it simpler. I'm Maria from the Sloneek team, and today I'll walk you through the Absence module.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/absence-overview\"]",
+        "url_contains": "/app/dashboard"
+      },
+      "hold_after_ms": 500
+    },
+    {
+      "id": "s02",
+      "narration": "In Sloneek, you have vacation, sick leave and sick days all in one place. Employees request time off themselves, their manager approves it, and the data is ready for payroll straight away.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/absence-overview\"]",
+          "before_ms": 1500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/absence-overview\"]"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "narration": "Labour law in most European countries guarantees at least four weeks of paid leave a year. When the system calculates the balances, there's no more retyping and no more mistakes. In a few minutes, we'll cover the setup, logging an absence, and the payroll reports.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "h3:text-is(\"Overview - Next 14 days\")",
+          "before_ms": 1500
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "part": 2,
+      "part_title": "Setup",
+      "narration": "First, let's set up the module. One prerequisite: every employee needs working hours assigned in Work contracts setup. Without them, the system doesn't know their working fund and can't calculate their absences. You'll find a guide in our video on working hours.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/settings/dashboard\"]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "highlight",
+          "selector": "a[href=\"/app/settings/working-hours\"]:text-is(\"View\")",
+          "before_ms": 1200
+        }
+      ],
+      "expect": {
+        "visible": "a[href=\"/app/settings/absence/events\"]:text-is(\"View\")",
+        "url_contains": "/app/settings/dashboard"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "In Settings, I open Absence. Here are all the absence types your company uses. Admins and HR have access here. Note that the list only shows active types; you'll find inactive ones using the filter at the top.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "a[href=\"/app/settings/absence/events\"]:text-is(\"View\")"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "highlight",
+          "selector": "h5:text-is(\"Absence events\")"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-row-column-filter .ag-header-cell[aria-colindex=\"4\"] select.common_select"
+        }
+      ],
+      "expect": {
+        "visible": ".ag-row a.redirect_column:text-is(\"Dovolená\")",
+        "url_contains": "/app/settings/absence/events"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "I click Add and create a new type. The internal name will be Vacation – demo. I'll also fill in the name employees will see, in English, Czech and Slovak.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "a[data-cy=addAbsenceButton]:text-is(\"Add\")"
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "type",
+          "selector": "input[data-cy=nameInput]",
+          "value": "Vacation – demo",
+          "speed": "fast"
+        },
+        {
+          "type": "type",
+          "selector": "input[data-cy=translatedNameInput]",
+          "value": "Vacation – demo",
+          "speed": "fast"
+        },
+        {
+          "type": "click",
+          "selector": "p.cursor_pointer:text-is(\"Display translates\")"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "type",
+          "selector": "slnk-common-translates-form-group-inputs div.ng-trigger > div.form-group:nth-child(7) > input",
+          "value": "Dovolenka – ukážka",
+          "speed": "fast"
+        },
+        {
+          "type": "type",
+          "selector": "slnk-common-translates-form-group-inputs div.ng-trigger > div.form-group:nth-child(1) > input",
+          "value": "Dovolená – ukázka",
+          "speed": "fast"
+        }
+      ],
+      "expect": {
+        "visible": "h5:text-is(\"New absence\")",
+        "url_contains": "/app/settings/absence/event/new/general"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "Now comes the choice that affects payroll: the type. Free time reduces working hours; that's for vacation or sick leave. At work doesn't change the hours worked, which is handy, for example, for a sick day the company pays as regular work. For vacation, I choose Free time.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=typeSelect] button"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-pane nb-option[data-cy=type_vacation]"
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-pane nb-option[data-cy=type_in_work]"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane nb-option[data-cy=type_vacation]"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "zoom",
+          "selector": "nb-select[data-cy=typeSelect]",
+          "value": "1.6",
+          "hold_ms": 2000
+        }
+      ],
+      "expect": {
+        "visible": "nb-select[data-cy=typeSelect] button:text-is(\"Free time (reduces working hours)\")"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "Under Time unit of drawing, I choose Days and a half days, so people can also take half a day off. I turn on Annual fund, set twenty days, and unused days will carry over to the new year.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=unitTypeSelect] button"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane nb-option[data-cy=unitType_days_and_half_days]"
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-checkbox[data-cy=annualFundCheckbox] .custom-checkbox"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "type",
+          "selector": "input[data-cy=yearlyEntitlementInput]",
+          "value": "20",
+          "speed": "fast"
+        },
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=fundUnitSelect] button"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane nb-option[data-cy=fundUnit_day]"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-checkbox[data-cy=unusedUnitsTransferCheckbox] .custom-checkbox"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "zoom",
+          "selector": "input[data-cy=yearlyEntitlementInput]",
+          "value": "1.6",
+          "hold_ms": 1800
+        }
+      ],
+      "expect": {
+        "visible": "nb-checkbox[data-cy=healthReasonsCheckbox]"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "I leave Health reasons off. You tick it for sick leave or care for a family member, which are counted in calendar days. Under Event timeout, I set seven, so vacation has to be requested at least a week in advance.",
+      "actions": [
+        {
+          "type": "zoom",
+          "selector": "nb-checkbox[data-cy=healthReasonsCheckbox]",
+          "value": "1.8",
+          "hold_ms": 2500
+        },
+        {
+          "type": "click",
+          "selector": "nb-checkbox[data-cy=eventTimeoutCheckbox] .custom-checkbox",
+          "before_ms": 1500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "fill",
+          "selector": "input[data-cy=eventTimeoutInput]",
+          "value": "7"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-checkbox[data-cy=eventTimeoutCheckbox]"
+        }
+      ],
+      "expect": {
+        "visible": "input[data-cy=eventTimeoutInput]"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Watch out for a common mistake. You can't change the time unit or the annual fund once the type has been created. If you get it wrong, don't delete the type. Deactivate it, so the history is kept, and create a new one.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "nb-select[data-cy=unitTypeSelect]",
+          "before_ms": 800
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-checkbox[data-cy=annualFundCheckbox]"
+        }
+      ],
+      "expect": {
+        "visible": "button[data-cy=submitButton]:not([disabled])"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "When saving, you have two buttons. Save for all users makes the type available to the whole company, so colleagues in other countries might suddenly see a vacation type that isn't meant for them. That's why clicking just Save is enough. I've already saved this type, so I'll close the form, and here it is in the list.",
+      "actions": [
+        {
+          "type": "zoom",
+          "selector": "button[data-cy=allCompanyButton]:text-is(\"Save for all users\")",
+          "value": "1.6",
+          "hold_ms": 2500
+        },
+        {
+          "type": "highlight",
+          "selector": "button[data-cy=submitButton]:text-is(\"Save\")",
+          "before_ms": 1200
+        },
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Back\")",
+          "before_ms": 1500
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-row a.redirect_column:text-is(\"Vacation – demo\")"
+        }
+      ],
+      "expect": {
+        "visible": "h5:text-is(\"Absence events\")",
+        "url_contains": "/app/settings/absence/events"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Who gets the type, and how much of it, you set in Bulk setting of absences. Each person has a row here for every absence type. In the Allowed column, you make the absence available to them, and in the Approval required column, you decide whether their manager has to approve it.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/settings/absence/collective-claims\"]"
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        },
+        {
+          "type": "type",
+          "selector": "input[aria-label=\"Name Filter Input\"]",
+          "value": "Claver",
+          "speed": "fast"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=allowed]"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=approval_needed]"
+        }
+      ],
+      "expect": {
+        "visible": ".ag-cell[col-id=\"user.full_name\"]:text-is(\"Claver Thomas\")",
+        "url_contains": "/app/settings/absence/collective-claims"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "Switching to Sloneek in the middle of the year? Then mainly fill in Fund for this year, meaning how many days the person is entitled to this year. Keep Individual fund for real exceptions only, such as longer leave for management.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".ag-row[row-index=\"0\"] .ag-cell[col-id=\"user.full_name\"]"
+        },
+        {
+          "type": "press",
+          "value": "End"
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=transformed_first_yearly_claim]"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=transformed_yearly_claim]"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=transformed_claimed]"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=transformed_transferred_from_previous_year]"
+        }
+      ],
+      "expect": {
+        "visible": ".ag-header-cell[col-id=transformed_first_yearly_claim]"
+      }
+    },
+    {
+      "id": "s14",
+      "part": 3,
+      "part_title": "Example use",
+      "narration": "Now let's put it into practice. Emma from sales wants to take three days of vacation. Employees log absences themselves, and I'll show you on my own account; Emma sees exactly the same. In the left menu, I open My absences.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/absence-overview\"]",
+          "before_ms": 4500
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ],
+      "expect": {
+        "visible": "button[data-cy=addAbsenceButton]:text-is(\"New absence\")",
+        "url_contains": "/app/my-profile/absence-overview"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "At the top, you see the balances by type, so how much vacation is still left. Below them are the upcoming and already finished absences.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".col-12.d-flex > .row"
+        },
+        {
+          "type": "zoom",
+          "selector": ".remaining-absence-title:text-is(\"🏖️ Vacation (days)\")",
+          "value": "1.8",
+          "hold_ms": 2200
+        },
+        {
+          "type": "highlight",
+          "selector": "h6:text-is(\"Upcoming absences\")"
+        },
+        {
+          "type": "highlight",
+          "selector": "h6:text-is(\"Already finished absences\")"
+        }
+      ]
+    },
+    {
+      "id": "s16",
+      "narration": "I click New absence and choose vacation in the Absence field. The list only offers the types that person is allowed to use.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "button[data-cy=addAbsenceButton]:text-is(\"New absence\")"
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=absenceEventsAutocomplete] input"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-pane [data-cy=autocompleteSearchInput]",
+          "value": "Vacation (days)",
+          "speed": "fast"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane slnk-common-autocomplete-option"
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container [data-cy=dateFromInput]"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "In the calendar, I pick the first and the last day. If it were just a morning, I'd switch to Half-day at the top.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=dateFromInput]"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-view-mode button"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-year-cell:text-is(\"2026\")"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-picker-row:nth-child(3) nb-calendar-month-cell:nth-child(3)"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-day-cell:not(.bounding-month):text-is(\"23\")"
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=dateToInput]"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-day-cell:not(.bounding-month):text-is(\"25\")"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container nb-toggle[formcontrolname=fullDay]"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container nb-icon[icon=\"check\"]"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Sloneek immediately checks that the absence doesn't overlap with anything, and shows how many days will be deducted from the fund. If something doesn't add up, the Create button stays inactive.",
+      "actions": [
+        {
+          "type": "zoom",
+          "selector": "nb-dialog-container .info:has(nb-icon[icon=\"check\"])",
+          "value": "1.8",
+          "hold_ms": 2500
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container [data-cy=submitButton]:not([disabled])"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container [data-cy=submitButton]:not([disabled])"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "In the note, I write who's covering for me, so my colleagues know. Then I click Create.",
+      "actions": [
+        {
+          "type": "fill",
+          "selector": "nb-dialog-container [data-cy=noteTextarea]",
+          "value": "Peter is covering for me."
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=submitButton]:text-is(\"Create\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ],
+      "expect": {
+        "visible": ".upcoming-container span:text-is(\"11/23/2026 - 11/25/2026\")"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "The absence is now among the upcoming ones. As an admin, mine is approved automatically. Emma's request would go to her manager and show in orange until it's approved. Once approved, it turns green, and only then is it deducted from the balance.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".upcoming-container span:text-is(\"11/23/2026 - 11/25/2026\")"
+        },
+        {
+          "type": "highlight",
+          "selector": "h6:text-is(\"Upcoming absences\")"
+        }
+      ]
+    },
+    {
+      "id": "s21",
+      "narration": "Another common situation: Emma calls in the morning to say she's sick. As an admin, I'll log her sick leave myself. I click New absence and switch the toggle to Another user.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "button[data-cy=addAbsenceButton]:text-is(\"New absence\")",
+          "before_ms": 1500
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container nb-toggle[data-cy=differentUserToggle]",
+          "before_ms": 1500
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container [data-cy=usersAutocomplete] input"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "In the User field, I pick my colleague, then the type Sick leave, and today's date. Clicking Create saves the sick leave, and it shows up right away in the calendar and in the payroll data.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=usersAutocomplete] input"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-pane [data-cy=autocompleteSearchInput]",
+          "value": "Kristýna",
+          "speed": "fast"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane slnk-common-autocomplete-option:text-is(\"Nová Kristýna\")"
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=absenceEventsAutocomplete] input"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-pane [data-cy=autocompleteSearchInput]",
+          "value": "Sick leave",
+          "speed": "fast"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane slnk-common-autocomplete-option"
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=dateFromInput]"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-day-cell.today"
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container [data-cy=submitButton]:text-is(\"Create\")"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=closeButton]",
+          "before_ms": 800
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "h6:text-is(\"Upcoming absences\")"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "Who's out right now? In the Calendars menu, I open the Absences calendar. I can filter by team or by people and see right away whether vacations in the team overlap.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a.navigation_item:text-is(\"Calendars\")"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/events/absence\"]"
+        },
+        {
+          "type": "navigate",
+          "value": "https://app-pre-production.sloneek.com/app/events/absence?view=resourceTimelineMonth&from=01.11.2026"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "highlight",
+          "selector": "input[placeholder=\"Quick preview\"]"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=filterUsersAutocomplete] input"
+        },
+        {
+          "type": "highlight",
+          "selector": "full-calendar .fc-datagrid-cell.fc-resource:text-is(\"Claver Thomas\")"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=fullCalendar]",
+        "url_contains": "from=01.11.2026"
+      }
+    },
+    {
+      "id": "s24",
+      "narration": "That leaves the payroll data. In Custom reports, I open the Complex Salary Report. You can see the gross working fund, the length of absences, and the net working fund, meaning what's left once time off is deducted. That's why the choice between Free time and At work matters so much.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/custom-reports\"]"
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "highlight",
+          "selector": "a[href=\"/app/custom-reports/579\"]"
+        },
+        {
+          "type": "navigate",
+          "value": "https://app-pre-production.sloneek.com/app/custom-reports/579"
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        },
+        {
+          "type": "highlight",
+          "selector": "th[data-cy=\"crDetail.grid.header.salary_summary_working_fund_gross_hour\"]"
+        },
+        {
+          "type": "highlight",
+          "selector": "th[data-cy=\"crDetail.grid.header.salary_summary_absence_vacation_duration_hour\"]"
+        },
+        {
+          "type": "highlight",
+          "selector": "th[data-cy=\"crDetail.grid.header.salary_summary_working_fund_net_hour\"]"
+        }
+      ],
+      "expect": {
+        "visible": "h1:text-is(\"Complex Salary Report\")",
+        "url_contains": "/app/custom-reports/579"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "For your payroll accountant, limit the report to active employees. Note that ticking the Active column on the left doesn't filter anything yet; choose Yes using the filter icon on the Active column in the table. Then export the report to Excel.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-report-columns-selection-section-item label:text-is(\"Active\")"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=\"crDetail.grid.filterIcon.employee_active\"]"
+        },
+        {
+          "type": "highlight",
+          "selector": "button:text-is(\"Export\")",
+          "before_ms": 1000
+        }
+      ],
+      "expect": {
+        "visible": "th[data-cy=\"crDetail.grid.header.employee_active\"]"
+      }
+    },
+    {
+      "id": "s26",
+      "part": 5,
+      "part_title": "Wrap-up",
+      "narration": "And that's it. You now know how to set up an absence type, assign entitlements, and log both vacation and sick leave. You save yourself retyping spreadsheets, and your payroll accountant gets data they can rely on.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/dashboard\"]"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "highlight",
+          "selector": "h3:text-is(\"Absences\")",
+          "before_ms": 800
+        }
+      ],
+      "expect": {
+        "visible": "h3:text-is(\"Absences\")",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "How a manager approves a request in Approvals, we'll show in a separate video. Your task for today: go through the absence types with your payroll accountant, and fill in Fund for this year for your people.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/events/approvals\"]"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/events/approvals\"]"
+        }
+      ]
+    },
+    {
+      "id": "s28",
+      "narration": "A final tip: in Notifications and Integrations, under Connected accounts, connect Google or Microsoft. Approved absences will then appear in your Google or Outlook calendar, so you don't have to enter them twice.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/interface-settings\"]"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "highlight",
+          "selector": "h6:text-is(\"Connected accounts\")"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-common-user-detail-my-integrations button:text-is(\"Sign in with Microsoft\")"
+        }
+      ],
+      "expect": {
+        "visible": "h6:text-is(\"Connected accounts\")",
+        "url_contains": "/app/my-profile/interface-settings"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "If something doesn't work, check the Help Center. Next time we'll look at attendance and clock-ins. Now I'm off to check how many vacation days I have left. Less admin, more time for people. This is Sloneek.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/absence-overview\"]",
+          "before_ms": 2500
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".remaining-absence-title:text-is(\"🏖️ Vacation (days)\")",
+          "before_ms": 1500
+        }
+      ],
+      "expect": {
+        "visible": ".remaining-absence-title:text-is(\"🏖️ Vacation (days)\")",
+        "url_contains": "/app/my-profile/absence-overview"
+      },
+      "hold_after_ms": 1500
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat absenci 23.–25. 11. 2026 z minulého běhu (1)",
+      "url": "https://app-pre-production.sloneek.com/app/my-profile/absence-overview",
+      "if_visible": ".upcoming-container span:text-is(\"11/23/2026 - 11/25/2026\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".upcoming-container span:text-is(\"11/23/2026 - 11/25/2026\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=deleteButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has([data-cy=cancelButton]) [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat absenci 23.–25. 11. 2026 z minulého běhu (2)",
+      "url": "https://app-pre-production.sloneek.com/app/my-profile/absence-overview",
+      "if_visible": ".upcoming-container span:text-is(\"11/23/2026 - 11/25/2026\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".upcoming-container span:text-is(\"11/23/2026 - 11/25/2026\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=deleteButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has([data-cy=cancelButton]) [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    }
+  ],
+  "_localized": {
+    "from": "recipes/cs/absence.json",
+    "i18n": "i18n/absence.en.json",
+    "at": "2026-10-09T11:21:11.999Z",
+    "verified": {
+      "date": "2026-10-09",
+      "by": "Claude (BrowserOS, preprod, local-translate=en, in-page runner: CSS + :text-is/:has-text, wait 10 s visible, pointer/mouse events at elementFromPoint of centre, execCommand insertText / native setter for fill)",
+      "selectors": "all 29 steps passed (every action target and expect.visible resolved and visible, url_contains ok); s06 EN UI translation fields: cs=nth-child(1), de=2, es=3, hu=4, it=5, pl=6, sk=7 → override nth-child(2)→(1); s16 'Vacation (days)' → single option '🏖️ Vacation (days)'; s22 'Kristýna' → 'Nová Kristýna', 'Sick leave' → '🏥 Sick leave' (dialog closed without saving, no POST); dates in EN UI are MM/DD/YYYY ('11/23/2026 - 11/25/2026')",
+      "demo_type": "'Vacation – demo' created once in EN UI (plain Save): Free time, Days and a half days, Annual fund 20 Days, unused units transferred, Event timeout 7; translations cs 'Dovolená – ukázka', sk 'Dovolenka – ukážka'; id ebd7cd08-09c0-4b9e-a27b-b756d4cc247c",
+      "cleanup": "recipe cleanup (data-cy delete + confirm) verified in EN: a leftover 11/23–11/25/2026 absence found before the run was deleted, the dry-run one too; tenant left clean"
+    }
+  }
+}

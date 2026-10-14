@@ -1,0 +1,1055 @@
+{
+  "id": "absence-pl",
+  "version": 1,
+  "title": "Nieobecności – urlopy bez tabelek",
+  "lang": "pl",
+  "app_version": "preprod-2026-10-01",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "pl"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "F9eb9uZYeJuHuO7Uvs1R",
+    "model_id": "eleven_v4"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s15",
+    "title": "Nieobecności bez tabelek"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "part": 1,
+      "part_title": "Wprowadzenie",
+      "narration": "Urlop w Excelu, zwolnienie lekarskie w mailu, a na koniec miesiąca szukanie danych do płac? Uprośćmy to. Jestem Maria z zespołu Sloneek i dziś pokażę Wam moduł Nieobecności.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/absence-overview\"]",
+        "url_contains": "/app/dashboard"
+      },
+      "hold_after_ms": 500
+    },
+    {
+      "id": "s02",
+      "narration": "W Sloneeku macie urlopy, zwolnienia lekarskie i dni chorobowe w jednym miejscu. Pracownicy sami składają wnioski, menedżer je zatwierdza, a Wy macie dane od razu gotowe do płac.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/absence-overview\"]",
+          "before_ms": 1500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/absence-overview\"]"
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "narration": "Kodeks pracy daje pracownikom dwadzieścia albo dwadzieścia sześć dni urlopu w roku, zależnie od stażu. Gdy salda liczy system, znika przepisywanie i błędy. W kilka minut pokażemy ustawienia, zgłaszanie nieobecności i zestawienia do płac.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "h3:text-is(\"Przegląd – Następne 14 dni\")",
+          "before_ms": 1500
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "part": 2,
+      "part_title": "Ustawienia",
+      "narration": "Najpierw przygotujemy moduł. Jeden warunek: pracownik musi mieć przypisany czas pracy. Bez niego system nie zna jego wymiaru czasu pracy i nie policzy mu nieobecności. Instrukcję znajdziecie w filmie o czasie pracy.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/settings/dashboard\"]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "highlight",
+          "selector": "a[href=\"/app/settings/working-hours\"]:text-is(\"Pokaż\")",
+          "before_ms": 1200
+        }
+      ],
+      "expect": {
+        "visible": "a[href=\"/app/settings/absence/events\"]:text-is(\"Pokaż\")",
+        "url_contains": "/app/settings/dashboard"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "W Ustawieniach otwieram Nieobecność. Tu są wszystkie typy nieobecności, z których korzysta firma. Dostęp ma administrator lub HR. Uwaga, lista pokazuje tylko aktywne typy, wyłączone znajdziecie przez filtr u góry.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "a[href=\"/app/settings/absence/events\"]:text-is(\"Pokaż\")"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "highlight",
+          "selector": "h5:text-is(\"Wydarzenia nieobecności\")"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-row-column-filter .ag-header-cell[aria-colindex=\"4\"] select.common_select"
+        }
+      ],
+      "expect": {
+        "visible": ".ag-row a.redirect_column:text-is(\"Dovolená\")",
+        "url_contains": "/app/settings/absence/events"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "Klikam Dodaj i tworzę nowy typ. Nazwa wewnętrzna to Urlop, przykład. Uzupełniam też nazwę, którą zobaczą pracownicy, po polsku, czesku i angielsku.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "a[data-cy=addAbsenceButton]:text-is(\"Dodaj\")"
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "type",
+          "selector": "input[data-cy=nameInput]",
+          "value": "Urlop – przykład",
+          "speed": "fast"
+        },
+        {
+          "type": "type",
+          "selector": "input[data-cy=translatedNameInput]",
+          "value": "Urlop – przykład",
+          "speed": "fast"
+        },
+        {
+          "type": "click",
+          "selector": "p.cursor_pointer:text-is(\"Pokaż tłumaczenie\")"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "type",
+          "selector": "slnk-common-translates-form-group-inputs div.ng-trigger > div.form-group:nth-child(1) > input",
+          "value": "Dovolená – ukázka",
+          "speed": "fast"
+        },
+        {
+          "type": "type",
+          "selector": "slnk-common-translates-form-group-inputs div.ng-trigger > div.form-group:nth-child(3) > input",
+          "value": "Vacation – demo",
+          "speed": "fast"
+        }
+      ],
+      "expect": {
+        "visible": "h5:text-is(\"Zgłoś nieobecność\")",
+        "url_contains": "/app/settings/absence/event/new/general"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "Teraz wybór, który wpływa na płace: rodzaj. Czas wolny zmniejsza przepracowany czas, to urlop albo zwolnienie lekarskie. W pracy nie zmienia przepracowanych godzin i przydaje się na przykład przy dniu chorobowym, który firma płaci jak zwykłą pracę. Dla urlopu wybieram Czas wolny.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=typeSelect] button"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-pane nb-option[data-cy=type_vacation]"
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-pane nb-option[data-cy=type_in_work]"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane nb-option[data-cy=type_vacation]"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "zoom",
+          "selector": "nb-select[data-cy=typeSelect]",
+          "value": "1.6",
+          "hold_ms": 2000
+        }
+      ],
+      "expect": {
+        "visible": "nb-select[data-cy=typeSelect] button:text-is(\"Czas wolny (zmniejsza czas pracy)\")"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "W Jednostce czasu wybieram Dni i pół dnia, żeby można było wziąć też pół dnia wolnego. Włączam Limit roczny, ustawiam dwadzieścia dni, a niewykorzystane dni przejdą na nowy rok.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=unitTypeSelect] button"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane nb-option[data-cy=unitType_days_and_half_days]"
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-checkbox[data-cy=annualFundCheckbox] .custom-checkbox"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "type",
+          "selector": "input[data-cy=yearlyEntitlementInput]",
+          "value": "20",
+          "speed": "fast"
+        },
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=fundUnitSelect] button"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane nb-option[data-cy=fundUnit_day]"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-checkbox[data-cy=unusedUnitsTransferCheckbox] .custom-checkbox"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "zoom",
+          "selector": "input[data-cy=yearlyEntitlementInput]",
+          "value": "1.6",
+          "hold_ms": 1800
+        }
+      ],
+      "expect": {
+        "visible": "nb-checkbox[data-cy=healthReasonsCheckbox]"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "Powody zdrowotne zostawiam wyłączone. Zaznaczacie je przy zwolnieniu lekarskim albo opiece nad członkiem rodziny, które liczą się w dniach kalendarzowych. W ograniczeniu czasowym ustawiam siedem, więc urlop trzeba zgłosić co najmniej tydzień wcześniej.",
+      "actions": [
+        {
+          "type": "zoom",
+          "selector": "nb-checkbox[data-cy=healthReasonsCheckbox]",
+          "value": "1.8",
+          "hold_ms": 2500
+        },
+        {
+          "type": "click",
+          "selector": "nb-checkbox[data-cy=eventTimeoutCheckbox] .custom-checkbox",
+          "before_ms": 1500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "fill",
+          "selector": "input[data-cy=eventTimeoutInput]",
+          "value": "7"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-checkbox[data-cy=eventTimeoutCheckbox]"
+        }
+      ],
+      "expect": {
+        "visible": "input[data-cy=eventTimeoutInput]"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Uwaga na częsty błąd. Jednostki czasu i limitu rocznego nie zmienicie po utworzeniu typu. Jeśli się pomylicie, nie usuwajcie typu, tylko go dezaktywujcie, żeby została historia, i utwórzcie nowy.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "nb-select[data-cy=unitTypeSelect]",
+          "before_ms": 800
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-checkbox[data-cy=annualFundCheckbox]"
+        }
+      ],
+      "expect": {
+        "visible": "button[data-cy=submitButton]:not([disabled])"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "Przy zapisie macie dwa przyciski. Zapisz dla wszystkich użytkowników udostępni typ całej firmie i wtedy na przykład kolegom ze Słowacji pojawi się polski urlop. Dlatego wystarczy kliknąć samo Zapisz. Ja mam już ten typ zapisany, więc zamykam formularz i tu na liście go widzicie.",
+      "actions": [
+        {
+          "type": "zoom",
+          "selector": "button[data-cy=allCompanyButton]:text-is(\"Zapisz dla wszystkich użytkowników\")",
+          "value": "1.6",
+          "hold_ms": 2500
+        },
+        {
+          "type": "highlight",
+          "selector": "button[data-cy=submitButton]:text-is(\"Zapisz\")",
+          "before_ms": 1200
+        },
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Wróć\")",
+          "before_ms": 1500
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-row a.redirect_column:text-is(\"Urlop – przykład\")"
+        }
+      ],
+      "expect": {
+        "visible": "h5:text-is(\"Wydarzenia nieobecności\")",
+        "url_contains": "/app/settings/absence/events"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Komu typ przysługuje i w jakim wymiarze, ustalacie w Masowych ustawieniach nieobecności. Każda osoba ma tu wiersz dla każdego typu nieobecności. W pierwszej kolumnie udostępniacie nieobecność, a w kolumnie Wymaga zatwierdzenia decydujecie, czy musi ją zatwierdzić przełożony.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/settings/absence/collective-claims\"]"
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        },
+        {
+          "type": "type",
+          "selector": "input[aria-label=\"Imię Filter Input\"]",
+          "value": "Claver",
+          "speed": "fast"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=allowed]"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=approval_needed]"
+        }
+      ],
+      "expect": {
+        "visible": ".ag-cell[col-id=\"user.full_name\"]:text-is(\"Claver Thomas\")",
+        "url_contains": "/app/settings/absence/collective-claims"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "Przechodzicie na Sloneek w trakcie roku? Wtedy uzupełnijcie przede wszystkim Limit na ten rok, czyli ile dni przysługuje danej osobie w tym roku. Limit indywidualny zostawcie tylko dla wyjątków, na przykład dłuższego urlopu dla kierownictwa.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".ag-row[row-index=\"0\"] .ag-cell[col-id=\"user.full_name\"]"
+        },
+        {
+          "type": "press",
+          "value": "End"
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=transformed_first_yearly_claim]"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=transformed_yearly_claim]"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=transformed_claimed]"
+        },
+        {
+          "type": "highlight",
+          "selector": ".ag-header-cell[col-id=transformed_transferred_from_previous_year]"
+        }
+      ],
+      "expect": {
+        "visible": ".ag-header-cell[col-id=transformed_first_yearly_claim]"
+      }
+    },
+    {
+      "id": "s14",
+      "part": 3,
+      "part_title": "Przykład użycia",
+      "narration": "A teraz w praktyce. Ela z działu sprzedaży chce wziąć trzy dni urlopu. Pracownik sam zgłasza nieobecność, a ja pokażę to na swoim koncie, Ela zobaczy to samo. W lewym menu otwieram Moje nieobecności.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/absence-overview\"]",
+          "before_ms": 4500
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ],
+      "expect": {
+        "visible": "button[data-cy=addAbsenceButton]:text-is(\"Zgłoś nieobecność\")",
+        "url_contains": "/app/my-profile/absence-overview"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "U góry widzicie salda według typów, czyli ile urlopu jeszcze zostało. Pod nimi są nadchodzące i zakończone nieobecności.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".col-12.d-flex > .row"
+        },
+        {
+          "type": "zoom",
+          "selector": ".remaining-absence-title:text-is(\"🏖️ Urlop (fundusz dzienny)\")",
+          "value": "1.8",
+          "hold_ms": 2200
+        },
+        {
+          "type": "highlight",
+          "selector": "h6:text-is(\"Nadchodzące nieobecności\")"
+        },
+        {
+          "type": "highlight",
+          "selector": "h6:text-is(\"Zakończone nieobecności\")"
+        }
+      ]
+    },
+    {
+      "id": "s16",
+      "narration": "Klikam Zgłoś nieobecność i w polu Nieobecność wybieram urlop. W menu są tylko typy, które dana osoba ma udostępnione.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "button[data-cy=addAbsenceButton]:text-is(\"Zgłoś nieobecność\")"
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=absenceEventsAutocomplete] input"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-pane [data-cy=autocompleteSearchInput]",
+          "value": "Urlop (fundusz dzienny)",
+          "speed": "fast"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane slnk-common-autocomplete-option"
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container [data-cy=dateFromInput]"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "W kalendarzu wybieram pierwszy i ostatni dzień. Gdyby chodziło tylko o pół dnia, przełączam u góry na Pół dnia.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=dateFromInput]"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-view-mode button"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-year-cell:text-is(\"2026\")"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-picker-row:nth-child(3) nb-calendar-month-cell:nth-child(3)"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-day-cell:not(.bounding-month):text-is(\"23\")"
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=dateToInput]"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-day-cell:not(.bounding-month):text-is(\"25\")"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container nb-toggle[formcontrolname=fullDay]"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container nb-icon[icon=\"check\"]"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Sloneek od razu sprawdza, czy nieobecność z niczym się nie pokrywa, i pokazuje, ile dni odejmie z limitu. Gdyby coś się nie zgadzało, przycisk Utwórz pozostanie nieaktywny.",
+      "actions": [
+        {
+          "type": "zoom",
+          "selector": "nb-dialog-container .info:has(nb-icon[icon=\"check\"])",
+          "value": "1.8",
+          "hold_ms": 2500
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container [data-cy=submitButton]:not([disabled])"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container [data-cy=submitButton]:not([disabled])"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "W notatce wpisuję, kto mnie zastąpi, żeby koledzy wiedzieli. Klikam Utwórz.",
+      "actions": [
+        {
+          "type": "fill",
+          "selector": "nb-dialog-container [data-cy=noteTextarea]",
+          "value": "Zastępuje mnie Piotr."
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=submitButton]:text-is(\"Utwórz\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ],
+      "expect": {
+        "visible": ".upcoming-container span:text-is(\"23.11.2026 - 25.11.2026\")"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Nieobecność jest wśród nadchodzących. Jako administratorka mam zatwierdzenie automatycznie. Wniosek Eli trafiłby do przełożonego i do zatwierdzenia świeciłby na pomarańczowo. Po zatwierdzeniu zmieni kolor na zielony i dopiero wtedy odejmie się od salda.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".upcoming-container span:text-is(\"23.11.2026 - 25.11.2026\")"
+        },
+        {
+          "type": "highlight",
+          "selector": "h6:text-is(\"Nadchodzące nieobecności\")"
+        }
+      ]
+    },
+    {
+      "id": "s21",
+      "narration": "Druga częsta sytuacja: Ela dzwoni rano, że jest chora. Jako administratorka sama zgłoszę jej zwolnienie lekarskie. Klikam Zgłoś nieobecność i przesuwam przełącznik na Inny użytkownik.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "button[data-cy=addAbsenceButton]:text-is(\"Zgłoś nieobecność\")",
+          "before_ms": 1500
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container nb-toggle[data-cy=differentUserToggle]",
+          "before_ms": 1500
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container [data-cy=usersAutocomplete] input"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "W polu Użytkownik wybieram koleżankę, typ Zwolnienie lekarskie i dzisiejszy dzień. Przyciskiem Utwórz zapisujecie zwolnienie i od razu jest w kalendarzu i w danych do płac.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=usersAutocomplete] input"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-pane [data-cy=autocompleteSearchInput]",
+          "value": "Kristýna",
+          "speed": "fast"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane slnk-common-autocomplete-option:text-is(\"Nová Kristýna\")"
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=absenceEventsAutocomplete] input"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-pane [data-cy=autocompleteSearchInput]",
+          "value": "Zwolnienie lekarskie",
+          "speed": "fast"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-pane slnk-common-autocomplete-option"
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=dateFromInput]"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-datepicker-container nb-calendar-day-cell.today"
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container [data-cy=submitButton]:text-is(\"Utwórz\")"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=closeButton]",
+          "before_ms": 800
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "h6:text-is(\"Nadchodzące nieobecności\")"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "Kto akurat jest nieobecny? W menu Kalendarze otwieram kalendarz nieobecności. Mogę filtrować według zespołu albo osób i od razu widzę, czy urlopy w zespole się nie pokrywają.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a.navigation_item:text-is(\"Kalendarze\")"
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/events/absence\"]"
+        },
+        {
+          "type": "navigate",
+          "value": "https://app-pre-production.sloneek.com/app/events/absence?view=resourceTimelineMonth&from=01.11.2026"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "highlight",
+          "selector": "input[placeholder=\"Szybki podgląd\"]"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=filterUsersAutocomplete] input"
+        },
+        {
+          "type": "highlight",
+          "selector": "full-calendar .fc-datagrid-cell.fc-resource:text-is(\"Claver Thomas\")"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=fullCalendar]",
+        "url_contains": "from=01.11.2026"
+      }
+    },
+    {
+      "id": "s24",
+      "narration": "Zostają dane do płac. W Raportach niestandardowych otwieram Podsumowanie złożonych wynagrodzeń. Widzicie wymiar czasu pracy brutto, długość nieobecności i wymiar netto, czyli co zostaje po odjęciu czasu wolnego. Dlatego tak ważny jest wybór Czas wolny albo W pracy.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/custom-reports\"]"
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "highlight",
+          "selector": "a[href=\"/app/custom-reports/579\"]"
+        },
+        {
+          "type": "navigate",
+          "value": "https://app-pre-production.sloneek.com/app/custom-reports/579"
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        },
+        {
+          "type": "highlight",
+          "selector": "th[data-cy=\"crDetail.grid.header.salary_summary_working_fund_gross_hour\"]"
+        },
+        {
+          "type": "highlight",
+          "selector": "th[data-cy=\"crDetail.grid.header.salary_summary_absence_vacation_duration_hour\"]"
+        },
+        {
+          "type": "highlight",
+          "selector": "th[data-cy=\"crDetail.grid.header.salary_summary_working_fund_net_hour\"]"
+        }
+      ],
+      "expect": {
+        "visible": "h1:text-is(\"Podsumowanie złożonych wynagrodzeń\")",
+        "url_contains": "/app/custom-reports/579"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "Dla księgowej ograniczcie raport do aktywnych pracowników. Uwaga, zaznaczenie kolumny Aktywny po lewej jeszcze nie filtruje, wartość Tak wybierzcie przez ikonę filtra przy kolumnie Aktywny w tabeli. Potem wyeksportujecie raport do Excela.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-report-columns-selection-section-item label:text-is(\"Aktywny\")"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=\"crDetail.grid.filterIcon.employee_active\"]"
+        },
+        {
+          "type": "highlight",
+          "selector": "button:text-is(\"Eksport\")",
+          "before_ms": 1000
+        }
+      ],
+      "expect": {
+        "visible": "th[data-cy=\"crDetail.grid.header.employee_active\"]"
+      }
+    },
+    {
+      "id": "s26",
+      "part": 5,
+      "part_title": "Podsumowanie",
+      "narration": "I gotowe. Umiecie już ustawić typ nieobecności, przydzielić limity i zgłosić urlop oraz zwolnienie lekarskie. Oszczędzacie przepisywanie tabel, a księgowa dostaje dane, na których może polegać.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/dashboard\"]"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "highlight",
+          "selector": "h3:text-is(\"Nieobecności\")",
+          "before_ms": 800
+        }
+      ],
+      "expect": {
+        "visible": "h3:text-is(\"Nieobecności\")",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "Jak menedżer zatwierdza wniosek w sekcji Zatwierdzenia, pokażemy w osobnym filmie. Wasze zadanie na dziś: przejrzyjcie typy nieobecności z księgową i uzupełnijcie ludziom Limit na ten rok.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/events/approvals\"]"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/events/approvals\"]"
+        }
+      ]
+    },
+    {
+      "id": "s28",
+      "narration": "Wskazówka na koniec: w Ustawieniach interfejsu, w części Połączone konta, podłączcie Google albo Microsoft. Zatwierdzone nieobecności pojawią się wtedy w kalendarzu Google albo Outlook i nie musicie ich wpisywać dwa razy.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/interface-settings\"]"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "highlight",
+          "selector": "h6:text-is(\"Połączone konta\")"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-common-user-detail-my-integrations button:text-is(\"Sign in with Microsoft\")"
+        }
+      ],
+      "expect": {
+        "visible": "h6:text-is(\"Połączone konta\")",
+        "url_contains": "/app/my-profile/interface-settings"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "Jeśli coś nie zadziała, zajrzyjcie do Centrum pomocy. Następnym razem przyjrzymy się ewidencji czasu pracy. A ja idę sprawdzić, ile dni urlopu mi zostało. Mniej administracji, więcej czasu dla ludzi. To jest Sloneek.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/my-profile/absence-overview\"]",
+          "before_ms": 2500
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".remaining-absence-title:text-is(\"🏖️ Urlop (fundusz dzienny)\")",
+          "before_ms": 1500
+        }
+      ],
+      "expect": {
+        "visible": ".remaining-absence-title:text-is(\"🏖️ Urlop (fundusz dzienny)\")",
+        "url_contains": "/app/my-profile/absence-overview"
+      },
+      "hold_after_ms": 1500
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat absenci 23.–25. 11. 2026 z minulého běhu (1)",
+      "url": "https://app-pre-production.sloneek.com/app/my-profile/absence-overview",
+      "if_visible": ".upcoming-container span:text-is(\"23.11.2026 - 25.11.2026\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".upcoming-container span:text-is(\"23.11.2026 - 25.11.2026\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=deleteButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has([data-cy=cancelButton]) [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat absenci 23.–25. 11. 2026 z minulého běhu (2)",
+      "url": "https://app-pre-production.sloneek.com/app/my-profile/absence-overview",
+      "if_visible": ".upcoming-container span:text-is(\"23.11.2026 - 25.11.2026\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".upcoming-container span:text-is(\"23.11.2026 - 25.11.2026\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=deleteButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has([data-cy=cancelButton]) [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    }
+  ],
+  "_localized": {
+    "from": "recipes/cs/absence.json",
+    "i18n": "i18n/absence.pl.json",
+    "at": "2026-10-09T10:21:47.552Z",
+    "verified": {
+      "date": "2026-10-09",
+      "by": "Claude (BrowserOS, preprod, local-translate=pl)",
+      "selectors": "s04–s25 + s28 projeto nanečisto v PL UI; typ 'Urlop – przykład' na pre-produ založen (pro s11); cleanup (smazání absence 23.–25. 11.) ověřen"
+    }
+  }
+}

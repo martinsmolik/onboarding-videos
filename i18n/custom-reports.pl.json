@@ -1,0 +1,129 @@
+{
+  "_comment": "Polská verze videa Vlastní reporty. UI texty ověřeny naživo na pre-produ s local-translate=pl (9. 10. 2026, Claude přes BrowserOS) proti překladovým souborům aplikace translate_fe/pl. Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM.",
+  "verified": {
+    "date": "2026-10-09",
+    "by": "Claude (BrowserOS, preprod, local-translate=pl)",
+    "selectors": "all text-is targets resolved 1/1 visible; delete dialog opened and cancelled on TEST-REPORT"
+  },
+  "title": "Raporty niestandardowe – zestawienie dokładnie według potrzeb",
+  "thumbnail_title": "Raporty niestandardowe",
+  "parts": {
+    "Úvod": "Wprowadzenie",
+    "Nastavení": "Ustawienia",
+    "Ukázka využití": "Przykład użycia",
+    "Kdo report uvidí": "Kto zobaczy raport",
+    "Závěr": "Podsumowanie"
+  },
+  "text": {
+    "Vlastní reporty": "Raporty niestandardowe",
+    "Předpřipravené": "Gotowe",
+    "Veřejný": "Publiczny",
+    "Komplexní mzdový report": "Podsumowanie złożonych wynagrodzeń",
+    "Zpět": "Wróć",
+    "Vytvořit nový report": "Utwórz nowy raport",
+    "Nový report": "Nowy raport",
+    "Shrnutí": "Streszczenie",
+    "Minulý měsíc": "W zeszłym miesiącu",
+    "Tento rok": "W tym roku",
+    "Uložit report": "Zapisz raport",
+    "Možnosti": "Opcje",
+    "Smazat report": "Usuń raport",
+    "Smazat": "Usunąć",
+    "Čerpání dovolené – přehled": "Wykorzystanie urlopu – przegląd",
+    "Zbývající dovolená všech kolegů za letošní rok.": "Pozostały urlop wszystkich współpracowników w tym roku."
+  },
+  "keep": [
+    "Dovolená",
+    "Leave usage – overview",
+    "Wykorzystanie urlopu – przegląd"
+  ],
+  "steps": {
+    "s01": {
+      "narration": "Ile urlopu zostało pracownikom, kto ma nadgodziny i co wysłać do księgowej? Dzień dobry, jestem Maria z zespołu Sloneek i dziś pokażę Wam raporty niestandardowe."
+    },
+    "s02": {
+      "narration": "Raporty znajdziecie w lewym menu na samym dole, pod pozycją Raporty niestandardowe."
+    },
+    "s03": {
+      "narration": "U góry są zakładki: wszystkie raporty, ulubione, stworzone przeze mnie, publiczne i gotowe. Gotowe raporty wystarczy otworzyć i ewentualnie dostosować."
+    },
+    "s04": {
+      "narration": "Moduł nie wymaga żadnej konfiguracji. Otwieram Podsumowanie złożonych wynagrodzeń."
+    },
+    "s05": {
+      "narration": "U góry wybieram okres, po lewej kolumny, a po prawej od razu widzę dane."
+    },
+    "s06": {
+      "narration": "Raport korzysta z nieobecności, czasu pracy, aktywności i kart użytkowników, więc im staranniej je prowadzicie, tym lepszy macie przegląd."
+    },
+    "s07": {
+      "narration": "Teraz zbudujemy własne zestawienie. Kierownicy chcą wiedzieć, ile urlopu zostało pracownikom. Wracam do listy."
+    },
+    "s08": {
+      "narration": "Klikam Utwórz nowy raport i zaczynam od pustej tabeli."
+    },
+    "s09": {
+      "narration": "W części Uwzględnij dane rozwijam sekcję z nieobecnościami."
+    },
+    "s10": {
+      "narration": "Dla nieobecności mam do wyboru cztery widoki: szczegółowy, streszczenie, typy i dni z pozostałym funduszem. Wybieram Streszczenie, bo interesują mnie limity i salda."
+    },
+    "s11": {
+      "narration": "Zaznaczam nazwę nieobecności, przysługujący limit, wykorzystany limit i pozostały limit. Każda kolumna od razu pojawia się w tabeli."
+    },
+    "s12": {
+      "narration": "U góry przełączam okres na W tym roku, żeby liczby zgadzały się z rocznym limitem."
+    },
+    "s13": {
+      "narration": "Tabela pokazuje teraz wszystkie typy nieobecności. Uwaga na częsty błąd: zaznaczenie kolumny nie filtruje danych, tylko je wyświetla. Filtr to ikona w nagłówku kolumny."
+    },
+    "s14": {
+      "narration": "Klikam ją przy nazwie, wybieram typ urlopu i potwierdzam."
+    },
+    "s15": {
+      "narration": "W prawym górnym rogu klikam Zapisz raport."
+    },
+    "s16": {
+      "narration": "Nazywam go Wykorzystanie urlopu, przegląd, dodaję krótki opis i zaznaczam Upublicznij raport, żeby widzieli go też inni administratorzy. Zapisuję."
+    },
+    "s17": {
+      "narration": "Gotowy raport wyślecie księgowej lub kierownictwu przyciskiem Eksport. Do wyboru jest Excel lub CSV, a eksportowane są tylko przefiltrowane dane."
+    },
+    "s18": {
+      "narration": "A kto zobaczy raport? Upubliczniony raport inni administratorzy znajdą w zakładce Publiczny. Menedżer widzi tylko swój zespół, a pracownik tylko własne dane."
+    },
+    "s19": {
+      "narration": "I gotowe. Umiecie otworzyć gotowy raport, zbudować własny, przefiltrować go, zapisać i wyeksportować. Wskazówka na koniec: w zakładce Zaawansowany pogrupujecie i zsumujecie dane."
+    },
+    "s20": {
+      "narration": "Jeśli coś nie zadziała, zajrzyjcie do Centrum pomocy. Mniej administracji, więcej czasu dla ludzi. To jest Sloneek."
+    }
+  },
+  "cleanup_prepend": [
+    {
+      "name": "smazat report z minulého běhu (CZ)",
+      "url": "https://app-pre-production.sloneek.com/app/custom-reports",
+      "if_visible": "a:text-is(\"Čerpání dovolené – přehled\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "tr:has-text(\"Čerpání dovolené – přehled\") button.p-button-danger",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog button.p-button-danger",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "4000"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1234 @@
+{
+  "id": "work-assets",
+  "version": 1,
+  "title": "Track and hand over work assets",
+  "lang": "en",
+  "app_version": "preprod-2026-10-12",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "en",
+      "assetGridsWrapper": "false"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "7jQ3jNk3Fcw65sWUmzun",
+    "model_id": "eleven_v4"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s25",
+    "title": "Work assets"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Want to know who in your company has which laptop or phone? Hi, I'm Maria from the Sloneek team, and I'll show you how to track and hand over work assets.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Assets\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Assets\")",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Introduction",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "You'll find assets in the left menu, in the Company section, where I expand Assets.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Assets\")",
+          "before_ms": 1200
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Assets\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_management",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_management",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_assets_custom_fields",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "I click Management, and the Management of assets page opens with every asset in the company.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_management",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=assetsManagementPage] h5:text-is(\"Management of assets\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=assets-management-add-button]",
+        "url_contains": "/app/assets/all"
+      },
+      "part": 2,
+      "part_title": "Assets overview"
+    },
+    {
+      "id": "s04",
+      "narration": "For each asset you see the holder, with the acceptance status under their name, and next to it the inventory number and category.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] th.cdk-column-holderNameStatusFormatted",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] th.cdk-column-inventory_number",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] th.cdk-column-categories",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] th.cdk-column-holderNameStatusFormatted",
+        "url_contains": "/app/assets/all"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "Narrow the list down with search, with the Acceptance status filter, for example to assets waiting for confirmation, or by category.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-select button:has-text(\"Acceptance status\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-select button:has-text(\"Category\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-select button:has-text(\"Acceptance status\")",
+        "url_contains": "/app/assets/all"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "The switch at the top right turns on a detailed table, which you can download with the Export to Excel button.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] #users_management_toggle label",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button:has-text(\"Export to Excel\")",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] button:has-text(\"Export to Excel\")",
+        "url_contains": "gridTypeExtended=true"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "I turn the switch off again, and with the Import button you can upload many assets at once from an Excel template.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] #users_management_toggle label",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button:has-text(\"Import\")",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+        "url_contains": "gridTypeExtended=false"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "The orange button then reminds everyone who hasn't confirmed their asset yet to accept it.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button:has-text(\"Remind all unaccepted assets\")",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] button:has-text(\"Remind all unaccepted assets\")",
+        "url_contains": "/app/assets/all"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "I click Categories in the menu, where you set up groups of assets, such as laptops or phones, that you can then filter by.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_categories",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Notebook\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=assetsCategoriesPage] table",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] #assets_categories_add",
+        "url_contains": "/app/assets/categories"
+      },
+      "part": 3,
+      "part_title": "Categories and custom fields"
+    },
+    {
+      "id": "s10",
+      "narration": "You create a new category with the Add button, just give it a name and a color.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] #assets_categories_add",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] #assets_categories_add",
+        "url_contains": "/app/assets/categories"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "I click Custom fields, where you add extra details, such as the manufacturer, a size or a licence expiry date.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_custom_fields",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Producer\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] table",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] #assets_custom_fields_add",
+        "url_contains": "/app/assets/custom-fields"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Each field has its own type, for example text, number, date, a choice from options, or a reminder.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] th.cdk-column-dataTypeFormatted",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] #assets_custom_fields_add",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] th.cdk-column-dataTypeFormatted",
+        "url_contains": "/app/assets/custom-fields"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "In the menu I click Management again, then Add, and the new asset card opens.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_management",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=assets-management-add-button]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetsForm] [data-cy=assetNameInput]",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetAssignHolderButton]",
+        "url_contains": "/app/assets/new/info"
+      },
+      "part": 4,
+      "part_title": "A new asset"
+    },
+    {
+      "id": "s14",
+      "narration": "In the Name field I type what the asset is, here a Lenovo ThinkPad laptop.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=assetsForm] [data-cy=assetNameInput]",
+          "value": "Lenovo ThinkPad T14 – demo",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetAcquisitionDateInput]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "The date of acquisition is prefilled with today, and for an older asset you simply change it.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] [data-cy=assetAcquisitionDateInput]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetAcquisitionDateInput]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "The inventory number is required and must be unique within the company.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=assetsForm] [data-cy=assetInventoryNumberInput]",
+          "value": "DEMO-NB-014",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetSerialNumberInput]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "In Designation I enter the serial number, and if the asset doesn't have one, the lightning button generates a random code.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=assetsForm] [data-cy=assetSerialNumberInput]",
+          "value": "PF-6N9S4Z",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] #assets_management_detail_asset_part_generate_code_button",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] #assets_management_detail_asset_part_generate_code_button",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "I fill in the acquisition price excluding VAT and pick euros as the currency.",
+      "actions": [
+        {
+          "type": "fill",
+          "selector": "[data-cy=assetsForm] [data-cy=assetPriceInput]",
+          "value": "1290",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=assetsForm] [data-cy=assetCurrencySelect] button",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option:text-is(\"EUR\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-option:text-is(\"EUR\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetCurrencySelect] button:text-is(\"EUR\")",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "In the Category field I tick Notebook, and with the plus button next to it you could create a new category right away.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=assetsForm] [data-cy=assetCategoriesSelect] input",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "Note",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Notebook\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] #assets_management_detail_asset_part_create_new_category_button",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] #assets_management_detail_asset_part_create_new_category_button",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "With the Select button you can upload a photo of the asset, so everyone knows right away what it is.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] [data-cy=assetsPhotoUpload]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetsPhotoUpload]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "I'll hand the asset over right away, so I click Assign this asset, and Holder information appears below.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=assetsForm] [data-cy=assetAssignHolderButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetsForm] [data-cy=holderAutocomplete]",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] [data-cy=holderAutocomplete]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetNoteInput]",
+        "url_contains": "/app/assets/new/info"
+      },
+      "part": 5,
+      "part_title": "Handover to an employee"
+    },
+    {
+      "id": "s22",
+      "narration": "As the holder I choose my colleague Olivia Brown.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=assetsForm] [data-cy=holderAutocomplete] input",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "Olivia",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Brown Olivia\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=holderAutocomplete] [data-cy=autocompleteClearButton]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "I leave the asset status at New and the handover date at today.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] nb-select[formcontrolname=condition]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] [data-cy=assetHandoverDateInput]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetHandoverDateInput]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s24",
+      "narration": "In the note I write what Olivia gets with the laptop, because the note goes into the handover protocol.",
+      "actions": [
+        {
+          "type": "fill",
+          "selector": "[data-cy=assetsForm] [data-cy=assetNoteInput]",
+          "value": "Handed over with a charger and a bag.",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=saveFormButton]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "I click Save, and the asset is created together with its holder.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=saveFormButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetEditHolderButton]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] [data-cy=holderAutocomplete]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=holderAutocomplete] input[disabled]",
+        "url_contains": "/info"
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "The holder then accepts the asset in the app with an electronic signature, or rejects it, and until then it waits for confirmation.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] [data-cy=holderAutocomplete]",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "#assets_management_detail_holder_part_reset_acceptance_button",
+        "url_contains": "/info"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "If they put off accepting it, the arrow button sends them the acceptance request again.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "#assets_management_detail_holder_part_reset_acceptance_button",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": "#assets_management_detail_holder_part_reset_acceptance_button",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "#assets_management_detail_holder_part_reset_acceptance_button",
+        "url_contains": "/info"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "I click the Expanded tab, where you fill in the custom fields you prepared earlier.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=assetDetailTabExtendedInfo] a",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=\"customFieldInput-Producer\"]",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] form:has([data-cy=\"customFieldInput-Producer\"])",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=\"customFieldInput-Producer\"]",
+        "url_contains": "/extended-info"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "I click the History tab, where you'll find the handover protocols and an audit log that records every change to the asset.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=assetDetailTabHistory] a",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] table:has-text(\"Protocol type\")",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] table:has-text(\"Protocol type\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] table:has-text(\"Protocol type\")",
+        "url_contains": "/history"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "You'll find the employee's view in the Me section of the menu, where I expand My assets and click Overview.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"My assets\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_assets",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_assets",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=myAssetsPage] tr[data-cy=tableRow]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=myAssetsPage] [data-cy=assetAcceptButton]",
+        "url_contains": "/app/assets/my/assets"
+      },
+      "part": 6,
+      "part_title": "Acceptance and return"
+    },
+    {
+      "id": "s301",
+      "narration": "Here employees see their assets and confirm a pending handover with the Accept button.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=myAssetsPage] [data-cy=assetAcceptButton]",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=myAssetsPage] [data-cy=assetAcceptButton]",
+        "url_contains": "/app/assets/my/assets"
+      }
+    },
+    {
+      "id": "s31",
+      "narration": "In the Assets section I click Handover Protocols, where you have the signed handover and return protocols from the whole company.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_protocols",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] h5:text-is(\"Protocols on the acceptance and return of assets\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] h5:text-is(\"Protocols on the acceptance and return of assets\")",
+        "url_contains": "/app/assets/protocols"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "I click Management again and open an asset the holder has already accepted, for example a company car.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_management",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Kia Sportage 2020\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetRequestReturnButton]",
+          "value": "20000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetRequestReturnButton]",
+        "url_contains": "/app/assets/418f4ea2-7148-460f-be02-b696ea6a286d/info"
+      }
+    },
+    {
+      "id": "s321",
+      "narration": "In its detail you can request its return, which the holder signs, or return it straight to stock without a protocol.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetRequestReturnButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetReturnWithoutFlowButton]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetReturnWithoutFlowButton]",
+        "url_contains": "/app/assets/418f4ea2-7148-460f-be02-b696ea6a286d/info"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "You'll also find one person's assets on their user card, so in the menu I expand Users and click Management.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_staff",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] input[placeholder=\"Search...\"]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] input[placeholder=\"Search...\"]",
+        "url_contains": "/app/settings/users"
+      },
+      "part": 7,
+      "part_title": "User card and permissions"
+    },
+    {
+      "id": "s331",
+      "narration": "I type Brown into the search and click the name to open Olivia's card.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[placeholder=\"Search...\"]",
+          "value": "Brown",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Inactive\") td:first-child span:text-is(\"Brown Olivia\")",
+          "value": "10000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Inactive\") td:first-child span:text-is(\"Brown Olivia\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/company-details/member/3400dd35-a346-41ab-b593-2c55448a631f/assets\"]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+        "url_contains": "/member/3400dd35-a346-41ab-b593-2c55448a631f/work-data"
+      }
+    },
+    {
+      "id": "s332",
+      "narration": "I click the Assets tab and see the laptop we just handed over to Olivia.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/company-details/member/3400dd35-a346-41ab-b593-2c55448a631f/assets\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=companyMemberAssets] span.text-dark:text-is(\"Lenovo ThinkPad T14 – demo\")",
+          "value": "20000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=companyMemberAssets] nb-card:has-text(\"Lenovo ThinkPad T14 – demo\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=companyMemberAssets] span.text-dark:text-is(\"Lenovo ThinkPad T14 – demo\")",
+        "url_contains": "/member/3400dd35-a346-41ab-b593-2c55448a631f/assets"
+      }
+    },
+    {
+      "id": "s34",
+      "narration": "To decide who can manage assets, click Basic and work data and choose Asset manager in the Special user rights field.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/company-details/member/3400dd35-a346-41ab-b593-2c55448a631f/work-data\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+        "url_contains": "/work-data"
+      }
+    },
+    {
+      "id": "s35",
+      "narration": "Now you know how to track assets, hand them over to employees and look up their history, and if something doesn't work, check the Help Center.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+        "url_contains": "/work-data"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "Less admin, more time for people. This is Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+        "url_contains": "/work-data"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat CS pomůcku 'Lenovo ThinkPad T14 – ukázka' – jen při právě 1 řádku s přesným názvem po hledání, detail s tímtéž názvem v hlavičce, dialog 'Remove work asset' (jazyk UI) s držitelkou 'Králová Lucie'; když pomůcka neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/assets/all",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+          "value": "Lenovo ThinkPad T14 – ukázka",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – ukázka\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – ukázka\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetsDetailPage]:has-text(\"Lenovo ThinkPad T14 – ukázka\") >> [data-cy=assetDeleteButton]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=assetDeleteButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Remove work asset\"):has-text(\"Králová Lucie\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Remove work asset\"):has-text(\"Králová Lucie\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "smazat PL pomůcku 'Lenovo ThinkPad T14 – przykład' – jen při právě 1 řádku s přesným názvem po hledání, detail s tímtéž názvem v hlavičce, dialog 'Remove work asset' (jazyk UI) s držitelkou 'Wiśniewska Zofia'; když pomůcka neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/assets/all",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+          "value": "Lenovo ThinkPad T14 – przykład",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – przykład\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – przykład\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – przykład\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetsDetailPage]:has-text(\"Lenovo ThinkPad T14 – przykład\") >> [data-cy=assetDeleteButton]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=assetDeleteButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Remove work asset\"):has-text(\"Wiśniewska Zofia\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Remove work asset\"):has-text(\"Wiśniewska Zofia\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "smazat pomůcku 'Lenovo ThinkPad T14 – ukázka' – jen při právě 1 řádku s přesným názvem po hledání, detail s tímtéž názvem v hlavičce, dialog 'Odstranění pracovní pomůcky' s držitelkou 'Králová Lucie' (název pomůcky dialog neobsahuje); když pomůcka neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/assets/all",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+          "value": "Lenovo ThinkPad T14 – demo",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – demo\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – demo\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – demo\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetsDetailPage]:has-text(\"Lenovo ThinkPad T14 – demo\") >> [data-cy=assetDeleteButton]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=assetDeleteButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Remove work asset\"):has-text(\"Brown Olivia\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Remove work asset\"):has-text(\"Brown Olivia\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-12",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "holder": "Lucie Králová <lucie.kralova@example.com> (0c9409f2-fc6e-475b-b2b1-2e791b4a7a83), NEAKTIVNÍ – trvalá (z org-chart)",
+      "created_by_recipe": "pomůcka 'Lenovo ThinkPad T14 – ukázka' (inv. č. UKAZKA-NB-014, sériové č. PF-4K7Q2X, 32000 CZK, kategorie Notebook, držitelka Lucie, stav Nový, poznámka 'Předáno s nabíječkou a brašnou.') – maže cleanup",
+      "read_only": "pomůcka 'Kia Sportage 2020' (418f4ea2-7148-460f-be02-b696ea6a286d, držitel admin Claver Thomas, Přijata) – v s32 jen zvýraznění tlačítek vrácení; Moje pomůcky admina musí mít aspoň 1 čekající pomůcku (tlačítko Přijmout, s30)"
+    },
+    "notes": "viz atlas/work-assets.md (sekce 5 a 8)"
+  },
+  "_localized": {
+    "from": "recipes/cs/work-assets.json",
+    "i18n": "i18n/work-assets.en.json",
+    "at": "2026-10-12T13:04:49.298Z",
+    "verified": {
+      "date": "2026-10-12",
+      "by": "Claude (BrowserOS, preprod, local-translate=en, in-page runner out/work-assets-en/_work/dryrun-runner.js; recept z out/work-assets-en/_work/dryrun-R.json)",
+      "selectors": "Dry-run 40/40 (s331 řádek „Brown Olivia / Inactive“ ověřen ručně jako u PL). Cleanup po: vlastní blok smazal EN pomůcku (dialog „Remove work asset“ s Brown Olivia). Zkouška skutečným recorderem (job 061, mock hlas) 40/40 ok; cleanup_prepend PL bloku v EN UI smazal „Lenovo ThinkPad T14 – przykład“ ze zkoušky 060.",
+      "notes": "Živé EN popisky: Company → Assets (Management, Handover Protocols, Categories, Custom fields); Me → My assets → Overview; Users → Management; nadpis Management of assets; Acceptance status, Category, Export to Excel, Import, Remind all unaccepted assets; Assets categories + Add; Assets Custom fields; formulář Name, Date of acquisition, Inventory number, Designation (serial number), Acquisition price (excluding VAT), Currency (výchozí EUR, recept vybere EUR), Category, A photo/Select, Assign this asset, Holder information, Holder, Asset status = 1 - New, Handover date, Note (visible in protocol), Save; detail Information / Expanded / History, Protocol type, Request the return of the asset, Return the asset without a handover protocol; Overview of my assets + Accept; Protocols on the acceptance and return of assets; Search..., Inactive; karta Basic and work data, Assets, Special user rights → Asset manager."
+    }
+  }
+}

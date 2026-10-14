@@ -1,0 +1,1069 @@
+{
+  "id": "org-chart",
+  "version": 1,
+  "title": "Vytvořte organizační schéma",
+  "lang": "cs",
+  "app_version": "preprod-2026-10-12",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "cs",
+      "teams-management-page": "{\"view\":\"tree\"}"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "bF7C2fCv7Zf30iT84wZ1",
+    "model_id": "eleven_v4"
+  },
+  "pronunciation": [
+    {
+      "match": "PNG",
+      "say": "pé en gé",
+      "note": "formát obrázku"
+    }
+  ],
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s19",
+    "title": "Organizační schéma"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Chcete, aby každý kolega hned věděl, kdo je jeho vedoucí? Dobrý den, jsem Marie z týmu Sloneek a ukážu vám, jak vytvořit organizační schéma.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_teams",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_teams",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Úvod",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Organizační schéma najdete v levém menu v sekci Společnost pod položkou Týmy.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_teams",
+          "before_ms": 1200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_teams",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_teams",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "Kliknu na Týmy a otevře se stránka Týmy a organizační struktura.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_teams",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=\"teamNode-Zákaznická podpora\"]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] h5:text-is(\"Týmy a organizační struktura\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=addTeamButton]",
+        "url_contains": "/company-details/teams/tree"
+      },
+      "part": 2,
+      "part_title": "Jak schéma číst"
+    },
+    {
+      "id": "s04",
+      "narration": "Každý rámeček je jeden tým: nahoře jsou lidé s rolí v týmu, pod čarou členové a v závorce jejich pozice.",
+      "actions": [
+        {
+          "type": "zoom",
+          "selector": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Management & Board\"])",
+          "value": "1.3",
+          "before_ms": 300,
+          "hold_ms": 4200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Management & Board\"]) hr",
+        "url_contains": "/company-details/teams/tree"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "Když vypnete Zobrazit uživatele, uvidíte jen kostru firmy, tedy které týmy patří pod které.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=showUsersCheckbox] label",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Management & Board\"]):not(:has(.sloneek-org-chart-user))",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=teamsOrgChart]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Management & Board\"]):not(:has(.sloneek-org-chart-user))",
+        "url_contains": "/company-details/teams/tree"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "Zařazení určuje u každého týmu pole Nadřazený tým, a tým bez něj stojí samostatně, jako tady Zákaznická podpora.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Management & Board\"])",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Zákaznická podpora\"])",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Zákaznická podpora\"])",
+        "url_contains": "/company-details/teams/tree"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "Uživatele zase zapnu a kliknutím na Přidat otevřu formulář Vytvořit tým.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=showUsersCheckbox] label",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Management & Board\"]) .sloneek-org-chart-user",
+          "value": "8000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=addTeamButton]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=teamForm] [data-cy=nameInput]",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=creationSidebarHeader]:has-text(\"Vytvořit tým\")",
+        "url_contains": "/company-details/teams/tree"
+      },
+      "part": 3,
+      "part_title": "Nový tým"
+    },
+    {
+      "id": "s08",
+      "narration": "Do pole Název napíšu jméno nového týmu, Technická podpora.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=teamForm] [data-cy=nameInput]",
+          "value": "Technická podpora",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=teamForm] [data-cy=teamDescriptionTextarea]",
+        "url_contains": "/company-details/teams/tree"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "Do popisu napíšu, čím se tým zabývá, a ten si pak přečte každý, kdo na tým klikne.",
+      "actions": [
+        {
+          "type": "fill",
+          "selector": "[data-cy=teamForm] [data-cy=teamDescriptionTextarea]",
+          "value": "Řeší technické dotazy zákazníků k aplikaci.",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=teamForm] [data-cy=parentTeamAutocomplete]",
+        "url_contains": "/company-details/teams/tree"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "V poli Nadřazený tým vyberu Zákaznickou podporu, takže se nový tým zařadí pod ni.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=teamForm] [data-cy=parentTeamAutocomplete] input",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "Zákaznická",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Zákaznická podpora\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=teamForm] [data-cy=parentTeamAutocomplete] [data-cy=autocompleteClearButton]",
+        "url_contains": "/company-details/teams/tree"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "Jako manažera vyberu Tomáše Nováka, který bude týmu schvalovat absence.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=teamForm] [data-cy=teamManagerAutocomplete] input",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "Tomáš",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Novák Tomáš\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=teamForm]:has-text(\"Novák Tomáš - tomas.novak@example.com\")",
+        "url_contains": "/company-details/teams/tree"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Do pole Členové týmu přidám kolegyni Lucii Královou.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=teamForm] [data-cy=teamMembersAutocomplete] input",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "Lucie",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Králová Lucie\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=teamForm]:has-text(\"Králová Lucie - lucie.kralova@example.com\")",
+        "url_contains": "/company-details/teams/tree"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "Níž jsou další role, třeba supervizor, který dění v týmu jen sleduje, nebo schvalovatelé docházky a absencí.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=teamForm] [data-cy=supervisorsAutocomplete]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=teamForm] [data-cy=attendanceApproverAutocomplete]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=teamForm] [data-cy=absenceApproverAutocomplete]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=teamForm] [data-cy=absenceApproverAutocomplete]",
+        "url_contains": "/company-details/teams/tree"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "Když tým manažera nemá, žádosti jeho členů o schválení dostanou všichni administrátoři.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=teamForm] [data-cy=teamManagerAutocomplete]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=teamForm] [data-cy=submitButton]",
+        "url_contains": "/company-details/teams/tree"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Kliknu na Uložit a u Zákaznické podpory přibude šipka, pod kterou je nový tým schovaný.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=teamForm] [data-cy=submitButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-org-chart-designer:has([data-cy=\"teamNode-Zákaznická podpora\"]) .children-button button",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Zákaznická podpora\"])",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-common-org-chart-designer:has([data-cy=\"teamNode-Zákaznická podpora\"]) .children-button button",
+        "url_contains": "/company-details/teams/tree"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "Šipkou větev rozbalím a Technická podpora visí pod Zákaznickou podporou.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-org-chart-designer:has([data-cy=\"teamNode-Zákaznická podpora\"]) .children-button button",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-org-chart-designer:has([data-cy=\"teamNode-Zákaznická podpora\"]) [data-cy=\"teamNode-Technická podpora\"]",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technická podpora\"])",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-common-org-chart-designer:has([data-cy=\"teamNode-Zákaznická podpora\"]) [data-cy=\"teamNode-Technická podpora\"]",
+        "url_contains": "/company-details/teams/tree"
+      },
+      "part": 4,
+      "part_title": "Tým ve schématu"
+    },
+    {
+      "id": "s17",
+      "narration": "Tomáš ani Lucie tu zatím nejsou, protože schéma ve výchozím stavu ukazuje jen aktivní uživatele.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=showEnabledUsersOnlyCheckbox]",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technická podpora\"]):not(:has(.sloneek-org-chart-user a))",
+        "url_contains": "/company-details/teams/tree"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Když vypnete Zobrazit pouze aktivní, uvidíte i neaktivní lidi s červenou tečkou, třeba nováčky před nástupem.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=showEnabledUsersOnlyCheckbox] label",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technická podpora\"]) [data-cy=\"teamUserNode-Králová Lucie\"]",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technická podpora\"])",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technická podpora\"]) [data-cy=\"teamUserNode-Králová Lucie\"]",
+        "url_contains": "/company-details/teams/tree"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "Tomáš má u jména ikonku manažera a Lucie je pod čarou jako členka týmu i se svou pozicí.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technická podpora\"]) .sloneek-org-chart-user:has(.fa-user-tie)",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technická podpora\"]) .sloneek-org-chart-user:has([data-cy=\"teamUserNode-Králová Lucie\"])",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technická podpora\"]) .sloneek-org-chart-user:has([data-cy=\"teamUserNode-Novák Tomáš\"]) .fa-user-tie",
+        "url_contains": "/company-details/teams/tree"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Přepínačem nahoře schéma otočíte, takže se větve rozloží zleva doprava.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=horizontalViewToggle] label",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-self-horizontal",
+          "value": "5000"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technická podpora\"])",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-self-horizontal",
+        "url_contains": "/company-details/teams/tree"
+      },
+      "part": 5,
+      "part_title": "Zobrazení a export"
+    },
+    {
+      "id": "s21",
+      "narration": "Vrátím původní pohled a zaškrtávátkem Zobrazit pozice pak můžete pozice v závorkách skrýt.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=horizontalViewToggle] label",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-self-vertical",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=showPositionsCheckbox]",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-self-vertical",
+        "url_contains": "/company-details/teams/tree"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "Tlačítky vpravo větve sbalíte nebo rozbalíte a přes Stáhnout PNG si schéma uložíte jako obrázek.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=collapseAllButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=expandAllButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] #new_dashboard_company_teams_download",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] #new_dashboard_company_teams_download",
+        "url_contains": "/company-details/teams/tree"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "Kliknutím na název týmu otevřu jeho detail s popisem, manažerem a členy.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-org-chart-designer:has([data-cy=\"teamNode-Zákaznická podpora\"]) [data-cy=\"teamNode-Technická podpora\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=teamDetailPanel] [data-cy=teamNameH]:text-is(\"Technická podpora\")",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=teamDetailPanel]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=teamDetailPanel] [data-cy=teamDescriptionAlert]:has-text(\"Řeší technické dotazy zákazníků k aplikaci.\")",
+        "url_contains": "team_id="
+      },
+      "part": 6,
+      "part_title": "Detail týmu a lidí"
+    },
+    {
+      "id": "s24",
+      "narration": "Tlačítkem s tužkou tým kdykoli upravíte, a když změníte nadřazený tým, schéma se samo přeskládá.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=teamDetailPanel] [data-cy=editButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=creationSidebarHeader]:has-text(\"Upravit tým\")",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=teamForm] [data-cy=parentTeamAutocomplete]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=teamForm]:has-text(\"Králová Lucie - lucie.kralova@example.com\")",
+        "url_contains": "/company-details/teams/tree"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "Formulář zavřu bez změn a kliknu na Lucii, abych viděla její pozici a kontakty.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=creationSidebarHeader] [data-cy=closeButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technická podpora\"]) [data-cy=\"teamUserNode-Králová Lucie\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=teamsUserDetailPanel]:has-text(\"lucie.kralova@example.com\")",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=teamsUserDetailPanel]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=teamsUserDetailPanel]:has-text(\"Specialista zákaznické podpory\")",
+        "url_contains": "team_user_id="
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "Přes jméno se proklikám do karty uživatele, kde v poli Pozice nastavíte, co se ve schématu ukáže v závorce.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=teamsUserDetailPanel] #company_teams_detail_navigate_to_user_profile",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=positionSelect]:has-text(\"Specialista zákaznické podpory\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=positionSelect]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=positionSelect]:has-text(\"Specialista zákaznické podpory\")",
+        "url_contains": "/member/0c9409f2-fc6e-475b-b2b1-2e791b4a7a83/work-data"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "Pole Tým ukazuje, kam Lucie patří, a každý uživatel může být členem jen jednoho týmu, roli ale může mít ve více týmech.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=teamsSelect]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=teamsSelect]:has-text(\"Technická podpora\")",
+        "url_contains": "/work-data"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "Nové pozice přidáte přes odkaz Nastavení pozic, který vede do sekce Pozice a kompetence.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/performance-evaluation/positions\"]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] a[href=\"/app/performance-evaluation/positions\"]",
+        "url_contains": "/work-data"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "V levém menu kliknu zpátky na Týmy a jsem znovu u schématu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_teams",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_teams",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=switchToGridButton]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=switchToGridButton]",
+        "url_contains": "/company-details/teams/tree"
+      },
+      "part": 7,
+      "part_title": "Tabulka"
+    },
+    {
+      "id": "s291",
+      "narration": "Kliknu na Přepnout na tabulku a týmy i lidi uvidíte jako seznam.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=switchToGridButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=teamsGrid] [data-cy=\"gridTeamRow-Infinity Beans Ltd.\"]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=switchToTreeButton]",
+        "url_contains": "/company-details/teams/grid"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "Lidi i celé týmy tu mezi týmy přesunete přetažením za úchyt vlevo.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=teamsGrid] .ag-row[row-index=\"1\"] .ag-drag-handle",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=teamsGrid] .ag-center-cols-container .ag-row[row-index=\"1\"]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=teamsGrid] .ag-row[row-index=\"1\"] .ag-drag-handle",
+        "url_contains": "/company-details/teams/grid"
+      }
+    },
+    {
+      "id": "s31",
+      "narration": "Tlačítkem Přepnout na strom se vrátíte zpátky ke schématu.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=switchToTreeButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=\"teamNode-Zákaznická podpora\"]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=addTeamButton]",
+        "url_contains": "/company-details/teams/tree"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "Kdo všechno schéma uvidí, se nastavuje jinde, a tak v levém menu kliknu na Nastavení.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_application",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_settings_application",
+        "url_contains": "/app/settings/dashboard"
+      },
+      "part": 8,
+      "part_title": "Oprávnění a závěr"
+    },
+    {
+      "id": "s321",
+      "narration": "V rozbalené nabídce otevřu Nastavení aplikace a najdu volbu pro týmovou strukturu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_application",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_application",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] nb-checkbox[formcontrolname=is_allow_to_see_team_structure_to_all_employees]",
+          "value": "20000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-checkbox[formcontrolname=is_allow_to_see_team_structure_to_all_employees]",
+        "url_contains": "/app/settings/application"
+      }
+    },
+    {
+      "id": "s322",
+      "narration": "Volba Zobrazit týmovou strukturu všem uživatelům určuje, jestli schéma uvidí i zaměstnanci.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-checkbox[formcontrolname=is_allow_to_see_team_structure_to_all_employees]",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-checkbox[formcontrolname=is_allow_to_see_team_structure_to_all_employees]",
+        "url_contains": "/app/settings/application"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "Zaměstnanci pak schéma jen prohlížejí a hned najdou svého manažera, týmy a role nastavuje administrátor.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_teams",
+          "before_ms": 800
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_teams",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_teams",
+        "url_contains": "/app/settings/application"
+      }
+    },
+    {
+      "id": "s34",
+      "narration": "Kontakty na všechny kolegy pak lidé najdou na stránce Kolegové, hned nad Týmy.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_colleagues",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_colleagues",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_colleagues",
+        "url_contains": "/app/settings/application"
+      }
+    },
+    {
+      "id": "s35",
+      "narration": "Teď umíte vytvořit tým, zařadit ho do schématu a nastavit mu manažera i členy, a kdyby něco nešlo, mrkněte do Centra nápovědy.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_teams",
+        "url_contains": "/app/settings/application"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "Méně administrativy, víc času na lidi. To je Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_teams",
+        "url_contains": "/app/settings/application"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat tým 'Technická podpora' – jen podřízený tým 'Zákaznická podpora' (selektor přes designer rodiče), jméno v detailu týmu přesně 'Technická podpora', dialog 'Odstranění týmu' (název neobsahuje); když tým neexistuje, wait_ready selže a blok se přeskočí. Členové spadnou do kořene (Lucie bez týmu = výchozí stav)",
+      "url": "https://app-pre-production.sloneek.com/app/company-details/teams/tree",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=addTeamButton]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=\"teamNode-Zákaznická podpora\"]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=showUsersCheckbox] label",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-org-chart-designer:has([data-cy=\"teamNode-Zákaznická podpora\"]) [data-cy=\"teamNode-Technická podpora\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-org-chart-designer:has([data-cy=\"teamNode-Zákaznická podpora\"]) [data-cy=\"teamNode-Technická podpora\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=teamDetailPanel] [data-cy=teamNameH]:text-is(\"Technická podpora\")",
+          "value": "8000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=teamDetailPanel] [data-cy=editButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=creationSidebarHeader]:has-text(\"Upravit tým\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=teamForm]:has-text(\"Králová Lucie - lucie.kralova@example.com\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=teamForm] [data-cy=deleteButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Odstranění týmu\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Odstranění týmu\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-12",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "manager": "Tomáš Novák <tomas.novak@example.com> (a8c8fa35-ed76-4867-8f26-0b3d41b768ac), NEAKTIVNÍ – trvalý (z add-users), člen týmu 'Zákaznická podpora'",
+      "member": "Lucie Králová <lucie.kralova@example.com> (0c9409f2-fc6e-475b-b2b1-2e791b4a7a83), NEAKTIVNÍ – trvalá, založena 12. 10. 2026 pro toto video, pozice Specialista zákaznické podpory, bez týmu",
+      "parent_team": "Zákaznická podpora (cb6676b2-ae10-456a-b2ef-9f82af7ff928) – trvalý z add-users",
+      "created_by_recipe": "tým 'Technická podpora' (Nadřazený tým Zákaznická podpora, manažer Tomáš, členka Lucie, popis 'Řeší technické dotazy zákazníků k aplikaci.') – maže cleanup"
+    },
+    "notes": "viz atlas/org-chart.md (sekce 5 a 8)"
+  }
+}

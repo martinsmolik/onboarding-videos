@@ -1,0 +1,150 @@
+{
+  "_comment": "Anglická verze videa Absence. UI texty z translate_fe/en + ověřeno naživo (local-translate=en, 9. 10. 2026). Narace country-neutral (s03). Fiktivní zaměstnankyně Emma. Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM.",
+  "verified": {
+    "date": "2026-10-09",
+    "by": "Claude (BrowserOS, preprod, local-translate=en, in-page runner: CSS + :text-is/:has-text, wait 10 s visible, pointer/mouse events at elementFromPoint of centre, execCommand insertText / native setter for fill)",
+    "selectors": "all 29 steps passed (every action target and expect.visible resolved and visible, url_contains ok); s06 EN UI translation fields: cs=nth-child(1), de=2, es=3, hu=4, it=5, pl=6, sk=7 → override nth-child(2)→(1); s16 'Vacation (days)' → single option '🏖️ Vacation (days)'; s22 'Kristýna' → 'Nová Kristýna', 'Sick leave' → '🏥 Sick leave' (dialog closed without saving, no POST); dates in EN UI are MM/DD/YYYY ('11/23/2026 - 11/25/2026')",
+    "demo_type": "'Vacation – demo' created once in EN UI (plain Save): Free time, Days and a half days, Annual fund 20 Days, unused units transferred, Event timeout 7; translations cs 'Dovolená – ukázka', sk 'Dovolenka – ukážka'; id ebd7cd08-09c0-4b9e-a27b-b756d4cc247c",
+    "cleanup": "recipe cleanup (data-cy delete + confirm) verified in EN: a leftover 11/23–11/25/2026 absence found before the run was deleted, the dry-run one too; tenant left clean"
+  },
+  "title": "Absence – vacation without spreadsheets",
+  "thumbnail_title": "Absence without spreadsheets",
+  "parts": {
+    "Úvod": "Introduction",
+    "Nastavení": "Setup",
+    "Ukázka využití": "Example use",
+    "Závěr": "Wrap-up"
+  },
+  "text": {
+    "Přehled - Následujících 14 dní": "Overview - Next 14 days",
+    "Zobrazit": "View",
+    "Události absence": "Absence events",
+    "Přidat": "Add",
+    "Dovolená – ukázka": "Vacation – demo",
+    "Vacation – demo": "Dovolená – ukázka",
+    "Zobraz překlad": "Display translates",
+    "Nová absence": "New absence",
+    "Volno (krátí odpracovanou dobu)": "Free time (reduces working hours)",
+    "Uložit pro všechny uživatele": "Save for all users",
+    "Uložit": "Save",
+    "Zpět": "Back",
+    "Jméno Filter Input": "Name Filter Input",
+    "🏖️ Dovolená (denní fond)": "🏖️ Vacation (days)",
+    "Dovolená (denní fond)": "Vacation (days)",
+    "Nadcházející absence": "Upcoming absences",
+    "Již ukončené absence": "Already finished absences",
+    "Vytvořit": "Create",
+    "23.11.2026 - 25.11.2026": "11/23/2026 - 11/25/2026",
+    "Nemocenská": "Sick leave",
+    "Kalendáře": "Calendars",
+    "Rychlý pohled": "Quick preview",
+    "Komplexní mzdový report": "Complex Salary Report",
+    "Aktivní": "Active",
+    "Export": "Export",
+    "Absence": "Absences",
+    "Propojené účty": "Connected accounts",
+    "Zastupuje mě Petr.": "Peter is covering for me."
+  },
+  "keep": [
+    "Dovolená",
+    "Dovolenka – ukážka",
+    "Claver",
+    "Claver Thomas",
+    "Kristýna",
+    "Nová Kristýna",
+    "2026",
+    "Sign in with Microsoft"
+  ],
+  "steps": {
+    "s01": {
+      "narration": "Vacation in Excel, sick leave in an email, and at the end of the month, chasing the details for payroll? Let's make it simpler. I'm Maria from the Sloneek team, and today I'll walk you through the Absence module."
+    },
+    "s02": {
+      "narration": "In Sloneek, you have vacation, sick leave and sick days all in one place. Employees request time off themselves, their manager approves it, and the data is ready for payroll straight away."
+    },
+    "s03": {
+      "narration": "Labour law in most European countries guarantees at least four weeks of paid leave a year. When the system calculates the balances, there's no more retyping and no more mistakes. In a few minutes, we'll cover the setup, logging an absence, and the payroll reports."
+    },
+    "s04": {
+      "narration": "First, let's set up the module. One prerequisite: every employee needs working hours assigned in Work contracts setup. Without them, the system doesn't know their working fund and can't calculate their absences. You'll find a guide in our video on working hours."
+    },
+    "s05": {
+      "narration": "In Settings, I open Absence. Here are all the absence types your company uses. Admins and HR have access here. Note that the list only shows active types; you'll find inactive ones using the filter at the top."
+    },
+    "s06": {
+      "narration": "I click Add and create a new type. The internal name will be Vacation – demo. I'll also fill in the name employees will see, in English, Czech and Slovak.",
+      "selectors": {
+        "slnk-common-translates-form-group-inputs div.ng-trigger > div.form-group:nth-child(2) > input": "slnk-common-translates-form-group-inputs div.ng-trigger > div.form-group:nth-child(1) > input"
+      }
+    },
+    "s07": {
+      "narration": "Now comes the choice that affects payroll: the type. Free time reduces working hours; that's for vacation or sick leave. At work doesn't change the hours worked, which is handy, for example, for a sick day the company pays as regular work. For vacation, I choose Free time."
+    },
+    "s08": {
+      "narration": "Under Time unit of drawing, I choose Days and a half days, so people can also take half a day off. I turn on Annual fund, set twenty days, and unused days will carry over to the new year."
+    },
+    "s09": {
+      "narration": "I leave Health reasons off. You tick it for sick leave or care for a family member, which are counted in calendar days. Under Event timeout, I set seven, so vacation has to be requested at least a week in advance."
+    },
+    "s10": {
+      "narration": "Watch out for a common mistake. You can't change the time unit or the annual fund once the type has been created. If you get it wrong, don't delete the type. Deactivate it, so the history is kept, and create a new one."
+    },
+    "s11": {
+      "narration": "When saving, you have two buttons. Save for all users makes the type available to the whole company, so colleagues in other countries might suddenly see a vacation type that isn't meant for them. That's why clicking just Save is enough. I've already saved this type, so I'll close the form, and here it is in the list."
+    },
+    "s12": {
+      "narration": "Who gets the type, and how much of it, you set in Bulk setting of absences. Each person has a row here for every absence type. In the Allowed column, you make the absence available to them, and in the Approval required column, you decide whether their manager has to approve it."
+    },
+    "s13": {
+      "narration": "Switching to Sloneek in the middle of the year? Then mainly fill in Fund for this year, meaning how many days the person is entitled to this year. Keep Individual fund for real exceptions only, such as longer leave for management."
+    },
+    "s14": {
+      "narration": "Now let's put it into practice. Emma from sales wants to take three days of vacation. Employees log absences themselves, and I'll show you on my own account; Emma sees exactly the same. In the left menu, I open My absences."
+    },
+    "s15": {
+      "narration": "At the top, you see the balances by type, so how much vacation is still left. Below them are the upcoming and already finished absences."
+    },
+    "s16": {
+      "narration": "I click New absence and choose vacation in the Absence field. The list only offers the types that person is allowed to use."
+    },
+    "s17": {
+      "narration": "In the calendar, I pick the first and the last day. If it were just a morning, I'd switch to Half-day at the top."
+    },
+    "s18": {
+      "narration": "Sloneek immediately checks that the absence doesn't overlap with anything, and shows how many days will be deducted from the fund. If something doesn't add up, the Create button stays inactive."
+    },
+    "s19": {
+      "narration": "In the note, I write who's covering for me, so my colleagues know. Then I click Create."
+    },
+    "s20": {
+      "narration": "The absence is now among the upcoming ones. As an admin, mine is approved automatically. Emma's request would go to her manager and show in orange until it's approved. Once approved, it turns green, and only then is it deducted from the balance."
+    },
+    "s21": {
+      "narration": "Another common situation: Emma calls in the morning to say she's sick. As an admin, I'll log her sick leave myself. I click New absence and switch the toggle to Another user."
+    },
+    "s22": {
+      "narration": "In the User field, I pick my colleague, then the type Sick leave, and today's date. Clicking Create saves the sick leave, and it shows up right away in the calendar and in the payroll data."
+    },
+    "s23": {
+      "narration": "Who's out right now? In the Calendars menu, I open the Absences calendar. I can filter by team or by people and see right away whether vacations in the team overlap."
+    },
+    "s24": {
+      "narration": "That leaves the payroll data. In Custom reports, I open the Complex Salary Report. You can see the gross working fund, the length of absences, and the net working fund, meaning what's left once time off is deducted. That's why the choice between Free time and At work matters so much."
+    },
+    "s25": {
+      "narration": "For your payroll accountant, limit the report to active employees. Note that ticking the Active column on the left doesn't filter anything yet; choose Yes using the filter icon on the Active column in the table. Then export the report to Excel."
+    },
+    "s26": {
+      "narration": "And that's it. You now know how to set up an absence type, assign entitlements, and log both vacation and sick leave. You save yourself retyping spreadsheets, and your payroll accountant gets data they can rely on."
+    },
+    "s27": {
+      "narration": "How a manager approves a request in Approvals, we'll show in a separate video. Your task for today: go through the absence types with your payroll accountant, and fill in Fund for this year for your people."
+    },
+    "s28": {
+      "narration": "A final tip: in Notifications and Integrations, under Connected accounts, connect Google or Microsoft. Approved absences will then appear in your Google or Outlook calendar, so you don't have to enter them twice."
+    },
+    "s29": {
+      "narration": "If something doesn't work, check the Help Center. Next time we'll look at attendance and clock-ins. Now I'm off to check how many vacation days I have left. Less admin, more time for people. This is Sloneek."
+    }
+  }
+}

@@ -1,0 +1,1401 @@
+{
+  "id": "ats-new-position",
+  "version": 1,
+  "title": "Otevřete novou pozici",
+  "lang": "cs",
+  "app_version": "preprod-2026-10-13",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "cs"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "bF7C2fCv7Zf30iT84wZ1",
+    "model_id": "eleven_v4"
+  },
+  "pronunciation": [
+    {
+      "match": "CZK",
+      "say": "cé zet ká",
+      "note": "měna"
+    },
+    {
+      "match": "40 h",
+      "say": "čtyřicet hodin",
+      "note": "Plný úvazek 40 h"
+    },
+    {
+      "match": "Home project",
+      "say": "hóum prodžekt",
+      "note": "fáze náboru"
+    },
+    {
+      "match": "Kanban",
+      "say": "kanban",
+      "stem": true
+    },
+    {
+      "match": "LinkedIn",
+      "say": "linkedin",
+      "stem": true,
+      "note": "global rule has no stem"
+    },
+    {
+      "match": "Clavera",
+      "say": "klejvra",
+      "note": "Thomase Clavera"
+    },
+    {
+      "match": "Thomase",
+      "say": "tomáse"
+    }
+  ],
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s06",
+    "title": "Nová pozice v ATS"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Potřebujete obsadit volné místo a mít všechny uchazeče pěkně pohromadě? Dobrý den, jsem Marie z týmu Sloneek a ukážu vám, jak otevřít novou pracovní pozici.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate p-card",
+          "value": "20000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate p-card",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 1,
+      "part_title": "Úvod",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "V levém menu v sekci Společnost kliknu na ATS.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_ats",
+          "before_ms": 800
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_ats",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table",
+          "value": "20000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table",
+        "url_contains": "/app/ats-v2/job-offers"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "V Pracovních místech vidíte všechny pozice s typem práce, týmem, počtem kandidátů a stavem.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table thead",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table",
+        "url_contains": "/app/ats-v2/job-offers"
+      }
+    },
+    {
+      "id": "s04",
+      "narration": "Kliknu na Nová pracovní pozice a otevře se průvodce o třech krocích.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] p-button:text-is(\"Nová pracovní pozice\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] p-button:text-is(\"Nová pracovní pozice\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "input[data-cy=jobNameInput]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new nb-stepper > .header",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "input[data-cy=jobNameInput]",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "Do Názvu pracovní pozice napíšu Specialista zákaznické podpory – ukázka.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "input[data-cy=jobNameInput]",
+          "value": "Specialista zákaznické podpory – ukázka",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "input[data-cy=jobNameInput]",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      },
+      "part": 2,
+      "part_title": "O pozici"
+    },
+    {
+      "id": "s06",
+      "narration": "V Podrobnostech o pracovní pozici zvolíte práci v kanceláři, hybridní nebo remote, a já kliknu na Hybridní.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-job-offer-about-the-job nb-button-group",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "button[data-cy=positionHybridButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "button[data-cy=positionHybridButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-select[data-cy=locationSelect]",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "nb-select[data-cy=locationSelect]",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "Objeví se pole Lokalita, kde kliknu a vyberu Prahu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "nb-select[data-cy=locationSelect]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=locationSelect]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option-list nb-option:text-is(\"Praha\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "nb-option-list nb-option:text-is(\"Praha\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-option-list nb-option:text-is(\"Praha\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "nb-select[data-cy=locationSelect]:has-text(\"Praha\")",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "Kliknu na pole Tým a ze seznamu týmů vyberu Zákaznickou podporu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "nb-select[data-cy=teamSelect]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=teamSelect]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option-list nb-option:text-is(\"Zákaznická podpora\")",
+          "value": "5000"
+        },
+        {
+          "type": "scroll",
+          "selector": "nb-option-list nb-option:text-is(\"Zákaznická podpora\")",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "nb-option-list nb-option:text-is(\"Zákaznická podpora\")",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "nb-option-list nb-option:text-is(\"Zákaznická podpora\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "nb-select[data-cy=teamSelect]:has-text(\"Zákaznická podpora\")",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "Kliknu na Odpovědné osoby za nábor, kde vyberete kolegy, kteří mají nábor na starosti, a já zaškrtnu Thomase Clavera.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "slnk-common-autocomplete[data-cy=hiringManagerAutocomplete] input",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete[data-cy=hiringManagerAutocomplete] input",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "input[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "input[data-cy=autocompleteSearchInput]",
+          "value": "Claver",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Claver Thomas\")",
+          "value": "8000"
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Claver Thomas\")",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Claver Thomas\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-common-autocomplete[data-cy=hiringManagerAutocomplete]",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Do Finančních podmínek napíšu rozpětí od čtyřiceti do padesáti tisíc.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "input[data-cy=remunerationFromInput]",
+          "value": "40000",
+          "before_ms": 400
+        },
+        {
+          "type": "type",
+          "selector": "input[data-cy=remunerationToInput]",
+          "value": "50000",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "input[data-cy=remunerationToInput]",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "Kliknu na Měnu a vyberu české koruny, tedy CZK, a pak v poli Sazba zvolím Měsíčně, protože jde o měsíční mzdu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "nb-select[data-cy=currencySelect]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=currencySelect]",
+          "before_ms": 150
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option-list nb-option:text-is(\"CZK\")",
+          "value": "5000"
+        },
+        {
+          "type": "scroll",
+          "selector": "nb-option-list nb-option:text-is(\"CZK\")",
+          "before_ms": 150
+        },
+        {
+          "type": "hover",
+          "selector": "nb-option-list nb-option:text-is(\"CZK\")",
+          "before_ms": 250
+        },
+        {
+          "type": "click",
+          "selector": "nb-option-list nb-option:text-is(\"CZK\")",
+          "before_ms": 150
+        },
+        {
+          "type": "hover",
+          "selector": "nb-select[data-cy=rateSelect]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=rateSelect]",
+          "before_ms": 150
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option-list nb-option:text-is(\"Měsíčně\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "nb-option-list nb-option:text-is(\"Měsíčně\")",
+          "before_ms": 250
+        },
+        {
+          "type": "click",
+          "selector": "nb-option-list nb-option:text-is(\"Měsíčně\")",
+          "before_ms": 150
+        },
+        {
+          "type": "wait",
+          "value": "200"
+        }
+      ],
+      "expect": {
+        "visible": "nb-select[data-cy=rateSelect]:has-text(\"Měsíčně\")",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Kliknu na Zobrazit finanční podmínky, aby uchazeči viděli mzdu přímo v inzerátu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "nb-checkbox[data-cy=showRemunerationCheckbox]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-checkbox[data-cy=showRemunerationCheckbox]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "nb-checkbox[data-cy=showRemunerationCheckbox]",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "V poli Forma spolupráce vyberu Plný úvazek 40 h a výběr zavřu, a jako Typ pracovního vztahu pak zvolím Zaměstnanec, tedy klasický pracovní poměr.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "nb-select[data-cy=cooperationFormSelect]",
+          "before_ms": 200
+        },
+        {
+          "type": "hover",
+          "selector": "nb-select[data-cy=cooperationFormSelect]",
+          "before_ms": 250
+        },
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=cooperationFormSelect]",
+          "before_ms": 150
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option-list nb-option:text-is(\"Plný úvazek 40 h\")",
+          "value": "5000"
+        },
+        {
+          "type": "scroll",
+          "selector": "nb-option-list nb-option:text-is(\"Plný úvazek 40 h\")",
+          "before_ms": 150
+        },
+        {
+          "type": "hover",
+          "selector": "nb-option-list nb-option:text-is(\"Plný úvazek 40 h\")",
+          "before_ms": 250
+        },
+        {
+          "type": "click",
+          "selector": "nb-option-list nb-option:text-is(\"Plný úvazek 40 h\")",
+          "before_ms": 150
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "200"
+        },
+        {
+          "type": "hover",
+          "selector": "nb-select[data-cy=employmentStatusSelect]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=employmentStatusSelect]",
+          "before_ms": 150
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option-list nb-option:text-is(\"Zaměstnanec\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "nb-option-list nb-option:text-is(\"Zaměstnanec\")",
+          "before_ms": 250
+        },
+        {
+          "type": "click",
+          "selector": "nb-option-list nb-option:text-is(\"Zaměstnanec\")",
+          "before_ms": 150
+        },
+        {
+          "type": "wait",
+          "value": "200"
+        }
+      ],
+      "expect": {
+        "visible": "nb-select[data-cy=employmentStatusSelect]:has-text(\"Zaměstnanec\")",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "Do Popisu pracovní pozice napíšu, koho hledáme a co bude náplní práce.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "slnk-common-editor[data-cy=jobDescriptionCKEditor] .ql-editor",
+          "before_ms": 300
+        },
+        {
+          "type": "type",
+          "selector": "slnk-common-editor[data-cy=jobDescriptionCKEditor] .ql-editor",
+          "value": "Hledáme kolegu, který bude našim zákazníkům pomáhat po telefonu, e-mailem i v chatu.",
+          "speed": "fast",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "slnk-common-editor[data-cy=jobDescriptionCKEditor] .ql-editor",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Popis i dovednosti vám umí navrhnout umělá inteligence, já ale vše vyplním ručně.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-common-open-ai-search-bar[data-cy=aiJobDescription]",
+          "before_ms": 400
+        },
+        {
+          "type": "scroll",
+          "selector": "#ats-job-ai-generate-attributes",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "#ats-job-ai-generate-attributes",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "#ats-job-ai-generate-attributes",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "Do Klíčových dovedností napíšu Komunikace a kliknu na plus.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "input[data-cy=newAttributeInput]",
+          "value": "Komunikace",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "button[data-cy=addNewAttributeButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "button[data-cy=addNewAttributeButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-job-offer-about-the-job div:text-is(\"Jak důležité jsou tyto dovednosti?\")",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-job-offer-about-the-job div:text-is(\"Jak důležité jsou tyto dovednosti?\")",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "Vpravo určíte, jak je dovednost důležitá, a podle dovedností pak Sloneek porovnává kandidáty s pozicí.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-job-offer-about-the-job div:text-is(\"Jak důležité jsou tyto dovednosti?\")",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-job-offer-about-the-job div:text-is(\"Jak důležité jsou tyto dovednosti?\")",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Firemní údaje a fotky se doplní z nastavení ATS, a tak kliknu na Další.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "slnk-common-editor[data-cy=companyDetailCKEditor]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-common-editor[data-cy=companyDetailCKEditor]",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-job-offer-about-the-job button[data-cy=nextButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-job-offer-about-the-job button[data-cy=nextButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-job-offer-candidate-info table >> nth=0",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-job-offer-candidate-info table >> nth=0",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "Ve druhém kroku vyberete, co mají uchazeči vyplnit, a jméno, příjmení a e-mail jsou vždy povinné.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-job-offer-candidate-info table >> nth=0",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-job-offer-candidate-info table >> nth=0",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      },
+      "part": 3,
+      "part_title": "Informace o kandidátovi"
+    },
+    {
+      "id": "s20",
+      "narration": "U Životopisu kliknu na Aktivní i Povinné, takže se bez něj nikdo nepřihlásí.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "tr[data-cy=checkboxes1Tr-2] nb-checkbox[formcontrolname=active] label",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "tr[data-cy=checkboxes1Tr-2] nb-checkbox[formcontrolname=active] label",
+          "before_ms": 200
+        },
+        {
+          "type": "hover",
+          "selector": "tr[data-cy=checkboxes1Tr-2] nb-checkbox[formcontrolname=required] label",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "tr[data-cy=checkboxes1Tr-2] nb-checkbox[formcontrolname=required] label",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "tr[data-cy=checkboxes1Tr-2]",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "U Telefonního čísla kliknu jen na Aktivní, takže ho uchazeč vyplnit může, ale nemusí.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "tr[data-cy=checkboxes1Tr-1] nb-checkbox[formcontrolname=active] label",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "tr[data-cy=checkboxes1Tr-1] nb-checkbox[formcontrolname=active] label",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "tr[data-cy=checkboxes1Tr-1]",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "Pod tím v Doplňujících otázkách pro kandidáty kliknu na plus a do Textu otázky napíšu Máte zkušenosti se zákaznickou podporou?",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "button[data-cy=addNewQuestionButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "button[data-cy=addNewQuestionButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "button[data-cy=addNewQuestionButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "input[data-cy=questionTextInput-1]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "input[data-cy=questionTextInput-1]",
+          "value": "Máte zkušenosti se zákaznickou podporou?",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "input[data-cy=questionTextInput-1]",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "V Typu otázky jsou textová odpověď, odpověď ano, ne a nahrání souboru, a já vyberu odpověď formou ano, ne.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "nb-select[data-cy=questionTypeSelect-1]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=questionTypeSelect-1]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option-list nb-option:text-is(\"Odpověď formou ano, ne\")",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-option-list",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "nb-option-list nb-option:text-is(\"Odpověď formou ano, ne\")",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "nb-option-list nb-option:text-is(\"Odpověď formou ano, ne\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "nb-select[data-cy=questionTypeSelect-1]:has-text(\"ano, ne\")",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s24",
+      "narration": "Kliknu na Povinné a pak na Další.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "nb-checkbox[data-cy=requiredQuestionCheckbox-1] label",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-checkbox[data-cy=requiredQuestionCheckbox-1] label",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-job-offer-candidate-info button[data-cy=nextButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-job-offer-candidate-info button[data-cy=nextButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Home project\")",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Home project\")",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "Ve třetím kroku vyberete fáze náboru, kterými kandidáti na této pozici projdou.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-settings-recruitment-stages-form slnk-common-card >> nth=0",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Home project\")",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      },
+      "part": 4,
+      "part_title": "Nastavení pozice"
+    },
+    {
+      "id": "s26",
+      "narration": "Domácí projekt u této pozice nechceme, a tak u Home project zruším zaškrtnutí.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Home project\") >> nb-checkbox label",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Home project\") >> nb-checkbox label",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Home project\")",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "Zelená ikona znamená aktivní automatický e-mail, který kandidát dostane, jakmile ho do fáze přesunete, a fáze upravíte v Nastavení fází náboru.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"1st interview\") >> *:text-is(\"Automatický e-mail je aktivní\")",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new a:has-text(\"Nastavení fází náboru\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new a:has-text(\"Nastavení fází náboru\")",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "Přepínačem Odeslat pracovní pozici ke schválení pošlete inzerát vybraným kolegům ke schválení, ještě než ho zveřejníte.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "nb-toggle[data-cy=approvalsToggle]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-new slnk-sloneek-ats-v2-job-offer-approvals-section",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "nb-toggle[data-cy=approvalsToggle]",
+        "url_contains": "/app/ats-v2/job-offers/new"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "Uložit a publikovat by pozici hned zveřejnilo na kariérní stránce, my si ji ale zatím jen připravíme, a tak kliknu na Uložit jako koncept.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "button[data-cy=submitButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "button[data-cy=saveButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "button[data-cy=saveButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table tbody tr:has(td.mat-column-name > div:text-is(\"Specialista zákaznické podpory – ukázka\")):has(.p-tag-label:text-is(\"Koncept / Pozastaveno\"))",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table tbody tr:has(td.mat-column-name > div:text-is(\"Specialista zákaznické podpory – ukázka\")):has(.p-tag-label:text-is(\"Koncept / Pozastaveno\"))",
+        "url_contains": "/app/ats-v2/job-offers"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "Pozice je v přehledu ve stavu Koncept, a uchazeči ji tak na kariérní stránce zatím nevidí.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table tbody tr:has(td.mat-column-name > div:text-is(\"Specialista zákaznické podpory – ukázka\"))",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table tbody tr:has(td.mat-column-name > div:text-is(\"Specialista zákaznické podpory – ukázka\")):has(.p-tag-label:text-is(\"Koncept / Pozastaveno\"))",
+        "url_contains": "/app/ats-v2/job-offers"
+      },
+      "part": 5,
+      "part_title": "Detail pozice"
+    },
+    {
+      "id": "s31",
+      "narration": "Kliknu na její název a otevře se detail pozice.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table tbody td.mat-column-name > div:text-is(\"Specialista zákaznické podpory – ukázka\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table tbody td.mat-column-name > div:text-is(\"Specialista zákaznické podpory – ukázka\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] button:has-text(\"Možnosti\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] button:has-text(\"Možnosti\")",
+        "url_contains": "/app/ats-v2/job-offers/detail/"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "Nahoře vidíte stav, typ práce, lokalitu, tým, datum vytvoření a odpovědnou osobu.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-detail-v2 .job-details",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] button:has-text(\"Možnosti\")",
+        "url_contains": "/app/ats-v2/job-offers/detail/"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "Přihlášené uchazeče uvidíte v seznamu, nebo kliknu na Kanban, kde budou rozdělení do sloupců podle fází náboru.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] p-togglebutton:text-is(\"Kanban\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] p-togglebutton:text-is(\"Kanban\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] h3:text-is(\"Zatím žádní kandidáti\")",
+        "url_contains": "view=kanban"
+      }
+    },
+    {
+      "id": "s34",
+      "narration": "Práci s kandidáty ukazuje další video, a teď kliknu na Možnosti.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] button:has-text(\"Možnosti\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] button:has-text(\"Možnosti\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-menu-overlay li[aria-label=\"Archivovat\"] a",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": ".p-menu-overlay li[aria-label=\"Archivovat\"] a",
+        "url_contains": "/app/ats-v2/job-offers/detail/"
+      }
+    },
+    {
+      "id": "s35",
+      "narration": "Tady pozici upravíte nebo jí změníte stav na Otevřeno či Uzavřeno, a když už ji nepotřebujete, kliknu na Archivovat.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".p-menu-overlay",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": ".p-menu-overlay li[aria-label=\"Archivovat\"] a",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay li[aria-label=\"Archivovat\"] a",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Archivace pracovní pozice\") >> #common_confirmation_yes",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-common-confirmation-dialog:has-text(\"Archivace pracovní pozice\") >> #common_confirmation_yes",
+        "url_contains": "/app/ats-v2/job-offers/detail/"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "Archivovaná pozice zmizí z kariérní stránky, kandidáti i všechny informace ale zůstanou zachované, a tak to potvrdím kliknutím na Ano.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Archivace pracovní pozice\")",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Archivace pracovní pozice\") >> #common_confirmation_yes",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Archivace pracovní pozice\") >> #common_confirmation_yes",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ],
+      "expect": {
+        "url_contains": "/app/ats-v2"
+      }
+    },
+    {
+      "id": "s37",
+      "narration": "V levém menu kliknu na ATS a v Aktuálních už pozice není, protože ji teď najdete pod tlačítkem Archivované.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_ats",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_ats",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] p-togglebutton:text-is(\"Archivované\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] p-togglebutton:text-is(\"Archivované\")",
+        "url_contains": "/app/ats-v2/job-offers"
+      },
+      "part": 6,
+      "part_title": "Sdílení a shrnutí"
+    },
+    {
+      "id": "s38",
+      "narration": "Zveřejněné pozice najdete na kariérní stránce pod tlačítkem Inzertní portál, kde má každá svůj odkaz a sdílíte ji třeba na LinkedIn.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-ats-navigation-header p-button:text-is(\"Inzertní portál\")",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-ats-navigation-header p-button:text-is(\"Inzertní portál\")",
+        "url_contains": "/app/ats-v2/job-offers"
+      }
+    },
+    {
+      "id": "s39",
+      "narration": "Teď víte, jak pozici založit, nastavit, uložit jako koncept i archivovat, a kdyby něco nešlo, mrkněte do Centra nápovědy.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-ats-navigation-header p-button:text-is(\"Inzertní portál\")",
+        "url_contains": "/app/ats-v2/job-offers"
+      }
+    },
+    {
+      "id": "s40",
+      "narration": "Méně administrativy, víc času na lidi. To je Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-ats-navigation-header p-button:text-is(\"Inzertní portál\")",
+        "url_contains": "/app/ats-v2/job-offers"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "archivovat pozici 'Specialista zákaznické podpory – ukázka' v Aktuálních – jen když hledání 'ukázka' nechá právě 1 řádek s přesným názvem; dialog 'Archivace pracovní pozice' název neuvádí (proto kontrola jediného řádku); když pozice neexistuje, wait_ready selže a blok se přeskočí. Mazání pozic UI nenabízí.",
+      "url": "https://app-pre-production.sloneek.com/app/ats-v2/job-offers",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table tbody tr:has(td.mat-column-name > div:text-is(\"Specialista zákaznické podpory – ukázka\"))",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] input[placeholder=\"Hledat pozice\"]",
+          "value": "ukázka",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table tbody tr:has(td.mat-column-name > div:text-is(\"Specialista zákaznické podpory – ukázka\"))",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table tbody:not(:has(tr ~ tr)) td.mat-column-name > div:text-is(\"Specialista zákaznické podpory – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table tbody tr:has(td.mat-column-name > div:text-is(\"Specialista zákaznické podpory – ukázka\")) >> button:has(.fa-ellipsis)",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-menu-overlay li[aria-label=\"Archivovat\"] a",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay li[aria-label=\"Archivovat\"] a",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Archivace pracovní pozice\") >> #common_confirmation_yes",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Archivace pracovní pozice\") >> #common_confirmation_yes",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "teardown": [
+    {
+      "name": "teardown: archivovat pozici 'Specialista zákaznické podpory – ukázka' v Aktuálních – jen když hledání 'ukázka' nechá právě 1 řádek s přesným názvem; dialog 'Archivace pracovní pozice' název neuvádí (proto kontrola jediného řádku); když pozice neexistuje, wait_ready selže a blok se přeskočí. Mazání pozic UI nenabízí.",
+      "url": "https://app-pre-production.sloneek.com/app/ats-v2/job-offers",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table tbody tr:has(td.mat-column-name > div:text-is(\"Specialista zákaznické podpory – ukázka\"))",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] input[placeholder=\"Hledat pozice\"]",
+          "value": "ukázka",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table tbody tr:has(td.mat-column-name > div:text-is(\"Specialista zákaznické podpory – ukázka\"))",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table tbody:not(:has(tr ~ tr)) td.mat-column-name > div:text-is(\"Specialista zákaznické podpory – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table tbody tr:has(td.mat-column-name > div:text-is(\"Specialista zákaznické podpory – ukázka\")) >> button:has(.fa-ellipsis)",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-menu-overlay li[aria-label=\"Archivovat\"] a",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay li[aria-label=\"Archivovat\"] a",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Archivace pracovní pozice\") >> #common_confirmation_yes",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Archivace pracovní pozice\") >> #common_confirmation_yes",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "teardown: ověřit, že v Aktuálních nezůstala žádná pozice s 'ukázka' (hledání -> 'Nenalezena žádná pracovní pozice'); jen čtení",
+      "url": "https://app-pre-production.sloneek.com/app/ats-v2/job-offers",
+      "if_visible": "[data-cy=mainContentCenterDiv] p-button:text-is(\"Nová pracovní pozice\")",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] input[placeholder=\"Hledat pozice\"]",
+          "value": "ukázka",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list h3:text-is(\"Nenalezena žádná pracovní pozice\")",
+          "value": "8000"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-13",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "created_by_recipe": "pozice 'Specialista zákaznické podpory – ukázka' (Hybridní, Praha, tým Zákaznická podpora, odpovědná osoba Claver Thomas, 40 000–50 000 CZK měsíčně, Plný úvazek 40 h, Zaměstnanec, dovednost Komunikace, životopis povinný, telefon nepovinný, otázka ano/ne povinná, bez fáze Home project) uložená jako KONCEPT (nikdy nepublikována, není na kariérní stránce) a na konci videa ARCHIVOVÁNA; cleanup (před) a teardown (po) archivují případný zbytek v Aktuálních. Archivované kopie zůstávají (UI mazání nenabízí).",
+      "read_only": "Přehled pozic, Inzertní portál (jen zvýrazněn), AI tlačítka (jen zvýrazněna), přepínač schvalování (jen zvýrazněn), Nastavení fází náboru (odkaz jen zvýrazněn)",
+      "never_clicked": "Uložit a publikovat, Inzertní portál, AI tlačítka, Odeslat ke schválení, Přidat kandidáta, Změnit stav, Duplikát"
+    },
+    "notes": "viz atlas/ats-new-position.md"
+  }
+}

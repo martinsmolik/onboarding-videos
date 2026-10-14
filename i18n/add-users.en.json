@@ -1,0 +1,288 @@
+{
+  "_comment": "Anglická verze videa Přidejte uživatele do systému (add-users). UI texty z translate_fe/en (staženo fetchem uvnitř stránky) + ověřeno naživo 11. 10. 2026 (local-translate=en, dry-run 36/36). Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM. Vlastní EN demo data: tým 'Customer Support' (03fd8c48-b7b7-461b-8c62-2f0fa68d5292) a úvazek 'Full-time 40 h' (4397f259-439a-4fe4-a375-207489a1facc, šablona Full Time, Weekly 40:00, Po–Pá 9:00–17:30, překlad en 'Full-time 40 h'), obojí založeno 11. 10. 2026; pozice 'Customer Support Specialist' (bd2af2ad-…), lokace 'Praha' (keep). Uživatel 'Emily Carter' <emily.carter@example.com> (v seznamu 'Carter Emily'), NEAKTIVNÍ – vytváří recept, maže cleanup. POZOR: na tenantu existuje i starší 'Full time 40 h' (bez spojovníku) – selektor :has-text(\"Full-time 40 h\") je jednoznačný. s27: English je u nového uživatele výchozí – video jazyk jen potvrdí a uloží (reálný klik = PATCH 200). Čekací pojistky s20/s21/s33 jsou jazykově nezávislé (steps.sNN.selectors). Mazání v seznamu = řádkové menu 'Remove' (karta má 'Delete'). Cleanup hledá 'emily.carter@example' a maže jen při právě 1 řádku 'Carter Emily' a dialogu se jménem; cleanup_prepend stejně maže zbylou CZ Janu a PL Annu. Bez mobilní aplikace, bez asistentky Ellie (odkaz na Help Center).",
+  "verified": {
+    "date": "2026-10-11",
+    "status": "verified live",
+    "by": "Claude (BrowserOS, preprod, local-translate=en, in-page runner podle out/performance-review/_work/dryrun-runner.js: CSS + :text-is/:has-text/>>, wait 10 s visible, wait_ready = selektor + bez spinneru, eventy v elementFromPoint středu)",
+    "selectors": "36/36 kroků prošlo (každý cíl akce + expect.visible, url_contains ok); s22, s27, s28 a s33 běžely po částech kvůli čtení popisků, akce beze změny. Opravy proti offline návrhu: 'Nastavení pozic' = 'Manage positions', 'Přidat finanční podmínky' = 'Add new remuneration', řádkové menu 'Odstranit' = 'Remove'. Živé EN popisky: menu Users → Management, nadpis 'Management of users', Add / Invite / Import users, Search..., All users / Only inactive, 'Create a new user', 'The user is not active', 'Hide email from other colleagues', 'Special user rights' (Administrator, Document manager, Asset manager, ATS manager, Project administrator, Reporting administrator, Ombudsman, Evaluation manager, Onboarding specialist), 'Type of employment relationship' → Employee, 'Date of joining the company' (MM/DD/YYYY, 11/02/2026), 'Manage positions', dialog 'Choosing the type of work contract' (Type of work contract, Indefinite period, Valid from, Valid until, Save), hlavička 'Carter Emily (Inactive)', záložky Basic and work data / Personal information / Contract and Payroll / Absence overview / Activity overview / Evaluation / Documents / Assets / History / Notifications & Integrations / Audit log, 'Add new remuneration', Interface language = English (výchozí), 'Save user interface changes', Actions → Activate / Delete, import dialog 'Import from Google Workspace' / 'Import from Office 365' / Confirm, menu 'New hire packets'.",
+    "cleanup": "před: 73 uživatelů (46 aktivních / 27 neaktivních), žádná Emily/Jana/Anna; pojistka EN bloku správně neprošla na prázdném výsledku. Běh založil 'Carter Emily' d84103a4-5d99-4f91-a5fc-7d99e32d16d1 (neaktivní, enabled=false) → 74 (46/28). Po reloadu EN cleanup: hledání 'emily.carter@example' → 1 řádek → Remove → dialog s 'Carter Emily' → Ano; zbylo 0 shod, 73 (46/27). Bloky cleanup_prepend (CZ Jana, PL Anna) nespuštěny – nebylo co mazat; akce jsou totožné s ověřeným EN blokem."
+  },
+  "title": "Add users to the system: manual setup, invite link and import",
+  "thumbnail_title": "Adding users",
+  "parts": {
+    "Úvod": "Introduction",
+    "Základní údaje": "Basic information",
+    "Pracovní údaje": "Work details",
+    "Karta uživatele": "User profile",
+    "Aktivace": "Activation",
+    "Další způsoby přidání": "Other ways to add users",
+    "Závěr": "Wrap-up"
+  },
+  "selectors": {
+    "nb-option[data-cy=\"positionOption-Specialista zákaznické podpory\"]": "nb-option[data-cy=\"positionOption-Customer Support Specialist\"]",
+    "nb-option[data-cy=\"team-Zákaznická podpora\"]": "nb-option[data-cy=\"team-Customer Support\"]"
+  },
+  "text": {
+    "Importovat uživatele": "Import users",
+    "Skrýt e-mail pro ostatní kolegy": "Hide email from other colleagues",
+    "Zvláštní uživatelská práva": "Special user rights",
+    "Zaměstnanec": "Employee",
+    "Nastavení pozic": "Manage positions",
+    "Specialista zákaznické podpory": "Customer Support Specialist",
+    "Zákaznická podpora": "Customer Support",
+    "Plný úvazek 40 h": "Full-time 40 h",
+    "Uložit": "Save",
+    "(Neaktivní)": "(Inactive)",
+    "Přidat finanční podmínky": "Add new remuneration",
+    "Doba neurčitá": "Indefinite period",
+    "Czech": "English",
+    "Akce": "Actions",
+    "Aktivovat": "Activate",
+    "Všichni uživatelé": "All users",
+    "Jen neaktivní": "Only inactive",
+    "Jana": "Emily",
+    "Dvořáková": "Carter",
+    "jana.dvorakova@example.com": "emily.carter@example.com",
+    "jana.dvorakova@example": "emily.carter@example",
+    "Dvořáková Jana": "Carter Emily",
+    "„Dvořáková Jana“": "Carter Emily",
+    "{{DATE:+21d:D. M. YYYY}}": "{{DATE:+21d:MM/DD/YYYY}}",
+    "Vyhledávání...": "Search...",
+    "Odstranit": "Remove"
+  },
+  "keep": [
+    "Praha",
+    "demo-pridani"
+  ],
+  "cleanup_prepend": [
+    {
+      "name": "smazat zbylou CZ demo uživatelku 'Dvořáková Jana' (jana.dvorakova@example.com) z CZ běhu – jen při právě 1 řádku po hledání 'jana.dvorakova@example' a dialogu se jménem",
+      "url": "https://app-pre-production.sloneek.com/app/settings/users",
+      "if_visible": "[data-cy=addUserButton]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "input[placeholder=\"Search...\"]",
+          "value": "jana.dvorakova@example",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] table:not(:has([data-cy=tableRow] ~ [data-cy=tableRow])) [data-cy=tableRow]:has-text(\"Dvořáková Jana\")",
+          "value": "6000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=tableRow]:has-text(\"Dvořáková Jana\") >> [data-cy=actionsButton] button",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay li[aria-label=\"Remove\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Dvořáková Jana\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat zbylou PL demo uživatelku 'Kowalska Anna' (anna.kowalska@example…) z PL běhu – jen při právě 1 řádku po hledání 'anna.kowalska@example' a dialogu se jménem",
+      "url": "https://app-pre-production.sloneek.com/app/settings/users",
+      "if_visible": "[data-cy=addUserButton]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "input[placeholder=\"Search...\"]",
+          "value": "anna.kowalska@example",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] table:not(:has([data-cy=tableRow] ~ [data-cy=tableRow])) [data-cy=tableRow]:has-text(\"Kowalska Anna\")",
+          "value": "6000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=tableRow]:has-text(\"Kowalska Anna\") >> [data-cy=actionsButton] button",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay li[aria-label=\"Remove\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Kowalska Anna\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    }
+  ],
+  "steps": {
+    "s01": {
+      "narration": "A new colleague is starting and you're not sure where to begin? Hi, I'm Maria from the Sloneek team, and I'll show you how to add users."
+    },
+    "s02": {
+      "narration": "In the left menu, under Company, I expand Users and open Management."
+    },
+    "s03": {
+      "narration": "Here you see all active users with their team, position, and roles. You can search by name, email, team, role, position, or tag."
+    },
+    "s04": {
+      "narration": "You can add users manually with the Add button, send them a link with Invite, or import them from Google Workspace and Office 365."
+    },
+    "s05": {
+      "narration": "Let's start manually. I click Add, and the Create a new user form opens."
+    },
+    "s06": {
+      "narration": "First, the account status. Emily starts in a few weeks, so I choose The user is not active."
+    },
+    "s07": {
+      "narration": "An inactive user can't log in, gets no emails, and you don't pay a license for them. It's the perfect state for preparing a new hire's start."
+    },
+    "s08": {
+      "narration": "Only the name, surname, and email are required. I'll enter Emily Carter."
+    },
+    "s09": {
+      "narration": "I enter her work email. Once she's activated, her invitation to Sloneek goes to this address."
+    },
+    "s10": {
+      "narration": "The option to hide the email from other colleagues hides the address in the Colleagues section. It's handy for a private email, for example."
+    },
+    "s11": {
+      "narration": "Special user rights add roles on top of a regular user. I'll open the list, but I won't select anything."
+    },
+    "s12": {
+      "narration": "An administrator manages the whole app and sees all data. A document manager or an asset manager has full access only to their own module."
+    },
+    "s13": {
+      "narration": "A reporting administrator can access all reports, and only the ombudsman can read the trust box. A regular colleague needs none of these."
+    },
+    "s14": {
+      "narration": "I set the type of employment relationship to Employee. You can also choose contractor, freelance, or internship."
+    },
+    "s15": {
+      "narration": "On the right are more work details. In the Date of joining the company field, I enter her first working day."
+    },
+    "s16": {
+      "narration": "The start date is saved to the profile history. Sloneek doesn't calculate pro-rated leave on its own, though; you set that in the user's absences."
+    },
+    "s17": {
+      "narration": "I pick the position from the list, here Customer Support Specialist. You can add new positions through the Manage positions link."
+    },
+    "s18": {
+      "narration": "I add Emily to the Customer Support team. The team determines her manager and who approves her absences and attendance."
+    },
+    "s19": {
+      "narration": "And the work location, here our Prague office. You can fill in the other details anytime later."
+    },
+    "s20": {
+      "narration": "All done, so I click Create user. Sloneek immediately asks whether I want to assign a type of work contract.",
+      "selectors": {
+        "[data-cy=confirmationDialog]:has-text(\"Přiřadit typ spolupráce?\")": "[data-cy=confirmationDialog]"
+      }
+    },
+    "s21": {
+      "narration": "The type of work contract sets her working hours, which her attendance and absence balances are calculated from. I choose Yes.",
+      "selectors": {
+        "nb-dialog-container:has-text(\"Výběr typu spolupráce\")": "nb-dialog-container slnk-common-autocomplete"
+      }
+    },
+    "s22": {
+      "narration": "I select Full-time 40 h. It's valid from her start date, I tick Indefinite period, and save."
+    },
+    "s23": {
+      "narration": "Emily now has her own user profile. The header shows she's still inactive."
+    },
+    "s24": {
+      "narration": "The tabs hold personal information, contract and payroll, absences, documents, assets, and the change history."
+    },
+    "s25": {
+      "narration": "The Contract and Payroll tab shows her full-time contract. You can also add remuneration here."
+    },
+    "s26": {
+      "narration": "You set managers and approvers in the Teams section. If a team has no manager, administrators approve the requests."
+    },
+    "s27": {
+      "narration": "Before you activate Emily, check her language. In the Notifications and Integrations tab, English is already set, so I just confirm it and save."
+    },
+    "s28": {
+      "narration": "Her invitation and the app will be in English. When Emily starts, open Actions and choose Activate."
+    },
+    "s29": {
+      "narration": "Once activated, she gets an email with a link to set her password, sees her assigned documents, and you start paying her license."
+    },
+    "s30": {
+      "narration": "Back in the overview, I switch the filter to Only inactive. Emily is here, ready for her first day."
+    },
+    "s31": {
+      "narration": "The second way is Invite. Sloneek creates a company link that you can send to colleagues by email or in a chat."
+    },
+    "s32": {
+      "narration": "Colleagues use the link to create their own accounts and fill in their details. You then review them and activate the accounts."
+    },
+    "s33": {
+      "narration": "Import users brings people in from Google Workspace or Office 365. For a bulk import from Excel, our support team will prepare it with you.",
+      "selectors": {
+        "nb-dialog-container:has-text(\"Import z Office 365\")": "nb-dialog-container"
+      }
+    },
+    "s34": {
+      "narration": "A final tip: when you create an inactive newcomer, you can assign them a new hire packet, so they fill in their details before their first day."
+    },
+    "s35": {
+      "narration": "Now you know how to add users manually, invite them with a link, and bring them in with an import. If something doesn't work, check the Help Center."
+    },
+    "s36": {
+      "narration": "Less admin, more time for people. This is Sloneek."
+    }
+  }
+}

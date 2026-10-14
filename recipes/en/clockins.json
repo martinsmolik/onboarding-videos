@@ -1,0 +1,976 @@
+{
+  "id": "clockins",
+  "version": 1,
+  "title": "Clock-ins and clock-outs: attendance in one click",
+  "lang": "en",
+  "app_version": "preprod-2026-10-09",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "en"
+    },
+    "timezone": "Europe/Lisbon"
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "7jQ3jNk3Fcw65sWUmzun",
+    "model_id": "eleven_v4"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s16",
+    "title": "Clock-ins and clock-outs"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "A paper attendance book, and chasing down who came in when at the end of the month? Hi, I'm Maria from the Sloneek team, and today I'll show you clock-ins and clock-outs.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-attendance a.widget-headline-link",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Introduction",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "People clock in and out with a single click, on the web or at an attendance terminal. And you get attendance that's ready to use for payroll.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-attendance p-card:has(a.widget-headline-link)",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-attendance p-card:has(a.widget-headline-link)",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "I'll show you the setup, everyday clocking in, and the manager's view. You'll find the module in the left menu under Attendance.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+          "before_ms": 2500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s04",
+      "narration": "Let's start with the setup. At the bottom of the left menu, I click Attendance settings.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview-settings\"]",
+          "before_ms": 600
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview-settings\"]",
+          "before_ms": 900
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ],
+      "expect": {
+        "visible": "h1:text-is(\"Attendance settings\")",
+        "url_contains": "/app/attendance-v2-overview-settings"
+      },
+      "part": 2,
+      "part_title": "Setup"
+    },
+    {
+      "id": "s05",
+      "narration": "In the Changes section, you let people correct their own attendance. I recommend keeping approval by an attendance approver switched on.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "form > p-card:nth-of-type(1)",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "form > p-card:nth-of-type(1)",
+        "url_contains": "/app/attendance-v2-overview-settings/general"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "Closing timesheets makes sure approvers close the timesheet every month. Here, between the first and the fourth day of the following month.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "form > p-card:nth-of-type(2)",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "form > p-card:nth-of-type(2)",
+        "url_contains": "/app/attendance-v2-overview-settings/general"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "Automatic breaks add the lunch break based on working hours, so people don't have to clock it.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "form > p-card:nth-of-type(3)",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "form > p-card:nth-of-type(3)",
+        "url_contains": "/app/attendance-v2-overview-settings/general"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "The Events tab holds the departure types, such as lunch, a break, or a doctor's visit.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "p-tab:text-is(\"Events\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ],
+      "expect": {
+        "visible": "button:text-is(\"Add event\")",
+        "url_contains": "/app/attendance-v2-overview-settings/departures"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "For each one, you decide whether it counts as work and where people see it, for example on the terminal or on a desktop.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "table thead",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "table thead",
+        "url_contains": "/app/attendance-v2-overview-settings/departures"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "If you have an attendance terminal, you add it in the Terminals tab. You assign card or chip numbers to people in Attendance cards.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "p-tab:text-is(\"Terminals\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "highlight",
+          "selector": "p-tab:text-is(\"Attendance cards\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "p-tab:text-is(\"Attendance cards\")",
+        "url_contains": "/app/attendance-v2-overview-settings/departures"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "Now for an ordinary day. You get to work in the morning and find the Attendance widget on your Dashboard.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-attendance button:text-is(\"Clock in\")",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 3,
+      "part_title": "Clocking in and out"
+    },
+    {
+      "id": "s12",
+      "narration": "The widget shows whether you're at work, how much you've worked today, and your balance up to today.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-attendance p-tag",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-attendance p-card:has(a.widget-headline-link) .p-card-content > div.d-flex.flex-column.gap-2",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-attendance p-tag",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "I click Clock in. Sloneek instantly saves the time you arrived.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-dashboard-v2-attendance button:text-is(\"Clock in\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-attendance p-tag:text-is(\"At work\")",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "The status has switched to At work, and the button has changed to Clock out. Your time is counted from this moment.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-attendance p-tag:text-is(\"At work\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-attendance slnk-attendance-v2-clock-in-out-button button",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-attendance slnk-attendance-v2-clock-in-out-button button",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "You'll find the details in the Attendance module. I'll open it straight from the widget.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-dashboard-v2-attendance a.widget-headline-link",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ],
+      "expect": {
+        "visible": ".timeline-row.selected",
+        "url_contains": "/app/attendance-v2-overview"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "In the Me view, you see the whole month. Each day has a timeline: work in green, breaks in orange, and time off in grey.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".timeline-row.selected",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": ".timeline-row.selected",
+        "url_contains": "/app/attendance-v2-overview"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "On the right is the day's detail: the daily goal, how much you've worked, the balance, and a list of segments.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-attendance-v2-daily-summary-card p-card",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-attendance-v2-daily-summary-card p-card",
+        "url_contains": "/app/attendance-v2-overview"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Below it is the month summary with the total balance, so you see right away whether you have overtime or are short of hours.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-attendance-v2-monthly-summary-card p-card",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-attendance-v2-monthly-summary-card p-card",
+        "url_contains": "/app/attendance-v2-overview"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "Forgot to clock in? With the Add segment button, you can fill in the missing time, even after the fact.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-attendance-v2-daily-summary-card button:text-is(\"Add segment\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog .p-dialog-title:text-is(\"Add segment\")",
+        "url_contains": "/app/attendance-v2-overview"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "You choose the segment type and the time from and to. Your manager then approves the change. I'll close the dialog now.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".p-dialog p-select#segmentType",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "highlight",
+          "selector": ".p-dialog input#startTime",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog button:text-is(\"Cancel\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-attendance-v2-daily-summary-card p-card",
+        "url_contains": "/app/attendance-v2-overview"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "When you leave, you click Clock out. The menu also offers interruptions, such as lunch, a break, or a doctor's visit.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-attendance-v2-overview-page slnk-attendance-v2-clock-in-out-button button",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "highlight",
+          "selector": ".p-menu-overlay ul.p-menu-list",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": ".p-menu-overlay li[aria-label=\"End of shift\"]",
+        "url_contains": "/app/attendance-v2-overview"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "At the end of the day, I choose End of shift. The At work segment now has both a start and an end.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay li[aria-label=\"End of shift\"] a",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-attendance-v2-daily-summary-card-event:has(.event-at-work)",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "slnk-attendance-v2-overview-page button:text-is(\"Clock in\")",
+        "url_contains": "/app/attendance-v2-overview"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "And how does a manager see it? In the Team view, they have their people's attendance listed one below the other.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "p-togglebutton:text-is(\"Team\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ],
+      "expect": {
+        "visible": "p-multiselect",
+        "url_contains": "view=team"
+      },
+      "part": 4,
+      "part_title": "Manager's view"
+    },
+    {
+      "id": "s24",
+      "narration": "An admin can pick any team; a manager only sees their own. In Filters, they can show, for example, only errors or approval requests.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "p-multiselect",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] button:text-is(\"Filters\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "highlight",
+          "selector": ".p-popover form",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "p-togglebutton:text-is(\"Team\")",
+        "url_contains": "view=team"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "The manager finds requests to change attendance in Approvals.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/events/approvals\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/events/approvals\"]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ],
+      "expect": {
+        "visible": "a[href=\"/app/events/approvals/attendance\"]",
+        "url_contains": "/app/events/approvals"
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "In the Attendance tab, they see both the original and the new value, and approve or reject the change with one click.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "a[href=\"/app/events/approvals/attendance\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "highlight",
+          "selector": "table thead",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "table tbody tr:first-child",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "th:text-is(\"New value\")",
+        "url_contains": "/app/events/approvals/attendance"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "You'll find attendance data for payroll and checks in Custom reports, among the pre-made reports.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/custom-reports\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/custom-reports\"]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ],
+      "expect": {
+        "visible": "a[href=\"/app/custom-reports/569\"]",
+        "url_contains": "/app/custom-reports"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "I'll open the Overview of clock-ins and clock-outs, with every clock-in and clock-out for the chosen period.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "a[href=\"/app/custom-reports/569\"]",
+          "before_ms": 800
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "navigate",
+          "value": "https://app-pre-production.sloneek.com/app/custom-reports/569"
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ],
+      "expect": {
+        "visible": "h1:text-is(\"Overview of clock-ins and clock-outs\")",
+        "url_contains": "/app/custom-reports/569"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "For each record, you see the start, the end, the duration, and how it was entered, such as web or terminal. You can export the report to Excel.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=\"crSidebar.header.attendance\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "highlight",
+          "selector": "button:text-is(\"Export\")",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=\"crSidebar.header.attendance\"]",
+        "url_contains": "/app/custom-reports/569"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "And that's it. You now know how to set up attendance, clock in and out, and keep track of your whole team.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-attendance p-card:has(a.widget-headline-link)",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 5,
+      "part_title": "Wrap-up"
+    },
+    {
+      "id": "s31",
+      "narration": "A final tip: on the Dashboard, you'll also find the Team attendance widget. It shows each team member's balance up to today.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-team-attendance p-card",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-team-attendance p-card",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "If something doesn't work, check the Help Center. Less admin, more time for people. This is Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-team-attendance p-card",
+        "url_contains": "/app/dashboard"
+      },
+      "hold_after_ms": 1500
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-09",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs (localStorage local-translate=cs)",
+    "preconditions": [
+      "Tenant má Docházku 2.0 (widget Docházka na Ploše, modul /app/attendance-v2-overview, Nastavení docházky /app/attendance-v2-overview-settings). Stará docházka v menu není.",
+      "Admin Thomas Claver nemá dnes žádný segment V práci (cleanup ho smaže; systémová Pauza 12:00–12:30 z pracovní doby zůstává a nesmí se mazat).",
+      "Natáčet v pracovní den; v Plochě musí být widget Docházka (p-card s odkazem a.widget-headline-link) se stavem Mimo práci a tlačítkem Zaznamenat příchod.",
+      "Mezi příchodem (s13) a Koncem směny (s22) musí uplynout aspoň 1 minuta, jinak API vrátí 400 'Událost musí být otevřena alespoň jednu minutu' a UI nic neukáže. Recept to drží přes min_duration_ms v s13–s21 (součet ~77 s).",
+      "Nastavení docházky se jen ukazuje (highlight), nic se nemění: Změny ON/OFF/ON, Uzávěrka ON (1.–4.), připomenutí OFF, Automatické pauzy ON, Detekce půlnoci OFF.",
+      "Záložka Terminály se neotevírá (ukazuje přihlašovací a zamykací PIN terminálu), jen se zvýrazní.",
+      "Schvalování → Docházka má na pre-produ 7 čekajících žádostí (Sýkora Erik, Borges Terri, leden 2026); s26 zvýrazní první řádek – kdyby je někdo schválil, tabulka je prázdná a s26 selže na 'table tbody tr:first-child'.",
+      "start.timezone = Europe/Lisbon: firma demo tenanta je v Portugalsku (auth/me → company.country.timezone = 'Europe/Lisbon', region PT-11). Štítek 'Jiné časové pásmo' a hláška v dialogu Přidat segment vznikají v FE (CompanyTimezoneService.getTimezoneDifferenceMinutesToLocal: offset pásma firmy − new Date().getTimezoneOffset(); showDifferentTimezoneTag = rozdíl ≠ 0). Prohlížeč na Macu má Europe/Prague (+1 h), proto se štítek ukazoval. Recorder nastaví Emulation.setTimezoneOverride před cleanupem i nahráváním – štítek by pak zmizet neměl (ověří až nahrávání).",
+      "Cleanup běží jen PŘED nahráváním (recorder runCleanup před replaySteps). Po posledním natáčení zůstane jeden segment V práci (~1,5 min); smaže ho cleanup dalšího běhu. Bloky cleanupu hledají segment V práci v kterémkoli dni aktuálního měsíce (.timeline-row:has(.event-at-work) → klik na řádek → koš v kartě dne), takže fungují i v jiný den než natáčení. Segment z předchozího měsíce (natáčení 30./31. a další běh v novém měsíci) najdou jen po ručním přepnutí měsíce – smazat ručně."
+    ],
+    "notes": "Celý tok proklikán a DRY-RUN 9. 10. 2026 12:16–12:21 UTC in-page runnerem (CSS + :text-is, čekání ≤10 s na viditelnost, klik pointer eventy na elementFromPoint středu, tempo ~430 ms/slovo + min_duration_ms + hold): cleanup → 32/32 kroků OK → cleanup OK (smazán 1 segment V práci 13:18–13:20). Navíc ověřeno: cleanup smaže i otevřený segment (V práci bez konce) a widget se vrátí na Mimo práci. Po dry-runu upraveny 2 selektory (widget p-card měl count 2 – druhý je karta Pracovní doba → p-card:has(a.widget-headline-link), count 1; oba upravené selektory ověřeny živě 1/1 po dry-runu). Na Ploše je i widget 'Týmová docházka' (saldo členů týmu, odkaz /app/attendance-v2-overview?view=team) – recept ho nepoužívá. Tenant po průchodu čistý, nastavení beze změny. Zjištění: Odchod je split-menu (Konec směny + typy přerušení z Nastavení docházky → Události, popisky přeložené: Lunch→Oběd, Default break→Pauza, End of shift→Konec směny); příchod/odchod nemá potvrzovací dialog ani toast; mazání segmentu: koš → dialog 'Smazat segment?' → Smazat (DELETE 204, u vlastního segmentu admina bez schválení); help centrum píše 'Odchody', aplikace má záložku 'Události'; report 569 Přehled příchodů a odchodů má sloupec Typ vložení (web/mobil/terminál, hodnota 'Systém' u automatických pauz). | 9. 10. 2026 odpoledne (v2 po schválení): mobil z narace vypuštěn (s02, s09, s29), tip s31 = widget Týmová docházka na Ploše (slnk-dashboard-v2-team-attendance, nadpis 'Týmová docházka', tabulka Jméno / Saldo k dnešnímu dni, odkaz /app/attendance-v2-overview?view=team), start.timezone Europe/Lisbon, cleanup přes celý aktuální měsíc. DRY-RUN v2 12:39–12:44 UTC: cleanup (nic) → 32/32 OK (příchod 12:41:25, Konec směny 12:42:53 = 88 s) → cleanup OK i s jiným vybraným dnem (01.10.) – smazán 1 segment V práci 13:41–13:43; tenant čistý (widget out_of_work, today_worked 0), nastavení docházky beze změny (API attendance-settings). | 9. 10. v2 (plynulost): bez min_duration (s13–s21 nesou minutu narací, kontrola součtu klipů ≥ 62 s), Schvalování rozděleno na s25 (menu) a s26 (záložka Docházka + tabulka), kratší čekání po navigaci, delší narace u pomalých kroků (s13, s18, s27, s28); „schvalování“ v naraci malým písmenem (velké „Sch“ četla Jana jako „š“)."
+  },
+  "cleanup": [
+    {
+      "name": "smazat segment V práci z minulého běhu – kterýkoli den aktuálního měsíce (1)",
+      "url": "https://app-pre-production.sloneek.com/app/attendance-v2-overview?view=me",
+      "if_visible": ".timeline-row:has(.event-at-work)",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".timeline-row:has(.event-at-work) > div:first-child",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-attendance-v2-daily-summary-card-event:has(.event-at-work) button:has(.fa-trash-can)",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog [data-cy=confirmationDialog] [data-cy=submitButton] button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "smazat segment V práci z minulého běhu – kterýkoli den aktuálního měsíce (2)",
+      "url": "https://app-pre-production.sloneek.com/app/attendance-v2-overview?view=me",
+      "if_visible": ".timeline-row:has(.event-at-work)",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".timeline-row:has(.event-at-work) > div:first-child",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-attendance-v2-daily-summary-card-event:has(.event-at-work) button:has(.fa-trash-can)",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog [data-cy=confirmationDialog] [data-cy=submitButton] button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "smazat segment V práci z minulého běhu – kterýkoli den aktuálního měsíce (3)",
+      "url": "https://app-pre-production.sloneek.com/app/attendance-v2-overview?view=me",
+      "if_visible": ".timeline-row:has(.event-at-work)",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".timeline-row:has(.event-at-work) > div:first-child",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-attendance-v2-daily-summary-card-event:has(.event-at-work) button:has(.fa-trash-can)",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog [data-cy=confirmationDialog] [data-cy=submitButton] button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "smazat segment V práci z minulého běhu – kterýkoli den aktuálního měsíce (4)",
+      "url": "https://app-pre-production.sloneek.com/app/attendance-v2-overview?view=me",
+      "if_visible": ".timeline-row:has(.event-at-work)",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".timeline-row:has(.event-at-work) > div:first-child",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-attendance-v2-daily-summary-card-event:has(.event-at-work) button:has(.fa-trash-can)",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog [data-cy=confirmationDialog] [data-cy=submitButton] button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "smazat segment V práci z minulého běhu – kterýkoli den aktuálního měsíce (5)",
+      "url": "https://app-pre-production.sloneek.com/app/attendance-v2-overview?view=me",
+      "if_visible": ".timeline-row:has(.event-at-work)",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".timeline-row:has(.event-at-work) > div:first-child",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-attendance-v2-daily-summary-card-event:has(.event-at-work) button:has(.fa-trash-can)",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog [data-cy=confirmationDialog] [data-cy=submitButton] button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "zavřít případný dialog nebo menu",
+      "if_visible": ".p-dialog, .p-menu-overlay, .p-popover",
+      "actions": [
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ]
+    },
+    {
+      "name": "Docházka: zpět na pohled Moje",
+      "url": "https://app-pre-production.sloneek.com/app/attendance-v2-overview?view=me",
+      "if_visible": "p-togglebutton:text-is(\"Me\")",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ]
+    },
+    {
+      "name": "Plocha",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    },
+    {
+      "name": "zahřát Vlastní reporty (aby se ve videu netočilo kolečko)",
+      "url": "https://app-pre-production.sloneek.com/app/custom-reports",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "4000"
+        },
+        {
+          "type": "navigate",
+          "value": "https://app-pre-production.sloneek.com/app/custom-reports/569"
+        },
+        {
+          "type": "wait",
+          "value": "8000"
+        }
+      ]
+    }
+  ],
+  "_localized": {
+    "from": "recipes/cs/clockins.json",
+    "i18n": "i18n/clockins.en.json",
+    "at": "2026-10-09T18:12:32.883Z",
+    "verified": {
+      "date": "2026-10-09",
+      "by": "Claude (BrowserOS, preprod, local-translate=en, in-page runner out/clockins/_work/dryrun-runner.js: CSS + :text-is, wait 10 s visible, pointer/mouse events at elementFromPoint of centre)",
+      "selectors": "all 32 steps passed (every action target and expect.visible resolved c1/v1, url_contains ok), 18:07–18:11 UTC; clock in 18:08:35, End of shift 18:09:58 (≥ 60 s). Live EN labels: h1 'Attendance settings', tabs General/Events/Terminals/Attendance cards, 'Add event', widget 'Attendance' tag 'Off work'→'At work', button 'Clock in'→'Clock out' (split menu), toggles 'Me'/'Team', 'Add segment' (button + dialog title), 'Cancel', menu li[aria-label='End of shift'] (tenant data, untranslated), 'Filters', th 'New value', report 569 h1 'Overview of clock-ins and clock-outs', 'Export', widget 'Team attendance'. Browser was Europe/Prague, so 'Different timezone' tag showed – recorder's start.timezone should hide it.",
+      "cleanup": "before: no At work segment in October; after: the run's segment 'At work, 19:09 - 19:10' deleted via recipe cleanup path (row → trash → 'Delete segment?' → Delete); cleanup toggle 'Me' present. Nothing approved/rejected, settings unchanged."
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "_comment": "Polská verze videa Absence. UI texty z translate_fe/pl + ověřeno naživo (local-translate=pl, 9. 10. 2026). Narace přizpůsobena polskému Kodeksu pracy (20/26 dní). Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM.",
+  "verified": {
+    "date": "2026-10-09",
+    "by": "Claude (BrowserOS, preprod, local-translate=pl)",
+    "selectors": "s04–s25 + s28 projeto nanečisto v PL UI; typ 'Urlop – przykład' na pre-produ založen (pro s11); cleanup (smazání absence 23.–25. 11.) ověřen"
+  },
+  "title": "Nieobecności – urlopy bez tabelek",
+  "thumbnail_title": "Nieobecności bez tabelek",
+  "parts": {
+    "Úvod": "Wprowadzenie",
+    "Nastavení": "Ustawienia",
+    "Ukázka využití": "Przykład użycia",
+    "Závěr": "Podsumowanie"
+  },
+  "text": {
+    "Přehled - Následujících 14 dní": "Przegląd – Następne 14 dni",
+    "Zobrazit": "Pokaż",
+    "Události absence": "Wydarzenia nieobecności",
+    "Přidat": "Dodaj",
+    "Dovolená – ukázka": "Urlop – przykład",
+    "Dovolenka – ukážka": "Dovolená – ukázka",
+    "Zobraz překlad": "Pokaż tłumaczenie",
+    "Nová absence": "Zgłoś nieobecność",
+    "Volno (krátí odpracovanou dobu)": "Czas wolny (zmniejsza czas pracy)",
+    "Uložit pro všechny uživatele": "Zapisz dla wszystkich użytkowników",
+    "Uložit": "Zapisz",
+    "Zpět": "Wróć",
+    "Jméno Filter Input": "Imię Filter Input",
+    "🏖️ Dovolená (denní fond)": "🏖️ Urlop (fundusz dzienny)",
+    "Dovolená (denní fond)": "Urlop (fundusz dzienny)",
+    "Nadcházející absence": "Nadchodzące nieobecności",
+    "Již ukončené absence": "Zakończone nieobecności",
+    "Vytvořit": "Utwórz",
+    "Nemocenská": "Zwolnienie lekarskie",
+    "Kalendáře": "Kalendarze",
+    "Rychlý pohled": "Szybki podgląd",
+    "Komplexní mzdový report": "Podsumowanie złożonych wynagrodzeń",
+    "Aktivní": "Aktywny",
+    "Export": "Eksport",
+    "Absence": "Nieobecności",
+    "Propojené účty": "Połączone konta",
+    "Zastupuje mě Petr.": "Zastępuje mnie Piotr."
+  },
+  "keep": [
+    "Dovolená",
+    "Claver",
+    "Claver Thomas",
+    "Kristýna",
+    "Nová Kristýna",
+    "2026",
+    "23.11.2026 - 25.11.2026",
+    "Vacation – demo",
+    "Sign in with Microsoft"
+  ],
+  "steps": {
+    "s01": {
+      "narration": "Urlop w Excelu, zwolnienie lekarskie w mailu, a na koniec miesiąca szukanie danych do płac? Uprośćmy to. Jestem Maria z zespołu Sloneek i dziś pokażę Wam moduł Nieobecności."
+    },
+    "s02": {
+      "narration": "W Sloneeku macie urlopy, zwolnienia lekarskie i dni chorobowe w jednym miejscu. Pracownicy sami składają wnioski, menedżer je zatwierdza, a Wy macie dane od razu gotowe do płac."
+    },
+    "s03": {
+      "narration": "Kodeks pracy daje pracownikom dwadzieścia albo dwadzieścia sześć dni urlopu w roku, zależnie od stażu. Gdy salda liczy system, znika przepisywanie i błędy. W kilka minut pokażemy ustawienia, zgłaszanie nieobecności i zestawienia do płac."
+    },
+    "s04": {
+      "narration": "Najpierw przygotujemy moduł. Jeden warunek: pracownik musi mieć przypisany czas pracy. Bez niego system nie zna jego wymiaru czasu pracy i nie policzy mu nieobecności. Instrukcję znajdziecie w filmie o czasie pracy."
+    },
+    "s05": {
+      "narration": "W Ustawieniach otwieram Nieobecność. Tu są wszystkie typy nieobecności, z których korzysta firma. Dostęp ma administrator lub HR. Uwaga, lista pokazuje tylko aktywne typy, wyłączone znajdziecie przez filtr u góry."
+    },
+    "s06": {
+      "narration": "Klikam Dodaj i tworzę nowy typ. Nazwa wewnętrzna to Urlop, przykład. Uzupełniam też nazwę, którą zobaczą pracownicy, po polsku, czesku i angielsku.",
+      "selectors": {
+        "slnk-common-translates-form-group-inputs div.ng-trigger > div.form-group:nth-child(7) > input": "slnk-common-translates-form-group-inputs div.ng-trigger > div.form-group:nth-child(1) > input",
+        "slnk-common-translates-form-group-inputs div.ng-trigger > div.form-group:nth-child(2) > input": "slnk-common-translates-form-group-inputs div.ng-trigger > div.form-group:nth-child(3) > input"
+      }
+    },
+    "s07": {
+      "narration": "Teraz wybór, który wpływa na płace: rodzaj. Czas wolny zmniejsza przepracowany czas, to urlop albo zwolnienie lekarskie. W pracy nie zmienia przepracowanych godzin i przydaje się na przykład przy dniu chorobowym, który firma płaci jak zwykłą pracę. Dla urlopu wybieram Czas wolny."
+    },
+    "s08": {
+      "narration": "W Jednostce czasu wybieram Dni i pół dnia, żeby można było wziąć też pół dnia wolnego. Włączam Limit roczny, ustawiam dwadzieścia dni, a niewykorzystane dni przejdą na nowy rok."
+    },
+    "s09": {
+      "narration": "Powody zdrowotne zostawiam wyłączone. Zaznaczacie je przy zwolnieniu lekarskim albo opiece nad członkiem rodziny, które liczą się w dniach kalendarzowych. W ograniczeniu czasowym ustawiam siedem, więc urlop trzeba zgłosić co najmniej tydzień wcześniej."
+    },
+    "s10": {
+      "narration": "Uwaga na częsty błąd. Jednostki czasu i limitu rocznego nie zmienicie po utworzeniu typu. Jeśli się pomylicie, nie usuwajcie typu, tylko go dezaktywujcie, żeby została historia, i utwórzcie nowy."
+    },
+    "s11": {
+      "narration": "Przy zapisie macie dwa przyciski. Zapisz dla wszystkich użytkowników udostępni typ całej firmie i wtedy na przykład kolegom ze Słowacji pojawi się polski urlop. Dlatego wystarczy kliknąć samo Zapisz. Ja mam już ten typ zapisany, więc zamykam formularz i tu na liście go widzicie."
+    },
+    "s12": {
+      "narration": "Komu typ przysługuje i w jakim wymiarze, ustalacie w Masowych ustawieniach nieobecności. Każda osoba ma tu wiersz dla każdego typu nieobecności. W pierwszej kolumnie udostępniacie nieobecność, a w kolumnie Wymaga zatwierdzenia decydujecie, czy musi ją zatwierdzić przełożony."
+    },
+    "s13": {
+      "narration": "Przechodzicie na Sloneek w trakcie roku? Wtedy uzupełnijcie przede wszystkim Limit na ten rok, czyli ile dni przysługuje danej osobie w tym roku. Limit indywidualny zostawcie tylko dla wyjątków, na przykład dłuższego urlopu dla kierownictwa."
+    },
+    "s14": {
+      "narration": "A teraz w praktyce. Ela z działu sprzedaży chce wziąć trzy dni urlopu. Pracownik sam zgłasza nieobecność, a ja pokażę to na swoim koncie, Ela zobaczy to samo. W lewym menu otwieram Moje nieobecności."
+    },
+    "s15": {
+      "narration": "U góry widzicie salda według typów, czyli ile urlopu jeszcze zostało. Pod nimi są nadchodzące i zakończone nieobecności."
+    },
+    "s16": {
+      "narration": "Klikam Zgłoś nieobecność i w polu Nieobecność wybieram urlop. W menu są tylko typy, które dana osoba ma udostępnione."
+    },
+    "s17": {
+      "narration": "W kalendarzu wybieram pierwszy i ostatni dzień. Gdyby chodziło tylko o pół dnia, przełączam u góry na Pół dnia."
+    },
+    "s18": {
+      "narration": "Sloneek od razu sprawdza, czy nieobecność z niczym się nie pokrywa, i pokazuje, ile dni odejmie z limitu. Gdyby coś się nie zgadzało, przycisk Utwórz pozostanie nieaktywny."
+    },
+    "s19": {
+      "narration": "W notatce wpisuję, kto mnie zastąpi, żeby koledzy wiedzieli. Klikam Utwórz."
+    },
+    "s20": {
+      "narration": "Nieobecność jest wśród nadchodzących. Jako administratorka mam zatwierdzenie automatycznie. Wniosek Eli trafiłby do przełożonego i do zatwierdzenia świeciłby na pomarańczowo. Po zatwierdzeniu zmieni kolor na zielony i dopiero wtedy odejmie się od salda."
+    },
+    "s21": {
+      "narration": "Druga częsta sytuacja: Ela dzwoni rano, że jest chora. Jako administratorka sama zgłoszę jej zwolnienie lekarskie. Klikam Zgłoś nieobecność i przesuwam przełącznik na Inny użytkownik."
+    },
+    "s22": {
+      "narration": "W polu Użytkownik wybieram koleżankę, typ Zwolnienie lekarskie i dzisiejszy dzień. Przyciskiem Utwórz zapisujecie zwolnienie i od razu jest w kalendarzu i w danych do płac."
+    },
+    "s23": {
+      "narration": "Kto akurat jest nieobecny? W menu Kalendarze otwieram kalendarz nieobecności. Mogę filtrować według zespołu albo osób i od razu widzę, czy urlopy w zespole się nie pokrywają."
+    },
+    "s24": {
+      "narration": "Zostają dane do płac. W Raportach niestandardowych otwieram Podsumowanie złożonych wynagrodzeń. Widzicie wymiar czasu pracy brutto, długość nieobecności i wymiar netto, czyli co zostaje po odjęciu czasu wolnego. Dlatego tak ważny jest wybór Czas wolny albo W pracy."
+    },
+    "s25": {
+      "narration": "Dla księgowej ograniczcie raport do aktywnych pracowników. Uwaga, zaznaczenie kolumny Aktywny po lewej jeszcze nie filtruje, wartość Tak wybierzcie przez ikonę filtra przy kolumnie Aktywny w tabeli. Potem wyeksportujecie raport do Excela."
+    },
+    "s26": {
+      "narration": "I gotowe. Umiecie już ustawić typ nieobecności, przydzielić limity i zgłosić urlop oraz zwolnienie lekarskie. Oszczędzacie przepisywanie tabel, a księgowa dostaje dane, na których może polegać."
+    },
+    "s27": {
+      "narration": "Jak menedżer zatwierdza wniosek w sekcji Zatwierdzenia, pokażemy w osobnym filmie. Wasze zadanie na dziś: przejrzyjcie typy nieobecności z księgową i uzupełnijcie ludziom Limit na ten rok."
+    },
+    "s28": {
+      "narration": "Wskazówka na koniec: w Ustawieniach interfejsu, w części Połączone konta, podłączcie Google albo Microsoft. Zatwierdzone nieobecności pojawią się wtedy w kalendarzu Google albo Outlook i nie musicie ich wpisywać dwa razy."
+    },
+    "s29": {
+      "narration": "Jeśli coś nie zadziała, zajrzyjcie do Centrum pomocy. Następnym razem przyjrzymy się ewidencji czasu pracy. A ja idę sprawdzić, ile dni urlopu mi zostało. Mniej administracji, więcej czasu dla ludzi. To jest Sloneek."
+    }
+  }
+}

@@ -1,0 +1,1096 @@
+{
+  "id": "performance-review",
+  "version": 1,
+  "title": "Hodnocení výkonnosti: pozice, kompetence a cykly hodnocení",
+  "lang": "cs",
+  "app_version": "preprod-2026-10-09",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "cs"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "bF7C2fCv7Zf30iT84wZ1",
+    "model_id": "eleven_v4"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s25",
+    "title": "Hodnocení výkonnosti"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Hodnocení v tabulkách a poznámky roztroušené po e-mailech? Dobrý den, jsem Marie z týmu Sloneek a ukážu vám hodnocení výkonnosti.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Úvod",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Hodnocení stojí na pozicích a jejich kompetencích. Manažer hodnotí své podřízené a lidé se mohou ohodnotit i sami.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "before_ms": 1500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "V levém menu kliknu na Hodnocení výkonnosti. Tady vidíte všechny cykly hodnocení, jejich stav a míru dokončení.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-positions-evaluation-list [data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-list table thead",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-list [data-cy=tableRow]",
+        "url_contains": "/app/performance-evaluation/positions-evaluation/all"
+      }
+    },
+    {
+      "id": "s04",
+      "narration": "Filtry nad tabulkou rychle oddělí koncepty, probíhající cykly, cykly připravené ke spuštění a dokončené.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-status-filter",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-status-filter button:text-is(\"Dokončeno\")",
+        "url_contains": "/app/performance-evaluation/positions-evaluation/all"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "Začneme pozicemi. Tlačítkem Spravovat pozice otevřete přehled pracovních pozic a jejich kompetencí.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "button:has-text(\"Spravovat pozice\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "button:has-text(\"Spravovat pozice\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "tr:has-text(\"Specialista zákaznické podpory\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "h5:text-is(\"Pozice a kompetence\")",
+        "url_contains": "/app/performance-evaluation/positions"
+      },
+      "part": 2,
+      "part_title": "Pozice a kompetence"
+    },
+    {
+      "id": "s06",
+      "narration": "U každé pozice vidíte, kolik lidí ji má přiřazenou a kolik kompetencí obsahuje její kompetenční model.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "table thead",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "tr:has-text(\"Specialista zákaznické podpory\")",
+        "url_contains": "/app/performance-evaluation/positions"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "Otevřu pozici Specialista zákaznické podpory. Nahoře je název a popis práce, který uvidí i zaměstnanec.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "tr:has-text(\"Specialista zákaznické podpory\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "tr:has-text(\"Specialista zákaznické podpory\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "input#name",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-common-card:has(slnk-common-editor)",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "slnk-common-card:has(slnk-common-editor)",
+        "url_contains": "/app/performance-evaluation/positions/edit/"
+      },
+      "voice_after_actions": true
+    },
+    {
+      "id": "s08",
+      "narration": "Níže je kompetenční model. Každá kompetence má svou škálu, tady nula až pět, a stupně můžete slovně popsat.",
+      "actions": [
+        {
+          "type": "scroll",
+          "value": "slnk-common-card:has(slnk-common-open-ai-search-bar-v2)",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "span.text-primary:text-is(\"Nastavení slovního popisu stupnice\") >> nth=0",
+          "before_ms": 600
+        },
+        {
+          "type": "click",
+          "selector": "span.text-primary:text-is(\"Nastavení slovního popisu stupnice\") >> nth=0",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "highlight",
+          "selector": "div.px-4.pb-4.pt-4:has(input[placeholder=\"Popis stupnice\"]) >> nth=0",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "div.px-4.pb-4.pt-4:has(input[placeholder=\"Popis stupnice\"]) >> nth=0",
+        "url_contains": "/app/performance-evaluation/positions/edit/"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "Kompetence nemusíte vymýšlet sami: v poli Inspirujte se umělou inteligencí zadáte pozici a AI je navrhne. Pozici pak lidem přiřadíte v profilu.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "textarea[data-cy=aiTextarea]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-common-card-page-header button:has-text(\"Zpět\")",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-card-page-header button:has-text(\"Zpět\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container [data-cy=submitButton]",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "nb-dialog-container [data-cy=submitButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "tr:has-text(\"Specialista zákaznické podpory\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "h5:text-is(\"Pozice a kompetence\")",
+        "url_contains": "/app/performance-evaluation/positions"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Teď založíme nový cyklus. Kliknu na Vytvořit a vyplním název, třeba Hodnocení výkonu za čtvrté čtvrtletí.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-common-card-page-header button:has-text(\"Zpět\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-positions-evaluation-list [data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "button:has-text(\"Vytvořit\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "button:has-text(\"Vytvořit\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "input#name",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "input#name",
+          "value": "Hodnocení výkonu za čtvrté čtvrtletí",
+          "before_ms": 400,
+          "delay_ms": 40
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-setup-survey-basic-settings",
+        "url_contains": "/setup/survey"
+      },
+      "part": 3,
+      "part_title": "Nový cyklus hodnocení",
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s11",
+      "narration": "Volba Vypsat kompetence z pracovních pozic přidá kompetence do dotazníku. Manažer hodnotí vždy, já zaškrtnu i sebehodnocení.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "nb-checkbox[formcontrolname=is_copy_competencies_from_position]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "hover",
+          "selector": "nb-checkbox[formcontrolname=is_self_review_requested] label",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-checkbox[formcontrolname=is_self_review_requested] label",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "nb-checkbox[formcontrolname=is_self_review_requested] span.custom-checkbox.checked",
+        "url_contains": "/setup/survey"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "V Cílení vyberete, koho hodnotíte: celou firmu, týmy, lokality, štítky, pozice nebo konkrétní lidi. Zvolím vybrané uživatele.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-setup-survey-targeting nb-radio-group",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-radio:has(input[value=\"users\"]) label",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "slnk-positions-evaluation-setup-survey-targeting slnk-common-autocomplete input",
+          "before_ms": 600
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "Claver",
+          "before_ms": 400,
+          "delay_ms": 60
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:text-is(\"Claver Thomas\")",
+          "before_ms": 600
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-setup-survey-targeting slnk-common-autocomplete",
+        "url_contains": "/setup/survey"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "V Časové ose nastavím datum zahájení a ukončení. Cyklus může začít klidně i dnes.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "input[formcontrolname=start_date]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-calendar-day-cell.day-cell.today",
+          "before_ms": 700
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "input[formcontrolname=end_date]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "nb-calendar-day-cell.day-cell:not(.bounding-month):not(.disabled) >> nth=-1",
+          "before_ms": 900
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-setup-survey-timeline",
+        "url_contains": "/setup/survey"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "Kliknu na Další. Hodnocení se uloží jako koncept a pokračujeme k dotazníku.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "slnk-common-card-page-header button:has-text(\"Další\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-card-page-header button:has-text(\"Další\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ":text-is(\"Vyberte možnost vytvoření dotazníku\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": ":text-is(\"Vyberte možnost vytvoření dotazníku\")",
+        "url_contains": "/questionnaire"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Dotazník můžete nechat navrhnout umělou inteligencí, nebo začít od nuly. Já zvolím Začít od nuly.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-setup li:has-text(\"Vytvořit pomocí AI\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "hover",
+          "selector": "li:has-text(\"Začít od nuly\") >> nth=-1",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "li:has-text(\"Začít od nuly\") >> nth=-1",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ":text-is(\"Instrukce pro sebehodnocení\")",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": ":text-is(\"Pokyny pro manažera\")",
+        "url_contains": "sectionId=instructions"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "V Instrukcích připravíte pokyny zvlášť pro sebehodnocení a pro manažera. Všechny změny se ukládají automaticky.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-common-card:has-text(\"Instrukce pro sebehodnocení\") >> nth=-1",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": ":text-is(\"Pokyny pro manažera\")",
+        "url_contains": "sectionId=instructions"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "Ve Všech pozicích přidáte otázky pro každého hodnoceného. Kliknu na Přidat otázku a napíšu její znění.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-common-dynamic-menu-item a:text-is(\"Všechny pozice\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "button:has-text(\"Přidat otázku\")",
+          "value": "10000"
+        },
+        {
+          "type": "hover",
+          "selector": "button:has-text(\"Přidat otázku\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "button:has-text(\"Přidat otázku\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "type",
+          "selector": "input[formcontrolname=text]",
+          "value": "Jak se vám daří plnit cíle za uplynulé období?",
+          "before_ms": 400,
+          "delay_ms": 30
+        }
+      ],
+      "expect": {
+        "visible": "input[formcontrolname=text]",
+        "url_contains": "/questionnaire"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Jako typ odpovědi zvolím škálu od jedné do pěti. Otázku můžete určit jen pro manažera, nebo pro manažera i uživatele.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-select#type button",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-option:text-is(\"Škála\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-select#target_type",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "nb-select#type button:has-text(\"Škála\")",
+        "url_contains": "/questionnaire"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "U konkrétní pozice jsou otázky z jejího kompetenčního modelu. I sem můžete přidat vlastní otázky.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-common-dynamic-menu-item a:text-is(\"Specialista zákaznické podpory\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-accordion-item-header h6:text-is(\"Komunikace se zákazníkem\")",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-setup-questionnaire-question:has-text(\"Komunikace se zákazníkem\") >> nth=0",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "nb-accordion-item-header h6:text-is(\"Komunikace se zákazníkem\")",
+        "url_contains": "/questionnaire"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Kliknu na Další. Shrnutí ukáže název, cílení, termíny a počet otázek v dotazníku.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "slnk-common-card-page-header button:has-text(\"Další\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-card-page-header button:has-text(\"Další\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ":text-is(\"Shrnutí\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": ":text-is(\"Shrnutí\")",
+        "url_contains": "/launch"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "Tlačítkem Zahájit cyklus spustíte a hodnotitelé dostanou úkol. Pro ukázku ho nechám jako koncept.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "slnk-common-card-page-header button:has-text(\"Zahájit\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ],
+      "expect": {
+        "visible": ":text-is(\"Shrnutí\")",
+        "url_contains": "/launch"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "Teď výsledky. V přehledu otevřu ukázkové hodnocení za třetí čtvrtletí.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=tableRow]:has-text(\"Hodnocení výkonu – ukázka (Q3 2026)\")",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=tableRow]:has-text(\"Hodnocení výkonu – ukázka (Q3 2026)\")",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=tableRow]:has-text(\"Hodnocení výkonu – ukázka (Q3 2026)\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-detail-results",
+        "url_contains": "/detail/"
+      },
+      "part": 4,
+      "part_title": "Výsledky",
+      "voice_after_actions": 3
+    },
+    {
+      "id": "s23",
+      "narration": "Nahoře vidíte počet účastníků a míru dokončení. Tabulka Výsledky ukáže, komu ještě chybí některý typ zpětné vazby.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=positionsEvaluationResultUserListTable] tbody tr",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-common-card:has-text(\"Míra dokončení\") >> nth=-1",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=positionsEvaluationResultUserListTable] thead",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=positionsEvaluationResultUserListTable]",
+        "url_contains": "/detail/"
+      },
+      "voice_after_actions": 1
+    },
+    {
+      "id": "s24",
+      "narration": "V záložce Hodnotitelé zkontrolujete, kdo koho hodnotí. V tabulce Výsledky kliknu na jméno hodnoceného.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "a[href$=\"/raters\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=positionsEvaluationResultUserListTable] tbody tr:has-text(\"Claver Thomas\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=positionsEvaluationResultUserListTable] tbody tr:has-text(\"Claver Thomas\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "slnk-position-evaluation-report-summary",
+        "url_contains": "/user-report/"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "Report ukazuje silné stránky a oblasti ke zlepšení, tady vede komunikace a nejslabší je samostatnost. Klíčové poznatky AI to shrnou slovy.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "slnk-position-evaluation-report-performance-by-category",
+          "value": "20000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-position-evaluation-report-summary",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-common-card:has-text(\"Klíčové poznatky AI\") >> nth=-1",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-position-evaluation-report-performance-by-category",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "slnk-position-evaluation-report-performance-by-category",
+        "url_contains": "/user-report/"
+      },
+      "voice_after_actions": 1
+    },
+    {
+      "id": "s26",
+      "narration": "V Podrobné zpětné vazbě vidíte hodnocení manažera i sebehodnocení. Konečný výsledek po společné domluvě nastavíte tužkou.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-competencies-feedback table",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-positions-evaluation-competencies-feedback .fa-pencil >> nth=0",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-competencies-feedback th:text-is(\"Konečný výsledek\")",
+        "url_contains": "/user-report/"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "Ze slabší oblasti rovnou vytvoříte osobní cíl. Ve sdílených poznámkách je dohodnutý akční plán, který vidí i zaměstnanec.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "button:has-text(\"Vytvořte si osobní cíl\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-common-card:has-text(\"Sdílené poznámky k hodnocení\") >> nth=-1",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "button:has-text(\"Vytvořte si osobní cíl\")",
+        "url_contains": "/user-report/"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "A jak to vidí zaměstnanec? V sekci Já otevře Moje hodnocení výkonnosti. Když cyklus běží, najde dotazník v Mých úkolech.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_performance_evaluation",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_performance_evaluation",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-positions-evaluation-my-cycles",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-my-tasks",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-my-cycles",
+        "url_contains": "/positions-evaluation/my/my-evaluation"
+      },
+      "part": 5,
+      "part_title": "Pohled zaměstnance"
+    },
+    {
+      "id": "s29",
+      "narration": "V Mých cyklech má své výsledky a v záložce Kompetence vidí popis pozice i to, podle čeho bude hodnocen.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-my-cycles",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "hover",
+          "selector": "a[href$=\"/my/my-competences\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "a[href$=\"/my/my-competences\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ":has-text(\"Kompetenční model : Specialista zákaznické podpory\") >> nth=-1",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": ":has-text(\"Kompetenční model : Specialista zákaznické podpory\") >> nth=-1",
+        "url_contains": "/my/my-competences"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "Tip na závěr: hotový cyklus v přehledu jednoduše zduplikujete a další kolo hodnocení máte připravené za chvíli.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-positions-evaluation-list [data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=tableRow] [data-cy=actionsButton] >> nth=0",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-context-menu a:has-text(\"Duplikovat\")",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=positionsEvaluationSearch]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-list [data-cy=tableRow]",
+        "url_contains": "/app/performance-evaluation/positions-evaluation/all"
+      },
+      "part": 6,
+      "part_title": "Závěr"
+    },
+    {
+      "id": "s31",
+      "narration": "Teď umíte nastavit pozice, připravit cyklus hodnocení i číst výsledky. Kdyby něco nešlo, mrkněte do Centra nápovědy.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-list",
+        "url_contains": "/app/performance-evaluation/positions-evaluation/all"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "Méně administrativy, víc času na lidi. To je Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-list",
+        "url_contains": "/app/performance-evaluation/positions-evaluation/all"
+      },
+      "hold_after_ms": 1500
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "Thomas Claver: nastavit demo pozici videa (karta uživatele 244ccfdd, mění jen pole Pozice; přeskočí, když už ji má)",
+      "url": "https://app-pre-production.sloneek.com/app/company-details/member/244ccfdd-cc2a-4a75-bd8f-93e79bdd3b5f/work-data",
+      "if_visible": "nb-select[data-cy=positionSelect] button:not(:has-text(\"Specialista zákaznické podpory\"))",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=positionSelect] button",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "nb-option:text-is(\"Specialista zákaznické podpory\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=companyMemberWorkDataSaveButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "navigate",
+          "value": "https://app-pre-production.sloneek.com/app/company-details/member/244ccfdd-cc2a-4a75-bd8f-93e79bdd3b5f/work-data"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-select[data-cy=positionSelect] button:has-text(\"Specialista zákaznické podpory\")",
+          "value": "15000"
+        }
+      ]
+    },
+    {
+      "name": "smazat koncept 'Hodnocení výkonu za čtvrté čtvrtletí' z minulého běhu (1)",
+      "url": "https://app-pre-production.sloneek.com/app/performance-evaluation/positions-evaluation/all",
+      "if_visible": "[data-cy=tableRow]:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\")",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=tableRow]:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\") >> [data-cy=actionsButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a:has-text(\"Vymazat\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\") [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat koncept 'Hodnocení výkonu za čtvrté čtvrtletí' z minulého běhu (2)",
+      "url": "https://app-pre-production.sloneek.com/app/performance-evaluation/positions-evaluation/all",
+      "if_visible": "[data-cy=tableRow]:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\")",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=tableRow]:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\") >> [data-cy=actionsButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a:has-text(\"Vymazat\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\") [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-09",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "position": "babef7ec-634e-484e-b1bc-4eedf54a28af",
+      "cycle": "dc32420e-4b25-4a07-b9d9-b40fb19b0467",
+      "user_report": "5cef2f44-3982-4e99-a83e-d4d5cb00f40a"
+    },
+    "notes": "DRY-RUN 9. 10. 2026 ~20:20-20:45 UTC in-page runnerem (Playwright-like: první shoda musí být viditelná, :text-is/:has-text/>>/nth, wait_ready = selektor + bez spinneru): cleanup před (smazán zbylý koncept) -> s01-s32 32/32 OK (~89 s bez narace) -> cleanup po (koncept smazán, ověřeno API). Zjištění: (1) detail pozice vždy při odchodu ukáže dialog 'Neuložené změny' (i bez úprav) -> s09 klikne Ano = odejít bez uložení; (2) menu Akce v seznamu cyklů je nbContextMenu s trigger=hover, otevírá se najetím a zavírá až odjetím myši (Escape nefunguje) -> s30 najede na Akce a pak na pole Hledat; (3) cleanup potvrzuje jen dialog, který obsahuje název konceptu (nb-dialog-container:has-text(...)), protože otevřené menu jiného řádku by jinak smazalo cizí cyklus - při dry-runu se to stalo (smazán cizí dokončený cyklus '360 evaluation'); (4) demo cyklus je stále 'Probíhá', s22 ho proto otevírá bez filtru Dokončeno; (5) nadpis sekce pozice v dotazníku je 'Specialista Zákaznické Podpory' (Title Case)."
+  }
+}

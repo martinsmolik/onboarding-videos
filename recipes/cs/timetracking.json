@@ -1,0 +1,1769 @@
+{
+  "id": "timetracking",
+  "version": 1,
+  "title": "Timetracking a aktivity (projekty)",
+  "lang": "cs",
+  "app_version": "preprod-2026-10-13",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "cs"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "bF7C2fCv7Zf30iT84wZ1",
+    "model_id": "eleven_v4"
+  },
+  "pronunciation": [
+    {
+      "match": "timetracking",
+      "say": "tajmtrekink",
+      "stem": true,
+      "case": "insensitive",
+      "note": "Timetracking aktivity, timetrackingu"
+    },
+    {
+      "match": "time tracking",
+      "say": "tajm trekink",
+      "stem": true,
+      "case": "insensitive",
+      "note": "Mód Time Trackingu"
+    },
+    {
+      "match": "Escape",
+      "say": "eskejp",
+      "note": "klávesa Escape"
+    },
+    {
+      "match": "CZK",
+      "say": "cé zet ká",
+      "note": "měna"
+    },
+    {
+      "match": "Claver",
+      "say": "klejvr",
+      "note": "příjmení admina na pre-produ"
+    },
+    {
+      "match": "Export",
+      "say": "export"
+    }
+  ],
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s27",
+    "title": "Timetracking a aktivity"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Chcete vědět, kolik času lidé tráví na projektech a u klientů? Dobrý den, jsem Marie z týmu Sloneek a ukážu vám, jak funguje timetracking a aktivity.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_clients_and_projects",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "#new_timetracking_show_detail .time_tracking_info",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Úvod",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Lidé zapisují čas k aktivitám, třeba stopkami tady v hlavičce, a čím se to liší od příchodů a odchodů, vysvětluje samostatné video.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "#new_timetracking_show_detail .time_tracking_info",
+          "before_ms": 1200
+        },
+        {
+          "type": "highlight",
+          "selector": "#new_timetracking_show_detail",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "#new_timetracking_show_detail .time_tracking_info",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "Nejdřív připravím klienta, a tak v levém menu rozbalím Klienti a projekty a kliknu na Klienti.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_clients_and_projects",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_clients_and_projects",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_planning_clients",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_planning_clients",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_planning_clients",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "#clients_and_projects_clients_add",
+        "url_contains": "/app/planning/clients"
+      },
+      "part": 2,
+      "part_title": "Klienti a projekty"
+    },
+    {
+      "id": "s04",
+      "narration": "V seznamu jsou firmy, pro které pracujete, a já kliknu na Přidat.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "#clients_and_projects_clients_add",
+          "before_ms": 200
+        },
+        {
+          "type": "click",
+          "selector": "#clients_and_projects_clients_add",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] input#name",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] input#name",
+        "url_contains": "/app/planning/clients/new"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "Do pole Název napíšu Klient – ukázka, další údaje jako IČO nebo adresu můžete doplnit později.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input#name",
+          "value": "Klient – ukázka",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] input#business_id",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] input#name",
+        "url_contains": "/clients/new"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "Dole kliknu na pole Seznam uživatelů, kteří pracují pro klienta, a vyhledám Claver.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-autocomplete[formcontrolname=client_users]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-autocomplete[formcontrolname=client_users] input",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "Claver",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Claver Thomas\")",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-common-autocomplete-option:has-text(\"Claver Thomas\")",
+        "url_contains": "/clients/new"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "Vyberu sebe a seznam zavřu klávesou Escape, klienta pak při zápisu času uvidí jen lidé z tohoto seznamu.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Claver Thomas\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-autocomplete[formcontrolname=client_users]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-common-autocomplete[formcontrolname=client_users].ng-dirty",
+        "url_contains": "/clients/new"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "Kliknu na Uložit a nový klient se objeví v seznamu vlevo.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "#clients_add_and_save",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "#clients_add_and_save",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .common_sub_menu.active:has-text(\"Klient – ukázka\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .common_sub_menu.active:has-text(\"Klient – ukázka\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .common_sub_menu.active:has-text(\"Klient – ukázka\")",
+        "url_contains": "/app/planning/clients/"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "Projekty najdete hned vedle, a tak v menu pod Klienti a projekty kliknu na Projekty.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_planning_projects",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_planning_projects",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "#projects_add_button",
+        "url_contains": "/app/planning/projects"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Kliknu na Přidat a do pole Název projektu napíšu Projekt Onboarding – ukázka.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "#projects_add_button",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "#projects_add_button",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] input#project_name",
+          "value": "10000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input#project_name",
+          "value": "Projekt Onboarding – ukázka",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] input#project_name",
+        "url_contains": "/app/planning/projects/new"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "Kliknu na pole Klient, pro kterého pracujeme, a vyberu Klient – ukázka.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] nb-select[formcontrolname=client_uuid] button",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option-list nb-option:text-is(\"Klient – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-option-list nb-option:text-is(\"Klient – ukázka\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-select[formcontrolname=client_uuid] button:has-text(\"Klient – ukázka\")",
+        "url_contains": "/projects/new"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Začátek a konec projektu jsou nepovinné, v tyto dny se projekt pro zapisování času sám zapne a vypne.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] input[formcontrolname=from_date]",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] input[formcontrolname=to_date]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] input[formcontrolname=from_date]",
+        "url_contains": "/projects/new"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "Kliknu na Uložit a projekt je připravený.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "#projects_add_and_save_button",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "#projects_add_and_save_button",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .common_sub_menu.active:has-text(\"Projekt Onboarding – ukázka\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .common_sub_menu.active:has-text(\"Projekt Onboarding – ukázka\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .common_sub_menu.active:has-text(\"Projekt Onboarding – ukázka\")",
+        "url_contains": "/app/planning/projects/"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "Co lidé dělají, popisují aktivity, a tak v levém menu kliknu na Nastavení a v rozbalené nabídce na Aktivity.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_planning_events",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_planning_events",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_planning_events",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "#new_dashboard_reports_company_settings_activity_events_add",
+        "url_contains": "/app/planning/events"
+      },
+      "part": 3,
+      "part_title": "Aktivity"
+    },
+    {
+      "id": "s15",
+      "narration": "Kliknu na Přidat a do pole Název napíšu Konzultace – ukázka.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "#new_dashboard_reports_company_settings_activity_events_add",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "#new_dashboard_reports_company_settings_activity_events_add",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] input[formcontrolname=name]",
+          "value": "10000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[formcontrolname=name]",
+          "value": "Konzultace – ukázka",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] input[formcontrolname=name]",
+        "url_contains": "/app/planning/events/new"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "Kliknu na Mód Time Trackingu, kde určíte, jestli lidé u aktivity stopky použít nesmí, smí, nebo musí, a nechám Povoleno.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] nb-select[formcontrolname=time_tracking_type] button",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option-list nb-option:text-is(\"Vyžadováno\")",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-option-list",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "nb-option-list nb-option:text-is(\"Povoleno\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-select[formcontrolname=time_tracking_type] button:has-text(\"Povoleno\")",
+        "url_contains": "/events/new"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "Do Hodinové částky k fakturaci napíšu tisíc pět set, u interní práce, kterou klientovi neúčtujete, ji necháte prázdnou.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[formcontrolname=company_price]",
+          "value": "1500",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] input[formcontrolname=company_price]",
+        "url_contains": "/events/new"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Do Nákladové hodinové sazby napíšu osm set a v poli Měna vyberu CZK.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[formcontrolname=worker_price]",
+          "value": "800",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] nb-select[formcontrolname=currency_uuid] button",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option-list nb-option:text-is(\"CZK\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-option-list nb-option:text-is(\"CZK\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-select[formcontrolname=currency_uuid] button:has-text(\"CZK\")",
+        "url_contains": "/events/new"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "Kliknu na Uložit a dole se objeví Nastavení uživatelů, tedy kdo smí aktivitu používat.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "#new_dashboard_reports_company_settings_activity_events_add_save",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "#new_dashboard_reports_company_settings_activity_events_add_save",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "#settings_activity_detail_delete_button",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Jméno Filter Input\"]",
+          "value": "15000"
+        },
+        {
+          "type": "scroll",
+          "selector": "#settings_activity_allow_for_selected_users",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "#settings_activity_allow_for_all_users",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "#settings_activity_detail_delete_button",
+        "url_contains": "/app/planning/events/"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Do filtru Jméno napíšu Claver a zaškrtnu řádek Claver Thomas.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Jméno Filter Input\"]",
+          "value": "Claver",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"]:has-text(\"Claver Thomas\")",
+          "value": "10000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-paging-panel:has-text(\"1 do 1 z 1\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"] [col-id=checkbox_col] .ag-selection-checkbox",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv]:has-text(\"Počet vybraných uživatelů : 1\")",
+        "url_contains": "/app/planning/events/"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "Kliknu na Povolit pro vybrané uživatele, a aktivitu tak smím používat jen já, ostatním zůstává zakázaná.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "#settings_activity_allow_for_selected_users",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "#settings_activity_allow_for_selected_users",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"] [col-id=is_allowed] nb-checkbox:has(input:checked)",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"] [col-id=is_allowed] nb-checkbox:has(input:checked)",
+        "url_contains": "/app/planning/events/"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "Jak se čas zapisuje, ukážu v levém menu, kde kliknu na Moje aktivity.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_activities",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_activities",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "#planning_add_button",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "#planning_add_button",
+        "url_contains": "/app/my-profile/activity-overview"
+      },
+      "part": 4,
+      "part_title": "Zápis času"
+    },
+    {
+      "id": "s23",
+      "narration": "Kliknu na Zobrazit nastavení aktivity a vidím, které aktivity smím používat a u kterých je nutné schválení.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#company_users_users_activity_overview_show_activity_settings",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] table tr:has-text(\"Konzultace – ukázka\")",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] table tr:has-text(\"Konzultace – ukázka\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] table tr:has-text(\"Konzultace – ukázka\")",
+        "url_contains": "/activity-overview"
+      }
+    },
+    {
+      "id": "s24",
+      "narration": "Kliknu na Nová aktivita a otevře se formulář s kalendářem.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "#planning_add_button",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "#planning_add_button",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container slnk-common-planning-dialog [data-cy=clientAutocomplete]",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container slnk-common-planning-dialog [data-cy=clientAutocomplete]",
+        "url_contains": "/activity-overview"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "Kliknu na pole Klient a vyberu Klient – ukázka.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container slnk-common-planning-dialog [data-cy=clientAutocomplete] input",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Klient – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Klient – ukázka\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container slnk-common-planning-dialog [data-cy=projectAutocomplete]",
+        "url_contains": "/activity-overview"
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "Kliknu na pole Projekt a vyberu Projekt Onboarding – ukázka.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container slnk-common-planning-dialog [data-cy=projectAutocomplete] input",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Projekt Onboarding – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Projekt Onboarding – ukázka\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container slnk-common-planning-dialog [data-cy=activityEventAutocomplete]",
+        "url_contains": "/activity-overview"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "Kliknu na pole Aktivita a vyberu Konzultace – ukázka.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container slnk-common-planning-dialog [data-cy=activityEventAutocomplete] input",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Konzultace – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Konzultace – ukázka\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container slnk-common-planning-dialog nb-radio-group[formcontrolname=is_automatically_approve]",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container slnk-common-planning-dialog nb-radio-group[formcontrolname=is_automatically_approve]",
+        "url_contains": "/activity-overview"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "Do polí Od a Do zadáte, kdy jste na aktivitě pracovali, a vpravo vidíte svůj týden v kalendáři.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container slnk-common-planning-dialog [data-cy=startDateTimeInput]",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container slnk-common-planning-dialog [data-cy=endDateTimeInput]",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container slnk-common-planning-dialog [data-cy=fullCalendar]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container slnk-common-planning-dialog [data-cy=startDateTimeInput]",
+        "url_contains": "/activity-overview"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "Dole jako administrátorka volím, jestli se záznam schválí automaticky, nebo ho musí schválit manažer.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "nb-dialog-container slnk-common-planning-dialog nb-radio-group[formcontrolname=is_automatically_approve]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container slnk-common-planning-dialog nb-radio-group[formcontrolname=is_automatically_approve]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container slnk-common-planning-dialog nb-radio-group[formcontrolname=is_automatically_approve]",
+        "url_contains": "/activity-overview"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "Tlačítkem Vytvořit by se čas zapsal, teď ale formulář zavřu křížkem.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "nb-dialog-container slnk-common-planning-dialog [data-cy=submitButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container slnk-common-planning-dialog [data-cy=submitButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "hover",
+          "selector": "nb-dialog-container [data-cy=closeButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=closeButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "body:not(:has(nb-dialog-container))",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "#planning_add_button",
+        "url_contains": "/activity-overview"
+      }
+    },
+    {
+      "id": "s31",
+      "narration": "Čas můžete měřit i stopkami, a tak kliknu na čas v hlavičce a otevře se okno Timetracking aktivity.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "#new_timetracking_show_detail .time_tracking_info",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "#new_timetracking_show_detail .time_tracking_info",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "p-dynamicdialog button:has-text(\"Spustit\")",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "p-dynamicdialog button:has-text(\"Spustit\")",
+        "url_contains": "/activity-overview"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "Vyberete aktivitu a klienta a kliknete na Spustit, já ale okno teď zavřu křížkem.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "p-dynamicdialog slnk-sloneek-planning-time-tracking-form",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "p-dynamicdialog button:has-text(\"Spustit\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "p-dynamicdialog button:has-text(\"Spustit\")",
+          "before_ms": 200
+        },
+        {
+          "type": "hover",
+          "selector": "p-dynamicdialog .p-dialog-header button",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "p-dynamicdialog .p-dialog-header button",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "body:not(:has(p-dynamicdialog .p-dialog))",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "#planning_add_button",
+        "url_contains": "/activity-overview"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "Záznamy ke schválení najdete v levém menu, kde kliknu na Schvalování a pak na záložku Aktivity.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_approvals",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_approvals",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=activitiesTab] a",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=activitiesTab] a",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=activitiesTab] a",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] nb-select:has-text(\"Všichni klienti\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-select:has-text(\"Všechny projekty\")",
+        "url_contains": "/app/events/approvals/planning"
+      },
+      "part": 5,
+      "part_title": "Schvalování a přehledy"
+    },
+    {
+      "id": "s34",
+      "narration": "Žádosti filtrujete i podle klienta a projektu a tlačítky Schválit nebo Odmítnout je vyřídíte, zaměstnanec pak dostane upozornění.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-select:has-text(\"Všichni klienti\")",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-select:has-text(\"Všechny projekty\")",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] [data-cy=singleApproveButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] [data-cy=singleRejectButton]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] [data-cy=singleApproveButton]",
+        "url_contains": "/approvals/planning"
+      }
+    },
+    {
+      "id": "s35",
+      "narration": "Přehledy podle lidí, projektů a klientů najdete v levém menu, kde kliknu na Reporty a pak na záložku Aktivity.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_reports_v2",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_reports_v2",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/planning\"]",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/planning\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/planning\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-activities-summary)",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/activity/activities_summary\"]",
+        "url_contains": "/dashboard/planning"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "Jsou tu Přehled aktivit, Souhrn aktivit a Měsíční report odpracované doby, a já u Souhrnu aktivit kliknu na Přejít na report.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-activities-overview)",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-activities-summary)",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-activities-monthly-report)",
+          "before_ms": 200
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/activity/activities_summary\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/activity/activities_summary\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+        "url_contains": "/activity/activities_summary"
+      }
+    },
+    {
+      "id": "s37",
+      "narration": "Souhrn aktivit sečte schválené hodiny každého člověka a spočítá i cenu práce podle sazeb, a tak kliknu na Vygenerovat jednorázový report.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container [data-cy=usersWholeCompanyButton]",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container [data-cy=usersWholeCompanyButton]",
+        "url_contains": "/activities_summary"
+      }
+    },
+    {
+      "id": "s38",
+      "narration": "Zvolíte období a lidi, hotový report pak stáhnete tlačítkem Export, a protože ho teď generovat nebudu, formulář zavřu křížkem.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container [data-cy=intervalStartInput]",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container [data-cy=usersWholeCompanyButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "hover",
+          "selector": "nb-dialog-container [data-cy=closeButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=closeButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "body:not(:has(nb-dialog-container))",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+        "url_contains": "/activities_summary"
+      }
+    },
+    {
+      "id": "s39",
+      "narration": "Teď víte, jak připravit klienty, projekty a aktivity a jak lidé zapisují čas, a kdyby něco nešlo, mrkněte do Centra nápovědy.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+        "url_contains": "/activities_summary"
+      },
+      "part": 6,
+      "part_title": "Shrnutí"
+    },
+    {
+      "id": "s40",
+      "narration": "Méně administrativy, víc času na lidi. To je Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+        "url_contains": "/activities_summary"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "cleanup: smazat aktivitu 'Konzultace – ukázka' – filtr 'Název Filter Input' = 'Konzultace' (celý název s pomlčkou filtr nenajde), přesně 1 řádek s přesným názvem, detail: boční hledání 'Konzultace' -> právě 1 aktivní položka 'Konzultace – ukázka', dialog 'Vymazání číselníku aktivit' (název neobsahuje); když neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/planning/events",
+      "if_visible": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Název Filter Input\"]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Název Filter Input\"]",
+          "value": "Konzultace",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular a.redirect_column:text-is(\"Konzultace – ukázka\")",
+          "value": "6000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-paging-panel:has-text(\"1 do 1 z 1\")",
+          "value": "4000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular a.redirect_column:text-is(\"Konzultace – ukázka\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] div.container_padding nb-form-field input",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] div.container_padding nb-form-field input",
+          "value": "Konzultace",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .common_sub_menu.active:has-text(\"Konzultace – ukázka\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv]:not(:has(.common_sub_menu.active ~ .common_sub_menu.active))",
+          "value": "3000"
+        },
+        {
+          "type": "click",
+          "selector": "#settings_activity_detail_delete_button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Vymazání číselníku aktivit\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Vymazání číselníku aktivit\") >> #planning_delete_event_confirmation_yes",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "cleanup: smazat projekt 'Projekt Onboarding – ukázka' – filtr 'Název projektu Filter Input' = 'Projekt Onboarding' (celý název s pomlčkou filtr nenajde), přesně 1 řádek s přesným názvem, detail: boční hledání 'Projekt Onboarding' -> právě 1 aktivní položka 'Projekt Onboarding – ukázka', dialog 'Smazání projektu' (název neobsahuje); když neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/planning/projects",
+      "if_visible": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Název projektu Filter Input\"]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Název projektu Filter Input\"]",
+          "value": "Projekt Onboarding",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular a.redirect_column:text-is(\"Projekt Onboarding – ukázka\")",
+          "value": "6000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-paging-panel:has-text(\"1 do 1 z 1\")",
+          "value": "4000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular a.redirect_column:text-is(\"Projekt Onboarding – ukázka\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] div.container_padding nb-form-field input",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] div.container_padding nb-form-field input",
+          "value": "Projekt Onboarding",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .common_sub_menu.active:has-text(\"Projekt Onboarding – ukázka\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv]:not(:has(.common_sub_menu.active ~ .common_sub_menu.active))",
+          "value": "3000"
+        },
+        {
+          "type": "click",
+          "selector": "#projects_detail_delete",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Smazání projektu\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Smazání projektu\") >> #planning_form_delete_project_confirmation_yes",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "cleanup: smazat klienta 'Klient – ukázka' – filtr 'Označení Filter Input' = 'Klient' (celý název s pomlčkou filtr nenajde), přesně 1 řádek s přesným názvem, detail: boční hledání 'Klient' -> právě 1 aktivní položka 'Klient – ukázka', dialog 'Smazání klienta' (název neobsahuje); když neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/planning/clients",
+      "if_visible": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Označení Filter Input\"]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Označení Filter Input\"]",
+          "value": "Klient",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular a.redirect_column:text-is(\"Klient – ukázka\")",
+          "value": "6000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-paging-panel:has-text(\"1 do 1 z 1\")",
+          "value": "4000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular a.redirect_column:text-is(\"Klient – ukázka\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] div.container_padding nb-form-field input",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] div.container_padding nb-form-field input",
+          "value": "Klient",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .common_sub_menu.active:has-text(\"Klient – ukázka\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv]:not(:has(.common_sub_menu.active ~ .common_sub_menu.active))",
+          "value": "3000"
+        },
+        {
+          "type": "click",
+          "selector": "#clients_detail_delete",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Smazání klienta\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Smazání klienta\") >> #planning_client_delete_confirmation_yes",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "teardown": [
+    {
+      "name": "teardown: smazat aktivitu 'Konzultace – ukázka' – filtr 'Název Filter Input' = 'Konzultace' (celý název s pomlčkou filtr nenajde), přesně 1 řádek s přesným názvem, detail: boční hledání 'Konzultace' -> právě 1 aktivní položka 'Konzultace – ukázka', dialog 'Vymazání číselníku aktivit' (název neobsahuje); když neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/planning/events",
+      "if_visible": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Název Filter Input\"]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Název Filter Input\"]",
+          "value": "Konzultace",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular a.redirect_column:text-is(\"Konzultace – ukázka\")",
+          "value": "6000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-paging-panel:has-text(\"1 do 1 z 1\")",
+          "value": "4000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular a.redirect_column:text-is(\"Konzultace – ukázka\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] div.container_padding nb-form-field input",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] div.container_padding nb-form-field input",
+          "value": "Konzultace",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .common_sub_menu.active:has-text(\"Konzultace – ukázka\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv]:not(:has(.common_sub_menu.active ~ .common_sub_menu.active))",
+          "value": "3000"
+        },
+        {
+          "type": "click",
+          "selector": "#settings_activity_detail_delete_button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Vymazání číselníku aktivit\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Vymazání číselníku aktivit\") >> #planning_delete_event_confirmation_yes",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "teardown: smazat projekt 'Projekt Onboarding – ukázka' – filtr 'Název projektu Filter Input' = 'Projekt Onboarding' (celý název s pomlčkou filtr nenajde), přesně 1 řádek s přesným názvem, detail: boční hledání 'Projekt Onboarding' -> právě 1 aktivní položka 'Projekt Onboarding – ukázka', dialog 'Smazání projektu' (název neobsahuje); když neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/planning/projects",
+      "if_visible": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Název projektu Filter Input\"]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Název projektu Filter Input\"]",
+          "value": "Projekt Onboarding",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular a.redirect_column:text-is(\"Projekt Onboarding – ukázka\")",
+          "value": "6000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-paging-panel:has-text(\"1 do 1 z 1\")",
+          "value": "4000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular a.redirect_column:text-is(\"Projekt Onboarding – ukázka\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] div.container_padding nb-form-field input",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] div.container_padding nb-form-field input",
+          "value": "Projekt Onboarding",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .common_sub_menu.active:has-text(\"Projekt Onboarding – ukázka\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv]:not(:has(.common_sub_menu.active ~ .common_sub_menu.active))",
+          "value": "3000"
+        },
+        {
+          "type": "click",
+          "selector": "#projects_detail_delete",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Smazání projektu\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Smazání projektu\") >> #planning_form_delete_project_confirmation_yes",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "teardown: smazat klienta 'Klient – ukázka' – filtr 'Označení Filter Input' = 'Klient' (celý název s pomlčkou filtr nenajde), přesně 1 řádek s přesným názvem, detail: boční hledání 'Klient' -> právě 1 aktivní položka 'Klient – ukázka', dialog 'Smazání klienta' (název neobsahuje); když neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/planning/clients",
+      "if_visible": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Označení Filter Input\"]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Označení Filter Input\"]",
+          "value": "Klient",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular a.redirect_column:text-is(\"Klient – ukázka\")",
+          "value": "6000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-paging-panel:has-text(\"1 do 1 z 1\")",
+          "value": "4000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular a.redirect_column:text-is(\"Klient – ukázka\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] div.container_padding nb-form-field input",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] div.container_padding nb-form-field input",
+          "value": "Klient",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .common_sub_menu.active:has-text(\"Klient – ukázka\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv]:not(:has(.common_sub_menu.active ~ .common_sub_menu.active))",
+          "value": "3000"
+        },
+        {
+          "type": "click",
+          "selector": "#clients_detail_delete",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Smazání klienta\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Smazání klienta\") >> #planning_client_delete_confirmation_yes",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-13",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "created_by_recipe": "klient 'Klient – ukázka' (uživatel pro klienta: Claver Thomas), projekt 'Projekt Onboarding – ukázka' (klient 'Klient – ukázka'), aktivita 'Konzultace – ukázka' (Povoleno, 1500/800 CZK, povolená jen pro Claver Thomas) – maže cleanup i teardown (aktivita, projekt, klient)",
+      "read_only": "Schvalování → Aktivity (existující žádosti, jen zvýraznění), Reporty → Aktivity (karty), Souhrn aktivit (dialog jednorázového reportu jen otevřen a zavřen), stopky v hlavičce (okno jen otevřeno a zavřeno)",
+      "never_clicked": "Vytvořit / Vytvořit a přidat další (záznam aktivity = e-mail schvalovateli), Spustit a play v hlavičce (timer), Schválit / Odmítnout (e-mail zaměstnanci), Vygenerovat report, Povolit pro všechny aktivní uživatele, Uložit pro všechny"
+    },
+    "notes": "viz atlas/timetracking.md"
+  }
+}

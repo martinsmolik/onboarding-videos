@@ -1,0 +1,1219 @@
+{
+  "id": "dashboard",
+  "version": 1,
+  "title": "Discover what your dashboard can do",
+  "lang": "en",
+  "app_version": "preprod-2026-10-12",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "en"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "7jQ3jNk3Fcw65sWUmzun",
+    "model_id": "eleven_v4"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s04",
+    "title": "Dashboard"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Want everything that's waiting for you at work in one place every morning? Hi, I'm Maria from the Sloneek team, and I'll walk you through the dashboard.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate p-card",
+          "value": "20000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate p-card",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 1,
+      "part_title": "Introduction",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "You can open the dashboard any time from the left menu with the Dashboard item, right at the top.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+          "before_ms": 1200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "At the top a greeting welcomes you, and below it are cards in two columns, whose content depends on your role.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-greeting",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-new-colleagues p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-greeting",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s04",
+      "narration": "The first card, On your plate, gathers everything that's waiting for you.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate p-card",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button]:has(.fa-stamp)",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 2,
+      "part_title": "What's waiting for you"
+    },
+    {
+      "id": "s05",
+      "narration": "There are requests to approve, assets to handle, tasks with a deadline, documents or feedback.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button] >> nth=0",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button] >> nth=1",
+          "before_ms": 100
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button] >> nth=2",
+          "before_ms": 100
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button]:has(.fa-stamp)",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "I click the row with requests to approve, and the card switches to the Approvals list.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button]:has(.fa-stamp)",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button]:has(.fa-stamp)",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-approvals-absence",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-second-level-header p-selectbutton",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "Requests are split into tabs, such as absence, activities, attendance or change of personal data.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-second-level-header p-selectbutton",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-second-level-header p-selectbutton",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "For each request you see who submitted it and for when, and you can handle it right away with the Approve or Reject button.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-approvals-absence >> nth=0",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-approvals-absence >> nth=0 >> p-button:text-is(\"Approve\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-approvals-absence >> nth=0 >> p-button:text-is(\"Reject\")",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-approvals-absence",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "The Go to section link leads to the Approvals module, but I'll go back with the left arrow.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-second-level-header p-button:text-is(\"Go to section\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-second-level-header p-button:has(.fa-chevron-left) button",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-second-level-header p-button:has(.fa-chevron-left) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button]:has(.fa-stamp)",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button]:has(.fa-stamp)",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Below it is the Feed, the company board, where you'll find announcements from management and kudos from colleagues.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed h3",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed h3",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed slnk-dashboard-v2-feed-post >> nth=0",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton:text-is(\"Announcement\")",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 3,
+      "part_title": "Feed"
+    },
+    {
+      "id": "s11",
+      "narration": "I click the Announcement toggle, and only company announcements remain.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton:text-is(\"Announcement\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton.p-togglebutton-checked:text-is(\"Announcement\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton.p-togglebutton-checked:text-is(\"Announcement\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "An important announcement can be pinned to the top, and under every post you can react with an emoji or write a comment.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed slnk-common-icon[icon=thumbtack]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed slnk-dashboard-v2-feed-post-reaction >> nth=0",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed input[placeholder=\"Add new note\"] >> nth=0",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed slnk-common-icon[icon=thumbtack]",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "I click New announcement, where an administrator chooses who the message is for and writes its text.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-button:text-is(\"New announcement\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-dashboard-v2-feed-post-add-or-edit-dialog p-select",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-feed-post-add-or-edit-dialog p-select",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-feed-post-add-or-edit-dialog slnk-common-editor",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-feed-post-add-or-edit-dialog slnk-common-editor",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "The announcement would reach all recipients by email and in the app, so I won't send it now and click Cancel.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": ".p-dialog:has(slnk-dashboard-v2-feed-post-add-or-edit-dialog) p-button:text-is(\"Cancel\")",
+          "before_ms": 800
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog:has(slnk-dashboard-v2-feed-post-add-or-edit-dialog) p-button:text-is(\"Cancel\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-button:text-is(\"Give kudos\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "With the Give kudos button you publicly praise a colleague, and with the All toggle I go back to all posts.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-button:text-is(\"Give kudos\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton:text-is(\"All\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton.p-togglebutton-checked:text-is(\"All\")",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton.p-togglebutton-checked:text-is(\"All\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "The Overview - Today card shows who's away today, and clicking the Home office tab shows who's working from home.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-today p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-today p-card",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-today p-togglebutton:has-text(\"Home office\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-today p-togglebutton.p-togglebutton-checked:has-text(\"Home office\")",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-today p-togglebutton.p-togglebutton-checked:has-text(\"Home office\")",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 4,
+      "part_title": "Who's away and who's celebrating"
+    },
+    {
+      "id": "s17",
+      "narration": "The overview for the next fourteen days shows who'll be away soon, and below it you'll find upcoming birthdays and work anniversaries.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-next-14-days p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-next-14-days p-card",
+          "before_ms": 300
+        },
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-upcoming-birthdays p-card",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-upcoming-birthdays p-card",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-upcoming-anniversaries p-card",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-upcoming-anniversaries p-card",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "At the top of the right column you'll see new colleagues who recently joined the company.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-greeting",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-new-colleagues p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-new-colleagues p-card",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 5,
+      "part_title": "Your cards"
+    },
+    {
+      "id": "s19",
+      "narration": "The mood meter asks every day how you like your work, and you answer with a single click on an emoji.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-mood-meter p-card",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-mood-meter p-card",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "The Attendance card shows your status today, the Clock in button starts your working day, and below it you'll find your working hours.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-attendance p-card >> nth=0",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-clock-in-out-button p-button",
+          "before_ms": 200
+        },
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-attendance p-card >> nth=1",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-attendance p-card >> nth=1",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-clock-in-out-button p-button",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "The Absences card shows your remaining time off and your upcoming leave.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-absences p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-absences p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-absences p-button:text-is(\"Add absence\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "I click Add absence, and the same request form opens as in the Absence module.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-absences p-button:text-is(\"Add absence\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-absences p-button:text-is(\"Add absence\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-dialog:has(slnk-events-absence-create) slnk-events-absence-create",
+          "value": "10000"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog:has(slnk-events-absence-create) .p-dialog-close-button",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "I won't send the request now, so I close the form with the cross.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": ".p-dialog:has(slnk-events-absence-create) .p-dialog-close-button",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog:has(slnk-events-absence-create) .p-dialog-close-button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-activities p-button:text-is(\"Add activity\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s24",
+      "narration": "Similarly, with the Add activity button you log, for example, a meeting or work on a project.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-activities p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-activities p-button:text-is(\"Add activity\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-activities p-button:text-is(\"Add activity\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "My tasks shows your upcoming tasks, and the arrow next to the heading takes you to the whole section.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-tasks p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-tasks p-card",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-tasks slnk-dashboard-v2-widget-headline-with-section-navigation p-button",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-tasks slnk-dashboard-v2-widget-headline-with-section-navigation p-button",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-tasks slnk-dashboard-v2-widget-headline-with-section-navigation p-button",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "Useful links lead to company pages that your administrator has prepared for you.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "Team attendance shows managers how many hours their people have worked so far this month.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-team-attendance p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-team-attendance p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-team-attendance p-card",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "The last card shows company wiki pages marked as important, and I open one with a click.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-admin-pages p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-admin-pages p-card",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-admin-pages button:text-is(\"Guide to Sloneek\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-dashboard-v2-admin-page-dialog",
+          "value": "10000"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-admin-page-dialog p-button:has(.fa-xmark) button",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "You read the article right on the dashboard, and when you're done, you close it with the cross.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-dashboard-v2-admin-page-dialog p-button:has(.fa-xmark) button",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "slnk-dashboard-v2-admin-page-dialog p-button:has(.fa-xmark) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-admin-pages button:text-is(\"Guide to Sloneek\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "Everyone adjusts the layout themselves, so at the top I click the pencil, Customize view.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-greeting",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] p-button:has(.fa-pen) button",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] p-button:has(.fa-pen) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-dashboard-v2-customize-view-dialog .cdk-drag-handle",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-customize-view-dialog p-button:text-is(\"Save\")",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 6,
+      "part_title": "Customizing the dashboard"
+    },
+    {
+      "id": "s31",
+      "narration": "You drag cards by the handle to another place or to the other column, and clicking the eye hides a card, for example Upcoming anniversaries.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-customize-view-dialog .cdk-drag-handle >> nth=1",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-dashboard-v2-customize-view-dialog .cdk-drag:has-text(\"Upcoming anniversaries\") >> p-button button",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-dashboard-v2-customize-view-dialog .cdk-drag:has-text(\"Upcoming anniversaries\") >> .fa-eye-slash",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-customize-view-dialog .cdk-drag:has-text(\"Upcoming anniversaries\") >> .fa-eye-slash",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "You would confirm the changes with the Save button, but I click Cancel and the dashboard stays unchanged.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-customize-view-dialog p-button:text-is(\"Save\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-dashboard-v2-customize-view-dialog p-button:text-is(\"Cancel\")",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "slnk-dashboard-v2-customize-view-dialog p-button:text-is(\"Cancel\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-upcoming-anniversaries",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "Administrators also have a Settings gear next to it, which I click.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] p-button:has(.fa-gear-complex) button",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] p-button:has(.fa-gear-complex) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-general p-card",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-general p-card",
+        "url_contains": "/app/dashboard-v2/settings/general"
+      },
+      "part": 7,
+      "part_title": "Settings for administrators"
+    },
+    {
+      "id": "s34",
+      "narration": "On the General tab you hide the mood meter, birthdays or anniversaries for the whole company, and you can forbid users from hiding selected cards.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-general p-card",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-general p-card",
+        "url_contains": "/app/dashboard-v2/settings/general"
+      }
+    },
+    {
+      "id": "s35",
+      "narration": "I click the Useful links tab and then Add link.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] p-tab[id$=\"_tab_useful-links\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Add link\")",
+          "value": "10000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Add link\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-dashboard-v2-settings-useful-links-dialog input[formcontrolname=title]",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-settings-useful-links-dialog input[formcontrolname=url]",
+        "url_contains": "/app/dashboard-v2/settings/useful-links"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "In Title I type Newcomer guide, and in the URL field I paste the Help Center address.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "slnk-dashboard-v2-settings-useful-links-dialog input[formcontrolname=title]",
+          "value": "Newcomer guide",
+          "before_ms": 400
+        },
+        {
+          "type": "fill",
+          "selector": "slnk-dashboard-v2-settings-useful-links-dialog input[formcontrolname=url]",
+          "value": "https://help.sloneek.com/hc/en-us",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-settings-useful-links-dialog p-button:text-is(\"Save\")",
+        "url_contains": "/app/dashboard-v2/settings/useful-links"
+      }
+    },
+    {
+      "id": "s37",
+      "narration": "I click Save, and the link appears in the list, where you edit it with the pencil or delete it with the bin.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-dashboard-v2-settings-useful-links-dialog p-button:text-is(\"Save\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Newcomer guide\")",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Newcomer guide\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Newcomer guide\")",
+        "url_contains": "/app/dashboard-v2/settings/useful-links"
+      }
+    },
+    {
+      "id": "s38",
+      "narration": "In the left menu I click Dashboard, and the new link is already on the Useful links card.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links a:text-is(\"Newcomer guide\")",
+          "value": "20000"
+        },
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links a:text-is(\"Newcomer guide\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s39",
+      "narration": "Now you know what the dashboard shows you, how to handle what's waiting for you, and how to customize it, and if something doesn't work, check the Help Center.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s40",
+      "narration": "Less admin, more time for people. This is Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+        "url_contains": "/app/dashboard-v2"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat CS užitečný odkaz 'Příručka pro nováčky' – jen řádek s tímto názvem, potvrzovací dialog musí obsahovat přesně 'Link Příručka pro nováčky will be deleted.' (jazyk UI); když odkaz neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2/settings/useful-links",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Add link\")",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Add link\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Příručka pro nováčky\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Příručka pro nováčky\") >> p-button:has(.fa-trash-can) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-confirmdialog:has-text(\"Link Příručka pro nováčky will be deleted.\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-confirmdialog:has-text(\"Link Příručka pro nováčky will be deleted.\") >> button.p-confirmdialog-accept-button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    },
+    {
+      "name": "smazat PL užitečný odkaz 'Przewodnik dla nowych pracowników' – jen řádek s tímto názvem, potvrzovací dialog musí obsahovat přesně 'Link Przewodnik dla nowych pracowników will be deleted.' (jazyk UI); když odkaz neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2/settings/useful-links",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Add link\")",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Add link\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Przewodnik dla nowych pracowników\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Przewodnik dla nowych pracowników\") >> p-button:has(.fa-trash-can) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-confirmdialog:has-text(\"Link Przewodnik dla nowych pracowników will be deleted.\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-confirmdialog:has-text(\"Link Przewodnik dla nowych pracowników will be deleted.\") >> button.p-confirmdialog-accept-button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    },
+    {
+      "name": "smazat EN užitečný odkaz 'Newcomer guide' – jen řádek s tímto názvem, potvrzovací dialog musí obsahovat přesně 'Link Newcomer guide will be deleted.'; když odkaz neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2/settings/useful-links",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Add link\")",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Add link\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Newcomer guide\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Newcomer guide\") >> p-button:has(.fa-trash-can) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-confirmdialog:has-text(\"Link Newcomer guide will be deleted.\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-confirmdialog:has-text(\"Link Newcomer guide will be deleted.\") >> button.p-confirmdialog-accept-button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-12",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "created_by_recipe": "užitečný odkaz 'Příručka pro nováčky' → https://help.sloneek.com/hc/cs-cz (Nastavení plochy → Užitečné odkazy) – maže cleanup",
+      "read_only": "wiki článek 'Guide to Sloneek' (důležitý, připnutý na plochu) – jen otevřen a zavřen; čekající žádosti ve Schválení (Absence) – jen zvýrazněny; oznámení 'Winter team building' (připnuté) – jen zvýrazněno",
+      "never_saved": "Nové oznámení, Přidat absenci, Přizpůsobit zobrazení (Zrušit) – otevřeno a zavřeno bez uložení; měřič nálady, Zaznamenat příchod, reakce, Dát kudos – jen zvýrazněno"
+    },
+    "notes": "viz atlas/dashboard.md (sekce 5 a 8)"
+  },
+  "teardown": [
+    {
+      "name": "smazat EN užitečný odkaz 'Newcomer guide' – jen řádek s tímto názvem, potvrzovací dialog musí obsahovat přesně 'Link Newcomer guide will be deleted.'; když odkaz neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2/settings/useful-links",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Add link\")",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Add link\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Newcomer guide\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Newcomer guide\") >> p-button:has(.fa-trash-can) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-confirmdialog:has-text(\"Link Newcomer guide will be deleted.\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-confirmdialog:has-text(\"Link Newcomer guide will be deleted.\") >> button.p-confirmdialog-accept-button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    }
+  ],
+  "_localized": {
+    "from": "recipes/cs/dashboard.json",
+    "i18n": "i18n/dashboard.en.json",
+    "at": "2026-10-12T19:41:19.357Z",
+    "verified": {
+      "date": "2026-10-12",
+      "by": "Claude (BrowserOS, preprod, local-translate=en, in-page runner out/dashboard-en/_work/dryrun-runner.js; recept z out/dashboard-en/_work/dryrun-R.json + dryrun-T.json)",
+      "selectors": "Dry-run 40/40 v jednom běhu; cleanup před přeskočen – nic nebylo; teardown smazal EN odkaz (1 → 2 → 1).",
+      "notes": "Živé EN popisky: Dashboard, On your plate, Approvals (Absence/Activities/Attendance/Change of personal data/Documents), Approve/Reject, Go to section, Feed (All/Announcement/Kudos), New announcement → Cancel/Create an announcement, Give kudos, Add new note, Overview - Today (Absence/Home office/Business trip), Overview - Next 14 days, Upcoming birthdays/anniversaries, New colleagues, How do you like your work today?, Attendance + Clock in, Working hours, Absences + Add absence, Activities + Add activity, My tasks, Useful links, Team attendance, Wiki pages marked as important, Customize view (Cancel/Save), Settings: General / Useful links, Add link, table Title/URL/Options.",
+      "rehearsal": "Zkouška skutečným recorderem (job 141-rehearse-dashboard-en, mock hlas): 40/40 ok, cleanup FAILED (ignored) jen tam, kde nic nebylo, teardown 1/1 done; tenant po všech zkouškách čistý (užitečné odkazy 1, fáze náboru 10, zdroje kandidátů 7 – stejně jako na začátku)."
+    }
+  }
+}

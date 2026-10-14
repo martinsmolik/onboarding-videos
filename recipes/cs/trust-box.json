@@ -1,0 +1,876 @@
+{
+  "id": "trust-box",
+  "version": 1,
+  "title": "Otevřete schránku důvěry",
+  "lang": "cs",
+  "app_version": "preprod-2026-10-13",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "cs"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "bF7C2fCv7Zf30iT84wZ1",
+    "model_id": "eleven_v4"
+  },
+  "pronunciation": [
+    {
+      "match": "FaceUpu",
+      "say": "fejs apu"
+    },
+    {
+      "match": "FaceUp",
+      "say": "fejs ap"
+    },
+    {
+      "match": "Face up",
+      "say": "fejs ap"
+    },
+    {
+      "match": "NNTB",
+      "say": "en en té bé"
+    },
+    {
+      "match": "JPG",
+      "say": "jé pé gé"
+    },
+    {
+      "match": "PNG",
+      "say": "pé en gé"
+    },
+    {
+      "match": "Clara",
+      "say": "Klára"
+    },
+    {
+      "match": "whistleblowingový",
+      "say": "vislblouinkový"
+    }
+  ],
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s04",
+    "title": "Schránka důvěry"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Chcete, aby vám zaměstnanci mohli bezpečně říct, co je trápí, i bez podpisu? Dobrý den, jsem Marie z týmu Sloneek a ukážu vám, jak funguje Schránka důvěry.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_trust_box",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_my_trust_box",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Úvod",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Schránka důvěry je anonymní kanál, kterým vám zaměstnanci pošlou postřeh, obavu nebo návrh na zlepšení, i když se pod něj nechtějí podepsat.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_trust_box",
+          "before_ms": 1000
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_trust_box",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_my_trust_box",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "Každý zaměstnanec ji najde v levém menu v sekci Já, a tak kliknu na Schránka důvěry.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_trust_box",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] textarea[formcontrolname=text]",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .info-panel",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] textarea[formcontrolname=text]",
+        "url_contains": "/app/trust-box/new-message"
+      },
+      "part": 2,
+      "part_title": "Kde ji zaměstnanci najdou"
+    },
+    {
+      "id": "s04",
+      "narration": "Otevře se záložka Klasická schránka důvěry s polem pro text zprávy a místem pro přílohu.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] ul.tabset a.tab-link:text-is(\"Klasická schránka důvěry\")",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] textarea[formcontrolname=text]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .uploadFileContainer",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .uploadFileContainer",
+        "url_contains": "/app/trust-box/new-message"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "Kliknu do pole Napište zprávu a napíšu ukázkový návrh na kratší porady.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] textarea[formcontrolname=text]",
+          "value": "Ukázka: navrhuji kratší porady, ke kterým předem dostaneme program.",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] textarea[formcontrolname=text]",
+        "url_contains": "/app/trust-box/new-message"
+      },
+      "part": 3,
+      "part_title": "Jak napsat zprávu"
+    },
+    {
+      "id": "s06",
+      "narration": "Zpráva může mít nejvýš pět set znaků a počítadlo pod polem ukazuje, kolik jich už máte.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] form div.caption",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] form div.caption",
+        "url_contains": "/app/trust-box/new-message"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "Vpravo můžete přiložit jeden soubor typu PDF, JPG nebo PNG, třeba fotku nebo dokument, který věc dokládá.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] .uploadFileContainer",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .uploadFileContainer",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .uploadFileContainer",
+        "url_contains": "/app/trust-box/new-message"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "Žlutý pruh dole připomíná, že zpráva je anonymní, a jmenovitě vypíše, kdo ji uvidí.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .info-panel",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .info-panel",
+        "url_contains": "/app/trust-box/new-message"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "Příjemci uvidí text i přílohu, ale nedozví se, kdo zprávu napsal.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] textarea[formcontrolname=text]",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] textarea[formcontrolname=text]",
+        "url_contains": "/app/trust-box/new-message"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Zprávu by odeslalo tlačítko Uložit, my ji ale posílat nebudeme, a tak kliknu na Zrušit a formulář se vyprázdní.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-tab.content-active button:text-is(\"Uložit\")",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] nb-tab.content-active button:text-is(\"Zrušit\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] nb-tab.content-active button:text-is(\"Zrušit\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] form div.caption:text-is(\"0/500\")",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] form div.caption:text-is(\"0/500\")",
+        "url_contains": "/app/trust-box/new-message"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "Má-li firma zapnutou integraci FaceUp, vidí zaměstnanec i druhou záložku, a tak kliknu na Face up schránka důvěry.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] ul.tabset a.tab-link:text-is(\"Face up schránka důvěry (NNTB)\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] ul.tabset a.tab-link:text-is(\"Face up schránka důvěry (NNTB)\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] iframe[src*=\"faceup.com\"]",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] iframe[src*=\"faceup.com\"]",
+        "url_contains": "/app/trust-box/new-message"
+      },
+      "part": 4,
+      "part_title": "Whistleblowing přes FaceUp"
+    },
+    {
+      "id": "s12",
+      "narration": "Je to whistleblowingový kanál služby FaceUp, dříve NNTB, který na rozdíl od klasické schránky pokrývá zákonné požadavky na ochranu oznamovatelů.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] iframe[src*=\"faceup.com\"]",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] iframe[src*=\"faceup.com\"]",
+        "url_contains": "/app/trust-box/new-message"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "Podněty v něm řeší pověřené osoby vaší firmy a oznamovateli kvůli nim nehrozí žádné odvetné opatření.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] iframe[src*=\"faceup.com\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] iframe[src*=\"faceup.com\"]",
+        "url_contains": "/app/trust-box/new-message"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "Zaměstnanec klikne na Vytvořit podnět, po odeslání dostane klíč a s ním se přes Zkontrolovat podnět dozví, jak se jeho věc řeší.",
+      "actions": [
+        {
+          "type": "scroll",
+          "value": "down",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] iframe[src*=\"faceup.com\"]",
+        "url_contains": "/app/trust-box/new-message"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Zelený pruh dole připomíná, že veškerá komunikace ve FaceUpu je anonymní a šifrovaná.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] iframe[src*=\"faceup.com\"]",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] iframe[src*=\"faceup.com\"]",
+        "url_contains": "/app/trust-box/new-message"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "Kdo čte zprávy z klasické schránky, zjistíte v přehledu uživatelů, a tak v levém menu rozbalím Uživatelé.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_staff",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_staff",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+        "url_contains": "/app/trust-box/new-message"
+      },
+      "part": 5,
+      "part_title": "Kdo zprávy čte"
+    },
+    {
+      "id": "s17",
+      "narration": "Kliknu na Přehled a správa a otevře se seznam všech uživatelů s jejich týmy, pozicemi a rolemi.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] thead.p-datatable-thead",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] p-multiselect:has-text(\"Hledat podle rolí\")",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] p-multiselect:has-text(\"Hledat podle rolí\")",
+        "url_contains": "/app/settings/users"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Kliknu na filtr Hledat podle rolí a otevře se seznam všech rolí, které ve firmě používáte.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] p-multiselect:has-text(\"Hledat podle rolí\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] p-multiselect:has-text(\"Hledat podle rolí\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-multiselect-overlay li[role=option][aria-label=\"Ombudsman\"]",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".p-multiselect-overlay",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": ".p-multiselect-overlay li[role=option][aria-label=\"Ombudsman\"]",
+        "url_contains": "/app/settings/users"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "Zaškrtnu roli Ombudsman a v seznamu zůstanou jen uživatelé, kteří ji mají.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".p-multiselect-overlay li[role=option][aria-label=\"Ombudsman\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td:first-child span:text-is(\"Ouancia Maria\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td:first-child span:text-is(\"Beruni Clara\")",
+        "url_contains": "/app/settings/users"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Zprávy čtou jen uživatelé s rolí Ombudsman, tady Clara a Maria, a když ve firmě žádný Ombudsman není, vidí je anonymně administrátoři a vlastník účtu.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] tbody",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td:first-child span:text-is(\"Ouancia Maria\")",
+        "url_contains": "/app/settings/users"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "Kliknutím na jméno otevřu kartu Marie, kde uvidíme, jaké role uživatel má.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td:first-child span:text-is(\"Ouancia Maria\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td:first-child span:text-is(\"Ouancia Maria\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+        "url_contains": "/app/company-details/member/e1a87f15-e4aa-4b90-9bbf-d2d86d05676d/work-data"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "V poli Zvláštní uživatelská práva má Marie vedle role Administrator i roli Ombudsman, a právě tady ji uživateli přidáte nebo odeberete.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+        "url_contains": "/app/company-details/member/e1a87f15-e4aa-4b90-9bbf-d2d86d05676d/work-data"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "Kliknu na záložku Nastavení rozhraní, kde jsou Mariina upozornění.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/e1a87f15-e4aa-4b90-9bbf-d2d86d05676d/interface-settings\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/e1a87f15-e4aa-4b90-9bbf-d2d86d05676d/interface-settings\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr:has(#user_notifications_checkbox_email_core_trust_box_new_message)",
+          "value": "15000"
+        },
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] tr:has(#user_notifications_checkbox_email_core_trust_box_new_message)",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] tr:has(#user_notifications_checkbox_email_core_trust_box_new_message)",
+        "url_contains": "/app/company-details/member/e1a87f15-e4aa-4b90-9bbf-d2d86d05676d/interface-settings"
+      }
+    },
+    {
+      "id": "s24",
+      "narration": "V řádku Nová zpráva ve Schránce důvěry vidíte, že jí upozornění chodí e-mailem i do webové aplikace.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] tr:has(#user_notifications_checkbox_email_core_trust_box_new_message)",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] #user_notifications_checkbox_email_core_trust_box_new_message",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] #user_notifications_checkbox_in_app_core_trust_box_new_message",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] tr:has(#user_notifications_checkbox_email_core_trust_box_new_message)",
+        "url_contains": "/app/company-details/member/e1a87f15-e4aa-4b90-9bbf-d2d86d05676d/interface-settings"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "E-mail obsahuje jen odkaz do schránky, samotný text zprávy v něm není.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] #user_notifications_checkbox_email_core_trust_box_new_message",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] #user_notifications_checkbox_email_core_trust_box_new_message",
+        "url_contains": "/app/company-details/member/e1a87f15-e4aa-4b90-9bbf-d2d86d05676d/interface-settings"
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "Ombudsman pak zprávy čte v levém menu v sekci Společnost pod položkou Schránka důvěry, kterou já jako administrátor nevidím.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] #navigation_company",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] #navigation_company",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] #navigation_company",
+        "url_contains": "/app/company-details/member/e1a87f15-e4aa-4b90-9bbf-d2d86d05676d/interface-settings"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "U každé zprávy vidí datum, text a přílohu ke stažení, a celou schránku může vyprázdnit jen vlastník firemního účtu.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] #navigation_company",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] #navigation_company",
+        "url_contains": "/app/company-details/member/e1a87f15-e4aa-4b90-9bbf-d2d86d05676d/interface-settings"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "Na zprávy z klasické schránky se odpovědět nedá, protože autor je anonymní, a tak pro další komunikaci kliknu v levém menu na Integrace.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_integrations",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_integrations",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] #integrations_face_up_check_id",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-settings-integration-face-up nb-card",
+        "url_contains": "/app/settings/integration"
+      },
+      "part": 6,
+      "part_title": "Nastavení"
+    },
+    {
+      "id": "s29",
+      "narration": "Na kartě Face up je přepínač Aktivní a odkaz na aplikaci, tedy přímý odkaz na váš kanál, který zkopírujete ze svého účtu ve FaceUpu.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-settings-integration-face-up nb-card",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] #integrations_face_up_check_id",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-settings-integration-face-up nb-card-body .can-disable",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-settings-integration-face-up nb-card",
+        "url_contains": "/app/settings/integration"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "Odkaz vložíte přes Nastavení na kartě a integraci můžou zapnout jen administrátoři a vlastník účtu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-settings-integration-face-up a[href=\"/app/settings/integration/detail/face-up\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-settings-integration-face-up a[href=\"/app/settings/integration/detail/face-up\"]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-settings-integration-face-up a[href=\"/app/settings/integration/detail/face-up\"]",
+        "url_contains": "/app/settings/integration"
+      }
+    },
+    {
+      "id": "s31",
+      "narration": "Schránku můžete také úplně skrýt, třeba když ji ve firmě nechcete používat, a tak v levém menu kliknu na Nastavení a pak na Nastavení aplikace.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_application",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_application",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_application",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] nb-checkbox[formcontrolname=is_hide_trust_box]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-checkbox[formcontrolname=is_hide_trust_box]",
+        "url_contains": "/app/settings/application"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "Zaškrtnutím volby Skrýt Schránku důvěry ji schováte všem uživatelům, my ji necháme vypnutou.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-checkbox[formcontrolname=is_hide_trust_box]",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-checkbox[formcontrolname=is_hide_trust_box]",
+        "url_contains": "/app/settings/application"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "Na závěr kliknu v menu znovu na Schránka důvěry a přidám doporučení z Centra nápovědy.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_trust_box",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_trust_box",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] textarea[formcontrolname=text]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] textarea[formcontrolname=text]",
+        "url_contains": "/app/trust-box/new-message"
+      },
+      "part": 7,
+      "part_title": "Shrnutí"
+    },
+    {
+      "id": "s34",
+      "narration": "Domluvte se ve firmě, k čemu schránka slouží, aby nebyla jen místem pro stížnosti, a i bez podpisu pište s respektem.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] textarea[formcontrolname=text]",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] textarea[formcontrolname=text]",
+        "url_contains": "/app/trust-box/new-message"
+      }
+    },
+    {
+      "id": "s35",
+      "narration": "Teď víte, kde zaměstnanci schránku najdou, kdo zprávy čte, jak funguje FaceUp a kde schránku nastavíte, a kdyby něco nešlo, mrkněte do Centra nápovědy.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] textarea[formcontrolname=text]",
+        "url_contains": "/app/trust-box/new-message"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "Méně administrativy, víc času na lidi. To je Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] textarea[formcontrolname=text]",
+        "url_contains": "/app/trust-box/new-message"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "zpět na start (nic se nevytváří – zpráva se jen napíše a zruší)",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-13",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "ombudsmen": "Beruni Clara (Ombudsman), Ouancia Maria (e1a87f15-e4aa-4b90-9bbf-d2d86d05676d; Administrator, Ombudsman) – existující data pre-produ, jen zobrazeno",
+      "created_by_recipe": "nic – ukázková zpráva se napíše do pole a smaže tlačítkem Zrušit, nikdy se neodešle",
+      "read_only": "Schránka důvěry (obě záložky), Správa uživatelů (filtr role Ombudsman), karta Marie (Zvláštní uživatelská práva, Nastavení rozhraní), Integrace (Face up), Nastavení aplikace",
+      "never_clicked": "Uložit (odeslání zprávy), Vytvořit/Zkontrolovat podnět ve FaceUpu, přepínač a Nastavení Face up, Skrýt Schránku důvěry, role a upozornění na kartě, Smazat všechny"
+    },
+    "notes": "viz atlas/trust-box.md"
+  }
+}

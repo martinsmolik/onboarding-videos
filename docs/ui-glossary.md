@@ -17,7 +17,7 @@ Vytaženo z hotových receptů (`out/*/recipe.json`). `?` = v tom jazyce zatím 
 | 360° zpětná vazba – ukázka (podzim 2026) | ? | ? | feedback-360 |
 | Absence | Absences | Nieobecności | absence |
 | Akce | Actions | Akcje | add-users |
-| Aktivity a time tracking | ? | ? | clockins-vs-tracking |
+| Aktivity a time tracking | Activities & time tracking | ? | clockins-vs-tracking |
 | Aktivní | Active | Aktywny | absence, wiki, workflows |
 | Aktivovat | Activate | Aktywuj | add-users |
 | Aktivovat uživatele | ? | ? | workflows |
@@ -46,7 +46,7 @@ Vytaženo z hotových receptů (`out/*/recipe.json`). `?` = v tom jazyce zatím 
 | Datum | ? | ? | user-folders |
 | Dohoda o práci z domova | Remote work agreement | Umowa o pracę zdalną | documents |
 | Dohoda o práci z domova.pdf | Remote work agreement.pdf | Umowa o pracę zdalną.pdf | documents |
-| Docházka (nový modul) | ? | ? | attendance-modes, clockins-vs-tracking |
+| Docházka (nový modul) | Attendance (new module) | ? | attendance-modes, clockins-vs-tracking |
 | Docházkové karty | Attendance cards | Karty obecności | clockins |
 | Dokončeno | ? | ? | feedback-360 |
 | Dovolená – ukázka | Vacation – demo | Urlop – przykład | absence |
@@ -64,7 +64,7 @@ Vytaženo z hotových receptů (`out/*/recipe.json`). `?` = v tom jazyce zatím 
 | Hledat podle týmů | ? | ? | user-folders |
 | Hodnocení výkonu – ukázka (Q3 2026) | Performance review – demo (Q3 2026) | Ocena wyników – przykład (Q3 2026) | performance-review |
 | Home project | ? | ? | ats-new-position |
-| Homeoffice | ? | ? | clockins-vs-tracking |
+| Homeoffice | Homeoffice | ? | clockins-vs-tracking |
 | Chcete využít | Would you like to use | Czy chcesz skorzystać | documents |
 | Checklist | Checklist | Checklista | goals |
 | Christmas Party | ? | ? | surveys |
@@ -145,7 +145,7 @@ Vytaženo z hotových receptů (`out/*/recipe.json`). `?` = v tom jazyce zatím 
 | Please share the primary reason | ? | ? | surveys |
 | Plný úvazek 40 h | Full-time 40 h | Pełny etat 40 h | add-users, ats-new-position, attendance-modes, working-hours |
 | Po aktivaci bude | When active | Po aktywacji do każdego | ats-setup |
-| Počet hodin | ? | ? | clockins-vs-tracking |
+| Počet hodin | Number of hours | ? | clockins-vs-tracking |
 | Podepsat | Sign | Podpisać | documents |
 | Podle plánu | On track | Zgodnie z planem | goals |
 | Pomůcky | Assets | Narzędzia | work-assets |
@@ -158,7 +158,7 @@ Vytaženo z hotových receptů (`out/*/recipe.json`). `?` = v tom jazyce zatím 
 | Praha | ? | ? | ats-new-position |
 | Procento | Percentage | % | goals |
 | Projekt Onboarding – ukázka | ? | ? | timetracking |
-| Projekty a klienti | ? | ? | clockins-vs-tracking |
+| Projekty a klienti | Projects and clients | ? | clockins-vs-tracking |
 | Propojené účty | Connected accounts | Połączone konta | absence |
 | Protokoly o převzetí a vrácení pomůcek | Protocols on the acceptance and return of assets | Protokoły przyjęcia i zwrotu narzędzi | work-assets |
 | První den zaměstnance | ? | ? | workflows |
@@ -202,7 +202,7 @@ Vytaženo z hotových receptů (`out/*/recipe.json`). `?` = v tom jazyce zatím 
 | Správa dokumentů | Document management | Zarządzanie dokumentami | documents |
 | Správa pomůcek | Management of assets | Zarządzanie majątkiem | work-assets |
 | Spravovat pozice | Manage positions | Zarządzaj pozycjami | performance-review |
-| Spustit | ? | ? | clockins-vs-tracking, timetracking |
+| Spustit | Start | ? | clockins-vs-tracking, timetracking |
 | Stav přijetí | Acceptance status | Status przyjęcia | work-assets |
 | Strom | Tree | Drzewo | goals |
 | Škála | Scale | Skala | performance-review |
@@ -212,7 +212,7 @@ Vytaženo z hotových receptů (`out/*/recipe.json`). `?` = v tom jazyce zatím 
 | Tento rok | This year | W tym roku | custom-reports |
 | Termín lékařské prohlídky – ukázka | ? | ? | user-folders |
 | Terminály | Terminals | Terminale | clockins |
-| Time tracking a aktivity | ? | ? | clockins-vs-tracking |
+| Time tracking a aktivity | Time tracking and activities | ? | clockins-vs-tracking |
 | Trvalý pobyt | ? | ? | user-folders |
 | Týdenní | Weekly | Tygodniowy | working-hours |
 | Týdenní fond pracovní doby | Weekly working hours fund | Tygodniowy fundusz czasu pracy | attendance-modes, working-hours |

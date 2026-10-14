@@ -1,0 +1,1424 @@
+{
+  "id": "workflows",
+  "version": 1,
+  "title": "Onboardingové a offboardingové workflows",
+  "lang": "cs",
+  "app_version": "preprod-2026-10-13",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "cs"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "bF7C2fCv7Zf30iT84wZ1",
+    "model_id": "eleven_v4"
+  },
+  "pronunciation": [],
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s24",
+    "title": "HR Workflows"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Chcete, aby každý nástup i odchod kolegy proběhl stejně a na nic se nezapomnělo? Dobrý den, jsem Marie z týmu Sloneek a ukážu vám HR Workflows.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Úvod",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Workflow je automatický postup, který při nástupu nebo odchodu zaměstnance sám odešle e-maily, spustí checklisty úkolů a upraví údaje v jeho profilu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows",
+          "before_ms": 1000
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "Najdete je v levém menu v sekci Společnost, kde rozbalím HR Workflows a kliknu na Přehled a správa, kde jsou všechna workflow vaší firmy.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows_overview_and_management",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows_overview_and_management",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows_overview_and_management",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=hrWorkflowsOverviewTable] thead",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=hrWorkflowsOverviewTable] thead",
+        "url_contains": "/app/hr-workflows/overview"
+      },
+      "part": 2,
+      "part_title": "Přehled workflows"
+    },
+    {
+      "id": "s04",
+      "narration": "V přehledu vidíte u každého workflow typ, tým a lokalitu, pro které platí, a stav, přičemž Aktivní se spouští samo a Návrh zatím nikdy.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=hrWorkflowsOverviewTable] thead",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=hrWorkflowsOverviewTable] tbody slnk-hr-workflows-status-tag:has-text(\"Aktivní\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=hrWorkflowsOverviewTable] tbody slnk-hr-workflows-status-tag:has-text(\"Návrh\")",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=hrWorkflowsOverviewTable] thead",
+        "url_contains": "/app/hr-workflows/overview"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "Kliknu na Vytvořit workflow, a i když vám ho může navrhnout umělá inteligence, já kliknu na Vytvořit vlastní.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=hrWorkflowsOverviewCreateWorkflow]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=hrWorkflowsOverviewCreateWorkflow]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=hrWorkflowsCreateCustom]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=hrWorkflowsCreateFromAi]",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=hrWorkflowsCreateCustom]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=hrWorkflowsCreateCustom]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "p-select[data-cy=hrWorkflowsSetupTrigger]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=hrWorkflowsSetupTypeOnboarding]",
+        "url_contains": "/app/hr-workflows/setup"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "Offboarding se hodí pro odchod zaměstnance, my teď ale připravíme nástup, a tak kliknu na Onboarding.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=hrWorkflowsSetupTypeOffboarding]",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=hrWorkflowsSetupTypeOnboarding]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=hrWorkflowsSetupTypeOnboarding]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=hrWorkflowsSetupTypeOnboarding]",
+        "url_contains": "/app/hr-workflows/setup"
+      },
+      "part": 3,
+      "part_title": "Kdy a pro koho se spustí"
+    },
+    {
+      "id": "s07",
+      "narration": "Kliknu do pole Název a napíšu Nástup do zákaznické podpory – ukázka.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "input[data-cy=hrWorkflowsSetupWorkflowName]",
+          "value": "Nástup do zákaznické podpory – ukázka",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "input[data-cy=hrWorkflowsSetupWorkflowName]",
+        "url_contains": "/app/hr-workflows/setup"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "Kliknu na pole Kdy se má workflow spustit a uvidíte dvě možnosti: nastavení fáze Onboarding v profilu, nebo dokončení balíčku pro nováčky.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "p-select[data-cy=hrWorkflowsSetupTrigger]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "p-select[data-cy=hrWorkflowsSetupTrigger]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-select-overlay li[role=option]:has-text(\"balíček\")",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".p-select-overlay",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": ".p-select-overlay li[role=option]:has-text(\"Onboarding\")",
+        "url_contains": "/app/hr-workflows/setup"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "Balíček pro nováčky je sběr dat od nových kolegů, kterému se věnuje samostatné video, a já kliknu na fázi Onboarding.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".p-select-overlay li[role=option]:has-text(\"balíček\")",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": ".p-select-overlay li[role=option]:has-text(\"Onboarding\")",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": ".p-select-overlay li[role=option]:has-text(\"Onboarding\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "p-select[data-cy=hrWorkflowsSetupTrigger]:has-text(\"Onboarding\")",
+        "url_contains": "/app/hr-workflows/setup"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Podmínkami určíte, pro koho workflow platí, a tak kliknu na Typ podmínky, kde jsou týmy, lokality, štítky a pozice, a vyberu Týmy.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=hrWorkflowsSetupConditions] p-select[name=type]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=hrWorkflowsSetupConditions] p-select[name=type]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-select-overlay li[role=option]:text-is(\"Týmy\")",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".p-select-overlay",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": ".p-select-overlay li[role=option]:text-is(\"Týmy\")",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": ".p-select-overlay li[role=option]:text-is(\"Týmy\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=hrWorkflowsSetupConditions] p-select[name=type]:has-text(\"Týmy\")",
+        "url_contains": "/app/hr-workflows/setup"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "Kliknu na Hodnota a zaškrtnu tým Zákaznická podpora, takže se workflow spustí jen jeho novým členům.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=hrWorkflowsSetupConditions] p-multiselect[name=value]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=hrWorkflowsSetupConditions] p-multiselect[name=value]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-multiselect-overlay li[role=option][aria-label=\"Zákaznická podpora\"]",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": ".p-multiselect-overlay li[role=option][aria-label=\"Zákaznická podpora\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": ".p-multiselect-overlay li[role=option][aria-label=\"Zákaznická podpora\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=hrWorkflowsSetupConditions] p-multiselect[name=value]:has-text(\"Zákaznická podpora\")",
+        "url_contains": "/app/hr-workflows/setup"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Další podmínku můžete přidat tlačítkem Přidat podmínku, já ale kliknu na Pokračovat a workflow se uloží jako návrh.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=hrWorkflowsSetupAddCondition]",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=hrWorkflowsSetupContinue]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=hrWorkflowsSetupContinue]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanelList]",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=hrWorkflowsSetupBuilderDropZone] div:text-is(\"V profilu uživatele je vyplněna fáze \\\"Onboarding\\\"\")",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=hrWorkflowsSetupActionsPanelList]",
+        "url_contains": "/builder"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "Otevře se krok Vytvoření se spouštěčem vlevo a nabídkou akcí vpravo, a ve skupině Oznámení kliknu u akce Odeslat e-mail na plus.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=hrWorkflowsSetupBuilderDropZone] div:text-is(\"V profilu uživatele je vyplněna fáze \\\"Onboarding\\\"\")",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanelList]",
+          "before_ms": 200
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanelList] p-accordion-header[id$=_accordionheader_notification]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanelList] p-accordion-header[id$=_accordionheader_notification]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanelList] .hr-workflows-draggable-item:has(.slnk-md-bold:text-is(\"Odeslat e-mail\")) >> button:has(.fa-plus)",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanelList] .hr-workflows-draggable-item:has(.slnk-md-bold:text-is(\"Odeslat e-mail\")) >> button:has(.fa-plus)",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanelList] .hr-workflows-draggable-item:has(.slnk-md-bold:text-is(\"Odeslat e-mail\")) >> button:has(.fa-plus)",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-dialog[role=dialog] slnk-common-editor[name=title] .ql-editor",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog[role=dialog] slnk-common-editor[name=title] .ql-editor",
+        "url_contains": "/builder"
+      },
+      "part": 4,
+      "part_title": "Akce workflow"
+    },
+    {
+      "id": "s14",
+      "narration": "Napíšu název e-mailu a v poli Cíl e-mailu zvolím soukromý e-mail, protože pracovní adresu nováček před nástupem obvykle ještě nemá.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": ".p-dialog[role=dialog] slnk-common-editor[name=title] .ql-editor",
+          "value": "Vítejte v týmu zákaznické podpory",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": ".p-dialog[role=dialog] p-select[name=target_email]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog[role=dialog] p-select[name=target_email]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-select-overlay li[role=option]:text-is(\"Soukromý e-mail\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": ".p-select-overlay li[role=option]:text-is(\"Soukromý e-mail\")",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": ".p-select-overlay li[role=option]:text-is(\"Soukromý e-mail\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog[role=dialog] p-select[name=target_email]:has-text(\"Soukromý e-mail\")",
+        "url_contains": "/builder"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Do těla napíšu pozdrav a vpravo kliknu u proměnné Jméno na plus, takže Sloneek při odeslání doplní jméno nováčka.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": ".p-dialog[role=dialog] slnk-common-editor[name=text] .ql-editor",
+          "value": "Dobrý den ",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": ".p-dialog[role=dialog] slnk-hr-workflows-template-variables p-card:has(.slnk-md-bold:text-is(\"Jméno\")) >> button",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog[role=dialog] slnk-hr-workflows-template-variables p-card:has(.slnk-md-bold:text-is(\"Jméno\")) >> button",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog[role=dialog] slnk-common-editor[name=text] .ql-editor .template-variable",
+        "url_contains": "/builder"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "Dopíšu zbytek zprávy a kliknu na Uložit, čímž se e-mail přidá do workflow.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": ".p-dialog[role=dialog] slnk-common-editor[name=text] .ql-editor",
+          "value": ", těšíme se na vás! V první den vás čeká úvodní schůzka s vedoucím týmu.",
+          "speed": "fast",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": ".p-dialog[role=dialog] slnk-common-dialog-footer button:text-is(\"Uložit\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog[role=dialog] slnk-common-dialog-footer button:text-is(\"Uložit\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=hrWorkflowsSetupBuilderDropZone] slnk-hr-workflows-setup-actions-item:has(.slnk-md-bold:text-is(\"Odeslat e-mail\"))",
+          "value": "10000"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=hrWorkflowsSetupBuilderDropZone] slnk-hr-workflows-setup-actions-item:has(.slnk-md-bold:text-is(\"Odeslat e-mail\"))",
+        "url_contains": "/builder"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "Ve skupině Dokumenty kliknu u akce Nastavit checklist na plus a jako šablonu vyberu Nástup nového kolegy.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanelList] p-accordion-header[id$=_accordionheader_document_and_task]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanelList] p-accordion-header[id$=_accordionheader_document_and_task]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanelList] .hr-workflows-draggable-item:has(.slnk-md-bold:text-is(\"Nastavit checklist\")) >> button:has(.fa-plus)",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanelList] .hr-workflows-draggable-item:has(.slnk-md-bold:text-is(\"Nastavit checklist\")) >> button:has(.fa-plus)",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanelList] .hr-workflows-draggable-item:has(.slnk-md-bold:text-is(\"Nastavit checklist\")) >> button:has(.fa-plus)",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-dialog[role=dialog] p-select[name=checklist_template_uuid]",
+          "value": "10000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog[role=dialog] p-select[name=checklist_template_uuid]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-select-overlay li[role=option]:text-is(\"Nástup nového kolegy\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": ".p-select-overlay li[role=option]:text-is(\"Nástup nového kolegy\")",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": ".p-select-overlay li[role=option]:text-is(\"Nástup nového kolegy\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-dialog[role=dialog] tr[slnk-hr-workflows-setup-checklist-task-item] p-inputnumber",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog[role=dialog] p-select[name=checklist_template_uuid]:has-text(\"Nástup nového kolegy\")",
+        "url_contains": "/builder"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Šablony checklistů s jejich úkoly připravíte v modulu Checklists, kterému se věnuje samostatné video.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".p-dialog[role=dialog] p-select[name=checklist_template_uuid]",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": ".p-dialog[role=dialog] slnk-hr-workflows-setup-checklist-dialog-form table",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog[role=dialog] slnk-hr-workflows-setup-checklist-dialog-form table",
+        "url_contains": "/builder"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "Při sekvenčním režimu se úkoly plní postupně a další se zpřístupní až po dokončení předchozího, při paralelním v libovolném pořadí.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".p-dialog[role=dialog] slnk-hr-workflows-setup-checklist-dialog-form div.mb-3:has(p-radiobutton)",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog[role=dialog] slnk-hr-workflows-setup-checklist-dialog-form table",
+        "url_contains": "/builder"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Termín každého úkolu je počet dní od spuštění workflow, a tak u podpisu smlouvy kliknu na plus a termín posunu o den.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".p-dialog[role=dialog] tr[slnk-hr-workflows-setup-checklist-task-item] p-inputnumber",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": ".p-dialog[role=dialog] tr[slnk-hr-workflows-setup-checklist-task-item] .p-inputnumber-increment-button",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog[role=dialog] tr[slnk-hr-workflows-setup-checklist-task-item] .p-inputnumber-increment-button",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog[role=dialog] tr[slnk-hr-workflows-setup-checklist-task-item] p-inputnumber",
+        "url_contains": "/builder"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "Ve sloupci Přiřazeno kliknu na řešitele a kromě konkrétních kolegů můžete zvolit samotného nováčka jako Uživatele nebo jeho manažera.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": ".p-dialog[role=dialog] tr[slnk-hr-workflows-setup-checklist-task-item] p-multiselect[name=assignees]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog[role=dialog] tr[slnk-hr-workflows-setup-checklist-task-item] p-multiselect[name=assignees]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-multiselect-overlay li[role=option][aria-label=\"Manažer\"]",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".p-multiselect-overlay li[role=option][aria-label=\"Uživatel\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": ".p-multiselect-overlay li[role=option][aria-label=\"Manažer\"]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": ".p-multiselect-overlay li[role=option][aria-label=\"Manažer\"]",
+        "url_contains": "/builder"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "Výběr zavřu kliknutím vedle a nastavení checklistu uložím tlačítkem Uložit.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".p-dialog[role=dialog] .p-dialog-title",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "hover",
+          "selector": ".p-dialog[role=dialog] slnk-common-dialog-footer button:text-is(\"Uložit\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog[role=dialog] slnk-common-dialog-footer button:text-is(\"Uložit\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=hrWorkflowsSetupBuilderDropZone] slnk-hr-workflows-setup-actions-item:has(.slnk-md-bold:text-is(\"Nastavit checklist\"))",
+          "value": "10000"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=hrWorkflowsSetupBuilderDropZone] slnk-hr-workflows-setup-actions-item:has(.slnk-md-bold:text-is(\"Nastavit checklist\"))",
+        "url_contains": "/builder"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "Ve skupině Načasování kliknu u akce První den zaměstnance na plus a workflow pak počká až do dne nástupu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanelList] .hr-workflows-draggable-item:has(.slnk-md-bold:text-is(\"První den zaměstnance\")) >> button:has(.fa-plus)",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanelList] .hr-workflows-draggable-item:has(.slnk-md-bold:text-is(\"První den zaměstnance\")) >> button:has(.fa-plus)",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=hrWorkflowsSetupBuilderDropZone] slnk-hr-workflows-setup-actions-item:has(.slnk-md-bold:text-is(\"První den zaměstnance\"))",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=hrWorkflowsSetupBuilderDropZone] slnk-hr-workflows-setup-actions-item:has(.slnk-md-bold:text-is(\"První den zaměstnance\"))",
+        "url_contains": "/builder"
+      }
+    },
+    {
+      "id": "s24",
+      "narration": "Ve skupině Správa uživatelů přidám plusem akci Aktivovat uživatele, takže se nováčkovi v den nástupu zpřístupní aplikace.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanelList] p-accordion-header[id$=_accordionheader_user_management]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanelList] p-accordion-header[id$=_accordionheader_user_management]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanelList] .hr-workflows-draggable-item:has(.slnk-md-bold:text-is(\"Aktivovat uživatele\")) >> button:has(.fa-plus)",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanelList] .hr-workflows-draggable-item:has(.slnk-md-bold:text-is(\"Aktivovat uživatele\")) >> button:has(.fa-plus)",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanelList] .hr-workflows-draggable-item:has(.slnk-md-bold:text-is(\"Aktivovat uživatele\")) >> button:has(.fa-plus)",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=hrWorkflowsSetupBuilderDropZone] slnk-hr-workflows-setup-actions-item:has(.slnk-md-bold:text-is(\"Aktivovat uživatele\"))",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=hrWorkflowsSetupBuilderDropZone] slnk-hr-workflows-setup-actions-item:has(.slnk-md-bold:text-is(\"Aktivovat uživatele\"))",
+        "url_contains": "/builder"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "Akce můžete přetažením seřadit, ozubeným kolečkem upravit, vedlejší ikonou zkopírovat a košem smazat.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=hrWorkflowsSetupBuilderDropZone] slnk-hr-workflows-setup-actions-item:has(.slnk-md-bold:text-is(\"Nastavit checklist\")) >> button.hr-workflows-draggable-item-handle",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=hrWorkflowsSetupBuilderDropZone] slnk-hr-workflows-setup-actions-item:has(.slnk-md-bold:text-is(\"Nastavit checklist\")) >> slnk-hr-workflows-setup-actions-controls",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=hrWorkflowsSetupBuilderDropZone] slnk-hr-workflows-setup-actions-item:has(.slnk-md-bold:text-is(\"Nastavit checklist\"))",
+        "url_contains": "/builder"
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "Kliknu na Rozbalit vše a uvidíte i další akce, třeba nastavení týmu, pozice, pracovní doby, absencí a mzdy, dokument k podpisu nebo webhook.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanel] button:text-is(\"Rozbalit vše\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanel] button:text-is(\"Rozbalit vše\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=hrWorkflowsSetupActionsPanelList]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=hrWorkflowsSetupActionsPanelList]",
+        "url_contains": "/builder"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "Tlačítko Publikovat workflow aktivuje a od té chvíle se spustí každému, kdo splní podmínky, naše ukázka ale zůstane jako návrh.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=hrWorkflowsSetupBuilderPublish]",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=hrWorkflowsSetupBuilderPublish]",
+        "url_contains": "/builder"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "Kliknu na Zpět a nové workflow najdete v přehledu jako návrh, který přes tři tečky v řádku můžete duplikovat nebo smazat.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=hrWorkflowsSetupBack]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=hrWorkflowsSetupBack]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=hrWorkflowsOverviewTable] tbody tr:has(td:text-is(\"Nástup do zákaznické podpory – ukázka\")):has(.p-tag-label:text-is(\"Návrh\"))",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=hrWorkflowsOverviewTable] tbody tr:has(td:text-is(\"Nástup do zákaznické podpory – ukázka\"))",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=hrWorkflowsOverviewTable] tbody tr:has(td:text-is(\"Nástup do zákaznické podpory – ukázka\")) >> [data-cy=hrWorkflowsOverviewRowMenu]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=hrWorkflowsOverviewTable] tbody tr:has(td:text-is(\"Nástup do zákaznické podpory – ukázka\")) >> [data-cy=hrWorkflowsOverviewRowMenu]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=hrWorkflowsOverviewTable] tbody tr:has(td:text-is(\"Nástup do zákaznické podpory – ukázka\")):has(.p-tag-label:text-is(\"Návrh\"))",
+        "url_contains": "/app/hr-workflows/overview"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "Workflow se spouští z karty zaměstnance, a tak v levém menu rozbalím Uživatelé a kliknu na Přehled a správa.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_staff",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_staff",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] input[placeholder=\"Vyhledávání...\"]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] input[placeholder=\"Vyhledávání...\"]",
+        "url_contains": "/app/settings/users"
+      },
+      "part": 5,
+      "part_title": "Jak se workflow spustí"
+    },
+    {
+      "id": "s30",
+      "narration": "Do vyhledávání napíšu Novák a otevřu kartu ukázkového uživatele Tomáše Nováka z týmu Zákaznická podpora.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[placeholder=\"Vyhledávání...\"]",
+          "value": "Novák",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td:first-child span:text-is(\"Novák Tomáš\")",
+          "value": "10000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td:first-child span:text-is(\"Novák Tomáš\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td:first-child span:text-is(\"Novák Tomáš\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=employmentStatesSelect]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=employmentStatesSelect]",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/work-data"
+      }
+    },
+    {
+      "id": "s31",
+      "narration": "Kliknu na pole Fáze životního cyklu uživatele, kde jsou fáze od Preboardingu po Alumni, a právě nastavení fáze Onboarding a uložení karty workflow spustí.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=employmentStatesSelect]",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=employmentStatesSelect] button",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=employmentStatesSelect] button",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option-list nb-option:text-is(\"Onboarding\")",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-option-list nb-option:text-is(\"Onboarding\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "nb-option-list nb-option:text-is(\"Onboarding\")",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/work-data"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "Stejně tak fáze Offboarding spustí offboardingová workflow, my ale nic měnit nebudeme, a tak výběr zavřu.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "nb-option-list nb-option:text-is(\"Offboarding\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=employmentStatesSelect] button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=employmentStatesSelect] button",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/work-data"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "Průběh sledujete v levém menu pod HR Workflows v Historii, kde u každého spuštění vidíte uživatele, začátek, stav a pokrok.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows_history",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows_history",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows_history",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody tr:has(.p-tag-label:text-is(\"Selhalo\")) >> button:has(.fa-eye)",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] thead",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] thead",
+        "url_contains": "/app/hr-workflows/instances"
+      },
+      "part": 6,
+      "part_title": "Průběh a úkoly"
+    },
+    {
+      "id": "s34",
+      "narration": "Kliknu na oko u spuštění se stavem Selhalo a otevře se jeho detail.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tbody tr:has(.p-tag-label:text-is(\"Selhalo\")) >> button:has(.fa-eye)",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tbody tr:has(.p-tag-label:text-is(\"Selhalo\")) >> button:has(.fa-eye)",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-hr-workflows-instance-action-item:has-text(\"Selhalo\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-hr-workflows-instance-actions",
+        "url_contains": "/app/hr-workflows/instances/"
+      }
+    },
+    {
+      "id": "s35",
+      "narration": "Časová osa ukazuje každou akci se stavem, třeba Dokončeno, Selhalo nebo Čeká na vyřízení, a s datem začátku a konce.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-hr-workflows-instance-info",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-hr-workflows-instance-actions",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-hr-workflows-instance-actions",
+        "url_contains": "/app/hr-workflows/instances/"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "Selhanou akci můžete restartovat nebo přeskočit a celé spuštění ukončíte tlačítkem Zrušit instanci, tady ale nic měnit nebudeme.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button:text-is(\"Restartovat\")",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button:text-is(\"Přeskočit\")",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button:text-is(\"Zrušit instanci\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-hr-workflows-instance-actions",
+        "url_contains": "/app/hr-workflows/instances/"
+      }
+    },
+    {
+      "id": "s37",
+      "narration": "Úkoly z checklistů pak řešitelé najdou v levém menu v sekci Já pod položkou Moje úkoly, kde každý vidí stav a termín svých úkolů.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_checklists",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_checklists",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] thead",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] thead",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] thead",
+        "url_contains": "/app/my-checklists"
+      }
+    },
+    {
+      "id": "s38",
+      "narration": "Tip na závěr: pro odchody si připravte i offboardingové workflow, které třeba pošle dokumenty k podpisu a deaktivuje uživatele.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] thead",
+        "url_contains": "/app/my-checklists"
+      },
+      "part": 7,
+      "part_title": "Shrnutí"
+    },
+    {
+      "id": "s39",
+      "narration": "Teď víte, jak workflow založit, jaké akce umí, kdy se spustí a kde sledujete jeho průběh, a kdyby něco nešlo, mrkněte do Centra nápovědy.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] thead",
+        "url_contains": "/app/my-checklists"
+      }
+    },
+    {
+      "id": "s40",
+      "narration": "Méně administrativy, víc času na lidi. To je Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] thead",
+        "url_contains": "/app/my-checklists"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat workflow 'Nástup do zákaznické podpory – ukázka' – jen když hledání 'ukázka' nechá právě 1 řádek s přesným názvem ve stavu Návrh; potvrzovací dialog název neuvádí (proto kontrola jediného řádku); když workflow neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/hr-workflows/overview",
+      "if_visible": "[data-cy=hrWorkflowsOverviewCreateWorkflow]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=hrWorkflowsOverviewTable] thead",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] input[placeholder=\"Vyhledat workflow\"]",
+          "value": "ukázka",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=hrWorkflowsOverviewTable] tbody tr:has(td:text-is(\"Nástup do zákaznické podpory – ukázka\")):has(.p-tag-label:text-is(\"Návrh\"))",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=hrWorkflowsOverviewTable] tbody:not(:has(tr ~ tr)) td:text-is(\"Nástup do zákaznické podpory – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=hrWorkflowsOverviewTable] tbody tr:has(td:text-is(\"Nástup do zákaznické podpory – ukázka\")) >> [data-cy=hrWorkflowsOverviewRowMenu]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=hrWorkflowsOverviewMenuDelete]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=hrWorkflowsOverviewMenuDelete]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-confirmdialog:has-text(\"Opravdu chcete smazat celé workflow?\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-confirmdialog:has-text(\"Opravdu chcete smazat celé workflow?\") >> .p-confirmdialog-accept-button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "teardown": [
+    {
+      "name": "teardown: smazat workflow 'Nástup do zákaznické podpory – ukázka' – jen když hledání 'ukázka' nechá právě 1 řádek s přesným názvem ve stavu Návrh; potvrzovací dialog název neuvádí (proto kontrola jediného řádku); když workflow neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/hr-workflows/overview",
+      "if_visible": "[data-cy=hrWorkflowsOverviewCreateWorkflow]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=hrWorkflowsOverviewTable] thead",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] input[placeholder=\"Vyhledat workflow\"]",
+          "value": "ukázka",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=hrWorkflowsOverviewTable] tbody tr:has(td:text-is(\"Nástup do zákaznické podpory – ukázka\")):has(.p-tag-label:text-is(\"Návrh\"))",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=hrWorkflowsOverviewTable] tbody:not(:has(tr ~ tr)) td:text-is(\"Nástup do zákaznické podpory – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=hrWorkflowsOverviewTable] tbody tr:has(td:text-is(\"Nástup do zákaznické podpory – ukázka\")) >> [data-cy=hrWorkflowsOverviewRowMenu]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=hrWorkflowsOverviewMenuDelete]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=hrWorkflowsOverviewMenuDelete]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-confirmdialog:has-text(\"Opravdu chcete smazat celé workflow?\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-confirmdialog:has-text(\"Opravdu chcete smazat celé workflow?\") >> .p-confirmdialog-accept-button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-13",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "user": "Tomáš Novák (a8c8fa35-ed76-4867-8f26-0b3d41b768ac), NEAKTIVNÍ, tým Zákaznická podpora – jen karta otevřena, fáze se nemění",
+      "created_by_recipe": "workflow 'Nástup do zákaznické podpory – ukázka' (Onboarding, spouštěč fáze Onboarding, podmínka tým Zákaznická podpora; akce Odeslat e-mail, Nastavit checklist 'Nástup nového kolegy', První den zaměstnance, Aktivovat uživatele) – zůstává NÁVRH (nikdy nepublikováno), maže cleanup (před) i teardown (po)",
+      "read_only": "Přehled workflows, Historie (detail selhaného spuštění 'test' / Tommy Bones), karta Tomáše (pole Fáze životního cyklu jen otevřeno), Moje úkoly",
+      "never_clicked": "Publikovat, Vytvořit pomocí AI, aktivace/deaktivace (X), Duplikovat, Restartovat, Přeskočit, Zrušit instanci, výběr fáze na kartě, Uložit změny, akce úkolů"
+    },
+    "notes": "viz atlas/workflows.md"
+  }
+}

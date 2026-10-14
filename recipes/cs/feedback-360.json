@@ -1,0 +1,1026 @@
+{
+  "id": "feedback-360",
+  "version": 1,
+  "title": "360° zpětná vazba: nastavení cyklu, průběh a výsledky",
+  "lang": "cs",
+  "app_version": "preprod-2026-10-11",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "cs"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "bF7C2fCv7Zf30iT84wZ1",
+    "model_id": "eleven_v4"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s22",
+    "title": "360° zpětná vazba"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Zpětná vazba jen od šéfa ukáže jen kus pravdy. Dobrý den, jsem Marie z týmu Sloneek a ukážu vám 360° zpětnou vazbu.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_feedback_360",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "narration_tts": "Zpětná vazba jen od šéfa ukáže jen kus pravdy. Dobrý den, jsem Marie z týmu Sloneek a ukážu vám třistašedesátistupňovou zpětnou vazbu.",
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_feedback_360",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Úvod",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Hodnoceného uvidíte z více stran: on sám, jeho manažer, podřízení i kolegové. Modul najdete v sekci Společnost.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_feedback_360",
+          "before_ms": 1500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_feedback_360"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "Kliknu na Zpětná vazba. V přehledu vidíte všechny cykly, jejich stav, míru dokončení a počet odpovědí.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_feedback_360",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-feedback-360-overview [data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-feedback-360-overview table thead",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-feedback-360-overview [data-cy=tableRow]",
+        "url_contains": "/app/feedback-360/all"
+      },
+      "voice_after_actions": 1
+    },
+    {
+      "id": "s04",
+      "narration": "Filtry nad tabulkou rychle oddělí návrhy, probíhající a dokončené cykly.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-feedback-360-overview-filters",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-feedback-360-overview-filters button:text-is(\"Návrh\")",
+          "before_ms": 600
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-feedback-360-overview-filters button:text-is(\"Dokončeno\")",
+          "before_ms": 700
+        }
+      ],
+      "expect": {
+        "visible": "slnk-feedback-360-overview-filters button:text-is(\"Všechny průzkumy\")"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "Nový cyklus založím tlačítkem Vytvořit. Průvodce má čtyři kroky: nastavení, časovou osu, dotazník a zahájení.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=createButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=createButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=nameInput]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=nameInput]",
+        "url_contains": "/feedback-360/all/setup/survey"
+      },
+      "voice_after_actions": 2,
+      "part": 2,
+      "part_title": "Nastavení cyklu"
+    },
+    {
+      "id": "s06",
+      "narration": "Vyplním název a nechám zapnuté Odpovědi jsou anonymní. Hodnotitelé se pak vyjadřují otevřeněji.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=nameInput]",
+          "value": "360° zpětná vazba – Q4 2026",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=anonymousCheckbox]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=anonymousCheckbox]"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "V Typech zpětné vazby vyberete, kdo koho hodnotí: sám sebe, manažer podřízené, podřízení manažera a kolegové navzájem.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-common-card:has([data-cy=selfReviewCheckbox])",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=peerFeedbackCheckbox]"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "V Cílení určíte, koho hodnotíte: celou firmu, týmy, lokality, štítky nebo konkrétní lidi. Zvolím vybrané uživatele.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=usersTargetingRadio] label",
+          "before_ms": 600
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=targetingAutocomplete] input",
+          "before_ms": 600
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container nb-checkbox:has-text(\"Claver Thomas\") label",
+          "before_ms": 600
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=targetingAutocomplete]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=targetingAutocomplete]"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "Pak rozhodnete, kdo hodnotitele vybere: týmový manažer, administrátor, nebo každý hodnocený sám.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=feedbackProviderRadioGroup]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=participantFeedbackProviderRadio]"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Nastavíte i počet hodnotitelů a kdo reporty před zveřejněním zkontroluje. Schvalovatelem bude administrátor.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=ratersCountSelect]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=hrAdminReportsApproversRadio] label",
+          "before_ms": 1200
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=hrAdminReportsApproversRadio]"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "Kliknu na Vytvořit. Cyklus se uloží jako návrh a pokračujeme na časovou osu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=nextStepButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=nextStepButton]",
+          "before_ms": 300
+        }
+      ],
+      "_creates_data": "POST surveys – návrh '360° zpětná vazba – Q4 2026' (cleanup ho maže)"
+    },
+    {
+      "id": "s12",
+      "narration": "Na časové ose nastavíte termín výběru hodnotitelů, začátek a konec sběru a termín schválení reportů.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=providersSelectionDeadlineInput]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=providersSelectionDeadlineInput]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container nb-calendar-day-cell.day-cell:not(.disabled):not(.bounding-month) >> nth=0",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=collectionStartInput]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container nb-calendar-day-cell.day-cell:not(.disabled):not(.bounding-month) >> nth=0",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=collectionEndInput]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container nb-calendar-day-cell.day-cell:not(.disabled):not(.bounding-month) >> nth=0",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=reportApprovingDeadlineInput]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container nb-calendar-day-cell.day-cell:not(.disabled):not(.bounding-month) >> nth=0",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=reportApprovingDeadlineInput]",
+        "url_contains": "/timeline"
+      },
+      "voice_after_actions": 1,
+      "part": 3,
+      "part_title": "Časová osa",
+      "_note": "DAY = první povolený den; každé další pole povolí až den po předchozím. Poslední 3 dny v měsíci nenahrávat (kalendář by musel přepnout měsíc)."
+    },
+    {
+      "id": "s13",
+      "narration": "Připomínky zapnete pro každou fázi zvlášť, třeba tři dny před termínem. Kliknu na Pokračovat.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=reminderBeforeCollectionToggle] label",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=reminderBeforeCollectionAutocomplete] input",
+          "before_ms": 700
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container nb-checkbox:has-text(\"3 dní před\") label",
+          "before_ms": 600
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 500
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=nextStepButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=nextStepButton]",
+          "before_ms": 300
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "narration": "Dotazník vám může navrhnout umělá inteligence, nebo ho složíte sami. Zvolím Začít od nuly.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=option-scratch]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=option-ai]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=option-scratch]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=option-scratch]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=instructionsForSelfReviewersEditor]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=instructionsForSelfReviewersEditor]",
+        "url_contains": "/questionnaire/instructions"
+      },
+      "voice_after_actions": 1,
+      "part": 4,
+      "part_title": "Dotazník"
+    },
+    {
+      "id": "s15",
+      "narration": "V Instrukcích napíšete pokyny zvlášť pro každý typ hodnotitele. Všechny změny se ukládají automaticky.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=instructionsForSelfReviewersEditor] .ql-editor",
+          "before_ms": 400
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=instructionsForSelfReviewersEditor] .ql-editor",
+          "value": "Ohodnoťte prosím sami sebe za uplynulé čtvrtletí, upřímně a konkrétně.",
+          "speed": "fast"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-common-autosave-indicator",
+          "before_ms": 1200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=instructionsForPeerFeedbackProvidersEditor]"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "V Nastavení hodnoticí stupnice zvolím škálu od jedné do pěti. Popisky stupňů se doplní samy a můžete je upravit.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=\"menuItem-fe.sloneek.modules.feedback_360.setup.survey.questionnaire.menu.scale\"] a",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=scaleSelect]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=scaleSelect] button",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "nb-option[data-cy=option-1-5]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=scaleInput]",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=scaleInput]",
+        "url_contains": "/questionnaire/scale"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "Otázky skládáte do oblastí hodnocení. První oblast přejmenuji na Komunikace a napíšu znění otázky.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-common-dynamic-menu-item a[href*=\"questionnaire/section?sectionId=\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=questionTextInput]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=textEditableEditButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=textEditableInput]",
+          "value": "Komunikace",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=textEditableConfirmButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=questionTextInput]",
+          "before_ms": 600
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=questionTextInput]",
+          "value": "Sdílí informace včas a srozumitelně.",
+          "clear": true,
+          "speed": "fast"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=sectionNameTextEditable]:has-text(\"Komunikace\")",
+        "url_contains": "/questionnaire/section"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "U otázky zvolíte stupnici nebo textovou odpověď a zda je povinná. Nahoře vidíte odhad času na vyplnění.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=answerTypeSelect]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=isRequiredCheckbox]",
+          "before_ms": 700
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=estimatedTimeStrong]",
+          "before_ms": 700
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=estimatedTimeStrong]"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "Kliknu na Pokračovat. Shrnutí ukáže hodnocené, termíny, počet otázek i nastavení anonymity a schvalování.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=nextStepButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=nextStepButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=launchButton]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=surveyNameStrong]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=launchButton]",
+        "url_contains": "/launch"
+      },
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s20",
+      "narration": "Tlačítkem Zahájit cyklus spustíte, aplikace se ještě jednou zeptá. Pro ukázku ho nechám jako návrh.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=launchButton]",
+          "before_ms": 800
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=launchButton]",
+        "url_contains": "/launch"
+      },
+      "_note": "NIKDY neklikat – Zahájit spustí cyklus."
+    },
+    {
+      "id": "s21",
+      "narration": "Jak to vypadá, když cyklus běží? Otevřu ukázkovou zpětnou vazbu, která už probíhá.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_feedback_360",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-feedback-360-overview [data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-feedback-360-overview [data-cy=tableRow]:has-text(\"360° zpětná vazba – ukázka (podzim 2026)\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "slnk-feedback-360-overview [data-cy=tableRow]:has-text(\"360° zpětná vazba – ukázka (podzim 2026)\") td >> nth=0",
+          "before_ms": 300
+        }
+      ],
+      "part": 5,
+      "part_title": "Průběh cyklu"
+    },
+    {
+      "id": "s22",
+      "narration": "Přehled ukazuje čtyři fáze: výběr hodnotitelů, sběr zpětné vazby, schválení a doručení reportu, každou s termínem.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=completionRateDiv]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-feedback-360-monitoring table",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=overviewTab]",
+        "url_contains": "/monitoring/dashboard"
+      },
+      "voice_after_actions": 1
+    },
+    {
+      "id": "s23",
+      "narration": "V záložce Hodnotitelé můžete jako administrátor hodnotitele u každého hodnoceného doplnit nebo změnit.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=ratersTab]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-feedback-360-raters-selection",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-feedback-360-raters-selection",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "slnk-feedback-360-raters-selection",
+        "url_contains": "/monitoring/raters"
+      },
+      "voice_after_actions": 1,
+      "_note": "'Automaticky přiřadit' (AI) neklikat."
+    },
+    {
+      "id": "s24",
+      "narration": "Záložka Dotazník ho ukáže jen pro čtení, takže snadno poradíte, když se někdo zeptá.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=questionnaireTab]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-dynamic-menu",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-common-dynamic-menu",
+        "url_contains": "/monitoring/questionnaire"
+      },
+      "voice_after_actions": 1
+    },
+    {
+      "id": "s25",
+      "narration": "Po schválení reportů najdete ve Výsledcích celkové skóre, počet odpovědí, míru dokončení a klíčové poznatky AI.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_feedback_360",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-feedback-360-overview [data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-feedback-360-overview-filters button:text-is(\"Dokončeno\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-feedback-360-overview [data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-feedback-360-overview [data-cy=tableRow]:has-text(\"Company evaluation Q2\"):not(:has-text(\"copy\")) td >> nth=0",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=feedback360UserReportsOverviewTable]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-feedback-360-result slnk-common-card >> nth=0",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=resultsTab]",
+        "url_contains": "/monitoring/results"
+      },
+      "voice_after_actions": 3,
+      "part": 6,
+      "part_title": "Výsledky",
+      "_todo": "Přepnout na CZ demo cyklus '360° zpětná vazba – ukázka (podzim 2026)' (dda54568-679e-4735-b574-6a775200c996), až bude Dokončeno. Teď cílí na anglický 'Company evaluation Q2' (9d7028f3-…, jen čtení) kvůli selektorům. Nepočítá se do dry-runu."
+    },
+    {
+      "id": "s26",
+      "narration": "Kliknutím na jméno otevřete report: nejlepší oblasti, oblasti ke zlepšení, grafy a podrobnou zpětnou vazbu.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=feedback360UserReportsOverviewTable] tr:has-text(\"Claver Thomas\") td >> nth=0",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-feedback-360-reports-performance",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-feedback-360-reports-summary-areas",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "slnk-feedback-360-report",
+        "url_contains": "/report/"
+      },
+      "voice_after_actions": 2,
+      "_todo": "Přepnout na CZ demo cyklus '360° zpětná vazba – ukázka (podzim 2026)' (dda54568-679e-4735-b574-6a775200c996), až bude Dokončeno. Teď cílí na anglický 'Company evaluation Q2' (9d7028f3-…, jen čtení) kvůli selektorům. Nepočítá se do dry-runu."
+    },
+    {
+      "id": "s27",
+      "narration": "V Analytice porovnáte týmy a lokality a uvidíte, kde se sebehodnocení liší od pohledu ostatních.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-common-card-page-header a:text-is(\"Zpět\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=analyticsTab]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=analyticsTab]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-feedback-360-analytics-overall-statistics",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-feedback-360-analytics-performance-area-self-vs-other",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-feedback-360-analytics",
+        "url_contains": "/monitoring/analytics"
+      },
+      "voice_after_actions": 4,
+      "_todo": "Přepnout na CZ demo cyklus '360° zpětná vazba – ukázka (podzim 2026)' (dda54568-679e-4735-b574-6a775200c996), až bude Dokončeno. Teď cílí na anglický 'Company evaluation Q2' (9d7028f3-…, jen čtení) kvůli selektorům. Nepočítá se do dry-runu."
+    },
+    {
+      "id": "s28",
+      "narration": "Zaměstnanec najde vše v sekci Já pod Moje zpětná vazba: úkoly i své schválené reporty.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_my_feedback_360",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-my-feedback-360-overview [data-cy=tableRow]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-my-feedback-360-overview-reports",
+        "url_contains": "/app/feedback-360/my"
+      },
+      "voice_after_actions": 1,
+      "part": 7,
+      "part_title": "Pohled zaměstnance"
+    },
+    {
+      "id": "s29",
+      "narration": "V detailu cyklu vidí své úkoly a termíny. Jakmile začne sběr, najde tu i dotazníky k vyplnění.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-my-feedback-360-overview-tasks [data-cy=tableRow]:has-text(\"360° zpětná vazba – ukázka (podzim 2026)\") td >> nth=0",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-feedback-360-tasks-raters-selection-table",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-feedback-360-tasks-raters-selection-table",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "slnk-my-feedback-360-dashboard",
+        "url_contains": "/my/dda54568-679e-4735-b574-6a775200c996/dashboard"
+      },
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s30",
+      "narration": "Tip na závěr: hotový cyklus v přehledu zduplikujete, nebo zvolíte Duplikát pro porovnání a v analytice uvidíte posun.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_feedback_360",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-feedback-360-overview [data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-feedback-360-overview [data-cy=tableRow]:has-text(\"360° zpětná vazba – ukázka (podzim 2026)\") [data-cy=actionsButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-context-menu a:text-is(\"Duplikovat\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-context-menu a:text-is(\"Duplikát pro porovnání\")",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=filtersSearch]",
+          "before_ms": 900
+        }
+      ],
+      "expect": {
+        "visible": "slnk-feedback-360-overview [data-cy=tableRow]"
+      },
+      "voice_after_actions": 2,
+      "part": 8,
+      "part_title": "Závěr",
+      "_note": "menu Akce = nbContextMenu na hover; zavírá se odjetím myši (hover na Hledat)."
+    },
+    {
+      "id": "s31",
+      "narration": "Teď umíte připravit cyklus 360° zpětné vazby, sledovat jeho průběh i číst výsledky. Kdyby něco nešlo, mrkněte do Centra nápovědy.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "600"
+        }
+      ],
+      "narration_tts": "Teď umíte připravit cyklus třistašedesátistupňové zpětné vazby, sledovat jeho průběh i číst výsledky. Kdyby něco nešlo, mrkněte do Centra nápovědy.",
+      "expect": {
+        "visible": "slnk-feedback-360-overview [data-cy=tableRow]"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "Méně administrativy, víc času na lidi. To je Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "600"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-feedback-360-overview [data-cy=tableRow]"
+      },
+      "hold_after_ms": 1200
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat návrh '360° zpětná vazba – Q4 2026' z minulého běhu (1) – seznam filtrovaný ?name=Q4 2026 (filtr API nenajde text s pomlčkou –), pojistka: v tabulce právě 1 řádek s tímto názvem",
+      "url": "https://app-pre-production.sloneek.com/app/feedback-360/all?name=Q4%202026",
+      "if_visible": "[data-cy=tableRow]:has-text(\"360° zpětná vazba – Q4 2026\")",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "slnk-feedback-360-overview table:not(:has([data-cy=tableRow] ~ [data-cy=tableRow])) [data-cy=tableRow]:has-text(\"360° zpětná vazba – Q4 2026\")",
+          "value": "4000"
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-feedback-360-overview table:not(:has([data-cy=tableRow] ~ [data-cy=tableRow])) [data-cy=tableRow]:has-text(\"360° zpětná vazba – Q4 2026\") [data-cy=actionsButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a:text-is(\"Odstranit\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "p-dynamicdialog [data-cy=reasonInput]",
+          "value": "5000"
+        },
+        {
+          "type": "fill",
+          "selector": "p-dynamicdialog [data-cy=reasonInput]",
+          "value": "Úklid návrhu po natáčení"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-feedback-360-overview table:not(:has([data-cy=tableRow] ~ [data-cy=tableRow])) [data-cy=tableRow]:has-text(\"360° zpětná vazba – Q4 2026\")",
+          "value": "2000"
+        },
+        {
+          "type": "click",
+          "selector": "p-dynamicdialog [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat návrh '360° zpětná vazba – Q4 2026' z minulého běhu (2) – seznam filtrovaný ?name=Q4 2026 (filtr API nenajde text s pomlčkou –), pojistka: v tabulce právě 1 řádek s tímto názvem",
+      "url": "https://app-pre-production.sloneek.com/app/feedback-360/all?name=Q4%202026",
+      "if_visible": "[data-cy=tableRow]:has-text(\"360° zpětná vazba – Q4 2026\")",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "slnk-feedback-360-overview table:not(:has([data-cy=tableRow] ~ [data-cy=tableRow])) [data-cy=tableRow]:has-text(\"360° zpětná vazba – Q4 2026\")",
+          "value": "4000"
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-feedback-360-overview table:not(:has([data-cy=tableRow] ~ [data-cy=tableRow])) [data-cy=tableRow]:has-text(\"360° zpětná vazba – Q4 2026\") [data-cy=actionsButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a:text-is(\"Odstranit\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "p-dynamicdialog [data-cy=reasonInput]",
+          "value": "5000"
+        },
+        {
+          "type": "fill",
+          "selector": "p-dynamicdialog [data-cy=reasonInput]",
+          "value": "Úklid návrhu po natáčení"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-feedback-360-overview table:not(:has([data-cy=tableRow] ~ [data-cy=tableRow])) [data-cy=tableRow]:has-text(\"360° zpětná vazba – Q4 2026\")",
+          "value": "2000"
+        },
+        {
+          "type": "click",
+          "selector": "p-dynamicdialog [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-11",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "cycle": "dda54568-679e-4735-b574-6a775200c996",
+      "demo_user": "9653ebed-af63-4b54-9ca4-b44e3df68f05",
+      "results_placeholder_cycle": "9d7028f3-c92d-491a-b9dd-015fc0eee3df"
+    },
+    "dry_run": "11. 10. 2026 ~11:00 UTC in-page runnerem (BrowserOS): cleanup před (nic) -> s01–s24 + s28–s32 = 29/29 OK (s25–s27 _todo, nepočítány) -> guarded cleanup po: návrh 5b0fe7a0 smazán, seznam 23 -> 22, smazána jen tato uuid.",
+    "notes": "Mazací dialog návrhu ('Zahodit dotazník', p-dynamicdialog) neobsahuje název cyklu a vyžaduje 'Důvod zrušení'. Pojistka: cleanup otevře seznam filtrovaný ?name=Q4%202026 (API filtr name nenajde název s pomlčkou '–') a před každým klikem čeká (wait_ready) na tabulku s právě jedním řádkem s přesným názvem; když pojistka selže, blok skončí chybou a nic nesmaže (runCleanup chyby ignoruje). s25–s27 mají _todo a nepočítají se. Recorder cleanup běží jen před natáčením – úklid po natáčení spustit ručně (stejné bloky)."
+  }
+}

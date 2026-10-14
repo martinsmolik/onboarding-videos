@@ -1,0 +1,225 @@
+{
+  "_comment": "Anglická verze videa Hodnocení výkonnosti (performance-review). UI texty z translate_fe/en (staženo fetchem uvnitř stránky) + ověřeno naživo (local-translate=en). Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM. Od 11. 10. 2026 má EN video vlastní anglická demo data (pozice 'Customer Support Specialist' bd2af2ad-…, cyklus 'Performance review – demo (Q3 2026)' 684d7efc-…, report d235c8c8-…); první cleanup blok masteru přepne Thomasovi pozici na EN pozici (mapováno v `text`). Cyklus psaný v s10 je 'Performance review for Q4' a stejný název používá cleanup (if_visible + guard v nb-dialog-container). cleanup_prepend maže zbylé CZ/PL koncepty z jiných běhů, potvrzení jen v dialogu s přesným názvem. Bez mobilní aplikace, bez asistentky Ellie (odkaz na Help Center). wait_ready a voice_after_actions z masteru zůstávají.",
+  "verified": {
+    "date": "2026-10-10",
+    "by": "Claude (BrowserOS, preprod, local-translate=en, in-page runner out/performance-review/_work/dryrun-runner.js: CSS + :text-is/:has-text/>>/nth, wait 10 s visible, wait_ready = selector + no spinner, pointer/mouse events at elementFromPoint of centre)",
+    "selectors": "32/32 steps passed (every action target + expect.visible resolved, url_contains ok). One fix during the run: s25 card title is 'AI key observations' in the user report (translate_fe has both 'AI key insights' and 'AI key observations'; the report uses the latter). Live EN labels: menu 'Performance evaluation' / 'My performance evaluation' (section ME), h5 'Competency evaluation', 'Manage positions', '+ Create', filters All surveys/Drafts/In progress/Ready to launch/Completed, tags Draft/Completed, h5 'Positions and competencies', 'Setting the verbal description of the scale', placeholder 'Scale description', wizard 'Evaluation' 1. Survey setup/2. Questionnaire/3. Launch, 'Save as draft', 'Next', 'Basic settings', 'Evaluation name', 'List competencies from created job positions', 'Feedback types' Manager/User, targeting Whole company/Selected teams/Selected locations/Selected users/Selected tags/Selected positions, 'Timeline' Start date/End date (MM/DD/YYYY), 'Select the option to create a questionnaire', 'Create with AI', 'Start from scratch', 'Instruction for self reviewers', 'Instructions for manager', 'All positions', 'Add question', 'Scale', 'Summary' (Name/Targeting 'Users (1)'/Duration/Start date/End date/Number of questions 6), 'Launch' (2x), 'Completion rate', report 'Summary', 'Top 5 strenghts' (typo in app), 'Top 5 areas to improve', 'AI key observations', 'Performance by category', 'Final result', 'Create personal goal', 'Shared review notes', 'Notes visible to the administrator', My tasks 'No tasks', 'My cycles', tab 'Competencies', menu 'Duplicate'/'Delete' (live), dialog 'Delete performance evaluation – Are you sure you want to delete <name>? No / Yes'. Demo cycle is now 'Completed' (100 %).",
+    "cleanup": "before: API 23 cycles, none of ours. Run created draft 'Performance review for Q4' (68ed28e2-…); deleted after reload via row → Actions (hover) → Delete → dialog checked to contain 'delete Performance review for Q4?' → Yes; GET 404; after: 23 cycles, identical uuid set (Q4 2026 draft, demo cycle untouched). NB: the in-page runner cannot parse 'nb-dialog-container:has-text(\"…\") [data-cy=submitButton]' (pseudo not at end of segment) – the confirm was done by an equivalent manual guarded click; Playwright in the recorder supports the selector. cleanup_prepend blocks (CZ/PL leftover drafts) not exercised – no such drafts existed.",
+    "en_demo_data": "11. 10. 2026: EN dry-run with EN demo data 32/32 (local-translate=en; changed steps s05–s07, s09, s19, s22, s29 all ok – s07 opens bd2af2ad, s22 opens 684d7efc, s24 report d235c8c8, s29 'Competency model : Customer Support Specialist'). EN position-switch cleanup: guard correctly not visible when Thomas already has 'Customer Support Specialist' (actions verified via the identical CZ block). Cleanup: before 26 cycles → guarded delete of leftover draft 'Performance review for Q4' aff9ddd3 → 25; run draft 43902ba2 deleted the same way after a reload (GET 404) → 25, uuid set identical to before minus aff9ddd3. CZ position-switch block run afterwards (guard visible, actions ok, wait_ready after reload ok): Thomas back on 'Specialista zákaznické podpory'."
+  },
+  "title": "Performance evaluation: positions, competencies and review cycles",
+  "thumbnail_title": "Performance evaluation",
+  "parts": {
+    "Úvod": "Introduction",
+    "Pozice a kompetence": "Positions and competencies",
+    "Nový cyklus hodnocení": "New review cycle",
+    "Výsledky": "Results",
+    "Pohled zaměstnance": "Employee's view",
+    "Závěr": "Wrap-up"
+  },
+  "text": {
+    "Dokončeno": "Completed",
+    "Spravovat pozice": "Manage positions",
+    "Pozice a kompetence": "Positions and competencies",
+    "Nastavení slovního popisu stupnice": "Setting the verbal description of the scale",
+    "Popis stupnice": "Scale description",
+    "Zpět": "Back",
+    "Vytvořit": "Create",
+    "Hodnocení výkonu za čtvrté čtvrtletí": "Performance review for Q4",
+    "Další": "Next",
+    "Vyberte možnost vytvoření dotazníku": "Select the option to create a questionnaire",
+    "Pokyny pro manažera": "Instructions for manager",
+    "Vytvořit pomocí AI": "Create with AI",
+    "Začít od nuly": "Start from scratch",
+    "Instrukce pro sebehodnocení": "Instruction for self reviewers",
+    "Všechny pozice": "All positions",
+    "Přidat otázku": "Add question",
+    "Jak se vám daří plnit cíle za uplynulé období?": "How well are you meeting your goals for the past period?",
+    "Škála": "Scale",
+    "Shrnutí": "Summary",
+    "Zahájit": "Launch",
+    "Míra dokončení": "Completion rate",
+    "Klíčové poznatky AI": "AI key observations",
+    "Konečný výsledek": "Final result",
+    "Vytvořte si osobní cíl": "Create personal goal",
+    "Sdílené poznámky k hodnocení": "Shared review notes",
+    "Kompetenční model : Specialista zákaznické podpory": "Competency model : Customer Support Specialist",
+    "Duplikovat": "Duplicate",
+    "Vymazat": "Delete",
+    "Specialista zákaznické podpory": "Customer Support Specialist",
+    "Komunikace se zákazníkem": "Customer communication",
+    "Hodnocení výkonu – ukázka (Q3 2026)": "Performance review – demo (Q3 2026)"
+  },
+  "keep": [
+    "Claver",
+    "Claver Thomas"
+  ],
+  "cleanup_prepend": [
+    {
+      "name": "smazat zbylý CZ koncept 'Hodnocení výkonu za čtvrté čtvrtletí' z jiného běhu",
+      "url": "https://app-pre-production.sloneek.com/app/performance-evaluation/positions-evaluation/all",
+      "if_visible": "[data-cy=tableRow]:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\")",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=tableRow]:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\") >> [data-cy=actionsButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a:has-text(\"Delete\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\") [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat zbylý PL koncept 'Ocena wyników za czwarty kwartał' z jiného běhu",
+      "url": "https://app-pre-production.sloneek.com/app/performance-evaluation/positions-evaluation/all",
+      "if_visible": "[data-cy=tableRow]:has-text(\"Ocena wyników za czwarty kwartał\")",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=tableRow]:has-text(\"Ocena wyników za czwarty kwartał\") >> [data-cy=actionsButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a:has-text(\"Delete\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has-text(\"Ocena wyników za czwarty kwartał\") [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    }
+  ],
+  "steps": {
+    "s01": {
+      "narration": "Reviews in spreadsheets and notes scattered across emails? Hi, I'm Maria from the Sloneek team, and I'll show you performance evaluation."
+    },
+    "s02": {
+      "narration": "Evaluation is built on positions and their competencies. Managers evaluate their direct reports, and people can also evaluate themselves."
+    },
+    "s03": {
+      "narration": "In the left menu, I click Performance evaluation. Here you see all review cycles, their status, and their completion rate."
+    },
+    "s04": {
+      "narration": "The filters above the table quickly separate drafts, ongoing cycles, cycles ready to launch, and completed ones."
+    },
+    "s05": {
+      "narration": "Let's start with positions. The Manage positions button opens an overview of job positions and their competencies."
+    },
+    "s06": {
+      "narration": "For each position, you see how many people hold it and how many competencies its competency model contains."
+    },
+    "s07": {
+      "narration": "I'll open the Customer Support Specialist position. At the top are the name and the job description, which the employee sees too."
+    },
+    "s08": {
+      "narration": "Below is the competency model. Each competency has its own scale, here zero to five, and you can describe each level in words."
+    },
+    "s09": {
+      "narration": "You don't have to invent competencies yourself: type the position into the AI field and AI suggests them. You then assign the position to people in their profile."
+    },
+    "s10": {
+      "narration": "Now let's create a new cycle. I click Create and fill in a name, for example Performance review for Q4."
+    },
+    "s11": {
+      "narration": "The first option adds competencies from the job positions to the questionnaire. The manager always evaluates, and I'll also tick self-evaluation."
+    },
+    "s12": {
+      "narration": "Under Targeting, you choose who gets evaluated: the whole company, teams, locations, tags, positions, or specific people. I'll pick selected users."
+    },
+    "s13": {
+      "narration": "In the Timeline, I set the start and end date. The cycle can even start today."
+    },
+    "s14": {
+      "narration": "I click Next. The review is saved as a draft, and we move on to the questionnaire."
+    },
+    "s15": {
+      "narration": "AI can draft the questionnaire for you, or you can start from scratch. I'll choose Start from scratch."
+    },
+    "s16": {
+      "narration": "In Instructions, you write separate guidance for the self-evaluation and for the manager. All changes are saved automatically."
+    },
+    "s17": {
+      "narration": "In All positions, you add questions for everyone being evaluated. I click Add question and type the wording."
+    },
+    "s18": {
+      "narration": "As the answer type, I choose a scale from one to five. A question can be for the manager only, or for both the manager and the user."
+    },
+    "s19": {
+      "narration": "Each position has questions from its competency model. You can add your own questions here, too."
+    },
+    "s20": {
+      "narration": "I click Next. The summary shows the name, targeting, dates, and the number of questions."
+    },
+    "s21": {
+      "narration": "The Launch button starts the cycle, and evaluators get their tasks. For this demo, I'll leave it as a draft."
+    },
+    "s22": {
+      "narration": "Now the results. In the overview, I open the demo review for the third quarter."
+    },
+    "s23": {
+      "narration": "At the top, you see the number of participants and the completion rate. The Results table shows who's still missing a type of feedback."
+    },
+    "s24": {
+      "narration": "In the Raters tab, you check who evaluates whom. In the Results table, I click the name of the person being evaluated."
+    },
+    "s25": {
+      "narration": "The report shows strengths and areas to improve: here, customer communication leads and independence is the weakest. AI key observations sum it up in words."
+    },
+    "s26": {
+      "narration": "Detailed feedback shows the manager's rating next to the self-evaluation. You set the agreed final result with the pencil icon."
+    },
+    "s27": {
+      "narration": "You can turn a weaker area straight into a personal goal. The shared notes hold the agreed action plan, which the employee sees too."
+    },
+    "s28": {
+      "narration": "And the employee's view? They open My performance evaluation. While a cycle is running, the questionnaire waits in My tasks."
+    },
+    "s29": {
+      "narration": "My cycles holds their results, and the Competencies tab shows the position description and what they'll be evaluated on."
+    },
+    "s30": {
+      "narration": "A final tip: duplicate a finished cycle in the overview, and your next review round is ready in no time."
+    },
+    "s31": {
+      "narration": "Now you know how to set up positions, prepare a review cycle, and read the results. If something doesn't work, check the Help Center."
+    },
+    "s32": {
+      "narration": "Less admin, more time for people. This is Sloneek."
+    }
+  }
+}

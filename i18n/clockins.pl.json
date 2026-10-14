@@ -1,0 +1,140 @@
+{
+  "_comment": "Polská verze videa Příchody a odchody (clockins). UI texty z translate_fe/pl + ověřeno naživo (local-translate=pl, 9. 10. 2026). Modul se v PL menu jmenuje 'Czas pracy', widget na Pulpitu taky 'Czas pracy', tlačítko příchodu 'Rozpocznij pracę'. Report 569 má v PL UI chybný název 'Przegląd przylotów i odlotów' (přílety/odlety letadel) – narace ho proto jmenuje opisně 'przegląd przyjść i wyjść'. Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM.",
+  "verified": {
+    "date": "2026-10-09",
+    "by": "Claude (BrowserOS, preprod, local-translate=pl)",
+    "selectors": "DRY-RUN 9. 10. 2026 17:59–18:02 UTC v PL UI in-page runnerem (out/clockins/_work/dryrun-runner.js): cleanup (smazán 1 segment W pracy 18:40–18:41 z CZ běhu) → 32/32 kroků OK (Rozpocznij pracę 17:59:5x, End of shift 18:01:0x ≈ 70 s) → cleanup OK (smazán segment W pracy 19:00–19:01, widget zpět Rozpocznij pracę). První běh 17:54 selhal jen v s21: nabídka Zakończ pracę ukazuje data tenanta bez PL překladu ('End of shift', 'Lunch', 'Default break', 'Lékař odchod', 'Služebka') → s21/s22 selektor aria-label='End of shift' a narace upravena.",
+    "notes": "Časy v kartě dne jsou v čase prohlížeče (Praha, +1 h proti Lisabonu); štítek 'Inna strefa czasowa' bez CDP override viditelný. Report 569 má v PL název 'Przegląd przylotów i odlotów' (chybný překlad) – selektor s28 ho musí použít, narace ho opisuje."
+  },
+  "title": "Przyjścia i wyjścia: czas pracy jednym kliknięciem",
+  "thumbnail_title": "Przyjścia i wyjścia",
+  "parts": {
+    "Úvod": "Wprowadzenie",
+    "Nastavení": "Ustawienia",
+    "Příchod a odchod": "Przyjście i wyjście",
+    "Pohled manažera": "Widok menedżera",
+    "Závěr": "Podsumowanie"
+  },
+  "text": {
+    "Nastavení docházky": "Ustawienia obecności",
+    "Události": "Wydarzenia",
+    "Přidat událost": "Dodaj wyjazd",
+    "Terminály": "Terminale",
+    "Docházkové karty": "Karty obecności",
+    "Zaznamenat příchod": "Rozpocznij pracę",
+    "V práci": "W pracy",
+    "Přidat segment": "Dodaj segment",
+    "Zrušit": "Anuluj",
+    "Tým": "Zespół",
+    "Moje": "Ja",
+    "Filtry": "Filtry",
+    "Nová hodnota": "Nowa wartość",
+    "Přehled příchodů a odchodů": "Przegląd przylotów i odlotów",
+    "Export": "Eksport"
+  },
+  "keep": [],
+  "steps": {
+    "s01": {
+      "narration": "Papierowa lista obecności, a na koniec miesiąca szukanie, kto kiedy przyszedł? Dzień dobry, jestem Maria z zespołu Sloneek i dziś pokażę Wam przyjścia i wyjścia."
+    },
+    "s02": {
+      "narration": "Pracownicy rejestrują przyjście i wyjście jednym kliknięciem, w przeglądarce albo na terminalu. A Wy macie czas pracy od razu gotowy do płac."
+    },
+    "s03": {
+      "narration": "Pokażę Wam ustawienia, codzienne odbijanie i widok menedżera. Moduł znajdziecie w lewym menu pod pozycją Czas pracy."
+    },
+    "s04": {
+      "narration": "Zaczniemy od ustawień. Na dole lewego menu klikam Ustawienia obecności."
+    },
+    "s05": {
+      "narration": "W części Zmiany pozwalacie pracownikom poprawiać własną obecność. Polecam zostawić włączone, że każdą zmianę musi zatwierdzić osoba zatwierdzająca obecność."
+    },
+    "s06": {
+      "narration": "Zamykanie arkuszy czasu pracy pilnuje, żeby zatwierdzający co miesiąc zamykali arkusz. Tutaj między pierwszym a czwartym dniem następnego miesiąca."
+    },
+    "s07": {
+      "narration": "Automatyczne pauzy dodają przerwę obiadową według czasu pracy, więc pracownicy nie muszą jej odbijać."
+    },
+    "s08": {
+      "narration": "W zakładce Wydarzenia są rodzaje wyjść, na przykład obiad, przerwa albo lekarz."
+    },
+    "s09": {
+      "narration": "Dla każdego ustalacie, czy liczy się jako praca i gdzie pracownicy go zobaczą, na przykład na terminalu albo na komputerze."
+    },
+    "s10": {
+      "narration": "Jeśli macie terminal, dodacie go w zakładce Terminale. Numery kart albo chipów przypiszecie w Kartach obecności."
+    },
+    "s11": {
+      "narration": "Teraz zwykły dzień. Rano przychodzicie do pracy i na Pulpicie znajdujecie widżet Czas pracy."
+    },
+    "s12": {
+      "narration": "Widżet pokazuje, czy jesteście w pracy, ile dziś przepracowaliście i saldo do tej pory."
+    },
+    "s13": {
+      "narration": "Klikam Rozpocznij pracę. Sloneek od razu zapisuje godzinę, o której przyszliście."
+    },
+    "s14": {
+      "narration": "Status zmienił się na W pracy, a przycisk na Zakończ pracę. Czas liczy się od tej chwili."
+    },
+    "s15": {
+      "narration": "Szczegóły znajdziecie w module Czas pracy. Otwieram go prosto z widżetu."
+    },
+    "s16": {
+      "narration": "W zakładce Ja widzicie cały miesiąc. Każdy dzień ma oś czasu: na zielono praca, na pomarańczowo przerwy, a na szaro czas wolny."
+    },
+    "s17": {
+      "narration": "Po prawej jest szczegół dnia: cel dzienny, ile przepracowaliście, saldo i lista segmentów."
+    },
+    "s18": {
+      "narration": "Pod nim jest podsumowanie całego miesiąca z saldem całkowitym, więc od razu widzicie, czy macie nadgodziny, czy brakuje Wam godzin."
+    },
+    "s19": {
+      "narration": "Zapomnieliście odbić? Przyciskiem Dodaj segment uzupełnicie brakujący czas, także wstecz."
+    },
+    "s20": {
+      "narration": "Wybieracie rodzaj segmentu i godziny od do. Zmianę zatwierdzi potem menedżer. Teraz zamykam okno."
+    },
+    "s21": {
+      "narration": "Kiedy wychodzicie, klikacie Zakończ pracę. W menu są też przerwy, na przykład lunch, pauza albo wizyta u lekarza.",
+      "selectors": {
+        ".p-menu-overlay li[aria-label=\"Konec směny\"]": ".p-menu-overlay li[aria-label=\"End of shift\"]"
+      }
+    },
+    "s22": {
+      "narration": "Na koniec dnia wybieram End of shift, czyli koniec zmiany. Segment W pracy ma teraz początek i koniec.",
+      "selectors": {
+        ".p-menu-overlay li[aria-label=\"Konec směny\"] a": ".p-menu-overlay li[aria-label=\"End of shift\"] a"
+      }
+    },
+    "s23": {
+      "narration": "A jak to widzi menedżer? W zakładce Zespół ma czas pracy swoich ludzi jeden pod drugim."
+    },
+    "s24": {
+      "narration": "Administrator wybierze dowolny zespół, menedżer widzi tylko swój. W Filtrach wyświetli na przykład tylko błędy albo prośby o zatwierdzenie."
+    },
+    "s25": {
+      "narration": "Prośby o zmianę czasu pracy menedżer znajdzie w zatwierdzeniach."
+    },
+    "s26": {
+      "narration": "W zakładce Czas pracy widzi poprzednią i nową wartość i jednym kliknięciem zmianę zatwierdza albo odrzuca."
+    },
+    "s27": {
+      "narration": "Dane o czasie pracy do płac i kontroli znajdziecie w Raportach niestandardowych, wśród gotowych raportów."
+    },
+    "s28": {
+      "narration": "Otwieram przegląd przyjść i wyjść. Znajdziecie w nim każde odbicie wszystkich pracowników za wybrany okres."
+    },
+    "s29": {
+      "narration": "Przy każdym wpisie widzicie początek, koniec, czas trwania i sposób wprowadzenia, na przykład przeglądarka albo terminal. Raport wyeksportujecie do Excela."
+    },
+    "s30": {
+      "narration": "I gotowe. Umiecie ustawić czas pracy, odbić przyjście i wyjście i macie przegląd całego zespołu."
+    },
+    "s31": {
+      "narration": "Wskazówka na koniec: na Pulpicie znajdziecie też widżet Obecność zespołu. Pokazuje saldo każdego członka zespołu do dzisiaj."
+    },
+    "s32": {
+      "narration": "Jeśli coś nie zadziała, zajrzyjcie do Centrum pomocy. Mniej administracji, więcej czasu dla ludzi. To jest Sloneek."
+    }
+  }
+}

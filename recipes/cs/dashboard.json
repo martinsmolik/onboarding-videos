@@ -1,0 +1,1148 @@
+{
+  "id": "dashboard",
+  "version": 1,
+  "title": "Objevte možnosti hlavní plochy",
+  "lang": "cs",
+  "app_version": "preprod-2026-10-12",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "cs"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "bF7C2fCv7Zf30iT84wZ1",
+    "model_id": "eleven_v4"
+  },
+  "pronunciation": [
+    {
+      "match": "Feed",
+      "say": "fíd",
+      "note": "karta Feed (firemní nástěnka)"
+    },
+    {
+      "match": "kudos",
+      "say": "kjúdos",
+      "case": "insensitive",
+      "note": "veřejná pochvala"
+    }
+  ],
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s04",
+    "title": "Hlavní plocha"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Chcete mít každé ráno na jednom místě všechno, co vás v práci čeká? Dobrý den, jsem Marie z týmu Sloneek a provedu vás hlavní plochou.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate p-card",
+          "value": "20000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate p-card",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 1,
+      "part_title": "Úvod",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Plochu otevřete kdykoli z levého menu položkou Plocha, která je úplně nahoře.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+          "before_ms": 1200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "Nahoře vás přivítá pozdrav a pod ním jsou karty ve dvou sloupcích, jejichž obsah se řídí vaší rolí.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-greeting",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-new-colleagues p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-greeting",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s04",
+      "narration": "První karta, Co by nemělo uniknout vaší pozornosti, shromažďuje všechno, co čeká právě na vás.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate p-card",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button]:has(.fa-stamp)",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 2,
+      "part_title": "Co na vás čeká"
+    },
+    {
+      "id": "s05",
+      "narration": "Jsou tu žádosti ke schválení, pomůcky ke zpracování, úkoly s termínem, dokumenty nebo zpětná vazba.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button] >> nth=0",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button] >> nth=1",
+          "before_ms": 100
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button] >> nth=2",
+          "before_ms": 100
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button]:has(.fa-stamp)",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "Kliknu na řádek se žádostmi ke schválení a karta se přepne na seznam Schválení.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button]:has(.fa-stamp)",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button]:has(.fa-stamp)",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-approvals-absence",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-second-level-header p-selectbutton",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "Žádosti jsou rozdělené do záložek, třeba absence, aktivity, docházka nebo změna osobních údajů.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-second-level-header p-selectbutton",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-second-level-header p-selectbutton",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "U každé žádosti vidíte, kdo ji podal a na kdy, a vyřídíte ji rovnou tlačítkem Schválit nebo Odmítnout.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-approvals-absence >> nth=0",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-approvals-absence >> nth=0 >> p-button:text-is(\"Schválit\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-approvals-absence >> nth=0 >> p-button:text-is(\"Odmítnout\")",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-approvals-absence",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "Odkaz Přejít do sekce vede do modulu Schvalování, já se ale šipkou vlevo vrátím zpátky.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-second-level-header p-button:text-is(\"Přejít do sekce\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-second-level-header p-button:has(.fa-chevron-left) button",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-second-level-header p-button:has(.fa-chevron-left) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button]:has(.fa-stamp)",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button]:has(.fa-stamp)",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Pod ní je Feed, firemní nástěnka, kde najdete oznámení vedení a kudos od kolegů.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed h3",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed h3",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed slnk-dashboard-v2-feed-post >> nth=0",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton:text-is(\"Oznámení\")",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 3,
+      "part_title": "Feed"
+    },
+    {
+      "id": "s11",
+      "narration": "Kliknu na přepínač Oznámení a zůstanou jen firemní oznámení.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton:text-is(\"Oznámení\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton.p-togglebutton-checked:text-is(\"Oznámení\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton.p-togglebutton-checked:text-is(\"Oznámení\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Důležité oznámení jde připnout nahoru a pod každým příspěvkem můžete reagovat smajlíkem nebo napsat komentář.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed slnk-common-icon[icon=thumbtack]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed slnk-dashboard-v2-feed-post-reaction >> nth=0",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed input[placeholder=\"Přidat novou poznámku\"] >> nth=0",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed slnk-common-icon[icon=thumbtack]",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "Kliknu na Nové oznámení, kde administrátor vybere, pro koho zpráva je, a napíše její text.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-button:text-is(\"Nové oznámení\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-dashboard-v2-feed-post-add-or-edit-dialog p-select",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-feed-post-add-or-edit-dialog p-select",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-feed-post-add-or-edit-dialog slnk-common-editor",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-feed-post-add-or-edit-dialog slnk-common-editor",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "Oznámení by přišlo všem adresátům e-mailem i v aplikaci, a tak ho teď neodešlu a kliknu na Zrušit.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": ".p-dialog:has(slnk-dashboard-v2-feed-post-add-or-edit-dialog) p-button:text-is(\"Zrušit\")",
+          "before_ms": 800
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog:has(slnk-dashboard-v2-feed-post-add-or-edit-dialog) p-button:text-is(\"Zrušit\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-button:text-is(\"Dát kudos\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Tlačítkem Dát kudos veřejně pochválíte kolegu a přepínačem Vše se vrátím ke všem příspěvkům.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-button:text-is(\"Dát kudos\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton:text-is(\"Vše\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton.p-togglebutton-checked:text-is(\"Vše\")",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton.p-togglebutton-checked:text-is(\"Vše\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "Karta Přehled Dnes ukazuje, kdo dnes chybí, a kliknutím na záložku Práce z domu zjistíte, kdo pracuje z domova.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-today p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-today p-card",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-today p-togglebutton:has-text(\"Práce z domu\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-today p-togglebutton.p-togglebutton-checked:has-text(\"Práce z domu\")",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-today p-togglebutton.p-togglebutton-checked:has-text(\"Práce z domu\")",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 4,
+      "part_title": "Kdo je pryč a kdo slaví"
+    },
+    {
+      "id": "s17",
+      "narration": "Přehled na následujících čtrnáct dní ukazuje, kdo bude brzy pryč, a pod ním najdete nadcházející narozeniny a výročí nástupu.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-next-14-days p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-next-14-days p-card",
+          "before_ms": 300
+        },
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-upcoming-birthdays p-card",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-upcoming-birthdays p-card",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-upcoming-anniversaries p-card",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-upcoming-anniversaries p-card",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "V pravém sloupci nahoře uvidíte nové kolegy, kteří do firmy nedávno nastoupili.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-greeting",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-new-colleagues p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-new-colleagues p-card",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 5,
+      "part_title": "Vaše karty"
+    },
+    {
+      "id": "s19",
+      "narration": "Měřič nálady se každý den zeptá, jak se vám v práci líbí, a odpovíte jedním kliknutím na smajlíka.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-mood-meter p-card",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-mood-meter p-card",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Karta Docházka ukazuje váš dnešní stav, tlačítkem Zaznamenat příchod začnete pracovní den a pod ní je fond pracovní doby.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-attendance p-card >> nth=0",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-clock-in-out-button p-button",
+          "before_ms": 200
+        },
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-attendance p-card >> nth=1",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-attendance p-card >> nth=1",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-clock-in-out-button p-button",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "Karta Absence ukazuje zbývající fond dovolené a vaše nadcházející volno.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-absences p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-absences p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-absences p-button:text-is(\"Přidat absenci\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "Kliknu na Přidat absenci a otevře se stejný formulář žádosti jako v modulu Absence.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-absences p-button:text-is(\"Přidat absenci\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-absences p-button:text-is(\"Přidat absenci\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-dialog:has(slnk-events-absence-create) slnk-events-absence-create",
+          "value": "10000"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog:has(slnk-events-absence-create) .p-dialog-close-button",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "Žádost teď posílat nebudu, a tak formulář zavřu křížkem.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": ".p-dialog:has(slnk-events-absence-create) .p-dialog-close-button",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog:has(slnk-events-absence-create) .p-dialog-close-button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-activities p-button:text-is(\"Přidat aktivitu\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s24",
+      "narration": "Podobně tlačítkem Přidat aktivitu zapíšete třeba poradu nebo práci na projektu.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-activities p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-activities p-button:text-is(\"Přidat aktivitu\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-activities p-button:text-is(\"Přidat aktivitu\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "Moje úkoly ukazují vaše nejbližší úkoly a šipka u nadpisu vás přenese do celé sekce.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-tasks p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-tasks p-card",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-tasks slnk-dashboard-v2-widget-headline-with-section-navigation p-button",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-tasks slnk-dashboard-v2-widget-headline-with-section-navigation p-button",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-tasks slnk-dashboard-v2-widget-headline-with-section-navigation p-button",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "Užitečné odkazy vedou na firemní stránky, které pro vás připravil administrátor.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "Týmová docházka ukazuje manažerům, kolik hodin mají jejich lidé odpracováno k dnešnímu dni.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-team-attendance p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-team-attendance p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-team-attendance p-card",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "Poslední karta ukazuje články z firemní wiki označené jako důležité, a jeden otevřu kliknutím.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-admin-pages p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-admin-pages p-card",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-admin-pages button:text-is(\"Guide to Sloneek\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-dashboard-v2-admin-page-dialog",
+          "value": "10000"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-admin-page-dialog p-button:has(.fa-xmark) button",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "Článek si přečtete přímo na ploše, a když ho dočtete, zavřete ho křížkem.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-dashboard-v2-admin-page-dialog p-button:has(.fa-xmark) button",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "slnk-dashboard-v2-admin-page-dialog p-button:has(.fa-xmark) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-admin-pages button:text-is(\"Guide to Sloneek\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "Rozložení si každý upraví sám, a tak nahoře kliknu na tužku Přizpůsobit zobrazení.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-greeting",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] p-button:has(.fa-pen) button",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] p-button:has(.fa-pen) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-dashboard-v2-customize-view-dialog .cdk-drag-handle",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-customize-view-dialog p-button:text-is(\"Uložit\")",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 6,
+      "part_title": "Přizpůsobení plochy"
+    },
+    {
+      "id": "s31",
+      "narration": "Karty přetáhnete za úchyt jinam nebo do druhého sloupce a kliknutím na oko kartu skryjete, třeba Nadcházející výročí.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-customize-view-dialog .cdk-drag-handle >> nth=1",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-dashboard-v2-customize-view-dialog .cdk-drag:has-text(\"Nadcházející výročí\") >> p-button button",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-dashboard-v2-customize-view-dialog .cdk-drag:has-text(\"Nadcházející výročí\") >> .fa-eye-slash",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-customize-view-dialog .cdk-drag:has-text(\"Nadcházející výročí\") >> .fa-eye-slash",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "Změny byste potvrdili tlačítkem Uložit, já ale kliknu na Zrušit a plocha zůstane beze změny.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-customize-view-dialog p-button:text-is(\"Uložit\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-dashboard-v2-customize-view-dialog p-button:text-is(\"Zrušit\")",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "slnk-dashboard-v2-customize-view-dialog p-button:text-is(\"Zrušit\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-upcoming-anniversaries",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "Administrátor má vedle ještě ozubené kolečko Nastavení, na které kliknu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] p-button:has(.fa-gear-complex) button",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] p-button:has(.fa-gear-complex) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-general p-card",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-general p-card",
+        "url_contains": "/app/dashboard-v2/settings/general"
+      },
+      "part": 7,
+      "part_title": "Nastavení pro administrátory"
+    },
+    {
+      "id": "s34",
+      "narration": "Na záložce Generál skryjete celé firmě měřič nálady, narozeniny nebo výročí a můžete lidem zakázat skrývání vybraných karet.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-general p-card",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-general p-card",
+        "url_contains": "/app/dashboard-v2/settings/general"
+      }
+    },
+    {
+      "id": "s35",
+      "narration": "Kliknu na záložku Užitečné odkazy a pak na Přidat odkaz.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] p-tab[id$=\"_tab_useful-links\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Přidat odkaz\")",
+          "value": "10000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Přidat odkaz\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-dashboard-v2-settings-useful-links-dialog input[formcontrolname=title]",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-settings-useful-links-dialog input[formcontrolname=url]",
+        "url_contains": "/app/dashboard-v2/settings/useful-links"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "Do Názvu napíšu Příručka pro nováčky a do pole URL vložím adresu Centra nápovědy.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "slnk-dashboard-v2-settings-useful-links-dialog input[formcontrolname=title]",
+          "value": "Příručka pro nováčky",
+          "before_ms": 400
+        },
+        {
+          "type": "fill",
+          "selector": "slnk-dashboard-v2-settings-useful-links-dialog input[formcontrolname=url]",
+          "value": "https://help.sloneek.com/hc/cs-cz",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-settings-useful-links-dialog p-button:text-is(\"Uložit\")",
+        "url_contains": "/app/dashboard-v2/settings/useful-links"
+      }
+    },
+    {
+      "id": "s37",
+      "narration": "Kliknu na Uložit a odkaz přibude v seznamu, kde ho tužkou upravíte nebo košem smažete.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-dashboard-v2-settings-useful-links-dialog p-button:text-is(\"Uložit\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Příručka pro nováčky\")",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Příručka pro nováčky\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Příručka pro nováčky\")",
+        "url_contains": "/app/dashboard-v2/settings/useful-links"
+      }
+    },
+    {
+      "id": "s38",
+      "narration": "V levém menu kliknu na Plocha a nový odkaz už je v kartě Užitečné odkazy.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links a:text-is(\"Příručka pro nováčky\")",
+          "value": "20000"
+        },
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links a:text-is(\"Příručka pro nováčky\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s39",
+      "narration": "Teď víte, co vám plocha ukáže, jak z ní vyřídit, co čeká, a jak si ji upravit, a kdyby něco nešlo, mrkněte do Centra nápovědy.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s40",
+      "narration": "Méně administrativy, víc času na lidi. To je Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+        "url_contains": "/app/dashboard-v2"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat užitečný odkaz 'Příručka pro nováčky' – jen řádek s tímto názvem, potvrzovací dialog musí obsahovat přesně 'Odkaz Příručka pro nováčky bude smazán.'; když odkaz neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2/settings/useful-links",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Přidat odkaz\")",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Přidat odkaz\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Příručka pro nováčky\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Příručka pro nováčky\") >> p-button:has(.fa-trash-can) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-confirmdialog:has-text(\"Odkaz Příručka pro nováčky bude smazán.\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-confirmdialog:has-text(\"Odkaz Příručka pro nováčky bude smazán.\") >> button.p-confirmdialog-accept-button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-12",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "created_by_recipe": "užitečný odkaz 'Příručka pro nováčky' → https://help.sloneek.com/hc/cs-cz (Nastavení plochy → Užitečné odkazy) – maže cleanup",
+      "read_only": "wiki článek 'Guide to Sloneek' (důležitý, připnutý na plochu) – jen otevřen a zavřen; čekající žádosti ve Schválení (Absence) – jen zvýrazněny; oznámení 'Winter team building' (připnuté) – jen zvýrazněno",
+      "never_saved": "Nové oznámení, Přidat absenci, Přizpůsobit zobrazení (Zrušit) – otevřeno a zavřeno bez uložení; měřič nálady, Zaznamenat příchod, reakce, Dát kudos – jen zvýrazněno"
+    },
+    "notes": "viz atlas/dashboard.md (sekce 5 a 8)"
+  },
+  "teardown": [
+    {
+      "name": "smazat užitečný odkaz 'Příručka pro nováčky' – jen řádek s tímto názvem, potvrzovací dialog musí obsahovat přesně 'Odkaz Příručka pro nováčky bude smazán.'; když odkaz neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2/settings/useful-links",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Přidat odkaz\")",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Přidat odkaz\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Příručka pro nováčky\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Příručka pro nováčky\") >> p-button:has(.fa-trash-can) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-confirmdialog:has-text(\"Odkaz Příručka pro nováčky bude smazán.\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-confirmdialog:has-text(\"Odkaz Příručka pro nováčky bude smazán.\") >> button.p-confirmdialog-accept-button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    }
+  ]
+}

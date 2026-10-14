@@ -1,0 +1,226 @@
+{
+  "_comment": "Polská verze videa Hodnocení výkonnosti (performance-review). UI texty z translate_fe/pl + ověřeno naživo (local-translate=pl). Od 11. 10. 2026 má PL video vlastní polská demo data (pravidlo: každý jazyk své demo): pozice 'Specjalista ds. obsługi klienta' (61aeb7e5-0aa1-4aa1-b5cf-91d7e8ba9808), cyklus 'Ocena wyników – przykład (Q3 2026)' (edbfe012-e0a8-4601-9b31-ae06e041e54d), report efb4c631-9a96-4a11-b75f-740bc23a7b89 – CZ názvy demo dat se mapují v `text` na polské. Thomasovu pozici přepíná na PL lokalizovaný první cleanup blok z CZ masteru (karta uživatele, pole Pozice) – záložka Kompetencje (s29) i sloupec Pozycja ukazují aktuální pozici. Nový koncept v s10 se jmenuje 'Ocena wyników za czwarty kwartał' (cleanup ho maže); cleanup_prepend maže i CZ koncept po CZ běhu. Chybné PL štítky (Dodać, Początek, Zaczynać od początku, Promuj kompetencje…, Kluczowe informacje na temat sztucznej inteligencji, Usuwać, Składać) – selektory je musí použít, narace je místy opisuje (atlas/README.md #39–#58). Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM.",
+  "verified": {
+    "date": "2026-10-11",
+    "by": "Claude (BrowserOS, preprod, local-translate=pl)",
+    "selectors": "DRY-RUN 11. 10. 2026 v PL UI in-page runnerem s polskými demo daty: cleanup před (po reloadu; žádný koncept k smazání; blok pozice Thomase otestován v obou směrech CZ→PL, po reloadu ověřeno) → 32/32 kroků OK → cleanup po (po reloadu; guarded dialog smazal koncept 'Ocena wyników za czwarty kwartał' 464d4d43…, API GET 404). Počet cyklů 25 před → 26 během → 25 po (24 před založením PL demo cyklu). Předchozí běh 10. 10. 2026 (CZ demo data) také 32/32.",
+    "notes": "PL demo cyklus 'Ocena wyników – przykład (Q3 2026)' je 11. 10. 2026 'W toku' (konec dnes, stav se přepne po skončení – CZ demo cyklus se takhle přepnul na Zakończony). s22 ho otevírá bez filtru, funguje v obou stavech. Moje zadania je prázdné (oba dotazníky vyplněny). Menu Akce po s30 zůstává v runneru otevřené – cleanup vždy po reloadu."
+  },
+  "title": "Ocena wydajności: stanowiska, kompetencje i cykle oceny",
+  "thumbnail_title": "Ocena wydajności",
+  "parts": {
+    "Úvod": "Wprowadzenie",
+    "Pozice a kompetence": "Stanowiska i kompetencje",
+    "Nový cyklus hodnocení": "Nowy cykl oceny",
+    "Výsledky": "Wyniki",
+    "Pohled zaměstnance": "Widok pracownika",
+    "Závěr": "Podsumowanie"
+  },
+  "text": {
+    "Dokončeno": "Zakończony",
+    "Spravovat pozice": "Zarządzaj pozycjami",
+    "Pozice a kompetence": "Stanowiska i kompetencje",
+    "Nastavení slovního popisu stupnice": "Ustalenie opisu słownego skali",
+    "Popis stupnice": "Opis skali",
+    "Zpět": "Wróć",
+    "Vytvořit": "Dodać",
+    "Hodnocení výkonu za čtvrté čtvrtletí": "Ocena wyników za czwarty kwartał",
+    "Další": "Następny",
+    "Vyberte možnost vytvoření dotazníku": "Wybierz opcję utworzenia kwestionariusza",
+    "Vytvořit pomocí AI": "Twórz za pomocą sztucznej inteligencji",
+    "Začít od nuly": "Zaczynać od początku",
+    "Instrukce pro sebehodnocení": "Instrukcja dla osób dokonujących samooceny",
+    "Pokyny pro manažera": "Instrukcje dla menedżera",
+    "Všechny pozice": "Wszystkie pozycje",
+    "Přidat otázku": "Dodaj pytanie",
+    "Jak se vám daří plnit cíle za uplynulé období?": "Jak udaje Ci się realizować cele w minionym okresie?",
+    "Škála": "Skala",
+    "Shrnutí": "Streszczenie",
+    "Zahájit": "Początek",
+    "Míra dokončení": "Współczynnik ukończenia",
+    "Klíčové poznatky AI": "Kluczowe informacje na temat sztucznej inteligencji",
+    "Konečný výsledek": "Wynik końcowy",
+    "Vytvořte si osobní cíl": "Stwórz osobisty cel",
+    "Sdílené poznámky k hodnocení": "Wspólne notatki z recenzji",
+    "Duplikovat": "Duplikat",
+    "Vymazat": "Usuwać",
+    "Specialista zákaznické podpory": "Specjalista ds. obsługi klienta",
+    "Komunikace se zákazníkem": "Komunikacja z klientem",
+    "Hodnocení výkonu – ukázka (Q3 2026)": "Ocena wyników – przykład (Q3 2026)"
+  },
+  "keep": [
+    "Claver",
+    "Claver Thomas"
+  ],
+  "cleanup_prepend": [
+    {
+      "name": "smazat CZ koncept 'Hodnocení výkonu za čtvrté čtvrtletí' po CZ běhu (1)",
+      "url": "https://app-pre-production.sloneek.com/app/performance-evaluation/positions-evaluation/all",
+      "if_visible": "[data-cy=tableRow]:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\")",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=tableRow]:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\") >> [data-cy=actionsButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a:has-text(\"Usuwać\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\") [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat CZ koncept 'Hodnocení výkonu za čtvrté čtvrtletí' po CZ běhu (2)",
+      "url": "https://app-pre-production.sloneek.com/app/performance-evaluation/positions-evaluation/all",
+      "if_visible": "[data-cy=tableRow]:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\")",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=tableRow]:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\") >> [data-cy=actionsButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a:has-text(\"Usuwać\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\") [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    }
+  ],
+  "steps": {
+    "s01": {
+      "narration": "Oceny w arkuszach kalkulacyjnych i notatki rozsiane po e-mailach? Dzień dobry, jestem Maria z zespołu Sloneek i dziś pokażę Wam ocenę wydajności."
+    },
+    "s02": {
+      "narration": "Ocena opiera się na stanowiskach i ich kompetencjach. Menedżer ocenia swoich podwładnych, a pracownicy mogą ocenić także samych siebie."
+    },
+    "s03": {
+      "narration": "W lewym menu klikam Ocena wydajności. Tutaj widzicie wszystkie cykle oceny, ich status i stopień ukończenia."
+    },
+    "s04": {
+      "narration": "Filtry nad tabelą szybko oddzielą wersje robocze, cykle w toku, cykle gotowe do startu i zakończone."
+    },
+    "s05": {
+      "narration": "Zaczniemy od stanowisk. Przyciskiem Zarządzaj pozycjami otworzycie przegląd stanowisk i ich kompetencji."
+    },
+    "s06": {
+      "narration": "Przy każdym stanowisku widzicie, ilu osobom jest przypisane i ile kompetencji zawiera jego model kompetencji."
+    },
+    "s07": {
+      "narration": "Otwieram stanowisko Specjalista ds. obsługi klienta. Na górze jest nazwa i opis stanowiska, który zobaczy też pracownik."
+    },
+    "s08": {
+      "narration": "Niżej jest model kompetencji. Każda kompetencja ma swoją skalę, tutaj od zera do pięciu, a poszczególne stopnie możecie opisać słownie."
+    },
+    "s09": {
+      "narration": "Kompetencji nie musicie wymyślać sami: w polu Zainspiruj się sztuczną inteligencją wpiszecie stanowisko, a AI je zaproponuje. Stanowisko przypiszecie potem pracownikom w profilu."
+    },
+    "s10": {
+      "narration": "Teraz założymy nowy cykl. Klikam Dodać i wpisuję nazwę, na przykład Ocena wyników za czwarty kwartał."
+    },
+    "s11": {
+      "narration": "Pierwsza opcja przeniesie do kwestionariusza kompetencje ze stanowisk. Menedżer ocenia zawsze, a ja zaznaczam też samoocenę."
+    },
+    "s12": {
+      "narration": "W części Celowanie wybieracie, kogo oceniacie: całą firmę, zespoły, lokalizacje, tagi, stanowiska albo konkretne osoby. Wybieram wybranych użytkowników."
+    },
+    "s13": {
+      "narration": "Na osi czasu ustawiam datę rozpoczęcia i zakończenia. Cykl może się zacząć nawet dzisiaj."
+    },
+    "s14": {
+      "narration": "Klikam Następny. Ocena zapisze się jako wersja robocza i przechodzimy do kwestionariusza."
+    },
+    "s15": {
+      "narration": "Kwestionariusz może zaproponować sztuczna inteligencja albo możecie zacząć od zera. Ja wybieram Zaczynać od początku."
+    },
+    "s16": {
+      "narration": "W Instrukcjach przygotujecie wskazówki osobno dla samooceny i dla menedżera. Wszystkie zmiany zapisują się automatycznie."
+    },
+    "s17": {
+      "narration": "W części Wszystkie pozycje dodacie pytania dla każdego ocenianego. Klikam Dodaj pytanie i wpisuję jego treść."
+    },
+    "s18": {
+      "narration": "Jako typ odpowiedzi wybieram skalę od jednego do pięciu. Pytanie możecie przeznaczyć tylko dla menedżera albo dla menedżera i pracownika."
+    },
+    "s19": {
+      "narration": "Przy konkretnym stanowisku są pytania z jego modelu kompetencji. Tutaj też możecie dodać własne pytania."
+    },
+    "s20": {
+      "narration": "Klikam Następny. Streszczenie pokaże nazwę, grupę docelową, terminy i liczbę pytań w kwestionariuszu."
+    },
+    "s21": {
+      "narration": "Przyciskiem Początek uruchomicie cykl, a oceniający dostaną zadanie. Na potrzeby pokazu zostawiam go jako wersję roboczą."
+    },
+    "s22": {
+      "narration": "Teraz wyniki. W przeglądzie otwieram przykładową ocenę wyników za trzeci kwartał."
+    },
+    "s23": {
+      "narration": "Na górze widzicie liczbę uczestników i współczynnik ukończenia. Tabela Wyniki pokaże, komu brakuje jeszcze któregoś typu opinii."
+    },
+    "s24": {
+      "narration": "W zakładce Oceniający sprawdzicie, kto kogo ocenia. W tabeli Wyniki klikam nazwisko ocenianej osoby."
+    },
+    "s25": {
+      "narration": "Raport pokazuje mocne strony i obszary do poprawy, tutaj prowadzi komunikacja z klientem, a najsłabsza jest samodzielność. Sekcja z kluczowymi informacjami od AI podsumuje to słowami."
+    },
+    "s26": {
+      "narration": "W Szczegółowej informacji zwrotnej widzicie ocenę menedżera i samoocenę. Wynik końcowy po wspólnych ustaleniach ustawicie ołówkiem."
+    },
+    "s27": {
+      "narration": "Ze słabszego obszaru od razu stworzycie osobisty cel. We wspólnych notatkach jest uzgodniony plan działania, który widzi też pracownik."
+    },
+    "s28": {
+      "narration": "A jak to widzi pracownik? W sekcji Ja otwiera Moja ocena wyników. Gdy cykl trwa, znajdzie kwestionariusz w Moich zadaniach."
+    },
+    "s29": {
+      "narration": "W Moich cyklach ma swoje wyniki, a w zakładce Kompetencje widzi opis stanowiska i to, według czego będzie oceniany.",
+      "selectors": {
+        ":has-text(\"Kompetenční model : Specialista zákaznické podpory\") >> nth=-1": ":has-text(\"Model kompetencji : Specjalista ds. obsługi klienta\") >> nth=-1"
+      }
+    },
+    "s30": {
+      "narration": "Wskazówka na koniec: gotowy cykl w przeglądzie po prostu zduplikujecie i kolejną rundę oceny macie gotową w chwilę."
+    },
+    "s31": {
+      "narration": "Teraz umiecie ustawić stanowiska, przygotować cykl oceny i czytać wyniki. Jeśli coś nie zadziała, zajrzyjcie do Centrum pomocy."
+    },
+    "s32": {
+      "narration": "Mniej administracji, więcej czasu dla ludzi. To jest Sloneek."
+    }
+  }
+}

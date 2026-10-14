@@ -1,0 +1,465 @@
+{
+  "_comment": "Anglická verze videa Nahrajte a posílejte dokumenty (documents). UI texty z translate_fe/en (fetch uvnitř stránky) + ověřeno naživo (local-translate=en). Vlastní EN demo data: trvalý NEAKTIVNÍ uživatel 'James Miller' <james.miller@example.com> (322d66e2-619b-40ad-b68b-d1a90e755714, v seznamu 'Miller James') – nikdy neaktivovat; PDF assets/demo/Remote work policy.pdf a assets/demo/Remote work agreement.pdf (out/documents/_work/make_demo_pdfs_i18n.py). Recept vytváří složku 'HR policies', dokument 'Remote work policy' (Selected users: James, read confirmation do 14 dní, verze 1.0) a 'Remote work agreement' (James, signature request, deadline +14 dní); master cleanup (urls = search_text s EN názvy) je smaže. cleanup_prepend smaže stejnou pojistkou pozůstatky CZ ('Směrnice o home office', 'Dohoda o práci z domova', 'Personální směrnice') a PL ('Polityka pracy zdalnej', 'Umowa o pracę zdalną', 'Polityki kadrowe') běhu. ids: s31 karta Tomáše → karta Jamese. Bez asistentky Ellie (odkaz na Help Center). Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM. Generátor: out/documents/_work/build_i18n.py (+ i18n_src.json)",
+  "verified": {
+    "date": "2026-10-12",
+    "by": "Claude (BrowserOS, preprod, local-translate=en, in-page runner out/documents/_work/dryrun-runner.js; recept z out/documents-en/_work/dryrun-R.json)",
+    "selectors": "Před EN během byly CZ i PL pozůstatky už smazané (PL dry-run). Pokus 1 přerušen v s15 výpadkem spojení s Macem (tab zamrzl, ne selhání selektoru; s13–s14 OK, dokument se neodeslal) → reload, vzniklá složka 'HR policies' smazána EN cleanup blokem (karta s přesným názvem, prázdná). Průchod 2: 36/36 bez změn selektorů (Document management, All documents, Would you like to use…, Confirmations, Read pending, Remind, Sign, menu Download/Duplicate/Archive/Change folder/Delete). Cleanup po (po reloadech): 'Remote work agreement', 'Remote work policy', složka 'HR policies' smazány (dialog 'Delete document' s názvem). Dokumenty 32 → 34 → 32, složky 10 → 11 → 10. Datum {{DATE:+14d:MM/DD/YYYY}} = 10/26/2026. James celou dobu neaktivní ('Inactive').",
+    "notes": "EN UI: Upload company-wide document / Upload single user document / Bulk upload documents for user, Whole company / Selected teams / Selected users, Expand, Designation / version, Not required / Read confirmation / Signature request, Confirm, Deadline date, Additional signature users, Add external user, Special user rights → Document manager. Playwright :has-text je case-insensitive – s30 'Sign' sedí i na 'Already signed', ale nth=0 je řádek 'JB Test 2 … Sign' (první v seznamu)."
+  },
+  "title": "Upload and send documents",
+  "thumbnail_title": "Documents",
+  "parts": {
+    "Úvod": "Introduction",
+    "Kde je najdete": "Where to find it",
+    "Složky a nastavení": "Folders and settings",
+    "Dokument pro více lidí": "A document for several people",
+    "Kdo už přečetl": "Who has read it",
+    "Dokument k podpisu": "A document to sign",
+    "Šablony": "Templates",
+    "Pohled zaměstnance": "The employee's view",
+    "Oprávnění a úpravy": "Permissions and changes",
+    "Závěr": "Wrap-up"
+  },
+  "text": {
+    "Správa dokumentů": "Document management",
+    "Všechny dokumenty": "All documents",
+    "Chcete využít": "Would you like to use",
+    "Potvrzení": "Confirmations",
+    "Čeká na přečtení": "Read pending",
+    "Podepsat": "Sign",
+    "Archivovat": "Archive",
+    "Vymazat": "Delete",
+    "Smazat dokument": "Delete document",
+    "Smazat složku": "Delete folder",
+    "Personální směrnice": "HR policies",
+    "Směrnice o home office": "Remote work policy",
+    "Dohoda o práci z domova": "Remote work agreement",
+    "Směrnice o home office.pdf": "Remote work policy.pdf",
+    "Dohoda o práci z domova.pdf": "Remote work agreement.pdf",
+    "assets/demo/Směrnice o home office.pdf": "assets/demo/Remote work policy.pdf",
+    "assets/demo/Dohoda o práci z domova.pdf": "assets/demo/Remote work agreement.pdf",
+    "Personální": "HR pol",
+    "Směrnice a interní předpisy pro všechny zaměstnance.": "Policies and internal rules for all employees.",
+    "Prosím, přečtěte si novou směrnici o práci z domova a potvrďte ji.": "Please read the new remote work policy and confirm it.",
+    "Tomáš": "James",
+    "Novák Tomáš": "Miller James",
+    "{{DATE:+14d:D. M. YYYY}}": "{{DATE:+14d:MM/DD/YYYY}}"
+  },
+  "selectors": {},
+  "keep": [
+    "{{DATE:+14d:MM/DD/YYYY}}",
+    "0 / 1"
+  ],
+  "urls": {
+    "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Dohoda%20o%20pr%C3%A1ci%20z%20domova": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Remote%20work%20agreement",
+    "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Sm%C4%9Brnice%20o%20home%20office": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Remote%20work%20policy"
+  },
+  "ids": {
+    "a8c8fa35-ed76-4867-8f26-0b3d41b768ac": "322d66e2-619b-40ad-b68b-d1a90e755714"
+  },
+  "cleanup_prepend": [
+    {
+      "name": "smazat CS dokument 'Dohoda o práci z domova' – jen při právě 1 řádku s přesným názvem po hledání (search_text v URL) a s názvem v dialogu; když neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Dohoda%20o%20pr%C3%A1ci%20z%20domova",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Dohoda o práci z domova\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) slnk-document-title-cell .name:text-is(\"Dohoda o práci z domova\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Dohoda o práci z domova\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-document-dialog:has-text(\"Delete document\"):has-text(\"Dohoda o práci z domova\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-document-dialog:has-text(\"Delete document\"):has-text(\"Dohoda o práci z domova\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat CS dokument 'Směrnice o home office' – jen při právě 1 řádku s přesným názvem po hledání (search_text v URL) a s názvem v dialogu; když neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Sm%C4%9Brnice%20o%20home%20office",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Směrnice o home office\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) slnk-document-title-cell .name:text-is(\"Směrnice o home office\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Směrnice o home office\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-document-dialog:has-text(\"Delete document\"):has-text(\"Směrnice o home office\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-document-dialog:has-text(\"Delete document\"):has-text(\"Směrnice o home office\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat CS složku 'Personální směrnice' – jen vybraná karta s přesným názvem; smazat jde jen prázdnou složku",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company/settings/folders/all-documents",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=addFolderButton]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card .folder-name:text-is(\"Personální směrnice\")",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card .folder-name:text-is(\"Personální směrnice\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=nameInput]",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"Personální směrnice\") >> [data-cy=deleteFolderButton]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"Personální směrnice\") >> [data-cy=deleteFolderButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-folder-dialog:has-text(\"Delete folder\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-folder-dialog:has-text(\"Delete folder\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat PL dokument 'Umowa o pracę zdalną' – jen při právě 1 řádku s přesným názvem po hledání (search_text v URL) a s názvem v dialogu; když neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Umowa%20o%20prac%C4%99%20zdaln%C4%85",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Umowa o pracę zdalną\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) slnk-document-title-cell .name:text-is(\"Umowa o pracę zdalną\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Umowa o pracę zdalną\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-document-dialog:has-text(\"Delete document\"):has-text(\"Umowa o pracę zdalną\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-document-dialog:has-text(\"Delete document\"):has-text(\"Umowa o pracę zdalną\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat PL dokument 'Polityka pracy zdalnej' – jen při právě 1 řádku s přesným názvem po hledání (search_text v URL) a s názvem v dialogu; když neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Polityka%20pracy%20zdalnej",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Polityka pracy zdalnej\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) slnk-document-title-cell .name:text-is(\"Polityka pracy zdalnej\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Polityka pracy zdalnej\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-document-dialog:has-text(\"Delete document\"):has-text(\"Polityka pracy zdalnej\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-document-dialog:has-text(\"Delete document\"):has-text(\"Polityka pracy zdalnej\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat PL složku 'Polityki kadrowe' – jen vybraná karta s přesným názvem; smazat jde jen prázdnou složku",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company/settings/folders/all-documents",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=addFolderButton]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card .folder-name:text-is(\"Polityki kadrowe\")",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card .folder-name:text-is(\"Polityki kadrowe\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=nameInput]",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"Polityki kadrowe\") >> [data-cy=deleteFolderButton]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"Polityki kadrowe\") >> [data-cy=deleteFolderButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-folder-dialog:has-text(\"Delete folder\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-folder-dialog:has-text(\"Delete folder\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    }
+  ],
+  "steps": {
+    "s01": {
+      "narration": "Want to know who has already read the new policy? Hi, I'm Maria from the Sloneek team, and I'll show you how to upload and send documents."
+    },
+    "s02": {
+      "narration": "Documents keeps contracts, policies and certificates in one place. Employees read and sign them right in the app."
+    },
+    "s03": {
+      "narration": "In the left menu, under Company, I open Documents. They're managed by an administrator or a user with the Document manager right."
+    },
+    "s04": {
+      "narration": "The list shows the folder, recipients, confirmation status and expiration. Folders are on the left, and All documents holds absolutely everything."
+    },
+    "s05": {
+      "narration": "You create folders in Settings. I click Add folder and create a folder for HR policies."
+    },
+    "s06": {
+      "narration": "I type a name and a short description. In User permissions, you can let selected people read the whole folder."
+    },
+    "s07": {
+      "narration": "I click Create folder. The new folder shows up in the list right away, and you can file documents in it."
+    },
+    "s08": {
+      "narration": "On the Approvals tab, you can turn on mandatory approval for documents that employees upload themselves. An administrator or document manager approves them."
+    },
+    "s09": {
+      "narration": "In Notifications, you set how often Sloneek reminds people about unread and unsigned documents, and when it warns about an upcoming expiration."
+    },
+    "s10": {
+      "narration": "Back in Documents, I click Add new document. You can create a document from a template or upload your own file."
+    },
+    "s11": {
+      "narration": "You can upload for the whole company, for a single user, or in bulk for several people. I'll upload the policy as a company-wide document."
+    },
+    "s12": {
+      "narration": "I type the name Remote work policy and pick the HR policies folder."
+    },
+    "s13": {
+      "narration": "I upload the file, a PDF or an image. The private email toggle would also send the finished document to a private address, so I leave it off."
+    },
+    "s14": {
+      "narration": "In Document owner, you decide who gets the document: the whole company, selected teams, or individual users."
+    },
+    "s15": {
+      "narration": "For this example, I choose Selected users and pick James Miller from the list."
+    },
+    "s16": {
+      "narration": "Under Expand, there are more options, such as the expiration date and a version label. For the version, I type 1.0.",
+      "narration_tts": "Under Expand, there are more options, such as the expiration date and a version label. For the version, I type one point oh."
+    },
+    "s17": {
+      "narration": "The confirmation type can be Not required, Read confirmation, or Signature request. For a policy, a read confirmation is enough."
+    },
+    "s18": {
+      "narration": "I tick the deadline and set it to fourteen days. Below, you can also set a deadline for new colleagues, counted from their first sign-in."
+    },
+    "s19": {
+      "narration": "Finally, I add an accompanying message and click Confirm. Recipients get an email notification and find the document in the app."
+    },
+    "s20": {
+      "narration": "The document is first in the list. The Status column shows how many people have confirmed it, so far zero out of one."
+    },
+    "s21": {
+      "narration": "Clicking the name opens the detail. The preview is on the left, and on the right you can edit the name, folder, expiration or version."
+    },
+    "s22": {
+      "narration": "The Confirmations tab shows the status for each recipient. Remind sends a reminder, and once it's read, you can download the confirmation here."
+    },
+    "s23": {
+      "narration": "Contracts and amendments go to one person. I close the detail and choose Upload single user document."
+    },
+    "s24": {
+      "narration": "I type the name, select James as the document owner, and upload the agreement file."
+    },
+    "s25": {
+      "narration": "I expand the settings and choose Signature request. I set the deadline date two weeks ahead."
+    },
+    "s26": {
+      "narration": "You can add more signers, such as a director, from your colleagues. To send the document to someone outside the company, use Add external user."
+    },
+    "s27": {
+      "narration": "I click Confirm. The Status column now shows the signing status, so far zero out of one."
+    },
+    "s28": {
+      "narration": "No need to write recurring contracts from scratch. In Templates, you prepare text with variables that are filled in from the employee profile."
+    },
+    "s29": {
+      "narration": "For example, the name, position or start date. With Order of signatures, you decide who signs first."
+    },
+    "s30": {
+      "narration": "Employees see their documents under My documents. In the Status column, they click Sign or confirm that they've read the document."
+    },
+    "s31": {
+      "narration": "You can also see what was sent to whom in the employee profile, on the Documents tab. James has both new documents here."
+    },
+    "s32": {
+      "narration": "Who can manage documents is set in the user profile, under Special user rights, by choosing Document manager."
+    },
+    "s33": {
+      "narration": "Under the three dots, you can download, duplicate, archive, move to another folder, or delete a document. Archive outdated documents instead, because deleting can't be undone."
+    },
+    "s34": {
+      "narration": "A final tip: with HR Workflows, Sloneek can automatically send new colleagues a document from a template, for example on their first day."
+    },
+    "s35": {
+      "narration": "Now you know how to upload a document, send it to be read or signed, and track who has confirmed it. If something doesn't work, check the Help Center."
+    },
+    "s36": {
+      "narration": "Less admin, more time for people. This is Sloneek."
+    }
+  }
+}

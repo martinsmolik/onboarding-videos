@@ -1,0 +1,995 @@
+{
+  "id": "clockins-vs-tracking",
+  "version": 1,
+  "title": "Příchody/odchody vs. timetracking a aktivity",
+  "lang": "cs",
+  "app_version": "preprod-2026-10-13",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "cs"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "bF7C2fCv7Zf30iT84wZ1",
+    "model_id": "eleven_v4"
+  },
+  "pronunciation": [
+    {
+      "match": "timetracking",
+      "say": "tajmtrekink",
+      "stem": true,
+      "case": "insensitive",
+      "note": "timetracking, timetrackingem"
+    },
+    {
+      "match": "time tracking",
+      "say": "tajm trekink",
+      "stem": true,
+      "case": "insensitive",
+      "note": "Mód Time Trackingu, Time tracking a aktivity"
+    },
+    {
+      "match": "Escape",
+      "say": "eskejp",
+      "note": "klávesa Escape"
+    },
+    {
+      "match": "vs.",
+      "say": "versus",
+      "note": "název videa Negativní vs. aktivní docházka"
+    }
+  ],
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s07",
+    "title": "Docházka vs. timetracking"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Potřebujete vědět, kdy jsou lidé v práci, nebo spíš na čem pracují? Dobrý den, jsem Marie z týmu Sloneek a ukážu vám rozdíl mezi docházkou a timetrackingem.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "slnk-dashboard-v2-attendance p-card:has(a.widget-headline-link)",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "#new_timetracking_show_detail .time_tracking_info",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-attendance p-card:has(a.widget-headline-link)",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Úvod",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Příchody a odchody, tedy docházka, říkají, kdy a jak dlouho jste v práci, a zaznamenáte je třeba tímhle tlačítkem na Ploše.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "slnk-dashboard-v2-attendance slnk-attendance-v2-clock-in-out-button button",
+          "before_ms": 1000
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-attendance p-card:has(a.widget-headline-link)",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-attendance slnk-attendance-v2-clock-in-out-button button",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-attendance slnk-attendance-v2-clock-in-out-button button",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "Timetracking a aktivity říkají, na čem jste pracovali, pro jakého klienta a na jakém projektu, a čas můžete měřit třeba stopkami tady v hlavičce.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "#new_timetracking_show_detail .time_tracking_info",
+          "before_ms": 600
+        },
+        {
+          "type": "highlight",
+          "selector": "#new_timetracking_show_detail",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "#new_timetracking_show_detail .time_tracking_info",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s04",
+      "narration": "Docházka tak slouží hlavně pro mzdy a přesčasy, aktivity pro fakturaci klientům a náklady projektů, a obojí můžete používat současně.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-attendance p-card:has(a.widget-headline-link) .p-card-content > div.d-flex.flex-column.gap-2",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "#new_timetracking_show_detail",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "#new_timetracking_show_detail .time_tracking_info",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "Začnu docházkou, a tak v levém menu kliknu na Docházka.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-daily-summary-card p-card",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .timeline-row.selected",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .timeline-row.selected",
+        "url_contains": "view=me"
+      },
+      "part": 2,
+      "part_title": "Příchody a odchody"
+    },
+    {
+      "id": "s06",
+      "narration": "V pohledu Moje má každý den svou časovou osu, na které jsou příchody, odchody, přestávky i absence.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .timeline-row.selected",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .timeline-row.selected",
+        "url_contains": "view=me"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "Vpravo Sloneek porovná odpracovaný čas s cílem podle úvazku a ukáže saldo, tedy přesčas, nebo chybějící hodiny.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-daily-summary-card p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-monthly-summary-card p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-monthly-summary-card p-card",
+        "url_contains": "view=me"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "Příchod se zaznamená tlačítkem Zaznamenat příchod a podrobně to ukazuje video Příchody a odchody, já ho ale teď mačkat nebudu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-clock-in-out-button button",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-clock-in-out-button button",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-clock-in-out-button button",
+        "url_contains": "view=me"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "A jestli si lidé příchody vůbec zapisují, nebo jim Sloneek čas dopočítá z úvazku, vysvětluje video Negativní vs. aktivní docházka.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-monthly-summary-card p-card",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-monthly-summary-card p-card",
+        "url_contains": "view=me"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Teď timetracking, a tak v levém menu kliknu na Moje aktivity.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_activities",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_activities",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "#planning_add_button",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] table.activity-table thead",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] table.activity-table thead",
+        "url_contains": "/app/my-profile/activity-overview"
+      },
+      "part": 3,
+      "part_title": "Timetracking a aktivity"
+    },
+    {
+      "id": "s11",
+      "narration": "Šipkou vlevo přejdu na minulý měsíc, kde jsou moje zapsané aktivity.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=decreaseMonthDiv]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=decreaseMonthDiv]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] table.activity-table tbody tr:has-text(\"Počet hodin\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] table.activity-table tbody tr:has-text(\"Počet hodin\")",
+        "url_contains": "/app/my-profile/activity-overview"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Každý záznam má datum, klienta, projekt, aktivitu a počet schválených hodin, nikoli čas příchodu a odchodu.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] table.activity-table thead",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] table.activity-table tbody",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] table.activity-table tbody tr:has-text(\"Počet hodin\")",
+        "url_contains": "/app/my-profile/activity-overview"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "Čas zapíšete tlačítkem Nová aktivita, klidně i zpětně, a podrobně to ukazuje video Timetracking a aktivity.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "#planning_add_button",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "#planning_add_button",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "#planning_add_button",
+        "url_contains": "/app/my-profile/activity-overview"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "Stopky najdete v hlavičce, a tak kliknu na čas a otevře se okno Timetracking aktivity.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "#new_timetracking_show_detail .time_tracking_info",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "#new_timetracking_show_detail .time_tracking_info",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "p-dynamicdialog button:has-text(\"Spustit\")",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "p-dynamicdialog button:has-text(\"Spustit\")",
+        "url_contains": "/app/my-profile/activity-overview"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Vyberete aktivitu a klienta a kliknete na Spustit, já ale nic měřit nebudu, a tak okno zavřu křížkem.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "p-dynamicdialog slnk-sloneek-planning-time-tracking-form",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "p-dynamicdialog button:has-text(\"Spustit\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "p-dynamicdialog button:has-text(\"Spustit\")",
+          "before_ms": 200
+        },
+        {
+          "type": "hover",
+          "selector": "p-dynamicdialog .p-dialog-header button",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "p-dynamicdialog .p-dialog-header button",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "body:not(:has(p-dynamicdialog .p-dialog))",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "#planning_add_button",
+        "url_contains": "/app/my-profile/activity-overview"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "Jak obě evidence souvisí, ukážu v nastavení docházky, a tak v levém menu kliknu na Docházka a pak na ozubené kolo.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] button:has(.fa-gear-complex)",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] button:has(.fa-gear-complex)",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] button:has(.fa-gear-complex)",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-settings-general-attendance-connections p-card",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-settings-general-attendance-connections p-card",
+        "url_contains": "/app/attendance-v2-overview-settings/general"
+      },
+      "part": 4,
+      "part_title": "Jak spolu souvisí"
+    },
+    {
+      "id": "s17",
+      "narration": "Dole v části Propojení je seznam absencí a aktivit, které souvisejí s docházkou, třeba Home office nebo služební cesta.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-settings-general-attendance-connections p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-settings-general-attendance-connections p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-settings-general-attendance-connections p-card",
+        "url_contains": "/attendance-v2-overview-settings"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Čas strávený na takové propojené aktivitě se do docházky započítá jako odpracovaný čas.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-settings-general-attendance-connections ul",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-settings-general-attendance-connections p-card",
+        "url_contains": "/attendance-v2-overview-settings"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "Propojení se nastavuje u aktivit, a tak kliknu na odkaz Nastavení aktivit.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-settings-general-attendance-connections a[href=\"/app/planning/events\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-settings-general-attendance-connections a[href=\"/app/planning/events\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=is_connected_to_attendance]",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=is_connected_to_attendance]",
+        "url_contains": "/app/planning/events"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Ve sloupci Je propojeno s docházkou má zelenou tečku třeba aktivita Home office.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=is_connected_to_attendance]",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row:has-text(\"Homeoffice\") >> [col-id=is_connected_to_attendance]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=is_connected_to_attendance]",
+        "url_contains": "/app/planning/events"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "Vedle ve sloupci Mód Time Trackingu určíte, jestli lidé u aktivity stopky použít nesmí, smí, nebo musí.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=time_tracking_type]",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=time_tracking_type]",
+        "url_contains": "/app/planning/events"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "A ve sloupcích Hodinová částka k fakturaci a Nákladová hodinová sazba jsou sazby, ze kterých Sloneek počítá cenu práce.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=company_price]",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=worker_price]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=worker_price]",
+        "url_contains": "/app/planning/events"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "Obě evidence se zapínají zvlášť, a tak v levém menu kliknu na Nastavení, pak na Viditelnost modulů a rozbalím panel pro celou společnost.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users_modules",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users_modules",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users_modules",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Jméno Filter Input\"]",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion.toggle-modules-section nb-accordion-item-header",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion.toggle-modules-section nb-accordion-item-header",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion-item-body div.col-6:has-text(\"Time tracking a aktivity\")",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion.toggle-modules-section nb-accordion-item-body form",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-accordion-item-body div.col-6:has-text(\"Docházka (nový modul)\")",
+        "url_contains": "/app/settings/users-modules"
+      },
+      "part": 5,
+      "part_title": "Kde je zapnete"
+    },
+    {
+      "id": "s24",
+      "narration": "Docházku zapíná přepínač Docházka, nový modul, a timetracking přepínače Time tracking a aktivity a Projekty a klienti.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion-item-body div.col-6:has-text(\"Docházka (nový modul)\")",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion-item-body div.col-6:has-text(\"Time tracking a aktivity\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion-item-body div.col-6:has-text(\"Projekty a klienti\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-accordion-item-body div.col-6:has-text(\"Projekty a klienti\")",
+        "url_contains": "/app/settings/users-modules"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "V tabulce pod panelem je pak můžete zapnout jen vybraným lidem, já tu ale teď nic měnit nebudu.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion.toggle-modules-section nb-accordion-item-body form",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-accordion.toggle-modules-section nb-accordion-item-body form",
+        "url_contains": "/app/settings/users-modules"
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "Podklady pro mzdy i pro projekty najdete v levém menu, kde kliknu na Reporty.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_reports_v2",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_reports_v2",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/attendance\"]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/attendance\"]",
+        "url_contains": "/app/reports-v-2/dashboard"
+      },
+      "part": 6,
+      "part_title": "Reporty"
+    },
+    {
+      "id": "s27",
+      "narration": "Kliknu na záložku Příchody a odchody, kde je třeba souhrn odpracované doby se saldem, tedy podklad pro mzdy.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/attendance\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/attendance\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-arrivals-departures-summary)",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-arrivals-departures-summary)",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-arrivals-departures-summary)",
+        "url_contains": "/dashboard/attendance"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "Kliknu na záložku Aktivity, kde Souhrn aktivit sečte hodiny a spočítá cenu práce podle sazeb, tedy pro fakturaci a náklady projektů.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/planning\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/planning\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-activities-summary)",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-activities-summary)",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-activities-summary)",
+        "url_contains": "/dashboard/planning"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "Kliknu na záložku Ostatní a u Denního mzdového reportu kliknu na Přejít na report.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/other\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/other\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/other/payroll\"]",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-payroll)",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/other/payroll\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/other/payroll\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+        "url_contains": "/app/reports-v-2/other/payroll"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "Kliknu na Vygenerovat jednorázový report a otevře se formulář nového reportu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container slnk-sloneek-reports-new-dialog nb-select[formcontrolname=working_type] button",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container slnk-sloneek-reports-new-dialog nb-select[formcontrolname=working_type] button",
+        "url_contains": "/other/payroll"
+      }
+    },
+    {
+      "id": "s31",
+      "narration": "Kliknu na pole Na základě čeho vyplácíte mzdy, kde zvolíte negativní docházku, aktivní docházku, nebo aktivity a time tracking.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container slnk-sloneek-reports-new-dialog nb-select[formcontrolname=working_type] button",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option:has-text(\"Aktivity a time tracking\")",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-option-list",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "nb-option:has-text(\"Aktivity a time tracking\")",
+        "url_contains": "/other/payroll"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "Mzdy tak můžete počítat z docházky i z aktivit, a protože report teď generovat nebudu, formulář zavřu klávesou Escape.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "nb-option:has-text(\"Aktivity a time tracking\")",
+          "before_ms": 600
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "body:not(:has(nb-dialog-container))",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+        "url_contains": "/other/payroll"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "Docházku zapněte, když potřebujete evidovat pracovní dobu, přesčasy a podklady pro mzdy.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+        "url_contains": "/other/payroll"
+      },
+      "part": 7,
+      "part_title": "Co zapnout"
+    },
+    {
+      "id": "s34",
+      "narration": "Timetracking a aktivity zapněte, když fakturujete klientům, nebo chcete vědět, kolik vás stojí jednotlivé projekty.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_activities",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_activities",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_my_activities",
+        "url_contains": "/other/payroll"
+      }
+    },
+    {
+      "id": "s35",
+      "narration": "A když potřebujete obojí, zapněte aktivní docházku pro mzdy a k ní aktivity pro projekty.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "#new_timetracking_show_detail",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "#new_timetracking_show_detail .time_tracking_info",
+        "url_contains": "/other/payroll"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "Teď víte, čím se docházka a timetracking liší a jak spolu souvisí, a kdyby něco nešlo, mrkněte do Centra nápovědy.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+        "url_contains": "/other/payroll"
+      }
+    },
+    {
+      "id": "s37",
+      "narration": "Méně administrativy, víc času na lidi. To je Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+        "url_contains": "/other/payroll"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "zpět na start (video nic nevytváří)",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-13",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "created_by_recipe": "nic – video jen čte a zvýrazňuje",
+      "read_only": "Plocha (widget Docházka, stopky), Docházka Moje, Moje aktivity (minulý měsíc – záznamy admina ze září 2026), okno stopek (otevřeno a zavřeno), Nastavení docházky → Propojení, Nastavení → Aktivity (sloupce), Viditelnost modulů (panel jen rozbalen), Reporty, dialog Denního mzdového reportu (otevřen a zavřen)",
+      "never_clicked": "Zaznamenat příchod (Plocha i Docházka), play / Spustit (stopky), Nová aktivita, Přidat segment, Uložit / přepínače na Viditelnosti modulů, Vygenerovat report"
+    },
+    "notes": "viz atlas/clockins-vs-tracking.md"
+  }
+}

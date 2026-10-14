@@ -1,0 +1,1394 @@
+{
+  "id": "working-hours",
+  "version": 1,
+  "title": "Create and assign working hours",
+  "lang": "en",
+  "app_version": "preprod-2026-10-11",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "en"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "7jQ3jNk3Fcw65sWUmzun",
+    "model_id": "eleven_v4"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s16",
+    "title": "Working hours"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "How many hours a week should each person work? Hi, I'm Maria from the Sloneek team, and I'll show you how to create and assign working hours.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Introduction",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Working hours, called a work contract in the app, define when someone is supposed to work. Without them, a person can't take absences or record attendance.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+          "before_ms": 1500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "In the left menu, I open Settings. You'll find working hours in the Work contracts setup row.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-settings-dashboard-row:has-text(\"Work contracts setup\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-settings-dashboard-row:has-text(\"Work contracts setup\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-settings-dashboard-row:has-text(\"Work contracts setup\")",
+        "url_contains": "/app/settings/dashboard"
+      },
+      "part": 2,
+      "part_title": "Where to find them",
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s04",
+      "narration": "When I open it, you see the list of templates: whether they're active, whether they're weekly or annual, and their note.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-settings-dashboard-row:has-text(\"Work contracts setup\") >> a[href=\"/app/settings/working-hours\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-header",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] #settings_working_hours_add_working_hours_button",
+        "url_contains": "/app/settings/working-hours"
+      },
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s05",
+      "narration": "I create a new template with the Add button. The New work contract type form opens.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] #settings_working_hours_add_working_hours_button",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] #settings_working_hours_add_working_hours_button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] input[formcontrolname=name]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] #settings_working_hours_form_save_new_button",
+        "url_contains": "/working-hours/setup"
+      },
+      "part": 3,
+      "part_title": "New template"
+    },
+    {
+      "id": "s06",
+      "narration": "You can start from a predefined template, such as Full Time or Half Time. But I'll start from scratch.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] input[placeholder=\"Select a predefined template\"]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-autocomplete-option-list",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-common-autocomplete-option-list",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] input[formcontrolname=name]",
+        "url_contains": "/working-hours/setup"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "In the Name field, I type Part-time, 30 hours. I enter the same text in the English translation, too.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[formcontrolname=name]",
+          "value": "Part-time 30 h",
+          "clear": true,
+          "before_ms": 600
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=translatedNameInput]",
+          "value": "Part-time 30 h",
+          "clear": true,
+          "before_ms": 500,
+          "speed": "fast"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=translatedNameInput]",
+        "url_contains": "/working-hours/setup"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "In the note, I briefly describe who the template is for. I leave the Active switch on, so the template can be used.",
+      "actions": [
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] textarea[formcontrolname=note]",
+          "value": "Monday to Friday, 6 hours a day.",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-toggle[formcontrolname=is_enabled]",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-toggle[formcontrolname=is_enabled]",
+        "url_contains": "/working-hours/setup"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "A work contract can be weekly or annual. A weekly schedule repeats every week and suits regular work.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] nb-select[formcontrolname=type] button",
+          "before_ms": 800
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option:text-is(\"Weekly\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "nb-option:text-is(\"Weekly\")",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "nb-option:text-is(\"Annual\")",
+        "url_contains": "/working-hours/setup"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "An annual schedule is set for each day of the year separately, for example for shifts. I'll keep Weekly.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "nb-option:text-is(\"Annual\")",
+          "before_ms": 800
+        },
+        {
+          "type": "wait",
+          "value": "1800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-option:text-is(\"Weekly\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-select[formcontrolname=type] button:has-text(\"Weekly\")",
+        "url_contains": "/working-hours/setup"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "I've saved the template. Below the form, a new table has appeared for the weekly working hours setting.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] #settings_working_hours_form_save_new_button",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] #settings_working_hours_form_save_new_button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"6\"]",
+          "value": "15000"
+        },
+        {
+          "type": "scroll",
+          "value": "[data-cy=mainContentCenterDiv] span:has-text(\"Weekly working hours fund\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-card:has-text(\"Weekly working hours setting\") >> nb-card-header",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] span:has-text(\"Weekly working hours fund\")",
+        "url_contains": "/working-hours/setup/"
+      },
+      "voice_after_actions": 3
+    },
+    {
+      "id": "s12",
+      "narration": "Sloneek has pre-filled a standard week: Monday to Friday, nine to five-thirty, with a thirty-minute break. The weekly fund is forty hours.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-body-viewport",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] span:has-text(\"Weekly working hours fund\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] span:has-text(\"Weekly working hours fund\"):has-text(\"40:00\")",
+        "url_contains": "/working-hours/setup/"
+      },
+      "part": 4,
+      "part_title": "Weekly schedule"
+    },
+    {
+      "id": "s13",
+      "narration": "The Reset button clears the table, and Normal brings back exactly this standard week.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button:text-is(\"Reset\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button:text-is(\"Normal\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] button:text-is(\"Copy the first line\")",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "For a part-time contract, I change the End of working hours in Monday's row to three-thirty.",
+      "actions": [
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"] .ag-cell[col-id=shift_end] input",
+          "value": "15:30",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] span:has-text(\"Weekly working hours fund\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] span:has-text(\"Weekly working hours fund\"):has-text(\"38:00\")",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "With Copy the first line, I copy Monday's times to the whole week.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] button:text-is(\"Copy the first line\")",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] button:text-is(\"Copy the first line\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] span:has-text(\"Weekly working hours fund\"):has-text(\"42:00\")",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "The copy also went to the weekend, so for Saturday and Sunday, I untick Workday. The fund now shows thirty hours.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"5\"] .ag-cell[col-id=is_working_day] nb-checkbox span.custom-checkbox",
+          "before_ms": 800
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"6\"] .ag-cell[col-id=is_working_day] nb-checkbox span.custom-checkbox",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] span:has-text(\"Weekly working hours fund\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] span:has-text(\"Weekly working hours fund\"):has-text(\"30:00\")",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "The breaks are on the right. The lunch break from twelve to twelve-thirty doesn't count as working time.",
+      "actions": [
+        {
+          "type": "scroll",
+          "value": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"] .ag-cell[col-id=lengthOfHalfShift]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "scroll",
+          "value": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"] .ag-cell[col-id=shift_first_pause_end]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-header-cell[col-id=shift_first_pause_start]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-header-cell[col-id=shift_first_pause_end]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-header-cell[col-id=shift_first_pause_start]",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Sloneek calculates the half-shift length on its own. Half-day absences are based on it.",
+      "actions": [
+        {
+          "type": "scroll",
+          "value": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"] .ag-cell[col-id=lengthOfHalfShift]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-header-cell[col-id=lengthOfHalfShift]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-header-cell[col-id=lengthOfHalfShift]",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "Finally, I save the schedule with the Save button above the table. Without it, the changes wouldn't take effect.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] #settings_working_hours_form_weekly_yearly_settings_save_button",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] #settings_working_hours_form_weekly_yearly_settings_save_button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "value": "5000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] span:has-text(\"Weekly working hours fund\"):has-text(\"30:00\")",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "You assign the template in the user's profile. Under Users, I open Management, search for James, and open his profile.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_staff",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "input[placeholder=\"Search...\"]",
+          "value": "James",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=tableRow]:has-text(\"Miller James\")",
+          "value": "8000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=tableRow]:has-text(\"Miller James\") >> span:text-is(\"Miller James\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] a[href$=\"/contracts-and-terms\"]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-common-header-autocomplete:has-text(\"Miller James\")",
+        "url_contains": "/work-data"
+      },
+      "part": 5,
+      "part_title": "Assigning to a user"
+    },
+    {
+      "id": "s21",
+      "narration": "Here, on the Contract and Payroll tab, you see all of James's work contracts.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href$=\"/contracts-and-terms\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Full-time 40 h\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=companyMemberContractsAndTerms] table >> nth=0",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Full-time 40 h\")",
+        "url_contains": "/contracts-and-terms"
+      },
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s22",
+      "narration": "James works full-time, forty hours a week, for an indefinite period. The green row marks the work contract that applies today.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Full-time 40 h\")",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Full-time 40 h\"):has-text(\"Indefinite period\")",
+        "url_contains": "/contracts-and-terms"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "Soon he's moving to part-time. Work contracts can't overlap, so I first end the current one with Edit.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Full-time 40 h\") >> [data-cy=actionsButton]",
+          "before_ms": 1500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Editing\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog] >> [data-cy=submitButton]",
+          "before_ms": 900
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container:has(input[formcontrolname=valid_from])",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container input[formcontrolname=valid_from]",
+        "url_contains": "/contracts-and-terms"
+      }
+    },
+    {
+      "id": "s24",
+      "narration": "I untick Indefinite period, enter the last full-time day in Valid until, and confirm the change.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container nb-checkbox[formcontrolname=is_indefinite_period] label",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container input[formcontrolname=valid_to]",
+          "before_ms": 500
+        },
+        {
+          "type": "type",
+          "selector": "nb-dialog-container input[formcontrolname=valid_to]",
+          "value": "{{DATE:+14d+6:MM/DD/YYYY}}",
+          "clear": true,
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": "nb-calendar nb-calendar-day-cell.selected",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container button:text-is(\"Edit\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Full-time 40 h\"):has-text(\"{{DATE:+14d+6:MM/DD/YYYY}}\")",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Full-time 40 h\"):has-text(\"{{DATE:+14d+6:MM/DD/YYYY}}\")",
+        "url_contains": "/contracts-and-terms"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "Now I click Add a new type of work contract and search for Part-time, 30 hours.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=companyMemberContractsAndTerms] button:has-text(\"Add a new type of work contract\")",
+          "before_ms": 800
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container slnk-common-autocomplete",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container slnk-common-autocomplete",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "Part-time",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Part-time 30 h\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container input[formcontrolname=valid_from]",
+        "url_contains": "/contracts-and-terms"
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "I tick Indefinite period and set Valid from to the day after the full-time contract ends. Then I save.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container nb-checkbox[formcontrolname=is_indefinite_period] label",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container input[formcontrolname=valid_from]",
+          "before_ms": 500
+        },
+        {
+          "type": "type",
+          "selector": "nb-dialog-container input[formcontrolname=valid_from]",
+          "value": "{{DATE:+14d+7:MM/DD/YYYY}}",
+          "clear": true,
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": "nb-calendar nb-calendar-day-cell.selected",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container button:text-is(\"Save\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Part-time 30 h\")",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Part-time 30 h\"):has-text(\"{{DATE:+14d+7:MM/DD/YYYY}}\")",
+        "url_contains": "/contracts-and-terms"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "The new contract follows on from the old one, and the history stays. Don't change contracts in the past; it would recalculate the balances of absences already taken.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Part-time 30 h\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Full-time 40 h\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Part-time 30 h\")",
+        "url_contains": "/contracts-and-terms"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "Sloneek deducts public holidays from a weekly template automatically, based on the Country of operation in Basic and work data.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href$=\"/work-data\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=countrySelect]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=countrySelect]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=countrySelect] button:has-text(\"Czechia\")",
+        "url_contains": "/work-data"
+      },
+      "part": 6,
+      "part_title": "Effect on absences and attendance",
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s29",
+      "narration": "In attendance, the work contract sets the working hours fund and the balance, and Free time absences reduce the fund. Attendance can also add the contract's breaks automatically.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_attendance_v2_settings",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] form > p-card:has-text(\"Automatic breaks\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] form > p-card:has-text(\"Automatic breaks\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] form > p-card:has-text(\"Breaks can be managed in Contracts settings\")",
+        "url_contains": "/attendance-v2-overview-settings"
+      },
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s30",
+      "narration": "To see who has no work contract, or whose contract ends soon, open Settings check in the Settings menu.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_control_screen",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] div.row.pl-3:has-text(\"Working hours of users\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] div.row.pl-3:has-text(\"Working hours of users\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] div.row.pl-3:has-text(\"The end of working hours\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] div.row.pl-3:has-text(\"The end of working hours\")",
+        "url_contains": "/app/settings/checking"
+      },
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s31",
+      "narration": "You can't change an assigned template; there's a lock on the schedule. If you need different times, use Duplicate and edit the copy.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] div.row.pl-3:has-text(\"Work contracts setup\") >> a[href=\"/app/settings/working-hours\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular a.redirect_column:text-is(\"Part-time 30 h\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] nb-icon[icon=lock-alt]",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] nb-icon[icon=lock-alt]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1800"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] #settings_working_hours_form_duplicate_button",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-icon[icon=lock-alt]",
+        "url_contains": "/working-hours/setup/"
+      },
+      "part": 7,
+      "part_title": "Editing and deleting",
+      "voice_after_actions": 4
+    },
+    {
+      "id": "s32",
+      "narration": "You can only delete a template that nobody has. If you no longer want to use it, just deactivate it.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] #settings_working_hours_form_delete_button",
+          "before_ms": 800
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container:has(#settings_working_time_delete_confirmation_yes)",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container:has(#settings_working_time_delete_confirmation_yes)",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "I click Yes, and Sloneek stops the deletion, because James already has this template.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container #settings_working_time_delete_confirmation_yes",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "p-toastitem",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": "p-toastitem",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-icon[icon=lock-alt]",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s34",
+      "narration": "A final tip: you can set the work contract for new colleagues right when you create them, or let HR Workflows assign it for you.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows",
+          "before_ms": 600
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows",
+        "url_contains": "/working-hours/setup/"
+      },
+      "part": 8,
+      "part_title": "Wrap-up"
+    },
+    {
+      "id": "s35",
+      "narration": "Now you know how to create working hours, assign them, and change them safely. If something doesn't work, check the Help Center.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-icon[icon=lock-alt]",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "Less admin, more time for people. This is Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-icon[icon=lock-alt]",
+        "url_contains": "/working-hours/setup/"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "CZ zbytek: smazat šablonu 'Zkrácený úvazek 30 h' – jen při právě 1 řádku s přesným názvem a '1 to 1 from 1'. Přiřazení Tomášovi tento recept NEODEBÍRÁ (patří CZ receptu) – dokud je přiřazená, server mazání odmítne a nic se nestane",
+      "url": "https://app-pre-production.sloneek.com/app/settings/working-hours",
+      "if_visible": "[data-cy=mainContentCenterDiv] #settings_working_hours_add_working_hours_button",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[aria-label=\"Name Filter Input\"]",
+          "value": "Zkrácený úvazek 30 h",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container:not(:has(.ag-row ~ .ag-row)) a.redirect_column:text-is(\"Zkrácený úvazek 30 h\")",
+          "value": "6000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-paging-row-summary-panel:has-text(\"1 to 1 from 1\")",
+          "value": "3000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row:has-text(\"Zkrácený úvazek 30 h\") >> [data-cy=deleteButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog] >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "PL zbytek: smazat šablonu 'Niepełny etat 30 h' – jen při právě 1 řádku s přesným názvem a '1 to 1 from 1'. Přiřazení Piotrovi tento recept NEODEBÍRÁ (patří PL receptu) – dokud je přiřazená, server mazání odmítne a nic se nestane",
+      "url": "https://app-pre-production.sloneek.com/app/settings/working-hours",
+      "if_visible": "[data-cy=mainContentCenterDiv] #settings_working_hours_add_working_hours_button",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[aria-label=\"Name Filter Input\"]",
+          "value": "Niepełny etat 30 h",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container:not(:has(.ag-row ~ .ag-row)) a.redirect_column:text-is(\"Niepełny etat 30 h\")",
+          "value": "6000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-paging-row-summary-panel:has-text(\"1 to 1 from 1\")",
+          "value": "3000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row:has-text(\"Niepełny etat 30 h\") >> [data-cy=deleteButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog] >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "odebrat Tomášovi 'Zkrácený úvazek 30 h' – jen v kartě Novák Tomáš (a8c8fa35-ed76-4867-8f26-0b3d41b768ac) a jen řádek s tímto názvem",
+      "url": "https://app-pre-production.sloneek.com/app/company-details/member/322d66e2-619b-40ad-b68b-d1a90e755714/contracts-and-terms",
+      "if_visible": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Part-time 30 h\")",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-header-autocomplete:has-text(\"Miller James\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Part-time 30 h\")",
+          "value": "10000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Part-time 30 h\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Remove\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog] >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "vrátit Tomášovi 'Plný úvazek 40 h' na dobu neurčitou – jen když řádek nemá 'Doba neurčitá'",
+      "url": "https://app-pre-production.sloneek.com/app/company-details/member/322d66e2-619b-40ad-b68b-d1a90e755714/contracts-and-terms",
+      "if_visible": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Full-time 40 h\"):not(:has-text(\"Indefinite period\"))",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-header-autocomplete:has-text(\"Miller James\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Full-time 40 h\")",
+          "value": "10000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Full-time 40 h\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Editing\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog] >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container:has(input[formcontrolname=valid_from])",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container nb-checkbox[formcontrolname=is_indefinite_period]:not(:has(.custom-checkbox.checked)) label",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container button:text-is(\"Edit\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Full-time 40 h\"):has-text(\"Indefinite period\")",
+          "value": "10000"
+        }
+      ]
+    },
+    {
+      "name": "smazat šablonu 'Zkrácený úvazek 30 h' – jen při právě 1 řádku s přesným názvem po filtru Název (dialog název neobsahuje)",
+      "url": "https://app-pre-production.sloneek.com/app/settings/working-hours",
+      "if_visible": "[data-cy=mainContentCenterDiv] #settings_working_hours_add_working_hours_button",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[aria-label=\"Name Filter Input\"]",
+          "value": "Part-time 30 h",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container:not(:has(.ag-row ~ .ag-row)) a.redirect_column:text-is(\"Part-time 30 h\")",
+          "value": "6000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-paging-row-summary-panel:has-text(\"1 to 1 from 1\")",
+          "value": "3000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row:has-text(\"Part-time 30 h\") >> [data-cy=deleteButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog] >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-11",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "user": "Tomáš Novák <tomas.novak@example.com> (a8c8fa35-ed76-4867-8f26-0b3d41b768ac), NEAKTIVNÍ, Zaměstnanec, Specialista zákaznické podpory, tým Zákaznická podpora, Praha, Země působení Czechia – trvalý",
+      "user_working_hours": "Plný úvazek 40 h (80ef47d9-a4fe-43b0-b8ae-9c7bf59f3bce) od 1. 9. 2026, Doba neurčitá – trvalé (cleanup ho vrací na Doba neurčitá)",
+      "created_by_recipe": "šablona 'Zkrácený úvazek 30 h' (Týdenní, Po–Pá 9:00–15:30, pauza 12:00–12:30, 30:00) + její přiřazení Tomášovi; konec 40 h úvazku – vše vrací cleanup"
+    },
+    "notes": "viz atlas/working-hours.md (sekce 5 a 8)"
+  },
+  "_localized": {
+    "from": "recipes/cs/working-hours.json",
+    "i18n": "i18n/working-hours.en.json",
+    "at": "2026-10-11T21:20:35.515Z",
+    "verified": {
+      "date": "2026-10-11",
+      "status": "verified live",
+      "by": "Claude (BrowserOS, preprod, local-translate=en, in-page runner out/working-hours/_work/dryrun-runner.js)",
+      "selectors": "Průchod 1: 36/36 bez oprav selektorů (ověřeny popisky: Work contracts setup, Add, New work contract type, Select a predefined template (Empty working days / Full Time / Half Time), Translate name - en, Weekly/Annual, Weekly working hours setting, Weekly working hours fund, Reset/Normal/Copy the first line, sloupec Workday, Search..., Contract and Payroll, menu řádku Editing/Remove, dialogy Editing work contract → Adjust work contract (tlačítko Edit), Add a new type of work contract → Choosing the type of work contract (Save), tabulka MM/DD/YYYY, Country of operation, Automatic breaks, Settings check, Working hours of users, The end of working hours, Deleting the work contract dial (Yes)). Opravy po průchodu 1: s29 expect = 'Breaks can be managed in Contracts settings' (jako CZ), narace s06 (Full Time / Half Time) a s16 (Workday). Průchod 2: 36/36 v jednom kuse bez reloadu (~106 s bez narace); s31 otevřel šablonu z s11 (8bb059fc-…), s33 kliknul Yes jen na ni, přiřazenou Jamesovi – server odmítl, toast 'The work contract are already assigned to a user'. Datumy {{DATE:+14d+6}} = 11/01/2026, {{DATE:+14d+7}} = 11/02/2026 (psané MM/DD/YYYY přepnou nb-calendar).",
+      "cleanup": "Před: šablon 25 (vč. CZ pozůstatku 'Zkrácený úvazek 30 h' přiřazeného Tomášovi), uživatelů 76 (46/30). Založen James Miller 322d66e2-… (neaktivní) → 77 (46/31) trvale. Blok CZ šablony otestován naživo: filtr → 1 řádek, '1 to 1 from 1' → koš → 'Elimination of working hours' → Yes → server odmítl. Po každém průchodu (po reloadech): Jamesovi odebrán 'Part-time 30 h', 'Full-time 40 h' zpět na Indefinite period, šablona smazána (toast 'Deleted'; 48aeb9ad-… po průchodu 1, 8bb059fc-… po průchodu 2). Šablon 25 → 26 → 25, uživatelů 77 (46/31) beze změny. James celou dobu neaktivní. Na Tomáše a Piotra se nesahalo."
+    }
+  }
+}

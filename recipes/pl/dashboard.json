@@ -1,0 +1,1219 @@
+{
+  "id": "dashboard",
+  "version": 1,
+  "title": "Odkryjcie możliwości pulpitu",
+  "lang": "pl",
+  "app_version": "preprod-2026-10-12",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "pl"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "F9eb9uZYeJuHuO7Uvs1R",
+    "model_id": "eleven_v4"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s04",
+    "title": "Pulpit"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Chcecie mieć co rano w jednym miejscu wszystko, co czeka na Was w pracy? Dzień dobry, jestem Maria z zespołu Sloneek i oprowadzę Was po pulpicie.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate p-card",
+          "value": "20000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate p-card",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 1,
+      "part_title": "Wprowadzenie",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Pulpit otworzycie w każdej chwili z lewego menu pozycją Pulpit, która jest na samej górze.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+          "before_ms": 1200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "Na górze wita Was pozdrowienie, a pod nim są karty w dwóch kolumnach, których zawartość zależy od Waszej roli.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-greeting",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-new-colleagues p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-greeting",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s04",
+      "narration": "Pierwsza karta, Do zrobienia, zbiera wszystko, co czeka właśnie na Was.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate p-card",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button]:has(.fa-stamp)",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 2,
+      "part_title": "Co na Was czeka"
+    },
+    {
+      "id": "s05",
+      "narration": "Są tu wnioski do zatwierdzenia, sprzęt do obsłużenia, zadania z terminem, dokumenty albo informacje zwrotne.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button] >> nth=0",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button] >> nth=1",
+          "before_ms": 100
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button] >> nth=2",
+          "before_ms": 100
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button]:has(.fa-stamp)",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "Klikam wiersz z wnioskami do zatwierdzenia i karta przełącza się na listę Zatwierdzenia.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button]:has(.fa-stamp)",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button]:has(.fa-stamp)",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-approvals-absence",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-second-level-header p-selectbutton",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "Wnioski są podzielone na zakładki, na przykład nieobecności, działania, czas pracy albo zmiana danych osobowych.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-second-level-header p-selectbutton",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-second-level-header p-selectbutton",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "Przy każdym wniosku widzicie, kto go złożył i na kiedy, a załatwicie go od razu przyciskiem Autoryzuj albo Odrzuć.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-approvals-absence >> nth=0",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-approvals-absence >> nth=0 >> p-button:text-is(\"Autoryzuj\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-approvals-absence >> nth=0 >> p-button:text-is(\"Odrzuć\")",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-approvals-absence",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "Link Przejdź do sekcji prowadzi do modułu zatwierdzeń, ale ja strzałką w lewo wracam z powrotem.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-second-level-header p-button:text-is(\"Przejdź do sekcji\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-second-level-header p-button:has(.fa-chevron-left) button",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-second-level-header p-button:has(.fa-chevron-left) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button]:has(.fa-stamp)",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate div[role=button]:has(.fa-stamp)",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Pod nią jest Feed, firmowa tablica, na której znajdziecie ogłoszenia kierownictwa i kudos od kolegów.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed h3",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed h3",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed slnk-dashboard-v2-feed-post >> nth=0",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton:text-is(\"Powiadomienie\")",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 3,
+      "part_title": "Feed"
+    },
+    {
+      "id": "s11",
+      "narration": "Klikam przełącznik Powiadomienie i zostają tylko firmowe ogłoszenia.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton:text-is(\"Powiadomienie\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton.p-togglebutton-checked:text-is(\"Powiadomienie\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton.p-togglebutton-checked:text-is(\"Powiadomienie\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Ważne ogłoszenie można przypiąć na górze, a pod każdym wpisem możecie zareagować emotikoną albo napisać komentarz.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed slnk-common-icon[icon=thumbtack]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed slnk-dashboard-v2-feed-post-reaction >> nth=0",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed input[placeholder=\"Dodaj nową notatkę\"] >> nth=0",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed slnk-common-icon[icon=thumbtack]",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "Klikam Nowe ogłoszenie, gdzie administrator wybiera, dla kogo jest wiadomość, i pisze jej treść.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-button:text-is(\"Nowe ogłoszenie\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-dashboard-v2-feed-post-add-or-edit-dialog p-select",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-feed-post-add-or-edit-dialog p-select",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-feed-post-add-or-edit-dialog slnk-common-editor",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-feed-post-add-or-edit-dialog slnk-common-editor",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "Ogłoszenie trafiłoby do wszystkich odbiorców e-mailem i w aplikacji, więc teraz go nie wyślę i klikam Anuluj.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": ".p-dialog:has(slnk-dashboard-v2-feed-post-add-or-edit-dialog) p-button:text-is(\"Anuluj\")",
+          "before_ms": 800
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog:has(slnk-dashboard-v2-feed-post-add-or-edit-dialog) p-button:text-is(\"Anuluj\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-button:text-is(\"Przekaż kudos\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Przyciskiem Przekaż kudos publicznie pochwalicie kolegę, a przełącznikiem Wszystko wracam do wszystkich wpisów.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-button:text-is(\"Przekaż kudos\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton:text-is(\"Wszystko\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton.p-togglebutton-checked:text-is(\"Wszystko\")",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton.p-togglebutton-checked:text-is(\"Wszystko\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "Karta Przegląd – Dzisiaj pokazuje, kogo dziś nie ma, a kliknięciem w drugą zakładkę sprawdzicie, kto pracuje z domu.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-today p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-today p-card",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-today p-togglebutton:has-text(\"Ministerstwo spraw wewnętrznych\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-today p-togglebutton.p-togglebutton-checked:has-text(\"Ministerstwo spraw wewnętrznych\")",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-today p-togglebutton.p-togglebutton-checked:has-text(\"Ministerstwo spraw wewnętrznych\")",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 4,
+      "part_title": "Kto jest nieobecny, a kto świętuje"
+    },
+    {
+      "id": "s17",
+      "narration": "Przegląd na następne czternaście dni pokazuje, kogo wkrótce nie będzie, a pod nim znajdziecie nadchodzące urodziny i rocznice zatrudnienia.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-next-14-days p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-next-14-days p-card",
+          "before_ms": 300
+        },
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-upcoming-birthdays p-card",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-upcoming-birthdays p-card",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-upcoming-anniversaries p-card",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-upcoming-anniversaries p-card",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "W prawej kolumnie na górze zobaczycie nowych kolegów, którzy niedawno dołączyli do firmy.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-greeting",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-new-colleagues p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-new-colleagues p-card",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 5,
+      "part_title": "Wasze karty"
+    },
+    {
+      "id": "s19",
+      "narration": "Miernik nastroju codziennie pyta, jak Wam się podoba w pracy, a odpowiecie jednym kliknięciem w emotikonę.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-mood-meter p-card",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-mood-meter p-card",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Karta Czas pracy pokazuje Wasz dzisiejszy stan, przyciskiem Rozpocznij pracę zaczniecie dzień pracy, a pod nią jest wymiar czasu pracy.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-attendance p-card >> nth=0",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-clock-in-out-button p-button",
+          "before_ms": 200
+        },
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-attendance p-card >> nth=1",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-attendance p-card >> nth=1",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-clock-in-out-button p-button",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "Karta Nieobecności pokazuje pozostały czas wolny i Wasz nadchodzący urlop.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-absences p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-absences p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-absences p-button:text-is(\"Zgłoś nieobecność\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "Klikam Zgłoś nieobecność i otwiera się ten sam formularz wniosku co w module Nieobecności.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-absences p-button:text-is(\"Zgłoś nieobecność\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-absences p-button:text-is(\"Zgłoś nieobecność\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-dialog:has(slnk-events-absence-create) slnk-events-absence-create",
+          "value": "10000"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog:has(slnk-events-absence-create) .p-dialog-close-button",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "Wniosku teraz nie wyślę, więc zamykam formularz krzyżykiem.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": ".p-dialog:has(slnk-events-absence-create) .p-dialog-close-button",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog:has(slnk-events-absence-create) .p-dialog-close-button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-activities p-button:text-is(\"Dodaj aktywność\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s24",
+      "narration": "Podobnie przyciskiem Dodaj aktywność zapiszecie na przykład spotkanie albo pracę nad projektem.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-activities p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-activities p-button:text-is(\"Dodaj aktywność\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-activities p-button:text-is(\"Dodaj aktywność\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "Moje zadania pokazują Wasze najbliższe zadania, a strzałka przy nagłówku przeniesie Was do całej sekcji.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-tasks p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-tasks p-card",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-tasks slnk-dashboard-v2-widget-headline-with-section-navigation p-button",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-tasks slnk-dashboard-v2-widget-headline-with-section-navigation p-button",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-tasks slnk-dashboard-v2-widget-headline-with-section-navigation p-button",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "Przydatne linki prowadzą do firmowych stron, które przygotował dla Was administrator.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "Obecność zespołu pokazuje menedżerom, ile godzin ich ludzie przepracowali do dziś.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-team-attendance p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-team-attendance p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-team-attendance p-card",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "Ostatnia karta pokazuje strony z firmowej wiki oznaczone jako ważne, a jedną otwieram kliknięciem.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-admin-pages p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-admin-pages p-card",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-admin-pages button:text-is(\"Guide to Sloneek\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-dashboard-v2-admin-page-dialog",
+          "value": "10000"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-admin-page-dialog p-button:has(.fa-xmark) button",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "Artykuł przeczytacie bezpośrednio na pulpicie, a gdy skończycie, zamkniecie go krzyżykiem.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-dashboard-v2-admin-page-dialog p-button:has(.fa-xmark) button",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "slnk-dashboard-v2-admin-page-dialog p-button:has(.fa-xmark) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-admin-pages button:text-is(\"Guide to Sloneek\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "Układ każdy dostosowuje sam, więc na górze klikam ołówek Dostosuj widok.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-greeting",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] p-button:has(.fa-pen) button",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] p-button:has(.fa-pen) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-dashboard-v2-customize-view-dialog .cdk-drag-handle",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-customize-view-dialog p-button:text-is(\"Zapisz\")",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 6,
+      "part_title": "Dostosowanie pulpitu"
+    },
+    {
+      "id": "s31",
+      "narration": "Karty przeciągniecie za uchwyt w inne miejsce albo do drugiej kolumny, a kliknięciem w oko ukryjecie kartę, na przykład Nadchodzące rocznice.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-customize-view-dialog .cdk-drag-handle >> nth=1",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-dashboard-v2-customize-view-dialog .cdk-drag:has-text(\"Nadchodzące rocznice\") >> p-button button",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-dashboard-v2-customize-view-dialog .cdk-drag:has-text(\"Nadchodzące rocznice\") >> .fa-eye-slash",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-customize-view-dialog .cdk-drag:has-text(\"Nadchodzące rocznice\") >> .fa-eye-slash",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "Zmiany zatwierdzilibyście przyciskiem Zapisz, ale ja klikam Anuluj i pulpit zostaje bez zmian.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-customize-view-dialog p-button:text-is(\"Zapisz\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-dashboard-v2-customize-view-dialog p-button:text-is(\"Anuluj\")",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "slnk-dashboard-v2-customize-view-dialog p-button:text-is(\"Anuluj\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-upcoming-anniversaries",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "Administrator ma obok jeszcze koło zębate Ustawienia, które klikam.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] p-button:has(.fa-gear-complex) button",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] p-button:has(.fa-gear-complex) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-general p-card",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-general p-card",
+        "url_contains": "/app/dashboard-v2/settings/general"
+      },
+      "part": 7,
+      "part_title": "Ustawienia dla administratorów"
+    },
+    {
+      "id": "s34",
+      "narration": "Na zakładce Ogólny ukryjecie całej firmie miernik nastroju, urodziny albo rocznice i możecie zabronić użytkownikom ukrywania wybranych kart.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-general p-card",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-general p-card",
+        "url_contains": "/app/dashboard-v2/settings/general"
+      }
+    },
+    {
+      "id": "s35",
+      "narration": "Klikam zakładkę Przydatne linki, a potem Dodaj link.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] p-tab[id$=\"_tab_useful-links\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Dodaj link\")",
+          "value": "10000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Dodaj link\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-dashboard-v2-settings-useful-links-dialog input[formcontrolname=title]",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-settings-useful-links-dialog input[formcontrolname=url]",
+        "url_contains": "/app/dashboard-v2/settings/useful-links"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "W polu Tytuł wpisuję Przewodnik dla nowych pracowników, a w pole URL wklejam adres Centrum pomocy.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "slnk-dashboard-v2-settings-useful-links-dialog input[formcontrolname=title]",
+          "value": "Przewodnik dla nowych pracowników",
+          "before_ms": 400
+        },
+        {
+          "type": "fill",
+          "selector": "slnk-dashboard-v2-settings-useful-links-dialog input[formcontrolname=url]",
+          "value": "https://help.sloneek.com/hc/en-us",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-settings-useful-links-dialog p-button:text-is(\"Zapisz\")",
+        "url_contains": "/app/dashboard-v2/settings/useful-links"
+      }
+    },
+    {
+      "id": "s37",
+      "narration": "Klikam Zapisz i link pojawia się na liście, gdzie ołówkiem go edytujecie, a koszem usuniecie.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-dashboard-v2-settings-useful-links-dialog p-button:text-is(\"Zapisz\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Przewodnik dla nowych pracowników\")",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Przewodnik dla nowych pracowników\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Przewodnik dla nowych pracowników\")",
+        "url_contains": "/app/dashboard-v2/settings/useful-links"
+      }
+    },
+    {
+      "id": "s38",
+      "narration": "W lewym menu klikam Pulpit i nowy link jest już w karcie Przydatne linki.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links a:text-is(\"Przewodnik dla nowych pracowników\")",
+          "value": "20000"
+        },
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links a:text-is(\"Przewodnik dla nowych pracowników\")",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s39",
+      "narration": "Teraz wiecie, co pokaże Wam pulpit, jak załatwić z niego to, co czeka, i jak go dostosować, a gdyby coś nie działało, zajrzyjcie do Centrum pomocy.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s40",
+      "narration": "Mniej administracji, więcej czasu dla ludzi. To jest Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links p-card",
+        "url_contains": "/app/dashboard-v2"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat CS užitečný odkaz 'Příručka pro nováčky' – jen řádek s tímto názvem, potvrzovací dialog musí obsahovat přesně 'Link Příručka pro nováčky zostanie usunięty.' (jazyk UI); když odkaz neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2/settings/useful-links",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Dodaj link\")",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Dodaj link\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Příručka pro nováčky\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Příručka pro nováčky\") >> p-button:has(.fa-trash-can) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-confirmdialog:has-text(\"Link Příručka pro nováčky zostanie usunięty.\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-confirmdialog:has-text(\"Link Příručka pro nováčky zostanie usunięty.\") >> button.p-confirmdialog-accept-button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    },
+    {
+      "name": "smazat EN užitečný odkaz 'Newcomer guide' – jen řádek s tímto názvem, potvrzovací dialog musí obsahovat přesně 'Link Newcomer guide zostanie usunięty.' (jazyk UI); když odkaz neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2/settings/useful-links",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Dodaj link\")",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Dodaj link\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Newcomer guide\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Newcomer guide\") >> p-button:has(.fa-trash-can) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-confirmdialog:has-text(\"Link Newcomer guide zostanie usunięty.\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-confirmdialog:has-text(\"Link Newcomer guide zostanie usunięty.\") >> button.p-confirmdialog-accept-button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    },
+    {
+      "name": "smazat PL užitečný odkaz 'Przewodnik dla nowych pracowników' – jen řádek s tímto názvem, potvrzovací dialog musí obsahovat přesně 'Link Przewodnik dla nowych pracowników zostanie usunięty.'; když odkaz neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2/settings/useful-links",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Dodaj link\")",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Dodaj link\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Przewodnik dla nowych pracowników\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Przewodnik dla nowych pracowników\") >> p-button:has(.fa-trash-can) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-confirmdialog:has-text(\"Link Przewodnik dla nowych pracowników zostanie usunięty.\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-confirmdialog:has-text(\"Link Przewodnik dla nowych pracowników zostanie usunięty.\") >> button.p-confirmdialog-accept-button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-12",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "created_by_recipe": "užitečný odkaz 'Příručka pro nováčky' → https://help.sloneek.com/hc/cs-cz (Nastavení plochy → Užitečné odkazy) – maže cleanup",
+      "read_only": "wiki článek 'Guide to Sloneek' (důležitý, připnutý na plochu) – jen otevřen a zavřen; čekající žádosti ve Schválení (Absence) – jen zvýrazněny; oznámení 'Winter team building' (připnuté) – jen zvýrazněno",
+      "never_saved": "Nové oznámení, Přidat absenci, Přizpůsobit zobrazení (Zrušit) – otevřeno a zavřeno bez uložení; měřič nálady, Zaznamenat příchod, reakce, Dát kudos – jen zvýrazněno"
+    },
+    "notes": "viz atlas/dashboard.md (sekce 5 a 8)"
+  },
+  "teardown": [
+    {
+      "name": "smazat PL užitečný odkaz 'Przewodnik dla nowych pracowników' – jen řádek s tímto názvem, potvrzovací dialog musí obsahovat přesně 'Link Przewodnik dla nowych pracowników zostanie usunięty.'; když odkaz neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2/settings/useful-links",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Dodaj link\")",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Dodaj link\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Przewodnik dla nowych pracowników\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Przewodnik dla nowych pracowników\") >> p-button:has(.fa-trash-can) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-confirmdialog:has-text(\"Link Przewodnik dla nowych pracowników zostanie usunięty.\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-confirmdialog:has-text(\"Link Przewodnik dla nowych pracowników zostanie usunięty.\") >> button.p-confirmdialog-accept-button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    }
+  ],
+  "_localized": {
+    "from": "recipes/cs/dashboard.json",
+    "i18n": "i18n/dashboard.pl.json",
+    "at": "2026-10-12T19:41:19.258Z",
+    "verified": {
+      "date": "2026-10-12",
+      "by": "Claude (BrowserOS, preprod, local-translate=pl, in-page runner out/dashboard-pl/_work/dryrun-runner.js = runner ats-setup; recept přes file input z out/dashboard-pl/_work/dryrun-R.json + dryrun-T.json)",
+      "selectors": "Dry-run 40/40 v jednom běhu; cleanup před (3 bloky CZ/EN/PL) přeskočeny – nic nebylo; teardown smazal PL odkaz (užitečné odkazy 1 → 2 → 1, zůstává jen „Link test“). Odkaz na ploše vede na https://help.sloneek.com/hc/en-us.",
+      "notes": "Živé PL popisky: Pulpit, Do zrobienia, Zatwierdzenia (záložky Nieobecnośći/Działania/Czas pracy/Zmiana danych osobowych/Dokumenty), Autoryzuj/Odrzuć, Przejdź do sekcji, Feed (Wszystko/Powiadomienie/Kudos), Nowe ogłoszenie → Anuluj/Utwórz ogłoszenie, Przekaż kudos, Dodaj nową notatkę, Przegląd - Dzisiaj (Nieobecność/Ministerstwo spraw wewnętrznych/Podróż służbowa), Przegląd – Następne 14 dni, Nadchodzące urodziny/rocznice, Nowi koledzy, Jak ci się dzisiaj podoba twoja praca?, Czas pracy + Rozpocznij pracę, Nieobecności + Zgłoś nieobecność, Działania + Dodaj aktywność, Moje zadania, Przydatne linki, Obecność zespołu, Strony Wiki oznaczone jako ważne, Dostosuj widok (Anuluj/Zapisz), Ustawienia: Ogólny / Przydatne linki, Dodaj link, tabulka Tytuł/URL/Opcje.",
+      "rehearsal": "Zkouška skutečným recorderem (job 140-rehearse-dashboard-pl, mock hlas): 40/40 ok, cleanup FAILED (ignored) jen tam, kde nic nebylo, teardown 1/1 done; tenant po všech zkouškách čistý (užitečné odkazy 1, fáze náboru 10, zdroje kandidátů 7 – stejně jako na začátku)."
+    }
+  }
+}

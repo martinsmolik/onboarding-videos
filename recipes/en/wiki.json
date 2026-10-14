@@ -1,0 +1,952 @@
+{
+  "id": "wiki",
+  "version": 1,
+  "title": "Create Wiki articles",
+  "lang": "en",
+  "app_version": "preprod-2026-10-12",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "en"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "7jQ3jNk3Fcw65sWUmzun",
+    "model_id": "eleven_v4"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s22",
+    "title": "Wiki articles"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Want your company guides in one place where everyone finds them? Hi, I'm Maria from the Sloneek team, and I'll show you how to create Wiki articles.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_wiki_pages",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_wiki_pages",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Introduction",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "You'll find the Wiki in the left menu, in the Company section, under Company wiki.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_wiki_pages",
+          "before_ms": 1200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_wiki_pages",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_wiki_pages",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "I click Company wiki, and the article overview opens, just as employees see it.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_wiki_pages",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=\"adminPageCard-Guide to Sloneek\"]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] h5:text-is(\"Wiki Pages\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=adminPagesManageButton]",
+        "url_contains": "/app/company-details/admin-pages"
+      },
+      "part": 2,
+      "part_title": "The Wiki through employees' eyes"
+    },
+    {
+      "id": "s04",
+      "narration": "Each article has its own card with a title and the dates when it was created and last updated.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=\"adminPageCard-Guide to Sloneek\"]",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=\"adminPageCard-Guide to Sloneek\"]",
+        "url_contains": "/app/company-details/admin-pages"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "For the Lunch menu article I click Detail, and the article opens with its attachment, here a picture of the menu.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=\"adminPageCardDetailButton-Lunch menu\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=adminPageDetailDialog] slnk-common-display-attachment img",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPageDetailDialog] slnk-common-display-attachment",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPageDetailDialog] [data-cy=adminPageDetailEditButton]",
+        "url_contains": "/app/company-details/admin-pages"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "Admins also get an Edit button here, but for now I'll close the window with the cross.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPageDetailDialog] [data-cy=adminPageDetailEditButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=adminPageDetailDialog] [data-cy=closeButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=adminPagesManageButton]",
+        "url_contains": "/app/company-details/admin-pages"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "You manage articles with the Manage button at the top right, which opens a table of all articles.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=adminPagesManageButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=adminPagesSettingsTable] tbody tr:has(a:text-is(\"How to plan your first week – demo\"))",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=adminPagesSettingsTable] table",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] button:has-text(\"Add\")",
+        "url_contains": "/app/settings/admin-pages"
+      },
+      "part": 3,
+      "part_title": "Managing articles"
+    },
+    {
+      "id": "s08",
+      "narration": "Unlike the cards, here you also see inactive articles, and for each one its order and whether it's marked as important.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=adminPagesSettingsTable] th:text-is(\"Active\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=adminPagesSettingsTable] th:text-is(\"Article order\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=adminPagesSettingsTable] th:text-is(\"Marked as Important\")",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=adminPagesSettingsTable] th:text-is(\"Marked as Important\")",
+        "url_contains": "/app/settings/admin-pages"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "The Role column says who the article is for, and when it's empty, everyone can see the article.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=adminPagesSettingsTable] th:text-is(\"Role\")",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=adminPagesSettingsTable] th:text-is(\"Role\")",
+        "url_contains": "/app/settings/admin-pages"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "I click Filters, where you can narrow the list by name, status, role or date, and I close the filters again.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=adminPagesSettingsTable] button:has-text(\"Filters\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-popover input[placeholder=\"Name\"]",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".p-popover",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=adminPagesSettingsTable] button:has-text(\"Filters\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] button:has-text(\"Add\")",
+        "url_contains": "/app/settings/admin-pages"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "I click Add, and the new article form opens.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] button:has-text(\"Add\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=adminPagesSettingsForm] [data-cy=adminPagesNameInput]",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPagesSettingsForm]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesSubmitButton]",
+        "url_contains": "/app/settings/admin-pages/new"
+      },
+      "part": 4,
+      "part_title": "New article"
+    },
+    {
+      "id": "s12",
+      "narration": "The list of articles with a search stays on the left, so you can jump between them at any time.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-side-sub-navigation",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-common-side-sub-navigation",
+        "url_contains": "/app/settings/admin-pages/new"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "In the Name field I type what the article is called, here How to plan your first week.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=adminPagesSettingsForm] [data-cy=adminPagesNameInput]",
+          "value": "How to plan your first week – demo",
+          "before_ms": 400,
+          "speed": "fast"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesSettingsForm] [data-cy=adminPagesDisplayTitleInput]",
+        "url_contains": "/app/settings/admin-pages/new"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "Employees will see the Display name above it on the card, so I type Your first week at the company.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=adminPagesSettingsForm] [data-cy=adminPagesDisplayTitleInput]",
+          "value": "Your first week at the company – demo",
+          "before_ms": 400,
+          "speed": "fast"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesSettingsForm] button.star_button",
+        "url_contains": "/app/settings/admin-pages/new"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Clicking the star marks the article as important, so it gets pinned to the Dashboard.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=adminPagesSettingsForm] button.star_button",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=adminPagesSettingsForm] button.star_button nb-icon.fas.fa-star",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesSettingsForm] button.star_button nb-icon.fas.fa-star",
+        "url_contains": "/app/settings/admin-pages/new"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "Article order decides where the article appears, and one means the very first spot.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPagesSettingsForm] input[formcontrolname=position]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesSettingsForm] input[formcontrolname=position]",
+        "url_contains": "/app/settings/admin-pages/new"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "I switch off the Active toggle, so the article stays a draft and employees won't see it yet.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=adminPagesSettingsForm] [data-cy=adminPagesActiveToggle] label",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=adminPagesSettingsForm] [data-cy=adminPagesActiveToggle] .toggle:not(.checked)",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesSettingsForm] [data-cy=adminPagesActiveToggle] .toggle:not(.checked)",
+        "url_contains": "/app/settings/admin-pages/new"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "In the editor I type the heading Your first week.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=adminPagesTextEditor] .ql-editor",
+          "value": "Your first week",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesTextEditor] .ql-editor:has-text(\"Your first week\")",
+        "url_contains": "/app/settings/admin-pages/new"
+      },
+      "part": 5,
+      "part_title": "Article content"
+    },
+    {
+      "id": "s19",
+      "narration": "In the style menu, which now says Normal, I pick Heading 2, and the line becomes a heading.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=adminPagesTextEditor] .ql-header .ql-picker-label",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=adminPagesTextEditor] .ql-header .ql-picker-item[data-value=\"2\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=adminPagesTextEditor] .ql-header .ql-picker-item[data-value=\"2\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=adminPagesTextEditor] .ql-editor h2:text-is(\"Your first week\")",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesTextEditor] .ql-editor h2:text-is(\"Your first week\")",
+        "url_contains": "/app/settings/admin-pages/new"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Enter takes me to a new line, and the button with dots starts a bulleted list.",
+      "actions": [
+        {
+          "type": "press",
+          "value": "Enter",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=adminPagesTextEditor] button.ql-list[value=bullet]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=adminPagesTextEditor] .ql-editor li",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesTextEditor] .ql-editor h2 + ol li",
+        "url_contains": "/app/settings/admin-pages/new"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "In the first bullet I write what awaits the newcomer on Monday.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=adminPagesTextEditor] .ql-editor",
+          "value": "Monday: pick up your laptop and sign in to Sloneek.",
+          "before_ms": 400,
+          "speed": "fast"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesTextEditor] .ql-editor li:text-is(\"Monday: pick up your laptop and sign in to Sloneek.\")",
+        "url_contains": "/app/settings/admin-pages/new"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "Enter adds another bullet, and I write what awaits them on Tuesday.",
+      "actions": [
+        {
+          "type": "press",
+          "value": "Enter",
+          "before_ms": 400
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=adminPagesTextEditor] .ql-editor",
+          "value": "Tuesday: meet your team and your buddy.",
+          "before_ms": 300,
+          "speed": "fast"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesTextEditor] .ql-editor li:text-is(\"Tuesday: meet your team and your buddy.\")",
+        "url_contains": "/app/settings/admin-pages/new"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "The toolbar also has bold, italics, a numbered list and a list with checkboxes.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPagesTextEditor] button.ql-bold",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPagesTextEditor] button.ql-italic",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPagesTextEditor] button.ql-list[value=ordered]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPagesTextEditor] button.ql-list[value=check]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesTextEditor] button.ql-list[value=check]",
+        "url_contains": "/app/settings/admin-pages/new"
+      }
+    },
+    {
+      "id": "s24",
+      "narration": "Other buttons insert a link, an image or a video into the text, and the last one adds an emoji.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPagesTextEditor] button.ql-link",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPagesTextEditor] button.ql-image",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPagesTextEditor] button.ql-video",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPagesTextEditor] button.slnk-emoji-button",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesTextEditor] button.slnk-emoji-button",
+        "url_contains": "/app/settings/admin-pages/new"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "Below the editor, the Select button attaches a document, spreadsheet or image, and employees will see it under the article.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPagesSettingsForm] slnk-common-upload-file-container",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPagesSettingsForm] slnk-common-upload-file-container button:has-text(\"Select\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesSettingsForm] slnk-common-upload-file-container button:has-text(\"Select\")",
+        "url_contains": "/app/settings/admin-pages/new"
+      },
+      "part": 6,
+      "part_title": "Attachment and visibility"
+    },
+    {
+      "id": "s26",
+      "narration": "I untick Visible to everyone, so only people with the selected role can see the article.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=adminPagesSettingsForm] [data-cy=adminPagesAllRolesCheckbox] label",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=adminPagesSettingsForm] nb-select[formcontrolname=roles] button",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesSettingsForm] nb-select[formcontrolname=roles] button",
+        "url_contains": "/app/settings/admin-pages/new"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "In the Role field I choose the onboarding role, so only people with this role will see the article.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=adminPagesSettingsForm] nb-select[formcontrolname=roles] button",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option:text-is(\"onboarding_specialist\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-option:text-is(\"onboarding_specialist\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesSettingsForm] nb-select[formcontrolname=roles] button:text-is(\"onboarding_specialist\")",
+        "url_contains": "/app/settings/admin-pages/new"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "The Save button creates the article, and Sloneek sends a notification about it right away, even when it's inactive, so only save finished text.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPagesSubmitButton]",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesSubmitButton]",
+        "url_contains": "/app/settings/admin-pages/new"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "I already have the sample article saved, so I open it in the list on the left and confirm leaving the form without saving.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-side-sub-navigation .common_sub_menu_item:has-text(\"Your first week at the company – demo\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Unsaved changes\") >> #unsaved_changes_confirmation_yes",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Unsaved changes\") >> #unsaved_changes_confirmation_yes",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=adminPagesSettingsForm] nb-select[formcontrolname=roles] button:text-is(\"onboarding_specialist\")",
+          "value": "20000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesTextEditor] .ql-editor h2:text-is(\"Your first week\")",
+        "url_contains": "/app/settings/admin-pages/60746ec5-4555-4643-8891-0a89433c08b1"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "The saved article is inactive, only people with the onboarding role can see it, and the editor holds exactly what we just wrote.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPagesSettingsForm] [data-cy=adminPagesActiveToggle]",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPagesSettingsForm] nb-select[formcontrolname=roles]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPagesTextEditor] .ql-editor",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesSettingsForm] button:has(nb-icon.fa-link)",
+        "url_contains": "/app/settings/admin-pages/60746ec5-4555-4643-8891-0a89433c08b1"
+      },
+      "part": 7,
+      "part_title": "The saved article"
+    },
+    {
+      "id": "s31",
+      "narration": "A saved article has a chain icon next to the display name, which copies its link, for example into an onboarding task.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPagesSettingsForm] button:has(nb-icon.fa-link)",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesSettingsForm] button:has(nb-icon.fa-link)",
+        "url_contains": "/app/settings/admin-pages/60746ec5-4555-4643-8891-0a89433c08b1"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "Once the article is ready, you switch on the Active toggle and click Save, but I won't save it.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=adminPagesSettingsForm] [data-cy=adminPagesActiveToggle] label",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=adminPagesSettingsForm] [data-cy=adminPagesActiveToggle] .toggle.checked",
+          "value": "5000"
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPagesSubmitButton]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesSettingsForm] [data-cy=adminPagesActiveToggle] .toggle.checked",
+        "url_contains": "/app/settings/admin-pages/60746ec5-4555-4643-8891-0a89433c08b1"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "The red Delete button removes the article, and the page will no longer be available.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=adminPagesDeleteButton]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=adminPagesDeleteButton]",
+        "url_contains": "/app/settings/admin-pages/60746ec5-4555-4643-8891-0a89433c08b1"
+      }
+    },
+    {
+      "id": "s34",
+      "narration": "Employees also see important articles on the Dashboard, so I click Dashboard in the menu and confirm leaving without saving.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Unsaved changes\") >> #unsaved_changes_confirmation_yes",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Unsaved changes\") >> #unsaved_changes_confirmation_yes",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-admin-pages p-card",
+          "value": "20000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-admin-pages p-card",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 8,
+      "part_title": "Dashboard and notifications"
+    },
+    {
+      "id": "s35",
+      "narration": "Starred articles have their own tile on the Dashboard, where anyone can open them with one click.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-admin-pages p-card",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-admin-pages p-card:has-text(\"Lunch menu\")",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "Sloneek announces new articles with a notification, so in the menu I click Notifications and Integrations.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_settings",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_settings",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr:has(#user_notifications_checkbox_email_core_admin_page_created)",
+          "value": "20000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] tr:has(#user_notifications_checkbox_email_core_admin_page_created)",
+        "url_contains": "/app/my-profile/interface-settings"
+      }
+    },
+    {
+      "id": "s37",
+      "narration": "In the row Notification of a new post in the company Wiki, everyone sets whether they get an email, an in-app notification, or both.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] tr:has(#user_notifications_checkbox_email_core_admin_page_created)",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] tr:has(#user_notifications_checkbox_email_core_admin_page_created)",
+        "url_contains": "/app/my-profile/interface-settings"
+      }
+    },
+    {
+      "id": "s38",
+      "narration": "Now you can write and format a Wiki article, choose who sees it, pin it to the Dashboard, and if anything doesn't work, check the Help Center.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] tr:has(#user_notifications_checkbox_email_core_admin_page_created)",
+        "url_contains": "/app/my-profile/interface-settings"
+      }
+    },
+    {
+      "id": "s39",
+      "narration": "Less admin, more time for people. This is Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] tr:has(#user_notifications_checkbox_email_core_admin_page_created)",
+        "url_contains": "/app/my-profile/interface-settings"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "nic k mazání: recept článek nikdy neukládá (uložení posílá upozornění); EN ukázkový článek 'How to plan your first week – demo' (60746ec5-4555-4643-8891-0a89433c08b1) je trvalý předpoklad a cleanup ho nemaže – jen kontrola, že existuje",
+      "url": "https://app-pre-production.sloneek.com/app/settings/admin-pages",
+      "if_visible": "[data-cy=mainContentCenterDiv] button:has-text(\"Add\")",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=adminPagesSettingsTable] tbody tr:has(a:text-is(\"How to plan your first week – demo\"))",
+          "value": "15000"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-12",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "saved_article": "'Jak si naplánovat první týden – ukázka' / zobrazený název 'První týden ve firmě – ukázka' (71188f3b-fa98-4ebd-a054-a25c8c1042a4) – NEAKTIVNÍ, Viditelné pro všechny vypnuto, role onboarding_specialist (0 držitelů), důležitý (hvězdička), pořadí 1, text: H2 'Váš první týden' + odrážky 'Pondělí: převezměte notebook a přihlaste se do Sloneeku.', 'Úterý: seznamte se s týmem a svým patronem.'; založen 12. 10. 2026 při průzkumu (jediné upozornění 'New wiki page' 16:11) – TRVALÝ, cleanup ho nemaže",
+      "read_only": "Lunch menu (98db495b-6f63-4dda-ac06-d69506b688e5, příloha Lunch.png) a Guide to Sloneek (09adc2ff-eacc-4b95-aadc-b38781de6ab8) – jen otevřít / zvýraznit",
+      "created_by_recipe": "nic – formulář nového článku se vyplní a opustí bez uložení (dialog Neuložené změny -> Ano)"
+    },
+    "notes": "viz atlas/wiki.md (sekce 5 a 8)"
+  },
+  "_localized": {
+    "from": "recipes/cs/wiki.json",
+    "i18n": "i18n/wiki.en.json",
+    "at": "2026-10-12T20:48:20.457Z",
+    "verified": {
+      "date": "2026-10-12",
+      "by": "Claude (BrowserOS, preprod, local-translate=en)",
+      "selectors": "Dry-run 39/39 v jednom běhu; s29 otevřel EN ukázkový článek 60746ec5… (H2 + 2 odrážky sedí), nic se neuložilo (dialog Unsaved changes -> Yes).",
+      "notes": "Živé EN popisky: menu Company → Company wiki, nadpis Wiki Pages, karta Created/Updated + Detail, dialog Edit, Manage, tabulka Active/Name/Display name/Article order/Marked as Important/Role/Created/Updated/Action, Filters, Add, New admin page, Insert attachment + Select, Visible to everyone, Back/Save/Delete, Dashboard – Wiki pages marked as important, Notifications and Integrations – řádek Notification of a new post in the company Wiki, sloupce Email / In-app.",
+      "rehearsal": "Zkouška skutečným recorderem (job 161-rehearse-wiki-en, mock hlas): 39/39 ok, cleanup 2/2 done (kontrola existence EN článku), 0 FAILED, mux 303,4 s, 0 warnings; nic se neuložilo, zvonek 218 beze změny."
+    }
+  }
+}

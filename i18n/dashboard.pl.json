@@ -1,0 +1,271 @@
+{
+  "_comment": "Polská verze videa Objevte možnosti hlavní plochy (dashboard). Struktura, kroky, kliky a tempo 1:1 podle CZ masteru. UI texty z translate_fe/pl (fetch uvnitř stránky) + ověřeno naživo 12. 10. 2026 (local-translate=pl). PL demo data: užitečný odkaz 'Przewodnik dla nowych pracowników' → https://help.sloneek.com/hc/en-us (help.sloneek.com/hc/pl neexistuje – přesměruje na cs-cz); cleanup i teardown ho mažou (dialog 'Link … zostanie usunięty.'), cleanup_prepend maže pozůstatky CZ ('Příručka pro nováčky') a EN ('Newcomer guide'). Read-only data tenantu jako v CZ (čekající žádosti, připnuté oznámení, wiki 'Guide to Sloneek', karty). PL UI: záložka Práce z domu = 'Ministerstwo spraw wewnętrznych' (bug #122) – narace ji nejmenuje ('druga zakładka'); Schválit = 'Autoryzuj'; přepínač Oznámení = 'Powiadomienie'. Narace bez asistentky Ellie (Centrum pomocy). Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM. Generátor: out/dashboard/_work/build_i18n.py (+ i18n_src.json)",
+  "verified": {
+    "date": "2026-10-12",
+    "by": "Claude (BrowserOS, preprod, local-translate=pl, in-page runner out/dashboard-pl/_work/dryrun-runner.js = runner ats-setup; recept přes file input z out/dashboard-pl/_work/dryrun-R.json + dryrun-T.json)",
+    "selectors": "Dry-run 40/40 v jednom běhu; cleanup před (3 bloky CZ/EN/PL) přeskočeny – nic nebylo; teardown smazal PL odkaz (užitečné odkazy 1 → 2 → 1, zůstává jen „Link test“). Odkaz na ploše vede na https://help.sloneek.com/hc/en-us.",
+    "notes": "Živé PL popisky: Pulpit, Do zrobienia, Zatwierdzenia (záložky Nieobecnośći/Działania/Czas pracy/Zmiana danych osobowych/Dokumenty), Autoryzuj/Odrzuć, Przejdź do sekcji, Feed (Wszystko/Powiadomienie/Kudos), Nowe ogłoszenie → Anuluj/Utwórz ogłoszenie, Przekaż kudos, Dodaj nową notatkę, Przegląd - Dzisiaj (Nieobecność/Ministerstwo spraw wewnętrznych/Podróż służbowa), Przegląd – Następne 14 dni, Nadchodzące urodziny/rocznice, Nowi koledzy, Jak ci się dzisiaj podoba twoja praca?, Czas pracy + Rozpocznij pracę, Nieobecności + Zgłoś nieobecność, Działania + Dodaj aktywność, Moje zadania, Przydatne linki, Obecność zespołu, Strony Wiki oznaczone jako ważne, Dostosuj widok (Anuluj/Zapisz), Ustawienia: Ogólny / Przydatne linki, Dodaj link, tabulka Tytuł/URL/Opcje.",
+    "rehearsal": "Zkouška skutečným recorderem (job 140-rehearse-dashboard-pl, mock hlas): 40/40 ok, cleanup FAILED (ignored) jen tam, kde nic nebylo, teardown 1/1 done; tenant po všech zkouškách čistý (užitečné odkazy 1, fáze náboru 10, zdroje kandidátů 7 – stejně jako na začátku)."
+  },
+  "title": "Odkryjcie możliwości pulpitu",
+  "thumbnail_title": "Pulpit",
+  "parts": {
+    "Úvod": "Wprowadzenie",
+    "Co na vás čeká": "Co na Was czeka",
+    "Feed": "Feed",
+    "Kdo je pryč a kdo slaví": "Kto jest nieobecny, a kto świętuje",
+    "Vaše karty": "Wasze karty",
+    "Přizpůsobení plochy": "Dostosowanie pulpitu",
+    "Nastavení pro administrátory": "Ustawienia dla administratorów"
+  },
+  "text": {
+    "Schválit": "Autoryzuj",
+    "Odmítnout": "Odrzuć",
+    "Přejít do sekce": "Przejdź do sekcji",
+    "Oznámení": "Powiadomienie",
+    "Přidat novou poznámku": "Dodaj nową notatkę",
+    "Nové oznámení": "Nowe ogłoszenie",
+    "Zrušit": "Anuluj",
+    "Dát kudos": "Przekaż kudos",
+    "Vše": "Wszystko",
+    "Práce z domu": "Ministerstwo spraw wewnętrznych",
+    "Přidat absenci": "Zgłoś nieobecność",
+    "Přidat aktivitu": "Dodaj aktywność",
+    "Uložit": "Zapisz",
+    "Nadcházející výročí": "Nadchodzące rocznice",
+    "Přidat odkaz": "Dodaj link",
+    "Příručka pro nováčky": "Przewodnik dla nowych pracowników",
+    "Odkaz Příručka pro nováčky bude smazán.": "Link Przewodnik dla nowych pracowników zostanie usunięty.",
+    "https://help.sloneek.com/hc/cs-cz": "https://help.sloneek.com/hc/en-us"
+  },
+  "selectors": {
+    "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-approvals-absence >> nth=0 >> p-button:text-is(\"Schválit\")": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-approvals-absence >> nth=0 >> p-button:text-is(\"Autoryzuj\")",
+    "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-approvals-absence >> nth=0 >> p-button:text-is(\"Odmítnout\")": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-approvals-absence >> nth=0 >> p-button:text-is(\"Odrzuć\")",
+    "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-second-level-header p-button:text-is(\"Přejít do sekce\")": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate-second-level-header p-button:text-is(\"Przejdź do sekcji\")",
+    "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton:text-is(\"Oznámení\")": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton:text-is(\"Powiadomienie\")",
+    "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton.p-togglebutton-checked:text-is(\"Oznámení\")": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton.p-togglebutton-checked:text-is(\"Powiadomienie\")",
+    "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed input[placeholder=\"Přidat novou poznámku\"] >> nth=0": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed input[placeholder=\"Dodaj nową notatkę\"] >> nth=0",
+    "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-button:text-is(\"Nové oznámení\")": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-button:text-is(\"Nowe ogłoszenie\")",
+    ".p-dialog:has(slnk-dashboard-v2-feed-post-add-or-edit-dialog) p-button:text-is(\"Zrušit\")": ".p-dialog:has(slnk-dashboard-v2-feed-post-add-or-edit-dialog) p-button:text-is(\"Anuluj\")",
+    "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-button:text-is(\"Dát kudos\")": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-button:text-is(\"Przekaż kudos\")",
+    "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton:text-is(\"Vše\")": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton:text-is(\"Wszystko\")",
+    "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton.p-togglebutton-checked:text-is(\"Vše\")": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-feed p-togglebutton.p-togglebutton-checked:text-is(\"Wszystko\")",
+    "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-today p-togglebutton:has-text(\"Práce z domu\")": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-today p-togglebutton:has-text(\"Ministerstwo spraw wewnętrznych\")",
+    "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-today p-togglebutton.p-togglebutton-checked:has-text(\"Práce z domu\")": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-overview-today p-togglebutton.p-togglebutton-checked:has-text(\"Ministerstwo spraw wewnętrznych\")",
+    "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-absences p-button:text-is(\"Přidat absenci\")": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-absences p-button:text-is(\"Zgłoś nieobecność\")",
+    "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-activities p-button:text-is(\"Přidat aktivitu\")": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-activities p-button:text-is(\"Dodaj aktywność\")",
+    "slnk-dashboard-v2-customize-view-dialog p-button:text-is(\"Uložit\")": "slnk-dashboard-v2-customize-view-dialog p-button:text-is(\"Zapisz\")",
+    "slnk-dashboard-v2-customize-view-dialog .cdk-drag:has-text(\"Nadcházející výročí\") >> p-button button": "slnk-dashboard-v2-customize-view-dialog .cdk-drag:has-text(\"Nadchodzące rocznice\") >> p-button button",
+    "slnk-dashboard-v2-customize-view-dialog .cdk-drag:has-text(\"Nadcházející výročí\") >> .fa-eye-slash": "slnk-dashboard-v2-customize-view-dialog .cdk-drag:has-text(\"Nadchodzące rocznice\") >> .fa-eye-slash",
+    "slnk-dashboard-v2-customize-view-dialog p-button:text-is(\"Zrušit\")": "slnk-dashboard-v2-customize-view-dialog p-button:text-is(\"Anuluj\")",
+    "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Přidat odkaz\")": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Dodaj link\")",
+    "slnk-dashboard-v2-settings-useful-links-dialog p-button:text-is(\"Uložit\")": "slnk-dashboard-v2-settings-useful-links-dialog p-button:text-is(\"Zapisz\")",
+    "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Příručka pro nováčky\")": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Przewodnik dla nowych pracowników\")",
+    "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links a:text-is(\"Příručka pro nováčky\")": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-useful-links a:text-is(\"Przewodnik dla nowych pracowników\")"
+  },
+  "keep": [
+    "Guide to Sloneek"
+  ],
+  "cleanup_prepend": [
+    {
+      "name": "smazat CS užitečný odkaz 'Příručka pro nováčky' – jen řádek s tímto názvem, potvrzovací dialog musí obsahovat přesně 'Link Příručka pro nováčky zostanie usunięty.' (jazyk UI); když odkaz neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2/settings/useful-links",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Dodaj link\")",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Dodaj link\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Příručka pro nováčky\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Příručka pro nováčky\") >> p-button:has(.fa-trash-can) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-confirmdialog:has-text(\"Link Příručka pro nováčky zostanie usunięty.\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-confirmdialog:has-text(\"Link Příručka pro nováčky zostanie usunięty.\") >> button.p-confirmdialog-accept-button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    },
+    {
+      "name": "smazat EN užitečný odkaz 'Newcomer guide' – jen řádek s tímto názvem, potvrzovací dialog musí obsahovat přesně 'Link Newcomer guide zostanie usunięty.' (jazyk UI); když odkaz neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2/settings/useful-links",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Dodaj link\")",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links p-button:text-is(\"Dodaj link\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Newcomer guide\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-settings-useful-links tbody tr:has-text(\"Newcomer guide\") >> p-button:has(.fa-trash-can) button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-confirmdialog:has-text(\"Link Newcomer guide zostanie usunięty.\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-confirmdialog:has-text(\"Link Newcomer guide zostanie usunięty.\") >> button.p-confirmdialog-accept-button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    }
+  ],
+  "cleanup_names": [
+    "smazat PL užitečný odkaz 'Przewodnik dla nowych pracowników' – jen řádek s tímto názvem, potvrzovací dialog musí obsahovat přesně 'Link Przewodnik dla nowych pracowników zostanie usunięty.'; když odkaz neexistuje, wait_ready selže a blok se přeskočí"
+  ],
+  "teardown_names": [
+    "smazat PL užitečný odkaz 'Przewodnik dla nowych pracowników' – jen řádek s tímto názvem, potvrzovací dialog musí obsahovat přesně 'Link Przewodnik dla nowych pracowników zostanie usunięty.'; když odkaz neexistuje, wait_ready selže a blok se přeskočí"
+  ],
+  "steps": {
+    "s01": {
+      "narration": "Chcecie mieć co rano w jednym miejscu wszystko, co czeka na Was w pracy? Dzień dobry, jestem Maria z zespołu Sloneek i oprowadzę Was po pulpicie."
+    },
+    "s02": {
+      "narration": "Pulpit otworzycie w każdej chwili z lewego menu pozycją Pulpit, która jest na samej górze."
+    },
+    "s03": {
+      "narration": "Na górze wita Was pozdrowienie, a pod nim są karty w dwóch kolumnach, których zawartość zależy od Waszej roli."
+    },
+    "s04": {
+      "narration": "Pierwsza karta, Do zrobienia, zbiera wszystko, co czeka właśnie na Was."
+    },
+    "s05": {
+      "narration": "Są tu wnioski do zatwierdzenia, sprzęt do obsłużenia, zadania z terminem, dokumenty albo informacje zwrotne."
+    },
+    "s06": {
+      "narration": "Klikam wiersz z wnioskami do zatwierdzenia i karta przełącza się na listę Zatwierdzenia."
+    },
+    "s07": {
+      "narration": "Wnioski są podzielone na zakładki, na przykład nieobecności, działania, czas pracy albo zmiana danych osobowych."
+    },
+    "s08": {
+      "narration": "Przy każdym wniosku widzicie, kto go złożył i na kiedy, a załatwicie go od razu przyciskiem Autoryzuj albo Odrzuć."
+    },
+    "s09": {
+      "narration": "Link Przejdź do sekcji prowadzi do modułu zatwierdzeń, ale ja strzałką w lewo wracam z powrotem."
+    },
+    "s10": {
+      "narration": "Pod nią jest Feed, firmowa tablica, na której znajdziecie ogłoszenia kierownictwa i kudos od kolegów."
+    },
+    "s11": {
+      "narration": "Klikam przełącznik Powiadomienie i zostają tylko firmowe ogłoszenia."
+    },
+    "s12": {
+      "narration": "Ważne ogłoszenie można przypiąć na górze, a pod każdym wpisem możecie zareagować emotikoną albo napisać komentarz."
+    },
+    "s13": {
+      "narration": "Klikam Nowe ogłoszenie, gdzie administrator wybiera, dla kogo jest wiadomość, i pisze jej treść."
+    },
+    "s14": {
+      "narration": "Ogłoszenie trafiłoby do wszystkich odbiorców e-mailem i w aplikacji, więc teraz go nie wyślę i klikam Anuluj."
+    },
+    "s15": {
+      "narration": "Przyciskiem Przekaż kudos publicznie pochwalicie kolegę, a przełącznikiem Wszystko wracam do wszystkich wpisów."
+    },
+    "s16": {
+      "narration": "Karta Przegląd – Dzisiaj pokazuje, kogo dziś nie ma, a kliknięciem w drugą zakładkę sprawdzicie, kto pracuje z domu."
+    },
+    "s17": {
+      "narration": "Przegląd na następne czternaście dni pokazuje, kogo wkrótce nie będzie, a pod nim znajdziecie nadchodzące urodziny i rocznice zatrudnienia."
+    },
+    "s18": {
+      "narration": "W prawej kolumnie na górze zobaczycie nowych kolegów, którzy niedawno dołączyli do firmy."
+    },
+    "s19": {
+      "narration": "Miernik nastroju codziennie pyta, jak Wam się podoba w pracy, a odpowiecie jednym kliknięciem w emotikonę."
+    },
+    "s20": {
+      "narration": "Karta Czas pracy pokazuje Wasz dzisiejszy stan, przyciskiem Rozpocznij pracę zaczniecie dzień pracy, a pod nią jest wymiar czasu pracy."
+    },
+    "s21": {
+      "narration": "Karta Nieobecności pokazuje pozostały czas wolny i Wasz nadchodzący urlop."
+    },
+    "s22": {
+      "narration": "Klikam Zgłoś nieobecność i otwiera się ten sam formularz wniosku co w module Nieobecności."
+    },
+    "s23": {
+      "narration": "Wniosku teraz nie wyślę, więc zamykam formularz krzyżykiem."
+    },
+    "s24": {
+      "narration": "Podobnie przyciskiem Dodaj aktywność zapiszecie na przykład spotkanie albo pracę nad projektem."
+    },
+    "s25": {
+      "narration": "Moje zadania pokazują Wasze najbliższe zadania, a strzałka przy nagłówku przeniesie Was do całej sekcji."
+    },
+    "s26": {
+      "narration": "Przydatne linki prowadzą do firmowych stron, które przygotował dla Was administrator."
+    },
+    "s27": {
+      "narration": "Obecność zespołu pokazuje menedżerom, ile godzin ich ludzie przepracowali do dziś."
+    },
+    "s28": {
+      "narration": "Ostatnia karta pokazuje strony z firmowej wiki oznaczone jako ważne, a jedną otwieram kliknięciem."
+    },
+    "s29": {
+      "narration": "Artykuł przeczytacie bezpośrednio na pulpicie, a gdy skończycie, zamkniecie go krzyżykiem."
+    },
+    "s30": {
+      "narration": "Układ każdy dostosowuje sam, więc na górze klikam ołówek Dostosuj widok."
+    },
+    "s31": {
+      "narration": "Karty przeciągniecie za uchwyt w inne miejsce albo do drugiej kolumny, a kliknięciem w oko ukryjecie kartę, na przykład Nadchodzące rocznice."
+    },
+    "s32": {
+      "narration": "Zmiany zatwierdzilibyście przyciskiem Zapisz, ale ja klikam Anuluj i pulpit zostaje bez zmian."
+    },
+    "s33": {
+      "narration": "Administrator ma obok jeszcze koło zębate Ustawienia, które klikam."
+    },
+    "s34": {
+      "narration": "Na zakładce Ogólny ukryjecie całej firmie miernik nastroju, urodziny albo rocznice i możecie zabronić użytkownikom ukrywania wybranych kart."
+    },
+    "s35": {
+      "narration": "Klikam zakładkę Przydatne linki, a potem Dodaj link."
+    },
+    "s36": {
+      "narration": "W polu Tytuł wpisuję Przewodnik dla nowych pracowników, a w pole URL wklejam adres Centrum pomocy."
+    },
+    "s37": {
+      "narration": "Klikam Zapisz i link pojawia się na liście, gdzie ołówkiem go edytujecie, a koszem usuniecie."
+    },
+    "s38": {
+      "narration": "W lewym menu klikam Pulpit i nowy link jest już w karcie Przydatne linki."
+    },
+    "s39": {
+      "narration": "Teraz wiecie, co pokaże Wam pulpit, jak załatwić z niego to, co czeka, i jak go dostosować, a gdyby coś nie działało, zajrzyjcie do Centrum pomocy."
+    },
+    "s40": {
+      "narration": "Mniej administracji, więcej czasu dla ludzi. To jest Sloneek."
+    }
+  }
+}

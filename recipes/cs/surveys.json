@@ -1,0 +1,1287 @@
+{
+  "id": "surveys",
+  "version": 1,
+  "title": "Vytvářejte a rozesílejte průzkumy",
+  "lang": "cs",
+  "app_version": "preprod-2026-10-13",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "cs"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "bF7C2fCv7Zf30iT84wZ1",
+    "model_id": "eleven_v4"
+  },
+  "pronunciation": [
+    {
+      "match": "4/2023",
+      "say": "čtyři, dva tisíce dvacet tři",
+      "note": "eNPS 4/2023"
+    },
+    {
+      "match": "Christmas Party",
+      "say": "krismas párty",
+      "note": "ukázkový průzkum"
+    }
+  ],
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s13",
+    "title": "Průzkumy"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Chcete zjistit, jak jsou kolegové spokojení, bez rozesílání dotazníků e-mailem? Dobrý den, jsem Marie z týmu Sloneek a ukážu vám, jak vytvořit a rozeslat průzkum.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate p-card",
+          "value": "20000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate p-card",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 1,
+      "part_title": "Úvod",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "V levém menu v sekci Společnost kliknu na Průzkumy.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_survey",
+          "before_ms": 800
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_survey",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table",
+          "value": "20000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table",
+        "url_contains": "/app/surveys/all"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "V přehledu vidíte všechny průzkumy se stavem, termíny a počtem odpovědí, a nahoře je vyfiltrujete na koncepty, probíhající a dokončené.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table thead",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-status-filter",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table",
+        "url_contains": "/app/surveys/all"
+      }
+    },
+    {
+      "id": "s04",
+      "narration": "Kliknu na Přidat nový průzkum a otevře se formulář, ve kterém si průzkum sestavíte od začátku.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] button[data-cy=newSurveyButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] button[data-cy=newSurveyButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] input[data-cy=nameInput]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] input[data-cy=nameInput]",
+        "url_contains": "/app/surveys/create"
+      },
+      "part": 2,
+      "part_title": "Nový průzkum a příjemci"
+    },
+    {
+      "id": "s05",
+      "narration": "Do Názvu průzkumu napíšu Spokojenost s nástupem – ukázka.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[data-cy=nameInput]",
+          "value": "Spokojenost s nástupem – ukázka",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] input[data-cy=nameInput]",
+        "url_contains": "/app/surveys/create"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "Do Popisu napíšu krátký úvod, který kolegové uvidí nad otázkami.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-editor[data-cy=descriptionTextarea] .ql-editor",
+          "value": "Zajímá nás, jak se vám u nás první týdny líbí. Vyplnění zabere dvě minuty.",
+          "speed": "fast",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-common-editor[data-cy=descriptionTextarea] .ql-editor",
+        "url_contains": "/app/surveys/create"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "V části Kdo má odpovědět na průzkum vyberete celou firmu, týmy, lokality, konkrétní lidi nebo štítky, a já kliknu na Vybrané týmy.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-survey-participants-form",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] button[data-cy=selectedTeamsButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] button[data-cy=selectedTeamsButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-autocomplete[data-cy=participantsAutocomplete] input",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-common-autocomplete[data-cy=participantsAutocomplete] input",
+        "url_contains": "/app/surveys/create"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "Kliknu do pole Vybrat tým, do hledání napíšu Zákaznická, zaškrtnu tým Zákaznická podpora a seznam zavřu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-autocomplete[data-cy=participantsAutocomplete] input",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-autocomplete[data-cy=participantsAutocomplete] input",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "input[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "input[data-cy=autocompleteSearchInput]",
+          "value": "Zákaznická",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Zákaznická podpora\")",
+          "value": "8000"
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Zákaznická podpora\")",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Zákaznická podpora\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-survey-participants-form .text-hint:has-text(\"Jakmile bude průzkum zveřejněn\")",
+        "url_contains": "/app/surveys/create"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "Pozor, kdo do týmu přibude až po spuštění průzkumu, ten už na něj odpovídat nebude.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-survey-participants-form .text-hint:has-text(\"Jakmile bude průzkum zveřejněn\")",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-survey-participants-form .text-hint:has-text(\"Jakmile bude průzkum zveřejněn\")",
+        "url_contains": "/app/surveys/create"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Kliknu na volbu Je průzkum anonymní, takže neuvidíte, kdo jak odpověděl, a kolegové budou odpovídat upřímněji.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] nb-checkbox[data-cy=anonymousCheckbox] label",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] nb-checkbox[data-cy=anonymousCheckbox] label",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-checkbox[data-cy=anonymousCheckbox] label",
+        "url_contains": "/app/surveys/create"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "Druhou volbou povolíte měnit odpovědi, dokud průzkum běží, a tu nechám vypnutou.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-checkbox[data-cy=editInProgressCheckbox]",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-checkbox[data-cy=editInProgressCheckbox]",
+        "url_contains": "/app/surveys/create"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Otázky vám umí navrhnout umělá inteligence, já ale do Textu otázky napíšu Jak hodnotíte svůj první týden u nás?",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] textarea[data-cy=aiTextarea]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] textarea[data-cy=aiTextarea]",
+          "before_ms": 300
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=0 >> textarea[data-cy=questionTextInput]",
+          "value": "Jak hodnotíte svůj první týden u nás?",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=0 >> textarea[data-cy=questionTextInput]",
+        "url_contains": "/app/surveys/create"
+      },
+      "part": 3,
+      "part_title": "Otázky"
+    },
+    {
+      "id": "s13",
+      "narration": "Kliknu na Typ odpovědi, kde je text, stupnice, výběr jedné nebo více možností a eNPS, a vyberu Stupnice.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=0 >> nb-select[data-cy=questionTypeSelect]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=0 >> nb-select[data-cy=questionTypeSelect]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option[data-cy=questionTypeOption-scale]",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-option-list",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "nb-option[data-cy=questionTypeOption-scale]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "nb-option[data-cy=questionTypeOption-scale]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=0 >> input[data-cy=scaleStartDescriptionInput]",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=0 >> input[data-cy=scaleEndDescriptionInput]",
+        "url_contains": "/app/surveys/create"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "Stupnice vede od jedné do pěti a do popisů napíšu na začátek Vůbec a na konec Skvěle.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=0 >> input[data-cy=scaleStartInput]",
+          "before_ms": 300
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=0 >> input[data-cy=scaleStartDescriptionInput]",
+          "value": "Vůbec",
+          "before_ms": 400
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=0 >> input[data-cy=scaleEndDescriptionInput]",
+          "value": "Skvěle",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=0 >> input[data-cy=scaleEndDescriptionInput]",
+        "url_contains": "/app/surveys/create"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Kliknu na Otázka je povinná, aby ji nikdo nepřeskočil.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=0 >> nb-checkbox[data-cy=requiredQuestionCheckbox] label",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=0 >> nb-checkbox[data-cy=requiredQuestionCheckbox] label",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=0",
+        "url_contains": "/app/surveys/create"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "Pod otázkou kliknu na plus a přidám další.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=0 >> button[data-cy=addQuestionButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=0 >> button[data-cy=addQuestionButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=0 >> button[data-cy=addQuestionButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1 >> textarea[data-cy=questionTextInput]",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1",
+        "url_contains": "/app/surveys/create"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "Napíšu otázku Co vám při nástupu nejvíc pomohlo, kliknu na Typ odpovědi a vyberu Výběr jedné možnosti.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1",
+          "before_ms": 300
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1 >> textarea[data-cy=questionTextInput]",
+          "value": "Co vám při nástupu nejvíc pomohlo?",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1 >> nb-select[data-cy=questionTypeSelect]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1 >> nb-select[data-cy=questionTypeSelect]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option[data-cy=questionTypeOption-single_select]",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "nb-option[data-cy=questionTypeOption-single_select]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "nb-option[data-cy=questionTypeOption-single_select]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1 >> input[data-cy=optionInput-0]",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1 >> input[data-cy=optionInput-0]",
+        "url_contains": "/app/surveys/create"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Do první možnosti napíšu Kolegové, kliknu na plus a do druhé napíšu Průvodce prvními dny.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1 >> input[data-cy=optionInput-0]",
+          "value": "Kolegové",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1 >> button[data-cy=addOptionButton-0]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1 >> button[data-cy=addOptionButton-0]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1 >> input[data-cy=optionInput-1]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1 >> input[data-cy=optionInput-1]",
+          "value": "Průvodce prvními dny",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1 >> input[data-cy=optionInput-1]",
+        "url_contains": "/app/surveys/create"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "Kliknu na Možnost přidat vlastní odpověď, aby kolegové mohli napsat i něco svého.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1 >> nb-checkbox[data-cy=addCustomResponseCheckbox] label",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1 >> nb-checkbox[data-cy=addCustomResponseCheckbox] label",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1",
+        "url_contains": "/app/surveys/create"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Ikonami dole otázku smažete nebo zkopírujete a za šipky vpravo nahoře ji přetáhnete na jiné místo.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1 >> button[data-cy=deleteQuestionButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1 >> button[data-cy=copyQuestionButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1 >> nb-icon.fa-sort",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=questionSection] >> nth=1",
+        "url_contains": "/app/surveys/create"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "V Automatizaci je Termín pro odeslání odpovědí, který je předvyplněný na dva týdny dopředu.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] input[data-cy=deadlineInput]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] input[data-cy=deadlineInput]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] input[data-cy=deadlineInput]",
+        "url_contains": "/app/surveys/create"
+      },
+      "part": 4,
+      "part_title": "Termín, upomínky a koncept"
+    },
+    {
+      "id": "s22",
+      "narration": "Kliknu na automatické upomínky pro ty, kdo ještě neodpověděli, a pak určíte, kolik dní před termínem odejdou, já nechám jeden den.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] nb-checkbox[data-cy=sendRemindersCheckbox] label",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] nb-checkbox[data-cy=sendRemindersCheckbox] label",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] input[data-cy=reminderInDaysInput]",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] input[data-cy=reminderInDaysInput]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] input[data-cy=reminderInDaysInput]",
+        "url_contains": "/app/surveys/create"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "Spustit průzkum by ho hned rozeslalo vybraným kolegům, já si ho ale zatím připravím, a tak kliknu na Uložit jako koncept.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button[data-cy=launchSurveyButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] button[data-cy=saveToDraftButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] button[data-cy=saveToDraftButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card-page-header p-tag[data-cy=\"tag-Návrh\"]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-common-card-page-header p-tag[data-cy=\"tag-Návrh\"]",
+        "url_contains": "/app/surveys/all"
+      }
+    },
+    {
+      "id": "s24",
+      "narration": "Otevře se detail průzkumu ve stavu Návrh, který zatím nikdo nedostal, a já kliknu na Nastavení.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card-page-header",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] nb-route-tabset li.route-tab a:text-is(\"Nastavení\")",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] nb-route-tabset li.route-tab a:text-is(\"Nastavení\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-survey-participants-form",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-survey-participants-form",
+        "url_contains": "/settings"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "Tady zkontrolujete příjemce, anonymitu i termín, a až budete připraveni, kliknete na Uložte a spusťte průzkum a kolegům přijde upozornění.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-survey-participants-form",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button#save_and_start_survey_button",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] button#save_and_start_survey_button",
+        "url_contains": "/settings"
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "V levém menu kliknu na Průzkumy a pak na filtr Koncepty, kde svůj koncept najdete.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_survey",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_survey",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-status-filter button:text-is(\"Koncepty\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-status-filter button:text-is(\"Koncepty\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table tbody tr:has(p-tag[data-cy=\"tag-Návrh\"]):has(td.mat-column-name > div:text-is(\"Spokojenost s nástupem – ukázka\"))",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table tbody tr:has(td.mat-column-name > div:text-is(\"Spokojenost s nástupem – ukázka\"))",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table tbody tr:has(p-tag[data-cy=\"tag-Návrh\"]):has(td.mat-column-name > div:text-is(\"Spokojenost s nástupem – ukázka\"))",
+        "url_contains": "/app/surveys/all"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "Přes tři tečky u průzkumu ho později zduplikujete, třeba pro další kolo, nebo smažete.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table tbody tr:has(td.mat-column-name > div:text-is(\"Spokojenost s nástupem – ukázka\")) >> button[data-cy=actionsButton]",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table tbody tr:has(p-tag[data-cy=\"tag-Návrh\"]):has(td.mat-column-name > div:text-is(\"Spokojenost s nástupem – ukázka\"))",
+        "url_contains": "/app/surveys/all"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "Teď se podívám na výsledky, a tak kliknu na Všechny průzkumy a otevřu dokončený průzkum eNPS 4/2023.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-status-filter button:text-is(\"Všechny průzkumy\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-status-filter button:text-is(\"Všechny průzkumy\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table tbody td.mat-column-name > div:text-is(\"eNPS 4/2023\")",
+          "value": "10000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table tbody td.mat-column-name > div:text-is(\"eNPS 4/2023\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table tbody td.mat-column-name > div:text-is(\"eNPS 4/2023\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] nb-route-tabset li.route-tab a:text-is(\"Analytika\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-route-tabset li.route-tab a:text-is(\"Analytika\")",
+        "url_contains": "/info"
+      },
+      "part": 5,
+      "part_title": "Výsledky"
+    },
+    {
+      "id": "s29",
+      "narration": "Na kartě Info jsou otázky průzkumu, a já kliknu na Analytika.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-survey-questions-form",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] nb-route-tabset li.route-tab a:text-is(\"Analytika\")",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] nb-route-tabset li.route-tab a:text-is(\"Analytika\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-analytics-widget >> nth=0",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-analytics-widget >> nth=0",
+        "url_contains": "/analytics"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "Nahoře vidíte, kolik lidí odpovědělo, i míru účasti, a tlačítkem Filtry výsledky zúžíte podle týmu nebo lokality.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-analytics-widget >> nth=0",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-filter button:text-is(\"Filtry\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-analytics-widget >> nth=0",
+        "url_contains": "/analytics"
+      }
+    },
+    {
+      "id": "s31",
+      "narration": "Shrnutí a doporučení vám umí připravit umělá inteligence, já ale projdu grafy sama.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(slnk-common-open-ai-button)",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-common-card:has(slnk-common-open-ai-button)",
+        "url_contains": "/analytics"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "U otázky eNPS vidíte celkové skóre a rozložení lidí na příznivce, neutrální a kritiky.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-analytics-widget:has-text(\"Skóre eNPS\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-analytics-widget:has-text(\"Skóre eNPS\")",
+          "before_ms": 300
+        },
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-analytics-widget:has-text(\"Rozložení respondentů\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-analytics-widget:has-text(\"Rozložení respondentů\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-analytics-widget:has-text(\"Rozložení respondentů\")",
+        "url_contains": "/analytics"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "Pod grafy jsou textové odpovědi a všechny odpovědi si stáhnete tlačítkem Exportovat odpovědi.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has-text(\"Please share the primary reason\") >> nth=0",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has-text(\"Please share the primary reason\") >> nth=0",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button[data-cy=exportSurveyButton]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] button[data-cy=exportSurveyButton]",
+        "url_contains": "/analytics"
+      }
+    },
+    {
+      "id": "s34",
+      "narration": "A jak to vidí zaměstnanec? V levém menu v sekci Já kliknu na Moje průzkumy.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_survey",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_survey",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-my-survey-grid table",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-my-survey-grid table",
+        "url_contains": "/app/surveys/my"
+      },
+      "part": 6,
+      "part_title": "Pohled zaměstnance"
+    },
+    {
+      "id": "s35",
+      "narration": "Tady má každý své průzkumy a ve sloupci Můj stav vidí, které ještě čekají na vyplnění.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-my-survey-grid table thead",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-my-survey-grid table",
+        "url_contains": "/app/surveys/my"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "Kliknu na průzkum Christmas Party, který už mám vyplněný.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-my-survey-grid table tbody td.mat-column-name > div:text-is(\"Christmas Party\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-my-survey-grid table tbody td.mat-column-name > div:text-is(\"Christmas Party\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-my-survey-detail-page slnk-common-card:has-text(\"Možnost vyplnění průzkumu do\") >> nth=0",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-my-survey-detail-page slnk-common-card:has-text(\"Možnost vyplnění průzkumu do\") >> nth=0",
+        "url_contains": "/app/surveys/my/"
+      }
+    },
+    {
+      "id": "s37",
+      "narration": "Kolega tu odpovídá na otázky až do termínu, který vidí u názvu, a tady už termín uplynul, takže odpovědi jen prohlížím.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-my-survey-detail-page slnk-common-card:has-text(\"Možnost vyplnění průzkumu do\") >> nth=0",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-my-survey-detail-page slnk-sloneek-my-survey-question >> nth=0",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-my-survey-detail-page slnk-common-card:has-text(\"Možnost vyplnění průzkumu do\") >> nth=0",
+        "url_contains": "/app/surveys/my/"
+      }
+    },
+    {
+      "id": "s38",
+      "narration": "V levém menu kliknu na Plochu, kde se Měřič nálady každý den anonymně ptá kolegů, jak se jim v práci líbí.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_dashboard",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-mood-meter p-card",
+          "value": "20000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-mood-meter p-card",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-mood-meter p-card",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 7,
+      "part_title": "Shrnutí"
+    },
+    {
+      "id": "s39",
+      "narration": "Teď víte, jak průzkum sestavit, vybrat příjemce, nastavit termín s upomínkami a projít výsledky, a kdyby něco nešlo, mrkněte do Centra nápovědy.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-mood-meter p-card",
+        "url_contains": "/app/dashboard-v2"
+      }
+    },
+    {
+      "id": "s40",
+      "narration": "Méně administrativy, víc času na lidi. To je Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-mood-meter p-card",
+        "url_contains": "/app/dashboard-v2"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat koncept průzkumu 'Spokojenost s nástupem – ukázka' – jen když hledání 'ukázka' nechá právě 1 řádek s přesným názvem ve stavu Návrh a potvrzovací dialog uvádí přesný název; když průzkum neexistuje, blok se přeskočí (if_visible)",
+      "url": "https://app-pre-production.sloneek.com/app/surveys/all",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table tbody tr:has(td.mat-column-name > div:text-is(\"Spokojenost s nástupem – ukázka\"))",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] input[data-cy=filtersSearch]",
+          "value": "ukázka",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table tbody tr:has(p-tag[data-cy=\"tag-Návrh\"]):has(td.mat-column-name > div:text-is(\"Spokojenost s nástupem – ukázka\"))",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table tbody:not(:has(tr ~ tr)) td.mat-column-name > div:text-is(\"Spokojenost s nástupem – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table tbody tr:has(td.mat-column-name > div:text-is(\"Spokojenost s nástupem – ukázka\")) >> button[data-cy=actionsButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table tbody tr:has(td.mat-column-name > div:text-is(\"Spokojenost s nástupem – ukázka\")) >> button[data-cy=actionsButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Vymazat\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Vymazat\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Spokojenost s nástupem – ukázka\") >> #survey_delete_dialog_yes",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Spokojenost s nástupem – ukázka\") >> #survey_delete_dialog_yes",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "teardown": [
+    {
+      "name": "teardown: smazat koncept průzkumu 'Spokojenost s nástupem – ukázka' – jen když hledání 'ukázka' nechá právě 1 řádek s přesným názvem ve stavu Návrh a potvrzovací dialog uvádí přesný název; když průzkum neexistuje, blok se přeskočí (if_visible)",
+      "url": "https://app-pre-production.sloneek.com/app/surveys/all",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table tbody tr:has(td.mat-column-name > div:text-is(\"Spokojenost s nástupem – ukázka\"))",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] input[data-cy=filtersSearch]",
+          "value": "ukázka",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table tbody tr:has(p-tag[data-cy=\"tag-Návrh\"]):has(td.mat-column-name > div:text-is(\"Spokojenost s nástupem – ukázka\"))",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table tbody:not(:has(tr ~ tr)) td.mat-column-name > div:text-is(\"Spokojenost s nástupem – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table tbody tr:has(td.mat-column-name > div:text-is(\"Spokojenost s nástupem – ukázka\")) >> button[data-cy=actionsButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table tbody tr:has(td.mat-column-name > div:text-is(\"Spokojenost s nástupem – ukázka\")) >> button[data-cy=actionsButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Vymazat\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Vymazat\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Spokojenost s nástupem – ukázka\") >> #survey_delete_dialog_yes",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Spokojenost s nástupem – ukázka\") >> #survey_delete_dialog_yes",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "teardown: ověřit, že žádný průzkum 'Spokojenost s nástupem – ukázka' nezůstal (hledání 'ukázka' -> 'Žádná data'); jen čtení",
+      "url": "https://app-pre-production.sloneek.com/app/surveys/all",
+      "if_visible": "[data-cy=mainContentCenterDiv] button[data-cy=newSurveyButton]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid table",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] input[data-cy=filtersSearch]",
+          "value": "ukázka",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-surveys-grid span:text-is(\"Žádná data\")",
+          "value": "8000"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-13",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "created_by_recipe": "KONCEPT průzkumu 'Spokojenost s nástupem – ukázka' (tým Zákaznická podpora – jen neaktivní demo uživatelé, anonymní, 2 otázky: stupnice 1–5 povinná, výběr jedné možnosti s vlastní odpovědí; termín +14 dní, upomínka 1 den předem) – nikdy nespuštěn; maže cleanup (před) i teardown (po).",
+      "read_only": "eNPS 4/2023 (dokončený, Info + Analytika), Christmas Party v Moje průzkumy (termín uplynul, odpovědi jen zobrazeny), Měřič nálady na Ploše (jen zvýrazněn)",
+      "never_clicked": "Spustit průzkum, Uložte a spusťte průzkum, Uložit změny, AI prompt / Získat AI doporučení, Exportovat odpovědi, Filtry (jen zvýrazněny), Duplikovat, smajlíky Měřiče nálady"
+    },
+    "notes": "viz atlas/surveys.md"
+  }
+}

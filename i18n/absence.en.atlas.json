@@ -1,0 +1,151 @@
+{
+  "_comment": "Atlas data for the Absence module in EN UI, collected during the EN video dry-run (preprod, local-translate=en, 9. 10. 2026, Claude via BrowserOS). For the coordinator to merge into atlas/*. 'verified': true = seen live in the UI; false = inferred / not confirmed.",
+  "collected": { "date": "2026-10-09", "env": "app-pre-production.sloneek.com", "user": "Thomas Claver (admin)", "ui_lang": "en" },
+  "ui_dictionary": {
+    "recipe_labels": {
+      "Přehled - Následujících 14 dní": "Overview - Next 14 days",
+      "Zobrazit": "View",
+      "Události absence": "Absence events",
+      "Přidat": "Add",
+      "Zobraz překlad": "Display translates",
+      "Nová absence (tlačítko i nadpis formuláře typu)": "New absence",
+      "Volno (krátí odpracovanou dobu)": "Free time (reduces working hours)",
+      "V práci (nemění odpracovanou dobu)": "At work (does not affect hours worked)",
+      "Uložit pro všechny uživatele": "Save for all users",
+      "Uložit": "Save",
+      "Zpět": "Back",
+      "Jméno Filter Input": "Name Filter Input",
+      "🏖️ Dovolená (denní fond)": "🏖️ Vacation (days)",
+      "Nadcházející absence": "Upcoming absences",
+      "Již ukončené absence": "Already finished absences",
+      "Vytvořit": "Create",
+      "Nemocenská": "🏥 Sick leave",
+      "Kalendáře": "Calendars",
+      "Rychlý pohled": "Quick preview",
+      "Komplexní mzdový report": "Complex Salary Report",
+      "Aktivní": "Active",
+      "Export": "Export",
+      "Absence (dashboard widget)": "Absences",
+      "Propojené účty": "Connected accounts",
+      "23.11.2026 - 25.11.2026 (formát data)": "11/23/2026 - 11/25/2026"
+    },
+    "navigation": {
+      "Moje absence": "My absences",
+      "Nastavení": "Settings",
+      "Nastavení › Absence": "Absence",
+      "Nastavení › Pracovní doba": "Work contracts setup",
+      "Nastavení › Hromadné nastavení absencí": "Bulk setting of absences",
+      "Kalendáře › Absence": "Absences",
+      "Kalendáře › Obecný přehled": "General overview",
+      "Kalendáře › Příchody / Odchody": "Arrivals / Departures",
+      "Vlastní reporty": "Custom reports",
+      "Schvalování": "Approvals",
+      "Nastavení rozhraní (menu)": "Notifications and Integrations",
+      "Viditelnost modulů": "Visibility of modules"
+    },
+    "settings_dashboard_cards": {
+      "Nastavení absencí": "Setting absences – Create and set the types of absences that users can log",
+      "Pracovní doba": "Work contracts setup – Defining the start and end of working hours, including breaks in the working day",
+      "Hromadné nastavení absencí": "Bulk setting of absences – Allow multiple users to take an event, or set their fund balance",
+      "page_title": "Application settings"
+    },
+    "absence_types_grid": {
+      "columns": ["Action", "Absence name for admins", "Name translation for users", "Active", "Type", "Volume of the annual fund", "Fund unit"],
+      "filter_values": { "Active": ["Yes", "No"], "Type": ["Free time (reduces working hours)", "At work (does not affect hours worked)"], "Fund unit": ["Day", "Hour"] },
+      "tabs": ["Settings", "Columns", "Filters", "Fullscreen"]
+    },
+    "absence_type_form": {
+      "title": "New absence",
+      "section": "Basic info",
+      "buttons": ["Back", "Save for all users", "Save"],
+      "fields": ["Active", "Select a predefined template", "Name", "Color", "Translate name - en", "Display translates / Hide translates", "Translate name - cs|de|es|hu|it|pl|sk", "Note", "Type", "Time unit of drawing", "Annual fund", "Yearly Entitlement (Days)", "Fund unit", "Disable accrue", "Unused units are being transferred to the new year", "Health reasons", "Event timeout", "Hide absence name"],
+      "options": { "Time unit of drawing": "Days and a half days (others not read)", "Fund unit": "Days", "Event timeout": "slider −31…31, label '7 days before the start'" },
+      "translation_fields_order_en_ui": { "cs": 1, "de": 2, "es": 3, "hu": 4, "it": 5, "pl": 6, "sk": 7 }
+    },
+    "collective_claims": {
+      "page_title": "Bulk setting of absence events",
+      "columns": { "absence_event.name": "Name of absence", "allowed": "Allowed", "user.full_name": "Name", "user.enabled": "Active", "user.team.name": "Team", "user.tags.name": "Tags", "approval_needed": "Approval required", "absence_event.yearly_fond_units": "Annual fund", "transformed_yearly_claim": "Individual fund", "transformed_first_yearly_claim": "Fund for this year", "transformed_claimed": "Drawn this year", "transformed_transferred_from_previous_year": "Transferred from last year" },
+      "boolean_filter": ["Yes", "No"],
+      "paging_example": "1 to 100 from 2,376 Page 1 from 24"
+    },
+    "my_absences": {
+      "buttons": ["Show settings for absences and annual funds", "New absence"],
+      "sections": ["Upcoming absences", "Already finished absences"],
+      "status_upcoming": "Approved by superior",
+      "balance_titles": ["Compensatory leave", "🤒 Sick Day", "🏖️ Vacation (hours)", "🏖️ Vacation (days)", "🩺 Doctor", "🫖 Care for a Family Member", "🏃 Unpaid Leave", "Business Trip", "🏥 Sick leave"]
+    },
+    "new_absence_dialog": {
+      "title": "Absence",
+      "toggles": ["For me / Another user", "Half-day / All days"],
+      "fields": ["User", "Absence", "From", "To", "Approval of the event", "Absence note (publicly visible, e.g. In my absence, please contact John Doe)"],
+      "approval_options_other_user": ["Automatically approved", "Subject to manager approval"],
+      "link": "Management of absence events",
+      "info_boxes": ["Type … Unit … Fund …", "Event check – Number of days 3, Drawing the fund 3 Days"],
+      "buttons": ["Create"],
+      "calendar": ["Month", "Today", "Show public holidays in company country (PT-11)"]
+    },
+    "absence_detail_dialog": {
+      "title": "Absence detail",
+      "fields": ["Absence name", "Date and time", "Type", "Days"],
+      "sections": { "User actions": ["Cancel", "Request cancellation"], "Admin action": ["Delete"] }
+    },
+    "absence_calendar": { "buttons": ["Absence", "New absence", "Timeline", "Today"], "placeholders": ["Search events ...", "Quick preview", "Find a user"] },
+    "custom_report_579": {
+      "title": "Complex Salary Report",
+      "buttons": ["Back", "Options", "Export", "Save report", "Reset view"],
+      "columns": { "employee_active": "Active", "salary_summary_working_fund_gross_hour": "Working fund gross (hours)", "salary_summary_absence_vacation_duration_hour": "Length of vacation absences (hours)", "salary_summary_working_fund_net_hour": "Working fund net (hours)", "salary_summary_attendance_worked_time_hour": "Worked hours", "salary_summary_attendance_saldo_hour": "Attendance saldo", "salary_summary_contract_names_in_interval": "Work contracts in interval" },
+      "active_values": ["Yes", "No"]
+    },
+    "interface_settings": { "sections": ["Connected accounts", "Google", "Microsoft", "Jira", "Other services", "MFA integration", "Token for recording attendance events"], "buttons": ["Sign in with Google", "Sign in with Microsoft", "Connect your Jira account", "Generate a new token"] },
+    "dashboard_widgets": ["On your plate", "Feed", "Overview - Today", "Overview - Next 14 days", "Upcoming birthdays", "Upcoming anniversaries", "New colleagues", "Attendance", "Working hours", "Activities", "Absences", "My tasks", "Useful links", "Team attendance"]
+  },
+  "api_calls": [
+    { "step": "s05/s11", "calls": ["GET /absence/absence-event?type=grid&grid_id=absence_events_grid", "GET /user-grid-settings?grid_id=settingsAbsence"] },
+    { "step": "s06", "calls": ["GET /absence/absence-event?type=template"] },
+    { "step": "create type (Save)", "calls": ["POST /absence/absence-event"] },
+    { "step": "s12", "calls": ["GET /user-grid-settings?grid_id=absence_user_absence_events", "GET /v2/module-absence/absence/user-absence-event/paginated?…filterModel[user.full_name]=Claver&filterModel[user.enabled]=true…&page=1&per_page=100"] },
+    { "step": "s14/s19/s29", "calls": ["GET /v2/module-core/users-management/absences-overview/user-absence-data?year=2026"] },
+    { "step": "s16/s21", "calls": ["GET /v2/module-absence/absence/absence-options?action=create&data_type=users", "GET /v2/module-absence/absence/absence-options?action=create&data_type=user_absence_events", "GET /v1/module-core/national-holidays", "GET /v1/module-absence/absences-calendar"] },
+    { "step": "s17", "calls": ["/v2/module-absence/absence/absence-validation", "/v1/module-attendance-v2/attendance-segment-event/validate"] },
+    { "step": "s19", "calls": ["POST /v2/module-absence/absence/absence"] },
+    { "step": "s22", "calls": ["GET /v2/module-absence/absence/absence-options?action=create&data_type=user_absence_events&user_uuid={uuid}", "/v2/module-absence/absence/absence-validation", "/v1/module-attendance-v2/attendance-segment-event/validate"], "note": "dialog closed – no create call" },
+    { "step": "s24", "calls": ["https://api-pre-production.analytics.sloneek.com/list-reports", "…/read-report/579", "…/configuration", "…/data", "/v1/module-core/options/user-by-uuids", "/tag?type=details"] },
+    { "step": "s26", "calls": ["/widgets/engagement/absence/v2?page=1&per_page=5", "/widgets/engagement/upcoming-absences", "/v1/module-engagement/dashboard/absences", "+ other dashboard widgets"] },
+    { "step": "s28", "calls": ["/v2/module-core/users-management/interface-settings", "/auth/me/google", "/auth/me/microsoft", "/auth/jira/user", "/auth/me/mfa", "/auth/attendance-token"] },
+    { "step": "cleanup", "calls": ["GET /v2/module-absence/absence/absence/{uuid}", "/v2/module-absence/absence/absence/{uuid}/change-status (delete = status change)"] }
+  ],
+  "tooltips_validations": [
+    { "where": "New absence dialog", "text": "Event check – Number of days 3, Drawing the fund 3 Days (green check when OK; Create enabled)", "verified": true },
+    { "where": "New absence dialog, note", "text": "Absence note (publicly visible, e.g. In my absence, please contact John Doe)", "verified": true },
+    { "where": "Absence type form", "text": "No tooltips found on 'Save for all users' (button id absence_set_to_all_company_members, no title/nbTooltip)", "verified": true },
+    { "where": "Grid toggle (translate_fe)", "text": "All events of all users that are visible to you within your user roles and settings.", "verified": false }
+  ],
+  "verified_open_items": {
+    "who_can_access_absence_settings": { "answer": "Visible to admin (Thomas Claver) in Settings → Absence / Bulk setting of absences. Settings also has 'Visibility of modules'. No role hint text in the UI; HR access not confirmed.", "verified": false },
+    "collective_claims_checkboxes_save_immediately": { "answer": "No Save button on the Bulk setting page (only Back + grid tabs Settings/Columns/Filters/Fullscreen) → most likely saved immediately per cell. Not tested (no data changed), no toast observed.", "verified": false },
+    "save_for_all_users": { "answer": "No tooltip/help text. Button id 'absence_set_to_all_company_members'; translate_fe has also 'Set to all users' (absence_dialog.set_to_all_users). Suggests it assigns/enables the type for all company users – not clicked.", "verified": false },
+    "status_colors_upcoming": { "answer": "Upcoming approved absence: inline background rgb(0,110,102) (dark teal/green), white text, label 'Approved by superior' (also for admin's auto-approved own absence). Pending (orange) not observed – no pending item; unclear whether the colour comes from status or type colour.", "verified": "partial" },
+    "admin_auto_approval": { "answer": "Admin's own absence created → immediately 'Approved by superior'. When admin creates for another user, dialog offers 'Approval of the event: Automatically approved / Subject to manager approval'.", "verified": true },
+    "date_format_en": { "answer": "EN UI uses MM/DD/YYYY (11/23/2026), time 10:00 AM – 6:30 PM.", "verified": true }
+  },
+  "en_translation_bugs": [
+    { "key": "Zobraz překlad", "en": "Display translates", "suggest": "Show translations", "where": "absence type form" },
+    { "key": "skrýt překlad", "en": "Hide translates", "suggest": "Hide translations", "where": "absence type form" },
+    { "key": "Časová jednotka čerpání", "en": "Time unit of drawing", "suggest": "Time unit for taking leave", "where": "absence type form" },
+    { "key": "Dny a půl dny", "en": "Days and a half days", "suggest": "Days and half-days", "where": "absence type form / dialog info" },
+    { "key": "Zakázat výpočet nároku absence", "en": "Disable accrue", "suggest": "Disable accrual", "where": "absence type form" },
+    { "key": "Časové omezení pro zápis události", "en": "Event timeout", "suggest": "Time limit for logging", "where": "absence type form" },
+    { "key": "Nevyčerpané jednotky se převádí do nového roku", "en": "Unused units are being transferred to the new year", "suggest": "Carry unused units over to the next year", "where": "absence type form" },
+    { "key": "Translate name - cs", "en": "Translate name - cs", "suggest": "Name (cs)", "where": "absence type form" },
+    { "key": "Již ukončené absence", "en": "Already finished absences", "suggest": "Past absences", "where": "My absences" },
+    { "key": "Schváleno nadřízeným", "en": "Approved by superior", "suggest": "Approved by manager", "where": "My absences (also shown for admin auto-approval)" },
+    { "key": "Volno (typ v info boxu dialogu)", "en": "Type: Absence", "suggest": "Type: Free time", "where": "New absence dialog info box – type shows 'Absence' instead of 'Free time'", "verified": false },
+    { "key": "Centrum nápovědy", "en": "Knowledgebase", "suggest": "Help Center (narration uses Help Center)", "where": "translate_fe only" },
+    { "key": "Rychlý pohled", "en": "Quick preview", "suggest": "Quick view", "where": "Absence calendar placeholder" },
+    { "key": "1 to 100 from 2,376 Page 1 from 24", "en": "from", "suggest": "of", "where": "grid paging" }
+  ],
+  "tenant_data_notes": [
+    "Tenant type names are partly Czech even in EN UI (internal names 'Dovolená', 'Lékař', 'Placené volno'…); user-facing translations show EN ('🏖️ Vacation (days)' = internal 'V01', 20 days).",
+    "Types 'Vacation – demo' (EN, 20 days, id ebd7cd08-…) and 'Urlop – przykład' (PL, 207 days – PL pass typo) both show user name 'Vacation – demo'."
+  ]
+}

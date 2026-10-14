@@ -1,0 +1,288 @@
+{
+  "_comment": "Polská verze videa Pracovní doby (working-hours). UI texty z translate_fe/pl + ověřeno naživo (local-translate=pl). Vlastní polská demo data: trvalý NEAKTIVNÍ uživatel 'Piotr Nowak' <piotr.nowak@example.com> (d0fd578b-556d-4e8d-add8-9793c69f31e5, tým Obsługa klienta 94cefbad-…, pozice Specjalista ds. obsługi klienta, Praha, Kraj działalności Poland) s úvazkem 'Pełny etat 40 h' (67645159-…) od 1. 9. 2026 na dobu neurčitou – nikdy neaktivovat. Recept vytváří šablonu 'Niepełny etat 30 h' a její přiřazení Piotrovi; cleanup (urls → karta Piotra podle uuid) odebere přiřazení, vrátí 40 h na Czas nieokreślony a smaže šablonu (filtr, právě 1 řádek s přesným názvem). cleanup_prepend zkusí smazat pozůstatky CZ 'Zkrácený úvazek 30 h' a EN 'Part-time 30 h' stejnou pojistkou – dokud jsou přiřazené CZ/EN demo uživateli, server smazání odmítne (odřazení patří jejich vlastním receptům, PL recept na Tomáše ani EN uživatele nesahá). Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM. Generátor: out/working-hours/_work/build_i18n_pl.py",
+  "verified": {
+    "date": "2026-10-11",
+    "by": "Claude (BrowserOS, preprod, local-translate=pl)",
+    "selectors": "DRY-RUN 11. 10. 2026 ~20:55–21:40 UTC v PL UI in-page runnerem (out/working-hours/_work/dryrun-runner.js – runner z add-users + řetězené :has-text/:not(:has-text), focusout při kliku mimo input, klik na SVG) s polskými demo daty (Piotr Nowak d0fd578b-…), datumy {{DATE:+14d+6}} = 01.11.2026 a {{DATE:+14d+7}} = 02.11.2026 (psané DD.MM.YYYY přepnou nb-calendar, tabulka ukazuje DD.MM.YYYY). Průchod 1: 36/36 s opravami (s29 text karty, s31 jiný název řádku v Kontrole ustawień, s33 toast) → cleanup po (přiřazení odebráno, 40 h zpět na Czas nieokreślony, šablona 6f206b5f-… smazána, toast 'Usunięto'). Cleanup před (po reloadech): blok CZ 'Zkrácený úvazek 30 h' (0c5dd8e6-…, přiřazený Tomášovi z CZ nahrávání) → server odmítl ('Rodzaj współpracy jest już przypisany do użytkownika'), blok EN 'Part-time 30 h' selhal na pojistce (neexistuje), Piotr bloky přeskočeny (if_visible), blok PL šablony selhal na pojistce. Průchod 2: 36/36 v jednom kuse bez reloadu (~108 s bez narace; s31 otevřel šablonu z s11 3d6864d1-…, s33 kliknul Tak jen na ni, přiřazenou Piotrovi – server odmítl). Cleanup po (po reloadech): Piotrovi odebrán 'Niepełny etat 30 h', 'Pełny etat 40 h' zpět na Czas nieokreślony, šablona smazána ('1 do 1 od 1' → 'Usunięto'). Šablon 25 (vč. CZ pozůstatku) → 26 → 25; uživatelů 75 (46/29) před založením Piotra → 76 (46/30) trvale, během běhu beze změny. Piotr celou dobu neaktivní.",
+    "notes": "Názvosloví v PL UI je nejednotné: menu a řádek Ustawienia aplikacji 'Obowiązki i rodzaje współpracy', nadpis seznamu 'Warunki zatrudnienia', řádek Kontroli ustawień 'Konfiguracja umów o pracę' (s31 má vlastní selektor), karta docházky 'Ustawienia umów'. Sloupec/filtr názvu šablony je 'Imię' (aria-label 'Imię Filter Input'), stránkování 'X do Y od Z'. Předdefinované šablony jsou anglicky (Empty, Full Time, Half Time). Tlačítko v detailu 'Duplikuj' (translate_fe má i 'Duplikat'). Menu řádku úvazku 'Edytuj' / 'Usuń', potvrzení 'Redakcja umowy o pracę', dialog 'Edytuj typ współpracy' s tlačítkem 'Edytuj'. Toast odmítnutí smazání 'Rodzaj współpracy jest już przypisany do użytkownika' (backend, v translate_fe není). Kraj działalności Piotra = Poland (svátky PL)."
+  },
+  "title": "Utwórz i przypisz czas pracy",
+  "thumbnail_title": "Czas pracy",
+  "parts": {
+    "Úvod": "Wprowadzenie",
+    "Kde je najdete": "Gdzie go znajdziecie",
+    "Nová šablona": "Nowy szablon",
+    "Rozvrh týdne": "Rozkład tygodnia",
+    "Přiřazení uživateli": "Przypisanie użytkownikowi",
+    "Vliv na absence a docházku": "Wpływ na nieobecności i czas pracy",
+    "Úpravy a mazání": "Zmiany i usuwanie",
+    "Závěr": "Podsumowanie"
+  },
+  "text": {
+    "Úvazky a typy spolupráce": "Obowiązki i rodzaje współpracy",
+    "Vyberte předdefinovanou šablonu": "Wybierz predefiniowany szablon",
+    "Zkrácený úvazek 30 h": "Niepełny etat 30 h",
+    "Zkrácený": "Niepełny",
+    "Pondělí až pátek, 6 hodin denně.": "Od poniedziałku do piątku, 6 godzin dziennie.",
+    "Týdenní": "Tygodniowy",
+    "Roční": "Roczny",
+    "Týdenní fond pracovní doby": "Tygodniowy fundusz czasu pracy",
+    "Nastavení týdenní pracovní doby": "Ustawienie tygodniowych godzin pracy",
+    "Reset": "Resetuj",
+    "Běžná": "Normalna",
+    "Zkopírovat první řádek": "Skopiuj pierwszą linię",
+    "Vyhledávání...": "Szukaj...",
+    "Tomáš": "Piotr",
+    "Novák Tomáš": "Nowak Piotr",
+    "Plný úvazek 40 h": "Pełny etat 40 h",
+    "Doba neurčitá": "Czas nieokreślony",
+    "Editace": "Edytuj",
+    "Editace typu spolupráce": "Redakcja umowy o pracę",
+    "Upravit typ spolupráce": "Edytuj typ współpracy",
+    "Upravit": "Edytuj",
+    "Zadat nový typ spolupráce": "Dodaj nowy typ współpracy",
+    "Uložit": "Zapisz",
+    "Czechia": "Poland",
+    "Automatické pauzy": "Automatyczne pauzy",
+    "Přestávky lze upravovat v Nastavení typů spolupráce": "Przerwy można zarządzać w Ustawienia umów",
+    "Pracovní doba uživatelů": "Czas pracy użytkowników",
+    "Končí pracovní doba": "Koniec godzin pracy",
+    "Smazání číselníku typu spolupráce": "Usuwanie wskaźnika czasu pracy",
+    "Ano": "Tak",
+    "Typ spolupráce je již přiřazen": "Rodzaj współpracy jest już przypisany",
+    "Odstranit": "Usuń",
+    "Odstranění typu spolupráce uživatele": "Usuwanie typu współpracy użytkownika",
+    "Název Filter Input": "Imię Filter Input",
+    "1 do 1 z 1": "1 do 1 od 1",
+    "Odstranění pracovní doby": "Usunięcie godzin pracy",
+    "{{DATE:+14d+6:D. M. YYYY}}": "{{DATE:+14d+6:DD.MM.YYYY}}",
+    "{{DATE:+14d+7:D. M. YYYY}}": "{{DATE:+14d+7:DD.MM.YYYY}}"
+  },
+  "keep": [
+    "{{DATE:+14d+6:DD.MM.YYYY}}",
+    "{{DATE:+14d+7:DD.MM.YYYY}}",
+    "15:30"
+  ],
+  "urls": {
+    "https://app-pre-production.sloneek.com/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/contracts-and-terms": "https://app-pre-production.sloneek.com/app/company-details/member/d0fd578b-556d-4e8d-add8-9793c69f31e5/contracts-and-terms"
+  },
+  "cleanup_prepend": [
+    {
+      "name": "smazat CZ šablonu 'Zkrácený úvazek 30 h' – jen při právě 1 řádku s přesným názvem po filtru (server ji odmítne smazat, dokud je někomu přiřazená)",
+      "url": "https://app-pre-production.sloneek.com/app/settings/working-hours",
+      "if_visible": "[data-cy=mainContentCenterDiv] #settings_working_hours_add_working_hours_button",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[aria-label=\"Imię Filter Input\"]",
+          "value": "Zkrácený úvazek 30 h",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container:not(:has(.ag-row ~ .ag-row)) a.redirect_column:text-is(\"Zkrácený úvazek 30 h\")",
+          "value": "6000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-paging-row-summary-panel:has-text(\"1 do 1 od 1\")",
+          "value": "3000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row:has-text(\"Zkrácený úvazek 30 h\") >> [data-cy=deleteButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usunięcie godzin pracy\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usunięcie godzin pracy\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat EN šablonu 'Part-time 30 h' – jen při právě 1 řádku s přesným názvem po filtru (server ji odmítne smazat, dokud je někomu přiřazená)",
+      "url": "https://app-pre-production.sloneek.com/app/settings/working-hours",
+      "if_visible": "[data-cy=mainContentCenterDiv] #settings_working_hours_add_working_hours_button",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[aria-label=\"Imię Filter Input\"]",
+          "value": "Part-time 30 h",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container:not(:has(.ag-row ~ .ag-row)) a.redirect_column:text-is(\"Part-time 30 h\")",
+          "value": "6000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-paging-row-summary-panel:has-text(\"1 do 1 od 1\")",
+          "value": "3000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row:has-text(\"Part-time 30 h\") >> [data-cy=deleteButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usunięcie godzin pracy\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usunięcie godzin pracy\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    }
+  ],
+  "steps": {
+    "s01": {
+      "narration": "Ile godzin tygodniowo ma przepracować każda osoba? Dzień dobry, jestem Maria z zespołu Sloneek i pokażę Wam, jak utworzyć i przypisać czas pracy."
+    },
+    "s02": {
+      "narration": "Czas pracy, w aplikacji etat albo rodzaj współpracy, określa, kiedy dana osoba ma pracować. Bez niego nie może korzystać z nieobecności ani rejestrować czasu pracy."
+    },
+    "s03": {
+      "narration": "W lewym menu otwieram Ustawienia. Czas pracy znajdziecie w wierszu Obowiązki i rodzaje współpracy."
+    },
+    "s04": {
+      "narration": "Po kliknięciu Pokaż widzicie listę szablonów: czy są aktywne, czy są tygodniowe, czy roczne, i ich notatkę."
+    },
+    "s05": {
+      "narration": "Nowy szablon zakładam przyciskiem Dodaj. Otwiera się formularz Nowy rodzaj współpracy."
+    },
+    "s06": {
+      "narration": "Możecie zacząć od gotowego szablonu, na przykład Full Time albo Half Time. Ja jednak zacznę od zera."
+    },
+    "s07": {
+      "narration": "W pierwszym polu wpisuję nazwę Niepełny etat 30 h. Ten sam tekst wpisuję też w tłumaczeniu na polski."
+    },
+    "s08": {
+      "narration": "W notatce krótko piszę, dla kogo jest szablon. Przełącznik Aktywny zostawiam włączony, żeby można było z niego korzystać."
+    },
+    "s09": {
+      "narration": "Rodzaj współpracy może być tygodniowy albo roczny. Tygodniowy rozkład powtarza się co tydzień i pasuje do zwykłej pracy."
+    },
+    "s10": {
+      "narration": "Roczny rozkład ustawiacie osobno dla każdego dnia w roku, na przykład dla pracy zmianowej. Ja zostawiam Tygodniowy."
+    },
+    "s11": {
+      "narration": "Szablon jest zapisany. Pod formularzem pojawiła się tabela Ustawienie tygodniowych godzin pracy."
+    },
+    "s12": {
+      "narration": "Sloneek wypełnił zwykły tydzień: od poniedziałku do piątku od dziewiątej do wpół do szóstej z półgodzinną przerwą. Tygodniowy fundusz to czterdzieści godzin."
+    },
+    "s13": {
+      "narration": "Przycisk Resetuj czyści tabelę, a Normalna przywraca właśnie ten zwykły tydzień."
+    },
+    "s14": {
+      "narration": "Dla niepełnego etatu zmieniam w wierszu poniedziałku Koniec godzin pracy na wpół do czwartej."
+    },
+    "s15": {
+      "narration": "Przyciskiem Skopiuj pierwszą linię przenoszę godziny z poniedziałku na cały tydzień."
+    },
+    "s16": {
+      "narration": "Kopia trafiła też na weekend, więc w sobotę i niedzielę odznaczam Dzień roboczy. Fundusz pokazuje teraz trzydzieści godzin."
+    },
+    "s17": {
+      "narration": "Po prawej są przerwy. Przerwa obiadowa od dwunastej do wpół do pierwszej nie wlicza się do czasu pracy."
+    },
+    "s18": {
+      "narration": "Długość pół zmiany Sloneek wylicza sam. Na jej podstawie liczy się nieobecność na pół dnia."
+    },
+    "s19": {
+      "narration": "Na koniec zapisuję rozkład przyciskiem Zapisz nad tabelą. Bez tego zmiany by się nie zapisały."
+    },
+    "s20": {
+      "narration": "Szablon przypisuję w karcie użytkownika. W sekcji Użytkownicy otwieram Zarządzanie, wyszukuję Piotra i otwieram jego kartę."
+    },
+    "s21": {
+      "narration": "Tutaj, w zakładce Rodzaj współpracy i warunki finansowe, widzicie wszystkie etaty Piotra."
+    },
+    "s22": {
+      "narration": "Piotr ma Pełny etat 40 h na czas nieokreślony. Zielony wiersz oznacza rodzaj współpracy, który obowiązuje właśnie dziś."
+    },
+    "s23": {
+      "narration": "Wkrótce przejdzie na niepełny etat. Rodzaje współpracy nie mogą się nakładać, dlatego obecny najpierw kończę przez Edytuj."
+    },
+    "s24": {
+      "narration": "Odznaczam Czas nieokreślony, w polu Ważne do wpisuję ostatni dzień pełnego etatu i klikam Edytuj."
+    },
+    "s25": {
+      "narration": "Teraz klikam Dodaj nowy typ współpracy i wyszukuję Niepełny etat 30 h."
+    },
+    "s26": {
+      "narration": "Zaznaczam Czas nieokreślony, a Obowiązuje od ustawiam na dzień po końcu pełnego etatu. Potem zapisuję."
+    },
+    "s27": {
+      "narration": "Nowy etat nawiązuje do starego, a historia zostaje. Nie zmieniajcie etatów w przeszłości, bo przeliczyłyby się salda wykorzystanych już nieobecności."
+    },
+    "s28": {
+      "narration": "Święta państwowe Sloneek w szablonie tygodniowym odlicza sam, według kraju pracy użytkownika, czyli pola Kraj działalności w Danych podstawowych i roboczych."
+    },
+    "s29": {
+      "narration": "W ewidencji czasu pracy etat wyznacza fundusz i saldo, a czas wolny fundusz zmniejsza. Przerwy z etatu mogą się wpisywać automatycznie."
+    },
+    "s30": {
+      "narration": "Kto nie ma rodzaju współpracy albo komu wkrótce się on skończy, zobaczycie w Ustawieniach pod pozycją Kontrola ustawień."
+    },
+    "s31": {
+      "narration": "Przypisanego szablonu już nie zmienicie, przy rozkładzie świeci kłódka. Gdy potrzebujecie innych godzin, użyjcie Duplikuj i zmieńcie kopię.",
+      "selectors": {
+        "[data-cy=mainContentCenterDiv] div.row.pl-3:has-text(\"Úvazky a typy spolupráce\") >> a[href=\"/app/settings/working-hours\"]": "[data-cy=mainContentCenterDiv] div.row.pl-3:has-text(\"Konfiguracja umów o pracę\") >> a[href=\"/app/settings/working-hours\"]"
+      }
+    },
+    "s32": {
+      "narration": "Usunąć można tylko szablon, którego nikt nie ma. Jeśli nie chcecie go już używać, wystarczy go dezaktywować."
+    },
+    "s33": {
+      "narration": "Klikam Tak, a Sloneek zatrzymuje usuwanie, bo szablon ma już przypisany Piotr."
+    },
+    "s34": {
+      "narration": "Wskazówka na koniec: nowym osobom rodzaj współpracy ustawicie od razu przy zakładaniu konta albo przypisze go za Was HR Workflows."
+    },
+    "s35": {
+      "narration": "Teraz umiecie utworzyć czas pracy, przypisać go i bezpiecznie zmienić. Jeśli coś nie zadziała, zajrzyjcie do Centrum pomocy."
+    },
+    "s36": {
+      "narration": "Mniej administracji, więcej czasu dla ludzi. To jest Sloneek."
+    }
+  }
+}

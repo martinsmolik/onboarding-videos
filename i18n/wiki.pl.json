@@ -1,0 +1,169 @@
+{
+  "_comment": "Polská verze videa Vytvářejte články na Wiki (wiki). Struktura, kroky, kliky a tempo 1:1 podle CZ masteru; recept NIKDY neukládá. UI texty z translate_fe/pl (fetch uvnitř stránky) + ověřeno naživo 12. 10. 2026 (local-translate=pl). PL demo data: trvalý ukázkový článek 'Jak zaplanować pierwszy tydzień – przykład' / 'Pierwszy tydzień w firmie – przykład' (NEAKTIVNÍ, role onboarding_specialist, hvězdička, H2 + 2 odrážky), založen jednou 12. 10. 2026 se schválením Martina (1 upozornění 'New wiki page'); cleanup ho nemaže. Read-only data tenantu jako v CZ (Lunch menu s přílohou, Guide to Sloneek). PL UI: pole Název = 'Imię' (bug #117) – narace ho nejmenuje ('w pierwsze pole'). Narace bez asistentky (Centrum pomocy). Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM. Generátor: out/wiki/_work/build_i18n.py (+ i18n_src.json)",
+  "verified": {
+    "date": "2026-10-12",
+    "by": "Claude (BrowserOS, preprod, local-translate=pl)",
+    "selectors": "Dry-run 39/39 v jednom běhu; s29 otevřel PL ukázkový článek 8f79b967… (H2 + 2 odrážky sedí), nic se neuložilo (dialog Niezapisane zmiany -> Tak).",
+    "notes": "Živé PL popisky: menu Firma → Wiki firmy, nadpis Firmowa wiki, karta Utworzony/Zaktualizowano + Szczegóły, dialog Edytuj, Zarządzaj, tabulka Aktywny/Imię/Wyświetlana nazwa/Kolejność artykułów/Oznaczone jako ważne/Rola/Utworzone/Zaktualizowano/Akcja, Filtry (placeholder Imię), Dodaj, formulář Wyświetlana nazwa/Aktywny/Imię (#117)/Kolejność artykułów, Wstaw załącznik + tlačítko „Wybierać“ (nespisovné, narace ho nejmenuje), Widoczne dla wszystkich, Wróć/Zapisz/Usuń, Pulpit – Strony Wiki oznaczone jako ważne, Powiadomienia i integracje – řádek Powiadomienie o nowym poście na firmowej Wiki, sloupce E-mail / Aplikacja internetowa.",
+    "rehearsal": "Zkouška skutečným recorderem (job 160-rehearse-wiki-pl, mock hlas): 39/39 ok, cleanup 2/2 done (kontrola existence PL článku), 0 FAILED, mux 309,7 s, 0 warnings; nic se neuložilo, zvonek 218 beze změny."
+  },
+  "title": "Twórzcie artykuły na Wiki",
+  "thumbnail_title": "Artykuły na Wiki",
+  "parts": {
+    "Úvod": "Wprowadzenie",
+    "Wiki očima zaměstnance": "Wiki oczami pracownika",
+    "Správa článků": "Zarządzanie artykułami",
+    "Nový článek": "Nowy artykuł",
+    "Obsah článku": "Treść artykułu",
+    "Příloha a viditelnost": "Załącznik i widoczność",
+    "Uložený článek": "Zapisany artykuł",
+    "Plocha a upozornění": "Pulpit i powiadomienia"
+  },
+  "text": {
+    "Firemní Wiki": "Firmowa wiki",
+    "Aktivní": "Aktywny",
+    "Pořadí článku": "Kolejność artykułów",
+    "Označeno jako Důležité": "Oznaczone jako ważne",
+    "Role": "Rola",
+    "Filtry": "Filtry",
+    "Název": "Imię",
+    "Přidat": "Dodaj",
+    "Neuložené změny": "Niezapisane zmiany",
+    "Vybrat": "Wybierać",
+    "Zpět": "Wróć",
+    "Jak si naplánovat první týden – ukázka": "Jak zaplanować pierwszy tydzień – przykład",
+    "První týden ve firmě – ukázka": "Pierwszy tydzień w firmie – przykład",
+    "Váš první týden": "Twój pierwszy tydzień",
+    "Pondělí: převezměte notebook a přihlaste se do Sloneeku.": "Poniedziałek: odbierz laptopa i zaloguj się do Sloneek.",
+    "Úterý: seznamte se s týmem a svým patronem.": "Wtorek: poznaj zespół i swojego opiekuna."
+  },
+  "keep": [
+    "onboarding_specialist",
+    "Lunch menu"
+  ],
+  "ids": {
+    "71188f3b-fa98-4ebd-a054-a25c8c1042a4": "8f79b967-9d4e-4793-8d53-c4dc70ebb14e"
+  },
+  "cleanup_names": [
+    "nic k mazání: recept článek nikdy neukládá (uložení posílá upozornění); PL ukázkový článek 'Jak zaplanować pierwszy tydzień – przykład' (8f79b967-9d4e-4793-8d53-c4dc70ebb14e) je trvalý předpoklad a cleanup ho nemaže – jen kontrola, že existuje"
+  ],
+  "steps": {
+    "s01": {
+      "narration": "Chcecie mieć firmowe instrukcje w jednym miejscu, gdzie każdy je znajdzie? Dzień dobry, jestem Maria z zespołu Sloneek i pokażę Wam, jak tworzyć artykuły na Wiki."
+    },
+    "s02": {
+      "narration": "Wiki znajdziecie w lewym menu w sekcji Firma pod pozycją Wiki firmy."
+    },
+    "s03": {
+      "narration": "Klikam Wiki firmy i otwiera się przegląd artykułów, tak jak widzą go pracownicy."
+    },
+    "s04": {
+      "narration": "Każdy artykuł ma swoją kartę z nazwą i datą, kiedy powstał i kiedy był ostatnio zaktualizowany."
+    },
+    "s05": {
+      "narration": "Przy artykule Lunch menu klikam Szczegóły i artykuł otwiera się razem z załącznikiem, tutaj ze zdjęciem jadłospisu."
+    },
+    "s06": {
+      "narration": "Administrator ma tu dodatkowo przycisk Edytuj, ale teraz zamykam okno krzyżykiem."
+    },
+    "s07": {
+      "narration": "Artykułami zarządzacie przyciskiem Zarządzaj w prawym górnym rogu, który otwiera tabelę wszystkich artykułów."
+    },
+    "s08": {
+      "narration": "W przeciwieństwie do kart widzicie tu też nieaktywne artykuły, a przy każdym jego kolejność i to, czy jest oznaczony jako ważny."
+    },
+    "s09": {
+      "narration": "Kolumna Rola mówi, dla kogo jest artykuł, a gdy jest pusta, artykuł widzą wszyscy."
+    },
+    "s10": {
+      "narration": "Klikam Filtry, gdzie zawęzicie listę według nazwy, stanu, roli albo daty, i z powrotem zamykam filtry."
+    },
+    "s11": {
+      "narration": "Klikam Dodaj i otwiera się formularz nowego artykułu."
+    },
+    "s12": {
+      "narration": "Po lewej zostaje lista artykułów z wyszukiwarką, więc w każdej chwili przejdziecie między nimi."
+    },
+    "s13": {
+      "narration": "W pierwsze pole wpisuję, jak nazywa się artykuł, tutaj Jak zaplanować pierwszy tydzień."
+    },
+    "s14": {
+      "narration": "Wyświetlaną nazwę nad nim pracownicy zobaczą na karcie, więc wpisuję Pierwszy tydzień w firmie."
+    },
+    "s15": {
+      "narration": "Kliknięciem w gwiazdkę oznaczam artykuł jako ważny, więc zostanie przypięty na pulpicie."
+    },
+    "s16": {
+      "narration": "Kolejność artykułów określa, w którym miejscu artykuł się wyświetli, a jedynka oznacza sam początek."
+    },
+    "s17": {
+      "narration": "Przełącznik Aktywny wyłączam, więc artykuł zostanie w wersji roboczej i pracownicy jeszcze go nie zobaczą."
+    },
+    "s18": {
+      "narration": "W edytorze wpisuję nagłówek Twój pierwszy tydzień."
+    },
+    "s19": {
+      "narration": "W menu stylów, gdzie jest teraz Normal, wybieram Heading 2 i z wiersza robi się nagłówek."
+    },
+    "s20": {
+      "narration": "Enterem przechodzę do nowego wiersza, a przyciskiem z kropkami zaczynam listę punktowaną."
+    },
+    "s21": {
+      "narration": "W pierwszym punkcie wpisuję, co czeka nowego pracownika w poniedziałek."
+    },
+    "s22": {
+      "narration": "Enterem dodaję kolejny punkt i wpisuję, co czeka go we wtorek."
+    },
+    "s23": {
+      "narration": "Na pasku znajdziecie też pogrubienie, kursywę, listę numerowaną albo listę z polami do zaznaczania."
+    },
+    "s24": {
+      "narration": "Kolejne przyciski wstawią do tekstu link, obrazek albo film, a ostatni doda emotikonę."
+    },
+    "s25": {
+      "narration": "Pod edytorem w polu Wstaw załącznik dołączycie dokument, arkusz albo obrazek, a pracownicy zobaczą go pod artykułem."
+    },
+    "s26": {
+      "narration": "Odznaczam Widoczne dla wszystkich, żeby artykuł widziały tylko osoby z wybraną rolą."
+    },
+    "s27": {
+      "narration": "W polu Rola wybieram rolę do onboardingu, więc artykuł zobaczą tylko osoby z tą rolą."
+    },
+    "s28": {
+      "narration": "Przyciskiem Zapisz utworzycie artykuł, a Sloneek od razu wyśle o nim powiadomienie, nawet gdy jest nieaktywny, więc zapisujcie dopiero gotowy tekst."
+    },
+    "s29": {
+      "narration": "Przykładowy artykuł mam już zapisany, więc otwieram go z listy po lewej i potwierdzam wyjście z formularza bez zapisywania."
+    },
+    "s30": {
+      "narration": "Zapisany artykuł jest nieaktywny, widzą go tylko osoby z rolą do onboardingu, a w edytorze jest dokładnie to, co przed chwilą pisaliśmy."
+    },
+    "s31": {
+      "narration": "Zapisany artykuł ma obok wyświetlanej nazwy ikonkę łańcucha, która skopiuje link, na przykład do zadania onboardingowego."
+    },
+    "s32": {
+      "narration": "Gdy artykuł będzie gotowy, włączycie przełącznik Aktywny i klikniecie Zapisz, ale ja zapisywać nie będę."
+    },
+    "s33": {
+      "narration": "Czerwonym przyciskiem Usuń skasujecie artykuł i strona nie będzie już dostępna."
+    },
+    "s34": {
+      "narration": "Ważne artykuły pracownicy zobaczą też na pulpicie, więc w menu klikam Pulpit i potwierdzam wyjście bez zapisywania."
+    },
+    "s35": {
+      "narration": "Artykuły z gwiazdką mają na pulpicie własny kafelek, z którego każdy otworzy je jednym kliknięciem."
+    },
+    "s36": {
+      "narration": "O nowych artykułach Sloneek informuje powiadomieniem, więc w menu klikam Powiadomienia i integracje."
+    },
+    "s37": {
+      "narration": "W wierszu Powiadomienie o nowym poście na firmowej Wiki każdy ustawi, czy dostanie e-mail, powiadomienie w aplikacji internetowej, czy jedno i drugie."
+    },
+    "s38": {
+      "narration": "Teraz wiecie, jak napisać artykuł na Wiki, sformatować go, ustawić, kto go zobaczy, i przypiąć na pulpicie, a gdyby coś nie działało, zajrzyjcie do Centrum pomocy."
+    },
+    "s39": {
+      "narration": "Mniej administracji, więcej czasu dla ludzi. To jest Sloneek."
+    }
+  }
+}

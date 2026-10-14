@@ -1,0 +1,465 @@
+{
+  "_comment": "Polská verze videa Nahrajte a posílejte dokumenty (documents). UI texty z translate_fe/pl (fetch uvnitř stránky) + ověřeno naživo (local-translate=pl). Vlastní polská demo data: trvalý NEAKTIVNÍ uživatel 'Piotr Nowak' <piotr.nowak@example.com> (d0fd578b-556d-4e8d-add8-9793c69f31e5, v seznamu 'Nowak Piotr') – nikdy neaktivovat; PDF assets/demo/Polityka pracy zdalnej.pdf a assets/demo/Umowa o pracę zdalną.pdf (out/documents/_work/make_demo_pdfs_i18n.py). Recept vytváří složku 'Polityki kadrowe', dokument 'Polityka pracy zdalnej' (Wybrani użytkownicy: Piotr, potvrzení přečtením do 14 dní, verze 1.0) a 'Umowa o pracę zdalną' (Piotr, žádost o podpis, termín +14 dní); master cleanup (urls = search_text s PL názvy) je smaže. cleanup_prepend smaže stejnou pojistkou (hledání → právě 1 řádek s přesným názvem → dialog s názvem; složka jen vybraná karta s přesným názvem a jen prázdná) pozůstatky CZ ('Směrnice o home office', 'Dohoda o práci z domova', 'Personální směrnice') a EN ('Remote work policy', 'Remote work agreement', 'HR policies') běhu. ids: s31 karta Tomáše → karta Piotra. Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM. Generátor: out/documents/_work/build_i18n.py (+ i18n_src.json)",
+  "verified": {
+    "date": "2026-10-12",
+    "by": "Claude (BrowserOS, preprod, local-translate=pl, in-page runner out/documents/_work/dryrun-runner.js; recept nahrán do stránky přes file input z out/documents-pl/_work/dryrun-R.json)",
+    "selectors": "Cleanup před (po reloadech): bloky CZ 'Dohoda o práci z domova' a 'Směrnice o home office' smazaly CZ pozůstatky z CZ nahrávání (právě 1 řádek po search_text, dialog 'Usuń dokument' s názvem), blok CZ složky smazal 'Personální směrnice' (prázdná). Dokumenty 34 → 32, složky 11 → 10. Průchod 1: 36/36 po opravě menu řádku 'Usuwać' (translate_fe má i 'Usuń'); s28 napoprvé selhal (klik na addNewTemplateButton dřív, než seznam šablon reagoval – tab na pozadí), opakování akce bez změny selektoru OK. Cleanup po (po reloadech): 'Umowa o pracę zdalną', 'Polityka pracy zdalnej', složka 'Polityki kadrowe' smazány; blok EN složky správně selhal na pojistce. Průchod 2: 36/36 v kuse bez opakování a bez změn. Cleanup po: 34 → 32 dokumentů, složka pryč. Datum {{DATE:+14d:DD.MM.YYYY}} = 26.10.2026 (pole deadline ukázalo 26.10.2026). Piotr celou dobu neaktivní (seznam uživatelů 'Nieaktywny').",
+    "notes": "PL UI má kostrbaté překlady: tlačítko Potvrdit = 'Potwierdzać', Rozbalit = 'Zwiększać' (sbalit 'Zwiń ustawienia'), Potvrzení přečtením = 'Przeczytaj potwierdzenie', Připomenout = 'Przypomnieć', Čeká na přečtení = 'Przeczytaj oczekujące', menu řádku 'Pobierać / Duplikat / Archiwum / Zmień folder / Usuwać', v Moje dokumenty 'Podpisać' / 'Podpisano'. Narace proto tlačítko Potvrdit a Rozbalit nejmenuje ('wszystko potwierdzam', 'Po rozwinięciu ustawień'). Sloupec Status: 'Potwierdzony 0 / 1' / 'Status podpisywania 0 / 1'."
+  },
+  "title": "Przesyłaj i wysyłaj dokumenty",
+  "thumbnail_title": "Dokumenty",
+  "parts": {
+    "Úvod": "Wprowadzenie",
+    "Kde je najdete": "Gdzie je znajdziecie",
+    "Složky a nastavení": "Foldery i ustawienia",
+    "Dokument pro více lidí": "Dokument dla wielu osób",
+    "Kdo už přečetl": "Kto już przeczytał",
+    "Dokument k podpisu": "Dokument do podpisu",
+    "Šablony": "Szablony",
+    "Pohled zaměstnance": "Widok pracownika",
+    "Oprávnění a úpravy": "Uprawnienia i zmiany",
+    "Závěr": "Podsumowanie"
+  },
+  "text": {
+    "Správa dokumentů": "Zarządzanie dokumentami",
+    "Všechny dokumenty": "Wszystkie dokumenty",
+    "Chcete využít": "Czy chcesz skorzystać",
+    "Potvrzení": "Potwierdzenia",
+    "Čeká na přečtení": "Przeczytaj oczekujące",
+    "Podepsat": "Podpisać",
+    "Archivovat": "Archiwum",
+    "Vymazat": "Usuwać",
+    "Smazat dokument": "Usuń dokument",
+    "Smazat složku": "Usuń folder",
+    "Personální směrnice": "Polityki kadrowe",
+    "Směrnice o home office": "Polityka pracy zdalnej",
+    "Dohoda o práci z domova": "Umowa o pracę zdalną",
+    "Směrnice o home office.pdf": "Polityka pracy zdalnej.pdf",
+    "Dohoda o práci z domova.pdf": "Umowa o pracę zdalną.pdf",
+    "assets/demo/Směrnice o home office.pdf": "assets/demo/Polityka pracy zdalnej.pdf",
+    "assets/demo/Dohoda o práci z domova.pdf": "assets/demo/Umowa o pracę zdalną.pdf",
+    "Personální": "Polityki",
+    "Směrnice a interní předpisy pro všechny zaměstnance.": "Polityki i regulaminy wewnętrzne dla wszystkich pracowników.",
+    "Prosím, přečtěte si novou směrnici o práci z domova a potvrďte ji.": "Prosimy o zapoznanie się z nową polityką pracy zdalnej i jej potwierdzenie.",
+    "Tomáš": "Piotr",
+    "Novák Tomáš": "Nowak Piotr",
+    "{{DATE:+14d:D. M. YYYY}}": "{{DATE:+14d:DD.MM.YYYY}}"
+  },
+  "selectors": {},
+  "keep": [
+    "{{DATE:+14d:DD.MM.YYYY}}",
+    "0 / 1"
+  ],
+  "urls": {
+    "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Dohoda%20o%20pr%C3%A1ci%20z%20domova": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Umowa%20o%20prac%C4%99%20zdaln%C4%85",
+    "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Sm%C4%9Brnice%20o%20home%20office": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Polityka%20pracy%20zdalnej"
+  },
+  "ids": {
+    "a8c8fa35-ed76-4867-8f26-0b3d41b768ac": "d0fd578b-556d-4e8d-add8-9793c69f31e5"
+  },
+  "cleanup_prepend": [
+    {
+      "name": "smazat CS dokument 'Dohoda o práci z domova' – jen při právě 1 řádku s přesným názvem po hledání (search_text v URL) a s názvem v dialogu; když neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Dohoda%20o%20pr%C3%A1ci%20z%20domova",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Dohoda o práci z domova\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) slnk-document-title-cell .name:text-is(\"Dohoda o práci z domova\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Dohoda o práci z domova\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Usuwać\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Usuwać\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-document-dialog:has-text(\"Usuń dokument\"):has-text(\"Dohoda o práci z domova\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-document-dialog:has-text(\"Usuń dokument\"):has-text(\"Dohoda o práci z domova\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat CS dokument 'Směrnice o home office' – jen při právě 1 řádku s přesným názvem po hledání (search_text v URL) a s názvem v dialogu; když neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Sm%C4%9Brnice%20o%20home%20office",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Směrnice o home office\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) slnk-document-title-cell .name:text-is(\"Směrnice o home office\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Směrnice o home office\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Usuwać\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Usuwać\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-document-dialog:has-text(\"Usuń dokument\"):has-text(\"Směrnice o home office\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-document-dialog:has-text(\"Usuń dokument\"):has-text(\"Směrnice o home office\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat CS složku 'Personální směrnice' – jen vybraná karta s přesným názvem; smazat jde jen prázdnou složku",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company/settings/folders/all-documents",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=addFolderButton]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card .folder-name:text-is(\"Personální směrnice\")",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card .folder-name:text-is(\"Personální směrnice\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=nameInput]",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"Personální směrnice\") >> [data-cy=deleteFolderButton]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"Personální směrnice\") >> [data-cy=deleteFolderButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-folder-dialog:has-text(\"Usuń folder\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-folder-dialog:has-text(\"Usuń folder\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat EN dokument 'Remote work agreement' – jen při právě 1 řádku s přesným názvem po hledání (search_text v URL) a s názvem v dialogu; když neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Remote%20work%20agreement",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Remote work agreement\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) slnk-document-title-cell .name:text-is(\"Remote work agreement\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Remote work agreement\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Usuwać\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Usuwać\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-document-dialog:has-text(\"Usuń dokument\"):has-text(\"Remote work agreement\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-document-dialog:has-text(\"Usuń dokument\"):has-text(\"Remote work agreement\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat EN dokument 'Remote work policy' – jen při právě 1 řádku s přesným názvem po hledání (search_text v URL) a s názvem v dialogu; když neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Remote%20work%20policy",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Remote work policy\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) slnk-document-title-cell .name:text-is(\"Remote work policy\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Remote work policy\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Usuwać\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Usuwać\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-document-dialog:has-text(\"Usuń dokument\"):has-text(\"Remote work policy\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-document-dialog:has-text(\"Usuń dokument\"):has-text(\"Remote work policy\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat EN složku 'HR policies' – jen vybraná karta s přesným názvem; smazat jde jen prázdnou složku",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company/settings/folders/all-documents",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=addFolderButton]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card .folder-name:text-is(\"HR policies\")",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card .folder-name:text-is(\"HR policies\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=nameInput]",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"HR policies\") >> [data-cy=deleteFolderButton]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"HR policies\") >> [data-cy=deleteFolderButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-folder-dialog:has-text(\"Usuń folder\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-folder-dialog:has-text(\"Usuń folder\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    }
+  ],
+  "steps": {
+    "s01": {
+      "narration": "Chcecie wiedzieć, kto już przeczytał nową politykę? Dzień dobry, jestem Maria z zespołu Sloneek i pokażę Wam, jak przesyłać i wysyłać dokumenty."
+    },
+    "s02": {
+      "narration": "Dokumenty trzymają umowy, regulaminy i zaświadczenia w jednym miejscu. Pracownicy czytają je i podpisują bezpośrednio w aplikacji."
+    },
+    "s03": {
+      "narration": "W lewym menu w sekcji Firma otwieram Dokumenty. Zarządza nimi administrator albo użytkownik z uprawnieniem Menedżer dokumentów."
+    },
+    "s04": {
+      "narration": "Na liście widzicie folder, odbiorców, status potwierdzenia i datę ważności. Po lewej są foldery, a we Wszystkich dokumentach znajdziecie absolutnie wszystko."
+    },
+    "s05": {
+      "narration": "Foldery zakładacie w Ustawieniach. Klikam Dodaj folder i tworzę folder na polityki kadrowe."
+    },
+    "s06": {
+      "narration": "Wpisuję nazwę i krótki opis. W polu Uprawnienia użytkownika możecie wybranym osobom pozwolić czytać cały folder."
+    },
+    "s07": {
+      "narration": "Klikam Utwórz folder. Nowy folder od razu pojawia się na liście i możecie przypisywać do niego dokumenty."
+    },
+    "s08": {
+      "narration": "W zakładce Zatwierdzenia włączycie obowiązkowe zatwierdzanie dokumentów, które przesyłają sami pracownicy. Zatwierdza administrator albo menedżer dokumentów."
+    },
+    "s09": {
+      "narration": "W Powiadomieniach ustawicie, jak często Sloneek przypomina o nieprzeczytanych i niepodpisanych dokumentach i kiedy ostrzega przed końcem ważności."
+    },
+    "s10": {
+      "narration": "Z powrotem w Dokumentach klikam Dodaj nowy dokument. Dokument możecie utworzyć z szablonu albo przesłać własny plik."
+    },
+    "s11": {
+      "narration": "Przesłać można dokument dla całej firmy, dla jednego użytkownika albo hurtowo dla wielu osób. Politykę przesyłam dla całej firmy."
+    },
+    "s12": {
+      "narration": "Wpisuję nazwę Polityka pracy zdalnej i wybieram folder Polityki kadrowe."
+    },
+    "s13": {
+      "narration": "Przesyłam plik, czyli PDF albo obrazek. Przełącznik prywatnego e-maila wysłałby gotowy dokument także na prywatny adres, więc zostawiam go wyłączony."
+    },
+    "s14": {
+      "narration": "W polu Właściciel dokumentu decydujecie, do kogo trafi dokument: do całej firmy, do wybranych zespołów albo do poszczególnych użytkowników."
+    },
+    "s15": {
+      "narration": "Na potrzeby przykładu wybieram Wybrani użytkownicy i zaznaczam na liście Piotra Nowaka."
+    },
+    "s16": {
+      "narration": "Po rozwinięciu ustawień są dodatkowe opcje, na przykład data ważności i oznaczenie wersji. W polu wersji wpisuję 1.0.",
+      "narration_tts": "Po rozwinięciu ustawień są dodatkowe opcje, na przykład data ważności i oznaczenie wersji. W polu wersji wpisuję jeden kropka zero."
+    },
+    "s17": {
+      "narration": "Typ potwierdzenia może być: Nie wymagane, Przeczytaj potwierdzenie albo Prośba o podpis. Przy polityce wystarczy potwierdzenie przeczytania."
+    },
+    "s18": {
+      "narration": "Zaznaczam termin i ustawiam czternaście dni. Poniżej możecie ustawić termin także nowym osobom, liczony od ich pierwszego logowania."
+    },
+    "s19": {
+      "narration": "Na koniec dodaję wiadomość towarzyszącą i wszystko potwierdzam. Odbiorcy dostaną powiadomienie e-mailem, a dokument znajdą w aplikacji."
+    },
+    "s20": {
+      "narration": "Dokument jest pierwszy na liście. W kolumnie Status widzicie, ile osób go potwierdziło, na razie zero z jednej."
+    },
+    "s21": {
+      "narration": "Kliknięciem w nazwę otwieram szczegóły. Po lewej jest podgląd, po prawej zmienicie nazwę, folder, datę ważności albo wersję."
+    },
+    "s22": {
+      "narration": "W zakładce Potwierdzenia widzicie status każdego odbiorcy. Przyciskiem Przypomnieć wyślecie przypomnienie, a po przeczytaniu pobierzecie tu potwierdzenie."
+    },
+    "s23": {
+      "narration": "Umowy i aneksy wysyłam jednej osobie. Zamykam szczegóły i wybieram Prześlij pojedynczy dokument."
+    },
+    "s24": {
+      "narration": "Wpisuję nazwę, jako właściciela dokumentu wybieram Piotra i przesyłam plik z umową."
+    },
+    "s25": {
+      "narration": "Rozwijam ustawienia i wybieram Prośba o podpis. Termin ostateczny ustawiam na dwa tygodnie do przodu."
+    },
+    "s26": {
+      "narration": "Kolejnych podpisujących, na przykład prezesa, dodacie spośród współpracowników. Osobie z zewnątrz wyślecie dokument przez Dodaj użytkownika zewnętrznego."
+    },
+    "s27": {
+      "narration": "Potwierdzam. W kolumnie Status widzicie teraz status podpisywania, na razie zero z jednej."
+    },
+    "s28": {
+      "narration": "Powtarzających się umów nie musicie pisać od nowa. W Szablonach przygotujecie tekst ze zmiennymi, które uzupełnią się z karty pracownika."
+    },
+    "s29": {
+      "narration": "Na przykład imię, stanowisko albo datę rozpoczęcia pracy. Przyciskiem Kolejność podpisów ustalicie, kto podpisuje jako pierwszy."
+    },
+    "s30": {
+      "narration": "Pracownik widzi swoje dokumenty w sekcji Moje dokumenty. W kolumnie Status klika Podpisać albo potwierdza, że dokument przeczytał."
+    },
+    "s31": {
+      "narration": "Co komu przyszło, zobaczycie też w karcie pracownika w zakładce Dokumenty. Piotr ma tu oba nowe dokumenty."
+    },
+    "s32": {
+      "narration": "Kto może zarządzać dokumentami, ustawicie w karcie użytkownika w polu Specjalne uprawnienia użytkownika, wybierając Menedżer dokumentów."
+    },
+    "s33": {
+      "narration": "Pod trzema kropkami dokument pobierzecie, zduplikujecie, zarchiwizujecie, przeniesiecie do innego folderu albo usuniecie. Nieaktualny dokument lepiej zarchiwizujcie, bo usunięcia nie da się cofnąć."
+    },
+    "s34": {
+      "narration": "Wskazówka na koniec: w HR Workflows Sloneek może nowym osobom automatycznie wysłać dokument z szablonu, na przykład od razu w pierwszym dniu pracy."
+    },
+    "s35": {
+      "narration": "Teraz umiecie przesłać dokument, wysłać go do przeczytania i do podpisu oraz sprawdzić, kto go potwierdził. Jeśli coś nie zadziała, zajrzyjcie do Centrum pomocy."
+    },
+    "s36": {
+      "narration": "Mniej administracji, więcej czasu dla ludzi. To jest Sloneek."
+    }
+  }
+}

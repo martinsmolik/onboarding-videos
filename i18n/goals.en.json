@@ -1,0 +1,332 @@
+{
+  "_comment": "Anglická verze videa Cíle. UI texty z translate_fe/en + ověření naživo (local-translate=en). Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM.",
+  "verified": {
+    "date": "2026-10-09",
+    "by": "Claude (BrowserOS, preprod, local-translate=en, in-page runner: CSS + :text-is/:has-text/:nth-match, wait 10 s visible, pointer/mouse events at elementFromPoint of centre, execCommand insertText)",
+    "selectors": "all 30 steps passed (every action target + expect.visible resolved and visible, url_contains ok). EN title placeholder is 'Title' in both goal and subgoal dialog (no per-step override). Owner 'Nová Kristýna' saved (Group by Owner shows her). Note: the in-page runner's insertText into the 'Update progress' p-inputnumber kept 82 (field shows '82 %'); with keydown+insertText per digit it took 85 and progress became 37.5 % – real keyboard typing in the recorder works (PL run also ended at 37.5 %).",
+    "cleanup": "run before and after: PL goal 'Zwiększyć zadowolenie klientów do 90%' deleted via detail → Options → Delete → dialog 'Delete' (CZ goal was not present); EN goal deleted the same way; grouping cleared via popover 'Clear' (tested live); view List; check-up frequency restored to Weekly (verified after reload). Tenant left with no CZ/PL/EN demo goal.",
+    "ui_labels": "menu section COMPANY › Goals; level radio Company/Team/Personal; metrics Subgoals/Numerical/Boolean/Checklist; numeric fields Start value/Target value/Current value + Unit; frequencies Weekly/Bi-weekly/Monthly/Quarterly; status dialog buttons On track/At risk/Off track/Blocked"
+  },
+  "title": "Goals: set company goals and track their progress",
+  "thumbnail_title": "Goals",
+  "parts": {
+    "Úvod": "Introduction",
+    "Nastavení": "Settings",
+    "Nový cíl": "New goal",
+    "Dílčí cíl a přehled": "Subgoal and overview",
+    "Kontrola plnění": "Progress check-ups",
+    "Závěr": "Wrap-up"
+  },
+  "text": {
+    "Nastavení cílů": "Goal settings",
+    "Týdně": "Weekly",
+    "Měsíční": "Monthly",
+    "Celá společnost": "Whole company",
+    "Celý tým": "Whole team",
+    "Pouze administrátoři": "Admins only",
+    "Cíle": "Goals",
+    "Nový cíl": "New goal",
+    "Nepřiřazeno": "Unassigned",
+    "Vysoký": "High",
+    "Numerické": "Numerical",
+    "Vybrat": "Select",
+    "Procento": "Percentage",
+    "Uložit": "Save",
+    "Možnosti": "Options",
+    "Nový dílčí cíl": "New subgoal",
+    "Checklist": "Checklist",
+    "Přidat nové": "Add new",
+    "Zpět": "Back",
+    "Seskupit podle": "Group by",
+    "Majitel": "Owner",
+    "Strom": "Tree",
+    "List": "List",
+    "Moje cíle": "My goals",
+    "Kontroly cílů": "Goal checkups",
+    "Aktualizovat progres": "Update progress",
+    "Aktualizovat průběh": "Update progress",
+    "Podle plánu": "On track",
+    "Aktualizovat": "Update",
+    "Titul": "Title",
+    "Zvýšit spokojenost zákazníků na 90 %": "Increase customer satisfaction to 90%",
+    "Zavést měsíční průzkum spokojenosti": "Launch a monthly satisfaction survey",
+    "Připravit dotazník": "Prepare the questionnaire",
+    "Rozeslat zákazníkům": "Send it to customers"
+  },
+  "selectors": {
+    ".p-menu-overlay a:text-is(\"Vymazat\")": ".p-menu-overlay a:text-is(\"Delete\")",
+    ".p-dialog button:text-is(\"Vymazat\")": ".p-dialog button:text-is(\"Delete\")",
+    ".p-popover button:text-is(\"Vymazat\")": ".p-popover button:text-is(\"Clear\")"
+  },
+  "keep": [
+    "2.",
+    "Nová Kristýna",
+    "Zwiększyć zadowolenie klientów do 90%"
+  ],
+  "cleanup_prepend": [
+    {
+      "name": "delete goal left by the Czech recording (1)",
+      "url": "https://app-pre-production.sloneek.com/app/goals-v2/all",
+      "if_visible": "td span.text-truncate:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "td span.text-truncate:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        },
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Options\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay a:text-is(\"Delete\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog button:text-is(\"Delete\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "4500"
+        }
+      ]
+    },
+    {
+      "name": "delete goal left by the Czech recording (2)",
+      "url": "https://app-pre-production.sloneek.com/app/goals-v2/all",
+      "if_visible": "td span.text-truncate:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "td span.text-truncate:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        },
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Options\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay a:text-is(\"Delete\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog button:text-is(\"Delete\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "4500"
+        }
+      ]
+    },
+    {
+      "name": "delete goal left by the Polish recording (1)",
+      "url": "https://app-pre-production.sloneek.com/app/goals-v2/all",
+      "if_visible": "td span.text-truncate:text-is(\"Zwiększyć zadowolenie klientów do 90%\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "td span.text-truncate:text-is(\"Zwiększyć zadowolenie klientów do 90%\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        },
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Options\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay a:text-is(\"Delete\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog button:text-is(\"Delete\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "4500"
+        }
+      ]
+    },
+    {
+      "name": "delete goal left by the Polish recording (2)",
+      "url": "https://app-pre-production.sloneek.com/app/goals-v2/all",
+      "if_visible": "td span.text-truncate:text-is(\"Zwiększyć zadowolenie klientów do 90%\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "td span.text-truncate:text-is(\"Zwiększyć zadowolenie klientów do 90%\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        },
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Options\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay a:text-is(\"Delete\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog button:text-is(\"Delete\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "4500"
+        }
+      ]
+    }
+  ],
+  "steps": {
+    "s01": {
+      "narration": "Hi, I'm Maria from the Sloneek team. Today we'll set up the Goals module, create a company goal with a subgoal, and look at how to check progress."
+    },
+    "s02": {
+      "narration": "Let's start with the settings. At the bottom of the left menu, I'll click Goal settings."
+    },
+    "s03": {
+      "narration": "First, I choose how often owners should check their goals. I'll switch to monthly."
+    },
+    "s04": {
+      "narration": "Settings save automatically. Below, I can see when the check-up reminder goes out. For monthly, for example, it's the second day of the month at nine in the morning."
+    },
+    "s05": {
+      "narration": "On the right, I set the default visibility: company goals are visible to the whole company, team goals to the whole team."
+    },
+    "s06": {
+      "narration": "And who can create goals. I'll leave company goals to admins only."
+    },
+    "s07": {
+      "narration": "Now to the goals themselves. Under Company, I'll open Goals."
+    },
+    "s08": {
+      "narration": "I can see all company goals with their level, progress, status and due date. To create a new one, I click New goal."
+    },
+    "s09": {
+      "narration": "I'll call it Increase customer satisfaction to ninety percent."
+    },
+    "s10": {
+      "narration": "I'll keep the level at company and choose Kristýna Nová as the owner."
+    },
+    "s11": {
+      "narration": "I'll set the priority to high."
+    },
+    "s12": {
+      "narration": "I'll set the due date to the end of the year."
+    },
+    "s13": {
+      "narration": "Under Metrics, I'll choose numerical: starting value eighty-two, target ninety, and the unit is percentage."
+    },
+    "s14": {
+      "narration": "I'll turn on regular check-ups and save the goal."
+    },
+    "s15": {
+      "narration": "Let me open the goal detail."
+    },
+    "s16": {
+      "narration": "A big goal is easier to reach in smaller steps. I'll click New subgoal."
+    },
+    "s17": {
+      "narration": "I'll call it Launch a monthly satisfaction survey. The parent goal is already filled in."
+    },
+    "s18": {
+      "narration": "The owner will be Kristýna again, and the due date the end of November."
+    },
+    "s19": {
+      "narration": "As the metric, I'll choose Checklist and add two tasks: prepare the questionnaire and send it to customers."
+    },
+    "s20": {
+      "narration": "I'll save it, and the subgoal appears in the goal detail."
+    },
+    "s21": {
+      "narration": "Back in the overview, I can group goals, for example by owner."
+    },
+    "s22": {
+      "narration": "And I'll switch to the tree view, where I see the whole hierarchy: our goal together with its subgoal."
+    },
+    "s23": {
+      "narration": "The goal owner finds it under My goals. They only see goals they own, created, or follow."
+    },
+    "s24": {
+      "narration": "When it's time for a check-up, they get a task in My tasks, on the Goal checkups tab."
+    },
+    "s25": {
+      "narration": "But they can update progress at any time, right in the goal detail."
+    },
+    "s26": {
+      "narration": "Under Options, I'll choose Update progress."
+    },
+    "s27": {
+      "narration": "I'll enter the current value, eighty-five, set the status to On track, and confirm."
+    },
+    "s28": {
+      "narration": "The progress has been recalculated, and the activity log keeps a record of the check-up."
+    },
+    "s29": {
+      "narration": "And that's it. You now know how to set up Goals, create a goal with a subgoal, and update its progress. Tip: you can also create goals from Performance evaluation."
+    },
+    "s30": {
+      "narration": "If something doesn't work, check the Help Center. Less admin, more time for people. This is Sloneek."
+    }
+  }
+}

@@ -1,0 +1,1208 @@
+{
+  "id": "add-users",
+  "version": 2,
+  "title": "Dodaj użytkowników do systemu: ręczne zakładanie, zaproszenie i import",
+  "lang": "pl",
+  "app_version": "preprod-2026-10-11",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "pl"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "F9eb9uZYeJuHuO7Uvs1R",
+    "model_id": "eleven_v4"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s19",
+    "title": "Dodawanie użytkowników"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Nowa osoba zaczyna pracę, a nie wiecie, od czego zacząć? Dzień dobry, jestem Maria z zespołu Sloneek i pokażę Wam, jak dodać użytkownika.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_staff",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_staff",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Wprowadzenie",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "W lewym menu w sekcji Firma rozwijam Użytkownicy i otwieram Zarządzanie.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_staff",
+          "before_ms": 1200
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=tableRow]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=addUserButton]",
+        "url_contains": "/app/settings/users"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "Tutaj widzicie wszystkich aktywnych użytkowników z zespołem, stanowiskiem i rolami. Szukać możecie po imieniu, e-mailu, zespole, roli, stanowisku albo tagu.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] table thead",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .p-datatable-header",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=tableRow]",
+        "url_contains": "/app/settings/users"
+      }
+    },
+    {
+      "id": "s04",
+      "narration": "Użytkowników dodacie ręcznie przyciskiem Dodaj, linkiem przez Zaproś albo importem z Google Workspace i Office 365.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=addUserButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=inviteButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button:has-text(\"Importuj użytkowników\")",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=inviteButton]",
+        "url_contains": "/app/settings/users"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "Zaczniemy ręcznie. Klikam Dodaj i otwiera się formularz Utwórz nowego użytkownika.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=addUserButton] button",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=addUserButton] button",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=usersCreateForm] [data-cy=firstNameInput]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=usersCreateForm]",
+        "url_contains": "/app/company-details/member/new"
+      },
+      "part": 2,
+      "part_title": "Dane podstawowe"
+    },
+    {
+      "id": "s06",
+      "narration": "Najpierw status konta. Anna zaczyna pracę dopiero za kilka tygodni, dlatego wybieram Użytkownik nie jest aktywny.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=userInactiveRadio]",
+          "before_ms": 1800
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=hirePacketSelect]",
+        "url_contains": "/member/new"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "Nieaktywny użytkownik nie może się zalogować, nie dostanie żadnego e-maila i nie płacicie za niego licencji. To idealny stan na przygotowanie startu.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=usersCreateForm] .user-activation-box .text-hint",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=usersCreateForm] .user-activation-box .text-hint",
+        "url_contains": "/member/new"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "Obowiązkowe są tylko imię, nazwisko i e-mail. Wpisuję Anna Kowalska.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=firstNameInput]",
+          "value": "Anna",
+          "clear": true,
+          "before_ms": 600
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=surnameInput]",
+          "value": "Kowalska",
+          "clear": true,
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=surnameInput]",
+        "url_contains": "/member/new"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "Podaję jej służbowy e-mail. Na ten adres po aktywacji przyjdzie zaproszenie do aplikacji Sloneek.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=emailInput]",
+          "value": "anna.kowalska@example.com",
+          "clear": true,
+          "before_ms": 400,
+          "speed": "fast"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=emailInput]",
+        "url_contains": "/member/new"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Opcja Ukryj adres e-mail dla innych współpracowników schowa adres w sekcji Współpracownicy. Przyda się na przykład przy prywatnym e-mailu.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=usersCreateForm] nb-checkbox:has-text(\"Ukryj adres e-mail dla innych współpracowników\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=usersCreateForm] nb-checkbox",
+        "url_contains": "/member/new"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "Specjalne uprawnienia użytkownika dodają role ponad zwykłego użytkownika. Rozwijam listę, ale niczego nie wybieram.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=userRolesSelect] button",
+          "before_ms": 1200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option[data-cy=userRole-admin]",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-option-list",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "nb-option[data-cy=userRole-ombudsman]",
+        "url_contains": "/member/new"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Administrator zarządza całą aplikacją i widzi wszystkie dane. Menedżer dokumentów albo Menedżer aktywów ma pełny dostęp tylko do swojego modułu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "nb-option[data-cy=userRole-admin]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "2200"
+        },
+        {
+          "type": "hover",
+          "selector": "nb-option[data-cy=userRole-document_manager]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "hover",
+          "selector": "nb-option[data-cy=userRole-property_administrator]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "nb-option[data-cy=userRole-admin]",
+        "url_contains": "/member/new"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "Menedżer raportów ma dostęp do wszystkich raportów, a Rzecznik Praw Obywatelskich jako jedyny czyta Skrzynkę zaufania. Zwykły pracownik nic z tego nie potrzebuje.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "nb-option[data-cy=userRole-reporting]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "hover",
+          "selector": "nb-option[data-cy=userRole-ombudsman]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1800"
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=userRolesSelect] button:has-text(\"Specjalne uprawnienia użytkownika\")",
+        "url_contains": "/member/new"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "Rodzaj stosunku pracy ustawiam na Pracownik. Do wyboru jest też wykonawca, wolny zawód albo staż.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=employmentTypesSelect] button",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "hover",
+          "selector": "nb-option[data-cy=employmentType-contractor]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "nb-option[data-cy=employmentType-employee]",
+          "before_ms": 900
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=employmentTypesSelect] button:has-text(\"Pracownik\")",
+        "url_contains": "/member/new"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Po prawej są pozostałe dane dotyczące pracy. W polu Data rozpoczęcia pracy w firmie wpisuję jej pierwszy dzień pracy.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=joinDateInput]",
+          "before_ms": 1000
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=joinDateInput]",
+          "value": "{{DATE:+21d:DD.MM.YYYY}}",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": "nb-calendar nb-calendar-day-cell.selected",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=joinDateInput]",
+        "url_contains": "/member/new"
+      },
+      "part": 3,
+      "part_title": "Dane dotyczące pracy"
+    },
+    {
+      "id": "s16",
+      "narration": "Data rozpoczęcia zapisze się w historii karty. Proporcjonalnej części urlopu Sloneek jednak sam nie wylicza, ustawicie ją w nieobecnościach użytkownika.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=joinDateInput]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=joinDateInput]",
+        "url_contains": "/member/new"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "Stanowisko wybieram z listy, tutaj Specjalista ds. obsługi klienta. Nowe stanowiska dodacie przez link Ustawienia pozycji.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=positionSelect] button",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-option[data-cy=\"positionOption-Specjalista ds. obsługi klienta\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] a:has-text(\"Ustawienia pozycji\")",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=positionSelect] button:has-text(\"Specjalista ds. obsługi klienta\")",
+        "url_contains": "/member/new"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Annę przypisuję do zespołu Obsługa klienta. Zespół określa jej menedżera i to, kto zatwierdza jej nieobecności i czas pracy.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=teamsSelect] button",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-option[data-cy=\"team-Obsługa klienta\"]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=teamsSelect] button:has-text(\"Obsługa klienta\")",
+        "url_contains": "/member/new"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "I jeszcze miejsce pracy, tutaj Praha. Pozostałe dane możecie uzupełnić w dowolnym momencie później.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=workLocationSelect] button",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-option[data-cy=workLocation-Praha]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=workLocationSelect] button:has-text(\"Praha\")",
+        "url_contains": "/member/new"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Gotowe, klikam Stwórz użytkownika. Sloneek od razu zapyta, czy chcę przypisać typ współpracy.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=usersCreateForm] [data-cy=submitButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=usersCreateForm] [data-cy=submitButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Przypisać typ współpracy?\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=confirmationDialog] [data-cy=submitButton]",
+        "url_contains": "/member/new"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "Typ współpracy to wymiar etatu, według którego liczy się czas pracy i salda nieobecności. Wybieram Tak.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog] [data-cy=submitButton]",
+          "before_ms": 2500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container:has-text(\"Wybór rodzaju współpracy\")",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container slnk-common-autocomplete",
+        "url_contains": "/member/new"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "Wybieram Pełny etat 40 godzin. Ważność zaczyna się od dnia rozpoczęcia pracy, zaznaczam Czas nieokreślony i zapisuję.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container slnk-common-autocomplete",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Pełny etat 40 h\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container nb-checkbox label",
+          "before_ms": 600
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container button:has-text(\"Zapisz\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] a[href$=\"/contracts-and-terms\"]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] a[href$=\"/work-data\"]",
+        "url_contains": "/work-data"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "Anna ma teraz własną kartę użytkownika. W nagłówku widzicie, że na razie jest nieaktywna.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-header-autocomplete .text-danger:text-is(\"(Nieaktywny)\")",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-common-header-autocomplete .selected-item-container",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "slnk-common-header-autocomplete .text-danger:text-is(\"(Nieaktywny)\")",
+        "url_contains": "/work-data"
+      },
+      "part": 4,
+      "part_title": "Karta użytkownika",
+      "voice_after_actions": 1
+    },
+    {
+      "id": "s24",
+      "narration": "W zakładkach znajdziecie dane osobowe, etat i warunki finansowe, nieobecności, dokumenty, narzędzia pracy i historię zmian.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] ul.route-tabset",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] a[href$=\"/history\"]",
+        "url_contains": "/work-data"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "W zakładce Rodzaj współpracy i warunki finansowe jest jej pełny etat. Możecie tu też dodać warunki finansowe.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href$=\"/contracts-and-terms\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Pełny etat 40 h\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Pełny etat 40 h\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=companyMemberContractsAndTerms] button:has-text(\"Dodaj warunki finansowe\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=companyMemberContractsAndTerms] [data-cy=tableRow]:has-text(\"Czas nieokreślony\")",
+        "url_contains": "/contracts-and-terms"
+      },
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s26",
+      "narration": "Menedżera i osoby zatwierdzające ustawicie w sekcji Zespoły. Gdy zespół nie ma menedżera, wnioski zatwierdzają administratorzy.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href$=\"/work-data\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=teamsSelect]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=teamsSelect]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=teamsSelect] button:has-text(\"Obsługa klienta\")",
+        "url_contains": "/work-data"
+      },
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s27",
+      "narration": "Zanim aktywujecie Annę, ustawcie jej język. W zakładce Powiadomienia i integracje wybieram Polish, czyli polski, i zapisuję.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href$=\"/interface-settings\"]",
+          "before_ms": 1200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=companyMemberInterfaceSettings] nb-select",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=companyMemberInterfaceSettings] nb-select button",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": "nb-option:text-is(\"Polish\")",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=companyMemberInterfaceSettingsSaveButton]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=companyMemberInterfaceSettings] nb-select button:has-text(\"Polish\")",
+        "url_contains": "/interface-settings"
+      },
+      "part": 5,
+      "part_title": "Aktywacja"
+    },
+    {
+      "id": "s28",
+      "narration": "Zaproszenie i aplikacja będą wtedy po polsku. Gdy Anna zacznie pracę, otwórzcie Akcje i wybierzcie Aktywuj.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] button:has-text(\"Akcje\")",
+          "before_ms": 1500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "hover",
+          "selector": "nb-context-menu a:has-text(\"Aktywuj\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] button:has-text(\"Akcje\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] button:has-text(\"Akcje\")",
+        "url_contains": "/interface-settings"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "Po aktywacji dostanie e-mail z linkiem do ustawienia hasła, zobaczy przypisane dokumenty i zaczniecie płacić za nią licencję.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button:has-text(\"Akcje\")",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] button:has-text(\"Akcje\")",
+        "url_contains": "/interface-settings"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "Wracam do przeglądu i przełączam filtr na Tylko nieaktywni. Anna jest tu gotowa na swój pierwszy dzień.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] p-select:has-text(\"Wszyscy użytkownicy\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": "li[role=option]:has-text(\"Tylko nieaktywni\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=tableRow]:has-text(\"Kowalska Anna\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=tableRow]:has-text(\"Kowalska Anna\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=tableRow]:has-text(\"Kowalska Anna\")",
+        "url_contains": "/app/settings/users"
+      },
+      "part": 6,
+      "part_title": "Inne sposoby dodawania",
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s31",
+      "narration": "Drugą drogą jest Zaproś. Sloneek utworzy firmowy link, który wyślecie współpracownikom na przykład e-mailem albo na czacie.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=inviteButton] button",
+          "before_ms": 600
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=inviteButton]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=inviteButton]",
+        "url_contains": "/app/settings/users"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "Współpracownik sam założy przez link konto i uzupełni swoje dane. Wy je potem sprawdzicie i konto aktywujecie.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=inviteButton]",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=inviteButton]",
+        "url_contains": "/app/settings/users"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "Importuj użytkowników wczyta osoby z Google Workspace albo Office 365. Masowy import z Excela przygotuje z Wami nasz zespół wsparcia.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] button:has-text(\"Importuj użytkowników\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container:has-text(\"Importuj z Office 365\")",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=closeButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=inviteButton]",
+        "url_contains": "/app/settings/users"
+      }
+    },
+    {
+      "id": "s34",
+      "narration": "Wskazówka na koniec: nieaktywnemu nowemu pracownikowi możecie przy zakładaniu przypisać pakiet Informacje dla nowych pracowników, a dane uzupełni jeszcze przed startem.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_php",
+          "before_ms": 600
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_php",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_settings_php",
+        "url_contains": "/app/settings/users"
+      },
+      "part": 7,
+      "part_title": "Podsumowanie"
+    },
+    {
+      "id": "s35",
+      "narration": "Teraz umiecie dodać użytkowników ręcznie, zaprosić ich linkiem i wczytać importem. Jeśli coś nie zadziała, zajrzyjcie do Centrum pomocy.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=addUserButton]",
+        "url_contains": "/app/settings/users"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "Mniej administracji, więcej czasu dla ludzi. To jest Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=addUserButton]",
+        "url_contains": "/app/settings/users"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat CZ demo uživatele 'Dvořáková Jana' (jana.dvorakova@example.com) po CZ běhu – jen při právě 1 řádku po hledání 'jana.dvorakova@example' a dialogu s přesným jménem",
+      "url": "https://app-pre-production.sloneek.com/app/settings/users",
+      "if_visible": "[data-cy=addUserButton]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "input[placeholder=\"Szukaj...\"]",
+          "value": "jana.dvorakova@example",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] table:not(:has([data-cy=tableRow] ~ [data-cy=tableRow])) [data-cy=tableRow]:has-text(\"Dvořáková Jana\")",
+          "value": "6000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=tableRow]:has-text(\"Dvořáková Jana\") >> [data-cy=actionsButton] button",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay li[aria-label=\"Usuń\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"„Dvořáková Jana”\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat EN demo uživatele 'Carter Emily' (emily.carter@example.com) po EN běhu – jen při právě 1 řádku po hledání 'emily.carter@example' a dialogu s přesným jménem",
+      "url": "https://app-pre-production.sloneek.com/app/settings/users",
+      "if_visible": "[data-cy=addUserButton]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "input[placeholder=\"Szukaj...\"]",
+          "value": "emily.carter@example",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] table:not(:has([data-cy=tableRow] ~ [data-cy=tableRow])) [data-cy=tableRow]:has-text(\"Carter Emily\")",
+          "value": "6000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=tableRow]:has-text(\"Carter Emily\") >> [data-cy=actionsButton] button",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay li[aria-label=\"Usuń\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"„Carter Emily”\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat demo uživatele 'Dvořáková Jana' (pozůstatek se starým e-mailem martin.smolik+demo-pridani@…) – jen při právě 1 řádku po hledání 'demo-pridani' a dialogu s přesným jménem",
+      "url": "https://app-pre-production.sloneek.com/app/settings/users",
+      "if_visible": "[data-cy=addUserButton]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "input[placeholder=\"Szukaj...\"]",
+          "value": "demo-pridani",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] table:not(:has([data-cy=tableRow] ~ [data-cy=tableRow])) [data-cy=tableRow]:has-text(\"Kowalska Anna\")",
+          "value": "6000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=tableRow]:has-text(\"Kowalska Anna\") >> [data-cy=actionsButton] button",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay li[aria-label=\"Usuń\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"„Kowalska Anna”\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat demo uživatele 'Dvořáková Jana' (jana.dvorakova@example.com) – jen při právě 1 řádku po hledání 'jana.dvorakova@example' a dialogu s přesným jménem",
+      "url": "https://app-pre-production.sloneek.com/app/settings/users",
+      "if_visible": "[data-cy=addUserButton]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "input[placeholder=\"Szukaj...\"]",
+          "value": "anna.kowalska@example",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] table:not(:has([data-cy=tableRow] ~ [data-cy=tableRow])) [data-cy=tableRow]:has-text(\"Kowalska Anna\")",
+          "value": "6000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=tableRow]:has-text(\"Kowalska Anna\") >> [data-cy=actionsButton] button",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay li[aria-label=\"Usuń\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"„Kowalska Anna”\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-11",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "team": "cb6676b2-ae10-456a-b2ef-9f82af7ff928",
+      "working_hours": "80ef47d9-a4fe-43b0-b8ae-9c7bf59f3bce",
+      "position": "babef7ec-634e-484e-b1bc-4eedf54a28af",
+      "user": "Jana Dvořáková <jana.dvorakova@example.com> (vytváří recept, maže cleanup)"
+    },
+    "notes": "DRY-RUN 11. 10. 2026 ~15:20 UTC in-page runnerem (out/performance-review/_work/dryrun-runner.js, Playwright-like: první shoda musí být viditelná, :text-is/:has-text/>>, wait_ready = selektor + bez spinneru), datum nástupu {{DATE:+21d:D. M. YYYY}} = 2. 11. 2026: cleanup před (nic ke smazání, pojistka selhala správně na prázdném seznamu) -> s01-s36 36/36 OK v jednom průchodu (~95 s bez narace) -> uživatelů 74 (1 demo) -> cleanup po: smazán přesně 'Dvořáková Jana', 73 (46 aktivních / 27 neaktivních) jako před během. Žádný e-mail na alias demo-pridani (Gmail). Zjištění: (1) 'Vytvořit uživatele' založí uživatele hned (s20), URL zůstává /member/new a otevře se dialog 'Přiřadit typ spolupráce?' – recept kliká jen jednou; (2) typované datum do [data-cy=joinDateInput] přepne nb-calendar na správný měsíc, klik na nb-calendar-day-cell.selected ho zavře; (3) seznam rolí (nb-select multiple) zavře Escape; (4) menu Akce v kartě je nb-context-menu na klik, zavírá se dalším klikem na Akce; (5) záložky karty vždy hledat uvnitř [data-cy=mainContentCenterDiv] – levé menu má odkaz /my-profile/interface-settings se stejnou koncovkou; (6) '(Neaktivní)' je div.text-danger v slnk-common-header-autocomplete. Ověřeno předem na probe uživateli: jazyk Czech se uloží (toast 'Upraveno', drží po reloadu) a pozvánka po aktivaci pak přijde česky ('Přihlášení do aplikace Sloneek')."
+  },
+  "_localized": {
+    "from": "recipes/cs/add-users.json",
+    "i18n": "i18n/add-users.pl.json",
+    "at": "2026-10-11T17:25:32.405Z",
+    "verified": {
+      "date": "2026-10-11",
+      "by": "Claude (BrowserOS, preprod, local-translate=pl)",
+      "selectors": "DRY-RUN 11. 10. 2026 ~17:15–17:45 UTC v PL UI in-page runnerem (out/add-users/_work/dryrun-runner.js) s polskými demo daty, datum nástupu {{DATE:+21d:DD.MM.YYYY}} = 02.11.2026 (pole pak ukáže 2.11.2026): cleanup před (po reloadu; guarded blok cleanup_prepend smazal CZ pozůstatek 'Dvořáková Jana' c5c62aa6… z CZ nahrávání 17:07 UTC; blok Emily Carter správně selhal na pojistce – nikdo k smazání) → 1. průchod 36/36 po opravě 'Doba neurčitá' = 'Czas nieokreślony' → 2. čistý průchod 36/36 bez reloadu (localized recipe ověřen SHA-1 shodou) → cleanup po (po reloadu; guarded blok smazal přesně 'Kowalska Anna', dialog 'Czy na pewno chcesz trwale usunąć „Kowalska Anna”?…'). Uživatelů 74 (46 akt. / 28 neakt., vč. CZ Jany) → 73 po cleanup před → 74 během → 73 (46 / 27) po. Anna celou dobu neaktivní (enabled=1 search 0). Tým Obsługa klienta po běhu 0 členů / 0 manažerů / 0 schvalovatelů.",
+      "notes": "Jazyk 'Polish' se u neaktivního uživatele uloží a drží po reloadu (s27, nb-option 'Polish' – názvy jazyků jsou i v PL UI anglicky). Záložka Nastavení rozhraní se v PL jmenuje 'Powiadomienia i integracje' (chybný překlad), selektor jde přes href /interface-settings. Checkbox v dialogu úvazku a sloupec Ważne do = 'Czas nieokreślony' (translate_fe má i 'Okres nieokreślony'). Menu Akce = 'Akcje' s 'Aktywuj' / 'Usuń' (Aktywuj se jen najede). Po reloadu na kartě je submenu Użytkownicy zabalené – při natáčení se nereloaduje, v čistém průchodu s30 OK."
+    }
+  }
+}

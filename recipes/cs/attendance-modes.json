@@ -1,0 +1,1052 @@
+{
+  "id": "attendance-modes",
+  "version": 1,
+  "title": "Negativní vs. aktivní docházka",
+  "lang": "cs",
+  "app_version": "preprod-2026-10-12",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "cs"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "bF7C2fCv7Zf30iT84wZ1",
+    "model_id": "eleven_v4"
+  },
+  "pronunciation": [
+    {
+      "match": "End",
+      "say": "end",
+      "note": "klávesa End"
+    },
+    {
+      "match": "40 h",
+      "say": "čtyřicet hodin",
+      "note": "název šablony Plný úvazek 40 h"
+    },
+    {
+      "match": "Escape",
+      "say": "eskejp",
+      "note": "klávesa Escape"
+    },
+    {
+      "match": "time tracking",
+      "say": "tajm trekink",
+      "case": "insensitive",
+      "note": "Aktivity a time tracking"
+    }
+  ],
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s15",
+    "title": "Negativní vs. aktivní docházka"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Musí si vaši lidé zapisovat příchody a odchody? Dobrý den, jsem Marie z týmu Sloneek a ukážu vám rozdíl mezi negativní a aktivní docházkou.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "slnk-dashboard-v2-attendance p-card:has(a.widget-headline-link)",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-attendance p-card:has(a.widget-headline-link)",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Úvod",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "U negativní docházky lidé nic nezapisují, Sloneek počítá s tím, že odpracovali svou pracovní dobu, a vy řešíte jen absence, které najdete tady v menu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_absence",
+          "before_ms": 1200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_absence",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-attendance p-card:has(a.widget-headline-link)",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "U aktivní docházky si lidé zaznamenávají příchod a odchod, třeba tímhle tlačítkem na Ploše, a Sloneek ukáže saldo, tedy přesčas nebo chybějící hodiny.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "slnk-dashboard-v2-attendance slnk-attendance-v2-clock-in-out-button button",
+          "before_ms": 600
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-attendance slnk-attendance-v2-clock-in-out-button button",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-dashboard-v2-attendance p-card:has(a.widget-headline-link) .p-card-content > div.d-flex.flex-column.gap-2",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "slnk-dashboard-v2-attendance slnk-attendance-v2-clock-in-out-button button",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s04",
+      "narration": "Oba režimy stojí na pracovní době, a tak v levém menu kliknu na Nastavení.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_settings",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_absence_working_hours",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_settings_absence_working_hours",
+        "url_contains": "/app/settings/dashboard"
+      },
+      "part": 2,
+      "part_title": "Pracovní doba"
+    },
+    {
+      "id": "s05",
+      "narration": "V rozbalené nabídce otevřu Úvazky a typy spolupráce, kde jsou šablony pracovní doby.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_absence_working_hours",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_absence_working_hours",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] ag-grid-angular a.redirect_column:text-is(\"Plný úvazek 40 h\")",
+        "url_contains": "/app/settings/working-hours"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "Kliknu na šablonu Plný úvazek 40 h, kterou má přiřazenou třeba kolega Tomáš.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular a.redirect_column:text-is(\"Plný úvazek 40 h\")",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular a.redirect_column:text-is(\"Plný úvazek 40 h\")",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular a.redirect_column:text-is(\"Plný úvazek 40 h\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] span:has-text(\"Týdenní fond pracovní doby\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] span:has-text(\"Týdenní fond pracovní doby\"):has-text(\"40:00\")",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "Týdenní rozvrh určuje, ve které dny a hodiny se pracuje, a nahoře vidíte týdenní fond, tady čtyřicet hodin.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-body-viewport",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] span:has-text(\"Týdenní fond pracovní doby\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] span:has-text(\"Týdenní fond pracovní doby\")",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "U negativní docházky Sloneek z rozvrhu rovnou počítá odpracovaný čas, u aktivní je to plán, se kterým porovnává zaznamenané hodiny.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-body-viewport",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] span:has-text(\"Týdenní fond pracovní doby\")",
+        "url_contains": "/working-hours/setup/"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "Kdo má jaký režim, určuje viditelnost modulu Docházka, a tak v nabídce Nastavení kliknu na Viditelnost modulů a rozbalím Zapnutí a vypnutí modulů pro celou společnost.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users_modules",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users_modules",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Jméno Filter Input\"]",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion.toggle-modules-section nb-accordion-item-header",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion.toggle-modules-section nb-accordion-item-header",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion-item-body div.col-6:has-text(\"Docházka (nový modul)\")",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion.toggle-modules-section nb-accordion-item-body form",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-accordion-item-body div.col-6:has-text(\"Docházka (nový modul)\")",
+        "url_contains": "/app/settings/users-modules"
+      },
+      "part": 3,
+      "part_title": "Kde režim přepnete"
+    },
+    {
+      "id": "s10",
+      "narration": "Přepínač Docházka, nový modul, zapíná docházku celé firmě, a když ho vypnete, má celá firma negativní docházku.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion-item-body div.col-6:has-text(\"Docházka (nový modul)\")",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-accordion-item-body div.col-6:has-text(\"Docházka (nový modul)\")",
+        "url_contains": "/app/settings/users-modules"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "Jednotlivým lidem docházku nastavíte v tabulce pod panelem, a tak do filtru Jméno napíšu Králová.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Jméno Filter Input\"]",
+          "value": "Králová",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row[row-index=\"0\"] [col-id=full_name]:text-is(\"Králová Lucie\")",
+          "value": "10000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-paging-panel:has-text(\"1 do 1 z 1\")",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row[row-index=\"0\"] [col-id=full_name]:text-is(\"Králová Lucie\")",
+        "url_contains": "/app/settings/users-modules"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "V tabulce zůstala jen kolegyně Lucie, a tak panel nahoře zase sbalím.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] nb-accordion.toggle-modules-section nb-accordion-item-header",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row[row-index=\"0\"]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row[row-index=\"0\"] [col-id=full_name]:text-is(\"Králová Lucie\")",
+        "url_contains": "/app/settings/users-modules"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "Kliknu na její jméno a klávesou End posunu tabulku doprava ke sloupci Docházka.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row[row-index=\"0\"] [col-id=full_name]:text-is(\"Králová Lucie\")",
+          "before_ms": 400
+        },
+        {
+          "type": "press",
+          "value": "End",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=\"user_module_visibility.is_attendance_v2_module_visible\"]",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=\"user_module_visibility.is_attendance_v2_module_visible\"]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"] [col-id=\"user_module_visibility.is_attendance_v2_module_visible\"]",
+        "url_contains": "/app/settings/users-modules"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "Zelené oko znamená, že Lucie Docházku vidí a zapisuje si příchody a odchody, má tedy aktivní docházku.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"] [col-id=\"user_module_visibility.is_attendance_v2_module_visible\"] button:has(.fa-eye)",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"] [col-id=\"user_module_visibility.is_attendance_v2_module_visible\"] button:has(.fa-eye)",
+        "url_contains": "/app/settings/users-modules"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Kliknu na oko, to se přeškrtne, a Lucie má od této chvíle negativní docházku.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"] [col-id=\"user_module_visibility.is_attendance_v2_module_visible\"] button:has(.fa-eye)",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"] [col-id=\"user_module_visibility.is_attendance_v2_module_visible\"] button:has(.fa-eye-slash)",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"] [col-id=\"user_module_visibility.is_attendance_v2_module_visible\"]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"] [col-id=\"user_module_visibility.is_attendance_v2_module_visible\"] button:has(.fa-eye-slash)",
+        "url_contains": "/app/settings/users-modules"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "Změna se uloží hned, Lucie Docházku v menu neuvidí a odpracované hodiny jí Sloneek dopočítá podle úvazku.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row[row-index=\"0\"]",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"] [col-id=\"user_module_visibility.is_attendance_v2_module_visible\"] button:has(.fa-eye-slash)",
+        "url_contains": "/app/settings/users-modules"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "Režimy tak můžete kombinovat, třeba kancelář s pevnou pracovní dobou na negativní a provoz na směny na aktivní docházce.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=\"user_module_visibility.is_attendance_v2_module_visible\"]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"] [col-id=\"user_module_visibility.is_attendance_v2_module_visible\"] button:has(.fa-eye-slash)",
+        "url_contains": "/app/settings/users-modules"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Pro ukázku Lucii docházku stejným kliknutím zase zapnu.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"] [col-id=\"user_module_visibility.is_attendance_v2_module_visible\"] button:has(.fa-eye-slash)",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"] [col-id=\"user_module_visibility.is_attendance_v2_module_visible\"] button:has(.fa-eye)",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"] [col-id=\"user_module_visibility.is_attendance_v2_module_visible\"]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"] [col-id=\"user_module_visibility.is_attendance_v2_module_visible\"] button:has(.fa-eye)",
+        "url_contains": "/app/settings/users-modules"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "Jak aktivní docházka vypadá, ukážu v levém menu, kde kliknu na Docházku.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-daily-summary-card p-card",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .timeline-row.selected",
+        "url_contains": "view=me"
+      },
+      "part": 4,
+      "part_title": "Aktivní docházka v praxi"
+    },
+    {
+      "id": "s20",
+      "narration": "V pohledu Moje má každý den svou časovou osu, na které se zobrazují příchody, odchody i přestávky.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .timeline-row.selected",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .timeline-row.selected",
+        "url_contains": "view=me"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "Vpravo je denní cíl podle úvazku, odpracovaný čas a saldo, které bez zapsaných příchodů klesá do minusu.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-daily-summary-card p-card",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-daily-summary-card p-card",
+        "url_contains": "view=me"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "Kliknu na přepínač Tým a jako administrátorka vidím docházku všech lidí pod sebou.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] p-togglebutton:text-is(\"Tým\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-daily-user-report .timeline-row:has-text(\"Besocki Eva\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-monthly-summary-card:has-text(\"Besocki Eva\")",
+        "url_contains": "view=team"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "Svislé čáry ukazují plánovanou pracovní dobu a vpravo má každý svůj měsíční cíl, odpracované hodiny a saldo.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-daily-user-report .timeline-row:has-text(\"Besocki Eva\")",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-monthly-summary-card:has-text(\"Besocki Eva\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-attendance-v2-monthly-summary-card:has-text(\"Besocki Eva\")",
+        "url_contains": "view=team"
+      }
+    },
+    {
+      "id": "s24",
+      "narration": "Pravidla pro aktivní docházku najdete pod ozubeným kolem, na které kliknu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] button:has(.fa-gear-complex)",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] button:has(.fa-gear-complex)",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] form > p-card:nth-of-type(3)",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] form > p-card:nth-of-type(1)",
+        "url_contains": "/app/attendance-v2-overview-settings/general"
+      },
+      "part": 5,
+      "part_title": "Schvalování a uzávěrka"
+    },
+    {
+      "id": "s25",
+      "narration": "V části Změny určíte, jestli si lidé smí docházku opravovat a jestli opravy musí schválit schvalovatel docházky.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] form > p-card:nth-of-type(1)",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] form > p-card:nth-of-type(1)",
+        "url_contains": "/attendance-v2-overview-settings"
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "Uzávěrka docházky hlídá, aby schvalovatelé každý měsíc uzavřeli výkazy práce, a automatické pauzy doplní přestávky z úvazku.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] form > p-card:nth-of-type(2)",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] form > p-card:nth-of-type(3)",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] form > p-card:nth-of-type(3)",
+        "url_contains": "/attendance-v2-overview-settings"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "U negativní docházky tohle nepotřebujete, schvalují se jen absence, třeba dovolená nebo nemocenská.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_approvals",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_approvals",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_approvals",
+        "url_contains": "/attendance-v2-overview-settings"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "Rozdíl uvidíte i v podkladech pro mzdy, a tak v levém menu kliknu na Reporty.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_reports_v2",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_other_reports_v2",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/attendance\"]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/attendance\"]",
+        "url_contains": "/app/reports-v-2/dashboard"
+      },
+      "part": 6,
+      "part_title": "Podklady pro mzdy"
+    },
+    {
+      "id": "s29",
+      "narration": "Kliknu na záložku Příchody a odchody, kde jsou reporty pro aktivní docházku, třeba souhrn odpracované doby se saldem.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/attendance\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-arrivals-departures-summary)",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-arrivals-departures-summary)",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-arrivals-departures-summary)",
+        "url_contains": "/dashboard/attendance"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "Kliknu na záložku Absence, kde reporty Pracovní doba a Report odpracované doby počítají s úvazkem, tedy pro negativní docházku.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/absence\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-absences-worked-time)",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-absences-working-hours)",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-absences-worked-time)",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-absences-worked-time)",
+        "url_contains": "/dashboard/absence"
+      }
+    },
+    {
+      "id": "s31",
+      "narration": "Kliknu na záložku Ostatní, kde najdete třeba Denní mzdový report.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/dashboard/other\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/other/payroll\"]",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card:has(#report_title-payroll)",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/other/payroll\"]",
+        "url_contains": "/dashboard/other"
+      }
+    },
+    {
+      "id": "s311",
+      "narration": "U Denního mzdového reportu kliknu na Přejít na report a otevře se jeho stránka s konfiguracemi.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/other/payroll\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/reports-v-2/other/payroll\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+        "url_contains": "/app/reports-v-2/other/payroll"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "Kliknu na Vygenerovat jednorázový report a otevře se formulář nového reportu.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container slnk-sloneek-reports-new-dialog nb-select[formcontrolname=working_type] button",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container slnk-sloneek-reports-new-dialog nb-select[formcontrolname=working_type] button",
+        "url_contains": "/other/payroll"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "Kliknu na pole Na základě čeho vyplácíte mzdy, kde vyberete negativní docházku, aktivní docházku, nebo aktivity a time tracking.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container slnk-sloneek-reports-new-dialog nb-select[formcontrolname=working_type] button",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option:has-text(\"Negativní docházka\")",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-option-list",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "nb-option:has-text(\"Negativní docházka\")",
+        "url_contains": "/other/payroll"
+      }
+    },
+    {
+      "id": "s34",
+      "narration": "Klávesou Escape nabídku i celý formulář zavřu, protože report teď generovat nebudu.",
+      "actions": [
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "body:not(:has(nb-dialog-container))",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+        "url_contains": "/other/payroll"
+      }
+    },
+    {
+      "id": "s35",
+      "narration": "Negativní docházku zvolte tam, kde lidé pracují v pevné pracovní době a vám stačí evidovat absence.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=createNewOneTimeReportButton]",
+        "url_contains": "/other/payroll"
+      },
+      "part": 7,
+      "part_title": "Který režim zvolit"
+    },
+    {
+      "id": "s36",
+      "narration": "Aktivní docházku zvolte pro směny, proměnlivou pracovní dobu, nebo když potřebujete doložit skutečně odpracované hodiny a přesčasy.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+          "before_ms": 600
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+        "url_contains": "/other/payroll"
+      }
+    },
+    {
+      "id": "s37",
+      "narration": "Teď víte, čím se oba režimy liší a kde je přepnete, a kdyby něco nešlo, mrkněte do Centra nápovědy.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+        "url_contains": "/other/payroll"
+      }
+    },
+    {
+      "id": "s38",
+      "narration": "Méně administrativy, víc času na lidi. To je Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a[href=\"/app/attendance-v2-overview\"]",
+        "url_contains": "/other/payroll"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "cleanup: Docházka u 'Králová Lucie' (0c9409f2-fc6e-475b-b2b1-2e791b4a7a83) zapnout, pokud je vypnutá – filtr Jméno 'Králová', přesně 1 řádek s textem 'Králová Lucie', klik na přeškrtnuté oko jen když existuje; nakonec ověří zelené oko",
+      "url": "https://app-pre-production.sloneek.com/app/settings/users-modules",
+      "if_visible": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Jméno Filter Input\"]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Jméno Filter Input\"]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Jméno Filter Input\"]",
+          "value": "Králová",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row[row-index=\"0\"] [col-id=full_name]:text-is(\"Králová Lucie\")",
+          "value": "10000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-paging-panel:has-text(\"1 do 1 z 1\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row[row-index=\"0\"] [col-id=full_name]:text-is(\"Králová Lucie\")",
+          "before_ms": 300
+        },
+        {
+          "type": "press",
+          "value": "End",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=\"user_module_visibility.is_attendance_v2_module_visible\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"] [col-id=\"user_module_visibility.is_attendance_v2_module_visible\"] button:has(.fa-eye-slash), [data-cy=mainContentCenterDiv] .ag-paging-panel",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"] [col-id=\"user_module_visibility.is_attendance_v2_module_visible\"] button:has(.fa-eye)",
+          "value": "5000"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "teardown": [
+    {
+      "name": "teardown: Docházka u 'Králová Lucie' (0c9409f2-fc6e-475b-b2b1-2e791b4a7a83) zapnout, pokud je vypnutá – filtr Jméno 'Králová', přesně 1 řádek s textem 'Králová Lucie', klik na přeškrtnuté oko jen když existuje; nakonec ověří zelené oko",
+      "url": "https://app-pre-production.sloneek.com/app/settings/users-modules",
+      "if_visible": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Jméno Filter Input\"]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Jméno Filter Input\"]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Jméno Filter Input\"]",
+          "value": "Králová",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row[row-index=\"0\"] [col-id=full_name]:text-is(\"Králová Lucie\")",
+          "value": "10000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-paging-panel:has-text(\"1 do 1 z 1\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row[row-index=\"0\"] [col-id=full_name]:text-is(\"Králová Lucie\")",
+          "before_ms": 300
+        },
+        {
+          "type": "press",
+          "value": "End",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=\"user_module_visibility.is_attendance_v2_module_visible\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"] [col-id=\"user_module_visibility.is_attendance_v2_module_visible\"] button:has(.fa-eye-slash), [data-cy=mainContentCenterDiv] .ag-paging-panel",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row[row-index=\"0\"] [col-id=\"user_module_visibility.is_attendance_v2_module_visible\"] button:has(.fa-eye)",
+          "value": "5000"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-12",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "user": "Lucie Králová <lucie.kralova@example.com> (0c9409f2-fc6e-475b-b2b1-2e791b4a7a83), NEAKTIVNÍ – trvalá; video jí vypne a hned zase zapne modul Docházka (s15/s18); cleanup i teardown ověří, že je zapnutý",
+      "read_only": "šablona 'Plný úvazek 40 h' (zamčená, přiřazená Tomášovi), firemní přepínač Docházka (nový modul), Nastavení docházky, reporty – jen zvýrazněno",
+      "never_clicked": "Uložit na Viditelnosti modulů (ukládá firemní přepínače), Zaznamenat příchod/Odchod, Vygenerovat report"
+    },
+    "notes": "viz atlas/attendance-modes.md"
+  }
+}

@@ -1,0 +1,1176 @@
+{
+  "id": "performance-review",
+  "version": 1,
+  "title": "Performance evaluation: positions, competencies and review cycles",
+  "lang": "en",
+  "app_version": "preprod-2026-10-09",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "en"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "7jQ3jNk3Fcw65sWUmzun",
+    "model_id": "eleven_v4"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s25",
+    "title": "Performance evaluation"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Reviews in spreadsheets and notes scattered across emails? Hi, I'm Maria from the Sloneek team, and I'll show you performance evaluation.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Introduction",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Evaluation is built on positions and their competencies. Managers evaluate their direct reports, and people can also evaluate themselves.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "before_ms": 1500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "In the left menu, I click Performance evaluation. Here you see all review cycles, their status, and their completion rate.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-positions-evaluation-list [data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-list table thead",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-list [data-cy=tableRow]",
+        "url_contains": "/app/performance-evaluation/positions-evaluation/all"
+      }
+    },
+    {
+      "id": "s04",
+      "narration": "The filters above the table quickly separate drafts, ongoing cycles, cycles ready to launch, and completed ones.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-status-filter",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-status-filter button:text-is(\"Completed\")",
+        "url_contains": "/app/performance-evaluation/positions-evaluation/all"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "Let's start with positions. The Manage positions button opens an overview of job positions and their competencies.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "button:has-text(\"Manage positions\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "button:has-text(\"Manage positions\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "tr:has-text(\"Customer Support Specialist\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "h5:text-is(\"Positions and competencies\")",
+        "url_contains": "/app/performance-evaluation/positions"
+      },
+      "part": 2,
+      "part_title": "Positions and competencies"
+    },
+    {
+      "id": "s06",
+      "narration": "For each position, you see how many people hold it and how many competencies its competency model contains.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "table thead",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "tr:has-text(\"Customer Support Specialist\")",
+        "url_contains": "/app/performance-evaluation/positions"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "I'll open the Customer Support Specialist position. At the top are the name and the job description, which the employee sees too.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "tr:has-text(\"Customer Support Specialist\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "tr:has-text(\"Customer Support Specialist\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "input#name",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-common-card:has(slnk-common-editor)",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "slnk-common-card:has(slnk-common-editor)",
+        "url_contains": "/app/performance-evaluation/positions/edit/"
+      },
+      "voice_after_actions": true
+    },
+    {
+      "id": "s08",
+      "narration": "Below is the competency model. Each competency has its own scale, here zero to five, and you can describe each level in words.",
+      "actions": [
+        {
+          "type": "scroll",
+          "value": "slnk-common-card:has(slnk-common-open-ai-search-bar-v2)",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "span.text-primary:text-is(\"Setting the verbal description of the scale\") >> nth=0",
+          "before_ms": 600
+        },
+        {
+          "type": "click",
+          "selector": "span.text-primary:text-is(\"Setting the verbal description of the scale\") >> nth=0",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "highlight",
+          "selector": "div.px-4.pb-4.pt-4:has(input[placeholder=\"Scale description\"]) >> nth=0",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "div.px-4.pb-4.pt-4:has(input[placeholder=\"Scale description\"]) >> nth=0",
+        "url_contains": "/app/performance-evaluation/positions/edit/"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "You don't have to invent competencies yourself: type the position into the AI field and AI suggests them. You then assign the position to people in their profile.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "textarea[data-cy=aiTextarea]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-common-card-page-header button:has-text(\"Back\")",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-card-page-header button:has-text(\"Back\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container [data-cy=submitButton]",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "nb-dialog-container [data-cy=submitButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "tr:has-text(\"Customer Support Specialist\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "h5:text-is(\"Positions and competencies\")",
+        "url_contains": "/app/performance-evaluation/positions"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Now let's create a new cycle. I click Create and fill in a name, for example Performance review for Q4.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-common-card-page-header button:has-text(\"Back\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-positions-evaluation-list [data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "button:has-text(\"Create\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "button:has-text(\"Create\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "input#name",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "input#name",
+          "value": "Performance review for Q4",
+          "before_ms": 400,
+          "delay_ms": 40
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-setup-survey-basic-settings",
+        "url_contains": "/setup/survey"
+      },
+      "part": 3,
+      "part_title": "New review cycle",
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s11",
+      "narration": "The first option adds competencies from the job positions to the questionnaire. The manager always evaluates, and I'll also tick self-evaluation.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "nb-checkbox[formcontrolname=is_copy_competencies_from_position]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "hover",
+          "selector": "nb-checkbox[formcontrolname=is_self_review_requested] label",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-checkbox[formcontrolname=is_self_review_requested] label",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "nb-checkbox[formcontrolname=is_self_review_requested] span.custom-checkbox.checked",
+        "url_contains": "/setup/survey"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Under Targeting, you choose who gets evaluated: the whole company, teams, locations, tags, positions, or specific people. I'll pick selected users.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-setup-survey-targeting nb-radio-group",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "click",
+          "selector": "nb-radio:has(input[value=\"users\"]) label",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "slnk-positions-evaluation-setup-survey-targeting slnk-common-autocomplete input",
+          "before_ms": 600
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "Claver",
+          "before_ms": 400,
+          "delay_ms": 60
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:text-is(\"Claver Thomas\")",
+          "before_ms": 600
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-setup-survey-targeting slnk-common-autocomplete",
+        "url_contains": "/setup/survey"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "In the Timeline, I set the start and end date. The cycle can even start today.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "input[formcontrolname=start_date]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-calendar-day-cell.day-cell.today",
+          "before_ms": 700
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "input[formcontrolname=end_date]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "nb-calendar-day-cell.day-cell:not(.bounding-month):not(.disabled) >> nth=-1",
+          "before_ms": 900
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-setup-survey-timeline",
+        "url_contains": "/setup/survey"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "I click Next. The review is saved as a draft, and we move on to the questionnaire.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "slnk-common-card-page-header button:has-text(\"Next\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-card-page-header button:has-text(\"Next\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ":text-is(\"Select the option to create a questionnaire\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": ":text-is(\"Select the option to create a questionnaire\")",
+        "url_contains": "/questionnaire"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "AI can draft the questionnaire for you, or you can start from scratch. I'll choose Start from scratch.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-setup li:has-text(\"Create with AI\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "hover",
+          "selector": "li:has-text(\"Start from scratch\") >> nth=-1",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "li:has-text(\"Start from scratch\") >> nth=-1",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ":text-is(\"Instruction for self reviewers\")",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": ":text-is(\"Instructions for manager\")",
+        "url_contains": "sectionId=instructions"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "In Instructions, you write separate guidance for the self-evaluation and for the manager. All changes are saved automatically.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-common-card:has-text(\"Instruction for self reviewers\") >> nth=-1",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": ":text-is(\"Instructions for manager\")",
+        "url_contains": "sectionId=instructions"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "In All positions, you add questions for everyone being evaluated. I click Add question and type the wording.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-common-dynamic-menu-item a:text-is(\"All positions\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "button:has-text(\"Add question\")",
+          "value": "10000"
+        },
+        {
+          "type": "hover",
+          "selector": "button:has-text(\"Add question\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "button:has-text(\"Add question\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "type",
+          "selector": "input[formcontrolname=text]",
+          "value": "How well are you meeting your goals for the past period?",
+          "before_ms": 400,
+          "delay_ms": 30
+        }
+      ],
+      "expect": {
+        "visible": "input[formcontrolname=text]",
+        "url_contains": "/questionnaire"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "As the answer type, I choose a scale from one to five. A question can be for the manager only, or for both the manager and the user.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-select#type button",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-option:text-is(\"Scale\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-select#target_type",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "nb-select#type button:has-text(\"Scale\")",
+        "url_contains": "/questionnaire"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "Each position has questions from its competency model. You can add your own questions here, too.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-common-dynamic-menu-item a:text-is(\"Customer Support Specialist\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-accordion-item-header h6:text-is(\"Customer communication\")",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-setup-questionnaire-question:has-text(\"Customer communication\") >> nth=0",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "nb-accordion-item-header h6:text-is(\"Customer communication\")",
+        "url_contains": "/questionnaire"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "I click Next. The summary shows the name, targeting, dates, and the number of questions.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "slnk-common-card-page-header button:has-text(\"Next\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-card-page-header button:has-text(\"Next\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ":text-is(\"Summary\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": ":text-is(\"Summary\")",
+        "url_contains": "/launch"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "The Launch button starts the cycle, and evaluators get their tasks. For this demo, I'll leave it as a draft.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "slnk-common-card-page-header button:has-text(\"Launch\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ],
+      "expect": {
+        "visible": ":text-is(\"Summary\")",
+        "url_contains": "/launch"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "Now the results. In the overview, I open the demo review for the third quarter.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=tableRow]:has-text(\"Performance review – demo (Q3 2026)\")",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=tableRow]:has-text(\"Performance review – demo (Q3 2026)\")",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=tableRow]:has-text(\"Performance review – demo (Q3 2026)\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-detail-results",
+        "url_contains": "/detail/"
+      },
+      "part": 4,
+      "part_title": "Results",
+      "voice_after_actions": 3
+    },
+    {
+      "id": "s23",
+      "narration": "At the top, you see the number of participants and the completion rate. The Results table shows who's still missing a type of feedback.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=positionsEvaluationResultUserListTable] tbody tr",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-common-card:has-text(\"Completion rate\") >> nth=-1",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=positionsEvaluationResultUserListTable] thead",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=positionsEvaluationResultUserListTable]",
+        "url_contains": "/detail/"
+      },
+      "voice_after_actions": 1
+    },
+    {
+      "id": "s24",
+      "narration": "In the Raters tab, you check who evaluates whom. In the Results table, I click the name of the person being evaluated.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "a[href$=\"/raters\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=positionsEvaluationResultUserListTable] tbody tr:has-text(\"Claver Thomas\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=positionsEvaluationResultUserListTable] tbody tr:has-text(\"Claver Thomas\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "slnk-position-evaluation-report-summary",
+        "url_contains": "/user-report/"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "The report shows strengths and areas to improve: here, customer communication leads and independence is the weakest. AI key observations sum it up in words.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "slnk-position-evaluation-report-performance-by-category",
+          "value": "20000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-position-evaluation-report-summary",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-common-card:has-text(\"AI key observations\") >> nth=-1",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-position-evaluation-report-performance-by-category",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "slnk-position-evaluation-report-performance-by-category",
+        "url_contains": "/user-report/"
+      },
+      "voice_after_actions": 1
+    },
+    {
+      "id": "s26",
+      "narration": "Detailed feedback shows the manager's rating next to the self-evaluation. You set the agreed final result with the pencil icon.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-competencies-feedback table",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-positions-evaluation-competencies-feedback .fa-pencil >> nth=0",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-competencies-feedback th:text-is(\"Final result\")",
+        "url_contains": "/user-report/"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "You can turn a weaker area straight into a personal goal. The shared notes hold the agreed action plan, which the employee sees too.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "button:has-text(\"Create personal goal\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-common-card:has-text(\"Shared review notes\") >> nth=-1",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "button:has-text(\"Create personal goal\")",
+        "url_contains": "/user-report/"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "And the employee's view? They open My performance evaluation. While a cycle is running, the questionnaire waits in My tasks.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_performance_evaluation",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_performance_evaluation",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-positions-evaluation-my-cycles",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-my-tasks",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-my-cycles",
+        "url_contains": "/positions-evaluation/my/my-evaluation"
+      },
+      "part": 5,
+      "part_title": "Employee's view"
+    },
+    {
+      "id": "s29",
+      "narration": "My cycles holds their results, and the Competencies tab shows the position description and what they'll be evaluated on.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-positions-evaluation-my-cycles",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "hover",
+          "selector": "a[href$=\"/my/my-competences\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "a[href$=\"/my/my-competences\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ":has-text(\"Competency model : Customer Support Specialist\") >> nth=-1",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": ":has-text(\"Competency model : Customer Support Specialist\") >> nth=-1",
+        "url_contains": "/my/my-competences"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "A final tip: duplicate a finished cycle in the overview, and your next review round is ready in no time.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_performance_evaluation",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-positions-evaluation-list [data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=tableRow] [data-cy=actionsButton] >> nth=0",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-context-menu a:has-text(\"Duplicate\")",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=positionsEvaluationSearch]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-list [data-cy=tableRow]",
+        "url_contains": "/app/performance-evaluation/positions-evaluation/all"
+      },
+      "part": 6,
+      "part_title": "Wrap-up"
+    },
+    {
+      "id": "s31",
+      "narration": "Now you know how to set up positions, prepare a review cycle, and read the results. If something doesn't work, check the Help Center.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-list",
+        "url_contains": "/app/performance-evaluation/positions-evaluation/all"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "Less admin, more time for people. This is Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1000"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-positions-evaluation-list",
+        "url_contains": "/app/performance-evaluation/positions-evaluation/all"
+      },
+      "hold_after_ms": 1500
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat zbylý CZ koncept 'Hodnocení výkonu za čtvrté čtvrtletí' z jiného běhu",
+      "url": "https://app-pre-production.sloneek.com/app/performance-evaluation/positions-evaluation/all",
+      "if_visible": "[data-cy=tableRow]:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\")",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=tableRow]:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\") >> [data-cy=actionsButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a:has-text(\"Delete\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has-text(\"Hodnocení výkonu za čtvrté čtvrtletí\") [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat zbylý PL koncept 'Ocena wyników za czwarty kwartał' z jiného běhu",
+      "url": "https://app-pre-production.sloneek.com/app/performance-evaluation/positions-evaluation/all",
+      "if_visible": "[data-cy=tableRow]:has-text(\"Ocena wyników za czwarty kwartał\")",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=tableRow]:has-text(\"Ocena wyników za czwarty kwartał\") >> [data-cy=actionsButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a:has-text(\"Delete\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has-text(\"Ocena wyników za czwarty kwartał\") [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "Thomas Claver: nastavit demo pozici videa (karta uživatele 244ccfdd, mění jen pole Pozice; přeskočí, když už ji má)",
+      "url": "https://app-pre-production.sloneek.com/app/company-details/member/244ccfdd-cc2a-4a75-bd8f-93e79bdd3b5f/work-data",
+      "if_visible": "nb-select[data-cy=positionSelect] button:not(:has-text(\"Customer Support Specialist\"))",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-select[data-cy=positionSelect] button",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "nb-option:text-is(\"Customer Support Specialist\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=companyMemberWorkDataSaveButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "navigate",
+          "value": "https://app-pre-production.sloneek.com/app/company-details/member/244ccfdd-cc2a-4a75-bd8f-93e79bdd3b5f/work-data"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-select[data-cy=positionSelect] button:has-text(\"Customer Support Specialist\")",
+          "value": "15000"
+        }
+      ]
+    },
+    {
+      "name": "smazat koncept 'Hodnocení výkonu za čtvrté čtvrtletí' z minulého běhu (1)",
+      "url": "https://app-pre-production.sloneek.com/app/performance-evaluation/positions-evaluation/all",
+      "if_visible": "[data-cy=tableRow]:has-text(\"Performance review for Q4\")",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=tableRow]:has-text(\"Performance review for Q4\") >> [data-cy=actionsButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a:has-text(\"Delete\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has-text(\"Performance review for Q4\") [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat koncept 'Hodnocení výkonu za čtvrté čtvrtletí' z minulého běhu (2)",
+      "url": "https://app-pre-production.sloneek.com/app/performance-evaluation/positions-evaluation/all",
+      "if_visible": "[data-cy=tableRow]:has-text(\"Performance review for Q4\")",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=tableRow]:has-text(\"Performance review for Q4\") >> [data-cy=actionsButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a:has-text(\"Delete\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has-text(\"Performance review for Q4\") [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-09",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "position": "babef7ec-634e-484e-b1bc-4eedf54a28af",
+      "cycle": "dc32420e-4b25-4a07-b9d9-b40fb19b0467",
+      "user_report": "5cef2f44-3982-4e99-a83e-d4d5cb00f40a"
+    },
+    "notes": "DRY-RUN 9. 10. 2026 ~20:20-20:45 UTC in-page runnerem (Playwright-like: první shoda musí být viditelná, :text-is/:has-text/>>/nth, wait_ready = selektor + bez spinneru): cleanup před (smazán zbylý koncept) -> s01-s32 32/32 OK (~89 s bez narace) -> cleanup po (koncept smazán, ověřeno API). Zjištění: (1) detail pozice vždy při odchodu ukáže dialog 'Neuložené změny' (i bez úprav) -> s09 klikne Ano = odejít bez uložení; (2) menu Akce v seznamu cyklů je nbContextMenu s trigger=hover, otevírá se najetím a zavírá až odjetím myši (Escape nefunguje) -> s30 najede na Akce a pak na pole Hledat; (3) cleanup potvrzuje jen dialog, který obsahuje název konceptu (nb-dialog-container:has-text(...)), protože otevřené menu jiného řádku by jinak smazalo cizí cyklus - při dry-runu se to stalo (smazán cizí dokončený cyklus '360 evaluation'); (4) demo cyklus je stále 'Probíhá', s22 ho proto otevírá bez filtru Dokončeno; (5) nadpis sekce pozice v dotazníku je 'Specialista Zákaznické Podpory' (Title Case)."
+  },
+  "_localized": {
+    "from": "recipes/cs/performance-review.json",
+    "i18n": "i18n/performance-review.en.json",
+    "at": "2026-10-11T07:24:29.880Z",
+    "verified": {
+      "date": "2026-10-10",
+      "by": "Claude (BrowserOS, preprod, local-translate=en, in-page runner out/performance-review/_work/dryrun-runner.js: CSS + :text-is/:has-text/>>/nth, wait 10 s visible, wait_ready = selector + no spinner, pointer/mouse events at elementFromPoint of centre)",
+      "selectors": "32/32 steps passed (every action target + expect.visible resolved, url_contains ok). One fix during the run: s25 card title is 'AI key observations' in the user report (translate_fe has both 'AI key insights' and 'AI key observations'; the report uses the latter). Live EN labels: menu 'Performance evaluation' / 'My performance evaluation' (section ME), h5 'Competency evaluation', 'Manage positions', '+ Create', filters All surveys/Drafts/In progress/Ready to launch/Completed, tags Draft/Completed, h5 'Positions and competencies', 'Setting the verbal description of the scale', placeholder 'Scale description', wizard 'Evaluation' 1. Survey setup/2. Questionnaire/3. Launch, 'Save as draft', 'Next', 'Basic settings', 'Evaluation name', 'List competencies from created job positions', 'Feedback types' Manager/User, targeting Whole company/Selected teams/Selected locations/Selected users/Selected tags/Selected positions, 'Timeline' Start date/End date (MM/DD/YYYY), 'Select the option to create a questionnaire', 'Create with AI', 'Start from scratch', 'Instruction for self reviewers', 'Instructions for manager', 'All positions', 'Add question', 'Scale', 'Summary' (Name/Targeting 'Users (1)'/Duration/Start date/End date/Number of questions 6), 'Launch' (2x), 'Completion rate', report 'Summary', 'Top 5 strenghts' (typo in app), 'Top 5 areas to improve', 'AI key observations', 'Performance by category', 'Final result', 'Create personal goal', 'Shared review notes', 'Notes visible to the administrator', My tasks 'No tasks', 'My cycles', tab 'Competencies', menu 'Duplicate'/'Delete' (live), dialog 'Delete performance evaluation – Are you sure you want to delete <name>? No / Yes'. Demo cycle is now 'Completed' (100 %).",
+      "cleanup": "before: API 23 cycles, none of ours. Run created draft 'Performance review for Q4' (68ed28e2-…); deleted after reload via row → Actions (hover) → Delete → dialog checked to contain 'delete Performance review for Q4?' → Yes; GET 404; after: 23 cycles, identical uuid set (Q4 2026 draft, demo cycle untouched). NB: the in-page runner cannot parse 'nb-dialog-container:has-text(\"…\") [data-cy=submitButton]' (pseudo not at end of segment) – the confirm was done by an equivalent manual guarded click; Playwright in the recorder supports the selector. cleanup_prepend blocks (CZ/PL leftover drafts) not exercised – no such drafts existed.",
+      "en_demo_data": "11. 10. 2026: EN dry-run with EN demo data 32/32 (local-translate=en; changed steps s05–s07, s09, s19, s22, s29 all ok – s07 opens bd2af2ad, s22 opens 684d7efc, s24 report d235c8c8, s29 'Competency model : Customer Support Specialist'). EN position-switch cleanup: guard correctly not visible when Thomas already has 'Customer Support Specialist' (actions verified via the identical CZ block). Cleanup: before 26 cycles → guarded delete of leftover draft 'Performance review for Q4' aff9ddd3 → 25; run draft 43902ba2 deleted the same way after a reload (GET 404) → 25, uuid set identical to before minus aff9ddd3. CZ position-switch block run afterwards (guard visible, actions ok, wait_ready after reload ok): Thomas back on 'Specialista zákaznické podpory'."
+    }
+  }
+}

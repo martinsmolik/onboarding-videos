@@ -1,0 +1,468 @@
+{
+  "_comment": "Atlas data modulu Cíle (EN UI) sebraná při suchém běhu EN videa 9. 10. 2026 (Claude, BrowserOS, preprod, admin Thomas Claver, local-translate=en). Koordinátor mergne do atlas/. 'verified': true = viděno naživo v UI; ostatní označeno unverified.",
+  "date": "2026-10-09",
+  "ui_dictionary": {
+    "navigation": {
+      "Nastavení cílů": "Goal settings",
+      "Cíle": "Goals",
+      "Moje cíle": "My goals",
+      "Moje úkoly": "My tasks",
+      "sekce Společnost": "COMPANY",
+      "sekce Já": "ME",
+      "sekce Reporty a nastavení": "REPORTS AND SETTINGS"
+    },
+    "goal_settings": {
+      "Nastavení cílů (h1)": "Goal settings",
+      "Výchozí kontrola": "Default check-up / Check-up default",
+      "Týdně": "Weekly",
+      "Každé dva týdny": "Bi-weekly",
+      "Měsíční": "Monthly",
+      "Čtvrtletně": "Quarterly",
+      "Každý (den)": "Every Monday",
+      "Každý druhý": "Every second Monday",
+      "V čase": "At time (09:00 AM)",
+      "Den v měsíci": "Day of the month (2.)",
+      "Měsíc čtvrtletí": "Month of the quarterly (Second in quarter)",
+      "Výchozí viditelnost": "Default visibility",
+      "Firemní cíle": "Company goals",
+      "Týmové cíle": "Team goals",
+      "Celá společnost": "Whole company",
+      "Celý tým": "Whole team",
+      "Oprávnění": "Permissions",
+      "Kdo může vytvářet firemní cíle": "Who can create company goals",
+      "Kdo může vytvářet týmové cíle": "Who can create team goals",
+      "Kdo může vytvářet osobní cíle": "Who can create personal goals",
+      "Pouze administrátoři": "Admins only",
+      "Manažeři a administrátoři": "Managers and admins",
+      "Všichni": "Everyone"
+    },
+    "goals_list": {
+      "Nový cíl": "New goal",
+      "Export": "Export",
+      "Seskupit podle": "Group by",
+      "Filtry": "Filters",
+      "List": "List",
+      "Časová osa": "Timeline",
+      "Strom": "Tree",
+      "sloupce": [
+        "Name",
+        "Level",
+        "Progress",
+        "Status",
+        "Owner",
+        "Due date"
+      ],
+      "úrovně v seznamu": [
+        "Company",
+        "Individual",
+        "<team name>"
+      ],
+      "Seskupit položky podle": "Group items by",
+      "možnosti seskupení": [
+        "Level",
+        "Priority",
+        "Status",
+        "Owner",
+        "Due date"
+      ],
+      "řazení": "A -> Z",
+      "Zobrazit prázdné skupiny": "Show empty groups",
+      "Vymazat (seskupení)": "Clear",
+      "Počet gólů": "Count of goals",
+      "Nepřiřazeno (skupina)": "Unassigned",
+      "bez dílčích cílů": "No sub goals"
+    },
+    "goal_dialog": {
+      "Nový cíl": "New goal",
+      "Nový dílčí cíl": "New subgoal",
+      "Obecné": "General",
+      "Titul (placeholder)": "Title",
+      "Popis": "Description",
+      "Úroveň": "Level",
+      "Firemní": "Company",
+      "Týmový": "Team",
+      "Osobní": "Personal",
+      "Majitel": "Owner",
+      "Pozorovatel": "Observer",
+      "Viditelnost": "Visibility",
+      "Nadřazený cíl/dílčí cíl": "Parent goal/subgoal",
+      "Priorita": "Priority",
+      "priority": [
+        "Low",
+        "Normal",
+        "High",
+        "Urgent",
+        "Unassigned"
+      ],
+      "Datum zahájení": "Start date",
+      "Termín": "Due date",
+      "Metriky": "Metrics",
+      "typy metrik": [
+        "Subgoals",
+        "Numerical",
+        "Boolean",
+        "Checklist"
+      ],
+      "Výchozí hodnota": "Start value",
+      "Cílová hodnota": "Target value",
+      "Aktuální hodnota": "Current value",
+      "Jednotka": "Unit",
+      "Vybrat": "Select",
+      "jednotky": [
+        "Percentage",
+        "Ks",
+        "Items",
+        "Users",
+        "Clients",
+        "Deals",
+        "Leads",
+        "Tickets",
+        "Tasks",
+        "Hours",
+        "Days",
+        "Weeks",
+        "Months",
+        "CZK",
+        "EUR",
+        "USD",
+        "Gbp",
+        "Points",
+        "Score",
+        "NPS",
+        "Rating",
+        "Mb",
+        "Gb"
+      ],
+      "Kontrola": "Check-up",
+      "Přidat nové (checklist)": "Add new",
+      "položka checklistu (placeholder)": "Name",
+      "Přílohy": "Attachments",
+      "Uložit": "Save",
+      "Zrušit": "Cancel"
+    },
+    "goal_detail": {
+      "Zpět": "Back",
+      "Možnosti": "Options",
+      "menu Možnosti": [
+        "Update progress",
+        "Mark as completed",
+        "Duplicate",
+        "Move",
+        "Delete",
+        "Share",
+        "Copy link"
+      ],
+      "Upravit": "Edit",
+      "Dílčí cíle (N)": "Subgoals (N)",
+      "Žádné dílčí cíle": "No subgoals",
+      "Aktivita": "Acitivity (sic)",
+      "Odpovědět": "Reply",
+      "Detaily": "Details",
+      "Stav": "Status",
+      "Majitelé": "Owners",
+      "Pozorovatelé": "Observers",
+      "Nadřazený cíl": "Parent goal",
+      "Podřízené cíle (N)": "Child goals (N)",
+      "Přílohy (N)": "Attachments (N)",
+      "Toto období": "This period"
+    },
+    "statuses": [
+      "Not started",
+      "On track",
+      "At risk",
+      "Off track",
+      "Blocked",
+      "Completed"
+    ],
+    "update_progress_dialog": {
+      "Aktualizovat průběh (h3)": "Update progress",
+      "Aktuální hodnota": "Current value",
+      "Jak se cítíte ohledně tohoto cíle?": "How do you feel about this goal?",
+      "stavy": [
+        "On track",
+        "At risk",
+        "Off track",
+        "Blocked"
+      ],
+      "Poznámka": "Note",
+      "Aktualizovat": "Update",
+      "Zrušit": "Cancel"
+    },
+    "delete_dialog": {
+      "Vymazat cíl": "Delete goal",
+      "text": "Are you sure you want to delete the goal and possibly all its subgoals?",
+      "Vymazat": "Delete",
+      "Zrušit": "Cancel"
+    },
+    "my_goals": {
+      "Moje cíle (h1)": "My goals",
+      "dashboard": [
+        "Quarterly performance",
+        "Overall goals progress",
+        "Goals health score",
+        "Quarter countdown"
+      ],
+      "záložky": [
+        "All",
+        "Assigned",
+        "My goals",
+        "Observed"
+      ]
+    },
+    "my_tasks": {
+      "záložky": [
+        "Tasks",
+        "Goal checkups"
+      ],
+      "prázdný stav": "No search result / Edit search filter",
+      "výchozí filtr": "Status = pending, missed (z URL stavu tabulky)"
+    }
+  },
+  "api_calls": [
+    {
+      "method": "GET",
+      "path": "/v1/module-performance/goals-settings",
+      "steps": "s02 (+ každé otevření modulu)"
+    },
+    {
+      "method": "PATCH",
+      "path": "/v1/module-performance/goals-settings",
+      "steps": "s03 (autosave frekvence), cleanup"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/module-performance/goals",
+      "steps": "s07, s14, s21, s22, s25 (seznam; stav tabulky v query goals_v2_company_list_table=base64)"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/module-performance/goals/users-select-all",
+      "steps": "s08, s16, s26"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/module-performance/goals/teams-select",
+      "steps": "s08, s16"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/module-performance/goals/users-select-by-role",
+      "steps": "s08, s16"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/module-performance/goals",
+      "steps": "s14 (cíl), s20 (dílčí cíl)"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/module-performance/goals/{uuid}",
+      "steps": "s15, s16, s20, s25, s27"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/module-performance/goals/{uuid}/activities",
+      "steps": "s15, s20, s25, s27"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/module-performance/goals/select",
+      "steps": "s16 (výběr nadřazeného cíle)"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/module-performance/goals/owners",
+      "steps": "s21 (seskupení podle majitele)"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/module-performance/goals/{uuid}/subgoals",
+      "steps": "s22 (rozbalení ve stromu)"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/module-performance/goals/my/dashboard",
+      "steps": "s23"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/module-performance/goals/my",
+      "steps": "s23"
+    },
+    {
+      "method": "GET",
+      "path": "/v3/module-checklist/tags",
+      "steps": "s24"
+    },
+    {
+      "method": "GET",
+      "path": "/v3/module-checklist/checklist-tasks/my",
+      "steps": "s24"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/module-performance/checkups/my",
+      "steps": "s24 (záložka Goal checkups)"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/module-performance/goals/{uuid}/status-update",
+      "steps": "s26"
+    },
+    {
+      "method": "PATCH",
+      "path": "/v1/module-performance/goals/{uuid}/status-update",
+      "steps": "s27"
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/module-performance/goals/{uuid}",
+      "steps": "cleanup (Options → Delete)"
+    }
+  ],
+  "api_calls_note": "Host https://api-pre-production.sloneek.com; metoda z hooku XHR/fetch v záložce. Query parametry vynechány.",
+  "tooltips_validations": [
+    {
+      "where": "Nový cíl – Úroveň",
+      "text": "Permissions can be managed in Goal settings",
+      "verified": true
+    },
+    {
+      "where": "Nový cíl – Viditelnost",
+      "text": "Visibility defaults can be managed in Goal settings",
+      "verified": true
+    },
+    {
+      "where": "Nový dílčí cíl – Úroveň",
+      "text": "Manage who will have access in Goals settings",
+      "verified": true
+    },
+    {
+      "where": "Nový cíl – Datum zahájení/Termín",
+      "text": "This goal will appear in Q4 2026",
+      "verified": true
+    },
+    {
+      "where": "Nový dílčí cíl – Termín (validace)",
+      "text": "Date must be before parent due date: 31 Dec 2026",
+      "verified": true
+    },
+    {
+      "where": "Nový cíl – Kontrola",
+      "text": "Check-up can be managed in Goal settings",
+      "verified": true
+    },
+    {
+      "where": "Přílohy (cíl)",
+      "text": "Click and upload or use Drag and Drop · SVG, PNG, JPG, JPEG, GIF, PDF, DOC, DOCX, XLS, XLSX, PPT or PPTX · Max file size is 14.65 MB",
+      "verified": true
+    },
+    {
+      "where": "Přílohy (dílčí cíl)",
+      "text": "Click and upload or use Drag and Drop · SVG, PNG, JPG, JPEG or GIF · Max file size is 14.65 MB",
+      "verified": true
+    },
+    {
+      "where": "Update progress – termín",
+      "text": "Due date 31 Dec 2026 (83 day remaining)",
+      "verified": true
+    },
+    {
+      "where": "Delete goal dialog",
+      "text": "Are you sure you want to delete the goal and possibly all its subgoals?",
+      "verified": true
+    }
+  ],
+  "verified_open_items": {
+    "numeric_metric_fields": {
+      "answer": [
+        "Start value",
+        "Target value",
+        "Current value"
+      ],
+      "plus": "Unit (select, placeholder 'Select')",
+      "verified": true
+    },
+    "level_firemni_label": {
+      "answer": "Company (radio input#company; ostatní Team, Personal; v seznamu sloupec Level ukazuje Company / Individual / název týmu)",
+      "verified": true
+    },
+    "checkup_frequencies": {
+      "answer": [
+        "Weekly",
+        "Bi-weekly",
+        "Monthly",
+        "Quarterly"
+      ],
+      "verified": true
+    },
+    "reminder_time": {
+      "answer": "Každá frekvence má vlastní 'At time' (výchozí 09:00 AM); Weekly: Every Monday; Bi-weekly: Every second Monday; Monthly: Day of the month 2.; Quarterly: Second in quarter + Day of the month 31.",
+      "verified": true,
+      "unverified": "seznam dalších časů v selectu neotevřen"
+    },
+    "goal_checkup_task_buttons": {
+      "answer": null,
+      "verified": false,
+      "note": "Záložka Goal checkups u admina prázdná (No search result, výchozí filtr Status = pending+missed) – tlačítka úkolu nelze ověřit."
+    },
+    "status_naming": {
+      "answer": "EN: detail i dialog Update progress používají 'On track' (CZ nekonzistence 'Na dobré cestě' vs 'Podle plánu' v EN není)",
+      "verified": true
+    },
+    "owner_in_detail": {
+      "answer": "Panel Details v detailu cíle ukazoval 'Owners empty', přestože majitelka Nová Kristýna byla uložena (Group by Owner ji počítá). Pravděpodobně jen render avatara bez textu.",
+      "verified": false
+    }
+  },
+  "en_translation_bugs": [
+    {
+      "where": "Detail cíle – nadpis aktivity",
+      "shown": "Acitivity",
+      "expected": "Activity",
+      "verified": true
+    },
+    {
+      "where": "Update progress dialog",
+      "shown": "(83 day remaining)",
+      "expected": "(83 days remaining)",
+      "verified": true
+    },
+    {
+      "where": "Jednotky metriky",
+      "shown": "Ks",
+      "expected": "Pcs (CZ 'ks' nepřeloženo; duplicitní s Items)",
+      "verified": true
+    },
+    {
+      "where": "Jednotky metriky",
+      "shown": "Gbp / Mb / Gb",
+      "expected": "GBP / MB / GB",
+      "verified": true
+    },
+    {
+      "where": "Goal settings – čtvrtletní kontrola",
+      "shown": "Month of the quarterly",
+      "expected": "Month of the quarter",
+      "verified": true
+    },
+    {
+      "where": "Goal settings – nadpisy frekvencí",
+      "shown": "Check-up default / Weekly default / Bi-weekly default / Monthly default",
+      "expected": "Default check-up / Weekly / …",
+      "verified": true
+    },
+    {
+      "where": "Nový dílčí cíl vs Nový cíl",
+      "shown": "'Goals settings' vs 'Goal settings'",
+      "expected": "jednotně 'Goal settings'",
+      "verified": true
+    },
+    {
+      "where": "Seznam (progress)",
+      "shown": "No sub goals",
+      "expected": "No subgoals (jinde 'Subgoals')",
+      "verified": true
+    }
+  ]
+}

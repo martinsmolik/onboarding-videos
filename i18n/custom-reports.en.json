@@ -1,0 +1,132 @@
+{
+  "_comment": "Anglická verze videa Vlastní reporty. UI texty z translate_fe/en, ověřeny naživo na pre-produ s local-translate=en (9. 10. 2026, Claude přes BrowserOS). Naraci napsal Claude – před publikací nechat zkontrolovat rodilým mluvčím.",
+  "verified": {
+    "date": "2026-10-09",
+    "by": "Claude (BrowserOS, preprod, local-translate=en, in-page runner: CSS + :text-is/:has-text, wait 10 s visible, pointer/mouse events at elementFromPoint of centre, execCommand insertText)",
+    "selectors": "all 20 steps passed (every action target and expect.visible resolved and visible, url_contains ok); filter left only 'Dovolená'; report saved as 'Leave usage – overview' (/app/custom-reports/594), visible in Public tab",
+    "cleanup": "CZ 'Čerpání dovolené – přehled' and PL 'Wykorzystanie urlopu – przegląd' deleted via row trash icon + dialog 'Delete'; EN report deleted via master path (link → Options → Delete report → Delete); tenant left without CZ/PL/EN demo report",
+    "ui_labels": "Absence views: Detailed / Summary / Types / Days (remaining fund); Summary columns: Name, Absence final claim, Absence total claimed, Absence remaining claim; save dialog: Save report / Name / Description / Make report public; export: Export as CSV / Export as Excel (.xlsx); preset 579 = 'Complex Salary Report'"
+  },
+  "title": "Custom reports – exactly the overview you need",
+  "thumbnail_title": "Custom reports",
+  "parts": {
+    "Úvod": "Introduction",
+    "Nastavení": "Setup",
+    "Ukázka využití": "Example use",
+    "Kdo report uvidí": "Who sees the report",
+    "Závěr": "Wrap-up"
+  },
+  "text": {
+    "Vlastní reporty": "Custom reports",
+    "Předpřipravené": "Pre made",
+    "Veřejný": "Public",
+    "Komplexní mzdový report": "Complex Salary Report",
+    "Zpět": "Back",
+    "Vytvořit nový report": "Create new report",
+    "Nový report": "New report",
+    "Shrnutí": "Summary",
+    "Minulý měsíc": "Last month",
+    "Tento rok": "This year",
+    "Uložit report": "Save report",
+    "Možnosti": "Options",
+    "Smazat report": "Delete report",
+    "Smazat": "Delete",
+    "Čerpání dovolené – přehled": "Leave usage – overview",
+    "Zbývající dovolená všech kolegů za letošní rok.": "Remaining leave for all colleagues this year."
+  },
+  "keep": [
+    "Dovolená",
+    "Leave usage – overview",
+    "Wykorzystanie urlopu – przegląd"
+  ],
+  "cleanup_prepend": [
+    {
+      "name": "smazat report z minulého běhu (CZ)",
+      "url": "https://app-pre-production.sloneek.com/app/custom-reports",
+      "if_visible": "a:text-is(\"Čerpání dovolené – přehled\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "tr:has-text(\"Čerpání dovolené – přehled\") button.p-button-danger",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog button.p-button-danger",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "4000"
+        }
+      ]
+    }
+  ],
+  "steps": {
+    "s01": {
+      "narration": "How much leave do people have left, who's working overtime, and what should you send to the accountant? Hi, I'm Maria from the Sloneek team, and today I'll show you Custom reports."
+    },
+    "s02": {
+      "narration": "You'll find reports at the very bottom of the left menu, under Custom reports."
+    },
+    "s03": {
+      "narration": "At the top, there are tabs: all reports, favorites, created by me, public, and pre-made. A pre-made report is ready to open, and you can adjust it if you need to."
+    },
+    "s04": {
+      "narration": "The module needs no setup. I'll open the Complex Salary Report."
+    },
+    "s05": {
+      "narration": "At the top, you choose the period, on the left the columns, and on the right you see the data right away."
+    },
+    "s06": {
+      "narration": "The report pulls data from absences, attendance, activities and user profiles, so the better you keep them up to date, the better your overview."
+    },
+    "s07": {
+      "narration": "Now let's build our own overview. Managers want to know how much leave people have left. I'll go back to the list."
+    },
+    "s08": {
+      "narration": "I'll click Create new report and start with an empty table."
+    },
+    "s09": {
+      "narration": "Under Include data, I'll expand Absence."
+    },
+    "s10": {
+      "narration": "For absences, you can choose from four views: detailed, summary, types, and days with the remaining fund. I'll pick Summary, because I want claims and balances."
+    },
+    "s11": {
+      "narration": "I'll tick the name, the final claim, the total claimed and the remaining claim. Each column shows up in the table right away."
+    },
+    "s12": {
+      "narration": "At the top, I'll switch the period to This year, so the numbers match the annual allowance."
+    },
+    "s13": {
+      "narration": "The table now shows all absence types. Watch out for a common mistake: ticking a column doesn't filter the data, it only displays it. The filter is the icon in the column header."
+    },
+    "s14": {
+      "narration": "I'll click it next to the name, select the vacation type, and confirm with Apply."
+    },
+    "s15": {
+      "narration": "In the top right corner, I'll click Save report."
+    },
+    "s16": {
+      "narration": "I'll name it Leave usage, overview, add a short description, and tick Make report public, so other admins can see it too. Then I'll save it."
+    },
+    "s17": {
+      "narration": "Send the finished report to your accountant or management with the Export button. You can choose Excel or CSV, and only the filtered data is exported."
+    },
+    "s18": {
+      "narration": "And who will see the report? Other admins will find a public report in the Public tab. A manager only sees their own team, and an employee only their own data."
+    },
+    "s19": {
+      "narration": "And that's it. You can now open a pre-made report, build your own, filter it, save it and export it. One last tip: in the Advanced tab, you can group and total your data."
+    },
+    "s20": {
+      "narration": "If something doesn't work, check the Help Center. Less admin, more time for people. This is Sloneek."
+    }
+  },
+  "_comment_cleanup": "cleanup_prepend maže přes ikonu koše v řádku seznamu: odkaz s názvem reportu je zalomený na 2 řádky a rekordér kliká do středu bounding boxu = mezera mezi řádky (klik propadne do <td>), takže původní cesta odkaz → Možnosti → Smazat report nefunguje. Mažou se CZ, PL i EN pozůstatky; původní (lokalizovaný) blok z CZ masteru se pak přeskočí."
+}

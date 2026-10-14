@@ -1,0 +1,680 @@
+{
+  "id": "custom-reports",
+  "version": 2,
+  "title": "Vlastní reporty – přehled přesně podle potřeby",
+  "lang": "cs",
+  "app_version": "preprod-2026-10-08",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "cs"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "bF7C2fCv7Zf30iT84wZ1",
+    "model_id": "eleven_v4"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s16",
+    "title": "Vlastní reporty"
+  },
+  "_explored": {
+    "date": "2026-10-08",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "notes": "v2: krátké kroky jako u absence (jedna věta = jedna akce), hlas Jana. Selektory ověřeny resolverem (count 1 / visible 1) a celý tok proklikán. Tlačítko se jmenuje 'Vytvořit nový report' (ne 'Vytvořit vlastní report' z help centra), záložky: Všechny reporty / Oblíbené / Vytvořeno mnou / Veřejný / Předpřipravené. Pohledy u absencí: Detailní / Shrnutí / Typy / Dny (zbývající fond). Export: Exportovat jako CSV / Exportovat jako Excel (.xlsx). Možnosti: Upravit název nebo popis / Přidat k oblíbeným / Smazat report. Odkaz presetu je v tabulce zalomený na dva řádky a rekordér kliká do středu bounding boxu (míjí) – proto hover + navigate na /app/custom-reports/579. Uložení reportu trvá na pre-produ 5–8 s. Před opakovaným natáčením smazat report 'Čerpání dovolené – přehled' (koš v seznamu nebo Možnosti → Smazat report)."
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "part": 1,
+      "part_title": "Úvod",
+      "narration": "Kolik dovolené lidem zbývá, kdo má přesčasy a co poslat účetní? Dobrý den, já jsem Marie z týmu Sloneek a dnes vám ukážu Vlastní reporty.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a[href=\"/app/custom-reports\"]",
+        "url_contains": "/app/dashboard"
+      },
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Reporty najdete v levém menu úplně dole pod položkou Vlastní reporty.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/custom-reports\"]",
+          "before_ms": 600
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/custom-reports\"]",
+          "before_ms": 900
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ],
+      "expect": {
+        "visible": "h1:text-is(\"Vlastní reporty\")",
+        "url_contains": "/app/custom-reports"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "Nahoře jsou záložky: všechny reporty, oblíbené, vytvořené mnou, veřejné a předpřipravené. Předpřipravené stačí otevřít a případně upravit.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".p-tablist-tab-list",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        },
+        {
+          "type": "highlight",
+          "selector": "p-tab:text-is(\"Předpřipravené\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "p-tab:text-is(\"Předpřipravené\")",
+        "url_contains": "/app/custom-reports"
+      }
+    },
+    {
+      "id": "s04",
+      "part": 2,
+      "part_title": "Nastavení",
+      "narration": "Modul nic nastavovat nepotřebuje. Otevřu Komplexní mzdový report.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "a[href=\"/app/custom-reports/579\"]",
+          "before_ms": 1500
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "navigate",
+          "value": "https://app-pre-production.sloneek.com/app/custom-reports/579"
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        }
+      ],
+      "expect": {
+        "visible": "h1:text-is(\"Komplexní mzdový report\")",
+        "url_contains": "/app/custom-reports/579"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "Nahoře volím období, vlevo sloupce a vpravo rovnou vidím data.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "p-togglebutton:text-is(\"Minulý měsíc\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=\"crDetail.sidebarTab.include-data\"]",
+          "before_ms": 900
+        },
+        {
+          "type": "zoom",
+          "selector": "th[data-cy=\"crDetail.grid.header.employee_name\"]",
+          "value": "1.4",
+          "hold_ms": 1500,
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "th[data-cy=\"crDetail.grid.header.employee_name\"]",
+        "url_contains": "/app/custom-reports/579"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "Report čerpá z absencí, docházky, aktivit i karet uživatelů, takže čím lépe je vedete, tím lepší přehled dostanete.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=\"crSidebar.header.absence\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=\"crSidebar.header.attendance\"]",
+          "before_ms": 900
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=\"crSidebar.header.activity\"]",
+          "before_ms": 900
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=\"crSidebar.header.employee\"]",
+          "before_ms": 900
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=\"crSidebar.header.absence\"]",
+        "url_contains": "/app/custom-reports/579"
+      }
+    },
+    {
+      "id": "s07",
+      "part": 3,
+      "part_title": "Ukázka využití",
+      "narration": "Teď si sestavíme vlastní přehled. Vedoucí chtějí vědět, kolik dovolené lidem zbývá. Vrátím se zpět do seznamu.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "4500"
+        },
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Zpět\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ],
+      "expect": {
+        "visible": "button:text-is(\"Vytvořit nový report\")",
+        "url_contains": "/app/custom-reports"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "Kliknu na Vytvořit nový report a začnu s prázdnou tabulkou.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Vytvořit nový report\")",
+          "before_ms": 700
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ],
+      "expect": {
+        "visible": "h1:text-is(\"Nový report\")",
+        "url_contains": "/app/custom-reports/new"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "V části Vybraná data rozbalím Absence.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=\"crDetail.sidebarTab.include-data\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=\"crSidebar.header.absence\"]",
+          "before_ms": 800
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=\"crSidebar.tabs.absence\"]",
+        "url_contains": "/app/custom-reports/new"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "U absencí vybírám ze čtyř pohledů: detailní, shrnutí, typy a dny se zbývajícím fondem. Já zvolím Shrnutí, protože chci nároky a zůstatky.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=\"crSidebar.tabs.absence\"] [role=combobox]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "highlight",
+          "selector": ".p-select-overlay",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "3800"
+        },
+        {
+          "type": "click",
+          "selector": ".p-select-overlay li[role=option]:text-is(\"Shrnutí\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=\"crSidebar.col.absence_summary.absence_remaining_claim\"]",
+        "url_contains": "/app/custom-reports/new"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "Zaškrtnu název absence, konečný nárok, uplatněný nárok a zbývající nárok. Každý sloupec se hned objeví v tabulce.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=\"crSidebar.col.absence_summary.absence_name\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=\"crSidebar.col.absence_summary.absence_final_claim\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=\"crSidebar.col.absence_summary.absence_total_claimed\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=\"crSidebar.col.absence_summary.absence_remaining_claim\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ],
+      "expect": {
+        "visible": "th[data-cy=\"crDetail.grid.header.absence_remaining_claim\"]",
+        "url_contains": "/app/custom-reports/new"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Nahoře přepnu období na tento rok, aby čísla seděla s ročním fondem.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "p-togglebutton:text-is(\"Tento rok\")",
+          "before_ms": 900
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ],
+      "expect": {
+        "visible": "th[data-cy=\"crDetail.grid.header.absence_remaining_claim\"]",
+        "url_contains": "/app/custom-reports/new"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "Tabulka teď ukazuje všechny typy absencí. Pozor na častou chybu: zaškrtnutím sloupce data nefiltrujete, jen je zobrazíte. Filtr je ikona v záhlaví sloupce.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=\"crSidebar.col.employee.employee_active\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "zoom",
+          "selector": "th[data-cy=\"crDetail.grid.header.absence_name\"]",
+          "value": "1.5",
+          "hold_ms": 1800
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=\"crDetail.grid.filterIcon.absence_name\"]",
+        "url_contains": "/app/custom-reports/new"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "Kliknu na ni u názvu, vyberu Dovolená a potvrdím tlačítkem Použít.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=\"crDetail.grid.filterIcon.absence_name\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=\"crDetail.grid.filter.list.value.absence_name\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": ".p-multiselect-overlay li[role=option]:text-is(\"Dovolená\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=\"crDetail.grid.filter.list.value.absence_name\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=\"crDetail.grid.filterFooter.apply\"] button",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ],
+      "expect": {
+        "visible": "tbody td:text-is(\"Dovolená\")",
+        "url_contains": "/app/custom-reports/new"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Vpravo nahoře kliknu na Uložit report.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Uložit report\")",
+          "before_ms": 800
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=nameInput]",
+        "url_contains": "/app/custom-reports/new"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "Pojmenuji ho Čerpání dovolené, přehled, přidám krátký popis a zaškrtnu Zveřejnit report, aby ho viděli i ostatní administrátoři. Uložím.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=nameInput]",
+          "value": "Čerpání dovolené – přehled",
+          "clear": true,
+          "speed": "fast",
+          "before_ms": 300
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=descriptionTextarea]",
+          "value": "Zbývající dovolená všech kolegů za letošní rok.",
+          "before_ms": 600
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=isPublicCheckbox]",
+          "before_ms": 900
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=saveButton] button",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "9000"
+        }
+      ],
+      "expect": {
+        "visible": "h1:text-is(\"Čerpání dovolené – přehled\")",
+        "url_contains": "/app/custom-reports/"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "Hotový report pošlete účetní nebo vedení tlačítkem Export. Na výběr máte Excel nebo CSV a exportují se jen vyfiltrovaná data.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=reportExportButton] button",
+          "before_ms": 1500
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "highlight",
+          "selector": ".p-menu-overlay",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "press",
+          "value": "Escape"
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=reportExportButton] button",
+        "url_contains": "/app/custom-reports/"
+      }
+    },
+    {
+      "id": "s18",
+      "part": 4,
+      "part_title": "Kdo report uvidí",
+      "narration": "A kdo report uvidí? Zveřejněný report najdou ostatní administrátoři v záložce Veřejný. Manažer vidí jen svůj tým a zaměstnanec jen svá vlastní data.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Zpět\")",
+          "before_ms": 1200
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "click",
+          "selector": "p-tab:text-is(\"Veřejný\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "highlight",
+          "selector": "a:text-is(\"Čerpání dovolené – přehled\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "a:text-is(\"Čerpání dovolené – přehled\")",
+        "url_contains": "/app/custom-reports"
+      }
+    },
+    {
+      "id": "s19",
+      "part": 5,
+      "part_title": "Závěr",
+      "narration": "A je to. Umíte otevřít předpřipravený report, sestavit vlastní, vyfiltrovat ho, uložit a vyexportovat. Tip na závěr: v záložce Pokročilé si data seskupíte a sečtete.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1000"
+        }
+      ],
+      "expect": {
+        "visible": "h1:text-is(\"Vlastní reporty\")",
+        "url_contains": "/app/custom-reports"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Kdyby něco nešlo, mrkněte do Centra nápovědy. Méně administrativy, víc času na lidi. To je Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1000"
+        }
+      ],
+      "expect": {
+        "visible": "h1:text-is(\"Vlastní reporty\")",
+        "url_contains": "/app/custom-reports"
+      },
+      "hold_after_ms": 1500
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat report z minulého běhu (CZ)",
+      "url": "https://app-pre-production.sloneek.com/app/custom-reports",
+      "if_visible": "a:text-is(\"Čerpání dovolené – přehled\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "tr:has-text(\"Čerpání dovolené – přehled\") button.p-button-danger",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog button.p-button-danger",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "4000"
+        }
+      ]
+    },
+    {
+      "name": "smazat report z minulého běhu (PL)",
+      "url": "https://app-pre-production.sloneek.com/app/custom-reports",
+      "if_visible": "a:text-is(\"Wykorzystanie urlopu – przegląd\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "tr:has-text(\"Wykorzystanie urlopu – przegląd\") button.p-button-danger",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog button.p-button-danger",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "4000"
+        }
+      ]
+    },
+    {
+      "name": "smazat report z minulého běhu (EN)",
+      "url": "https://app-pre-production.sloneek.com/app/custom-reports",
+      "if_visible": "a:text-is(\"Leave usage – overview\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "tr:has-text(\"Leave usage – overview\") button.p-button-danger",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog button.p-button-danger",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "4000"
+        }
+      ]
+    }
+  ]
+}

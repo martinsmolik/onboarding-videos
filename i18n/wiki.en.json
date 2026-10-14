@@ -1,0 +1,169 @@
+{
+  "_comment": "Anglická verze videa Vytvářejte články na Wiki (wiki). Struktura, kroky, kliky a tempo 1:1 podle CZ masteru; recept NIKDY neukládá. UI texty z translate_fe/en (fetch uvnitř stránky) + ověřeno naživo 12. 10. 2026 (local-translate=en). EN demo data: trvalý ukázkový článek 'How to plan your first week – demo' / 'Your first week at the company – demo' (NEAKTIVNÍ, role onboarding_specialist, hvězdička, H2 + 2 odrážky), založen jednou 12. 10. 2026 se schválením Martina (1 upozornění 'New wiki page'); cleanup ho nemaže. Read-only data tenantu jako v CZ (Lunch menu s přílohou, Guide to Sloneek). Narace bez asistentky (Help Center). Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM. Generátor: out/wiki/_work/build_i18n.py (+ i18n_src.json)",
+  "verified": {
+    "date": "2026-10-12",
+    "by": "Claude (BrowserOS, preprod, local-translate=en)",
+    "selectors": "Dry-run 39/39 v jednom běhu; s29 otevřel EN ukázkový článek 60746ec5… (H2 + 2 odrážky sedí), nic se neuložilo (dialog Unsaved changes -> Yes).",
+    "notes": "Živé EN popisky: menu Company → Company wiki, nadpis Wiki Pages, karta Created/Updated + Detail, dialog Edit, Manage, tabulka Active/Name/Display name/Article order/Marked as Important/Role/Created/Updated/Action, Filters, Add, New admin page, Insert attachment + Select, Visible to everyone, Back/Save/Delete, Dashboard – Wiki pages marked as important, Notifications and Integrations – řádek Notification of a new post in the company Wiki, sloupce Email / In-app.",
+    "rehearsal": "Zkouška skutečným recorderem (job 161-rehearse-wiki-en, mock hlas): 39/39 ok, cleanup 2/2 done (kontrola existence EN článku), 0 FAILED, mux 303,4 s, 0 warnings; nic se neuložilo, zvonek 218 beze změny."
+  },
+  "title": "Create Wiki articles",
+  "thumbnail_title": "Wiki articles",
+  "parts": {
+    "Úvod": "Introduction",
+    "Wiki očima zaměstnance": "The Wiki through employees' eyes",
+    "Správa článků": "Managing articles",
+    "Nový článek": "New article",
+    "Obsah článku": "Article content",
+    "Příloha a viditelnost": "Attachment and visibility",
+    "Uložený článek": "The saved article",
+    "Plocha a upozornění": "Dashboard and notifications"
+  },
+  "text": {
+    "Firemní Wiki": "Wiki Pages",
+    "Aktivní": "Active",
+    "Pořadí článku": "Article order",
+    "Označeno jako Důležité": "Marked as Important",
+    "Role": "Role",
+    "Filtry": "Filters",
+    "Název": "Name",
+    "Přidat": "Add",
+    "Neuložené změny": "Unsaved changes",
+    "Vybrat": "Select",
+    "Zpět": "Back",
+    "Jak si naplánovat první týden – ukázka": "How to plan your first week – demo",
+    "První týden ve firmě – ukázka": "Your first week at the company – demo",
+    "Váš první týden": "Your first week",
+    "Pondělí: převezměte notebook a přihlaste se do Sloneeku.": "Monday: pick up your laptop and sign in to Sloneek.",
+    "Úterý: seznamte se s týmem a svým patronem.": "Tuesday: meet your team and your buddy."
+  },
+  "keep": [
+    "onboarding_specialist",
+    "Lunch menu"
+  ],
+  "ids": {
+    "71188f3b-fa98-4ebd-a054-a25c8c1042a4": "60746ec5-4555-4643-8891-0a89433c08b1"
+  },
+  "cleanup_names": [
+    "nic k mazání: recept článek nikdy neukládá (uložení posílá upozornění); EN ukázkový článek 'How to plan your first week – demo' (60746ec5-4555-4643-8891-0a89433c08b1) je trvalý předpoklad a cleanup ho nemaže – jen kontrola, že existuje"
+  ],
+  "steps": {
+    "s01": {
+      "narration": "Want your company guides in one place where everyone finds them? Hi, I'm Maria from the Sloneek team, and I'll show you how to create Wiki articles."
+    },
+    "s02": {
+      "narration": "You'll find the Wiki in the left menu, in the Company section, under Company wiki."
+    },
+    "s03": {
+      "narration": "I click Company wiki, and the article overview opens, just as employees see it."
+    },
+    "s04": {
+      "narration": "Each article has its own card with a title and the dates when it was created and last updated."
+    },
+    "s05": {
+      "narration": "For the Lunch menu article I click Detail, and the article opens with its attachment, here a picture of the menu."
+    },
+    "s06": {
+      "narration": "Admins also get an Edit button here, but for now I'll close the window with the cross."
+    },
+    "s07": {
+      "narration": "You manage articles with the Manage button at the top right, which opens a table of all articles."
+    },
+    "s08": {
+      "narration": "Unlike the cards, here you also see inactive articles, and for each one its order and whether it's marked as important."
+    },
+    "s09": {
+      "narration": "The Role column says who the article is for, and when it's empty, everyone can see the article."
+    },
+    "s10": {
+      "narration": "I click Filters, where you can narrow the list by name, status, role or date, and I close the filters again."
+    },
+    "s11": {
+      "narration": "I click Add, and the new article form opens."
+    },
+    "s12": {
+      "narration": "The list of articles with a search stays on the left, so you can jump between them at any time."
+    },
+    "s13": {
+      "narration": "In the Name field I type what the article is called, here How to plan your first week."
+    },
+    "s14": {
+      "narration": "Employees will see the Display name above it on the card, so I type Your first week at the company."
+    },
+    "s15": {
+      "narration": "Clicking the star marks the article as important, so it gets pinned to the Dashboard."
+    },
+    "s16": {
+      "narration": "Article order decides where the article appears, and one means the very first spot."
+    },
+    "s17": {
+      "narration": "I switch off the Active toggle, so the article stays a draft and employees won't see it yet."
+    },
+    "s18": {
+      "narration": "In the editor I type the heading Your first week."
+    },
+    "s19": {
+      "narration": "In the style menu, which now says Normal, I pick Heading 2, and the line becomes a heading."
+    },
+    "s20": {
+      "narration": "Enter takes me to a new line, and the button with dots starts a bulleted list."
+    },
+    "s21": {
+      "narration": "In the first bullet I write what awaits the newcomer on Monday."
+    },
+    "s22": {
+      "narration": "Enter adds another bullet, and I write what awaits them on Tuesday."
+    },
+    "s23": {
+      "narration": "The toolbar also has bold, italics, a numbered list and a list with checkboxes."
+    },
+    "s24": {
+      "narration": "Other buttons insert a link, an image or a video into the text, and the last one adds an emoji."
+    },
+    "s25": {
+      "narration": "Below the editor, the Select button attaches a document, spreadsheet or image, and employees will see it under the article."
+    },
+    "s26": {
+      "narration": "I untick Visible to everyone, so only people with the selected role can see the article."
+    },
+    "s27": {
+      "narration": "In the Role field I choose the onboarding role, so only people with this role will see the article."
+    },
+    "s28": {
+      "narration": "The Save button creates the article, and Sloneek sends a notification about it right away, even when it's inactive, so only save finished text."
+    },
+    "s29": {
+      "narration": "I already have the sample article saved, so I open it in the list on the left and confirm leaving the form without saving."
+    },
+    "s30": {
+      "narration": "The saved article is inactive, only people with the onboarding role can see it, and the editor holds exactly what we just wrote."
+    },
+    "s31": {
+      "narration": "A saved article has a chain icon next to the display name, which copies its link, for example into an onboarding task."
+    },
+    "s32": {
+      "narration": "Once the article is ready, you switch on the Active toggle and click Save, but I won't save it."
+    },
+    "s33": {
+      "narration": "The red Delete button removes the article, and the page will no longer be available."
+    },
+    "s34": {
+      "narration": "Employees also see important articles on the Dashboard, so I click Dashboard in the menu and confirm leaving without saving."
+    },
+    "s35": {
+      "narration": "Starred articles have their own tile on the Dashboard, where anyone can open them with one click."
+    },
+    "s36": {
+      "narration": "Sloneek announces new articles with a notification, so in the menu I click Notifications and Integrations."
+    },
+    "s37": {
+      "narration": "In the row Notification of a new post in the company Wiki, everyone sets whether they get an email, an in-app notification, or both."
+    },
+    "s38": {
+      "narration": "Now you can write and format a Wiki article, choose who sees it, pin it to the Dashboard, and if anything doesn't work, check the Help Center."
+    },
+    "s39": {
+      "narration": "Less admin, more time for people. This is Sloneek."
+    }
+  }
+}

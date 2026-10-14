@@ -1,0 +1,136 @@
+{
+  "_comment": "Anglická verze videa Příchody a odchody (Docházka 2.0). UI texty z translate_fe/en (staženo fetchem uvnitř stránky) + ověřeno naživo (local-translate=en, 9. 10. 2026). Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM. Bez mobilní aplikace, bez asistentky Ellie (odkaz na Help Center). start.timezone Europe/Lisbon zůstává z masteru.",
+  "verified": {
+    "date": "2026-10-09",
+    "by": "Claude (BrowserOS, preprod, local-translate=en, in-page runner out/clockins/_work/dryrun-runner.js: CSS + :text-is, wait 10 s visible, pointer/mouse events at elementFromPoint of centre)",
+    "selectors": "all 32 steps passed (every action target and expect.visible resolved c1/v1, url_contains ok), 18:07–18:11 UTC; clock in 18:08:35, End of shift 18:09:58 (≥ 60 s). Live EN labels: h1 'Attendance settings', tabs General/Events/Terminals/Attendance cards, 'Add event', widget 'Attendance' tag 'Off work'→'At work', button 'Clock in'→'Clock out' (split menu), toggles 'Me'/'Team', 'Add segment' (button + dialog title), 'Cancel', menu li[aria-label='End of shift'] (tenant data, untranslated), 'Filters', th 'New value', report 569 h1 'Overview of clock-ins and clock-outs', 'Export', widget 'Team attendance'. Browser was Europe/Prague, so 'Different timezone' tag showed – recorder's start.timezone should hide it.",
+    "cleanup": "before: no At work segment in October; after: the run's segment 'At work, 19:09 - 19:10' deleted via recipe cleanup path (row → trash → 'Delete segment?' → Delete); cleanup toggle 'Me' present. Nothing approved/rejected, settings unchanged."
+  },
+  "title": "Clock-ins and clock-outs: attendance in one click",
+  "thumbnail_title": "Clock-ins and clock-outs",
+  "parts": {
+    "Úvod": "Introduction",
+    "Nastavení": "Setup",
+    "Příchod a odchod": "Clocking in and out",
+    "Pohled manažera": "Manager's view",
+    "Závěr": "Wrap-up"
+  },
+  "text": {
+    "Příchody a odchody": "Clock-ins and clock-outs",
+    "Nastavení docházky": "Attendance settings",
+    "Události": "Events",
+    "Přidat událost": "Add event",
+    "Terminály": "Terminals",
+    "Docházkové karty": "Attendance cards",
+    "Zaznamenat příchod": "Clock in",
+    "V práci": "At work",
+    "Přidat segment": "Add segment",
+    "Zrušit": "Cancel",
+    "Konec směny": "End of shift",
+    "Tým": "Team",
+    "Filtry": "Filters",
+    "Nová hodnota": "New value",
+    "Přehled příchodů a odchodů": "Overview of clock-ins and clock-outs",
+    "Export": "Export",
+    "Moje": "Me"
+  },
+  "keep": [],
+  "steps": {
+    "s01": {
+      "narration": "A paper attendance book, and chasing down who came in when at the end of the month? Hi, I'm Maria from the Sloneek team, and today I'll show you clock-ins and clock-outs."
+    },
+    "s02": {
+      "narration": "People clock in and out with a single click, on the web or at an attendance terminal. And you get attendance that's ready to use for payroll."
+    },
+    "s03": {
+      "narration": "I'll show you the setup, everyday clocking in, and the manager's view. You'll find the module in the left menu under Attendance."
+    },
+    "s04": {
+      "narration": "Let's start with the setup. At the bottom of the left menu, I click Attendance settings."
+    },
+    "s05": {
+      "narration": "In the Changes section, you let people correct their own attendance. I recommend keeping approval by an attendance approver switched on."
+    },
+    "s06": {
+      "narration": "Closing timesheets makes sure approvers close the timesheet every month. Here, between the first and the fourth day of the following month."
+    },
+    "s07": {
+      "narration": "Automatic breaks add the lunch break based on working hours, so people don't have to clock it."
+    },
+    "s08": {
+      "narration": "The Events tab holds the departure types, such as lunch, a break, or a doctor's visit."
+    },
+    "s09": {
+      "narration": "For each one, you decide whether it counts as work and where people see it, for example on the terminal or on a desktop."
+    },
+    "s10": {
+      "narration": "If you have an attendance terminal, you add it in the Terminals tab. You assign card or chip numbers to people in Attendance cards."
+    },
+    "s11": {
+      "narration": "Now for an ordinary day. You get to work in the morning and find the Attendance widget on your Dashboard."
+    },
+    "s12": {
+      "narration": "The widget shows whether you're at work, how much you've worked today, and your balance up to today."
+    },
+    "s13": {
+      "narration": "I click Clock in. Sloneek instantly saves the time you arrived."
+    },
+    "s14": {
+      "narration": "The status has switched to At work, and the button has changed to Clock out. Your time is counted from this moment."
+    },
+    "s15": {
+      "narration": "You'll find the details in the Attendance module. I'll open it straight from the widget."
+    },
+    "s16": {
+      "narration": "In the Me view, you see the whole month. Each day has a timeline: work in green, breaks in orange, and time off in grey."
+    },
+    "s17": {
+      "narration": "On the right is the day's detail: the daily goal, how much you've worked, the balance, and a list of segments."
+    },
+    "s18": {
+      "narration": "Below it is the month summary with the total balance, so you see right away whether you have overtime or are short of hours."
+    },
+    "s19": {
+      "narration": "Forgot to clock in? With the Add segment button, you can fill in the missing time, even after the fact."
+    },
+    "s20": {
+      "narration": "You choose the segment type and the time from and to. Your manager then approves the change. I'll close the dialog now."
+    },
+    "s21": {
+      "narration": "When you leave, you click Clock out. The menu also offers interruptions, such as lunch, a break, or a doctor's visit."
+    },
+    "s22": {
+      "narration": "At the end of the day, I choose End of shift. The At work segment now has both a start and an end."
+    },
+    "s23": {
+      "narration": "And how does a manager see it? In the Team view, they have their people's attendance listed one below the other."
+    },
+    "s24": {
+      "narration": "An admin can pick any team; a manager only sees their own. In Filters, they can show, for example, only errors or approval requests."
+    },
+    "s25": {
+      "narration": "The manager finds requests to change attendance in Approvals."
+    },
+    "s26": {
+      "narration": "In the Attendance tab, they see both the original and the new value, and approve or reject the change with one click."
+    },
+    "s27": {
+      "narration": "You'll find attendance data for payroll and checks in Custom reports, among the pre-made reports."
+    },
+    "s28": {
+      "narration": "I'll open the Overview of clock-ins and clock-outs, with every clock-in and clock-out for the chosen period."
+    },
+    "s29": {
+      "narration": "For each record, you see the start, the end, the duration, and how it was entered, such as web or terminal. You can export the report to Excel."
+    },
+    "s30": {
+      "narration": "And that's it. You now know how to set up attendance, clock in and out, and keep track of your whole team."
+    },
+    "s31": {
+      "narration": "A final tip: on the Dashboard, you'll also find the Team attendance widget. It shows each team member's balance up to today."
+    },
+    "s32": {
+      "narration": "If something doesn't work, check the Help Center. Less admin, more time for people. This is Sloneek."
+    }
+  }
+}

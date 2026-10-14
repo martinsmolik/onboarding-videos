@@ -1,0 +1,295 @@
+{
+  "_comment": "Anglická verze videa Vytvořte a přiřaďte pracovní doby (working-hours). UI texty z translate_fe/en (staženo fetchem uvnitř stránky) + ověřeno naživo 11. 10. 2026 (local-translate=en, dry-run 36/36). Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM. Vlastní EN demo data: trvalý NEAKTIVNÍ uživatel 'James Miller' <james.miller@example.com> (322d66e2-619b-40ad-b68b-d1a90e755714, v seznamu 'Miller James', Employee, Customer Support Specialist, tým Customer Support 03fd8c48-…, Praha, Country of operation Czechia, datum nástupu 09/01/2026) s úvazkem 'Full-time 40 h' (4397f259-439a-4fe4-a375-207489a1facc) od 09/01/2026, Indefinite period – nikdy neaktivovat. Recept vytváří šablonu 'Part-time 30 h' (název i překlad en) a její přiřazení Jamesovi; cleanup (urls → karta Jamese podle uuid) odebere přiřazení (menu řádku 'Remove'), vrátí 40 h na Indefinite period ('Editing' → Yes → 'Edit') a smaže šablonu (filtr 'Name Filter Input', právě 1 řádek s přesným názvem a '1 to 1 from 1'). cleanup_prepend zkusí smazat pozůstatky CZ 'Zkrácený úvazek 30 h' a PL 'Niepełny etat 30 h' stejnou pojistkou – dokud jsou přiřazené Tomášovi/Piotrovi, server smazání odmítne (toast 'The work contract are already assigned to a user'); odřazení patří CZ/PL receptům, EN recept na Tomáše ani Piotra nesahá. Potvrzovací dialogy jazykově nezávislé (selectors). Bez mobilní aplikace, bez asistentky Ellie (odkaz na Help Center). Generátor: out/working-hours/_work/build_i18n_en.py",
+  "verified": {
+    "date": "2026-10-11",
+    "status": "verified live",
+    "by": "Claude (BrowserOS, preprod, local-translate=en, in-page runner out/working-hours/_work/dryrun-runner.js)",
+    "selectors": "Průchod 1: 36/36 bez oprav selektorů (ověřeny popisky: Work contracts setup, Add, New work contract type, Select a predefined template (Empty working days / Full Time / Half Time), Translate name - en, Weekly/Annual, Weekly working hours setting, Weekly working hours fund, Reset/Normal/Copy the first line, sloupec Workday, Search..., Contract and Payroll, menu řádku Editing/Remove, dialogy Editing work contract → Adjust work contract (tlačítko Edit), Add a new type of work contract → Choosing the type of work contract (Save), tabulka MM/DD/YYYY, Country of operation, Automatic breaks, Settings check, Working hours of users, The end of working hours, Deleting the work contract dial (Yes)). Opravy po průchodu 1: s29 expect = 'Breaks can be managed in Contracts settings' (jako CZ), narace s06 (Full Time / Half Time) a s16 (Workday). Průchod 2: 36/36 v jednom kuse bez reloadu (~106 s bez narace); s31 otevřel šablonu z s11 (8bb059fc-…), s33 kliknul Yes jen na ni, přiřazenou Jamesovi – server odmítl, toast 'The work contract are already assigned to a user'. Datumy {{DATE:+14d+6}} = 11/01/2026, {{DATE:+14d+7}} = 11/02/2026 (psané MM/DD/YYYY přepnou nb-calendar).",
+    "cleanup": "Před: šablon 25 (vč. CZ pozůstatku 'Zkrácený úvazek 30 h' přiřazeného Tomášovi), uživatelů 76 (46/30). Založen James Miller 322d66e2-… (neaktivní) → 77 (46/31) trvale. Blok CZ šablony otestován naživo: filtr → 1 řádek, '1 to 1 from 1' → koš → 'Elimination of working hours' → Yes → server odmítl. Po každém průchodu (po reloadech): Jamesovi odebrán 'Part-time 30 h', 'Full-time 40 h' zpět na Indefinite period, šablona smazána (toast 'Deleted'; 48aeb9ad-… po průchodu 1, 8bb059fc-… po průchodu 2). Šablon 25 → 26 → 25, uživatelů 77 (46/31) beze změny. James celou dobu neaktivní. Na Tomáše a Piotra se nesahalo."
+  },
+  "title": "Create and assign working hours",
+  "thumbnail_title": "Working hours",
+  "parts": {
+    "Úvod": "Introduction",
+    "Kde je najdete": "Where to find them",
+    "Nová šablona": "New template",
+    "Rozvrh týdne": "Weekly schedule",
+    "Přiřazení uživateli": "Assigning to a user",
+    "Vliv na absence a docházku": "Effect on absences and attendance",
+    "Úpravy a mazání": "Editing and deleting",
+    "Závěr": "Wrap-up"
+  },
+  "selectors": {
+    "[data-cy=confirmationDialog]:has-text(\"Editace typu spolupráce\")": "[data-cy=confirmationDialog]",
+    "[data-cy=confirmationDialog]:has-text(\"Editace typu spolupráce\") >> [data-cy=submitButton]": "[data-cy=confirmationDialog] >> [data-cy=submitButton]",
+    "nb-dialog-container:has-text(\"Upravit typ spolupráce\")": "nb-dialog-container:has(input[formcontrolname=valid_from])",
+    "[data-cy=confirmationDialog]:has-text(\"Odstranění typu spolupráce uživatele\")": "[data-cy=confirmationDialog]",
+    "[data-cy=confirmationDialog]:has-text(\"Odstranění typu spolupráce uživatele\") >> [data-cy=submitButton]": "[data-cy=confirmationDialog] >> [data-cy=submitButton]",
+    "[data-cy=confirmationDialog]:has-text(\"Odstranění pracovní doby\")": "[data-cy=confirmationDialog]",
+    "[data-cy=confirmationDialog]:has-text(\"Odstranění pracovní doby\") >> [data-cy=submitButton]": "[data-cy=confirmationDialog] >> [data-cy=submitButton]",
+    "nb-dialog-container:has-text(\"Smazání číselníku typu spolupráce\")": "nb-dialog-container:has(#settings_working_time_delete_confirmation_yes)",
+    "nb-dialog-container:has-text(\"Smazání číselníku typu spolupráce\") >> button:text-is(\"Ano\")": "nb-dialog-container #settings_working_time_delete_confirmation_yes",
+    "p-toastitem:has-text(\"Typ spolupráce je již přiřazen\")": "p-toastitem",
+    "[data-cy=mainContentCenterDiv] form > p-card:has-text(\"Přestávky lze upravovat v Nastavení typů spolupráce\")": "[data-cy=mainContentCenterDiv] form > p-card:has-text(\"Breaks can be managed in Contracts settings\")"
+  },
+  "text": {
+    "Úvazky a typy spolupráce": "Work contracts setup",
+    "Vyberte předdefinovanou šablonu": "Select a predefined template",
+    "Zkrácený úvazek 30 h": "Part-time 30 h",
+    "Zkrácený": "Part-time",
+    "Pondělí až pátek, 6 hodin denně.": "Monday to Friday, 6 hours a day.",
+    "Týdenní": "Weekly",
+    "Roční": "Annual",
+    "Týdenní fond pracovní doby": "Weekly working hours fund",
+    "Nastavení týdenní pracovní doby": "Weekly working hours setting",
+    "Běžná": "Normal",
+    "Zkopírovat první řádek": "Copy the first line",
+    "Vyhledávání...": "Search...",
+    "Tomáš": "James",
+    "Novák Tomáš": "Miller James",
+    "Plný úvazek 40 h": "Full-time 40 h",
+    "Doba neurčitá": "Indefinite period",
+    "Editace": "Editing",
+    "Upravit": "Edit",
+    "Odstranit": "Remove",
+    "Zadat nový typ spolupráce": "Add a new type of work contract",
+    "Uložit": "Save",
+    "{{DATE:+14d+6:D. M. YYYY}}": "{{DATE:+14d+6:MM/DD/YYYY}}",
+    "{{DATE:+14d+6:DD.MM.YYYY}}": "{{DATE:+14d+6:MM/DD/YYYY}}",
+    "{{DATE:+14d+7:D. M. YYYY}}": "{{DATE:+14d+7:MM/DD/YYYY}}",
+    "{{DATE:+14d+7:DD.MM.YYYY}}": "{{DATE:+14d+7:MM/DD/YYYY}}",
+    "Automatické pauzy": "Automatic breaks",
+    "Pracovní doba uživatelů": "Working hours of users",
+    "Končí pracovní doba": "The end of working hours",
+    "Název Filter Input": "Name Filter Input",
+    "1 do 1 z 1": "1 to 1 from 1"
+  },
+  "keep": [
+    "Reset",
+    "Czechia",
+    "40:00",
+    "38:00",
+    "42:00",
+    "30:00",
+    "15:30"
+  ],
+  "urls": {
+    "https://app-pre-production.sloneek.com/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/contracts-and-terms": "https://app-pre-production.sloneek.com/app/company-details/member/322d66e2-619b-40ad-b68b-d1a90e755714/contracts-and-terms"
+  },
+  "cleanup_prepend": [
+    {
+      "name": "CZ zbytek: smazat šablonu 'Zkrácený úvazek 30 h' – jen při právě 1 řádku s přesným názvem a '1 to 1 from 1'. Přiřazení Tomášovi tento recept NEODEBÍRÁ (patří CZ receptu) – dokud je přiřazená, server mazání odmítne a nic se nestane",
+      "url": "https://app-pre-production.sloneek.com/app/settings/working-hours",
+      "if_visible": "[data-cy=mainContentCenterDiv] #settings_working_hours_add_working_hours_button",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[aria-label=\"Name Filter Input\"]",
+          "value": "Zkrácený úvazek 30 h",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container:not(:has(.ag-row ~ .ag-row)) a.redirect_column:text-is(\"Zkrácený úvazek 30 h\")",
+          "value": "6000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-paging-row-summary-panel:has-text(\"1 to 1 from 1\")",
+          "value": "3000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row:has-text(\"Zkrácený úvazek 30 h\") >> [data-cy=deleteButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog] >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "PL zbytek: smazat šablonu 'Niepełny etat 30 h' – jen při právě 1 řádku s přesným názvem a '1 to 1 from 1'. Přiřazení Piotrovi tento recept NEODEBÍRÁ (patří PL receptu) – dokud je přiřazená, server mazání odmítne a nic se nestane",
+      "url": "https://app-pre-production.sloneek.com/app/settings/working-hours",
+      "if_visible": "[data-cy=mainContentCenterDiv] #settings_working_hours_add_working_hours_button",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row[row-index=\"0\"]",
+          "value": "15000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[aria-label=\"Name Filter Input\"]",
+          "value": "Niepełny etat 30 h",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container:not(:has(.ag-row ~ .ag-row)) a.redirect_column:text-is(\"Niepełny etat 30 h\")",
+          "value": "6000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-paging-row-summary-panel:has-text(\"1 to 1 from 1\")",
+          "value": "3000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row:has-text(\"Niepełny etat 30 h\") >> [data-cy=deleteButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog] >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    }
+  ],
+  "steps": {
+    "s01": {
+      "narration": "How many hours a week should each person work? Hi, I'm Maria from the Sloneek team, and I'll show you how to create and assign working hours."
+    },
+    "s02": {
+      "narration": "Working hours, called a work contract in the app, define when someone is supposed to work. Without them, a person can't take absences or record attendance."
+    },
+    "s03": {
+      "narration": "In the left menu, I open Settings. You'll find working hours in the Work contracts setup row."
+    },
+    "s04": {
+      "narration": "When I open it, you see the list of templates: whether they're active, whether they're weekly or annual, and their note."
+    },
+    "s05": {
+      "narration": "I create a new template with the Add button. The New work contract type form opens."
+    },
+    "s06": {
+      "narration": "You can start from a predefined template, such as Full Time or Half Time. But I'll start from scratch."
+    },
+    "s07": {
+      "narration": "In the Name field, I type Part-time, 30 hours. I enter the same text in the English translation, too."
+    },
+    "s08": {
+      "narration": "In the note, I briefly describe who the template is for. I leave the Active switch on, so the template can be used."
+    },
+    "s09": {
+      "narration": "A work contract can be weekly or annual. A weekly schedule repeats every week and suits regular work."
+    },
+    "s10": {
+      "narration": "An annual schedule is set for each day of the year separately, for example for shifts. I'll keep Weekly."
+    },
+    "s11": {
+      "narration": "I've saved the template. Below the form, a new table has appeared for the weekly working hours setting."
+    },
+    "s12": {
+      "narration": "Sloneek has pre-filled a standard week: Monday to Friday, nine to five-thirty, with a thirty-minute break. The weekly fund is forty hours."
+    },
+    "s13": {
+      "narration": "The Reset button clears the table, and Normal brings back exactly this standard week."
+    },
+    "s14": {
+      "narration": "For a part-time contract, I change the End of working hours in Monday's row to three-thirty."
+    },
+    "s15": {
+      "narration": "With Copy the first line, I copy Monday's times to the whole week."
+    },
+    "s16": {
+      "narration": "The copy also went to the weekend, so for Saturday and Sunday, I untick Workday. The fund now shows thirty hours."
+    },
+    "s17": {
+      "narration": "The breaks are on the right. The lunch break from twelve to twelve-thirty doesn't count as working time."
+    },
+    "s18": {
+      "narration": "Sloneek calculates the half-shift length on its own. Half-day absences are based on it."
+    },
+    "s19": {
+      "narration": "Finally, I save the schedule with the Save button above the table. Without it, the changes wouldn't take effect."
+    },
+    "s20": {
+      "narration": "You assign the template in the user's profile. Under Users, I open Management, search for James, and open his profile."
+    },
+    "s21": {
+      "narration": "Here, on the Contract and Payroll tab, you see all of James's work contracts."
+    },
+    "s22": {
+      "narration": "James works full-time, forty hours a week, for an indefinite period. The green row marks the work contract that applies today."
+    },
+    "s23": {
+      "narration": "Soon he's moving to part-time. Work contracts can't overlap, so I first end the current one with Edit."
+    },
+    "s24": {
+      "narration": "I untick Indefinite period, enter the last full-time day in Valid until, and confirm the change."
+    },
+    "s25": {
+      "narration": "Now I click Add a new type of work contract and search for Part-time, 30 hours."
+    },
+    "s26": {
+      "narration": "I tick Indefinite period and set Valid from to the day after the full-time contract ends. Then I save."
+    },
+    "s27": {
+      "narration": "The new contract follows on from the old one, and the history stays. Don't change contracts in the past; it would recalculate the balances of absences already taken."
+    },
+    "s28": {
+      "narration": "Sloneek deducts public holidays from a weekly template automatically, based on the Country of operation in Basic and work data."
+    },
+    "s29": {
+      "narration": "In attendance, the work contract sets the working hours fund and the balance, and Free time absences reduce the fund. Attendance can also add the contract's breaks automatically."
+    },
+    "s30": {
+      "narration": "To see who has no work contract, or whose contract ends soon, open Settings check in the Settings menu."
+    },
+    "s31": {
+      "narration": "You can't change an assigned template; there's a lock on the schedule. If you need different times, use Duplicate and edit the copy."
+    },
+    "s32": {
+      "narration": "You can only delete a template that nobody has. If you no longer want to use it, just deactivate it."
+    },
+    "s33": {
+      "narration": "I click Yes, and Sloneek stops the deletion, because James already has this template."
+    },
+    "s34": {
+      "narration": "A final tip: you can set the work contract for new colleagues right when you create them, or let HR Workflows assign it for you."
+    },
+    "s35": {
+      "narration": "Now you know how to create working hours, assign them, and change them safely. If something doesn't work, check the Help Center."
+    },
+    "s36": {
+      "narration": "Less admin, more time for people. This is Sloneek."
+    }
+  }
+}

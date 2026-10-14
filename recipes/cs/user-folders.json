@@ -1,0 +1,1466 @@
+{
+  "id": "user-folders",
+  "version": 1,
+  "title": "Práce s uživatelskými složkami",
+  "lang": "cs",
+  "app_version": "preprod-2026-10-13",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "cs"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "bF7C2fCv7Zf30iT84wZ1",
+    "model_id": "eleven_v4"
+  },
+  "pronunciation": [],
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s11",
+    "title": "Uživatelské složky"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Chcete mít všechno o každém zaměstnanci pohromadě na jednom místě? Dobrý den, jsem Marie z týmu Sloneek a ukážu vám, jak pracovat s uživatelskými složkami.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_staff",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_staff",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Úvod",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Uživatelská složka je karta zaměstnance, kde najdete jeho pracovní a osobní údaje, smlouvu, absence, dokumenty i historii změn.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_staff",
+          "before_ms": 1000
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_staff",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_staff",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "Složky najdete v levém menu v sekci Společnost, kde rozbalím Uživatelé a kliknu na Přehled a správa.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_staff",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] thead.p-datatable-thead",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] input[placeholder=\"Vyhledávání...\"]",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] thead.p-datatable-thead",
+        "url_contains": "/app/settings/users"
+      },
+      "part": 2,
+      "part_title": "Kde složky najdete"
+    },
+    {
+      "id": "s04",
+      "narration": "Ve Správě uživatelů vidíte u každého tým, pozici, role a štítky, a filtry nahoře seznam zúžíte třeba na jeden tým nebo roli.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] thead.p-datatable-thead",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] p-multiselect:has-text(\"Hledat podle týmů\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] p-multiselect:has-text(\"Hledat podle rolí\")",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] p-multiselect:has-text(\"Štítky\")",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] p-multiselect:has-text(\"Hledat podle týmů\")",
+        "url_contains": "/app/settings/users"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "Do vyhledávání napíšu Novák a kliknutím na jméno otevřu složku Tomáše Nováka.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[placeholder=\"Vyhledávání...\"]",
+          "value": "Novák",
+          "clear": true,
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td:first-child span:text-is(\"Novák Tomáš\")",
+          "value": "10000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td:first-child span:text-is(\"Novák Tomáš\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td:first-child span:text-is(\"Novák Tomáš\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/documents-v2\"]",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/work-data"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "Nahoře je Tomášovo jméno, kde přepnete i na jiného kolegu, a pod ním jsou záložky, každá pro jednu oblast.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-header-autocomplete",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] ul.route-tabset",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] ul.route-tabset",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/work-data"
+      },
+      "part": 3,
+      "part_title": "Základní a pracovní údaje"
+    },
+    {
+      "id": "s07",
+      "narration": "Na záložce Základní a pracovní údaje je nahoře stav účtu: aktivní uživatel se do aplikace přihlásí, neaktivní, jako Tomáš, ne.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/work-data\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] div.user-activation-box",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] div.user-activation-box",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/work-data"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "V základních údajích je fotka, veřejný medailonek, jméno a e-mail, a také štítky, třeba mateřská nebo externista, podle kterých pak lidi filtrujete.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=userPhotoUpload]",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=introductionTextarea]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=tagsAutocomplete]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=tagsAutocomplete]",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/work-data"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "Pole Zvláštní uživatelská práva přidá oprávnění navíc, třeba správce dokumentů nebo pomůcek, a role v týmech nastavíte v Týmech.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/work-data"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Vpravo v dalších pracovních údajích je datum nástupu, pozice, tým nebo pracovní lokalita.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=joinDateInput]",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=positionSelect]",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=teamsSelect]",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=workLocationSelect]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=teamsSelect]",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/work-data"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "Rozšířené poznámky vidí jen administrátoři, a pod nimi jsou vlastní pole uživatelů rozdělená do kategorií.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=extendedNoteCKEditor]",
+          "before_ms": 400
+        },
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-custom-fields-category-submenu",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-custom-fields-category-submenu",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-common-custom-fields-category-submenu",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/work-data"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Vlastní pole si připravíte sami, a tak v levém menu pod položkou Uživatelé kliknu na Vlastní pole.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_user_custom_fields",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_user_custom_fields",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] #company_users_custom_fields_add",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=\"data_type\"]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=\"data_type\"]",
+        "url_contains": "/app/settings/custom-fields"
+      },
+      "part": 4,
+      "part_title": "Vlastní pole"
+    },
+    {
+      "id": "s13",
+      "narration": "U každého pole vidíte typ, kategorii, na které záložce karty se ukáže a jestli ho vidí i sám zaměstnanec.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=\"data_type\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=\"custom_field_category.name\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=\"is_work_information\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=\"is_visible_for_user\"]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=\"is_visible_for_user\"]",
+        "url_contains": "/app/settings/custom-fields"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "Kliknu na Přidat a otevře se okno Vytvoření vlastního pole.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] #company_users_custom_fields_add",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] #company_users_custom_fields_add",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container input[formcontrolname=name]",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container input[formcontrolname=name]",
+        "url_contains": "/app/settings/custom-fields"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Do pole Název pole napíšu Termín lékařské prohlídky a kliknu na Typ pole.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "nb-dialog-container input[formcontrolname=name]",
+          "value": "Termín lékařské prohlídky – ukázka",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container nb-select[formcontrolname=data_type] button",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option:text-is(\"Datum\")",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": "nb-option:text-is(\"Datum\")",
+        "url_contains": "/app/settings/custom-fields"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "Pole může být text, číslo, datum, připomínka, výročí nebo výběr z možností, a já vyberu Datum.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "nb-option-list",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-option:text-is(\"Datum\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container nb-select[formcontrolname=data_type] button:has-text(\"Datum\")",
+        "url_contains": "/app/settings/custom-fields"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "Kliknu na Kategorie a vyberu Informace k zaměstnání, aby se pole na kartě dalo rychle najít.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "nb-dialog-container slnk-common-custom-field-category-input input",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Informace k zaměstnaní\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Informace k zaměstnaní\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container nb-checkbox[formcontrolname=is_personal_information] label",
+        "url_contains": "/app/settings/custom-fields"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Zaškrtnutím určíte, na které záložce se pole ukáže, a tak odškrtnu Osobní údaje a nechám jen Základní a pracovní údaje.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container nb-checkbox[formcontrolname=is_work_information]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container nb-checkbox[formcontrolname=is_personal_information] label",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container nb-checkbox[formcontrolname=is_personal_information] label",
+        "url_contains": "/app/settings/custom-fields"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "Dole nastavíte, kdo pole uvidí, tedy sám zaměstnanec a jeho manažer týmu, a obě volby nechám zapnuté.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container nb-checkbox[formcontrolname=is_visible_for_user]",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container nb-checkbox[formcontrolname=is_visible_for_manager]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container nb-checkbox[formcontrolname=is_visible_for_manager]",
+        "url_contains": "/app/settings/custom-fields"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Kliknu na Uložit a nové pole je v seznamu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "nb-dialog-container button:text-is(\"Uložit\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container button:text-is(\"Uložit\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "body:not(:has(nb-dialog-container))",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row:has-text(\"Termín lékařské prohlídky – ukázka\")",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row:has-text(\"Termín lékařské prohlídky – ukázka\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row:has-text(\"Termín lékařské prohlídky – ukázka\")",
+        "url_contains": "/app/settings/custom-fields"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "Teď pole vyplním Tomášovi, a tak v menu kliknu na Přehled a správa a do vyhledávání napíšu Novák.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] thead.p-datatable-thead",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] input[placeholder=\"Vyhledávání...\"]",
+          "value": "10000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[placeholder=\"Vyhledávání...\"]",
+          "value": "Novák",
+          "clear": true,
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td:first-child span:text-is(\"Novák Tomáš\")",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td:first-child span:text-is(\"Novák Tomáš\")",
+        "url_contains": "/app/settings/users"
+      },
+      "part": 5,
+      "part_title": "Vyplnění na kartě"
+    },
+    {
+      "id": "s211",
+      "narration": "Kliknutím na jméno znovu otevřu složku Tomáše Nováka.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td:first-child span:text-is(\"Novák Tomáš\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td:first-child span:text-is(\"Novák Tomáš\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-custom-fields-category-submenu div.option:has(.option-name:text-is(\"Informace k zaměstnaní\"))",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-common-custom-fields-category-submenu div.option:has(.option-name:text-is(\"Informace k zaměstnaní\"))",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/work-data"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "Dole ve vlastních polích kliknu na kategorii Informace k zaměstnání a zobrazí se jen její pole.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-custom-fields-category-submenu",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-custom-fields-category-submenu div.option:has(.option-name:text-is(\"Informace k zaměstnaní\"))",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=\"customFieldInput-Termín lékařské prohlídky – ukázka\"]",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=\"customFieldInput-Termín lékařské prohlídky – ukázka\"]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=\"customFieldInput-Termín lékařské prohlídky – ukázka\"]",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/work-data"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "Do pole Termín lékařské prohlídky zadám patnáctého prosince.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=\"customFieldInput-Termín lékařské prohlídky – ukázka\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=\"customFieldInput-Termín lékařské prohlídky – ukázka\"]",
+          "value": "15. 12. 2026",
+          "clear": true,
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": "nb-calendar nb-calendar-day-cell.selected",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=\"customFieldInput-Termín lékařské prohlídky – ukázka\"]",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/work-data"
+      }
+    },
+    {
+      "id": "s24",
+      "narration": "Kliknu na Uložit změny a údaj je v Tomášově složce uložený.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=companyMemberWorkDataSaveButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=companyMemberWorkDataSaveButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=\"customFieldInput-Termín lékařské prohlídky – ukázka\"]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=\"customFieldInput-Termín lékařské prohlídky – ukázka\"]",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/work-data"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "Kliknu na záložku Osobní údaje s adresou, nouzovým kontaktem a bankovním účtem, které si může vyplnit i sám zaměstnanec, a jeho změny pak schválíte.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/personal-information\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/personal-information\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] h6:text-is(\"Bankovní detaily\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] h6:text-is(\"Trvalý pobyt\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] h6:text-is(\"Nouzový kontakt\")",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] h6:text-is(\"Bankovní detaily\")",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=companyMemberPersonalInfo]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] h6:text-is(\"Bankovní detaily\")",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/personal-information"
+      },
+      "part": 6,
+      "part_title": "Další záložky"
+    },
+    {
+      "id": "s27",
+      "narration": "Kliknu na záložku Typ spolupráce a finanční podmínky, kde je úvazek, mzda, srážky, bonusy a stravenky.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/contracts-and-terms\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/contracts-and-terms\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] nb-card-header:has-text(\"Nárok na stravenky\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-card-header:has-text(\"Informace o typu spolupráce\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-card-header:has-text(\"Informace o základních finančních podmínkách\")",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-card-header:has-text(\"Bonusy / benefity\")",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-card-header:has-text(\"Nárok na stravenky\")",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/contracts-and-terms"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "Manažer týmu tyhle údaje uvidí, jen když mu v jeho kartě povolíte zobrazit a editovat odměňování.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-card-header:has-text(\"Informace o základních finančních podmínkách\")",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-card-header:has-text(\"Nárok na stravenky\")",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/contracts-and-terms"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "Další záložky ukazují Tomášovy absence, aktivity, hodnocení a pomůcky, a ke každé oblasti máme samostatné video.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/absence-overview\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/absence-overview\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/activity-overview\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/evaluation\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/assets\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/assets\"]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/assets\"]",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/contracts-and-terms"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "Kliknu na záložku Dokumenty, kde jsou všechny dokumenty, které Tomášovi přišly.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/documents-v2\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/documents-v2\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=addDocumentButton]",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] table",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=addDocumentButton]",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/documents-v2"
+      },
+      "part": 7,
+      "part_title": "Dokumenty"
+    },
+    {
+      "id": "s31",
+      "narration": "Kliknu na Přidat nový dokument, pak na Nahrajte dokument a na Nahrajte dokument pro jednoho uživatele.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=addDocumentButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=addDocumentButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=uploadDocumentChoice]",
+          "value": "8000"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=uploadDocumentChoice]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=uploadSingleUserDocumentChoice]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=uploadSingleUserDocumentChoice]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [formcontrolname=owner_uuid] input",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [formcontrolname=owner_uuid] input",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "Napíšu název Lékařská prohlídka, v poli Vlastník dokumentu vyhledám a vyberu Tomáše a nakonec nahraju soubor s lékařským posudkem.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-container [data-cy=documentNameInput]",
+          "value": "Lékařská prohlídka – ukázka",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [formcontrolname=owner_uuid] input",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "Tomáš",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Novák Tomáš\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "upload",
+          "selector": ".cdk-overlay-container [data-cy=documentFileUpload] label.upload",
+          "value": "assets/demo/Lékařská prohlídka – ukázka.pdf",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=documentFileUpload]:has-text(\"Lékařská prohlídka – ukázka.pdf\")",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=documentFileUpload]:has-text(\"Lékařská prohlídka – ukázka.pdf\")",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "Kliknu na Potvrdit a dokument je v Tomášově složce, a jak posílat dokumenty celé firmě, ukazuje video Dokumenty.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=submitButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Lékařská prohlídka – ukázka\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Lékařská prohlídka – ukázka\")",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Lékařská prohlídka – ukázka\")",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/documents-v2"
+      }
+    },
+    {
+      "id": "s34",
+      "narration": "Kliknu na záložku Historie s časovou osou důležitých událostí, a vedle v Audit logu je podrobný záznam každé změny.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/history\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/history\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=companyMemberHistory]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=companyMemberHistory]",
+          "before_ms": 300
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/audit-log\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/audit-log\"]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=companyMemberHistory]",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/history"
+      },
+      "part": 8,
+      "part_title": "Historie a nastavení"
+    },
+    {
+      "id": "s35",
+      "narration": "Kliknu na záložku Nastavení rozhraní, kde Tomášovi nastavíte jazyk aplikace a jaká upozornění mu budou chodit.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/interface-settings\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a.tab-link[href=\"/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/interface-settings\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] nb-card-header:has-text(\"Nastavení upozornění\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-card-header:has-text(\"Uživatelské rozhraní\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-card-header:has-text(\"Nastavení upozornění\")",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-card-header:has-text(\"Nastavení upozornění\")",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/interface-settings"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "Zaměstnanec svou složku najde v menu v sekci Já pod položkou Můj profil a vidí v ní svoje údaje a vlastní pole, která mu povolíte.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_profile",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_profile",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_my_profile",
+        "url_contains": "/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/interface-settings"
+      },
+      "part": 9,
+      "part_title": "Pohled zaměstnance"
+    },
+    {
+      "id": "s37",
+      "narration": "Změny osobních údajů od zaměstnanců najdete v levém menu, kde kliknu na Schvalování a na záložku Změna osobních údajů.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_approvals",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_approvals",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/events/approvals/profile\"]",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/events/approvals/profile\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/events/approvals/profile\"]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=viewRequestedPersonalChangesButton]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=viewRequestedPersonalChangesButton]",
+        "url_contains": "/app/events/approvals/profile"
+      }
+    },
+    {
+      "id": "s38",
+      "narration": "Kliknu na Zobrazit vyžádané změny a vidíte aktuální i požadovanou hodnotu, kterou přijmete, nebo zamítnete.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=viewRequestedPersonalChangesButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=viewRequestedPersonalChangesButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-dialog-container table",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-dialog-container table",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container table",
+        "url_contains": "/app/events/approvals/profile"
+      }
+    },
+    {
+      "id": "s39",
+      "narration": "Teď víte, kde uživatelské složky najdete, jak je doplnit vlastními poli a dokumenty a kdo co vidí, a kdyby něco nešlo, mrkněte do Centra nápovědy.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container table",
+        "url_contains": "/app/events/approvals/profile"
+      }
+    },
+    {
+      "id": "s40",
+      "narration": "Méně administrativy, víc času na lidi. To je Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "nb-dialog-container table",
+        "url_contains": "/app/events/approvals/profile"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat dokument 'Lékařská prohlídka – ukázka' – jen při právě 1 řádku s přesným názvem po hledání (search_text v URL) a s názvem v dialogu 'Smazat dokument'; když dokument neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=L%C3%A9ka%C5%99sk%C3%A1%20prohl%C3%ADdka",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Lékařská prohlídka – ukázka\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) slnk-document-title-cell .name:text-is(\"Lékařská prohlídka – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Lékařská prohlídka – ukázka\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Vymazat\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Vymazat\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-document-dialog:has-text(\"Smazat dokument\"):has-text(\"Lékařská prohlídka – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-document-dialog:has-text(\"Smazat dokument\"):has-text(\"Lékařská prohlídka – ukázka\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "smazat vlastní pole 'Termín lékařské prohlídky – ukázka' – jen když filtr Název 'lékařské prohlídky' nechá právě 1 řádek s přesným názvem; dialog 'Smazání vlastního pole' název neuvádí (proto kontrola jediného řádku); když pole neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/settings/custom-fields",
+      "if_visible": "[data-cy=mainContentCenterDiv] #company_users_custom_fields_add",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=\"data_type\"]",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Název Filter Input\"]",
+          "value": "lékařské prohlídky",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row .ag-cell:text-is(\"Termín lékařské prohlídky – ukázka\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container:not(:has(.ag-row ~ .ag-row)) .ag-cell:text-is(\"Termín lékařské prohlídky – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row:has-text(\"Termín lékařské prohlídky – ukázka\") >> #custom_fields_delete_action",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Smazání vlastního pole\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Smazání vlastního pole\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "teardown": [
+    {
+      "name": "teardown: smazat dokument 'Lékařská prohlídka – ukázka' – jen při právě 1 řádku s přesným názvem po hledání (search_text v URL) a s názvem v dialogu 'Smazat dokument'; když dokument neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=L%C3%A9ka%C5%99sk%C3%A1%20prohl%C3%ADdka",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Lékařská prohlídka – ukázka\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) slnk-document-title-cell .name:text-is(\"Lékařská prohlídka – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Lékařská prohlídka – ukázka\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Vymazat\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Vymazat\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-document-dialog:has-text(\"Smazat dokument\"):has-text(\"Lékařská prohlídka – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-document-dialog:has-text(\"Smazat dokument\"):has-text(\"Lékařská prohlídka – ukázka\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "teardown: smazat vlastní pole 'Termín lékařské prohlídky – ukázka' – jen když filtr Název 'lékařské prohlídky' nechá právě 1 řádek s přesným názvem; dialog 'Smazání vlastního pole' název neuvádí (proto kontrola jediného řádku); když pole neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/settings/custom-fields",
+      "if_visible": "[data-cy=mainContentCenterDiv] #company_users_custom_fields_add",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-header-row-column .ag-header-cell[col-id=\"data_type\"]",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-floating-filter input[aria-label=\"Název Filter Input\"]",
+          "value": "lékařské prohlídky",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row .ag-cell:text-is(\"Termín lékařské prohlídky – ukázka\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container:not(:has(.ag-row ~ .ag-row)) .ag-cell:text-is(\"Termín lékařské prohlídky – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] .ag-pinned-left-cols-container .ag-row:has-text(\"Termín lékařské prohlídky – ukázka\") >> #custom_fields_delete_action",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Smazání vlastního pole\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Smazání vlastního pole\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-13",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "user": "Tomáš Novák <tomas.novak@example.com> (a8c8fa35-ed76-4867-8f26-0b3d41b768ac), NEAKTIVNÍ – trvalý (z org-chart)",
+      "created_by_recipe": "vlastní pole 'Termín lékařské prohlídky – ukázka' (Datum, kategorie 'Informace k zaměstnaní', jen karta Základní a pracovní údaje, viditelné pro uživatele i manažera) + hodnota 15.12.2026 u Tomáše; dokument 'Lékařská prohlídka – ukázka' pro Tomáše (Nevyžaduje potvrzení, soubor assets/demo/Lékařská prohlídka – ukázka.pdf) – maže cleanup (před) i teardown (po)",
+      "read_only": "Správa uživatelů (hledání), karta Tomáše (všechny záložky jen zvýrazněny), Schvalování → Změna osobních údajů (dialog první žádosti jen otevřen)",
+      "never_clicked": "Aktivace / deaktivace, Akce, Pozvat, Uložit na Osobních údajích / Nastavení rozhraní, Propojené účty, Přijmout / Zamítnout změny, Připomenout"
+    },
+    "notes": "viz atlas/user-folders.md"
+  }
+}

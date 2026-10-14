@@ -1,0 +1,324 @@
+{
+  "_comment": "Anglická verze videa Vytvořte organizační schéma (org-chart). Struktura, kroky a tempo 1:1 podle CZ masteru (schváleno Martinem 100/100). UI texty z translate_fe/en (fetch uvnitř stránky) + ověřeno naživo 12. 10. 2026 (local-translate=en). Vlastní EN demo data (trvalá): rodič 'Customer Support' (03fd8c48-b7b7-461b-8c62-2f0fa68d5292, z add-users EN), manažer 'James Miller' <james.miller@example.com> (322d66e2-619b-40ad-b68b-d1a90e755714, NEAKTIVNÍ, člen Customer Support), členka 'Olivia Brown' <olivia.brown@example.com> (3400dd35-a346-41ab-b593-2c55448a631f, NEAKTIVNÍ, pozice 'Customer Support Specialist', bez týmu – založena 12. 10. 2026 pro toto video stejně jako CZ Lucie; ne 'Emily …' – v Customer Support je dočasná 'Carter Emily' z add-users EN, hledání 'Emily' by bylo matoucí). Recept vytváří tým 'Technical Support' pod Customer Support; master cleanup ho maže. cleanup_prepend maže stejnou pojistkou CZ 'Technická podpora' (pod Zákaznická podpora, členka Lucie) a PL 'Wsparcie techniczne' (pod Obsługa klienta, členka Zofia). Narace bez asistentky Ellie (Help Center). Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM. Generátor: out/org-chart/_work/build_i18n.py (+ i18n_src.json)",
+  "verified": {
+    "date": "2026-10-12",
+    "by": "Claude (BrowserOS, preprod, local-translate=en, in-page runner out/org-chart-en/_work/dryrun-runner.js; recept z out/org-chart-en/_work/dryrun-R.json)",
+    "selectors": "Dry-run 39/39 napoprvé bez oprav. Cleanup po: vlastní blok smazal Technical Support (dialog „Team removal“). Zkouška skutečným recorderem (job 051, mock hlas) 39/39 ok; cleanup_prepend PL bloku v EN UI smazal Wsparcie techniczne ze zkoušky 050.",
+    "notes": "Živé EN popisky: Teams / Company, Teams and organizational structure, Add, Switch to the table / Switch to the tree, Show users / Show positions / Show only active, Collapse all, Expand all, Download (PNG), Create a team / Edit team, Name, Parent team, Team description, Managers, Supervisors, Team members, Attendance timesheet approvers, Absence approvers, Save; karta Position, Team, Manage positions; Settings → Application settings → „Show team structure to all users“; Colleagues."
+  },
+  "title": "Create an org chart",
+  "thumbnail_title": "Org chart",
+  "parts": {
+    "Úvod": "Introduction",
+    "Jak schéma číst": "How to read the chart",
+    "Nový tým": "A new team",
+    "Tým ve schématu": "The team in the chart",
+    "Zobrazení a export": "Views and export",
+    "Detail týmu a lidí": "Team and people details",
+    "Tabulka": "Table",
+    "Oprávnění a závěr": "Permissions and wrap-up"
+  },
+  "text": {
+    "Zákaznická": "Customer",
+    "Tomáš": "James",
+    "Lucie": "Olivia",
+    "Králová Lucie - lucie.kralova@example.com": "Brown Olivia - olivia.brown@example.com",
+    "Novák Tomáš - tomas.novak@example.com": "Miller James - james.miller@example.com",
+    "Řeší technické dotazy zákazníků k aplikaci.": "Handles customers' technical questions about the app.",
+    "Specialista zákaznické podpory": "Customer Support Specialist",
+    "Týmy a organizační struktura": "Teams and organizational structure",
+    "lucie.kralova@example.com": "olivia.brown@example.com",
+    "Technická podpora": "Technical Support",
+    "Zákaznická podpora": "Customer Support",
+    "Králová Lucie": "Brown Olivia",
+    "Novák Tomáš": "Miller James",
+    "Odstranění týmu": "Team removal",
+    "Vytvořit tým": "Create a team",
+    "Upravit tým": "Edit team"
+  },
+  "selectors": {
+    "[data-cy=mainContentCenterDiv] [data-cy=\"teamNode-Zákaznická podpora\"]": "[data-cy=mainContentCenterDiv] [data-cy=\"teamNode-Customer Support\"]",
+    "[data-cy=mainContentCenterDiv] h5:text-is(\"Týmy a organizační struktura\")": "[data-cy=mainContentCenterDiv] h5:text-is(\"Teams and organizational structure\")",
+    "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Zákaznická podpora\"])": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Customer Support\"])",
+    "[data-cy=creationSidebarHeader]:has-text(\"Vytvořit tým\")": "[data-cy=creationSidebarHeader]:has-text(\"Create a team\")",
+    "slnk-common-autocomplete-option:has-text(\"Zákaznická podpora\")": "slnk-common-autocomplete-option:has-text(\"Customer Support\")",
+    "slnk-common-autocomplete-option:has-text(\"Novák Tomáš\")": "slnk-common-autocomplete-option:has-text(\"Miller James\")",
+    "[data-cy=teamForm]:has-text(\"Novák Tomáš - tomas.novak@example.com\")": "[data-cy=teamForm]:has-text(\"Miller James - james.miller@example.com\")",
+    "slnk-common-autocomplete-option:has-text(\"Králová Lucie\")": "slnk-common-autocomplete-option:has-text(\"Brown Olivia\")",
+    "[data-cy=teamForm]:has-text(\"Králová Lucie - lucie.kralova@example.com\")": "[data-cy=teamForm]:has-text(\"Brown Olivia - olivia.brown@example.com\")",
+    "[data-cy=mainContentCenterDiv] slnk-common-org-chart-designer:has([data-cy=\"teamNode-Zákaznická podpora\"]) .children-button button": "[data-cy=mainContentCenterDiv] slnk-common-org-chart-designer:has([data-cy=\"teamNode-Customer Support\"]) .children-button button",
+    "[data-cy=mainContentCenterDiv] slnk-common-org-chart-designer:has([data-cy=\"teamNode-Zákaznická podpora\"]) [data-cy=\"teamNode-Technická podpora\"]": "[data-cy=mainContentCenterDiv] slnk-common-org-chart-designer:has([data-cy=\"teamNode-Customer Support\"]) [data-cy=\"teamNode-Technical Support\"]",
+    "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technická podpora\"])": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technical Support\"])",
+    "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technická podpora\"]):not(:has(.sloneek-org-chart-user a))": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technical Support\"]):not(:has(.sloneek-org-chart-user a))",
+    "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technická podpora\"]) [data-cy=\"teamUserNode-Králová Lucie\"]": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technical Support\"]) [data-cy=\"teamUserNode-Brown Olivia\"]",
+    "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technická podpora\"]) .sloneek-org-chart-user:has(.fa-user-tie)": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technical Support\"]) .sloneek-org-chart-user:has(.fa-user-tie)",
+    "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technická podpora\"]) .sloneek-org-chart-user:has([data-cy=\"teamUserNode-Králová Lucie\"])": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technical Support\"]) .sloneek-org-chart-user:has([data-cy=\"teamUserNode-Brown Olivia\"])",
+    "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technická podpora\"]) .sloneek-org-chart-user:has([data-cy=\"teamUserNode-Novák Tomáš\"]) .fa-user-tie": "[data-cy=mainContentCenterDiv] .sloneek-org-chart-box:has([data-cy=\"teamNode-Technical Support\"]) .sloneek-org-chart-user:has([data-cy=\"teamUserNode-Miller James\"]) .fa-user-tie",
+    "[data-cy=teamDetailPanel] [data-cy=teamNameH]:text-is(\"Technická podpora\")": "[data-cy=teamDetailPanel] [data-cy=teamNameH]:text-is(\"Technical Support\")",
+    "[data-cy=teamDetailPanel] [data-cy=teamDescriptionAlert]:has-text(\"Řeší technické dotazy zákazníků k aplikaci.\")": "[data-cy=teamDetailPanel] [data-cy=teamDescriptionAlert]:has-text(\"Handles customers' technical questions about the app.\")",
+    "[data-cy=creationSidebarHeader]:has-text(\"Upravit tým\")": "[data-cy=creationSidebarHeader]:has-text(\"Edit team\")",
+    "[data-cy=teamsUserDetailPanel]:has-text(\"lucie.kralova@example.com\")": "[data-cy=teamsUserDetailPanel]:has-text(\"olivia.brown@example.com\")",
+    "[data-cy=teamsUserDetailPanel]:has-text(\"Specialista zákaznické podpory\")": "[data-cy=teamsUserDetailPanel]:has-text(\"Customer Support Specialist\")",
+    "[data-cy=mainContentCenterDiv] [data-cy=positionSelect]:has-text(\"Specialista zákaznické podpory\")": "[data-cy=mainContentCenterDiv] [data-cy=positionSelect]:has-text(\"Customer Support Specialist\")",
+    "[data-cy=mainContentCenterDiv] [data-cy=teamsSelect]:has-text(\"Technická podpora\")": "[data-cy=mainContentCenterDiv] [data-cy=teamsSelect]:has-text(\"Technical Support\")",
+    "[data-cy=confirmationDialog]:has-text(\"Odstranění týmu\")": "[data-cy=confirmationDialog]:has-text(\"Team removal\")",
+    "[data-cy=confirmationDialog]:has-text(\"Odstranění týmu\") >> [data-cy=submitButton]": "[data-cy=confirmationDialog]:has-text(\"Team removal\") >> [data-cy=submitButton]"
+  },
+  "keep": [],
+  "ids": {
+    "0c9409f2-fc6e-475b-b2b1-2e791b4a7a83": "3400dd35-a346-41ab-b593-2c55448a631f"
+  },
+  "cleanup_prepend": [
+    {
+      "name": "smazat CS tým 'Technická podpora' – jen podřízený tým 'Zákaznická podpora' (designer rodiče), přesné jméno v detailu týmu, ve formuláři člen 'Králová Lucie - lucie.kralova@example.com', dialog s titulkem v jazyce UI; když tým neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/company-details/teams/tree",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=addTeamButton]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=\"teamNode-Zákaznická podpora\"]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=showUsersCheckbox] label",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-org-chart-designer:has([data-cy=\"teamNode-Zákaznická podpora\"]) [data-cy=\"teamNode-Technická podpora\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-org-chart-designer:has([data-cy=\"teamNode-Zákaznická podpora\"]) [data-cy=\"teamNode-Technická podpora\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=teamDetailPanel] [data-cy=teamNameH]:text-is(\"Technická podpora\")",
+          "value": "8000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=teamDetailPanel] [data-cy=editButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=creationSidebarHeader]:has-text(\"Edit team\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=teamForm]:has-text(\"Králová Lucie - lucie.kralova@example.com\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=teamForm] [data-cy=deleteButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Team removal\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Team removal\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat PL tým 'Wsparcie techniczne' – jen podřízený tým 'Obsługa klienta' (designer rodiče), přesné jméno v detailu týmu, ve formuláři člen 'Wiśniewska Zofia - zofia.wisniewska@example.com', dialog s titulkem v jazyce UI; když tým neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/company-details/teams/tree",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=addTeamButton]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=\"teamNode-Obsługa klienta\"]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=showUsersCheckbox] label",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-org-chart-designer:has([data-cy=\"teamNode-Obsługa klienta\"]) [data-cy=\"teamNode-Wsparcie techniczne\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-org-chart-designer:has([data-cy=\"teamNode-Obsługa klienta\"]) [data-cy=\"teamNode-Wsparcie techniczne\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=teamDetailPanel] [data-cy=teamNameH]:text-is(\"Wsparcie techniczne\")",
+          "value": "8000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=teamDetailPanel] [data-cy=editButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=creationSidebarHeader]:has-text(\"Edit team\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=teamForm]:has-text(\"Wiśniewska Zofia - zofia.wisniewska@example.com\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=teamForm] [data-cy=deleteButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Team removal\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Team removal\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    }
+  ],
+  "steps": {
+    "s01": {
+      "narration": "Want every colleague to know right away who their manager is? Hi, I'm Maria from the Sloneek team, and I'll show you how to create an org chart."
+    },
+    "s02": {
+      "narration": "You'll find the org chart in the left menu, in the Company section, under Teams."
+    },
+    "s03": {
+      "narration": "I click Teams, and the Teams and organizational structure page opens."
+    },
+    "s04": {
+      "narration": "Each box is one team: people with a role in the team are at the top, members are below the line, and their positions are in brackets."
+    },
+    "s05": {
+      "narration": "If you turn off Show users, you'll see just the company's skeleton, meaning which teams belong under which."
+    },
+    "s06": {
+      "narration": "Where a team sits is set by its Parent team field, and a team without one stands on its own, like Customer Support here."
+    },
+    "s07": {
+      "narration": "I turn users back on and click Add to open the Create a team form."
+    },
+    "s08": {
+      "narration": "In the Name field, I type the name of the new team, Technical Support."
+    },
+    "s09": {
+      "narration": "In the description, I write what the team does, and anyone who clicks on the team can read it."
+    },
+    "s10": {
+      "narration": "In the Parent team field, I choose Customer Support, so the new team goes under it."
+    },
+    "s11": {
+      "narration": "As the manager, I choose James Miller, who will approve the team's absences."
+    },
+    "s12": {
+      "narration": "In the Team members field, I add my colleague Olivia Brown."
+    },
+    "s13": {
+      "narration": "Further down are other roles, such as a supervisor who only follows what's going on in the team, or attendance and absence approvers."
+    },
+    "s14": {
+      "narration": "If a team has no manager, its members' approval requests go to all administrators."
+    },
+    "s15": {
+      "narration": "I click Save, and an arrow appears under Customer Support, with the new team tucked beneath it."
+    },
+    "s16": {
+      "narration": "I expand the branch with the arrow, and Technical Support sits under Customer Support."
+    },
+    "s17": {
+      "narration": "James and Olivia aren't shown yet, because by default the chart only shows active users."
+    },
+    "s18": {
+      "narration": "If you turn off Show only active, you'll also see inactive people with a red dot, such as new hires before their start date."
+    },
+    "s19": {
+      "narration": "James has a manager icon next to his name, and Olivia is below the line as a team member, along with her position."
+    },
+    "s20": {
+      "narration": "The toggle at the top rotates the chart, so the branches spread out from left to right."
+    },
+    "s21": {
+      "narration": "I switch back to the original view, and with the Show positions checkbox, you can then hide the positions in brackets."
+    },
+    "s22": {
+      "narration": "With the buttons on the right, you collapse or expand the branches, and with Download PNG, you save the chart as an image."
+    },
+    "s23": {
+      "narration": "Clicking the team name opens its detail with the description, manager and members."
+    },
+    "s24": {
+      "narration": "With the pencil button, you can edit the team at any time, and if you change the parent team, the chart rearranges itself."
+    },
+    "s25": {
+      "narration": "I close the form without changes and click on Olivia to see her position and contact details."
+    },
+    "s26": {
+      "narration": "Through her name, I go to the user profile, where the Position field sets what appears in brackets in the chart."
+    },
+    "s27": {
+      "narration": "The Team field shows where Olivia belongs, and each user can be a member of only one team but can have roles in several teams."
+    },
+    "s28": {
+      "narration": "You add new positions through the Manage positions link, which leads to the Positions and competencies section."
+    },
+    "s29": {
+      "narration": "In the left menu, I click Teams again, and I'm back at the chart."
+    },
+    "s291": {
+      "narration": "I click Switch to the table, and you'll see teams and people as a list."
+    },
+    "s30": {
+      "narration": "Here you can move people and whole teams between teams by dragging the handle on the left."
+    },
+    "s31": {
+      "narration": "The Switch to the tree button takes you back to the chart."
+    },
+    "s32": {
+      "narration": "Who can see the chart is set elsewhere, so in the left menu, I click Settings."
+    },
+    "s321": {
+      "narration": "In the expanded menu, I open Application settings and find the option for the team structure."
+    },
+    "s322": {
+      "narration": "The Show team structure to all users option decides whether employees can see the chart too."
+    },
+    "s33": {
+      "narration": "Employees then only view the chart and find their manager right away, while the administrator sets up teams and roles."
+    },
+    "s34": {
+      "narration": "Everyone can find their colleagues' contact details on the Colleagues page, right above Teams."
+    },
+    "s35": {
+      "narration": "Now you know how to create a team, place it in the chart and give it a manager and members, and if something doesn't work, check the Help Center."
+    },
+    "s36": {
+      "narration": "Less admin, more time for people. This is Sloneek."
+    }
+  }
+}

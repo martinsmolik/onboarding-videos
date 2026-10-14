@@ -37,14 +37,22 @@ Ostatní vypnuté: Slack, Gmail, Drive, web search, Research, Claude in Chrome.
 - **Notion:** jeden zápis na konci videa. Najít řádek podle Catalog ID, zapsat stav jazykové verze a odkaz.
 - **Na konci videa:** `node scripts/video-status.mjs > docs/dev/VIDEO-STATUS.md`, přidat řádek do Měření, posunout Frontu a napsat „Uloženo: <cesty>".
 
+## Poučení
+- Názvy z dat demo účtu (aktivity, složky, šablony, jména) se nepřekládají, patří do `keep` v i18n.
+- ag-grid: připnutý sloupec není v `.ag-center-cols-container`, řádek hledej podle textu, který v center kontejneru je.
+- Text z hlavičky tabulky (`thead`) v řádcích `tbody` není.
+- U highlightu stačí kontejner (karta, řádek), ne vnořený div přes přímé potomky.
+- clockins-vs-tracking s11/s12 potřebují data v minulém měsíci (v demu září, říjen je prázdný). Od listopadu před nahráním ověřit.
+
 ## Fronta
-1. **clockins-vs-tracking-en** převzetím receptu. Test: změřit spotřebu (Settings → Usage před a po). Do čtvrtka (schůzka s Janem) nic dalšího.
-2. Ostatní jazykové verze převzetím, seznam v `VIDEO-STATUS.md`. Před `surveys-en`/`-pl` ověřit v Notionu, proč je surveys v To Do, když česká verze existuje.
-3. Nová témata: nejdřív cs plnou výrobou, pak en/pl převzetím. collect-data, onboarding-checklists, ats-candidates, okr-kpi, feedback-360, ai-agent, ai-features, integrations.
+1. Ostatní jazykové verze převzetím, seznam v `VIDEO-STATUS.md`. Před `surveys-en`/`-pl` ověřit v Notionu, proč je surveys v To Do, když česká verze existuje.
+2. Nová témata: nejdřív cs plnou výrobou, pak en/pl převzetím. collect-data, onboarding-checklists, ats-candidates, okr-kpi, feedback-360, ai-agent, ai-features, integrations.
 
 ## Měření
 | datum | video | režim | model | usage před | usage po | poznámka |
 |---|---|---|---|---|---|---|
+| 2026-10-14 | clockins-vs-tracking-en | Cowork, příprava s hlasem (recept z CS, BrowserOS na 7 názvů UI, ElevenLabs 37 klipů, 4 409 znaků) | Sonnet 5.5 | 0 % | doplnit | Martin doplní „po přípravě“ |
+| 2026-10-14 | clockins-vs-tracking-en | Cowork, oprava 4 kroků (s04, s11, s12, s20; 3 subagenti na BrowserOS) a kontrola | Sonnet 5.5 | doplnit | doplnit | nahrání doběhlo bez failed kroků, 5:16 |
 
 ## Otevřené otázky
 - Běhy `rehearse-*` (23×) byly zkušební nahrávky ručně psaných receptů. Nový skill je zakazuje.

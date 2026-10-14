@@ -1,0 +1,325 @@
+{
+  "_comment": "Anglická verze videa Evidujte a předávejte pracovní pomůcky (work-assets). Struktura, kroky, kliky a tempo 1:1 podle CZ masteru (schváleno Martinem – „raketa“). UI texty z translate_fe/en (fetch uvnitř stránky) + ověřeno naživo 12. 10. 2026 (local-translate=en). EN demo data: držitelka 'Olivia Brown' <olivia.brown@example.com> (3400dd35-a346-41ab-b593-2c55448a631f, NEAKTIVNÍ, trvalá z org-chart EN); NE 'Carter Emily' (add-users EN). Recept vytváří pomůcku 'Lenovo ThinkPad T14 – demo' (inv. DEMO-NB-014, 1290 EUR – EUR je výchozí měna formuláře, klik na výběr měny zůstává; kategorie Notebook); master cleanup ji maže. cleanup_prepend maže stejnou pojistkou pozůstatky CZ ('… – ukázka', Lucie) a PL ('… – przykład', Zofia). Read-only data tenantu jako v CZ. Narace bez asistentky Ellie (Help Center). Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM. Generátor: out/work-assets/_work/build_i18n.py (+ i18n_src.json)",
+  "verified": {
+    "date": "2026-10-12",
+    "by": "Claude (BrowserOS, preprod, local-translate=en, in-page runner out/work-assets-en/_work/dryrun-runner.js; recept z out/work-assets-en/_work/dryrun-R.json)",
+    "selectors": "Dry-run 40/40 (s331 řádek „Brown Olivia / Inactive“ ověřen ručně jako u PL). Cleanup po: vlastní blok smazal EN pomůcku (dialog „Remove work asset“ s Brown Olivia). Zkouška skutečným recorderem (job 061, mock hlas) 40/40 ok; cleanup_prepend PL bloku v EN UI smazal „Lenovo ThinkPad T14 – przykład“ ze zkoušky 060.",
+    "notes": "Živé EN popisky: Company → Assets (Management, Handover Protocols, Categories, Custom fields); Me → My assets → Overview; Users → Management; nadpis Management of assets; Acceptance status, Category, Export to Excel, Import, Remind all unaccepted assets; Assets categories + Add; Assets Custom fields; formulář Name, Date of acquisition, Inventory number, Designation (serial number), Acquisition price (excluding VAT), Currency (výchozí EUR, recept vybere EUR), Category, A photo/Select, Assign this asset, Holder information, Holder, Asset status = 1 - New, Handover date, Note (visible in protocol), Save; detail Information / Expanded / History, Protocol type, Request the return of the asset, Return the asset without a handover protocol; Overview of my assets + Accept; Protocols on the acceptance and return of assets; Search..., Inactive; karta Basic and work data, Assets, Special user rights → Asset manager."
+  },
+  "title": "Track and hand over work assets",
+  "thumbnail_title": "Work assets",
+  "parts": {
+    "Úvod": "Introduction",
+    "Přehled pomůcek": "Assets overview",
+    "Kategorie a vlastní pole": "Categories and custom fields",
+    "Nová pomůcka": "A new asset",
+    "Předání zaměstnanci": "Handover to an employee",
+    "Převzetí a vrácení": "Acceptance and return",
+    "Karta uživatele a oprávnění": "User card and permissions"
+  },
+  "text": {
+    "Pomůcky": "Assets",
+    "Moje pomůcky": "My assets",
+    "Správa pomůcek": "Management of assets",
+    "Stav přijetí": "Acceptance status",
+    "Kategorie": "Category",
+    "Export do Excelu": "Export to Excel",
+    "Import": "Import",
+    "Připomenout všechny nepřevzaté pomůcky": "Remind all unaccepted assets",
+    "Protokoly o převzetí a vrácení pomůcek": "Protocols on the acceptance and return of assets",
+    "Typ protokolu": "Protocol type",
+    "Vyhledávání...": "Search...",
+    "Neaktivní": "Inactive",
+    "Odstranění pracovní pomůcky": "Remove work asset",
+    "Lenovo ThinkPad T14 – ukázka": "Lenovo ThinkPad T14 – demo",
+    "Králová Lucie": "Brown Olivia",
+    "CZK": "EUR",
+    "UKAZKA-NB-014": "DEMO-NB-014",
+    "PF-4K7Q2X": "PF-6N9S4Z",
+    "32000": "1290",
+    "Předáno s nabíječkou a brašnou.": "Handed over with a charger and a bag.",
+    "Lucie": "Olivia",
+    "Králová": "Brown"
+  },
+  "selectors": {
+    "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Pomůcky\")": "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Assets\")",
+    "[data-cy=mainContentCenterDiv] [data-cy=assetsManagementPage] h5:text-is(\"Správa pomůcek\")": "[data-cy=mainContentCenterDiv] [data-cy=assetsManagementPage] h5:text-is(\"Management of assets\")",
+    "[data-cy=mainContentCenterDiv] nb-select button:has-text(\"Stav přijetí\")": "[data-cy=mainContentCenterDiv] nb-select button:has-text(\"Acceptance status\")",
+    "[data-cy=mainContentCenterDiv] nb-select button:has-text(\"Kategorie\")": "[data-cy=mainContentCenterDiv] nb-select button:has-text(\"Category\")",
+    "[data-cy=mainContentCenterDiv] button:has-text(\"Export do Excelu\")": "[data-cy=mainContentCenterDiv] button:has-text(\"Export to Excel\")",
+    "[data-cy=mainContentCenterDiv] button:has-text(\"Připomenout všechny nepřevzaté pomůcky\")": "[data-cy=mainContentCenterDiv] button:has-text(\"Remind all unaccepted assets\")",
+    "nb-option:text-is(\"CZK\")": "nb-option:text-is(\"EUR\")",
+    "[data-cy=assetsForm] [data-cy=assetCurrencySelect] button:text-is(\"CZK\")": "[data-cy=assetsForm] [data-cy=assetCurrencySelect] button:text-is(\"EUR\")",
+    "slnk-common-autocomplete-option:has-text(\"Králová Lucie\")": "slnk-common-autocomplete-option:has-text(\"Brown Olivia\")",
+    "[data-cy=mainContentCenterDiv] table:has-text(\"Typ protokolu\")": "[data-cy=mainContentCenterDiv] table:has-text(\"Protocol type\")",
+    "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Moje pomůcky\")": "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"My assets\")",
+    "[data-cy=mainContentCenterDiv] h5:text-is(\"Protokoly o převzetí a vrácení pomůcek\")": "[data-cy=mainContentCenterDiv] h5:text-is(\"Protocols on the acceptance and return of assets\")",
+    "[data-cy=mainContentCenterDiv] input[placeholder=\"Vyhledávání...\"]": "[data-cy=mainContentCenterDiv] input[placeholder=\"Search...\"]",
+    "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Neaktivní\") td:first-child span:text-is(\"Králová Lucie\")": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Inactive\") td:first-child span:text-is(\"Brown Olivia\")",
+    "[data-cy=mainContentCenterDiv] a[href=\"/app/company-details/member/0c9409f2-fc6e-475b-b2b1-2e791b4a7a83/assets\"]": "[data-cy=mainContentCenterDiv] a[href=\"/app/company-details/member/3400dd35-a346-41ab-b593-2c55448a631f/assets\"]",
+    "[data-cy=mainContentCenterDiv] [data-cy=companyMemberAssets] span.text-dark:text-is(\"Lenovo ThinkPad T14 – ukázka\")": "[data-cy=mainContentCenterDiv] [data-cy=companyMemberAssets] span.text-dark:text-is(\"Lenovo ThinkPad T14 – demo\")",
+    "[data-cy=mainContentCenterDiv] [data-cy=companyMemberAssets] nb-card:has-text(\"Lenovo ThinkPad T14 – ukázka\")": "[data-cy=mainContentCenterDiv] [data-cy=companyMemberAssets] nb-card:has-text(\"Lenovo ThinkPad T14 – demo\")",
+    "[data-cy=mainContentCenterDiv] a[href=\"/app/company-details/member/0c9409f2-fc6e-475b-b2b1-2e791b4a7a83/work-data\"]": "[data-cy=mainContentCenterDiv] a[href=\"/app/company-details/member/3400dd35-a346-41ab-b593-2c55448a631f/work-data\"]",
+    "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – ukázka\")": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – demo\")",
+    "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – ukázka\")": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – demo\")",
+    "[data-cy=assetsDetailPage]:has-text(\"Lenovo ThinkPad T14 – ukázka\") >> [data-cy=assetDeleteButton]": "[data-cy=assetsDetailPage]:has-text(\"Lenovo ThinkPad T14 – demo\") >> [data-cy=assetDeleteButton]",
+    "[data-cy=confirmationDialog]:has-text(\"Odstranění pracovní pomůcky\"):has-text(\"Králová Lucie\")": "[data-cy=confirmationDialog]:has-text(\"Remove work asset\"):has-text(\"Brown Olivia\")",
+    "[data-cy=confirmationDialog]:has-text(\"Odstranění pracovní pomůcky\"):has-text(\"Králová Lucie\") >> [data-cy=submitButton]": "[data-cy=confirmationDialog]:has-text(\"Remove work asset\"):has-text(\"Brown Olivia\") >> [data-cy=submitButton]"
+  },
+  "keep": [
+    "Kia Sportage 2020",
+    "Notebook",
+    "Producer",
+    "Note",
+    "Import"
+  ],
+  "ids": {
+    "0c9409f2-fc6e-475b-b2b1-2e791b4a7a83": "3400dd35-a346-41ab-b593-2c55448a631f"
+  },
+  "cleanup_prepend": [
+    {
+      "name": "smazat CS pomůcku 'Lenovo ThinkPad T14 – ukázka' – jen při právě 1 řádku s přesným názvem po hledání, detail s tímtéž názvem v hlavičce, dialog 'Remove work asset' (jazyk UI) s držitelkou 'Králová Lucie'; když pomůcka neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/assets/all",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+          "value": "Lenovo ThinkPad T14 – ukázka",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – ukázka\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – ukázka\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetsDetailPage]:has-text(\"Lenovo ThinkPad T14 – ukázka\") >> [data-cy=assetDeleteButton]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=assetDeleteButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Remove work asset\"):has-text(\"Králová Lucie\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Remove work asset\"):has-text(\"Králová Lucie\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "smazat PL pomůcku 'Lenovo ThinkPad T14 – przykład' – jen při právě 1 řádku s přesným názvem po hledání, detail s tímtéž názvem v hlavičce, dialog 'Remove work asset' (jazyk UI) s držitelkou 'Wiśniewska Zofia'; když pomůcka neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/assets/all",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+          "value": "Lenovo ThinkPad T14 – przykład",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – przykład\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – przykład\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – przykład\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetsDetailPage]:has-text(\"Lenovo ThinkPad T14 – przykład\") >> [data-cy=assetDeleteButton]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=assetDeleteButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Remove work asset\"):has-text(\"Wiśniewska Zofia\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Remove work asset\"):has-text(\"Wiśniewska Zofia\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    }
+  ],
+  "steps": {
+    "s01": {
+      "narration": "Want to know who in your company has which laptop or phone? Hi, I'm Maria from the Sloneek team, and I'll show you how to track and hand over work assets."
+    },
+    "s02": {
+      "narration": "You'll find assets in the left menu, in the Company section, where I expand Assets."
+    },
+    "s03": {
+      "narration": "I click Management, and the Management of assets page opens with every asset in the company."
+    },
+    "s04": {
+      "narration": "For each asset you see the holder, with the acceptance status under their name, and next to it the inventory number and category."
+    },
+    "s05": {
+      "narration": "Narrow the list down with search, with the Acceptance status filter, for example to assets waiting for confirmation, or by category."
+    },
+    "s06": {
+      "narration": "The switch at the top right turns on a detailed table, which you can download with the Export to Excel button."
+    },
+    "s07": {
+      "narration": "I turn the switch off again, and with the Import button you can upload many assets at once from an Excel template."
+    },
+    "s08": {
+      "narration": "The orange button then reminds everyone who hasn't confirmed their asset yet to accept it."
+    },
+    "s09": {
+      "narration": "I click Categories in the menu, where you set up groups of assets, such as laptops or phones, that you can then filter by."
+    },
+    "s10": {
+      "narration": "You create a new category with the Add button, just give it a name and a color."
+    },
+    "s11": {
+      "narration": "I click Custom fields, where you add extra details, such as the manufacturer, a size or a licence expiry date."
+    },
+    "s12": {
+      "narration": "Each field has its own type, for example text, number, date, a choice from options, or a reminder."
+    },
+    "s13": {
+      "narration": "In the menu I click Management again, then Add, and the new asset card opens."
+    },
+    "s14": {
+      "narration": "In the Name field I type what the asset is, here a Lenovo ThinkPad laptop."
+    },
+    "s15": {
+      "narration": "The date of acquisition is prefilled with today, and for an older asset you simply change it."
+    },
+    "s16": {
+      "narration": "The inventory number is required and must be unique within the company."
+    },
+    "s17": {
+      "narration": "In Designation I enter the serial number, and if the asset doesn't have one, the lightning button generates a random code."
+    },
+    "s18": {
+      "narration": "I fill in the acquisition price excluding VAT and pick euros as the currency."
+    },
+    "s19": {
+      "narration": "In the Category field I tick Notebook, and with the plus button next to it you could create a new category right away."
+    },
+    "s20": {
+      "narration": "With the Select button you can upload a photo of the asset, so everyone knows right away what it is."
+    },
+    "s21": {
+      "narration": "I'll hand the asset over right away, so I click Assign this asset, and Holder information appears below."
+    },
+    "s22": {
+      "narration": "As the holder I choose my colleague Olivia Brown."
+    },
+    "s23": {
+      "narration": "I leave the asset status at New and the handover date at today."
+    },
+    "s24": {
+      "narration": "In the note I write what Olivia gets with the laptop, because the note goes into the handover protocol."
+    },
+    "s25": {
+      "narration": "I click Save, and the asset is created together with its holder."
+    },
+    "s26": {
+      "narration": "The holder then accepts the asset in the app with an electronic signature, or rejects it, and until then it waits for confirmation."
+    },
+    "s27": {
+      "narration": "If they put off accepting it, the arrow button sends them the acceptance request again."
+    },
+    "s28": {
+      "narration": "I click the Expanded tab, where you fill in the custom fields you prepared earlier."
+    },
+    "s29": {
+      "narration": "I click the History tab, where you'll find the handover protocols and an audit log that records every change to the asset."
+    },
+    "s30": {
+      "narration": "You'll find the employee's view in the Me section of the menu, where I expand My assets and click Overview."
+    },
+    "s301": {
+      "narration": "Here employees see their assets and confirm a pending handover with the Accept button."
+    },
+    "s31": {
+      "narration": "In the Assets section I click Handover Protocols, where you have the signed handover and return protocols from the whole company."
+    },
+    "s32": {
+      "narration": "I click Management again and open an asset the holder has already accepted, for example a company car."
+    },
+    "s321": {
+      "narration": "In its detail you can request its return, which the holder signs, or return it straight to stock without a protocol."
+    },
+    "s33": {
+      "narration": "You'll also find one person's assets on their user card, so in the menu I expand Users and click Management."
+    },
+    "s331": {
+      "narration": "I type Brown into the search and click the name to open Olivia's card."
+    },
+    "s332": {
+      "narration": "I click the Assets tab and see the laptop we just handed over to Olivia."
+    },
+    "s34": {
+      "narration": "To decide who can manage assets, click Basic and work data and choose Asset manager in the Special user rights field."
+    },
+    "s35": {
+      "narration": "Now you know how to track assets, hand them over to employees and look up their history, and if something doesn't work, check the Help Center."
+    },
+    "s36": {
+      "narration": "Less admin, more time for people. This is Sloneek."
+    }
+  }
+}

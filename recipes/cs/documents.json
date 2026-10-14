@@ -1,0 +1,1340 @@
+{
+  "id": "documents",
+  "version": 1,
+  "title": "Nahrajte a posílejte dokumenty",
+  "lang": "cs",
+  "app_version": "preprod-2026-10-12",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "cs"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "bF7C2fCv7Zf30iT84wZ1",
+    "model_id": "eleven_v4"
+  },
+  "pronunciation": [
+    {
+      "match": "Status",
+      "say": "status",
+      "note": "sloupec; velké S na začátku slova by mohlo spustit anglickou výslovnost"
+    }
+  ],
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s13",
+    "title": "Dokumenty"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Chcete vědět, kdo už si přečetl novou směrnici? Dobrý den, jsem Marie z týmu Sloneek a ukážu vám, jak nahrávat a posílat dokumenty.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_documents_v2",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_documents_v2",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Úvod",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Dokumenty drží smlouvy, směrnice i potvrzení na jednom místě. Zaměstnanci je čtou a podepisují přímo v aplikaci.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_documents_v2",
+          "before_ms": 1500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_documents_v2",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_documents_v2",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "V levém menu v sekci Společnost otevřu Dokumenty. Spravuje je administrátor nebo uživatel s právem Správce dokumentů.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_documents_v2",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] slnk-document-title-cell",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] h5:text-is(\"Správa dokumentů\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=addDocumentButton]",
+        "url_contains": "/app/documents-v2/company"
+      },
+      "part": 2,
+      "part_title": "Kde je najdete",
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s04",
+      "narration": "V seznamu vidíte složku, příjemce, stav potvrzení a expiraci. Vlevo jsou složky, ve Všech dokumentech najdete úplně všechno.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] tr.mat-mdc-header-row",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-list",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"Všechny dokumenty\")",
+        "url_contains": "/app/documents-v2/company"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "Složky založíte v Nastavení. Kliknu na Přidat složku a vytvořím složku pro personální směrnice.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=settingsButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=addFolderButton]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=addFolderButton]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=nameInput]",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=descriptionTextarea]",
+        "url_contains": "/settings/folders"
+      },
+      "part": 3,
+      "part_title": "Složky a nastavení",
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s06",
+      "narration": "Napíšu název a krátký popis. V poli Uživatelská oprávnění můžete vybraným lidem povolit čtení celé složky.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-container [data-cy=nameInput]",
+          "value": "Personální směrnice",
+          "before_ms": 400
+        },
+        {
+          "type": "fill",
+          "selector": ".cdk-overlay-container [data-cy=descriptionTextarea]",
+          "value": "Směrnice a interní předpisy pro všechny zaměstnance.",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=userPermissionsAutocomplete]",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=userPermissionsAutocomplete]",
+        "url_contains": "/settings/folders"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "Kliknu na Vytvořit složku. Nová složka se hned objeví v seznamu a můžete do ní řadit dokumenty.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=submitButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"Personální směrnice\")",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"Personální směrnice\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"Personální směrnice\")",
+        "url_contains": "/settings/folders/"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "V záložce Schválení zapnete povinné schvalování dokumentů, které nahrají sami zaměstnanci. Schvaluje administrátor nebo správce dokumentů.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=item-1]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] nb-toggle",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-card:has-text(\"Chcete využít\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-toggle",
+        "url_contains": "/settings/approvals"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "V Oznámení nastavíte, jak často Sloneek připomíná nepřečtené a nepodepsané dokumenty a kdy upozorní na blížící se expiraci.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=item-2]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=repeatConfirmationNotificationSelect]",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=signatureNotificationInDaysSelect]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=expirationNotificationInDaysSelect]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=expirationNotificationInDaysSelect]",
+        "url_contains": "/settings/notifications"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Zpátky v Dokumentech kliknu na Přidat nový dokument. Dokument můžete vytvořit ze šablony, nebo nahrát vlastní soubor.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_documents_v2",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=addDocumentButton]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=addDocumentButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=uploadDocumentChoice]",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=createDocumentFromTemplateChoice]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=uploadDocumentChoice]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=bulkDocumentUploadChoice]",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=uploadCompanyWideDocumentChoice]",
+        "url_contains": "/add-document"
+      },
+      "part": 4,
+      "part_title": "Dokument pro více lidí",
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s11",
+      "narration": "Nahrát jde pro celou společnost, pro jednoho uživatele, nebo hromadně pro víc lidí. Směrnici nahraju pro celou společnost.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=uploadSingleUserDocumentChoice]",
+          "before_ms": 600
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=bulkDocumentUploadChoice]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=uploadCompanyWideDocumentChoice]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=documentNameInput]",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=wholeCompanyButton]",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Napíšu název Směrnice o home office a vyberu složku Personální směrnice.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-container [data-cy=documentNameInput]",
+          "value": "Směrnice o home office",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=documentsFolderAutocomplete] input",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "Personální",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Personální směrnice\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=documentsFolderAutocomplete] [data-cy=autocompleteClearButton]",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "Nahraju soubor, tedy PDF nebo obrázek. Přepínač Soukromý e-mail by poslal hotový dokument i na soukromou adresu, nechám ho vypnutý.",
+      "actions": [
+        {
+          "type": "upload",
+          "selector": ".cdk-overlay-container [data-cy=documentFileUpload] label.upload",
+          "value": "assets/demo/Směrnice o home office.pdf",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=documentFileUpload]:has-text(\"Směrnice o home office.pdf\")",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=isPrivateToggle]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=documentFileUpload]:has-text(\"Směrnice o home office.pdf\")",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "V poli Vlastník dokumentu určíte, komu dokument půjde: celé společnosti, vybraným týmům, nebo jednotlivým uživatelům.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=wholeCompanyButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=selectedTeamsButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=selectedUsersButton]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=selectedUsersButton]",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Pro ukázku zvolím Vybraní uživatelé a v seznamu označím Tomáše Nováka.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=selectedUsersButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=usersAutocomplete] input",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=usersAutocomplete] input",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "Tomáš",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Novák Tomáš\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container nb-card-header",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=usersAutocomplete] [data-cy=autocompleteClearButton]",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "Pod Rozbalit jsou další volby, třeba datum expirace a označení verze. Do verze napíšu 1.0.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=expandCollapseButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=uploadDesignation]",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=expirationDateInput]",
+          "before_ms": 300
+        },
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-container [data-cy=uploadDesignation]",
+          "value": "1.0",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=readConfirmationButton]",
+        "url_contains": "/add-document"
+      },
+      "narration_tts": "Pod Rozbalit jsou další volby, třeba datum expirace a označení verze. Do verze napíšu jedna nula."
+    },
+    {
+      "id": "s17",
+      "narration": "Typ potvrzení může být Nevyžaduje, Potvrzení přečtením, nebo Žádost o podpis. U směrnice stačí potvrzení přečtením.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=noConfirmationButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=signatureConfirmationButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=readConfirmationButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=confirmationInDays]",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=confirmationInDays]",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Zaškrtnu termín a nastavím čtrnáct dní. Pod tím můžete termín nastavit i novým kolegům, počítá se od jejich prvního přihlášení.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=confirmationInDays] [data-cy=confirmationDaysCheckbox] label",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-container [data-cy=confirmationInDays] [data-cy=confirmationDaysInput]",
+          "value": "14",
+          "clear": true,
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=confirmationForNewUsersInDays]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=confirmationForNewUsersInDays]",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "Nakonec přidám doprovodnou zprávu a kliknu na Potvrdit. Příjemci dostanou upozornění e-mailem a dokument najdou v aplikaci.",
+      "actions": [
+        {
+          "type": "fill",
+          "selector": ".cdk-overlay-container [data-cy=accompanyingMessageCkeditor] .ql-editor",
+          "value": "Prosím, přečtěte si novou směrnici o práci z domova a potvrďte ji.",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=submitButton]",
+          "before_ms": 700
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Směrnice o home office\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Směrnice o home office\")",
+        "url_contains": "/app/documents-v2/company"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Dokument je první v seznamu. Ve sloupci Status vidíte, kolik lidí ho potvrdilo, zatím nula z jednoho.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Směrnice o home office\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Směrnice o home office\") >> td.cdk-column-companyStatus",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Směrnice o home office\") >> td.cdk-column-companyStatus:has-text(\"0 / 1\")",
+        "url_contains": "/app/documents-v2/company"
+      },
+      "part": 5,
+      "part_title": "Kdo už přečetl"
+    },
+    {
+      "id": "s21",
+      "narration": "Kliknutím na název otevřu detail. Vlevo je náhled, vpravo upravíte název, složku, expiraci nebo verzi.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Směrnice o home office\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=documentPreview]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=documentPreview]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=editDocumentButton]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=detailHeader]:has-text(\"Směrnice o home office\")",
+        "url_contains": "/company/detail/"
+      },
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s22",
+      "narration": "V záložce Potvrzení vidíte stav u každého příjemce. Tlačítkem Připomenout pošlete upomínku, po přečtení si tu stáhnete potvrzení.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container nb-tabset li.tab a.tab-link:text-is(\"Potvrzení\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=confirmationsGrid] tr[data-cy=tableRow]:has-text(\"Novák Tomáš\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=confirmationsGrid] tr[data-cy=tableRow]:has-text(\"Novák Tomáš\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=remindConfirmationButton]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=confirmationsGrid] tr[data-cy=tableRow]:has-text(\"Čeká na přečtení\")",
+        "url_contains": "/company/detail/"
+      },
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s23",
+      "narration": "Smlouvy a dodatky posílám jednomu člověku. Detail zavřu a zvolím Nahrajte dokument pro jednoho uživatele.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=detailHeader] [data-cy=closeButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=addDocumentButton]",
+          "value": "10000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=addDocumentButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=uploadDocumentChoice]",
+          "value": "8000"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=uploadDocumentChoice]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=uploadSingleUserDocumentChoice]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=uploadSingleUserDocumentChoice]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [formcontrolname=owner_uuid] input",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [formcontrolname=owner_uuid] input",
+        "url_contains": "/add-document"
+      },
+      "part": 6,
+      "part_title": "Dokument k podpisu"
+    },
+    {
+      "id": "s24",
+      "narration": "Napíšu název, jako vlastníka dokumentu vyberu Tomáše a nahraju soubor s dohodou.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-container [data-cy=documentNameInput]",
+          "value": "Dohoda o práci z domova",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [formcontrolname=owner_uuid] input",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "Tomáš",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Novák Tomáš\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "upload",
+          "selector": ".cdk-overlay-container [data-cy=documentFileUpload] label.upload",
+          "value": "assets/demo/Dohoda o práci z domova.pdf",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=documentFileUpload]:has-text(\"Dohoda o práci z domova.pdf\")",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=documentFileUpload]:has-text(\"Dohoda o práci z domova.pdf\")",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "Rozbalím nastavení a zvolím Žádost o podpis. Termín deadline nastavím na dva týdny dopředu.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=expandCollapseButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=signatureConfirmationButton]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=signatureConfirmationButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=deadlineDateInput]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=deadlineDateInput]",
+          "before_ms": 500
+        },
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-container [data-cy=deadlineDateInput]",
+          "value": "{{DATE:+14d:D. M. YYYY}}",
+          "clear": true,
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": "nb-calendar nb-calendar-day-cell.selected",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=addExternalUserButton]",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "Další podepisující, třeba jednatele, přidáte z kolegů. Externí osobě pošlete dokument přes Přidat externího uživatele.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [formcontrolname=signature_users_uuids]",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=addExternalUserButton]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=addExternalUserButton]",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "Kliknu na Potvrdit. Ve sloupci Status teď vidíte stav podepsání, zatím nula z jednoho.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=submitButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Dohoda o práci z domova\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Dohoda o práci z domova\") >> td.cdk-column-companyStatus",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Dohoda o práci z domova\") >> td.cdk-column-companyStatus:has-text(\"0 / 1\")",
+        "url_contains": "/app/documents-v2/company"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "Opakované smlouvy psát znovu nemusíte. V Šablonách připravíte text s proměnnými, které se doplní z karty zaměstnance.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=templatesButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=addNewTemplateButton]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=addNewTemplateButton]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=sidebarTabset]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=sidebarTabset]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=orderOfSignatureButton]",
+        "url_contains": "/documents-v2/template/new"
+      },
+      "part": 7,
+      "part_title": "Šablony",
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s29",
+      "narration": "Třeba jméno, pozici nebo datum nástupu. Tlačítkem Pořadí podpisů určíte, kdo podepisuje jako první.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=userVariableSection-work_data]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=orderOfSignatureButton]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=userVariableButton-position]",
+        "url_contains": "/documents-v2/template/new"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "Zaměstnanec vidí své dokumenty v sekci Moje dokumenty. Ve sloupci Status klikne na Podepsat, nebo dokument potvrdí jako přečtený.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_documents_v2",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] slnk-document-title-cell",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Podepsat\") >> nth=0",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Podepsat\")",
+        "url_contains": "/app/documents-v2/my"
+      },
+      "part": 8,
+      "part_title": "Pohled zaměstnance",
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s31",
+      "narration": "Co komu přišlo, uvidíte i v kartě zaměstnance v záložce Dokumenty. Tomáš tu má oba nové dokumenty.",
+      "actions": [
+        {
+          "type": "navigate",
+          "value": "https://app-pre-production.sloneek.com/app/company-details/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/documents-v2",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Dohoda o práci z domova\")",
+          "value": "20000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] a[href*=\"/documents-v2\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Dohoda o práci z domova\")",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Směrnice o home office\")",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Směrnice o home office\")",
+        "url_contains": "/member/a8c8fa35-ed76-4867-8f26-0b3d41b768ac/documents-v2"
+      },
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s32",
+      "narration": "Kdo smí dokumenty spravovat, určíte v kartě uživatele v poli Zvláštní uživatelská práva volbou Správce dokumentů.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href$=\"/work-data\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+        "url_contains": "/work-data"
+      },
+      "part": 9,
+      "part_title": "Oprávnění a úpravy",
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s33",
+      "narration": "Pod třemi tečkami dokument stáhnete, zduplikujete, archivujete, přesunete do jiné složky, nebo smažete. Neplatný dokument raději archivujte, smazání je nevratné.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_documents_v2",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Směrnice o home office\")",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Směrnice o home office\") >> [data-cy=actionsButton]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Vymazat\"]",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-context-menu",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-context-menu a[title=\"Archivovat\"]",
+          "before_ms": 600
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-context-menu a[title=\"Vymazat\"]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "nb-context-menu a[title=\"Archivovat\"]",
+        "url_contains": "/app/documents-v2/company"
+      },
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s34",
+      "narration": "Tip na závěr: v HR Workflows může Sloneek novým kolegům poslat dokument ze šablony automaticky, třeba hned při nástupu.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows",
+          "before_ms": 600
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows",
+        "url_contains": "/app/documents-v2/company"
+      },
+      "part": 10,
+      "part_title": "Závěr"
+    },
+    {
+      "id": "s35",
+      "narration": "Teď umíte nahrát dokument, poslat ho k přečtení i k podpisu a hlídat, kdo ho potvrdil. Kdyby něco nešlo, mrkněte do Centra nápovědy.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Směrnice o home office\")",
+        "url_contains": "/app/documents-v2/company"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "Méně administrativy, víc času na lidi. To je Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Směrnice o home office\")",
+        "url_contains": "/app/documents-v2/company"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat dokument 'Dohoda o práci z domova' – jen při právě 1 řádku s přesným názvem po hledání (search_text v URL) a s názvem v dialogu; když dokument neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Dohoda%20o%20pr%C3%A1ci%20z%20domova",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Dohoda o práci z domova\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) slnk-document-title-cell .name:text-is(\"Dohoda o práci z domova\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Dohoda o práci z domova\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Vymazat\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Vymazat\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-document-dialog:has-text(\"Smazat dokument\"):has-text(\"Dohoda o práci z domova\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-document-dialog:has-text(\"Smazat dokument\"):has-text(\"Dohoda o práci z domova\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat dokument 'Směrnice o home office' – jen při právě 1 řádku s přesným názvem po hledání (search_text v URL) a s názvem v dialogu; když dokument neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Sm%C4%9Brnice%20o%20home%20office",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Směrnice o home office\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) slnk-document-title-cell .name:text-is(\"Směrnice o home office\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Směrnice o home office\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Vymazat\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Vymazat\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-document-dialog:has-text(\"Smazat dokument\"):has-text(\"Směrnice o home office\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-document-dialog:has-text(\"Smazat dokument\"):has-text(\"Směrnice o home office\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat složku 'Personální směrnice' – jen vybraná karta s přesným názvem (tlačítko koše má jen vybraná karta); dialog „Smazat složku“ název neobsahuje; smazat jde jen prázdnou složku",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company/settings/folders/all-documents",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=addFolderButton]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card .folder-name:text-is(\"Personální směrnice\")",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card .folder-name:text-is(\"Personální směrnice\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=nameInput]",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"Personální směrnice\") >> [data-cy=deleteFolderButton]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"Personální směrnice\") >> [data-cy=deleteFolderButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-folder-dialog:has-text(\"Smazat složku\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-folder-dialog:has-text(\"Smazat složku\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-12",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "user": "Tomáš Novák <tomas.novak@example.com> (a8c8fa35-ed76-4867-8f26-0b3d41b768ac), NEAKTIVNÍ – trvalý (z add-users)",
+      "files": "assets/demo/Směrnice o home office.pdf, assets/demo/Dohoda o práci z domova.pdf – generuje out/documents/_work/make_demo_pdfs.py",
+      "created_by_recipe": "složka 'Personální směrnice', dokument 'Směrnice o home office' (Vybraní uživatelé: Tomáš, Potvrzení přečtením do 14 dní, verze 1.0), dokument 'Dohoda o práci z domova' (Tomáš, Žádost o podpis, deadline +14 dní) – vše maže cleanup"
+    },
+    "notes": "viz atlas/documents.md (sekce 5 a 8)"
+  }
+}

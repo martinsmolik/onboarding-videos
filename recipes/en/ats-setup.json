@@ -1,0 +1,1400 @@
+{
+  "id": "ats-setup",
+  "version": 1,
+  "title": "Customize the ATS module",
+  "lang": "en",
+  "app_version": "preprod-2026-10-12",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "en"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "7jQ3jNk3Fcw65sWUmzun",
+    "model_id": "eleven_v4"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s13",
+    "title": "ATS settings"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Want your recruitment set up exactly the way it really works at your company? Hi, I'm Maria from the Sloneek team, and I'll show you how to customize the ATS module.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate p-card",
+          "value": "20000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-dashboard-v2-on-your-plate p-card",
+        "url_contains": "/app/dashboard-v2"
+      },
+      "part": 1,
+      "part_title": "Introduction",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "In the left menu, in the Company section, I click ATS.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_ats",
+          "before_ms": 800
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_ats",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table",
+          "value": "20000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-ats-navigation-header p-tablist",
+        "url_contains": "/app/ats-v2/job-offers"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "Overview and administration opens, with the Jobs, All candidates and Talent pool tabs.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-ats-navigation-header p-tablist",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-ats-navigation-header p-tablist",
+        "url_contains": "/app/ats-v2/job-offers"
+      }
+    },
+    {
+      "id": "s04",
+      "narration": "Opening positions and working with candidates are covered in two other videos, and here we'll look at the settings that apply to all positions.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] p-button:text-is(\"New job position\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table",
+        "url_contains": "/app/ats-v2/job-offers"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "The Job portal button opens your public career page, where applicants find your open positions.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-ats-navigation-header p-button:text-is(\"Job portal\")",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-ats-navigation-header p-button:text-is(\"Job portal\")",
+        "url_contains": "/app/ats-v2/job-offers"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "At the top right I click the Settings button.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-ats-navigation-header p-button:text-is(\"Settings\")",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-ats-navigation-header p-button:text-is(\"Settings\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-portal-url input >> nth=0",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu",
+        "url_contains": "/app/ats-v2/settings/portal-url"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "On the left is a menu with every settings area, from the portal address all the way to the thank you message.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu",
+        "url_contains": "/app/ats-v2/settings/portal-url"
+      },
+      "part": 2,
+      "part_title": "Career page"
+    },
+    {
+      "id": "s08",
+      "narration": "In Portal URL, in the Domain field, you choose what the link to your career page will look like.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-portal-url input >> nth=0",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-portal-url a[href*=\"/ats-v2/\"]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-portal-url input >> nth=0",
+        "url_contains": "/app/ats-v2/settings/portal-url"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "In the GTM id field you paste the code from Google Tag Manager to measure traffic on the page.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-portal-url input[placeholder=\"GTM-XXXXX\"]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-portal-url input[placeholder=\"GTM-XXXXX\"]",
+        "url_contains": "/app/ats-v2/settings/portal-url"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "I click Embed code, where you'll find the code for embedding the career page directly on your company website.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu [data-cy=item-1]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu [data-cy=item-1]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-embed-code nb-alert >> nth=0",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-embed-code nb-alert >> nth=0",
+        "url_contains": "/app/ats-v2/settings/embed-code"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "You choose the language and look of the page, and hand the code to your web admin with the Copy button.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-embed-code nb-select",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-embed-code nb-alert >> nth=0",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-embed-code #company_ats_settings_embed_code_copy_light_mode",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-embed-code #company_ats_settings_embed_code_copy_light_mode",
+        "url_contains": "/app/ats-v2/settings/embed-code"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Now I click Recruitment stages, which every candidate goes through.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu [data-cy=item-2]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu [data-cy=item-2]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=0 >> #company_ats_settings_recruitment_stage_add_new_stage",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=0 >> #company_ats_settings_recruitment_stage_add_new_stage",
+        "url_contains": "/app/ats-v2/settings/recruitment-stages"
+      },
+      "part": 3,
+      "part_title": "Recruitment stages"
+    },
+    {
+      "id": "s13",
+      "narration": "Stages are in three groups: Candidate in hiring, Candidate hired and Candidate not hired.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=0 >> nb-card-header",
+          "before_ms": 500
+        },
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=1 >> nb-card-header",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=1 >> nb-card-header",
+          "before_ms": 300
+        },
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=2 >> nb-card-header",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=2 >> nb-card-header",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=2 >> nb-card-header",
+        "url_contains": "/app/ats-v2/settings/recruitment-stages"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "Stages in the Candidate not hired group serve as rejection reasons, for example an unsuitable candidate or a candidate who turned down the offer.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=2",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=2",
+        "url_contains": "/app/ats-v2/settings/recruitment-stages"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "At the top you change the group's color with the brush, and you reorder stages by dragging the handle on the left.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=0 >> nb-card-header",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=0 >> #company_ats_settings_recruitment_stages_brush",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .cdk-drag-handle >> nth=0",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=0 >> #company_ats_settings_recruitment_stages_brush",
+        "url_contains": "/app/ats-v2/settings/recruitment-stages"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "I add a new stage with the Add new stage button in the Candidate in hiring group.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=0 >> #company_ats_settings_recruitment_stage_add_new_stage",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=0 >> #company_ats_settings_recruitment_stage_add_new_stage",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-sloneek-ats-v2-settings-new-or-edit-stage-dialog input",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": "#company_ats_settings_recruitment_stage_add_new_stage_save",
+        "url_contains": "/app/ats-v2/settings/recruitment-stages"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "In Name I type Phone screening – demo and click Save.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "slnk-sloneek-ats-v2-settings-new-or-edit-stage-dialog input",
+          "value": "Phone screening – demo",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "#company_ats_settings_recruitment_stage_add_new_stage_save",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Phone screening – demo\")",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Phone screening – demo\")",
+        "url_contains": "/app/ats-v2/settings/recruitment-stages"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "The new stage has been added at the end of the group and will be offered whenever you create a new job position.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Phone screening – demo\")",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Phone screening – demo\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Phone screening – demo\")",
+        "url_contains": "/app/ats-v2/settings/recruitment-stages"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "I click the three dots next to it, where you can rename the stage, delete it or set an automatic email for it.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Phone screening – demo\") >> p-button button",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Phone screening – demo\") >> p-button button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-menu-overlay li[aria-label=\"Set automatic email\"] a",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".p-menu-overlay",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": ".p-menu-overlay li[aria-label=\"Set automatic email\"] a",
+        "url_contains": "/app/ats-v2/settings/recruitment-stages"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "In the menu I click Set automatic email.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": ".p-menu-overlay li[aria-label=\"Set automatic email\"] a",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay li[aria-label=\"Set automatic email\"] a",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-ats-automatic-emails-dialog .p-dialog slnk-common-editor[formcontrolname=subject] [contenteditable=true]",
+          "value": "8000"
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-ats-automatic-emails-dialog .p-dialog slnk-common-editor[formcontrolname=subject] [contenteditable=true]",
+        "url_contains": "/app/ats-v2/settings/recruitment-stages"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "An active email would go to every candidate who moves to this stage, so I'll leave it inactive.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "slnk-ats-automatic-emails-dialog .p-dialog p:has-text(\"When active\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "slnk-ats-automatic-emails-dialog .p-dialog p-selectbutton >> nth=1",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "slnk-ats-automatic-emails-dialog .p-dialog p-selectbutton >> nth=1",
+        "url_contains": "/app/ats-v2/settings/recruitment-stages"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "In Subject I type Invitation to a short phone call.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "slnk-ats-automatic-emails-dialog .p-dialog slnk-common-editor[formcontrolname=subject] [contenteditable=true]",
+          "value": "Invitation to a short phone call",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "slnk-ats-automatic-emails-dialog .p-dialog slnk-common-editor[formcontrolname=message] [contenteditable=true]",
+        "url_contains": "/app/ats-v2/settings/recruitment-stages"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "In Message I type Hello, and on the right under Variables I click Candidate name.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "slnk-ats-automatic-emails-dialog .p-dialog slnk-common-editor[formcontrolname=message] [contenteditable=true]",
+          "value": "Hello, ",
+          "before_ms": 400
+        },
+        {
+          "type": "hover",
+          "selector": "slnk-ats-automatic-emails-dialog .p-dialog li[aria-label=\"Candidate name\"] a",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "slnk-ats-automatic-emails-dialog .p-dialog li[aria-label=\"Candidate name\"] a",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-ats-automatic-emails-dialog .p-dialog p-togglebutton:text-is(\"Preview\")",
+        "url_contains": "/app/ats-v2/settings/recruitment-stages"
+      }
+    },
+    {
+      "id": "s24",
+      "narration": "I click Preview, and a sample candidate name appears in the text instead of the variable.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "slnk-ats-automatic-emails-dialog .p-dialog p-togglebutton:text-is(\"Preview\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-ats-automatic-emails-dialog .p-dialog p-togglebutton.p-togglebutton-checked:text-is(\"Preview\")",
+          "value": "5000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "slnk-ats-automatic-emails-dialog .p-dialog p-togglebutton.p-togglebutton-checked:text-is(\"Preview\")",
+        "url_contains": "/app/ats-v2/settings/recruitment-stages"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "I won't save the template now, so I click Cancel.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "slnk-ats-automatic-emails-dialog .p-dialog p-button:text-is(\"Cancel\")",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "slnk-ats-automatic-emails-dialog .p-dialog p-button:text-is(\"Cancel\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Phone screening – demo\")",
+        "url_contains": "/app/ats-v2/settings/recruitment-stages"
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "I click Company details, where you write the text shown below the description of every position.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu [data-cy=item-3]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu [data-cy=item-3]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-company-detail slnk-common-editor",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-company-detail slnk-common-editor",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-company-detail slnk-common-editor",
+        "url_contains": "/app/ats-v2/settings/company-detail"
+      },
+      "part": 4,
+      "part_title": "Company profile and GDPR"
+    },
+    {
+      "id": "s27",
+      "narration": "I click GDPR consents, where you'll find the consent text that applicants must confirm on the career page.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu [data-cy=item-4]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu [data-cy=item-4]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-gdpr-consent-v2 slnk-common-editor >> nth=0",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-gdpr-consent-v2 slnk-common-editor >> nth=0",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-gdpr-consent-v2 slnk-common-editor >> nth=0",
+        "url_contains": "/app/ats-v2/settings/gdpr-consent"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "By ticking Talent pool consent, you ask applicants to let their details stay in the talent pool for future hiring too.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-gdpr-consent-v2 nb-checkbox:has-text(\"Talent pool consent\")",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-gdpr-consent-v2 nb-checkbox:has-text(\"Talent pool consent\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-gdpr-consent-v2 nb-checkbox:has-text(\"Talent pool consent\")",
+        "url_contains": "/app/ats-v2/settings/gdpr-consent"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "Below that you set how long the consent is valid and whether a notification should be sent fourteen or thirty days before it expires.",
+      "actions": [
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-gdpr-consent-v2 nb-checkbox:has-text(\"30 days\")",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-gdpr-consent-v2 nb-select",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-gdpr-consent-v2 nb-checkbox:has-text(\"14 days\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-gdpr-consent-v2 nb-checkbox:has-text(\"30 days\")",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-gdpr-consent-v2 nb-checkbox:has-text(\"30 days\")",
+        "url_contains": "/app/ats-v2/settings/gdpr-consent"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "I click Company photos, where you upload photos from the office or team events for your job ads.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu [data-cy=item-5]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu [data-cy=item-5]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-company-photos slnk-common-images-upload",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-company-photos slnk-common-images-upload",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-company-photos slnk-common-images-upload",
+        "url_contains": "/app/ats-v2/settings/company-photos"
+      }
+    },
+    {
+      "id": "s31",
+      "narration": "I click Talent pool categories, which you use to sort people in your talent pool.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu [data-cy=item-6]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu [data-cy=item-6]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-talent-pool-categories nb-card-body",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-talent-pool-categories nb-card-body",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-talent-pool-categories nb-card-body",
+        "url_contains": "/app/ats-v2/settings/talent-pool-categories"
+      },
+      "part": 5,
+      "part_title": "Candidates"
+    },
+    {
+      "id": "s32",
+      "narration": "I click Candidate sources, the labels that tell you where candidates came from, for example LinkedIn or Startupjobs.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu [data-cy=item-7]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu [data-cy=item-7]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-LinkedIn\"]",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-LinkedIn\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-Startupjobs\"]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-LinkedIn\"]",
+        "url_contains": "/app/ats-v2/settings/candidate-sources"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "I click Add and type Job fair – demo as the name.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "#company_ats_settings_candidate_sources_add",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "#company_ats_settings_candidate_sources_add",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-sloneek-ats-v2-settings-source-dialog input[placeholder=\"New tag\"]",
+          "value": "8000"
+        },
+        {
+          "type": "type",
+          "selector": "slnk-sloneek-ats-v2-settings-source-dialog input[placeholder=\"New tag\"]",
+          "value": "Job fair – demo",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "#company_ats_settings_candidate_sources_add_save",
+        "url_contains": "/app/ats-v2/settings/candidate-sources"
+      }
+    },
+    {
+      "id": "s34",
+      "narration": "I click Save, and you can then assign the new label to candidates who came from the job fair.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "#company_ats_settings_candidate_sources_add_save",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-Job fair – demo\"]",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-Job fair – demo\"]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-Job fair – demo\"]",
+        "url_contains": "/app/ats-v2/settings/candidate-sources"
+      }
+    },
+    {
+      "id": "s35",
+      "narration": "I click AI matching, where you can turn on highlighting of the applicants who best match the position.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu [data-cy=item-8]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu [data-cy=item-8]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-matching nb-checkbox",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-matching nb-checkbox",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-matching nb-checkbox",
+        "url_contains": "/app/ats-v2/settings/candidate-matching"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "Finally I click Thank you message, which every applicant receives right after sending their application.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu [data-cy=item-9]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-vertical-nav-menu [data-cy=item-9]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-thank-you-message slnk-common-editor",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-thank-you-message slnk-common-editor",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-thank-you-message slnk-common-editor",
+        "url_contains": "/app/ats-v2/settings/thank-you-message"
+      }
+    },
+    {
+      "id": "s37",
+      "narration": "I click Back, and I'm in the job overview again.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card-page-header button:has(.fa-arrow-left)",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-common-card-page-header button:has(.fa-arrow-left)",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table",
+        "url_contains": "/app/ats-v2/job-offers"
+      },
+      "part": 6,
+      "part_title": "Summary"
+    },
+    {
+      "id": "s38",
+      "narration": "Now your career page, recruitment stages, consents and candidate sources are ready, and if something doesn't work, check the Help Center.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table",
+        "url_contains": "/app/ats-v2/job-offers"
+      }
+    },
+    {
+      "id": "s39",
+      "narration": "Less admin, more time for people. This is Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-job-offer-list table",
+        "url_contains": "/app/ats-v2/job-offers"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat CS fázi náboru 'Telefonický screening – ukázka' – jen řádek s tímto názvem (menu … → Delete), potvrzovací dialog 'Are you sure you want to delete the recruitment stage?' (název neuvádí); když fáze neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/ats-v2/settings/recruitment-stages",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=0 >> #company_ats_settings_recruitment_stage_add_new_stage",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=0 >> #company_ats_settings_recruitment_stage_add_new_stage",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Telefonický screening – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Telefonický screening – ukázka\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Telefonický screening – ukázka\") >> p-button button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-menu-overlay li[aria-label=\"Delete\"] a",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay li[aria-label=\"Delete\"] a",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete the recruitment stage?\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete the recruitment stage?\") >> [id=\"ats_settings_recruitment_stages.delete\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    },
+    {
+      "name": "smazat CS zdroj kandidátů 'Veletrh práce – ukázka' – jen štítek s data-cy přesně 'tag-Veletrh práce – ukázka' (křížek), dialog 'Are you sure you want to delete source?' (název neuvádí); když štítek neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/ats-v2/settings/candidate-sources",
+      "if_visible": "#company_ats_settings_candidate_sources_add",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "#company_ats_settings_candidate_sources_add",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-Veletrh práce – ukázka\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-Veletrh práce – ukázka\"] >> slnk-common-icon",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete source?\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete source?\") >> #common_confirmation_yes",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    },
+    {
+      "name": "smazat PL fázi náboru 'Rozmowa telefoniczna – przykład' – jen řádek s tímto názvem (menu … → Delete), potvrzovací dialog 'Are you sure you want to delete the recruitment stage?' (název neuvádí); když fáze neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/ats-v2/settings/recruitment-stages",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=0 >> #company_ats_settings_recruitment_stage_add_new_stage",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=0 >> #company_ats_settings_recruitment_stage_add_new_stage",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Rozmowa telefoniczna – przykład\")",
+          "value": "5000"
+        },
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Rozmowa telefoniczna – przykład\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Rozmowa telefoniczna – przykład\") >> p-button button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-menu-overlay li[aria-label=\"Delete\"] a",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay li[aria-label=\"Delete\"] a",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete the recruitment stage?\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete the recruitment stage?\") >> [id=\"ats_settings_recruitment_stages.delete\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    },
+    {
+      "name": "smazat PL zdroj kandidátů 'Targi pracy – przykład' – jen štítek s data-cy přesně 'tag-Targi pracy – przykład' (křížek), dialog 'Are you sure you want to delete source?' (název neuvádí); když štítek neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/ats-v2/settings/candidate-sources",
+      "if_visible": "#company_ats_settings_candidate_sources_add",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "#company_ats_settings_candidate_sources_add",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-Targi pracy – przykład\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-Targi pracy – przykład\"] >> slnk-common-icon",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete source?\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete source?\") >> #common_confirmation_yes",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    },
+    {
+      "name": "smazat EN fázi náboru 'Phone screening – demo' – jen řádek s tímto názvem (menu … → Delete), potvrzovací dialog 'Are you sure you want to delete the recruitment stage?' (název neuvádí); když fáze neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/ats-v2/settings/recruitment-stages",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=0 >> #company_ats_settings_recruitment_stage_add_new_stage",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=0 >> #company_ats_settings_recruitment_stage_add_new_stage",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Phone screening – demo\")",
+          "value": "5000"
+        },
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Phone screening – demo\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Phone screening – demo\") >> p-button button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-menu-overlay li[aria-label=\"Delete\"] a",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay li[aria-label=\"Delete\"] a",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete the recruitment stage?\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete the recruitment stage?\") >> [id=\"ats_settings_recruitment_stages.delete\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    },
+    {
+      "name": "smazat EN zdroj kandidátů 'Job fair – demo' – jen štítek s data-cy přesně 'tag-Job fair – demo' (křížek), dialog 'Are you sure you want to delete source?' (název neuvádí); když štítek neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/ats-v2/settings/candidate-sources",
+      "if_visible": "#company_ats_settings_candidate_sources_add",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "#company_ats_settings_candidate_sources_add",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-Job fair – demo\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-Job fair – demo\"] >> slnk-common-icon",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete source?\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete source?\") >> #common_confirmation_yes",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "teardown": [
+    {
+      "name": "smazat EN fázi náboru 'Phone screening – demo' – jen řádek s tímto názvem (menu … → Delete), potvrzovací dialog 'Are you sure you want to delete the recruitment stage?' (název neuvádí); když fáze neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/ats-v2/settings/recruitment-stages",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=0 >> #company_ats_settings_recruitment_stage_add_new_stage",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=0 >> #company_ats_settings_recruitment_stage_add_new_stage",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Phone screening – demo\")",
+          "value": "5000"
+        },
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Phone screening – demo\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Phone screening – demo\") >> p-button button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-menu-overlay li[aria-label=\"Delete\"] a",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay li[aria-label=\"Delete\"] a",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete the recruitment stage?\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete the recruitment stage?\") >> [id=\"ats_settings_recruitment_stages.delete\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    },
+    {
+      "name": "smazat EN zdroj kandidátů 'Job fair – demo' – jen štítek s data-cy přesně 'tag-Job fair – demo' (křížek), dialog 'Are you sure you want to delete source?' (název neuvádí); když štítek neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/ats-v2/settings/candidate-sources",
+      "if_visible": "#company_ats_settings_candidate_sources_add",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "#company_ats_settings_candidate_sources_add",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-Job fair – demo\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-Job fair – demo\"] >> slnk-common-icon",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete source?\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete source?\") >> #common_confirmation_yes",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-12",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "created_by_recipe": "fáze náboru 'Telefonický screening – ukázka' (skupina Kandidát v náboru, automatický e-mail neaktivní, šablona nikdy neuložena) a zdroj kandidátů 'Veletrh práce – ukázka' – maže cleanup (před) i teardown (po)",
+      "read_only": "Adresa URL portálu, Embed code, Podrobnosti o společnosti, GDPR souhlasy, Firemní fotografie, Kategorie talentů, AI výběr kandidátů, Děkovná zpráva – jen zvýrazněno, nic neuloženo",
+      "never_clicked": "Inzertní portál (veřejná stránka), Kopírovat, Uložit na stránkách nastavení, Aktivní u automatického e-mailu, Uložit v dialogu e-mailu, AI checkbox, křížky u cizích štítků, Nová pracovní pozice"
+    },
+    "notes": "viz atlas/ats-setup.md (sekce 5 a 8)"
+  },
+  "_localized": {
+    "from": "recipes/cs/ats-setup.json",
+    "i18n": "i18n/ats-setup.en.json",
+    "at": "2026-10-12T19:41:19.504Z",
+    "verified": {
+      "date": "2026-10-12",
+      "by": "Claude (BrowserOS, preprod, local-translate=en, in-page runner out/ats-setup-en/_work/dryrun-runner.js; recept z out/ats-setup-en/_work/dryrun-R.json + dryrun-T.json)",
+      "selectors": "Dry-run 39/39; cleanup před přeskočen – nic nebylo; teardown 2/2: smazal EN fázi (10 → 11 → 10, menu „Delete“, „Automatic email not active“) a EN zdroj (7 → 8 → 7).",
+      "notes": "Živé EN popisky: Overview and administration (Jobs / All candidates / Talent pool), Job portal, Settings, New job position; Portal URL, Embed code, Recruitment stages, Company details, GDPR consents, Company photos, Talent pool categories, Candidate sources, AI matching, Thank you message; Domain, GTM id, Copy; Candidate in hiring / hired / not hired, Add new stage; stage menu Rename / Set automatic email / Delete; Talent pool consent; Back.",
+      "rehearsal": "Zkouška skutečným recorderem (job 143-rehearse-ats-setup-en, mock hlas): 39/39 ok, cleanup FAILED (ignored) jen tam, kde nic nebylo, teardown 2/2 done; tenant po všech zkouškách čistý (užitečné odkazy 1, fáze náboru 10, zdroje kandidátů 7 – stejně jako na začátku)."
+    }
+  }
+}

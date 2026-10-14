@@ -1,0 +1,143 @@
+{
+  "_comment": "Verze EN převzetím CZ receptu (clockins-vs-tracking). Narace strojová, ke kontrole rodilým mluvčím.",
+  "title": "Clock-ins vs. time tracking and activities",
+  "thumbnail_title": "Attendance vs. time tracking",
+  "parts": {
+    "Úvod": "Introduction",
+    "Příchody a odchody": "Clock-ins and clock-outs",
+    "Timetracking a aktivity": "Time tracking and activities",
+    "Jak spolu souvisí": "How they relate",
+    "Kde je zapnete": "Where to switch them on",
+    "Reporty": "Reports",
+    "Co zapnout": "What to switch on"
+  },
+  "text": {
+    "Spustit": "Start",
+    "Docházka (nový modul)": "Attendance (new module)",
+    "Time tracking a aktivity": "Time tracking and activities",
+    "Projekty a klienti": "Projects and clients",
+    "Aktivity a time tracking": "Activities & time tracking",
+    "Jméno Filter Input": "Name Filter Input"
+  },
+  "keep": [
+    "Homeoffice"
+  ],
+  "steps": {
+    "s01": {
+      "narration": "Want to know when people are at work, or rather what they're working on? Hi, I'm Marie from the Sloneek team, and I'll show you the difference between attendance and time tracking."
+    },
+    "s02": {
+      "narration": "Clock-ins and clock-outs, in other words attendance, tell you when and for how long you're at work, and you can record them with this button on the Dashboard."
+    },
+    "s03": {
+      "narration": "Time tracking and activities tell you what you worked on, for which client and on which project, and you can measure the time with the stopwatch right here in the header."
+    },
+    "s04": {
+      "narration": "So attendance serves mainly payroll and overtime, while activities serve client invoicing and project costs, and you can use both at the same time."
+    },
+    "s05": {
+      "narration": "I'll start with attendance, so in the left menu I click Attendance."
+    },
+    "s06": {
+      "narration": "In the My view, every day has its own timeline showing clock-ins, clock-outs, breaks and absences."
+    },
+    "s07": {
+      "narration": "On the right, Sloneek compares the time worked with your target based on your contract, and shows the balance, meaning overtime or missing hours."
+    },
+    "s08": {
+      "narration": "You clock in with the Clock in button, and the Clock-ins and clock-outs video covers it in detail, but I won't press it now."
+    },
+    "s09": {
+      "narration": "And whether people record their clock-ins at all, or Sloneek calculates their time from their contract, is explained in the video about negative versus active attendance."
+    },
+    "s10": {
+      "narration": "Now time tracking, so in the left menu I click My activities."
+    },
+    "s11": {
+      "narration": "With the left arrow I go to last month, where my recorded activities are."
+    },
+    "s12": {
+      "narration": "Each record has a date, client, project, activity and the number of approved hours, not the time of clock-in and clock-out."
+    },
+    "s13": {
+      "narration": "You record time with the button for a new activity, even retroactively, and the video about time tracking and activities covers it in detail."
+    },
+    "s14": {
+      "narration": "The stopwatch is in the header, so I click the time and the Timetracking activities window opens."
+    },
+    "s15": {
+      "narration": "You choose an activity and a client and click Start, but I won't measure anything, so I'll close the window with the cross."
+    },
+    "s16": {
+      "narration": "How the two records relate, I'll show in the attendance settings, so in the left menu I click Attendance and then the cogwheel."
+    },
+    "s17": {
+      "narration": "At the bottom, in the connection section, is the list of absences and activities that relate to attendance, such as Home office or a business trip."
+    },
+    "s18": {
+      "narration": "Time spent on such a linked activity counts toward attendance as time worked."
+    },
+    "s19": {
+      "narration": "The link is set up on the activities, so I click the link to the activity settings."
+    },
+    "s20": {
+      "narration": "In the column showing whether an activity is linked to attendance, an activity like Home office has a green dot."
+    },
+    "s21": {
+      "narration": "In the next column, the time tracking mode, you decide whether people may not, may, or must use the stopwatch for the activity."
+    },
+    "s22": {
+      "narration": "And in the columns for the hourly billing rate and the hourly cost rate are the rates Sloneek uses to calculate the price of work."
+    },
+    "s23": {
+      "narration": "The two records are switched on separately, so in the left menu I click Settings, then Visibility of modules, and I expand the panel for the whole company."
+    },
+    "s24": {
+      "narration": "Attendance is switched on by the Attendance (new module) toggle, and time tracking by the toggles Time tracking and activities and Projects and clients."
+    },
+    "s25": {
+      "narration": "In the table below the panel you can then switch them on just for selected people, but I won't change anything here now."
+    },
+    "s26": {
+      "narration": "You'll find the data for payroll and for projects in the left menu, where I click Reports."
+    },
+    "s27": {
+      "narration": "I click the tab for clock-ins and clock-outs, where, for example, the summary of time worked with the balance is, the basis for payroll."
+    },
+    "s28": {
+      "narration": "I click the Activities tab, where the activities summary adds up the hours and calculates the price of work by rates, for invoicing and project costs."
+    },
+    "s29": {
+      "narration": "I click the Other tab, and at the Daily payroll report I click Go to report."
+    },
+    "s30": {
+      "narration": "I click Generate a one-time report and the form for a new report opens."
+    },
+    "s31": {
+      "narration": "I click the field asking on what basis you pay wages, where you choose between working hours only, clock-in and clock-out, or activities and time tracking."
+    },
+    "s32": {
+      "narration": "So you can calculate payroll from attendance or from activities, and since I won't generate the report now, I'll close the form with the Escape key."
+    },
+    "s33": {
+      "narration": "Switch on attendance when you need to record working hours, overtime and data for payroll."
+    },
+    "s34": {
+      "narration": "Switch on time tracking and activities when you invoice clients, or want to know how much individual projects cost you."
+    },
+    "s35": {
+      "narration": "And when you need both, switch on active attendance for payroll and activities for projects."
+    },
+    "s36": {
+      "narration": "Now you know how attendance and time tracking differ and how they relate, and if anything doesn't work, check the Help Center."
+    },
+    "s37": {
+      "narration": "Less admin, more time for people. That's Sloneek."
+    }
+  },
+  "selectors": {
+    "slnk-dashboard-v2-attendance p-card:has(a.widget-headline-link) .p-card-content > div.d-flex.flex-column.gap-2": "slnk-dashboard-v2-attendance p-card:has(a.widget-headline-link) .p-card-content",
+    "[data-cy=mainContentCenterDiv] table.activity-table tbody tr:has-text(\"Počet hodin\")": "[data-cy=mainContentCenterDiv] table.activity-table tbody tr:has-text(\"Number of hours\")",
+    "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row:has-text(\"Homeoffice\") >> [col-id=is_connected_to_attendance]": "[data-cy=mainContentCenterDiv] .ag-center-cols-container .ag-row:has-text(\"Homeoffice\") >> [col-id=is_connected_to_attendance]"
+  }
+}

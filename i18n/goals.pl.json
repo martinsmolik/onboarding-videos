@@ -1,0 +1,251 @@
+{
+  "_comment": "Polská verze videa Cíle. UI texty z translate_fe/pl + ověření naživo (local-translate=pl). Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM.",
+  "verified": {
+    "date": "2026-10-09",
+    "by": "Claude (BrowserOS, preprod, local-translate=pl)",
+    "selectors": "s02–s28 projeto nanečisto v PL UI, všechny expect OK; cleanup ověřen (smazání CZ i PL cíle přes Opcje → Usuń, zrušení seskupení přes Jasne, návrat kontroly na Tygodniowy)"
+  },
+  "title": "Cele: ustaw cele firmy i śledź ich realizację",
+  "thumbnail_title": "Cele",
+  "parts": {
+    "Úvod": "Wprowadzenie",
+    "Nastavení": "Ustawienia",
+    "Nový cíl": "Nowy cel",
+    "Dílčí cíl a přehled": "Podcel i przegląd",
+    "Kontrola plnění": "Kontrola realizacji",
+    "Závěr": "Podsumowanie"
+  },
+  "text": {
+    "Nastavení cílů": "Ustawienia celów",
+    "Týdně": "Tygodniowy",
+    "Měsíční": "Miesięczny",
+    "Celá společnost": "Cała firma",
+    "Celý tým": "Cały zespół",
+    "Pouze administrátoři": "Tylko dla administratorów",
+    "Cíle": "Cele",
+    "Nový cíl": "Nowy cel",
+    "Nepřiřazeno": "Nieprzypisany",
+    "Vysoký": "Wysoki",
+    "Numerické": "Liczbowy",
+    "Vybrat": "Wybierz",
+    "Procento": "%",
+    "Uložit": "Zapisz",
+    "Možnosti": "Opcje",
+    "Nový dílčí cíl": "Nowy podcel",
+    "Checklist": "Checklista",
+    "Přidat nové": "Dodaj nowy",
+    "Zpět": "Wróć",
+    "Seskupit podle": "Grupuj według",
+    "Majitel": "Właściciel",
+    "Strom": "Drzewo",
+    "List": "Lista",
+    "Moje cíle": "Moje cele",
+    "Kontroly cílů": "Kontrole celów",
+    "Aktualizovat progres": "Aktualizuj postęp",
+    "Aktualizovat průběh": "Aktualizuj postęp",
+    "Podle plánu": "Zgodnie z planem",
+    "Aktualizovat": "Zaktualizuj",
+    "Zvýšit spokojenost zákazníků na 90 %": "Zwiększyć zadowolenie klientów do 90%",
+    "Zavést měsíční průzkum spokojenosti": "Wprowadzić comiesięczną ankietę satysfakcji",
+    "Připravit dotazník": "Przygotować ankietę",
+    "Rozeslat zákazníkům": "Rozesłać do klientów"
+  },
+  "selectors": {
+    ".p-menu-overlay a:text-is(\"Vymazat\")": ".p-menu-overlay a:text-is(\"Usuń\")",
+    ".p-dialog button:text-is(\"Vymazat\")": ".p-dialog button:text-is(\"Usuń\")",
+    ".p-popover button:text-is(\"Vymazat\")": ".p-popover button:text-is(\"Jasne\")"
+  },
+  "keep": [
+    "2.",
+    "Nová Kristýna"
+  ],
+  "cleanup_prepend": [
+    {
+      "name": "usunąć cel z czeskiego nagrania (1)",
+      "url": "https://app-pre-production.sloneek.com/app/goals-v2/all",
+      "if_visible": "td span.text-truncate:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "td span.text-truncate:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        },
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Opcje\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay a:text-is(\"Usuń\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog button:text-is(\"Usuń\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "4500"
+        }
+      ]
+    },
+    {
+      "name": "usunąć cel z czeskiego nagrania (2)",
+      "url": "https://app-pre-production.sloneek.com/app/goals-v2/all",
+      "if_visible": "td span.text-truncate:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "td span.text-truncate:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        },
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Opcje\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay a:text-is(\"Usuń\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog button:text-is(\"Usuń\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "4500"
+        }
+      ]
+    }
+  ],
+  "steps": {
+    "s01": {
+      "narration": "Dzień dobry, jestem Maria z zespołu Sloneek. Dziś skonfigurujemy moduł Cele, utworzymy cel firmowy z podcelem i pokażemy, jak sprawdzać jego realizację."
+    },
+    "s02": {
+      "narration": "Zaczniemy od ustawień. W lewym menu na dole klikam Ustawienia celów."
+    },
+    "s03": {
+      "narration": "Najpierw wybieram, jak często właściciele mają sprawdzać swoje cele. Przełączam na miesięcznie."
+    },
+    "s04": {
+      "narration": "Ustawienia zapisują się same. Niżej widzę, kiedy przyjdzie przypomnienie, przy kontroli miesięcznej na przykład drugiego dnia miesiąca o dziewiątej rano."
+    },
+    "s05": {
+      "narration": "Po prawej ustawiam domyślną widoczność: cele firmowe widzi cała firma, a zespołowe cały zespół."
+    },
+    "s06": {
+      "narration": "I kto może tworzyć cele. Cele firmowe zostawiam tylko administratorom."
+    },
+    "s07": {
+      "narration": "Teraz same cele. W menu otwieram Cele."
+    },
+    "s08": {
+      "narration": "Widzę wszystkie cele firmy z poziomem, postępem, statusem i terminem. Nowy tworzę przyciskiem Nowy cel."
+    },
+    "s09": {
+      "narration": "Nazywam go Zwiększyć zadowolenie klientów do dziewięćdziesięciu procent.",
+      "selectors": {
+        ".p-dialog input[placeholder=\"Titul\"]": ".p-dialog input[placeholder=\"Nazwa\"]"
+      }
+    },
+    "s10": {
+      "narration": "Poziom zostawiam firmowy, a jako właścicielkę wybieram Kristýnę Novą.",
+      "selectors": {
+        ".p-dialog input[placeholder=\"Titul\"]": ".p-dialog input[placeholder=\"Nazwa\"]"
+      }
+    },
+    "s11": {
+      "narration": "Priorytet ustawiam na wysoki."
+    },
+    "s12": {
+      "narration": "Termin ustawiam na koniec roku."
+    },
+    "s13": {
+      "narration": "W Metrykach wybieram typ liczbowy: wartość początkowa osiemdziesiąt dwa, docelowa dziewięćdziesiąt, jednostka procent."
+    },
+    "s14": {
+      "narration": "Włączam regularną kontrolę i zapisuję cel."
+    },
+    "s15": {
+      "narration": "Otwieram szczegóły celu."
+    },
+    "s16": {
+      "narration": "Duży cel dzielę na mniejsze. Klikam Nowy podcel."
+    },
+    "s17": {
+      "narration": "Nazywam go Wprowadzić comiesięczną ankietę satysfakcji. Cel nadrzędny jest już uzupełniony.",
+      "selectors": {
+        ".p-dialog input[placeholder=\"Titul\"]": ".p-dialog input[placeholder=\"Tytuł\"]"
+      }
+    },
+    "s18": {
+      "narration": "Właścicielką znów będzie Kristýna, a terminem koniec listopada."
+    },
+    "s19": {
+      "narration": "Jako metrykę wybieram Checklistę i dodaję dwa zadania: przygotować ankietę i rozesłać ją do klientów."
+    },
+    "s20": {
+      "narration": "Zapisuję, a podcel pojawia się w szczegółach celu."
+    },
+    "s21": {
+      "narration": "Z powrotem w przeglądzie mogę pogrupować cele, na przykład według właściciela."
+    },
+    "s22": {
+      "narration": "I przełączam na widok drzewa, gdzie widzę całą hierarchię, nasz cel razem z podcelem."
+    },
+    "s23": {
+      "narration": "Właściciel celu znajdzie go w menu pod Moje cele. Widzi tylko cele, które posiada, utworzył lub obserwuje."
+    },
+    "s24": {
+      "narration": "Gdy przyjdzie czas kontroli, dostanie zadanie w Moich zadaniach, w zakładce Kontrole celów."
+    },
+    "s25": {
+      "narration": "Postęp może jednak zaktualizować w każdej chwili, bezpośrednio w szczegółach celu."
+    },
+    "s26": {
+      "narration": "W Opcjach wybieram Aktualizuj postęp."
+    },
+    "s27": {
+      "narration": "Wpisuję aktualną wartość osiemdziesiąt pięć, status Zgodnie z planem i potwierdzam."
+    },
+    "s28": {
+      "narration": "Postęp się przeliczył, a w aktywności zostaje zapis kontroli."
+    },
+    "s29": {
+      "narration": "I gotowe. Umiecie skonfigurować Cele, utworzyć cel z podcelem i zaktualizować jego postęp. Wskazówka: cele można tworzyć także z Oceny wydajności."
+    },
+    "s30": {
+      "narration": "Jeśli coś nie zadziała, zajrzyjcie do Centrum pomocy. Mniej administracji, więcej czasu dla ludzi. To jest Sloneek."
+    }
+  }
+}

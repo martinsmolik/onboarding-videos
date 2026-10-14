@@ -1,0 +1,222 @@
+{
+  "id": "rzd-demo-sk",
+  "version": 1,
+  "title": "BDO × Sloneek – ročné zúčtovanie dane (SK)",
+  "lang": "sk",
+  "app_version": "RZD FE + n8n webhook API v2 (2026-10-09)",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "http://localhost:8080/fe/?country=sk"
+  },
+  "voice": {
+    "provider": "mock"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Slovenská verzia toho istého formulára. Texty, oblasti aj doklady zodpovedajú žiadosti o ročné zúčtovanie ŽIA38.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1000"
+        },
+        {
+          "type": "type",
+          "selector": "#s1-email",
+          "value": "martin.smolik+demo@sloneek.com",
+          "speed": "fast",
+          "before_ms": 300,
+          "clear": true
+        },
+        {
+          "type": "type",
+          "selector": "#s1-password",
+          "value": "{{ENV:RZD_DEMO_PASS}}",
+          "speed": "fast",
+          "before_ms": 200,
+          "clear": true
+        },
+        {
+          "type": "click",
+          "selector": "[data-screen=\"s1\"] [data-action=\"login\"]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-screen=\"s5\"]:not([hidden])"
+      },
+      "hold_after_ms": 800
+    },
+    {
+      "id": "s02",
+      "narration": "Na Slovensku podáva zamestnanec len žiadosť, takže je predvybraná. Osobné údaje sa opäť načítajú zo Sloneeku.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-screen=\"s5\"] [data-action=\"continue\"]",
+          "before_ms": 800
+        },
+        {
+          "type": "type",
+          "selector": "#s6-birth-number",
+          "value": "850315/0007",
+          "clear": true,
+          "speed": "fast",
+          "before_ms": 500
+        },
+        {
+          "type": "type",
+          "selector": "#s6-birth-date",
+          "value": "15.3.1985",
+          "clear": true,
+          "speed": "fast",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-screen=\"s6\"] .action-bar__end [data-action=\"continue\"]",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "[data-screen=\"s7\"]:not([hidden])"
+      },
+      "hold_after_ms": 500
+    },
+    {
+      "id": "s03",
+      "narration": "Oblasti sú slovenské: nezdaniteľná časť na manželku, doplnkové dôchodkové sporenie, daňový bonus na deti a na zaplatené úroky.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-screen=\"s7\"] .tile-group",
+          "hold_ms": 1500
+        },
+        {
+          "type": "click",
+          "selector": "[data-category=\"deti\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-category=\"uroky\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-screen=\"s7\"] .action-bar__end .btn--primary",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "#s8-f-children-0-full_name"
+      },
+      "hold_after_ms": 500
+    },
+    {
+      "id": "s04",
+      "narration": "Pri deťoch stačí meno, rodné číslo a mesiace, za ktoré sa bonus uplatňuje.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "#s8-f-children-0-full_name",
+          "value": "Ema Tvrdíková",
+          "speed": "fast",
+          "before_ms": 300
+        },
+        {
+          "type": "type",
+          "selector": "#s8-f-children-0-birth_number",
+          "value": "230605/0010",
+          "speed": "fast"
+        },
+        {
+          "type": "click",
+          "selector": "[data-screen=\"s8\"] .action-bar__end [data-action=\"continue\"]",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "#s8-f-interest_paid"
+      },
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s05",
+      "narration": "Pri úrokoch z hypotéky sú sumy v eurách, dátumy zmluvy a vyhlásenie, že zamestnanec nečerpá štátny príspevok. Potvrdenie banky nahrá rovno do Sloneeku.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "#s8-f-interest_paid",
+          "value": "1 250,40",
+          "speed": "fast",
+          "before_ms": 300
+        },
+        {
+          "type": "type",
+          "selector": "#s8-f-interest_start",
+          "value": "1.3.2024",
+          "speed": "fast"
+        },
+        {
+          "type": "type",
+          "selector": "#s8-f-contract_date",
+          "value": "15.2.2024",
+          "speed": "fast"
+        },
+        {
+          "type": "click",
+          "selector": "label[for=\"s8-f-no_state_subsidy\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "upload",
+          "selector": "#s8-up-bank_interest_confirmation",
+          "value": "/Users/martinsmolik/dev_projects/Sloneek/BDO/n8n/rzd-webhook-api-v2/test-client/fixtures/test-doklad.pdf",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "click",
+          "selector": "[data-screen=\"s8\"] .action-bar__end [data-action=\"continue\"]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-screen=\"s9\"]:not([hidden])"
+      },
+      "hold_after_ms": 500
+    },
+    {
+      "id": "s06",
+      "narration": "Po kontrole a súhlase sa žiadosť odošle. Na Slovensku ju zamestnanec ešte elektronicky podpíše priamo v Sloneeku.",
+      "actions": [
+        {
+          "type": "scroll",
+          "value": "down",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "label[for=\"s9-consent\"]",
+          "before_ms": 600
+        },
+        {
+          "type": "click",
+          "selector": "[data-screen=\"s9\"] [data-action=\"submit\"]",
+          "before_ms": 700
+        }
+      ],
+      "expect": {
+        "visible": "[data-screen=\"s10\"]:not([hidden])"
+      },
+      "hold_after_ms": 3000
+    }
+  ]
+}

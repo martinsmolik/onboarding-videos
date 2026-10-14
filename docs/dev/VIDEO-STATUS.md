@@ -1,8 +1,8 @@
 # Stav videí
 
-Vygenerováno 14. 10. 2026 12:24:58 skriptem `scripts/video-status.mjs` z `out/`. Ručně neupravovat.
+Vygenerováno 14. 10. 2026 15:59:04 skriptem `scripts/video-status.mjs` z `out/`. Ručně neupravovat.
 
-Hotovo **47 z 87** (29 témat × cs/en/pl). Zkušebních běhů `rehearse-*`: 23.
+Hotovo **48 z 87** (29 témat × cs/en/pl). Zkušebních běhů `rehearse-*`: 23.
 
 | téma | cs | en | pl |
 |---|---|---|---|
@@ -16,7 +16,7 @@ Hotovo **47 z 87** (29 témat × cs/en/pl). Zkušebních běhů `rehearse-*`: 23
 | attendance-modes | ✓ | · | · |
 | working-hours | ✓ | ✓ | ✓ |
 | absences | ✓ | ✓ | ✓ |
-| clockins-vs-tracking | ✓ | · | · |
+| clockins-vs-tracking | ✓ | ✓ | · |
 | clockins | ✓ | ✓ | ✓ |
 | timetracking | ✓ | · | · |
 | ats-setup | ✓ | ✓ | ✓ |
@@ -36,13 +36,12 @@ Hotovo **47 z 87** (29 témat × cs/en/pl). Zkušebních běhů `rehearse-*`: 23
 | custom-reports | ✓ | ✓ | ✓ |
 | integrations | · | · | · |
 
-## Jazykové verze převzetím českého receptu (16)
+## Jazykové verze převzetím českého receptu (15)
 
 - user-folders-en
 - user-folders-pl
 - attendance-modes-en
 - attendance-modes-pl
-- clockins-vs-tracking-en
 - clockins-vs-tracking-pl
 - timetracking-en
 - timetracking-pl

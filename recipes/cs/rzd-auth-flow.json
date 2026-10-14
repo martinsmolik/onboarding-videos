@@ -1,0 +1,51 @@
+{
+  "id": "rzd-auth-flow",
+  "version": 2,
+  "title": "RZD PoC – přihlášení přes Sloneek a upload dokladu",
+  "lang": "cs",
+  "app_version": "n8n PoC 2026-10-08",
+  "viewport": { "width": 1920, "height": 1080 },
+  "start": { "url": "https://n8n-public.internal-integrations-ec1.aws.sloneek.com/form/dc5d1f20-8866-4b60-9b1b-1b1b579a86c7" },
+  "voice": { "provider": "mock" },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Přihlášení do Sloneeku.",
+      "actions": [
+        { "type": "type", "selector": "#field-0", "value": "martin.smolik+demo@sloneek.com", "speed": "fast", "before_ms": 400 },
+        { "type": "type", "selector": "#field-1", "value": "{{ENV:RZD_DEMO_PASS}}", "speed": "fast", "before_ms": 200 },
+        { "type": "click", "selector": "#submit-btn", "before_ms": 300 }
+      ],
+      "expect": { "visible": "input[placeholder=\"RRMMDD/XXXX\"]" },
+      "hold_after_ms": 1800
+    },
+    {
+      "id": "s02",
+      "narration": "Předvyplněný formulář, doplnění a příloha.",
+      "actions": [
+        { "type": "click", "selector": "input[type=checkbox]", "before_ms": 400 },
+        { "type": "upload", "selector": "input[type=file]", "value": "{{ENV:RZD_DOKLAD}}", "before_ms": 300 },
+        { "type": "scroll", "value": "down", "before_ms": 300 }
+      ],
+      "hold_after_ms": 1000
+    },
+    {
+      "id": "s03",
+      "narration": "Odeslání.",
+      "actions": [
+        { "type": "click", "selector": "#submit-btn", "before_ms": 300 }
+      ],
+      "expect": { "url_contains": "form-waiting" },
+      "hold_after_ms": 3000
+    },
+    {
+      "id": "s04",
+      "narration": "Dokument ve Sloneeku.",
+      "actions": [
+        { "type": "navigate", "value": "https://app.sloneek.com/app/documents-v2/my?page=1&per_page=25" },
+        { "type": "wait", "value": "2500" }
+      ],
+      "hold_after_ms": 2000
+    }
+  ]
+}

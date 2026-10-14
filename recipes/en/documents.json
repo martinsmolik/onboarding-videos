@@ -1,0 +1,1636 @@
+{
+  "id": "documents",
+  "version": 1,
+  "title": "Upload and send documents",
+  "lang": "en",
+  "app_version": "preprod-2026-10-12",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "en"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "7jQ3jNk3Fcw65sWUmzun",
+    "model_id": "eleven_v4"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s13",
+    "title": "Documents"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Want to know who has already read the new policy? Hi, I'm Maria from the Sloneek team, and I'll show you how to upload and send documents.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_documents_v2",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_documents_v2",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Introduction",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Documents keeps contracts, policies and certificates in one place. Employees read and sign them right in the app.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_documents_v2",
+          "before_ms": 1500
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_documents_v2",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_documents_v2",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "In the left menu, under Company, I open Documents. They're managed by an administrator or a user with the Document manager right.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_documents_v2",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] slnk-document-title-cell",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] h5:text-is(\"Document management\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=addDocumentButton]",
+        "url_contains": "/app/documents-v2/company"
+      },
+      "part": 2,
+      "part_title": "Where to find it",
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s04",
+      "narration": "The list shows the folder, recipients, confirmation status and expiration. Folders are on the left, and All documents holds absolutely everything.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] tr.mat-mdc-header-row",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-list",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"All documents\")",
+        "url_contains": "/app/documents-v2/company"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "You create folders in Settings. I click Add folder and create a folder for HR policies.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=settingsButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=addFolderButton]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=addFolderButton]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=nameInput]",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=descriptionTextarea]",
+        "url_contains": "/settings/folders"
+      },
+      "part": 3,
+      "part_title": "Folders and settings",
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s06",
+      "narration": "I type a name and a short description. In User permissions, you can let selected people read the whole folder.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-container [data-cy=nameInput]",
+          "value": "HR policies",
+          "before_ms": 400
+        },
+        {
+          "type": "fill",
+          "selector": ".cdk-overlay-container [data-cy=descriptionTextarea]",
+          "value": "Policies and internal rules for all employees.",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=userPermissionsAutocomplete]",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=userPermissionsAutocomplete]",
+        "url_contains": "/settings/folders"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "I click Create folder. The new folder shows up in the list right away, and you can file documents in it.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=submitButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"HR policies\")",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"HR policies\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"HR policies\")",
+        "url_contains": "/settings/folders/"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "On the Approvals tab, you can turn on mandatory approval for documents that employees upload themselves. An administrator or document manager approves them.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=item-1]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] nb-toggle",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-card:has-text(\"Would you like to use\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-toggle",
+        "url_contains": "/settings/approvals"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "In Notifications, you set how often Sloneek reminds people about unread and unsigned documents, and when it warns about an upcoming expiration.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=item-2]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=repeatConfirmationNotificationSelect]",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=signatureNotificationInDaysSelect]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=expirationNotificationInDaysSelect]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=expirationNotificationInDaysSelect]",
+        "url_contains": "/settings/notifications"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Back in Documents, I click Add new document. You can create a document from a template or upload your own file.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_documents_v2",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=addDocumentButton]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=addDocumentButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=uploadDocumentChoice]",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=createDocumentFromTemplateChoice]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=uploadDocumentChoice]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=bulkDocumentUploadChoice]",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=uploadCompanyWideDocumentChoice]",
+        "url_contains": "/add-document"
+      },
+      "part": 4,
+      "part_title": "A document for several people",
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s11",
+      "narration": "You can upload for the whole company, for a single user, or in bulk for several people. I'll upload the policy as a company-wide document.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=uploadSingleUserDocumentChoice]",
+          "before_ms": 600
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=bulkDocumentUploadChoice]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=uploadCompanyWideDocumentChoice]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=documentNameInput]",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=wholeCompanyButton]",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "I type the name Remote work policy and pick the HR policies folder.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-container [data-cy=documentNameInput]",
+          "value": "Remote work policy",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=documentsFolderAutocomplete] input",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "HR pol",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"HR policies\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=documentsFolderAutocomplete] [data-cy=autocompleteClearButton]",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "I upload the file, a PDF or an image. The private email toggle would also send the finished document to a private address, so I leave it off.",
+      "actions": [
+        {
+          "type": "upload",
+          "selector": ".cdk-overlay-container [data-cy=documentFileUpload] label.upload",
+          "value": "assets/demo/Remote work policy.pdf",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=documentFileUpload]:has-text(\"Remote work policy.pdf\")",
+          "value": "8000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=isPrivateToggle]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=documentFileUpload]:has-text(\"Remote work policy.pdf\")",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "In Document owner, you decide who gets the document: the whole company, selected teams, or individual users.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=wholeCompanyButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=selectedTeamsButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=selectedUsersButton]",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=selectedUsersButton]",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "For this example, I choose Selected users and pick James Miller from the list.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=selectedUsersButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=usersAutocomplete] input",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=usersAutocomplete] input",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "James",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Miller James\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container nb-card-header",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=usersAutocomplete] [data-cy=autocompleteClearButton]",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "Under Expand, there are more options, such as the expiration date and a version label. For the version, I type 1.0.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=expandCollapseButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=uploadDesignation]",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=expirationDateInput]",
+          "before_ms": 300
+        },
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-container [data-cy=uploadDesignation]",
+          "value": "1.0",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=readConfirmationButton]",
+        "url_contains": "/add-document"
+      },
+      "narration_tts": "Under Expand, there are more options, such as the expiration date and a version label. For the version, I type one point oh."
+    },
+    {
+      "id": "s17",
+      "narration": "The confirmation type can be Not required, Read confirmation, or Signature request. For a policy, a read confirmation is enough.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=noConfirmationButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=signatureConfirmationButton]",
+          "before_ms": 200
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=readConfirmationButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=confirmationInDays]",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=confirmationInDays]",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "I tick the deadline and set it to fourteen days. Below, you can also set a deadline for new colleagues, counted from their first sign-in.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=confirmationInDays] [data-cy=confirmationDaysCheckbox] label",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-container [data-cy=confirmationInDays] [data-cy=confirmationDaysInput]",
+          "value": "14",
+          "clear": true,
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=confirmationForNewUsersInDays]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=confirmationForNewUsersInDays]",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "Finally, I add an accompanying message and click Confirm. Recipients get an email notification and find the document in the app.",
+      "actions": [
+        {
+          "type": "fill",
+          "selector": ".cdk-overlay-container [data-cy=accompanyingMessageCkeditor] .ql-editor",
+          "value": "Please read the new remote work policy and confirm it.",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=submitButton]",
+          "before_ms": 700
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Remote work policy\")",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Remote work policy\")",
+        "url_contains": "/app/documents-v2/company"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "The document is first in the list. The Status column shows how many people have confirmed it, so far zero out of one.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Remote work policy\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Remote work policy\") >> td.cdk-column-companyStatus",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Remote work policy\") >> td.cdk-column-companyStatus:has-text(\"0 / 1\")",
+        "url_contains": "/app/documents-v2/company"
+      },
+      "part": 5,
+      "part_title": "Who has read it"
+    },
+    {
+      "id": "s21",
+      "narration": "Clicking the name opens the detail. The preview is on the left, and on the right you can edit the name, folder, expiration or version.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Remote work policy\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=documentPreview]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=documentPreview]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=editDocumentButton]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=detailHeader]:has-text(\"Remote work policy\")",
+        "url_contains": "/company/detail/"
+      },
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s22",
+      "narration": "The Confirmations tab shows the status for each recipient. Remind sends a reminder, and once it's read, you can download the confirmation here.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container nb-tabset li.tab a.tab-link:text-is(\"Confirmations\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=confirmationsGrid] tr[data-cy=tableRow]:has-text(\"Miller James\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=confirmationsGrid] tr[data-cy=tableRow]:has-text(\"Miller James\")",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=remindConfirmationButton]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=confirmationsGrid] tr[data-cy=tableRow]:has-text(\"Read pending\")",
+        "url_contains": "/company/detail/"
+      },
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s23",
+      "narration": "Contracts and amendments go to one person. I close the detail and choose Upload single user document.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=detailHeader] [data-cy=closeButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=addDocumentButton]",
+          "value": "10000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=addDocumentButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=uploadDocumentChoice]",
+          "value": "8000"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=uploadDocumentChoice]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=uploadSingleUserDocumentChoice]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=uploadSingleUserDocumentChoice]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [formcontrolname=owner_uuid] input",
+          "value": "5000"
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [formcontrolname=owner_uuid] input",
+        "url_contains": "/add-document"
+      },
+      "part": 6,
+      "part_title": "A document to sign"
+    },
+    {
+      "id": "s24",
+      "narration": "I type the name, select James as the document owner, and upload the agreement file.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-container [data-cy=documentNameInput]",
+          "value": "Remote work agreement",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [formcontrolname=owner_uuid] input",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "James",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Miller James\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "upload",
+          "selector": ".cdk-overlay-container [data-cy=documentFileUpload] label.upload",
+          "value": "assets/demo/Remote work agreement.pdf",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=documentFileUpload]:has-text(\"Remote work agreement.pdf\")",
+          "value": "8000"
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=documentFileUpload]:has-text(\"Remote work agreement.pdf\")",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "I expand the settings and choose Signature request. I set the deadline date two weeks ahead.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=expandCollapseButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=signatureConfirmationButton]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=signatureConfirmationButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".cdk-overlay-container [data-cy=deadlineDateInput]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=deadlineDateInput]",
+          "before_ms": 500
+        },
+        {
+          "type": "type",
+          "selector": ".cdk-overlay-container [data-cy=deadlineDateInput]",
+          "value": "{{DATE:+14d:MM/DD/YYYY}}",
+          "clear": true,
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": "nb-calendar nb-calendar-day-cell.selected",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=addExternalUserButton]",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "You can add more signers, such as a director, from your colleagues. To send the document to someone outside the company, use Add external user.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [formcontrolname=signature_users_uuids]",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": ".cdk-overlay-container [data-cy=addExternalUserButton]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": ".cdk-overlay-container [data-cy=addExternalUserButton]",
+        "url_contains": "/add-document"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "I click Confirm. The Status column now shows the signing status, so far zero out of one.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".cdk-overlay-container [data-cy=submitButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Remote work agreement\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Remote work agreement\") >> td.cdk-column-companyStatus",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Remote work agreement\") >> td.cdk-column-companyStatus:has-text(\"0 / 1\")",
+        "url_contains": "/app/documents-v2/company"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "No need to write recurring contracts from scratch. In Templates, you prepare text with variables that are filled in from the employee profile.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=templatesButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=addNewTemplateButton]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=addNewTemplateButton]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=sidebarTabset]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=sidebarTabset]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=orderOfSignatureButton]",
+        "url_contains": "/documents-v2/template/new"
+      },
+      "part": 7,
+      "part_title": "Templates",
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s29",
+      "narration": "For example, the name, position or start date. With Order of signatures, you decide who signs first.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=userVariableSection-work_data]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=orderOfSignatureButton]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=userVariableButton-position]",
+        "url_contains": "/documents-v2/template/new"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "Employees see their documents under My documents. In the Status column, they click Sign or confirm that they've read the document.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_documents_v2",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] slnk-document-title-cell",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Sign\") >> nth=0",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Sign\")",
+        "url_contains": "/app/documents-v2/my"
+      },
+      "part": 8,
+      "part_title": "The employee's view",
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s31",
+      "narration": "You can also see what was sent to whom in the employee profile, on the Documents tab. James has both new documents here.",
+      "actions": [
+        {
+          "type": "navigate",
+          "value": "https://app-pre-production.sloneek.com/app/company-details/member/322d66e2-619b-40ad-b68b-d1a90e755714/documents-v2",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Remote work agreement\")",
+          "value": "20000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] a[href*=\"/documents-v2\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Remote work agreement\")",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Remote work policy\")",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Remote work policy\")",
+        "url_contains": "/member/322d66e2-619b-40ad-b68b-d1a90e755714/documents-v2"
+      },
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s32",
+      "narration": "Who can manage documents is set in the user profile, under Special user rights, by choosing Document manager.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href$=\"/work-data\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+        "url_contains": "/work-data"
+      },
+      "part": 9,
+      "part_title": "Permissions and changes",
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s33",
+      "narration": "Under the three dots, you can download, duplicate, archive, move to another folder, or delete a document. Archive outdated documents instead, because deleting can't be undone.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_documents_v2",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Remote work policy\")",
+          "value": "15000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Remote work policy\") >> [data-cy=actionsButton]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-context-menu",
+          "before_ms": 200
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-context-menu a[title=\"Archive\"]",
+          "before_ms": 600
+        },
+        {
+          "type": "highlight",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "nb-context-menu a[title=\"Archive\"]",
+        "url_contains": "/app/documents-v2/company"
+      },
+      "voice_after_actions": 2
+    },
+    {
+      "id": "s34",
+      "narration": "A final tip: with HR Workflows, Sloneek can automatically send new colleagues a document from a template, for example on their first day.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows",
+          "before_ms": 600
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_hr_workflows",
+        "url_contains": "/app/documents-v2/company"
+      },
+      "part": 10,
+      "part_title": "Wrap-up"
+    },
+    {
+      "id": "s35",
+      "narration": "Now you know how to upload a document, send it to be read or signed, and track who has confirmed it. If something doesn't work, check the Help Center.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Remote work policy\")",
+        "url_contains": "/app/documents-v2/company"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "Less admin, more time for people. This is Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Remote work policy\")",
+        "url_contains": "/app/documents-v2/company"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat CS dokument 'Dohoda o práci z domova' – jen při právě 1 řádku s přesným názvem po hledání (search_text v URL) a s názvem v dialogu; když neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Dohoda%20o%20pr%C3%A1ci%20z%20domova",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Dohoda o práci z domova\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) slnk-document-title-cell .name:text-is(\"Dohoda o práci z domova\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Dohoda o práci z domova\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-document-dialog:has-text(\"Delete document\"):has-text(\"Dohoda o práci z domova\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-document-dialog:has-text(\"Delete document\"):has-text(\"Dohoda o práci z domova\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat CS dokument 'Směrnice o home office' – jen při právě 1 řádku s přesným názvem po hledání (search_text v URL) a s názvem v dialogu; když neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Sm%C4%9Brnice%20o%20home%20office",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Směrnice o home office\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) slnk-document-title-cell .name:text-is(\"Směrnice o home office\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Směrnice o home office\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-document-dialog:has-text(\"Delete document\"):has-text(\"Směrnice o home office\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-document-dialog:has-text(\"Delete document\"):has-text(\"Směrnice o home office\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat CS složku 'Personální směrnice' – jen vybraná karta s přesným názvem; smazat jde jen prázdnou složku",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company/settings/folders/all-documents",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=addFolderButton]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card .folder-name:text-is(\"Personální směrnice\")",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card .folder-name:text-is(\"Personální směrnice\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=nameInput]",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"Personální směrnice\") >> [data-cy=deleteFolderButton]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"Personální směrnice\") >> [data-cy=deleteFolderButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-folder-dialog:has-text(\"Delete folder\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-folder-dialog:has-text(\"Delete folder\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat PL dokument 'Umowa o pracę zdalną' – jen při právě 1 řádku s přesným názvem po hledání (search_text v URL) a s názvem v dialogu; když neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Umowa%20o%20prac%C4%99%20zdaln%C4%85",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Umowa o pracę zdalną\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) slnk-document-title-cell .name:text-is(\"Umowa o pracę zdalną\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Umowa o pracę zdalną\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-document-dialog:has-text(\"Delete document\"):has-text(\"Umowa o pracę zdalną\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-document-dialog:has-text(\"Delete document\"):has-text(\"Umowa o pracę zdalną\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat PL dokument 'Polityka pracy zdalnej' – jen při právě 1 řádku s přesným názvem po hledání (search_text v URL) a s názvem v dialogu; když neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Polityka%20pracy%20zdalnej",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Polityka pracy zdalnej\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) slnk-document-title-cell .name:text-is(\"Polityka pracy zdalnej\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Polityka pracy zdalnej\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-document-dialog:has-text(\"Delete document\"):has-text(\"Polityka pracy zdalnej\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-document-dialog:has-text(\"Delete document\"):has-text(\"Polityka pracy zdalnej\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat PL složku 'Polityki kadrowe' – jen vybraná karta s přesným názvem; smazat jde jen prázdnou složku",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company/settings/folders/all-documents",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=addFolderButton]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card .folder-name:text-is(\"Polityki kadrowe\")",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card .folder-name:text-is(\"Polityki kadrowe\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=nameInput]",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"Polityki kadrowe\") >> [data-cy=deleteFolderButton]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"Polityki kadrowe\") >> [data-cy=deleteFolderButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-folder-dialog:has-text(\"Delete folder\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-folder-dialog:has-text(\"Delete folder\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat dokument 'Dohoda o práci z domova' – jen při právě 1 řádku s přesným názvem po hledání (search_text v URL) a s názvem v dialogu; když dokument neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Remote%20work%20agreement",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Remote work agreement\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) slnk-document-title-cell .name:text-is(\"Remote work agreement\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Remote work agreement\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-document-dialog:has-text(\"Delete document\"):has-text(\"Remote work agreement\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-document-dialog:has-text(\"Delete document\"):has-text(\"Remote work agreement\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat dokument 'Směrnice o home office' – jen při právě 1 řádku s přesným názvem po hledání (search_text v URL) a s názvem v dialogu; když dokument neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company?page=1&per_page=25&search_text=Remote%20work%20policy",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-document-title-cell .name:text-is(\"Remote work policy\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) slnk-document-title-cell .name:text-is(\"Remote work policy\")",
+          "value": "5000"
+        },
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Remote work policy\") >> [data-cy=actionsButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-context-menu a[title=\"Delete\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-document-dialog:has-text(\"Delete document\"):has-text(\"Remote work policy\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-document-dialog:has-text(\"Delete document\"):has-text(\"Remote work policy\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat složku 'Personální směrnice' – jen vybraná karta s přesným názvem (tlačítko koše má jen vybraná karta); dialog „Smazat složku“ název neobsahuje; smazat jde jen prázdnou složku",
+      "url": "https://app-pre-production.sloneek.com/app/documents-v2/company/settings/folders/all-documents",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=addFolderButton]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card .folder-name:text-is(\"HR policies\")",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card .folder-name:text-is(\"HR policies\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=nameInput]",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"HR policies\") >> [data-cy=deleteFolderButton]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-folder-card:has-text(\"HR policies\") >> [data-cy=deleteFolderButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-delete-folder-dialog:has-text(\"Delete folder\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-delete-folder-dialog:has-text(\"Delete folder\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-12",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "user": "Tomáš Novák <tomas.novak@example.com> (a8c8fa35-ed76-4867-8f26-0b3d41b768ac), NEAKTIVNÍ – trvalý (z add-users)",
+      "files": "assets/demo/Směrnice o home office.pdf, assets/demo/Dohoda o práci z domova.pdf – generuje out/documents/_work/make_demo_pdfs.py",
+      "created_by_recipe": "složka 'Personální směrnice', dokument 'Směrnice o home office' (Vybraní uživatelé: Tomáš, Potvrzení přečtením do 14 dní, verze 1.0), dokument 'Dohoda o práci z domova' (Tomáš, Žádost o podpis, deadline +14 dní) – vše maže cleanup"
+    },
+    "notes": "viz atlas/documents.md (sekce 5 a 8)"
+  },
+  "_localized": {
+    "from": "recipes/cs/documents.json",
+    "i18n": "i18n/documents.en.json",
+    "at": "2026-10-12T09:05:53.375Z",
+    "verified": {
+      "date": "2026-10-12",
+      "by": "Claude (BrowserOS, preprod, local-translate=en, in-page runner out/documents/_work/dryrun-runner.js; recept z out/documents-en/_work/dryrun-R.json)",
+      "selectors": "Před EN během byly CZ i PL pozůstatky už smazané (PL dry-run). Pokus 1 přerušen v s15 výpadkem spojení s Macem (tab zamrzl, ne selhání selektoru; s13–s14 OK, dokument se neodeslal) → reload, vzniklá složka 'HR policies' smazána EN cleanup blokem (karta s přesným názvem, prázdná). Průchod 2: 36/36 bez změn selektorů (Document management, All documents, Would you like to use…, Confirmations, Read pending, Remind, Sign, menu Download/Duplicate/Archive/Change folder/Delete). Cleanup po (po reloadech): 'Remote work agreement', 'Remote work policy', složka 'HR policies' smazány (dialog 'Delete document' s názvem). Dokumenty 32 → 34 → 32, složky 10 → 11 → 10. Datum {{DATE:+14d:MM/DD/YYYY}} = 10/26/2026. James celou dobu neaktivní ('Inactive').",
+      "notes": "EN UI: Upload company-wide document / Upload single user document / Bulk upload documents for user, Whole company / Selected teams / Selected users, Expand, Designation / version, Not required / Read confirmation / Signature request, Confirm, Deadline date, Additional signature users, Add external user, Special user rights → Document manager. Playwright :has-text je case-insensitive – s30 'Sign' sedí i na 'Already signed', ale nth=0 je řádek 'JB Test 2 … Sign' (první v seznamu)."
+    }
+  }
+}

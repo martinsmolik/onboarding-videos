@@ -1,0 +1,413 @@
+{
+  "id": "rzd-demo-cz-silent",
+  "version": 1,
+  "title": "BDO × Sloneek – roční zúčtování daně (CZ) – bez komentáře",
+  "lang": "cs",
+  "app_version": "RZD FE + n8n webhook API v2 (2026-10-09)",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "http://localhost:8080/fe/?country=cz"
+  },
+  "voice": {
+    "provider": "mock"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "highlight",
+          "selector": "header.site-header",
+          "hold_ms": 1500
+        }
+      ],
+      "expect": {
+        "visible": "[data-screen=\"s1\"]:not([hidden])"
+      },
+      "hold_after_ms": 1800
+    },
+    {
+      "id": "s02",
+      "narration": "",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "#s1-email",
+          "value": "martin.smolik+demo@sloneek.com",
+          "speed": "fast",
+          "before_ms": 300,
+          "clear": true
+        },
+        {
+          "type": "type",
+          "selector": "#s1-password",
+          "value": "{{ENV:RZD_DEMO_PASS}}",
+          "speed": "fast",
+          "before_ms": 200,
+          "clear": true
+        },
+        {
+          "type": "click",
+          "selector": "[data-screen=\"s1\"] [data-action=\"login\"]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-screen=\"s5\"]:not([hidden])"
+      },
+      "hold_after_ms": 1800
+    },
+    {
+      "id": "s03",
+      "narration": "",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "label[for=\"s5-declaration\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "label[for=\"s5-settlement\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-screen=\"s5\"] [data-action=\"continue\"]",
+          "before_ms": 700
+        }
+      ],
+      "expect": {
+        "visible": "[data-screen=\"s6\"]:not([hidden])"
+      },
+      "hold_after_ms": 1800
+    },
+    {
+      "id": "s04",
+      "narration": "",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "#s6-first-name",
+          "hold_ms": 1200
+        },
+        {
+          "type": "type",
+          "selector": "#s6-birth-number",
+          "value": "850315/0007",
+          "clear": true,
+          "speed": "fast",
+          "before_ms": 400
+        },
+        {
+          "type": "type",
+          "selector": "#s6-birth-date",
+          "value": "15.3.1985",
+          "clear": true,
+          "speed": "fast",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-screen=\"s6\"] .action-bar__end [data-action=\"continue\"]",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "[data-screen=\"s7\"]:not([hidden])"
+      },
+      "hold_after_ms": 1800
+    },
+    {
+      "id": "s05",
+      "narration": "",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-category=\"hypoteka\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-category=\"manzel_ka\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-category=\"deti\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-screen=\"s7\"] .action-bar__end .btn--primary",
+          "before_ms": 700
+        }
+      ],
+      "expect": {
+        "visible": "[data-screen=\"s8\"]:not([hidden])"
+      },
+      "hold_after_ms": 1800
+    },
+    {
+      "id": "s06",
+      "narration": "",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "#s8-f-interest_paid",
+          "value": "48 250",
+          "speed": "fast",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "label[for=\"s8-f-loan_regime-from_2021\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "type",
+          "selector": "#s8-f-property_address",
+          "value": "Hlavní 12, Brno",
+          "speed": "fast",
+          "before_ms": 300
+        },
+        {
+          "type": "upload",
+          "selector": "#s8-up-bank_interest_confirmation",
+          "value": "/Users/martinsmolik/dev_projects/Sloneek/BDO/n8n/rzd-webhook-api-v2/test-client/fixtures/test-doklad.pdf",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-document=\"bank_interest_confirmation\"] .file-row",
+          "hold_ms": 1500
+        },
+        {
+          "type": "click",
+          "selector": "[data-screen=\"s8\"] .action-bar__end [data-action=\"continue\"]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "#s8-f-spouse_first_name"
+      },
+      "hold_after_ms": 1800
+    },
+    {
+      "id": "s07",
+      "narration": "",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "#s8-f-spouse_first_name",
+          "value": "Jana",
+          "speed": "fast",
+          "before_ms": 300
+        },
+        {
+          "type": "type",
+          "selector": "#s8-f-spouse_last_name",
+          "value": "Tvrdíková",
+          "speed": "fast"
+        },
+        {
+          "type": "type",
+          "selector": "#s8-f-spouse_birth_number",
+          "value": "875722/0010",
+          "speed": "fast"
+        },
+        {
+          "type": "select",
+          "selector": "#s8-f-spouse_months-from",
+          "value": "1 – leden"
+        },
+        {
+          "type": "type",
+          "selector": "#s8-f-child_first_name",
+          "value": "Ema",
+          "speed": "fast",
+          "before_ms": 300
+        },
+        {
+          "type": "type",
+          "selector": "#s8-f-child_last_name",
+          "value": "Tvrdíková",
+          "speed": "fast"
+        },
+        {
+          "type": "type",
+          "selector": "#s8-f-child_birth_number",
+          "value": "230605/0010",
+          "speed": "fast"
+        },
+        {
+          "type": "click",
+          "selector": "label[for=\"s8-f-spouse_conditions\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": "[data-screen=\"s8\"] .action-bar__end [data-action=\"continue\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "1800"
+        },
+        {
+          "type": "click",
+          "selector": "[data-screen=\"s8\"] .action-bar__end [data-action=\"continue\"]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "#s8-f-children-0-first_name"
+      },
+      "hold_after_ms": 1800
+    },
+    {
+      "id": "s08",
+      "narration": "",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "#s8-f-children-0-first_name",
+          "value": "Ema",
+          "speed": "fast",
+          "before_ms": 300
+        },
+        {
+          "type": "type",
+          "selector": "#s8-f-children-0-last_name",
+          "value": "Tvrdíková",
+          "speed": "fast"
+        },
+        {
+          "type": "type",
+          "selector": "#s8-f-children-0-birth_number",
+          "value": "230605/0010",
+          "speed": "fast"
+        },
+        {
+          "type": "click",
+          "selector": "label[for=\"s8-f-children-0-order-1\"]"
+        },
+        {
+          "type": "click",
+          "selector": "[data-action=\"repeat-add\"][data-repeat=\"children\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "type",
+          "selector": "#s8-f-children-1-first_name",
+          "value": "Adam",
+          "speed": "fast",
+          "before_ms": 300
+        },
+        {
+          "type": "type",
+          "selector": "#s8-f-children-1-last_name",
+          "value": "Tvrdík",
+          "speed": "fast"
+        },
+        {
+          "type": "type",
+          "selector": "#s8-f-children-1-birth_number",
+          "value": "210211/0010",
+          "speed": "fast"
+        },
+        {
+          "type": "click",
+          "selector": "label[for=\"s8-f-children-1-order-2\"]"
+        },
+        {
+          "type": "upload",
+          "selector": "#s8-up-birth_certificate",
+          "value": "/Users/martinsmolik/dev_projects/Sloneek/BDO/n8n/rzd-webhook-api-v2/test-client/fixtures/test-doklad.pdf",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "click",
+          "selector": "[data-screen=\"s8\"] .action-bar__end [data-action=\"continue\"]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-screen=\"s9\"]:not([hidden])"
+      },
+      "hold_after_ms": 1800
+    },
+    {
+      "id": "s09",
+      "narration": "",
+      "actions": [
+        {
+          "type": "scroll",
+          "value": "down",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "scroll",
+          "value": "down"
+        },
+        {
+          "type": "wait",
+          "value": "1000"
+        }
+      ],
+      "hold_after_ms": 1800
+    },
+    {
+      "id": "s10",
+      "narration": "",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "label[for=\"s9-consent\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "click",
+          "selector": "[data-screen=\"s9\"] [data-action=\"submit\"]",
+          "before_ms": 800
+        }
+      ],
+      "expect": {
+        "visible": "[data-screen=\"s10\"]:not([hidden])"
+      },
+      "hold_after_ms": 1800
+    },
+    {
+      "id": "s11",
+      "narration": "",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-screen=\"s10\"] .card",
+          "hold_ms": 2500
+        }
+      ],
+      "hold_after_ms": 3500
+    }
+  ]
+}

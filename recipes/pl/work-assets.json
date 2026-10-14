@@ -1,0 +1,1234 @@
+{
+  "id": "work-assets",
+  "version": 1,
+  "title": "Ewidencjonuj i przekazuj narzędzia pracy",
+  "lang": "pl",
+  "app_version": "preprod-2026-10-12",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "pl",
+      "assetGridsWrapper": "false"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "F9eb9uZYeJuHuO7Uvs1R",
+    "model_id": "eleven_v4"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s25",
+    "title": "Narzędzia pracy"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Chcecie wiedzieć, kto w firmie ma który laptop albo telefon? Dzień dobry, jestem Maria z zespołu Sloneek i pokażę Wam, jak ewidencjonować i przekazywać narzędzia pracy.",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Narzędzia\")",
+          "value": "15000"
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Narzędzia\")",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Wprowadzenie",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Narzędzia znajdziecie w lewym menu w sekcji Firma, gdzie rozwijam pozycję Narzędzia.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Narzędzia\")",
+          "before_ms": 1200
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Narzędzia\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_management",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_management",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a#navigation_company_assets_custom_fields",
+        "url_contains": "/app/dashboard"
+      }
+    },
+    {
+      "id": "s03",
+      "narration": "Klikam Przegląd i otwiera się strona Zarządzanie majątkiem ze wszystkimi narzędziami w firmie.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_management",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=assetsManagementPage] h5:text-is(\"Zarządzanie majątkiem\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=assets-management-add-button]",
+        "url_contains": "/app/assets/all"
+      },
+      "part": 2,
+      "part_title": "Przegląd narzędzi"
+    },
+    {
+      "id": "s04",
+      "narration": "Przy każdym narzędziu widzicie posiadacza, a pod jego nazwiskiem status przyjęcia, obok zaś numer inwentarzowy i kategorię.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] th.cdk-column-holderNameStatusFormatted",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] th.cdk-column-inventory_number",
+          "before_ms": 300
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] th.cdk-column-categories",
+          "before_ms": 200
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] th.cdk-column-holderNameStatusFormatted",
+        "url_contains": "/app/assets/all"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "Listę zawęzicie wyszukiwarką, filtrem Status przyjęcia, na przykład tylko do narzędzi czekających na potwierdzenie, albo według kategorii.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-select button:has-text(\"Status przyjęcia\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] nb-select button:has-text(\"Kategoria\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] nb-select button:has-text(\"Status przyjęcia\")",
+        "url_contains": "/app/assets/all"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "Przełącznikiem w prawym górnym rogu włączycie szczegółową tabelę, którą pobierzecie przyciskiem Eksport do Excela.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] #users_management_toggle label",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] ag-grid-angular .ag-center-cols-container .ag-row",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button:has-text(\"Eksport do Excela\")",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] button:has-text(\"Eksport do Excela\")",
+        "url_contains": "gridTypeExtended=true"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "Przełącznik z powrotem wyłączam, a przyciskiem Import wgracie wiele narzędzi naraz z szablonu Excela.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] #users_management_toggle label",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button:has-text(\"Import\")",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+        "url_contains": "gridTypeExtended=false"
+      }
+    },
+    {
+      "id": "s08",
+      "narration": "Pomarańczowym przyciskiem przypomnicie o przyjęciu wszystkim, którzy jeszcze nie potwierdzili swojego narzędzia.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] button:has-text(\"Przypomnienie o wszystkich niewykorzystanych narzędziach\")",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] button:has-text(\"Przypomnienie o wszystkich niewykorzystanych narzędziach\")",
+        "url_contains": "/app/assets/all"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "Klikam w menu Kategoria, gdzie przygotujecie grupy narzędzi, na przykład laptopy albo telefony, według których potem filtrujecie.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_categories",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Notebook\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=assetsCategoriesPage] table",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] #assets_categories_add",
+        "url_contains": "/app/assets/categories"
+      },
+      "part": 3,
+      "part_title": "Kategorie i pola niestandardowe"
+    },
+    {
+      "id": "s10",
+      "narration": "Nową kategorię założycie przyciskiem Dodaj, wystarczy nadać jej nazwę i kolor.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] #assets_categories_add",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] #assets_categories_add",
+        "url_contains": "/app/assets/categories"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "Klikam Pola niestandardowe, gdzie dodacie dodatkowe dane, na przykład producenta, rozmiar albo datę wygaśnięcia licencji.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_custom_fields",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Producer\")",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] table",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] #assets_custom_fields_add",
+        "url_contains": "/app/assets/custom-fields"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Każde pole ma swój rodzaj, na przykład tekst, liczbę, datę, wybór z listy albo przypomnienie.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] th.cdk-column-dataTypeFormatted",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] #assets_custom_fields_add",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] th.cdk-column-dataTypeFormatted",
+        "url_contains": "/app/assets/custom-fields"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "W menu klikam z powrotem Przegląd, potem Dodaj, i otwiera się karta nowego narzędzia.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_management",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=assets-management-add-button]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetsForm] [data-cy=assetNameInput]",
+          "value": "10000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetAssignHolderButton]",
+        "url_contains": "/app/assets/new/info"
+      },
+      "part": 4,
+      "part_title": "Nowe narzędzie"
+    },
+    {
+      "id": "s14",
+      "narration": "Najpierw wpisuję nazwę, czyli jakie to narzędzie, tutaj laptop Lenovo ThinkPad.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=assetsForm] [data-cy=assetNameInput]",
+          "value": "Lenovo ThinkPad T14 – przykład",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetAcquisitionDateInput]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Data nabycia wypełnia się dzisiejszą datą, a przy starszym narzędziu po prostu ją zmienicie.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] [data-cy=assetAcquisitionDateInput]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetAcquisitionDateInput]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s16",
+      "narration": "Numer inwentarzowy jest obowiązkowy i musi być unikalny w całej firmie.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=assetsForm] [data-cy=assetInventoryNumberInput]",
+          "value": "PRZYKLAD-NB-014",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetSerialNumberInput]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "W polu Oznaczenie wpisuję numer seryjny, a gdy narzędzie go nie ma, przycisk z błyskawicą wygeneruje losowy kod.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=assetsForm] [data-cy=assetSerialNumberInput]",
+          "value": "PF-5M8R3W",
+          "before_ms": 400
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] #assets_management_detail_asset_part_generate_code_button",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] #assets_management_detail_asset_part_generate_code_button",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Wpisuję cenę nabycia bez VAT, a walutę zmieniam na złotówki.",
+      "actions": [
+        {
+          "type": "fill",
+          "selector": "[data-cy=assetsForm] [data-cy=assetPriceInput]",
+          "value": "5490",
+          "before_ms": 400
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=assetsForm] [data-cy=assetCurrencySelect] button",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "nb-option:text-is(\"PLN\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "nb-option:text-is(\"PLN\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetCurrencySelect] button:text-is(\"PLN\")",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "W polu Kategoria zaznaczam Notebook, a przyciskiem plus obok moglibyście od razu założyć nową kategorię.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=assetsForm] [data-cy=assetCategoriesSelect] input",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "Note",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Notebook\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] #assets_management_detail_asset_part_create_new_category_button",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] #assets_management_detail_asset_part_create_new_category_button",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Przyciskiem Wybierz możecie dodać zdjęcie narzędzia, żeby każdy od razu wiedział, o co chodzi.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] [data-cy=assetsPhotoUpload]",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetsPhotoUpload]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "Narzędzie od razu przekażę, więc klikam Przypisz gadżet i poniżej pojawiają się Informacje dotyczące właściciela.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=assetsForm] [data-cy=assetAssignHolderButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetsForm] [data-cy=holderAutocomplete]",
+          "value": "5000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] [data-cy=holderAutocomplete]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetNoteInput]",
+        "url_contains": "/app/assets/new/info"
+      },
+      "part": 5,
+      "part_title": "Przekazanie pracownikowi"
+    },
+    {
+      "id": "s22",
+      "narration": "Jako posiadaczkę wybieram koleżankę Zofię Wiśniewską.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=assetsForm] [data-cy=holderAutocomplete] input",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "5000"
+        },
+        {
+          "type": "type",
+          "selector": "[data-cy=autocompleteSearchInput]",
+          "value": "Zofia",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-autocomplete-option:has-text(\"Wiśniewska Zofia\")",
+          "before_ms": 200
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=holderAutocomplete] [data-cy=autocompleteClearButton]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "Stan użyteczności zostawiam na wartości Nowy, a datę przekazania na dzisiaj.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] nb-select[formcontrolname=condition]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "300"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] [data-cy=assetHandoverDateInput]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=assetHandoverDateInput]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s24",
+      "narration": "W uwadze wpisuję, co Zofia dostaje razem z laptopem, bo uwaga trafi do protokołu przekazania.",
+      "actions": [
+        {
+          "type": "fill",
+          "selector": "[data-cy=assetsForm] [data-cy=assetNoteInput]",
+          "value": "Przekazano z ładowarką i torbą.",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=saveFormButton]",
+        "url_contains": "/app/assets/new/info"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "Klikam Zapisz i narzędzie jest założone razem z posiadaczką.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=saveFormButton]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetEditHolderButton]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] [data-cy=holderAutocomplete]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetsForm] [data-cy=holderAutocomplete] input[disabled]",
+        "url_contains": "/info"
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "Posiadacz potem przyjmuje narzędzie w aplikacji podpisem elektronicznym albo je odrzuca, a do tego czasu czeka ono na potwierdzenie.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetsForm] [data-cy=holderAutocomplete]",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": "#assets_management_detail_holder_part_reset_acceptance_button",
+        "url_contains": "/info"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "Gdy zwleka z przyjęciem, przyciskiem ze strzałką wyślecie mu prośbę o przyjęcie jeszcze raz.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "#assets_management_detail_holder_part_reset_acceptance_button",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "highlight",
+          "selector": "#assets_management_detail_holder_part_reset_acceptance_button",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "#assets_management_detail_holder_part_reset_acceptance_button",
+        "url_contains": "/info"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "Klikam zakładkę Rozszerzony, gdzie uzupełnicie pola niestandardowe, które wcześniej przygotowaliście.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=assetDetailTabExtendedInfo] a",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=\"customFieldInput-Producer\"]",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] form:has([data-cy=\"customFieldInput-Producer\"])",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=\"customFieldInput-Producer\"]",
+        "url_contains": "/extended-info"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "Klikam zakładkę Historia, gdzie znajdziecie protokoły przekazania i audit log, który zapisuje każdą zmianę narzędzia.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=assetDetailTabHistory] a",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] table:has-text(\"Typ protokołu\")",
+          "value": "10000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] table:has-text(\"Typ protokołu\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] table:has-text(\"Typ protokołu\")",
+        "url_contains": "/history"
+      }
+    },
+    {
+      "id": "s30",
+      "narration": "Widok pracownika znajdziecie w menu w sekcji Ja, gdzie rozwijam Moje narzędzia pracy i klikam Przegląd.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets:text-is(\"Moje narzędzia pracy\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_assets",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_my_assets",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=myAssetsPage] tr[data-cy=tableRow]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=myAssetsPage] [data-cy=assetAcceptButton]",
+        "url_contains": "/app/assets/my/assets"
+      },
+      "part": 6,
+      "part_title": "Przyjęcie i zwrot"
+    },
+    {
+      "id": "s301",
+      "narration": "Tutaj pracownik widzi swoje narzędzia, a oczekujące przyjęcie potwierdza przyciskiem Zaakceptuj.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=myAssetsPage] [data-cy=assetAcceptButton]",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=myAssetsPage] [data-cy=assetAcceptButton]",
+        "url_contains": "/app/assets/my/assets"
+      }
+    },
+    {
+      "id": "s31",
+      "narration": "W sekcji Narzędzia klikam Protokoły przekazania, gdzie macie podpisane protokoły przyjęcia i zwrotu z całej firmy.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_protocols",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] h5:text-is(\"Protokoły przyjęcia i zwrotu narzędzi\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] h5:text-is(\"Protokoły przyjęcia i zwrotu narzędzi\")",
+        "url_contains": "/app/assets/protocols"
+      }
+    },
+    {
+      "id": "s32",
+      "narration": "Klikam z powrotem Przegląd i otwieram narzędzie, które posiadacz już przyjął, na przykład samochód służbowy.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_assets_management",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Kia Sportage 2020\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetRequestReturnButton]",
+          "value": "20000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetRequestReturnButton]",
+        "url_contains": "/app/assets/418f4ea2-7148-460f-be02-b696ea6a286d/info"
+      }
+    },
+    {
+      "id": "s321",
+      "narration": "W jego szczegółach poprosicie o zwrot, który posiadacz podpisze, albo bez protokołu zwrócicie je od razu do magazynu.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetRequestReturnButton]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "400"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=assetReturnWithoutFlowButton]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=assetReturnWithoutFlowButton]",
+        "url_contains": "/app/assets/418f4ea2-7148-460f-be02-b696ea6a286d/info"
+      }
+    },
+    {
+      "id": "s33",
+      "narration": "Narzędzia jednej osoby znajdziecie też w jej karcie, więc w menu rozwijam pozycję Użytkownicy i klikam Zarządzanie.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_company_staff",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a#navigation_settings_users",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] input[placeholder=\"Szukaj...\"]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] input[placeholder=\"Szukaj...\"]",
+        "url_contains": "/app/settings/users"
+      },
+      "part": 7,
+      "part_title": "Karta użytkownika i uprawnienia"
+    },
+    {
+      "id": "s331",
+      "narration": "W wyszukiwarce wpisuję Wiśniewska i kliknięciem w nazwisko otwieram kartę Zofii.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": "[data-cy=mainContentCenterDiv] input[placeholder=\"Szukaj...\"]",
+          "value": "Wiśniewska",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Nieaktywny\") td:first-child span:text-is(\"Wiśniewska Zofia\")",
+          "value": "10000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]:has-text(\"Nieaktywny\") td:first-child span:text-is(\"Wiśniewska Zofia\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/company-details/member/4f5629ff-4526-45b9-b97f-1d47edc42f2f/assets\"]",
+          "value": "15000"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+        "url_contains": "/member/4f5629ff-4526-45b9-b97f-1d47edc42f2f/work-data"
+      }
+    },
+    {
+      "id": "s332",
+      "narration": "Klikam zakładkę Narzędzia i widzę laptop, który właśnie przekazaliśmy Zofii.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/company-details/member/4f5629ff-4526-45b9-b97f-1d47edc42f2f/assets\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=companyMemberAssets] span.text-dark:text-is(\"Lenovo ThinkPad T14 – przykład\")",
+          "value": "20000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=companyMemberAssets] nb-card:has-text(\"Lenovo ThinkPad T14 – przykład\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=companyMemberAssets] span.text-dark:text-is(\"Lenovo ThinkPad T14 – przykład\")",
+        "url_contains": "/member/4f5629ff-4526-45b9-b97f-1d47edc42f2f/assets"
+      }
+    },
+    {
+      "id": "s34",
+      "narration": "Kto może zarządzać narzędziami, ustawicie po kliknięciu Dane podstawowe i robocze, w polu Specjalne uprawnienia użytkownika, wybierając Menedżer aktywów.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] a[href=\"/app/company-details/member/4f5629ff-4526-45b9-b97f-1d47edc42f2f/work-data\"]",
+          "before_ms": 500
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+          "value": "15000"
+        },
+        {
+          "type": "highlight",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+        "url_contains": "/work-data"
+      }
+    },
+    {
+      "id": "s35",
+      "narration": "Teraz umiecie ewidencjonować narzędzia, przekazywać je pracownikom i sprawdzać ich historię, a gdyby coś nie działało, zajrzyjcie do Centrum pomocy.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+        "url_contains": "/work-data"
+      }
+    },
+    {
+      "id": "s36",
+      "narration": "Mniej administracji, więcej czasu dla ludzi. To jest Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "300"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainContentCenterDiv] [data-cy=userRolesSelect]",
+        "url_contains": "/work-data"
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat CS pomůcku 'Lenovo ThinkPad T14 – ukázka' – jen při právě 1 řádku s přesným názvem po hledání, detail s tímtéž názvem v hlavičce, dialog 'Usuń narzędzia pracy' (jazyk UI) s držitelkou 'Králová Lucie'; když pomůcka neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/assets/all",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+          "value": "Lenovo ThinkPad T14 – ukázka",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – ukázka\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – ukázka\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetsDetailPage]:has-text(\"Lenovo ThinkPad T14 – ukázka\") >> [data-cy=assetDeleteButton]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=assetDeleteButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usuń narzędzia pracy\"):has-text(\"Králová Lucie\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usuń narzędzia pracy\"):has-text(\"Králová Lucie\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "smazat EN pomůcku 'Lenovo ThinkPad T14 – demo' – jen při právě 1 řádku s přesným názvem po hledání, detail s tímtéž názvem v hlavičce, dialog 'Usuń narzędzia pracy' (jazyk UI) s držitelkou 'Brown Olivia'; když pomůcka neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/assets/all",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+          "value": "Lenovo ThinkPad T14 – demo",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – demo\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – demo\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – demo\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetsDetailPage]:has-text(\"Lenovo ThinkPad T14 – demo\") >> [data-cy=assetDeleteButton]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=assetDeleteButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usuń narzędzia pracy\"):has-text(\"Brown Olivia\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usuń narzędzia pracy\"):has-text(\"Brown Olivia\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "smazat pomůcku 'Lenovo ThinkPad T14 – ukázka' – jen při právě 1 řádku s přesným názvem po hledání, detail s tímtéž názvem v hlavičce, dialog 'Odstranění pracovní pomůcky' s držitelkou 'Králová Lucie' (název pomůcky dialog neobsahuje); když pomůcka neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/assets/all",
+      "if_visible": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow]",
+          "value": "15000"
+        },
+        {
+          "type": "fill",
+          "selector": "[data-cy=mainContentCenterDiv] [data-cy=filtersSearch]",
+          "value": "Lenovo ThinkPad T14 – przykład",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – przykład\")",
+          "value": "8000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] tbody:not(:has(tr[data-cy=tableRow] ~ tr[data-cy=tableRow])) td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – przykład\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] tr[data-cy=tableRow] td.cdk-column-name:text-is(\"Lenovo ThinkPad T14 – przykład\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=assetsDetailPage]:has-text(\"Lenovo ThinkPad T14 – przykład\") >> [data-cy=assetDeleteButton]",
+          "value": "15000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=assetDeleteButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usuń narzędzia pracy\"):has-text(\"Wiśniewska Zofia\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=confirmationDialog]:has-text(\"Usuń narzędzia pracy\"):has-text(\"Wiśniewska Zofia\") >> [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ]
+    },
+    {
+      "name": "zpět na start",
+      "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-12",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "demo_data": {
+      "holder": "Lucie Králová <lucie.kralova@example.com> (0c9409f2-fc6e-475b-b2b1-2e791b4a7a83), NEAKTIVNÍ – trvalá (z org-chart)",
+      "created_by_recipe": "pomůcka 'Lenovo ThinkPad T14 – ukázka' (inv. č. UKAZKA-NB-014, sériové č. PF-4K7Q2X, 32000 CZK, kategorie Notebook, držitelka Lucie, stav Nový, poznámka 'Předáno s nabíječkou a brašnou.') – maže cleanup",
+      "read_only": "pomůcka 'Kia Sportage 2020' (418f4ea2-7148-460f-be02-b696ea6a286d, držitel admin Claver Thomas, Přijata) – v s32 jen zvýraznění tlačítek vrácení; Moje pomůcky admina musí mít aspoň 1 čekající pomůcku (tlačítko Přijmout, s30)"
+    },
+    "notes": "viz atlas/work-assets.md (sekce 5 a 8)"
+  },
+  "_localized": {
+    "from": "recipes/cs/work-assets.json",
+    "i18n": "i18n/work-assets.pl.json",
+    "at": "2026-10-12T13:04:49.210Z",
+    "verified": {
+      "date": "2026-10-12",
+      "by": "Claude (BrowserOS, preprod, local-translate=pl, in-page runner out/work-assets-pl/_work/dryrun-runner.js = runner org-chart-pl + press; recept přes file input z out/work-assets-pl/_work/dryrun-R.json)",
+      "selectors": "Dry-run 40/40 (s331: runner neumí :has-text uprostřed selektoru – řádek „Wiśniewska Zofia / Nieaktywny“ ověřen ručně, klik + zbytek kroku ok). Cleanup před: CZ blok smazal pozůstatek CZ nahrávání 041 (dialog „Usuń narzędzia pracy“ s Králová Lucie); po: vlastní blok smazal PL pomůcku. Zkouška skutečným recorderem (job 060, mock hlas) 40/40 ok, cleanup FAILED (ignored) jen tam, kde nic nebylo.",
+      "notes": "Živé PL popisky: menu Firma → Narzędzia (Przegląd, Protokoły przekazania, Kategoria, Pola niestandardowe); Ja → Moje narzędzia pracy → Przegląd; Użytkownicy → Zarządzanie; nadpis Zarządzanie majątkiem; Status przyjęcia, Kategoria, Eksport do Excela, Import, Przypomnienie o wszystkich niewykorzystanych narzędziach; Kategorie narzędzi + Dodaj; Pola niestandardowe; formulář: pole Název = „Imię“ (chyba překladu, narace ho nejmenuje), Data nabycia, Numer inwentarzowy, Oznaczenie (numer seryjny), Cena nabycia (bez VAT), Waluta (výchozí EUR → PLN), Kategoria, Zdjęcie/Wybierz, Przypisz gadżet, Informacje dotyczące właściciela, Posiadacz, Stan użyteczności = 1 - Nowy, Data przekazania, Uwaga (widoczna w logu), Zapisz; detail Informacja / Rozszerzony / Historia, Typ protokołu, Poproś o zwrot narzędzia, Zwróć narzędzie bez protokołu przekazania; Przegląd moich narzędzi pracy + Zaakceptuj; Protokoły przyjęcia i zwrotu narzędzi; Szukaj..., Nieaktywny; karta Dane podstawowe i robocze, Narzędzia, Specjalne uprawnienia użytkownika → Menedżer aktywów."
+    }
+  }
+}

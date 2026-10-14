@@ -1,0 +1,383 @@
+{
+  "_comment": "Anglická verze videa Přizpůsobte si modul ATS (ats-setup). Struktura, kroky, kliky a tempo 1:1 podle CZ masteru. UI texty z translate_fe/en + ověřeno naživo 12. 10. 2026 (local-translate=en). EN demo data: fáze náboru 'Phone screening – demo' a zdroj kandidátů 'Job fair – demo'; cleanup (před) i teardown (po) je mažou, cleanup_prepend maže pozůstatky CZ a PL. Narace bez asistentky Ellie (Help Center). Naraci napsal Claude – PŘED PUBLIKACÍ NECHAT ZKONTROLOVAT RODILÝM MLUVČÍM. Generátor: out/ats-setup/_work/build_i18n.py (+ i18n_src.json)",
+  "verified": {
+    "date": "2026-10-12",
+    "by": "Claude (BrowserOS, preprod, local-translate=en, in-page runner out/ats-setup-en/_work/dryrun-runner.js; recept z out/ats-setup-en/_work/dryrun-R.json + dryrun-T.json)",
+    "selectors": "Dry-run 39/39; cleanup před přeskočen – nic nebylo; teardown 2/2: smazal EN fázi (10 → 11 → 10, menu „Delete“, „Automatic email not active“) a EN zdroj (7 → 8 → 7).",
+    "notes": "Živé EN popisky: Overview and administration (Jobs / All candidates / Talent pool), Job portal, Settings, New job position; Portal URL, Embed code, Recruitment stages, Company details, GDPR consents, Company photos, Talent pool categories, Candidate sources, AI matching, Thank you message; Domain, GTM id, Copy; Candidate in hiring / hired / not hired, Add new stage; stage menu Rename / Set automatic email / Delete; Talent pool consent; Back.",
+    "rehearsal": "Zkouška skutečným recorderem (job 143-rehearse-ats-setup-en, mock hlas): 39/39 ok, cleanup FAILED (ignored) jen tam, kde nic nebylo, teardown 2/2 done; tenant po všech zkouškách čistý (užitečné odkazy 1, fáze náboru 10, zdroje kandidátů 7 – stejně jako na začátku)."
+  },
+  "title": "Customize the ATS module",
+  "thumbnail_title": "ATS settings",
+  "parts": {
+    "Úvod": "Introduction",
+    "Kariérní stránka": "Career page",
+    "Fáze náboru": "Recruitment stages",
+    "Profil firmy a GDPR": "Company profile and GDPR",
+    "Kandidáti": "Candidates",
+    "Shrnutí": "Summary"
+  },
+  "text": {
+    "Nová pracovní pozice": "New job position",
+    "Inzertní portál": "Job portal",
+    "Nastavení": "Settings",
+    "Nastavit automatický e-mail": "Set automatic email",
+    "Po aktivaci bude": "When active",
+    "Jméno kandidáta": "Candidate name",
+    "Náhled": "Preview",
+    "Zrušit": "Cancel",
+    "Souhlas pro talent pool": "Talent pool consent",
+    "30 dní": "30 days",
+    "14 dní": "14 days",
+    "Nový štítek": "New tag",
+    "Smazat": "Delete",
+    "Opravdu chcete smazat fázi náboru?": "Are you sure you want to delete the recruitment stage?",
+    "Opravdu chcete smazat zdroj?": "Are you sure you want to delete source?",
+    "Telefonický screening – ukázka": "Phone screening – demo",
+    "Veletrh práce – ukázka": "Job fair – demo",
+    "tag-Veletrh práce – ukázka": "tag-Job fair – demo",
+    "Pozvánka na krátký telefonát": "Invitation to a short phone call",
+    "Dobrý den, ": "Hello, "
+  },
+  "selectors": {
+    "[data-cy=mainContentCenterDiv] p-button:text-is(\"Nová pracovní pozice\")": "[data-cy=mainContentCenterDiv] p-button:text-is(\"New job position\")",
+    "[data-cy=mainContentCenterDiv] slnk-ats-navigation-header p-button:text-is(\"Inzertní portál\")": "[data-cy=mainContentCenterDiv] slnk-ats-navigation-header p-button:text-is(\"Job portal\")",
+    "[data-cy=mainContentCenterDiv] slnk-ats-navigation-header p-button:text-is(\"Nastavení\")": "[data-cy=mainContentCenterDiv] slnk-ats-navigation-header p-button:text-is(\"Settings\")",
+    "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Telefonický screening – ukázka\")": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Phone screening – demo\")",
+    "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Telefonický screening – ukázka\") >> p-button button": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Phone screening – demo\") >> p-button button",
+    ".p-menu-overlay li[aria-label=\"Nastavit automatický e-mail\"] a": ".p-menu-overlay li[aria-label=\"Set automatic email\"] a",
+    "slnk-ats-automatic-emails-dialog .p-dialog p:has-text(\"Po aktivaci bude\")": "slnk-ats-automatic-emails-dialog .p-dialog p:has-text(\"When active\")",
+    "slnk-ats-automatic-emails-dialog .p-dialog li[aria-label=\"Jméno kandidáta\"] a": "slnk-ats-automatic-emails-dialog .p-dialog li[aria-label=\"Candidate name\"] a",
+    "slnk-ats-automatic-emails-dialog .p-dialog p-togglebutton:text-is(\"Náhled\")": "slnk-ats-automatic-emails-dialog .p-dialog p-togglebutton:text-is(\"Preview\")",
+    "slnk-ats-automatic-emails-dialog .p-dialog p-togglebutton.p-togglebutton-checked:text-is(\"Náhled\")": "slnk-ats-automatic-emails-dialog .p-dialog p-togglebutton.p-togglebutton-checked:text-is(\"Preview\")",
+    "slnk-ats-automatic-emails-dialog .p-dialog p-button:text-is(\"Zrušit\")": "slnk-ats-automatic-emails-dialog .p-dialog p-button:text-is(\"Cancel\")",
+    "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-gdpr-consent-v2 nb-checkbox:has-text(\"Souhlas pro talent pool\")": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-gdpr-consent-v2 nb-checkbox:has-text(\"Talent pool consent\")",
+    "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-gdpr-consent-v2 nb-checkbox:has-text(\"30 dní\")": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-gdpr-consent-v2 nb-checkbox:has-text(\"30 days\")",
+    "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-gdpr-consent-v2 nb-checkbox:has-text(\"14 dní\")": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-gdpr-consent-v2 nb-checkbox:has-text(\"14 days\")",
+    "slnk-sloneek-ats-v2-settings-source-dialog input[placeholder=\"Nový štítek\"]": "slnk-sloneek-ats-v2-settings-source-dialog input[placeholder=\"New tag\"]",
+    "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-Veletrh práce – ukázka\"]": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-Job fair – demo\"]",
+    ".p-menu-overlay li[aria-label=\"Smazat\"] a": ".p-menu-overlay li[aria-label=\"Delete\"] a",
+    "slnk-common-confirmation-dialog:has-text(\"Opravdu chcete smazat fázi náboru?\")": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete the recruitment stage?\")",
+    "slnk-common-confirmation-dialog:has-text(\"Opravdu chcete smazat fázi náboru?\") >> [id=\"ats_settings_recruitment_stages.delete\"]": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete the recruitment stage?\") >> [id=\"ats_settings_recruitment_stages.delete\"]",
+    "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-Veletrh práce – ukázka\"] >> slnk-common-icon": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-Job fair – demo\"] >> slnk-common-icon",
+    "slnk-common-confirmation-dialog:has-text(\"Opravdu chcete smazat zdroj?\")": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete source?\")",
+    "slnk-common-confirmation-dialog:has-text(\"Opravdu chcete smazat zdroj?\") >> #common_confirmation_yes": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete source?\") >> #common_confirmation_yes"
+  },
+  "keep": [
+    "GTM-XXXXX",
+    "tag-LinkedIn",
+    "tag-Startupjobs",
+    "ats_settings_recruitment_stages.delete"
+  ],
+  "cleanup_prepend": [
+    {
+      "name": "smazat CS fázi náboru 'Telefonický screening – ukázka' – jen řádek s tímto názvem (menu … → Delete), potvrzovací dialog 'Are you sure you want to delete the recruitment stage?' (název neuvádí); když fáze neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/ats-v2/settings/recruitment-stages",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=0 >> #company_ats_settings_recruitment_stage_add_new_stage",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=0 >> #company_ats_settings_recruitment_stage_add_new_stage",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Telefonický screening – ukázka\")",
+          "value": "5000"
+        },
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Telefonický screening – ukázka\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Telefonický screening – ukázka\") >> p-button button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-menu-overlay li[aria-label=\"Delete\"] a",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay li[aria-label=\"Delete\"] a",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete the recruitment stage?\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete the recruitment stage?\") >> [id=\"ats_settings_recruitment_stages.delete\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    },
+    {
+      "name": "smazat CS zdroj kandidátů 'Veletrh práce – ukázka' – jen štítek s data-cy přesně 'tag-Veletrh práce – ukázka' (křížek), dialog 'Are you sure you want to delete source?' (název neuvádí); když štítek neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/ats-v2/settings/candidate-sources",
+      "if_visible": "#company_ats_settings_candidate_sources_add",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "#company_ats_settings_candidate_sources_add",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-Veletrh práce – ukázka\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-Veletrh práce – ukázka\"] >> slnk-common-icon",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete source?\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete source?\") >> #common_confirmation_yes",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    },
+    {
+      "name": "smazat PL fázi náboru 'Rozmowa telefoniczna – przykład' – jen řádek s tímto názvem (menu … → Delete), potvrzovací dialog 'Are you sure you want to delete the recruitment stage?' (název neuvádí); když fáze neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/ats-v2/settings/recruitment-stages",
+      "if_visible": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=0 >> #company_ats_settings_recruitment_stage_add_new_stage",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form > slnk-common-card >> nth=0 >> #company_ats_settings_recruitment_stage_add_new_stage",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Rozmowa telefoniczna – przykład\")",
+          "value": "5000"
+        },
+        {
+          "type": "scroll",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Rozmowa telefoniczna – przykład\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-recruitment-stages-form .slnk-inner-card:has-text(\"Rozmowa telefoniczna – przykład\") >> p-button button",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": ".p-menu-overlay li[aria-label=\"Delete\"] a",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay li[aria-label=\"Delete\"] a",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete the recruitment stage?\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete the recruitment stage?\") >> [id=\"ats_settings_recruitment_stages.delete\"]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    },
+    {
+      "name": "smazat PL zdroj kandidátů 'Targi pracy – przykład' – jen štítek s data-cy přesně 'tag-Targi pracy – przykład' (křížek), dialog 'Are you sure you want to delete source?' (název neuvádí); když štítek neexistuje, wait_ready selže a blok se přeskočí",
+      "url": "https://app-pre-production.sloneek.com/app/ats-v2/settings/candidate-sources",
+      "if_visible": "#company_ats_settings_candidate_sources_add",
+      "actions": [
+        {
+          "type": "wait_ready",
+          "selector": "#company_ats_settings_candidate_sources_add",
+          "value": "15000"
+        },
+        {
+          "type": "wait_ready",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-Targi pracy – przykład\"]",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainContentCenterDiv] slnk-sloneek-ats-v2-settings-candidate-sources [data-cy=\"tag-Targi pracy – przykład\"] >> slnk-common-icon",
+          "before_ms": 300
+        },
+        {
+          "type": "wait_ready",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete source?\")",
+          "value": "5000"
+        },
+        {
+          "type": "click",
+          "selector": "slnk-common-confirmation-dialog:has-text(\"Are you sure you want to delete source?\") >> #common_confirmation_yes",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ]
+    }
+  ],
+  "cleanup_names": [
+    "smazat EN fázi náboru 'Phone screening – demo' – jen řádek s tímto názvem (menu … → Delete), potvrzovací dialog 'Are you sure you want to delete the recruitment stage?' (název neuvádí); když fáze neexistuje, wait_ready selže a blok se přeskočí",
+    "smazat EN zdroj kandidátů 'Job fair – demo' – jen štítek s data-cy přesně 'tag-Job fair – demo' (křížek), dialog 'Are you sure you want to delete source?' (název neuvádí); když štítek neexistuje, wait_ready selže a blok se přeskočí"
+  ],
+  "teardown_names": [
+    "smazat EN fázi náboru 'Phone screening – demo' – jen řádek s tímto názvem (menu … → Delete), potvrzovací dialog 'Are you sure you want to delete the recruitment stage?' (název neuvádí); když fáze neexistuje, wait_ready selže a blok se přeskočí",
+    "smazat EN zdroj kandidátů 'Job fair – demo' – jen štítek s data-cy přesně 'tag-Job fair – demo' (křížek), dialog 'Are you sure you want to delete source?' (název neuvádí); když štítek neexistuje, wait_ready selže a blok se přeskočí"
+  ],
+  "steps": {
+    "s01": {
+      "narration": "Want your recruitment set up exactly the way it really works at your company? Hi, I'm Maria from the Sloneek team, and I'll show you how to customize the ATS module."
+    },
+    "s02": {
+      "narration": "In the left menu, in the Company section, I click ATS."
+    },
+    "s03": {
+      "narration": "Overview and administration opens, with the Jobs, All candidates and Talent pool tabs."
+    },
+    "s04": {
+      "narration": "Opening positions and working with candidates are covered in two other videos, and here we'll look at the settings that apply to all positions."
+    },
+    "s05": {
+      "narration": "The Job portal button opens your public career page, where applicants find your open positions."
+    },
+    "s06": {
+      "narration": "At the top right I click the Settings button."
+    },
+    "s07": {
+      "narration": "On the left is a menu with every settings area, from the portal address all the way to the thank you message."
+    },
+    "s08": {
+      "narration": "In Portal URL, in the Domain field, you choose what the link to your career page will look like."
+    },
+    "s09": {
+      "narration": "In the GTM id field you paste the code from Google Tag Manager to measure traffic on the page."
+    },
+    "s10": {
+      "narration": "I click Embed code, where you'll find the code for embedding the career page directly on your company website."
+    },
+    "s11": {
+      "narration": "You choose the language and look of the page, and hand the code to your web admin with the Copy button."
+    },
+    "s12": {
+      "narration": "Now I click Recruitment stages, which every candidate goes through."
+    },
+    "s13": {
+      "narration": "Stages are in three groups: Candidate in hiring, Candidate hired and Candidate not hired."
+    },
+    "s14": {
+      "narration": "Stages in the Candidate not hired group serve as rejection reasons, for example an unsuitable candidate or a candidate who turned down the offer."
+    },
+    "s15": {
+      "narration": "At the top you change the group's color with the brush, and you reorder stages by dragging the handle on the left."
+    },
+    "s16": {
+      "narration": "I add a new stage with the Add new stage button in the Candidate in hiring group."
+    },
+    "s17": {
+      "narration": "In Name I type Phone screening – demo and click Save."
+    },
+    "s18": {
+      "narration": "The new stage has been added at the end of the group and will be offered whenever you create a new job position."
+    },
+    "s19": {
+      "narration": "I click the three dots next to it, where you can rename the stage, delete it or set an automatic email for it."
+    },
+    "s20": {
+      "narration": "In the menu I click Set automatic email."
+    },
+    "s21": {
+      "narration": "An active email would go to every candidate who moves to this stage, so I'll leave it inactive."
+    },
+    "s22": {
+      "narration": "In Subject I type Invitation to a short phone call."
+    },
+    "s23": {
+      "narration": "In Message I type Hello, and on the right under Variables I click Candidate name."
+    },
+    "s24": {
+      "narration": "I click Preview, and a sample candidate name appears in the text instead of the variable."
+    },
+    "s25": {
+      "narration": "I won't save the template now, so I click Cancel."
+    },
+    "s26": {
+      "narration": "I click Company details, where you write the text shown below the description of every position."
+    },
+    "s27": {
+      "narration": "I click GDPR consents, where you'll find the consent text that applicants must confirm on the career page."
+    },
+    "s28": {
+      "narration": "By ticking Talent pool consent, you ask applicants to let their details stay in the talent pool for future hiring too."
+    },
+    "s29": {
+      "narration": "Below that you set how long the consent is valid and whether a notification should be sent fourteen or thirty days before it expires."
+    },
+    "s30": {
+      "narration": "I click Company photos, where you upload photos from the office or team events for your job ads."
+    },
+    "s31": {
+      "narration": "I click Talent pool categories, which you use to sort people in your talent pool."
+    },
+    "s32": {
+      "narration": "I click Candidate sources, the labels that tell you where candidates came from, for example LinkedIn or Startupjobs."
+    },
+    "s33": {
+      "narration": "I click Add and type Job fair – demo as the name."
+    },
+    "s34": {
+      "narration": "I click Save, and you can then assign the new label to candidates who came from the job fair."
+    },
+    "s35": {
+      "narration": "I click AI matching, where you can turn on highlighting of the applicants who best match the position."
+    },
+    "s36": {
+      "narration": "Finally I click Thank you message, which every applicant receives right after sending their application."
+    },
+    "s37": {
+      "narration": "I click Back, and I'm in the job overview again."
+    },
+    "s38": {
+      "narration": "Now your career page, recruitment stages, consents and candidate sources are ready, and if something doesn't work, check the Help Center."
+    },
+    "s39": {
+      "narration": "Less admin, more time for people. This is Sloneek."
+    }
+  }
+}

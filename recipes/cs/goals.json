@@ -1,0 +1,1149 @@
+{
+  "id": "goals",
+  "version": 1,
+  "title": "Cíle: nastavte firemní cíle a sledujte jejich plnění",
+  "lang": "cs",
+  "app_version": "preprod-2026-10-08",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "start": {
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "cs"
+    }
+  },
+  "voice": {
+    "provider": "external",
+    "voice_id": "bF7C2fCv7Zf30iT84wZ1",
+    "model_id": "eleven_v4"
+  },
+  "chapters": true,
+  "interstitials": true,
+  "thumbnail": {
+    "shot": "s22",
+    "title": "Cíle"
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "narration": "Dobrý den, já jsem Marie z týmu Sloneek. Dnes nastavíme modul Cíle, založíme firemní cíl s dílčím cílem a ukážeme si kontrolu plnění.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ],
+      "expect": {
+        "visible": "[data-cy=mainNavigationDiv] a[href=\"/app/goals-v2/all\"]",
+        "url_contains": "/app/dashboard"
+      },
+      "part": 1,
+      "part_title": "Úvod",
+      "hold_after_ms": 400
+    },
+    {
+      "id": "s02",
+      "narration": "Začneme nastavením. V levém menu dole kliknu na Nastavení cílů.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/goals-v2-settings\"]",
+          "before_ms": 600
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/goals-v2-settings\"]",
+          "before_ms": 900
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ],
+      "expect": {
+        "visible": "h1:text-is(\"Nastavení cílů\")",
+        "url_contains": "/app/goals-v2-settings"
+      },
+      "part": 2,
+      "part_title": "Nastavení"
+    },
+    {
+      "id": "s03",
+      "narration": "Nejdřív volím, jak často mají majitelé své cíle kontrolovat. Přepnu na měsíční.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "form .p-select-label:text-is(\"Týdně\")",
+          "before_ms": 700
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": ".p-select-overlay li[role=option]:text-is(\"Měsíční\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ],
+      "expect": {
+        "visible": "form .p-select-label:text-is(\"Měsíční\")",
+        "url_contains": "/app/goals-v2-settings"
+      }
+    },
+    {
+      "id": "s04",
+      "narration": "Nastavení se ukládá samo. Níže vidím, kdy se kontrola připomene, u měsíční třeba druhý den v měsíci v devět ráno.",
+      "actions": [
+        {
+          "type": "zoom",
+          "selector": "form .p-select-label:text-is(\"2.\")",
+          "value": "1.3",
+          "hold_ms": 3000,
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "form .p-select-label:text-is(\"2.\")",
+        "url_contains": "/app/goals-v2-settings"
+      }
+    },
+    {
+      "id": "s05",
+      "narration": "Vpravo určím výchozí viditelnost: firemní cíle vidí celá společnost, týmové celý tým.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "form .p-select-label:text-is(\"Celá společnost\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "2200"
+        },
+        {
+          "type": "highlight",
+          "selector": "form .p-select-label:text-is(\"Celý tým\")",
+          "before_ms": 400
+        }
+      ],
+      "expect": {
+        "visible": "form .p-select-label:text-is(\"Celý tým\")",
+        "url_contains": "/app/goals-v2-settings"
+      }
+    },
+    {
+      "id": "s06",
+      "narration": "A kdo smí cíle zakládat. Firemní cíle nechám jen administrátorům.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "form .p-select-label:text-is(\"Pouze administrátoři\")",
+          "before_ms": 800
+        }
+      ],
+      "expect": {
+        "visible": "form .p-select-label:text-is(\"Pouze administrátoři\")",
+        "url_contains": "/app/goals-v2-settings"
+      }
+    },
+    {
+      "id": "s07",
+      "narration": "Teď k samotným cílům. Ve Společnosti otevřu Cíle.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/goals-v2/all\"]",
+          "before_ms": 600
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/goals-v2/all\"]",
+          "before_ms": 900
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ],
+      "expect": {
+        "visible": "h1:text-is(\"Cíle\")",
+        "url_contains": "/app/goals-v2/all"
+      },
+      "part": 3,
+      "part_title": "Nový cíl"
+    },
+    {
+      "id": "s08",
+      "narration": "Vidím všechny cíle firmy s úrovní, pokrokem, stavem a termínem. Nový založím tlačítkem Nový cíl.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": "table thead",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "3200"
+        },
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Nový cíl\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog h3:text-is(\"Nový cíl\")",
+        "url_contains": "/app/goals-v2/all"
+      }
+    },
+    {
+      "id": "s09",
+      "narration": "Pojmenuji ho Zvýšit spokojenost zákazníků na devadesát procent.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": ".p-dialog input[placeholder=\"Titul\"]",
+          "value": "Zvýšit spokojenost zákazníků na 90 %",
+          "clear": true,
+          "speed": "fast",
+          "before_ms": 500
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog input[placeholder=\"Titul\"]",
+        "url_contains": "/app/goals-v2/all"
+      }
+    },
+    {
+      "id": "s10",
+      "narration": "Úroveň nechám firemní a jako majitelku vyberu Kristýnu Novou.",
+      "actions": [
+        {
+          "type": "highlight",
+          "selector": ".p-dialog input#company",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog p-multiselect",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-multiselect-overlay li[role=option]:text-is(\"Nová Kristýna\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog input[placeholder=\"Titul\"]",
+        "url_contains": "/app/goals-v2/all"
+      }
+    },
+    {
+      "id": "s11",
+      "narration": "Prioritu dám vysokou.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".p-dialog .p-select-label:text-is(\"Nepřiřazeno\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": ".p-select-overlay li[role=option]:text-is(\"Vysoký\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog .p-select-label:text-is(\"Vysoký\")",
+        "url_contains": "/app/goals-v2/all"
+      }
+    },
+    {
+      "id": "s12",
+      "narration": "Termín nastavím na konec roku.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".p-dialog p-datepicker#due_date input",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": ".p-datepicker-panel button.p-datepicker-select-month",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": ".p-datepicker-panel span.p-datepicker-month:nth-child(12)",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": ".p-datepicker-panel span[data-date=\"2026-11-31\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog p-datepicker#due_date input",
+        "url_contains": "/app/goals-v2/all"
+      }
+    },
+    {
+      "id": "s13",
+      "narration": "V Metrikách zvolím numerickou: výchozí hodnota osmdesát dva, cílová devadesát, jednotka procento.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".p-dialog p-togglebutton:text-is(\"Numerické\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "type",
+          "selector": ":nth-match(.p-dialog p-inputnumber input, 1)",
+          "value": "82",
+          "clear": true,
+          "speed": "fast",
+          "before_ms": 300
+        },
+        {
+          "type": "type",
+          "selector": ":nth-match(.p-dialog p-inputnumber input, 2)",
+          "value": "90",
+          "clear": true,
+          "speed": "fast",
+          "before_ms": 300
+        },
+        {
+          "type": "type",
+          "selector": ":nth-match(.p-dialog p-inputnumber input, 3)",
+          "value": "82",
+          "clear": true,
+          "speed": "fast",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog .p-select-label:text-is(\"Vybrat\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": ".p-select-overlay li[role=option]:text-is(\"Procento\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog .p-select-label:text-is(\"Procento\")",
+        "url_contains": "/app/goals-v2/all"
+      }
+    },
+    {
+      "id": "s14",
+      "narration": "Zapnu pravidelnou kontrolu a cíl uložím.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".p-dialog p-toggleswitch#check-up",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog button:text-is(\"Uložit\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "4500"
+        }
+      ],
+      "expect": {
+        "visible": "td span.text-truncate:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+        "url_contains": "/app/goals-v2/all"
+      }
+    },
+    {
+      "id": "s15",
+      "narration": "Otevřu detail cíle.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "td span.text-truncate:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ],
+      "expect": {
+        "visible": ".goals-detail-title__text:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+        "url_contains": "/app/goals-v2/detail/"
+      },
+      "part": 4,
+      "part_title": "Dílčí cíl a přehled"
+    },
+    {
+      "id": "s16",
+      "narration": "Velký cíl rozdělím na menší. Kliknu na Nový dílčí cíl.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Nový dílčí cíl\")",
+          "before_ms": 700
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog h3:text-is(\"Nový dílčí cíl\")",
+        "url_contains": "/app/goals-v2/detail/"
+      }
+    },
+    {
+      "id": "s17",
+      "narration": "Pojmenuji ho Zavést měsíční průzkum spokojenosti. Nadřazený cíl je už vyplněný.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": ".p-dialog input[placeholder=\"Titul\"]",
+          "value": "Zavést měsíční průzkum spokojenosti",
+          "clear": true,
+          "speed": "fast",
+          "before_ms": 500
+        },
+        {
+          "type": "highlight",
+          "selector": ".p-dialog .p-select-label:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+          "before_ms": 600
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog .p-select-label:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+        "url_contains": "/app/goals-v2/detail/"
+      }
+    },
+    {
+      "id": "s18",
+      "narration": "Majitelkou bude opět Kristýna a termín konec listopadu.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".p-dialog p-multiselect",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-multiselect-overlay li[role=option]:text-is(\"Nová Kristýna\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog p-datepicker#due_date input",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": ".p-datepicker-panel button.p-datepicker-select-month",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": ".p-datepicker-panel span.p-datepicker-month:nth-child(11)",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "click",
+          "selector": ".p-datepicker-panel span[data-date=\"2026-10-30\"]",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog p-datepicker#due_date input",
+        "url_contains": "/app/goals-v2/detail/"
+      }
+    },
+    {
+      "id": "s19",
+      "narration": "Jako metriku zvolím Checklist a přidám dva úkoly: připravit dotazník a rozeslat zákazníkům.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".p-dialog p-togglebutton:text-is(\"Checklist\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog button:text-is(\"Přidat nové\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "type",
+          "selector": ".p-dialog input.checklist-input:placeholder-shown",
+          "value": "Připravit dotazník",
+          "clear": true,
+          "speed": "fast",
+          "before_ms": 300
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog button:text-is(\"Přidat nové\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        },
+        {
+          "type": "type",
+          "selector": ".p-dialog input.checklist-input:placeholder-shown",
+          "value": "Rozeslat zákazníkům",
+          "clear": true,
+          "speed": "fast",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog input.checklist-input",
+        "url_contains": "/app/goals-v2/detail/"
+      }
+    },
+    {
+      "id": "s20",
+      "narration": "Uložím a dílčí cíl se objeví v detailu.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".p-dialog button:text-is(\"Uložit\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "4500"
+        },
+        {
+          "type": "highlight",
+          "selector": "a:text-is(\"Zavést měsíční průzkum spokojenosti\")",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "a:text-is(\"Zavést měsíční průzkum spokojenosti\")",
+        "url_contains": "/app/goals-v2/detail/"
+      }
+    },
+    {
+      "id": "s21",
+      "narration": "Zpět v přehledu si cíle můžu seskupit, třeba podle majitele.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Zpět\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        },
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Seskupit podle\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-popover .p-select-label",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": ".p-select-overlay li[role=option]:text-is(\"Majitel\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "press",
+          "value": "Escape",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "600"
+        }
+      ],
+      "expect": {
+        "visible": "h1:text-is(\"Cíle\")",
+        "url_contains": "/app/goals-v2/all"
+      }
+    },
+    {
+      "id": "s22",
+      "narration": "A přepnu do stromu, kde vidím celou hierarchii, náš cíl i s dílčím cílem.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "p-togglebutton:text-is(\"Strom\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        },
+        {
+          "type": "click",
+          "selector": ".goals-v2-tree-node__self:has(article[aria-label=\"Zvýšit spokojenost zákazníků na 90 %\"]) button.goals-v2-tree-node__expand",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        },
+        {
+          "type": "highlight",
+          "selector": "article[aria-label=\"Zavést měsíční průzkum spokojenosti\"]",
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "article[aria-label=\"Zavést měsíční průzkum spokojenosti\"]",
+        "url_contains": "/app/goals-v2/all"
+      }
+    },
+    {
+      "id": "s23",
+      "narration": "Majitel cíle ho najde v sekci Já pod Moje cíle. Vidí jen cíle, které vlastní, vytvořil nebo sleduje.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/goals-v2/my\"]",
+          "before_ms": 600
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/goals-v2/my\"]",
+          "before_ms": 900
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ],
+      "expect": {
+        "visible": "h1:text-is(\"Moje cíle\")",
+        "url_contains": "/app/goals-v2/my"
+      },
+      "part": 5,
+      "part_title": "Kontrola plnění"
+    },
+    {
+      "id": "s24",
+      "narration": "Když přijde čas kontroly, dostane úkol v Mých úkolech, v záložce Kontroly cílů.",
+      "actions": [
+        {
+          "type": "hover",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/my-checklists\"]",
+          "before_ms": 600
+        },
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/my-checklists\"]",
+          "before_ms": 900
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        },
+        {
+          "type": "click",
+          "selector": "p-tab:text-is(\"Kontroly cílů\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "2000"
+        }
+      ],
+      "expect": {
+        "visible": "p-tab:text-is(\"Kontroly cílů\")",
+        "url_contains": "/app/my-checklists/goals-checkups"
+      }
+    },
+    {
+      "id": "s25",
+      "narration": "Průběh ale může aktualizovat kdykoli přímo v detailu cíle.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "[data-cy=mainNavigationDiv] a[href=\"/app/goals-v2/all\"]",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        },
+        {
+          "type": "click",
+          "selector": "td span.text-truncate:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "3000"
+        }
+      ],
+      "expect": {
+        "visible": ".goals-detail-title__text:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+        "url_contains": "/app/goals-v2/detail/"
+      }
+    },
+    {
+      "id": "s26",
+      "narration": "V Možnostech zvolím Aktualizovat progres.",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Možnosti\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay a:text-is(\"Aktualizovat progres\")",
+          "before_ms": 400
+        },
+        {
+          "type": "wait",
+          "value": "1800"
+        }
+      ],
+      "expect": {
+        "visible": ".p-dialog h3:text-is(\"Aktualizovat průběh\")",
+        "url_contains": "/app/goals-v2/detail/"
+      }
+    },
+    {
+      "id": "s27",
+      "narration": "Zadám aktuální hodnotu osmdesát pět, stav Podle plánu a potvrdím.",
+      "actions": [
+        {
+          "type": "type",
+          "selector": ".p-dialog p-inputnumber input",
+          "value": "85",
+          "clear": true,
+          "speed": "fast",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "500"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog button:text-is(\"Podle plánu\")",
+          "before_ms": 500
+        },
+        {
+          "type": "wait",
+          "value": "800"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog button:text-is(\"Aktualizovat\")",
+          "before_ms": 600
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        }
+      ],
+      "expect": {
+        "visible": ".goals-detail-title__text:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+        "url_contains": "/app/goals-v2/detail/"
+      }
+    },
+    {
+      "id": "s28",
+      "narration": "Pokrok se přepočítal a v aktivitě zůstává záznam o kontrole.",
+      "actions": [
+        {
+          "type": "zoom",
+          "selector": "p-progressbar",
+          "value": "1.4",
+          "hold_ms": 2800,
+          "before_ms": 300
+        }
+      ],
+      "expect": {
+        "visible": "p-progressbar",
+        "url_contains": "/app/goals-v2/detail/"
+      }
+    },
+    {
+      "id": "s29",
+      "narration": "A je to. Umíte nastavit Cíle, založit cíl s dílčím cílem a aktualizovat jeho průběh. Tip: cíle jdou zakládat i z Hodnocení výkonnosti.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1000"
+        }
+      ],
+      "expect": {
+        "visible": ".goals-detail-title__text:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+        "url_contains": "/app/goals-v2/detail/"
+      },
+      "part": 6,
+      "part_title": "Závěr"
+    },
+    {
+      "id": "s30",
+      "narration": "Kdyby něco nešlo, mrkněte do Centra nápovědy. Méně administrativy, víc času na lidi. To je Sloneek.",
+      "actions": [
+        {
+          "type": "wait",
+          "value": "1000"
+        }
+      ],
+      "expect": {
+        "visible": ".goals-detail-title__text:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+        "url_contains": "/app/goals-v2/detail/"
+      },
+      "hold_after_ms": 1500
+    }
+  ],
+  "_explored": {
+    "date": "2026-10-08",
+    "by": "Claude přes BrowserOS neo, admin Thomas Claver, UI cs",
+    "preconditions": [
+      "Nastavení cílů: výchozí kontrola = Týdně (recept ji přepíná na Měsíční; nastavení se ukládá samo, žádné tlačítko Uložit).",
+      "Neexistuje cíl 'Zvýšit spokojenost zákazníků na 90 %' (po každém běhu smazat: detail → Možnosti → Vymazat, maže i dílčí cíle).",
+      "Uživatelka 'Nová Kristýna' existuje (Petra Ukázková na pre-produ není).",
+      "Datum termínu je napevno 31. 12. 2026 (span[data-date=\"2026-11-31\"], měsíc 0-indexovaný) – v roce 2027 upravit."
+    ],
+    "notes": "Celý tok proklikán 8. 10. 2026 večer. Rozdíly oproti scénáři/help centru: v Nastavení cílů není tlačítko Uložit (autosave); nový cíl nemá pole 'Nadřazený cíl' – dílčí cíl se zakládá z detailu tlačítkem 'Nový dílčí cíl' (tam je nadřazený předvyplněný); metriky: Dílčí cíle / Numerické / Boolean / Checklist; jednotka 'Procento' (ne '%'); kontrola = přepínač 'Kontrola' (#check-up); stav v detailu: Dokončeno / Na dobré cestě / V ohrožení / Mimo trať / Nezahájeno / Blokováno, ale v dialogu 'Aktualizovat průběh' a v logu aktivit se stejný stav jmenuje 'Podle plánu' (nekonzistence); 'Seskupit podle' ukazuje 'Počet gólů' (chyba překladu); zobrazení List / Časová osa / Strom; check-in = Možnosti → 'Aktualizovat progres' (dialog 'Aktualizovat průběh'); Moje úkoly = /app/my-checklists se záložkou 'Kontroly cílů'. Recept nepřepíná uživatele (recorder to neumí) – pohled majitele ukazuje jen stránky Moje cíle a Kontroly cílů z účtu admina. | 9. 10.: název v seznamu = td span.text-truncate (td obsahuje i počet dílčích cílů), titulek detailu = .goals-detail-title__text (není h1); cleanup maže až 3 kopie cíle a vrací List bez seskupení."
+  },
+  "cleanup": [
+    {
+      "url": "https://app-pre-production.sloneek.com/app/goals-v2/all",
+      "if_visible": "td span.text-truncate:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "td span.text-truncate:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        },
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Možnosti\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay a:text-is(\"Vymazat\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog button:text-is(\"Vymazat\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "4500"
+        }
+      ],
+      "name": "smazat cíl z minulého běhu (1)"
+    },
+    {
+      "url": "https://app-pre-production.sloneek.com/app/goals-v2/all",
+      "if_visible": "td span.text-truncate:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "td span.text-truncate:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        },
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Možnosti\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay a:text-is(\"Vymazat\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog button:text-is(\"Vymazat\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "4500"
+        }
+      ],
+      "name": "smazat cíl z minulého běhu (2)"
+    },
+    {
+      "url": "https://app-pre-production.sloneek.com/app/goals-v2/all",
+      "if_visible": "td span.text-truncate:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "td span.text-truncate:text-is(\"Zvýšit spokojenost zákazníků na 90 %\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "3500"
+        },
+        {
+          "type": "click",
+          "selector": "button:text-is(\"Možnosti\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-menu-overlay a:text-is(\"Vymazat\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-dialog button:text-is(\"Vymazat\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "4500"
+        }
+      ],
+      "name": "smazat cíl z minulého běhu (3)"
+    },
+    {
+      "name": "přehled cílů: zobrazení List",
+      "url": "https://app-pre-production.sloneek.com/app/goals-v2/all",
+      "if_visible": "p-togglebutton:text-is(\"List\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "p-togglebutton:text-is(\"List\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    },
+    {
+      "name": "přehled cílů: zrušit seskupení",
+      "if_visible": "button:has-text(\"Seskupit podle\") .p-badge",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "button:has-text(\"Seskupit podle\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "900"
+        },
+        {
+          "type": "click",
+          "selector": ".p-popover button:text-is(\"Vymazat\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1500"
+        }
+      ]
+    },
+    {
+      "name": "vrátit výchozí kontrolu na Týdně",
+      "url": "https://app-pre-production.sloneek.com/app/goals-v2-settings",
+      "if_visible": "form .p-select-label:text-is(\"Měsíční\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": "form .p-select-label:text-is(\"Měsíční\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "700"
+        },
+        {
+          "type": "click",
+          "selector": ".p-select-overlay li[role=option]:text-is(\"Týdně\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    }
+  ]
+}
