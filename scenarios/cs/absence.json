@@ -454,12 +454,12 @@
       "id": "s29",
       "part": 5,
       "part_title": "Závěr",
-      "narration": "Kdyby něco nešlo, zeptejte se Ellie vpravo dole nebo mrkněte do Centra nápovědy. Příště se podíváme na docházku a příchody. Já se zatím jdu podívat, kolik dní dovolené mi zbývá. Méně administrativy, víc času na lidi. To je Sloneek.",
-      "narration_tts": "Kdyby něco nešlo, zeptejte se Elí vpravo dole nebo mrkněte do Centra nápovědy. Příště se podíváme na docházku a příchody. Já se zatím jdu podívat, kolik dní dovolené mi zbývá. Méně administrativy, víc času na lidi. To je Sloník.",
-      "subtitle": "Kdyby něco nešlo, zeptejte se Ellie vpravo dole nebo mrkněte do Centra nápovědy. Příště se podíváme na docházku a příchody. Já se zatím jdu podívat, kolik dní dovolené mi zbývá. Méně administrativy, víc času na lidi. To je Sloneek.",
+      "narration": "Kdyby něco nešlo, mrkněte do Centra nápovědy. Příště se podíváme na docházku a příchody. Já se zatím jdu podívat, kolik dní dovolené mi zbývá. Méně administrativy, víc času na lidi. To je Sloneek.",
+      "narration_tts": "Kdyby něco nešlo, mrkněte do Centra nápovědy. Příště se podíváme na docházku a příchody. Já se zatím jdu podívat, kolik dní dovolené mi zbývá. Méně administrativy, víc času na lidi. To je Sloník.",
+      "subtitle": "Kdyby něco nešlo, mrkněte do Centra nápovědy. Příště se podíváme na docházku a příchody. Já se zatím jdu podívat, kolik dní dovolené mi zbývá. Méně administrativy, víc času na lidi. To je Sloneek.",
       "intent": "Open 'Moje absence' and zoom the vacation balance card (the joke 'kolik dní dovolené mi zbývá').",
       "must_show": "The closing card with the Sloneek logo and the next video preview is visible.",
-      "zoom": "[KROUŽEK na Ellie] [ZÁVĚREČNÁ KARTA + náhled videa Docházka – příchody a odchody]",
+      "zoom": "[ZÁVĚREČNÁ KARTA + náhled videa Docházka – příchody a odchody]",
       "notes": "Bublina vpravo dole je HubSpot chat (#hubspot-messages-iframe-container); při kontrole byla jednou vidět a pak opakovaně skrytá (visibility:hidden), proto ji recept nezvýrazňuje. Jméno 'Ellie' v UI neověřeno."
     }
   ]

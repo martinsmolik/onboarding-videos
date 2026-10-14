@@ -1,6 +1,23 @@
 {
   "_comment": "Default ElevenLabs voice per language for /onboarding-video (voice ids are not secrets). Each colleague's ElevenLabs account must have access to the voice (Voice Library -> Add to my voices, or a shared workspace).",
-  "model_id": "eleven_multilingual_v2",
-  "cs": { "voice_id": "bF7C2fCv7Zf30iT84wZ1", "name": "Warm Czech Female Voice – Jana" },
-  "en": { "voice_id": "7jQ3jNk3Fcw65sWUmzun", "name": "Abigail" }
+  "_comment_speed": "Speaking tempo 0.7-1.2 for every language (1 = voice's natural pace). API: voice_settings.speed; connector clips: ffmpeg atempo in fetch-voice.mjs. Override per video with recipe.voice.speed. Change BEFORE recording.",
+  "model_id": "eleven_v4",
+  "speed": 1,
+  "cs": {
+    "voice_id": "bF7C2fCv7Zf30iT84wZ1",
+    "name": "Warm Czech Female Voice – Jana"
+  },
+  "en": {
+    "voice_id": "7jQ3jNk3Fcw65sWUmzun",
+    "name": "Abigail"
+  },
+  "pl": {
+    "voice_id": "F9eb9uZYeJuHuO7Uvs1R",
+    "name": "Arleta - Calm Instructor, Clear Voice",
+    "note": "Potvrzeno 9. 10. 2026 (Martin, poslechový test v4: Arleta vs Weronika vs Aleksandra AGK – vybrána A = Arleta)."
+  },
+  "_voice_test_2026_10_08": {
+    "note": "Poslechový test 4 nativních CZ hlasů: Aneta (kIlcjzuo6CyT7P5qkQYg) zněla nejlíp izolovaně, ale ve videu příliš uspávavě; zůstává Jana. Zpomalení přes speed 0.85 bylo moc – necháno 1."
+  },
+  "_model_note": "eleven_v4 od 9. 10. 2026 (A/B test Jana v2/v3/v4 – Martin vybral v4). Dřív eleven_multilingual_v2."
 }

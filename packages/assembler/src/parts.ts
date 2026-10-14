@@ -25,8 +25,8 @@ export function effectiveParts(steps: StepTexts[]): { part?: number; part_title?
 
 export function partLabel(part: number | undefined, title: string | undefined, lang?: string): string {
   if (title) return title;
-  if (part === undefined) return lang === "en" ? "Introduction" : "Úvod";
-  return `${lang === "en" ? "Part" : lang === "sk" ? "Časť" : "Část"} ${part}`;
+  if (part === undefined) return lang === "en" ? "Introduction" : lang === "pl" ? "Wprowadzenie" : "Úvod";
+  return `${lang === "en" ? "Part" : lang === "pl" ? "Część" : lang === "sk" ? "Časť" : "Část"} ${part}`;
 }
 
 export interface PartStart {

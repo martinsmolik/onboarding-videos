@@ -72,9 +72,10 @@ export const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;")
 
 /** UI strings per language. */
 export function brandStrings(lang?: string) {
-  if (lang === "en") return { eyebrow: "Video guide", part: (i: number, n: number) => `Part ${i} of ${n}`, outro: "Questions? Ask Ellie in the app.", min: (m: number) => `${m} min` };
-  if (lang === "sk") return { eyebrow: "Videonávod", part: (i: number, n: number) => `Časť ${i} z ${n}`, outro: "Otázky? Opýtajte sa Ellie v aplikácii.", min: (m: number) => `${m} min` };
-  return { eyebrow: "Videonávod", part: (i: number, n: number) => `Část ${i} z ${n}`, outro: "Dotazy? Zeptejte se Ellie v aplikaci.", min: (m: number) => `${m} min` };
+  if (lang === "en") return { eyebrow: "Video guide", part: (i: number, n: number) => `Part ${i} of ${n}`, outro: "Questions? See the Help Center in the app.", min: (m: number) => `${m} min` };
+  if (lang === "pl") return { eyebrow: "Poradnik wideo", part: (i: number, n: number) => `Część ${i} z ${n}`, outro: "Pytania? Zajrzyj do Centrum pomocy w aplikacji.", min: (m: number) => `${m} min` };
+  if (lang === "sk") return { eyebrow: "Videonávod", part: (i: number, n: number) => `Časť ${i} z ${n}`, outro: "Otázky? Pozrite si Centrum nápovedy v aplikácii.", min: (m: number) => `${m} min` };
+  return { eyebrow: "Videonávod", part: (i: number, n: number) => `Část ${i} z ${n}`, outro: "Dotazy? Mrkněte do Centra nápovědy v aplikaci.", min: (m: number) => `${m} min` };
 }
 
 const fontFaces = (f: BrandFonts) =>

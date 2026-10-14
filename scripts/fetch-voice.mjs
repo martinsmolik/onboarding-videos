@@ -7,12 +7,35 @@
 // so a clip voiced from the subtitle / an old narration is reported instead of silently accepted.
 import fs from 'node:fs';
 import path from 'node:path';
+import { spawnSync } from 'node:child_process';
 
 const id = process.argv[2];
 if (!id) { console.error('usage: node scripts/fetch-voice.mjs <id>'); process.exit(1); }
 const root = path.resolve(new URL('..', import.meta.url).pathname);
 const dir = path.join(root, 'out', id, 'audio');
 const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'urls.json'), 'utf8'));
+
+// Speaking tempo: recipe.voice.speed, else config/voices.json `speed`, else 1. The connector cannot slow a voice
+// down, so clips are re-timed here with ffmpeg atempo (pitch unchanged). Do this BEFORE recording: the recorder
+// paces every step by its clip length.
+function voiceSpeed() {
+  let v = NaN;
+  try { v = Number(JSON.parse(fs.readFileSync(path.join(root, 'out', id, 'recipe.json'), 'utf8')).voice?.speed); } catch { /* no recipe yet */ }
+  if (!Number.isFinite(v) || v <= 0) { try { v = Number(JSON.parse(fs.readFileSync(path.join(root, 'config', 'voices.json'), 'utf8')).speed); } catch { v = NaN; } }
+  if (!Number.isFinite(v) || v <= 0) return 1;
+  return Math.min(1.2, Math.max(0.7, Math.round(v * 1000) / 1000));
+}
+const speed = voiceSpeed();
+const ffmpeg = process.env.FFMPEG_PATH || (fs.existsSync('/opt/homebrew/opt/ffmpeg-full/bin/ffmpeg') ? '/opt/homebrew/opt/ffmpeg-full/bin/ffmpeg' : 'ffmpeg');
+function retime(file) {
+  if (speed === 1) return '';
+  const tmp = file + '.tmp.mp3';
+  const r = spawnSync(ffmpeg, ['-y', '-v', 'error', '-i', file, '-vn', '-af', `atempo=${speed}`, '-ar', '44100', '-c:a', 'libmp3lame', '-b:a', '192k', tmp], { encoding: 'utf8' });
+  if (r.status !== 0) { try { fs.unlinkSync(tmp); } catch {} throw new Error(`ffmpeg atempo failed: ${(r.stderr || r.error?.message || '').trim().slice(0, 200)}`); }
+  fs.renameSync(tmp, file);
+  return ` (tempo ${speed})`;
+}
+if (speed !== 1) console.log(`tempo: clips are re-timed to speed ${speed} with ffmpeg atempo (recipe.voice.speed / config/voices.json speed)`);
 
 let expected = null;
 try { expected = Object.fromEntries(JSON.parse(fs.readFileSync(path.join(dir, 'manifest.json'), 'utf8')).steps.map((s) => [s.id, s.tts_text ?? s.narration])); } catch { /* no manifest yet */ }
@@ -34,7 +57,8 @@ for (const [step, url] of Object.entries(manifest.clips)) {
     const res = await fetch(url);
     if (!res.ok) throw new Error(`HTTP ${res.status}${res.status === 400 || res.status === 403 ? ' – signed URL expired? ask Claude to refresh urls.json' : ''}`);
     fs.writeFileSync(dest, Buffer.from(await res.arrayBuffer()));
-    console.log(`✓ ${step} ${(fs.statSync(dest).size / 1024).toFixed(0)} kB`); ok++;
+    const note = retime(dest);
+    console.log(`✓ ${step} ${(fs.statSync(dest).size / 1024).toFixed(0)} kB${note}`); ok++;
   } catch (e) { console.error(`✗ ${step}: ${e.message}`); fail++; }
 }
 console.log(`\n${ok} ok, ${fail} failed${mismatch ? `, ${mismatch} voiced from the wrong text` : ''} → ${dir}`);

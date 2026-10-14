@@ -10,3 +10,4 @@ storage-state*.json
 out/session.json
 .DS_Store
 videa/
+queue/

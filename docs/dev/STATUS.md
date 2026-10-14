@@ -38,7 +38,7 @@ Ostatní vypnuté: Slack, Gmail, Drive, web search, Research, Claude in Chrome.
 - **Na konci videa:** `node scripts/video-status.mjs > docs/dev/VIDEO-STATUS.md`, přidat řádek do Měření, posunout Frontu a napsat „Uloženo: <cesty>".
 
 ## Fronta
-1. **user-folders-en** převzetím receptu. Test: změřit spotřebu (Settings → Usage před a po). Do čtvrtka (schůzka s Janem) nic dalšího.
+1. **clockins-vs-tracking-en** převzetím receptu. Test: změřit spotřebu (Settings → Usage před a po). Do čtvrtka (schůzka s Janem) nic dalšího.
 2. Ostatní jazykové verze převzetím, seznam v `VIDEO-STATUS.md`. Před `surveys-en`/`-pl` ověřit v Notionu, proč je surveys v To Do, když česká verze existuje.
 3. Nová témata: nejdřív cs plnou výrobou, pak en/pl převzetím. collect-data, onboarding-checklists, ats-candidates, okr-kpi, feedback-360, ai-agent, ai-features, integrations.
 

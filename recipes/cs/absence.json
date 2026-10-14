@@ -9,16 +9,22 @@
     "height": 1080
   },
   "start": {
-    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2"
+    "url": "https://app-pre-production.sloneek.com/app/dashboard-v2",
+    "local_storage": {
+      "local-translate": "cs"
+    }
   },
   "voice": {
     "provider": "external",
     "voice_id": "bF7C2fCv7Zf30iT84wZ1",
-    "model_id": "eleven_multilingual_v2"
+    "model_id": "eleven_v4"
   },
   "chapters": true,
   "interstitials": true,
-  "thumbnail": { "shot": "s15", "title": "Absence bez tabulek" },
+  "thumbnail": {
+    "shot": "s15",
+    "title": "Absence bez tabulek"
+  },
   "steps": [
     {
       "id": "s01",
@@ -951,8 +957,8 @@
     },
     {
       "id": "s29",
-      "narration": "Kdyby něco nešlo, zeptejte se Ellie vpravo dole nebo mrkněte do Centra nápovědy. Příště se podíváme na docházku a příchody. Já se zatím jdu podívat, kolik dní dovolené mi zbývá. Méně administrativy, víc času na lidi. To je Sloneek.",
-      "narration_tts": "Kdyby něco nešlo, zeptejte se Elí vpravo dole nebo mrkněte do Centra nápovědy. Příště se podíváme na docházku a příchody. Já se zatím jdu podívat, kolik dní dovolené mi zbývá. Méně administrativy, víc času na lidi. To je Sloník.",
+      "narration": "Kdyby něco nešlo, mrkněte do Centra nápovědy. Příště se podíváme na docházku a příchody. Já se zatím jdu podívat, kolik dní dovolené mi zbývá. Méně administrativy, víc času na lidi. To je Sloneek.",
+      "narration_tts": "Kdyby něco nešlo, mrkněte do Centra nápovědy. Příště se podíváme na docházku a příchody. Já se zatím jdu podívat, kolik dní dovolené mi zbývá. Méně administrativy, víc času na lidi. To je Sloník.",
       "actions": [
         {
           "type": "click",
@@ -974,6 +980,76 @@
         "url_contains": "/app/my-profile/absence-overview"
       },
       "hold_after_ms": 1500
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "smazat absenci 23.–25. 11. 2026 z minulého běhu (1)",
+      "url": "https://app-pre-production.sloneek.com/app/my-profile/absence-overview",
+      "if_visible": ".upcoming-container span:text-is(\"23.11.2026 - 25.11.2026\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".upcoming-container span:text-is(\"23.11.2026 - 25.11.2026\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=deleteButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has([data-cy=cancelButton]) [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
+    },
+    {
+      "name": "smazat absenci 23.–25. 11. 2026 z minulého běhu (2)",
+      "url": "https://app-pre-production.sloneek.com/app/my-profile/absence-overview",
+      "if_visible": ".upcoming-container span:text-is(\"23.11.2026 - 25.11.2026\")",
+      "actions": [
+        {
+          "type": "click",
+          "selector": ".upcoming-container span:text-is(\"23.11.2026 - 25.11.2026\")",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1800"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container [data-cy=deleteButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "1200"
+        },
+        {
+          "type": "click",
+          "selector": "nb-dialog-container:has([data-cy=cancelButton]) [data-cy=submitButton]",
+          "before_ms": 300
+        },
+        {
+          "type": "wait",
+          "value": "2500"
+        }
+      ]
     }
   ]
 }

@@ -82,7 +82,7 @@
     },
     {
       "match": "GDPR",
-      "say": "gé dé pé er"
+      "say": "džídýpíár"
     },
     {
       "match": "HPP",
@@ -372,6 +372,16 @@
       "stem": true,
       "case": "insensitive",
       "note": "absence -> apsentse; s 'c' to hlas občas četl anglicky absens"
+    },
+    {
+      "match": "shrnutí",
+      "say": "s hrnutí",
+      "note": "Jana četla 'šrnutí'; mezera drží s+h (ověřeno 8. 10., custom-reports s10)"
+    },
+    {
+      "match": "Shrnutí",
+      "say": "s hrnutí",
+      "note": "záměrně malé s – 'S hrnutí' s velkým S se rozpadalo na dvě slova; proto ne case:insensitive"
     },
     {
       "match": "licenc",
@@ -1180,6 +1190,16 @@
     {
       "match": "Edenred",
       "say": "edenred"
+    },
+    {
+      "match": "Jen neaktivní",
+      "say": "jen neaktivní",
+      "note": "filtr v Uživatelích; velké „Jen“ čte Jana anglicky „džen“ (add-users s30, 11. 10.)"
+    },
+    {
+      "match": "Nastavení aplikace",
+      "say": "nastavení aplikace",
+      "note": "název stránky v menu; přes stem pravidlo „aplikac“ vznikalo „aplikatse“ a hlas četl „nastavení aplikat“ (org-chart s32, 12. 10.) – tady bez přepisu, malé n"
     }
   ],
   "sk": [
@@ -2115,5 +2135,400 @@
       "say": "edenred"
     }
   ],
-  "en": []
+  "en": [
+    {
+      "match": "Kristýn",
+      "say": "Kristin",
+      "stem": true,
+      "note": "Kristýna → Kristina (EN voice stumbles on ý)"
+    }
+  ],
+  "pl": [
+    {
+      "match": "Sloneek",
+      "say": "Slonik",
+      "stem": true,
+      "note": "DRAFT pl – ověřit rodilým mluvčím"
+    },
+    {
+      "match": "Sloneek Intelligence",
+      "say": "Slonik intelidżens"
+    },
+    {
+      "match": "Ellie",
+      "say": "Eli"
+    },
+    {
+      "match": "HR",
+      "say": "ejcz ar",
+      "note": "anglicky"
+    },
+    {
+      "match": "ATS",
+      "say": "ej ti es"
+    },
+    {
+      "match": "API",
+      "say": "ej pi aj"
+    },
+    {
+      "match": "SSO",
+      "say": "es es oł"
+    },
+    {
+      "match": "CEO",
+      "say": "si i oł"
+    },
+    {
+      "match": "IT",
+      "say": "aj ti"
+    },
+    {
+      "match": "ID",
+      "say": "aj di"
+    },
+    {
+      "match": "KPI",
+      "say": "kej pi aj"
+    },
+    {
+      "match": "OKR",
+      "say": "oł kej ar"
+    },
+    {
+      "match": "AI",
+      "say": "ej aj"
+    },
+    {
+      "match": "CRM",
+      "say": "si ar em"
+    },
+    {
+      "match": "URL",
+      "say": "ju ar el"
+    },
+    {
+      "match": "PDF",
+      "say": "pe de ef"
+    },
+    {
+      "match": "CSV",
+      "say": "ce es wu"
+    },
+    {
+      "match": "XLSX",
+      "say": "iks el es iks"
+    },
+    {
+      "match": "SMS",
+      "say": "es em es"
+    },
+    {
+      "match": "QR",
+      "say": "ku er"
+    },
+    {
+      "match": "GDPR",
+      "say": "gie de pe er"
+    },
+    {
+      "match": "RODO",
+      "say": "rodo"
+    },
+    {
+      "match": "NIP",
+      "say": "nip"
+    },
+    {
+      "match": "PESEL",
+      "say": "pesel"
+    },
+    {
+      "match": "Google Workspace",
+      "say": "gugl łorkspejs"
+    },
+    {
+      "match": "Google",
+      "say": "gugl",
+      "stem": true
+    },
+    {
+      "match": "Microsoft 365",
+      "say": "majkrosoft trzysta sześćdziesiąt pięć"
+    },
+    {
+      "match": "Office 365",
+      "say": "ofis trzysta sześćdziesiąt pięć",
+      "note": "add-users PL s04, s33 (dialog Importuj z Office 365)"
+    },
+    {
+      "match": "Polish",
+      "say": "polisz",
+      "note": "add-users PL s27 – název jazyka v nb-select je i v PL UI anglicky"
+    },
+    {
+      "match": "Microsoft",
+      "say": "majkrosoft",
+      "stem": true
+    },
+    {
+      "match": "Outlook",
+      "say": "ałtluk",
+      "stem": true
+    },
+    {
+      "match": "Teams",
+      "say": "tims"
+    },
+    {
+      "match": "Slack",
+      "say": "slak",
+      "stem": true
+    },
+    {
+      "match": "Excel",
+      "say": "eksel",
+      "stem": true
+    },
+    {
+      "match": "Word",
+      "say": "łord",
+      "stem": true
+    },
+    {
+      "match": "LinkedIn",
+      "say": "linkedin"
+    },
+    {
+      "match": "YouTube",
+      "say": "jutub",
+      "stem": true
+    },
+    {
+      "match": "iPhone",
+      "say": "ajfon",
+      "stem": true
+    },
+    {
+      "match": "home office",
+      "say": "hołm ofis",
+      "case": "insensitive"
+    },
+    {
+      "match": "onboarding",
+      "say": "onbording",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "offboarding",
+      "say": "ofbording",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "workflow",
+      "say": "łorkfloł",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "checklist",
+      "say": "czeklist",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "checklista",
+      "say": "czeklista",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "feedback",
+      "say": "fidbek",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "dashboard",
+      "say": "deszbord",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "timesheet",
+      "say": "tajmszit",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "performance review",
+      "say": "performens rewju",
+      "case": "insensitive"
+    },
+    {
+      "match": "manager",
+      "say": "menedżer",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "meeting",
+      "say": "miting",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "deadline",
+      "say": "dedlajn",
+      "case": "insensitive"
+    },
+    {
+      "match": "online",
+      "say": "onlajn",
+      "case": "insensitive"
+    },
+    {
+      "match": "e-learning",
+      "say": "i lerning",
+      "case": "insensitive"
+    },
+    {
+      "match": "sick day",
+      "say": "sik dej",
+      "case": "insensitive"
+    },
+    {
+      "match": "sick days",
+      "say": "sik dejs",
+      "case": "insensitive"
+    },
+    {
+      "match": "Fidoo",
+      "say": "fidu"
+    },
+    {
+      "match": "Jira",
+      "say": "dżira",
+      "stem": true
+    },
+    {
+      "match": "Notion",
+      "say": "nołszyn",
+      "stem": true
+    },
+    {
+      "match": "HubSpot",
+      "say": "habspot",
+      "stem": true
+    },
+    {
+      "match": "n8n",
+      "say": "en ejt en"
+    },
+    {
+      "match": "webhook",
+      "say": "łebhuk",
+      "stem": true,
+      "case": "insensitive"
+    },
+    {
+      "match": "Power BI",
+      "say": "pałer bi aj"
+    },
+    {
+      "match": "DocuSign",
+      "say": "dokjusajn"
+    },
+    {
+      "match": "Pluxee",
+      "say": "pluksi"
+    },
+    {
+      "match": "Edenred",
+      "say": "edenred"
+    },
+    {
+      "match": "Kristýn",
+      "say": "Krystyn",
+      "stem": true,
+      "note": "jméno majitelky v Cílech; ý Arleta nečte"
+    },
+    {
+      "match": "End of shift",
+      "say": "end of szift",
+      "case": "insensitive",
+      "note": "data tenanta v nabídce Zakończ pracę (clockins s22), anglicky"
+    },
+    {
+      "match": "lunch",
+      "say": "lancz",
+      "case": "insensitive",
+      "note": "clockins s21"
+    },
+    {
+      "match": "ds.",
+      "say": "do spraw",
+      "note": "Specjalista ds. obsługi klienta (performance-review PL demo pozice)"
+    },
+    {
+      "match": "30 h",
+      "say": "trzydzieści godzin",
+      "note": "working-hours PL – název šablony Niepełny etat 30 h"
+    },
+    {
+      "match": "40 h",
+      "say": "czterdzieści godzin",
+      "note": "working-hours PL – název šablony Pełny etat 40 h"
+    },
+    {
+      "match": "Full Time",
+      "say": "ful tajm",
+      "note": "working-hours PL s06 – předdefinovaná šablona je i v PL UI anglicky"
+    },
+    {
+      "match": "Half Time",
+      "say": "half tajm",
+      "note": "working-hours PL s06 – předdefinovaná šablona je i v PL UI anglicky"
+    },
+    {
+      "match": "e-mail",
+      "say": "imejl",
+      "stem": true,
+      "case": "insensitive",
+      "note": "documents PL s13, s19 (e-maila, e-mailem) – DRAFT, ověřit rodilým mluvčím"
+    },
+    {
+      "match": "Feed",
+      "say": "fid",
+      "note": "dashboard PL s10 (karta Feed) – DRAFT, ověřit rodilým mluvčím"
+    },
+    {
+      "match": "GTM",
+      "say": "gie te em",
+      "note": "ats-setup PL s09 (Identyfikator GTM)"
+    },
+    {
+      "match": "Tag Manager",
+      "say": "teg menedżer",
+      "stem": true,
+      "note": "ats-setup PL s09 (Google Tag Managera)"
+    },
+    {
+      "match": "Embed code",
+      "say": "imbed kołd",
+      "note": "ats-setup PL s10 (menu Embed code, i v PL UI anglicky)"
+    },
+    {
+      "match": "Startupjobs",
+      "say": "startap dżobs",
+      "note": "ats-setup PL s32 (zdroj kandidátů – data tenantu)"
+    },
+    {
+      "match": "Heading",
+      "say": "heding",
+      "note": "wiki PL s19 (styl Heading 2 v editoru, anglicky i v PL UI) – DRAFT, ověřit rodilým mluvčím"
+    }
+  ]
 }

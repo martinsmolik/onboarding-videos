@@ -50,6 +50,10 @@
           "t_actions_end_ms": {
             "type": "integer"
           },
+          "t_voice_ms": {
+            "type": "integer",
+            "description": "when the narration actually starts (voice_after_actions steps: after their actions); absent = t_start_ms"
+          },
           "t_end_ms": {
             "type": "integer"
           },

@@ -81,6 +81,7 @@ Each package: TypeScript, `tsx` runtime, exposes a CLI (`pnpm --filter @svp/<nam
 - **Loudness:** mux measures every narration clip (EBU R128, cached in `audio/loudness.json`) and applies a static gain to
   -16 LUFS (`--lufs`, `SVP_LOUDNESS_LUFS`, `0` = off) + a -1 dBFS peak limiter per boosted clip. ElevenLabs clips differ by
   up to 13 dB otherwise.
+- **Tempo:** `recipe.voice.speed` (default `config/voices.json` → `speed`, 0.7–1.2, 1 = natural pace). API provider sends `voice_settings.speed`; for connector clips `scripts/fetch-voice.mjs` re-times the mp3 with ffmpeg `atempo` (pitch kept). Set it before `record` – the recorder paces steps by clip length, and mux can only speed a clip up by 6 %, never slow it down.
 - **Pronunciation:** `config/pronunciation.json` (per language) + `recipe.pronunciation` rewrite the SPOKEN text only
   (`tts_text` = lexicon(`narration_tts ?? narration`)); subtitles keep the spelling. Whole words, `stem: true` keeps Czech
   endings (absence/absencí → apsence/apsencí). It is part of the audio cache key, so a rule change re-voices exactly the

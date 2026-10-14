@@ -2,8 +2,8 @@
 // Kept local on purpose – packages must not share code.
 
 export type ActionType =
-  | 'navigate' | 'click' | 'hover' | 'type' | 'fill' | 'press'
-  | 'select' | 'scroll' | 'wait' | 'highlight' | 'zoom';
+  | 'navigate' | 'click' | 'hover' | 'type' | 'fill' | 'press' | 'upload'
+  | 'select' | 'scroll' | 'wait' | 'highlight' | 'zoom' | 'wait_ready';
 
 export interface Action {
   type: ActionType;
@@ -31,21 +31,37 @@ export interface Step {
   actions: Action[];
   hold_after_ms?: number;
   min_duration_ms?: number;
+  /** true = start the narration only when all actions are done; N = right after action N (1-based), e.g. after a wait_ready; default = at the step start */
+  voice_after_actions?: boolean | number;
   expect?: { visible?: string; url_contains?: string };
+}
+
+/** Pre-run cleanup: remove leftovers of a previous (failed) run so the recipe starts from a clean tenant. */
+export interface CleanupBlock {
+  name?: string;
+  /** open this URL first (default: stay where we are) */
+  url?: string;
+  /** run the block only when this selector is visible within ~3 s (e.g. the report created by the last run) */
+  if_visible?: string;
+  actions: Action[];
 }
 
 export interface Recipe {
   id: string;
   version: number;
   title?: string;
-  lang: 'cs' | 'en' | 'sk';
+  lang: 'cs' | 'en' | 'sk' | 'pl';
   app_version?: string;
   viewport: { width: number; height: number };
-  start: { url: string; storage_state?: string };
-  voice?: { provider?: string; voice_id?: string; model_id?: string };
+  start: { url: string; storage_state?: string; /** localStorage keys set (and page reloaded) before cleanup/recording, e.g. { "local-translate": "pl" } */ local_storage?: Record<string, string>; /** IANA timezone emulated via CDP (Emulation.setTimezoneOverride) before cleanup and recording, e.g. "Europe/Lisbon" */ timezone?: string };
+  voice?: { provider?: string; voice_id?: string; model_id?: string; language_code?: string; speed?: number };
   chapters?: boolean;
   interstitials?: boolean;
   steps: Step[];
+  /** executed once before recording starts (not part of the video in screencast mode); failures are logged, never fatal */
+  cleanup?: CleanupBlock[];
+  /** Post-run teardown (screencast mode): same format as cleanup, runs after the screencast stopped – for demo objects that must not stay visible to other users. */
+  teardown?: CleanupBlock[];
 }
 
 export type StepStatus = 'ok' | 'failed' | 'skipped';
@@ -69,6 +85,8 @@ export interface TimingStep {
   part_title?: string;
   t_start_ms: number;
   t_actions_end_ms: number;
+  /** when the narration starts (default t_start_ms; = t_actions_end_ms for voice_after_actions steps) */
+  t_voice_ms?: number;
   t_end_ms: number;
   audio_ms: number;
   status: StepStatus;

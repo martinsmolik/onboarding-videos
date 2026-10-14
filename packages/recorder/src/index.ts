@@ -259,7 +259,17 @@ class Recorder {
         await this.glideTo(x, y);
         await this.ripple();
         await this.page.mouse.click(x, y);
-        if (a.clear) await loc.fill('');
+        if (a.clear) {
+          // Select the whole value and let the typed text replace it. Verified on pre-prod 9. 10. 2026:
+          // over CDP, Cmd/Ctrl+A does NOT select text (no editing command), and fill('') is undone by
+          // PrimeNG p-inputnumber (100 + "90" -> "10,090"). el.select() + typing works for number and text inputs.
+          const selected = await loc.evaluate((el) => {
+            const i = el as HTMLInputElement;
+            if (typeof i.select !== 'function') return false;
+            i.focus(); i.select(); return true;
+          }).catch(() => false);
+          if (!selected) await loc.fill('').catch(() => {});
+        }
         const fast = a.speed === 'fast';
         const delay = a.delay_ms ?? (this.beaconMode ? (fast ? BEACON_FAST_TYPE_DELAY_MS : BEACON_TYPE_DELAY_MS) : (fast ? FAST_TYPE_DELAY_MS : DEFAULT_TYPE_DELAY_MS));
         await loc.pressSequentially(a.value ?? '', { delay });
@@ -331,13 +341,44 @@ class Recorder {
           const sel = a.selector || v;
           const loc = this.locator(sel);
           await loc.waitFor({ state: 'attached', timeout: LOCATOR_TIMEOUT_MS });
-          await loc.evaluate(el => el.scrollIntoView({ behavior: 'smooth', block: 'center' }));
+          await loc.evaluate(el => el.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' }));
           await sleep(600);
         }
         return;
       }
       case 'wait': {
         await sleep(Number(a.value ?? 500) || 0);
+        return;
+      }
+      case 'wait_ready': {
+        // page is "ready": selector visible, network quiet, no loading spinner left (max value ms, default 20000)
+        const max = Number(a.value ?? 20000) || 20000;
+        const t0 = Date.now();
+        if (a.selector) await this.locator(a.selector).waitFor({ state: 'visible', timeout: max });
+        // networkidle is capped: pages with polling / long-lived requests never go idle and would burn the whole budget
+        await this.page.waitForLoadState('networkidle', { timeout: Math.min(2500, Math.max(500, max - (Date.now() - t0))) }).catch(() => {});
+        const spin = 'p-progressspinner, .p-progressspinner, .p-progress-spinner, .p-datatable-loading-overlay, .ag-overlay-loading-wrapper, [class*="spinner"]:not([class*="spinner-hidden"]), [class*="loader"]:not([class*="lazy-loader"]):not(td):not(tr)';
+        while (Date.now() - t0 < max) {
+          const busy = await this.page.evaluate((sel) => [...document.querySelectorAll(sel)].some(el => { const r = (el as HTMLElement).getBoundingClientRect(); const cs = getComputedStyle(el as HTMLElement); return r.width > 4 && r.height > 4 && cs.visibility !== 'hidden' && cs.display !== 'none' && cs.opacity !== '0'; }), spin).catch(() => false);
+          if (!busy) break;
+          await sleep(200);
+        }
+        await sleep(300); // let the table paint
+        return;
+      }
+      case 'upload': {
+        // file input: cursor goes to the field and clicks, then the file is set directly (no native dialog)
+        if (!a.selector) throw new Error('upload: missing selector');
+        if (!a.value) throw new Error('upload: missing value (file path)');
+        const { x, y, loc } = await this.elementCenter(a.selector);
+        await this.glideTo(x, y);
+        await this.ripple();
+        // relative paths (e.g. assets/demo/x.pdf) are repo-relative: `pnpm --filter` runs with cwd = package dir,
+        // so resolve against the directory pnpm was invoked from (INIT_CWD), like cli.ts does for --recipe/--out
+        const file = path.isAbsolute(a.value) ? a.value : path.resolve(process.env.INIT_CWD || process.cwd(), a.value);
+        await loc.setInputFiles(file);
+        await loc.dispatchEvent('change').catch(() => {});
+        await sleep(400);
         return;
       }
       case 'highlight': {
@@ -445,9 +486,101 @@ export function loadSessionFile(file: string, log: (l: string) => void): { cooki
   return state;
 }
 
-const localeFor = (lang: string) => (lang === 'en' ? 'en-US' : lang === 'sk' ? 'sk-SK' : 'cs-CZ');
+const localeFor = (lang: string) => (lang === 'en' ? 'en-US' : lang === 'sk' ? 'sk-SK' : lang === 'pl' ? 'pl-PL' : 'cs-CZ');
 
 /** The step/pacing engine shared by every capture mode. Times are Recorder.now() (ms since recorder.start()). */
+/**
+ * recipe.start.local_storage: set localStorage keys (e.g. Sloneek UI language `local-translate`) and reload,
+ * BEFORE cleanup and recording. The recorder attaches to the user's real browser profile, so a PL run would
+ * otherwise leave the UI in Polish for the next CZ run – every recipe should state its UI language here.
+ */
+async function applyStartStorage(page: Page, recipe: Recipe, log: (l: string) => void): Promise<void> {
+  const ls = recipe.start.local_storage;
+  if (!ls || !Object.keys(ls).length) return;
+  const changed = await page.evaluate((kv) => {
+    let n = 0;
+    for (const [k, v] of Object.entries(kv)) { if (localStorage.getItem(k) !== v) { localStorage.setItem(k, v); n++; } }
+    return n;
+  }, ls).catch(() => -1);
+  log(`start.local_storage: ${JSON.stringify(ls)} (${changed} changed)`);
+  if (changed !== 0) {
+    await page.reload({ waitUntil: 'load', timeout: 30_000 });
+    await page.waitForLoadState('networkidle', { timeout: 5_000 }).catch(() => {});
+    await sleep(500);
+  }
+}
+
+/**
+ * recipe.start.timezone (IANA, e.g. "Europe/Lisbon"): emulate the browser timezone via CDP
+ * (Emulation.setTimezoneOverride) on the recording page and on every popup/tab it opens, BEFORE the
+ * first navigation, so cleanup and recording both run in it. Sloneek compares the company timezone
+ * (auth/me -> company.country.timezone) with `new Date().getTimezoneOffset()`; a mismatch shows the
+ * "Jiné časové pásmo" tag and a time-shift hint in attendance dialogs. Overrides live only while the CDP
+ * session is attached – keep the returned handle and call dispose() at the very end.
+ * In --cdp mode only pages opened by the recording page are touched, never the user's other tabs.
+ */
+interface TimezoneHandle { dispose(): Promise<void> }
+async function applyStartTimezone(context: BrowserContext, page: Page, recipe: Recipe, log: (l: string) => void, ownContext: boolean): Promise<TimezoneHandle> {
+  const timezoneId = recipe.start.timezone;
+  const sessions: CDPSession[] = [];
+  if (!timezoneId) return { dispose: async () => {} };
+  const apply = async (pg: Page, label: string) => {
+    try {
+      const s = await pg.context().newCDPSession(pg);
+      await s.send('Emulation.setTimezoneOverride', { timezoneId });
+      sessions.push(s);
+      log(`start.timezone: ${timezoneId} (${label})`);
+    } catch (e) {
+      log(`start.timezone: ${timezoneId} FAILED on ${label}: ${(e as Error).message.split('\n')[0]}`);
+    }
+  };
+  await apply(page, 'recording page');
+  const onPage = (pg: Page) => { void apply(pg, 'new page'); };
+  if (ownContext) context.on('page', onPage); // own context: every new tab is ours
+  else page.on('popup', onPage); // attached browser: only tabs opened from the recording page
+  return {
+    dispose: async () => {
+      if (ownContext) context.off('page', onPage); else page.off('popup', onPage);
+      for (const s of sessions) {
+        await s.send('Emulation.setTimezoneOverride', { timezoneId: '' }).catch(() => {});
+        await s.detach().catch(() => {});
+      }
+    }
+  };
+}
+
+/**
+ * Pre-run cleanup (recipe.cleanup): delete leftovers of a previous run so retries start from a clean tenant.
+ * Each block may open a URL and is skipped unless `if_visible` is visible within 3 s. Errors are logged, never fatal.
+ * Runs before the screencast starts (screencast mode); in video mode it is part of the recording.
+ */
+async function runCleanup(page: Page, recorder: Recorder, recipe: Recipe, log: (l: string) => void, blocksIn?: Recipe['cleanup'], label = 'cleanup'): Promise<void> {
+  const blocks = blocksIn ?? recipe.cleanup ?? [];
+  if (!blocks.length) return;
+  for (const [i, b] of blocks.entries()) {
+    const name = b.name ?? `${label} ${i + 1}`;
+    try {
+      if (b.url) {
+        await page.goto(b.url, { waitUntil: 'load', timeout: 30_000 });
+        await page.waitForLoadState('networkidle', { timeout: 5_000 }).catch(() => {});
+        await sleep(500);
+      }
+      if (b.if_visible) {
+        const vis = await recipeLocator(page, b.if_visible).waitFor({ state: 'visible', timeout: 3_000 }).then(() => true, () => false);
+        if (!vis) { log(`${name}: nothing to clean (${b.if_visible} not visible)`); continue; }
+      }
+      for (const a of b.actions) await recorder.runAction(a);
+      log(`${name}: done`);
+    } catch (e) {
+      log(`${name}: FAILED (ignored) – ${(e as Error).message?.split('\n')[0]}`);
+    }
+  }
+  await page.goto(recipe.start.url, { waitUntil: 'load', timeout: 30_000 });
+  await page.waitForLoadState('networkidle', { timeout: 5_000 }).catch(() => {});
+  await sleep(300);
+  await recorder.reinjectCursor();
+}
+
 async function replaySteps(page: Page, recorder: Recorder, p: Prepared, strict: boolean, beacon: boolean): Promise<TimingStep[]> {
   const { recipe, shotsDir, audioFor, log } = p;
   const { viewport } = recipe;
@@ -477,6 +610,8 @@ async function replaySteps(page: Page, recorder: Recorder, p: Prepared, strict: 
           const msg = (e as Error).message.split('\n')[0];
           throw new Error(`action ${i + 1} ${a.type}${a.selector ? ` ${a.selector}` : ''}: ${msg}`);
         }
+        // voice_after_actions: N = the narration starts right after action N (e.g. after the page has loaded), the rest runs under the voice
+        if (typeof step.voice_after_actions === 'number' && i + 1 === step.voice_after_actions) rec.t_voice_ms = recorder.now();
       }
       rec.t_actions_end_ms = recorder.now();
       await recorder.checkExpect(step);
@@ -493,8 +628,12 @@ async function replaySteps(page: Page, recorder: Recorder, p: Prepared, strict: 
     await page.screenshot({ path: shot, clip: { x: 0, y: 0, width: viewport.width, height: viewport.height } }).catch(err => log(`screenshot ${step.id} failed: ${(err as Error).message}`));
 
     // Pacing: hold the step until narration AND actions are both done, then hold_after.
-    const floor = Math.max(audioMs, step.min_duration_ms ?? 0);
-    await sleep(rec.t_start_ms + floor - recorder.now());
+    // voice_after_actions: the narration starts only once the actions (e.g. a slow page load) are done.
+    if (step.voice_after_actions === true) rec.t_voice_ms = rec.t_actions_end_ms || recorder.now();
+    else if (typeof step.voice_after_actions === 'number') rec.t_voice_ms = rec.t_voice_ms ?? (rec.t_actions_end_ms || recorder.now());
+    else rec.t_voice_ms = rec.t_start_ms;
+    await sleep(rec.t_start_ms + (step.min_duration_ms ?? 0) - recorder.now());
+    await sleep(rec.t_voice_ms + audioMs - recorder.now());
     await sleep(hold);
     rec.t_end_ms = recorder.now();
     timingSteps.push(rec);
@@ -523,6 +662,7 @@ async function runVideo(opts: RunOptions, p: Prepared): Promise<RunResult> {
   let videoPathTmp: string | null = null;
   let timingSteps: TimingStep[] = [];
   let recorder: Recorder | null = null;
+  let tz: TimezoneHandle | null = null;
 
   try {
     const session = opts.sessionFile ? loadSessionFile(opts.sessionFile, log) : undefined;
@@ -543,6 +683,7 @@ async function runVideo(opts: RunOptions, p: Prepared): Promise<RunResult> {
     await context.addInitScript(CURSOR_INIT_SCRIPT);
 
     const page = await context.newPage();
+    tz = await applyStartTimezone(context, page, recipe, log, true);
     recorder = new Recorder(page, viewport, log, true);
     recorder.start(); // t=0 ≈ first video frame (video starts with page creation)
     const video = page.video();
@@ -552,6 +693,8 @@ async function runVideo(opts: RunOptions, p: Prepared): Promise<RunResult> {
     }
     await page.goto(recipe.start.url, { waitUntil: 'load', timeout: 30_000 });
     await recorder.reinjectCursor();
+    await applyStartStorage(page, recipe, log);
+    await runCleanup(page, recorder, recipe, log);
     if (session) {
       const n = await page.evaluate(() => { try { return localStorage.length; } catch { return -1; } }).catch(() => -1);
       log(`page: ${safeUrl(page.url())}  localStorage keys: ${n}`);
@@ -564,6 +707,7 @@ async function runVideo(opts: RunOptions, p: Prepared): Promise<RunResult> {
     context = null;
     videoPathTmp = video ? await video.path() : null;
   } finally {
+    if (tz) await tz.dispose().catch(() => {});
     if (context) await context.close().catch(() => {});
     await browser.close().catch(() => {});
   }
@@ -622,6 +766,7 @@ async function runScreencast(opts: RunOptions, p: Prepared, mode: 'cdp' | 'launc
   let context: BrowserContext | null = null;
   let page: Page | null = null;
   let cdp: CDPSession | null = null;
+  let tz: TimezoneHandle | null = null;
   let cap: ScreencastCapture | null = null;
   let timingSteps: TimingStep[] = [];
   let wallT0 = 0, endWall = 0;
@@ -651,6 +796,7 @@ async function runScreencast(opts: RunOptions, p: Prepared, mode: 'cdp' | 'launc
       if (!storageState && shouldLogin(recipe.start.url))
         await login(page, { url: recipe.start.url, user: process.env.SLONEEK_DEMO_USER!, pass: process.env.SLONEEK_DEMO_PASS!, log });
     }
+    tz = await applyStartTimezone(context, page, recipe, log, mode !== 'cdp');
     await page.addInitScript(cursorInitScript({ beacon: false })); // this page only
     cdp = await context.newCDPSession(page);
     if (mode === 'cdp') {
@@ -667,6 +813,8 @@ async function runScreencast(opts: RunOptions, p: Prepared, mode: 'cdp' | 'launc
     await page.waitForLoadState('networkidle', { timeout: 5_000 }).catch(() => {}); // SPA settle (capped)
     await sleep(300);
     await recorder.reinjectCursor();
+    await applyStartStorage(page, recipe, log);
+    await runCleanup(page, recorder, recipe, log);
     const lsKeys = await page.evaluate(() => { try { return localStorage.length; } catch { return -1; } }).catch(() => -1);
     log(`page: ${safeUrl(page.url())}  localStorage keys: ${lsKeys}`);
 
@@ -681,12 +829,15 @@ async function runScreencast(opts: RunOptions, p: Prepared, mode: 'cdp' | 'launc
     await sleep(TAIL_MS);
     endWall = Date.now();
     await cap.stop();
+    // teardown: remove demo objects that must not stay visible to other users (runs after the screencast, not in the video)
+    if (recipe.teardown?.length) { log('teardown:'); await runCleanup(page, recorder, recipe, (l) => log(`  ${l}`), recipe.teardown, 'teardown').catch((e) => log(`teardown FAILED (ignored) – ${(e as Error).message}`)); }
   } finally {
     process.off('SIGINT', onSignal);
     process.off('SIGTERM', onSignal);
     if (cap) await cap.stop().catch(() => {});
     if (cdp && mode === 'cdp') await cdp.send('Emulation.clearDeviceMetricsOverride').catch(() => {});
     if (cdp) await cdp.detach().catch(() => {});
+    if (tz) await tz.dispose().catch(() => {});
     if (mode === 'cdp') await page?.close().catch(() => {});
     else await context?.close().catch(() => {});
     // for connectOverCDP this only disconnects – the user's browser keeps running

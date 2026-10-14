@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { probeDurationMs, readJson, resolvePath, run, which } from "./util.js";
 import { acceptExternal } from "./external.js";
 import { spokenTextFor } from "./pronunciation.js";
@@ -30,7 +31,17 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 /** ElevenLabs API only accepts language_code (language enforcement) on these models; others reject it. */
 export const LANGUAGE_CODE_MODELS = /^eleven_(flash|turbo)_v2_5$|^eleven_v3$/;
 
-async function elevenlabs(text: string, voiceId: string, modelId: string, apiKey: string, lang?: string): Promise<{ mp3: Buffer; alignment: Alignment }> {
+/** Speaking tempo for a recipe: recipe.voice.speed, else config/voices.json `speed`, else 1. Clamped to the ElevenLabs range 0.7-1.2. */
+export function voiceSpeed(recipe: any, voicesFile = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "config", "voices.json")): number {
+  let v = Number(recipe?.voice?.speed);
+  if (!Number.isFinite(v) || v <= 0) {
+    try { v = Number(JSON.parse(fs.readFileSync(voicesFile, "utf8")).speed); } catch { v = NaN; }
+  }
+  if (!Number.isFinite(v) || v <= 0) return 1;
+  return Math.min(1.2, Math.max(0.7, Math.round(v * 1000) / 1000));
+}
+
+async function elevenlabs(text: string, voiceId: string, modelId: string, apiKey: string, lang?: string, speed?: number): Promise<{ mp3: Buffer; alignment: Alignment }> {
   // output_format is a QUERY parameter in the ElevenLabs API (not a body field).
   const url = `${process.env.ELEVENLABS_BASE_URL || "https://api.elevenlabs.io"}/v1/text-to-speech/${encodeURIComponent(voiceId)}/with-timestamps?output_format=mp3_44100_128`;
   let lastErr: unknown;
@@ -40,7 +51,13 @@ async function elevenlabs(text: string, voiceId: string, modelId: string, apiKey
       const res = await fetch(url, {
         method: "POST",
         headers: { "xi-api-key": apiKey, "content-type": "application/json", accept: "application/json" },
-        body: JSON.stringify({ text, model_id: modelId, ...(lang && LANGUAGE_CODE_MODELS.test(modelId) ? { language_code: lang } : {}) }),
+        body: JSON.stringify({
+          text,
+          model_id: modelId,
+          ...(lang && LANGUAGE_CODE_MODELS.test(modelId) ? { language_code: lang } : {}),
+          // voice_settings.speed (0.7-1.2) = speaking tempo; omitted at 1 so the voice's own settings apply
+          ...(speed && speed !== 1 ? { voice_settings: { speed } } : {}),
+        }),
       });
       if (res.status === 429 || res.status >= 500) { lastErr = new Error(`ElevenLabs HTTP ${res.status}: ${await res.text()}`); continue; }
       if (!res.ok) throw Object.assign(new Error(`ElevenLabs HTTP ${res.status}: ${await res.text()}`), { fatal: true });
@@ -261,7 +278,7 @@ export async function tts(opts: TtsOptions): Promise<TtsResult> {
       else if (provider === "espeak") alignment = await espeak(text, espeakVoiceId, mp3);
       else if (provider === "say") alignment = await sayTts(text, say!.voice, say!.rate, mp3);
       else {
-        const r = await elevenlabs(text, voiceId, modelId, apiKey!, recipe.voice?.language_code ?? recipe.lang);
+        const r = await elevenlabs(text, voiceId, modelId, apiKey!, recipe.voice?.language_code ?? recipe.lang, voiceSpeed(recipe));
         fs.writeFileSync(mp3, r.mp3);
         alignment = r.alignment;
         chars += text.length;

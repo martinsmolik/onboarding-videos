@@ -235,7 +235,7 @@ Struktura
  5. Přehledy a reporty: kde HR vidí souhrn (filtry, export, podklady pro mzdy), pokud je
      modul má.
  6. AI tip (volitelně): pokud lze akci udělat přes Sloneek Intelligence, krátce to ukaž („Na
-     tohle se můžete zeptat i AI asistentky Ellie“).
+     tohle najdete i v Centru nápovědy“).
 
 Tipy
 
@@ -299,7 +299,7 @@ Opakující se prvky každého závěru
      Dává divákům důvod dokoukat až do konce.
      Most na další video – navázání na související modul (Docházka → Podklady pro mzdy,
      Nábor → HR automatizace / onboarding).
-     Kde hledat pomoc – AI asistentka Ellie v pravém dolním rohu, Centrum nápovědy,
+     Kde hledat pomoc – Centrum nápovědy, (AI asistentku „Ellie“ ve videích NEZMIŇOVAT – není v UI ověřená, rozhodnutí 8. 10. 2026),
      onboarding portál a živá podpora („mluvit s podporou“).
      Závěrečná karta – logo, odkaz na onboarding portál, náhled dalšího videa.
 
@@ -321,7 +321,7 @@ Vzorové závěry (vyber styl a drž ho ve všech videech)
 
 
     B) S nadhledem: „Gratuluji, právě jste si ušetřili hodiny přepisování tabulek. Kdyby
-    něco nefungovalo, zeptejte se Ellie, nebo nám napište. Já se zatím jdu podívat, kolik
+    něco nefungovalo, mrkněte do Centra nápovědy, nebo nám napište. Já se zatím jdu podívat, kolik
     dní dovolené mi zbývá.“
 
 

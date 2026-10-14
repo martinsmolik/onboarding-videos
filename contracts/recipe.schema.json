@@ -28,7 +28,8 @@
       "enum": [
         "cs",
         "en",
-        "sk"
+        "sk",
+        "pl"
       ]
     },
     "app_version": {
@@ -63,6 +64,17 @@
         "storage_state": {
           "type": "string",
           "description": "path to Playwright storageState json (logged-in session)"
+        },
+        "local_storage": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "localStorage keys set before cleanup and recording (page is reloaded when something changed). Sloneek UI language: {\"local-translate\": \"cs\"|\"pl\"|\"en\"}. The recorder uses the real browser profile, so state the UI language in every recipe."
+        },
+        "timezone": {
+          "type": "string",
+          "description": "IANA timezone (e.g. \"Europe/Lisbon\") the recorder emulates via CDP Emulation.setTimezoneOverride on the recording page and every tab it opens, before cleanup and recording. Use the timezone the app expects (Sloneek: company.country.timezone from auth/me) so time-zone hints such as 'Jiné časové pásmo' do not appear."
         }
       }
     },
@@ -88,6 +100,12 @@
         "language_code": {
           "type": "string",
           "description": "BCP-47 language enforced on the TTS model (default recipe.lang). Sent to the API only for models that accept it (flash/turbo v2.5, v3); the /onboarding-video skill sets it on the connector's TTS node."
+        },
+        "speed": {
+          "type": "number",
+          "minimum": 0.7,
+          "maximum": 1.2,
+          "description": "Speaking tempo, 1 = the voice's natural pace (default from config/voices.json `speed`, else 1). API provider: sent as voice_settings.speed. External provider (connector clips): fetch-voice.mjs applies ffmpeg atempo on download, pitch unchanged. Must be set BEFORE recording - the recorder paces steps by clip length."
         }
       }
     },
@@ -198,6 +216,62 @@
           }
         }
       ]
+    },
+    "cleanup": {
+      "type": "array",
+      "description": "Pre-run cleanup executed once before recording (screencast mode: not in the video). Removes leftovers of a previous run so retries start from a clean tenant. Each block optionally opens `url` and runs only if `if_visible` is visible within 3 s. Errors are logged and ignored.",
+      "items": {
+        "type": "object",
+        "required": [
+          "actions"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "if_visible": {
+            "type": "string",
+            "description": "selector (same syntax as actions) that must be visible for the block to run"
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/action"
+            }
+          }
+        }
+      }
+    },
+    "teardown": {
+      "type": "array",
+      "description": "Post-run teardown (screencast mode): same format as cleanup, executed after the screencast stopped (not in the video). Use for demo objects that must not stay visible to other users between runs.",
+      "items": {
+        "type": "object",
+        "required": [
+          "actions"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "if_visible": {
+            "type": "string",
+            "description": "selector (same syntax as actions) that must be visible for the block to run"
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/action"
+            }
+          }
+        }
+      }
     }
   },
   "$defs": {
@@ -261,6 +335,18 @@
               "type": "string"
             }
           }
+        },
+        "voice_after_actions": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "integer",
+              "minimum": 1
+            }
+          ],
+          "description": "Delay the narration so it never talks over a loading page. true = start after all actions of the step; N = start right after action N (1-based, typically a wait_ready), the remaining actions run under the voice. Default/false = narration starts with the step."
         }
       }
     },
@@ -283,9 +369,11 @@
             "scroll",
             "wait",
             "highlight",
-            "zoom"
+            "zoom",
+            "upload",
+            "wait_ready"
           ],
-          "description": "zoom = smooth page zoom on `selector` (400 ms in, hold_ms, 400 ms out; origin = element centre, moved only as far as needed to keep the zoomed element on screen; scale clamped to fit; cursor glides onto the element if it is not on it). fill = cursor clicks the field, then the whole `value` is set at once (+ input/change events) – for long texts."
+          "description": "zoom = smooth page zoom on `selector` (400 ms in, hold_ms, 400 ms out; origin = element centre, moved only as far as needed to keep the zoomed element on screen; scale clamped to fit; cursor glides onto the element if it is not on it). fill = cursor clicks the field, then the whole `value` is set at once (+ input/change events) – for long texts. wait_ready = wait until `selector` (optional) is visible, the network is idle and no loading spinner is shown; value = max ms (default 20000)."
         },
         "selector": {
           "type": "string",
@@ -293,7 +381,7 @@
         },
         "value": {
           "type": "string",
-          "description": "navigate: url; type/fill: text; press: key; select: option; wait: ms; scroll: 'down'|'up'|selector; zoom: scale, e.g. \"1.6\" (default 1.6)"
+          "description": "navigate: url; type/fill: text; press: key; select: option; wait: ms; scroll: 'down'|'up'|selector; zoom: scale, e.g. \"1.6\" (default 1.6); upload: local file path for an <input type=file>"
         },
         "clear": {
           "type": "boolean",

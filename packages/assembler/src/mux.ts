@@ -160,14 +160,14 @@ function cardFilter(w: number, h: number, durMs: number, bg: string, fg: string,
 
 /** Title + description for YouTube (chapters must be in the description to show up). */
 export function youtubeText(title: string, chapters: string, lang?: string): string {
-  const intro = lang === "en" ? "Sloneek video guide." : lang === "sk" ? "Videonávod Sloneek." : "Videonávod Sloneek.";
+  const intro = lang === "en" ? "Sloneek video guide." : lang === "pl" ? "Poradnik wideo Sloneek." : lang === "sk" ? "Videonávod Sloneek." : "Videonávod Sloneek.";
   return [`Název: ${title}`, "", "Popis:", title, "", intro, ...(chapters.trim() ? ["", chapters.trim()] : []), "", "https://www.sloneek.com"].join("\n") + "\n";
 }
 
 /** "1 část" / "4 části" / "5 částí" (cs), "časť/časti/častí" (sk), "part/parts" (en). */
 export function partsLabel(n: number, lang?: string): string {
   if (lang === "en") return `${n} ${n === 1 ? "part" : "parts"}`;
-  const [one, few, many] = lang === "sk" ? ["časť", "časti", "častí"] : ["část", "části", "částí"];
+  const [one, few, many] = lang === "pl" ? ["część", "części", "części"] : lang === "sk" ? ["časť", "časti", "častí"] : ["část", "části", "částí"];
   return `${n} ${n === 1 ? one : n >= 2 && n <= 4 ? few : many}`;
 }
 
@@ -321,14 +321,15 @@ export async function mux(opts: MuxOptions): Promise<MuxResult> {
     const real = await probeDurationMs(file);
     if (Math.abs(real - audioMs) > 100) warnings.push(`step ${s.id}: durations.json says ${audioMs}ms but mp3 is ${real}ms - rerun tts`);
     if (s.audio_ms && Math.abs(s.audio_ms - real) > 100) warnings.push(`step ${s.id}: recorder paced against ${s.audio_ms}ms but mp3 is ${real}ms (stale durations.json at record time?)`);
-    if (s.t_start_ms + real > totalMs + 200) warnings.push(`DRIFT step ${s.id}: t_start ${s.t_start_ms} + audio ${real} = ${s.t_start_ms + real}ms > video total ${totalMs}ms (+200 tolerance) - audio will be cut`);
-    const slot = typeof s.t_end_ms === "number" ? s.t_end_ms - s.t_start_ms - 40 : Infinity;
+    const tv: number = typeof s.t_voice_ms === "number" ? s.t_voice_ms : s.t_start_ms; // narration start (voice_after_actions steps start after their actions)
+    if (tv + real > totalMs + 200) warnings.push(`DRIFT step ${s.id}: voice start ${tv} + audio ${real} = ${tv + real}ms > video total ${totalMs}ms (+200 tolerance) - audio will be cut`);
+    const slot = typeof s.t_end_ms === "number" ? s.t_end_ms - tv - 40 : Infinity;
     let tempo = 1;
     if (real > slot && slot > 0) {
       const need = real / slot;
       if (need <= MAX_FIT_TEMPO) { tempo = Math.round(need * 1000) / 1000; warnings.push(`step ${s.id}: audio ${real}ms > recorded slot ${slot + 40}ms -> sped up ${((tempo - 1) * 100).toFixed(1)}% to fit`); }
     }
-    items.push({ id: s.id, file, t: s.t_start_ms, shift: shiftAt(index), audioMs: Math.round(real / tempo), status: s.status, tempo });
+    items.push({ id: s.id, file, t: tv, shift: shiftAt(index), audioMs: Math.round(real / tempo), status: s.status, tempo });
   }
   // per-clip loudness: every scene at the same integrated loudness (EBU R128)
   const lufsTarget = opts.loudnessLufs ?? (process.env.SVP_LOUDNESS_LUFS !== undefined ? Number(process.env.SVP_LOUDNESS_LUFS) : DEFAULT_LUFS);
